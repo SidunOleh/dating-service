@@ -3,47 +3,47 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
+  #     - name: Setup PHP
+  #       uses: shivammathur/setup-php@v2
+  #       with:
+  #         php-version: '8.1'
 
-      - name: Install Dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+  #     - name: Install Dependencies
+  #       run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Setup Laravel
-        run: |
-          cp .env.example .env
-          php artisan config:clear
-          php artisan cache:clear
-          php artisan key:generate
+  #     - name: Setup Laravel
+  #       run: |
+  #         cp .env.example .env
+  #         php artisan config:clear
+  #         php artisan cache:clear
+  #         php artisan key:generate
 
-      - name: Composer Audit
-        run: composer audit
+  #     - name: Composer Audit
+  #       run: composer audit
 
-      - name: Composer Validate
-        run: composer validate --no-check-all --strict
+  #     - name: Composer Validate
+  #       run: composer validate --no-check-all --strict
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '16'
 
-      - name: Install Node.js Dependencies
-        run: npm install
+  #     - name: Install Node.js Dependencies
+  #       run: npm install
 
-      - name: Build Vue.js
-        run: npm run build
+  #     - name: Build Vue.js
+  #       run: npm run build
 
   deploy:
-    needs: [build]
+    # needs: [build]
     runs-on: ubuntu-latest
 
     steps:
@@ -64,9 +64,6 @@ jobs:
           sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g' .env
           sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g' .env
           sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g' .env
-          sed -i 's/MAIL_USERNAME=null/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/g' .env
-          sed -i 's/MAIL_PASSWORD=null/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}/g' .env
-          sed -i 's/MAIL_FROM_ADDRESS="hello@example.com"/MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}/g' .env
           sed -i 's/GOOGLE_MAPS_KEY=/GOOGLE_MAPS_KEY=${{ secrets.GOOGLE_MAPS_KEY }}/g' .env
           sed -i 's/PLISIO_SECRET_KEY=/PLISIO_SECRET_KEY=${{ secrets.PLISIO_SECRET_KEY }}/g' .env
 

@@ -110,4 +110,4 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script:
-            chown -R www-root /var/www/date && cd /var/www/date && php artisan cache:clear && php artisan config:clear && php artisan view:clear && php artisan migrate
+            php artisan cache:clear && php artisan config:clear && php artisan view:clear && php artisan migrate

@@ -44,7 +44,7 @@ jobs:
 
   deploy:
     # needs: [build]
-    
+
     runs-on: ubuntu-latest
 
     steps:
@@ -66,6 +66,9 @@ jobs:
           sed -i 's|APP_URL=http://date|DB_HOST=${{ secrets.APP_URL }}|g' .env
           sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g' .env
           sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g' .env
+          sed -i 's/MAIL_USERNAME=null/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/g' .env
+          sed -i 's/MAIL_FROM_ADDRESS=\"hello@example.com\"/MAIL_FROM_ADDRESS=${{ secrets.MAIL_USERNAME }}/g' .env
+          sed -i 's/MAIL_PASSWORD=null/MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}/g' .env
           sed -i 's/GOOGLE_MAPS_KEY=/GOOGLE_MAPS_KEY=${{ secrets.GOOGLE_MAPS_KEY }}/g' .env
           sed -i 's/PLISIO_SECRET_KEY=/PLISIO_SECRET_KEY=${{ secrets.PLISIO_SECRET_KEY }}/g' .env
 

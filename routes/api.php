@@ -1,0 +1,208 @@
+<?php
+
+use App\Http\Controllers\Admin\Ads\DeleteController as AdsDeleteController;
+use App\Http\Controllers\Admin\Ads\GetOptionsController;
+use App\Http\Controllers\Admin\Ads\IndexController as AdsIndexController;
+use App\Http\Controllers\Admin\Ads\StoreController as AdsStoreController;
+use App\Http\Controllers\Admin\Ads\UpdateController as AdsUpdateController;
+use App\Http\Controllers\Admin\Ads\UpdateOptionsController;
+use App\Http\Controllers\Admin\Ads\UpdateStatusController;
+use App\Http\Controllers\Admin\Auth\ResetPassword;
+use App\Http\Controllers\Admin\Auth\SendResetLink;
+use App\Http\Controllers\Admin\Creators\DeleteController as CreatorsDeleteController;
+use App\Http\Controllers\Admin\Creators\IndexController as CreatorsIndexController;
+use App\Http\Controllers\Admin\Creators\ShowController as CreatorsShowController;
+use App\Http\Controllers\Admin\Creators\StoreController as CreatorsStoreController;
+use App\Http\Controllers\Admin\Creators\UpdateController as CreatorsUpdateController;
+use App\Http\Controllers\Admin\Images\UploadController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Permissions\DeleteController as PermissionsDeleteController;
+use App\Http\Controllers\Admin\Permissions\IndexController as PermissionsIndexController;
+use App\Http\Controllers\Admin\Permissions\StoreController as PermissionsStoreController;
+use App\Http\Controllers\Admin\ProfileRequests\DoneController;
+use App\Http\Controllers\Admin\ProfileRequests\IndexController as ProfileRequestIndexController;
+use App\Http\Controllers\Admin\ProfileRequests\ShowController;
+use App\Http\Controllers\Admin\Roles\DeleteController as RolesDeleteController;
+use App\Http\Controllers\Admin\Roles\IndexController as RolesIndexController;
+use App\Http\Controllers\Admin\Roles\StoreController as RolesStoreController;
+use App\Http\Controllers\Admin\Roles\UpdateController as RolesUpdateController;
+use App\Http\Controllers\Admin\Templates\DeleteController as TemplatesDeleteController;
+use App\Http\Controllers\Admin\Templates\IndexController as TemplatesIndexController;
+use App\Http\Controllers\Admin\Templates\ShowController as TemplatesShowController;
+use App\Http\Controllers\Admin\Templates\StoreController as TemplatesStoreController;
+use App\Http\Controllers\Admin\Templates\UpdateController as TemplatesUpdateController;
+use App\Http\Controllers\Admin\Transactions\IndexController as TransactionsIndexController;
+use App\Http\Controllers\Admin\Users\IndexController;
+use App\Http\Controllers\Admin\Users\StoreController;
+use App\Http\Controllers\Admin\Users\UpdateController;
+use App\Http\Controllers\Admin\Users\DeleteController;
+use App\Http\Controllers\Admin\Transactions\DeleteController as TransactionsDeleteController;
+use App\Http\Controllers\Admin\WithdrawalRequests\AmountController;
+use App\Http\Controllers\Admin\WithdrawalRequests\DeleteController as WithdrawalRequestsDeleteController;
+use App\Http\Controllers\Admin\WithdrawalRequests\IndexController as WithdrawalRequestsIndexController;
+use App\Http\Controllers\Admin\WithdrawalRequests\RejectController;
+use App\Http\Controllers\Admin\WithdrawalRequests\WithdrawController;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
+|
+*/
+
+Route::name('password.')->group(function () {
+    Route::post('/send-reset-link', SendResetLink::class)
+        ->name('send-reset-link');
+    Route::post('/reset-password', ResetPassword::class)
+        ->name('reset');
+});
+
+Route::middleware(['auth:sanctum',])->group(function () {
+    Route::prefix('/users')->name('users.')->group(function () {
+        Route::get('/', IndexController::class)
+            ->name('index')
+            ->can('users.view');
+        Route::post('/', StoreController::class)  
+            ->name('store')
+            ->can('users.create');
+        Route::put('/{user}', UpdateController::class)  
+            ->name('update')
+            ->can('users.edit');
+        Route::delete('/{user}', DeleteController::class)  
+            ->name('delete')
+            ->can('users.delete');
+    });
+
+    Route::prefix('/roles')->name('roles.')->group(function () {
+        Route::get('/', RolesIndexController::class)
+            ->name('index')
+            ->can('users.view');
+        Route::post('/', RolesStoreController::class)  
+            ->name('store')
+            ->can('users.create');
+        Route::put('/{role}', RolesUpdateController::class)  
+            ->name('update')
+            ->can('users.edit');
+        Route::delete('/{role}', RolesDeleteController::class)  
+            ->name('delete')
+            ->can('users.delete');
+    });
+
+    Route::prefix('/permissions')->name('permissions.')->group(function () {
+        Route::get('/', PermissionsIndexController::class)
+            ->name('index')
+            ->can('users.view');
+        Route::post('/', PermissionsStoreController::class)  
+            ->name('store')
+            ->can('users.create');
+        Route::delete('/{permission}', PermissionsDeleteController::class)  
+            ->name('delete')
+            ->can('users.delete');
+    });
+
+    Route::prefix('/templates')->name('templates.')->group(function () {
+        Route::get('/', TemplatesIndexController::class)
+            ->name('index')
+            ->can('templates.view');
+        Route::get('/{template}', TemplatesShowController::class)
+            ->name('show')
+            ->can('templates.show');
+        Route::post('/', TemplatesStoreController::class)  
+            ->name('store')
+            ->can('templates.create');
+        Route::put('/{template}', TemplatesUpdateController::class)  
+            ->name('update')
+            ->can('templates.update');
+        Route::delete('/{template}', TemplatesDeleteController::class)  
+            ->name('delete')
+            ->can('templates.delete');
+    });
+
+    Route::post('/images/upload', UploadController::class)
+        ->name('images.upload');
+
+    Route::prefix('/ads')->name('ads.')->group(function () {
+        Route::get('/options', GetOptionsController::class)
+            ->name('index.options')
+            ->can('ads.view');
+        Route::put('/options', UpdateOptionsController::class)  
+            ->name('update.options')
+            ->can('ads.edit');
+        Route::get('/', AdsIndexController::class)
+            ->name('index')
+            ->can('ads.view');
+        Route::post('/', AdsStoreController::class)  
+            ->name('store')
+            ->can('ads.create');
+        Route::put('/{ad}', AdsUpdateController::class)  
+            ->name('update')
+            ->can('ads.edit');
+        Route::patch('/{ad}/status', UpdateStatusController::class)  
+            ->name('update.status')
+            ->can('ads.edit');
+        Route::delete('/{ad}', AdsDeleteController::class)  
+            ->name('delete')
+            ->can('ads.delete');
+    });
+
+    Route::prefix('/creators')->name('creators.')->group(function () {
+        Route::get('/', CreatorsIndexController::class)
+            ->name('index')
+            ->can('creators.view');
+        Route::get('/{creator}', CreatorsShowController::class)
+            ->name('show')
+            ->can('creators.show');
+        Route::post('/', CreatorsStoreController::class)  
+            ->name('store')
+            ->can('creators.create');
+        Route::put('/{creator}', CreatorsUpdateController::class)  
+            ->name('update')
+            ->can('creators.update');
+        Route::delete('/{creator}', CreatorsDeleteController::class)  
+            ->name('delete')
+            ->can('creators.delete');
+    });
+
+    Route::prefix('/profile-requests')->name('profile-requests')->group(function () {
+        Route::get('/', ProfileRequestIndexController::class)
+            ->name('index')
+            ->can('approved-creators.profile-requests.view|not-approved-creators.profile-requests.view');
+        Route::get('/{profileRequest}', ShowController::class)
+            ->name('show')
+            ->can('approved-creators.profile-requests.show|not-approved-creators.profile-requests.show');
+        Route::put('/{profileRequest}', DoneController::class)
+            ->name('update')
+            ->can('approved-creators.profile-requests.done|not-approved-creators.profile-requests.done');
+    });
+
+    Route::prefix('/transactions')->name('transactions')->group(function () {
+        Route::get('/', TransactionsIndexController::class)
+            ->name('index')
+            ->can('transactions.view');
+        Route::delete('/{transaction}', TransactionsDeleteController::class)  
+            ->name('delete')
+            ->can('transactions.delete');
+    });
+
+    Route::prefix('/withdrawal-requests')->name('withdrawal-requests.')->group(function () {
+        Route::get('/', WithdrawalRequestsIndexController::class)
+            ->name('index')
+            ->can('withdrawal-requests.view');
+        Route::delete('/{withdrawalRequest}', WithdrawalRequestsDeleteController::class)  
+            ->name('delete')
+            ->can('withdrawal-requests.delete');
+        Route::get('/{withdrawalRequest}/amount', AmountController::class)  
+            ->name('amount')
+            ->can('withdrawal-requests.withdraw');
+        Route::post('/{withdrawalRequest}/withdraw', WithdrawController::class)  
+            ->name('withdraw')
+            ->can('withdrawal-requests.withdraw');
+        Route::post('/{withdrawalRequest}/reject', RejectController::class)  
+            ->name('reject')
+            ->can('withdrawal-requests.withdraw');
+    });
+});

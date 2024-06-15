@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('subscriptions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('creator_id')
+                ->constrained()                
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('name');
+            $table->dateTime('starts_at');
+            $table->dateTime('ends_at');
+            $table->enum('status', ['pending', 'active', 'inactive',])->default('pending');
+            $table->boolean('auto_resume')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('subscriptions');
+    }
+};

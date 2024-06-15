@@ -97,18 +97,17 @@ jobs:
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
-          key: ${{ secrets.DEPLOY_KEY }}
           source: "./"
-          target: "~/path_to_project"
+          target: "/var/www/date"
 
       - name: Run laravel commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.DEPLOY_KEY }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script:
-            chown -R www-root ~/path_to_project && cd ~/path_to_project && php artisan cache:clear && php artisan config:clear && php artisan view:clear && php artisan migrate
+            chown -R www-root /var/www/date && cd /var/www/date && php artisan cache:clear && php artisan config:clear && php artisan view:clear && php artisan migrate

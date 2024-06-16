@@ -40,23 +40,25 @@ class PlisioInvoice extends Model
         return $this->morphOne(Transaction::class, 'details');
     }
 
+    public function creator(): Creator
+    {
+        return $this->transaction->creator;
+    }
+
     public function changeStatus(string $status): bool
     {
         $this->status = $status;
         $this->save();
-        
         $this->transaction->status = $status;
         $this->transaction->save();
 
         if ($status == 'completed') {
             $this->subscription->activate();
 
-            if (
-                $referral = $this->transaction->creator->referral
-            ) {
-                $referral->reward(
-                    $this->transaction->usd_amount * 0.5
-                );
+            if ($referral = $this->creator->referral) {
+                $percent = 0.5;
+                $reward = $this->transaction->usd_amount * $percent;
+                $referral->reward($reward);
             }
         }
 

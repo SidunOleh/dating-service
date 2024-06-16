@@ -16,6 +16,7 @@ class CreatorResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'is_banned' => $this->is_banned,
             'show_on_site' => $this->show_on_site,
 

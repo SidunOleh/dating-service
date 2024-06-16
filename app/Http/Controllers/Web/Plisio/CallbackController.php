@@ -29,15 +29,10 @@ class CallbackController extends Controller
                 throw new InvoiceUnverifyResponseException();
             }
     
-            if ($data['data']['ipn_type'] == 'invoice') {
-                $invoice = PlisioInvoice::where(
-                    'txn_id', 
-                    $data['data']['txn_id']
-                )->firstOrFail();
+            if ($data['ipn_type'] == 'invoice') {
+                $invoice = PlisioInvoice::where('txn_id', $data['txn_id'])->firstOrFail();
                 
-                $invoice->changeStatus(
-                    $data['data']['status']
-                );
+                $invoice->changeStatus($data['status']);
             }
         } catch (Exception $e) {
             $webhookLog->exception = [

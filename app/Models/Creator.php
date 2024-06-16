@@ -307,7 +307,7 @@ class Creator extends Authenticatable
         return $request ? $this->profileRequests()->create($request) : null;
     }
 
-    public function fieldChanged(string $field, $value): bool
+    private function fieldChanged(string $field, $value): bool
     {
         if ($field == 'birthday') {
             return $this->birthday?->format('Y-m-d') != $value;

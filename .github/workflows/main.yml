@@ -3,48 +3,7 @@ on:
     branches: [main]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-
-  #     - name: Setup PHP
-  #       uses: shivammathur/setup-php@v2
-  #       with:
-  #         php-version: '8.1'
-
-  #     - name: Install Dependencies
-  #       run: composer install --prefer-dist --no-progress --no-suggest
-
-  #     - name: Setup Laravel
-  #       run: |
-  #         cp .env.example .env
-  #         php artisan config:clear
-  #         php artisan cache:clear
-  #         php artisan key:generate
-
-  #     - name: Composer Audit
-  #       run: composer audit
-
-  #     - name: Composer Validate
-  #       run: composer validate --no-check-all --strict
-
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '16'
-
-  #     - name: Install Node.js Dependencies
-  #       run: npm install
-
-  #     - name: Build Vue.js
-  #       run: npm run build
-
   deploy:
-    # needs: [build]
-
     runs-on: ubuntu-latest
 
     steps:
@@ -116,4 +75,4 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script:
-            cd /var/www/date && php artisan cache:clear && php artisan config:clear && php artisan view:clear && php artisan migrate
+            cd /var/www/date && php artisan cache:clear && php artisan config:clear && php artisan view:clear && php artisan storage:link && php artisan migrate

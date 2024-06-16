@@ -53,7 +53,7 @@ class PlisioClient
             throw new InvoiceRequestErrorException($response['data']['message'], $response['data']['code']);
         }
 
-        if (! $this->verifyResponse($response)) {
+        if (! $this->verifyData($response['data'])) {
             throw new InvoiceUnverifyResponseException();
         }
 
@@ -77,25 +77,25 @@ class PlisioClient
         );
     }
 
-    public function verifyResponse(array $response): bool
+    public function verifyData(array $data): bool
     {
-        if (! isset($response['data']['verify_hash'])) {
+        if (! isset($data['verify_hash'])) {
             return false;
         }
     
-        $verifyHash = $response['data']['verify_hash'];
-        unset($response['data']['verify_hash']);
-        ksort($response['data']);
+        $verifyHash = $data['verify_hash'];
+        unset($data['verify_hash']);
+        ksort($data);
     
-        if (isset($response['data']['expire_utc'])){
-            $response['data']['expire_utc'] = (string) $response['data']['expire_utc'];
+        if (isset($data['expire_utc'])){
+            $data['expire_utc'] = (string) $data['expire_utc'];
         }
         
-        if (isset($response['data']['tx_urls'])){
-            $response['data']['tx_urls'] = html_entity_decode($response['data']['tx_urls']);
+        if (isset($data['tx_urls'])){
+            $data['tx_urls'] = html_entity_decode($data['tx_urls']);
         }
     
-        $hash = hash_hmac('sha1', serialize($response['data']), $this->secretKey);
+        $hash = hash_hmac('sha1', serialize($data), $this->secretKey);
         if ($hash == $verifyHash) {
             return true;
         }

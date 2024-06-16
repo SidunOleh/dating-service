@@ -25,7 +25,7 @@ class CallbackController extends Controller
         try {
             $client = new PlisioClient(env('PLISIO_SECRET_KEY'));
 
-            if (! $client->verifyResponse($data = $request->all())) {
+            if (! $client->verifyData($data = $request->all())) {
                 throw new InvoiceUnverifyResponseException();
             }
     

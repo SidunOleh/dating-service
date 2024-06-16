@@ -20,7 +20,7 @@ class Option extends Model
         $collection = new Collection();
         foreach ($settings as $name => $value) {
             $collection->push(self::updateOrCreate(
-                ['value' => $value,], ['name' => $name,]
+                ['name' => $name,], ['value' => $value,]
             ));
         }
         

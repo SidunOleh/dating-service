@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\Ads\DeleteController as AdsDeleteController;
-use App\Http\Controllers\Admin\Ads\GetOptionsController;
 use App\Http\Controllers\Admin\Ads\IndexController as AdsIndexController;
 use App\Http\Controllers\Admin\Ads\StoreController as AdsStoreController;
 use App\Http\Controllers\Admin\Ads\UpdateController as AdsUpdateController;
-use App\Http\Controllers\Admin\Ads\UpdateOptionsController;
 use App\Http\Controllers\Admin\Ads\UpdateStatusController;
 use App\Http\Controllers\Admin\Auth\ResetPassword;
 use App\Http\Controllers\Admin\Auth\SendResetLink;
@@ -26,6 +24,8 @@ use App\Http\Controllers\Admin\Roles\DeleteController as RolesDeleteController;
 use App\Http\Controllers\Admin\Roles\IndexController as RolesIndexController;
 use App\Http\Controllers\Admin\Roles\StoreController as RolesStoreController;
 use App\Http\Controllers\Admin\Roles\UpdateController as RolesUpdateController;
+use App\Http\Controllers\Admin\Settings\IndexController as SettingsIndexController;
+use App\Http\Controllers\Admin\Settings\UpdateController as SettingsUpdateController;
 use App\Http\Controllers\Admin\Templates\DeleteController as TemplatesDeleteController;
 use App\Http\Controllers\Admin\Templates\IndexController as TemplatesIndexController;
 use App\Http\Controllers\Admin\Templates\ShowController as TemplatesShowController;
@@ -126,12 +126,6 @@ Route::middleware(['auth:sanctum',])->group(function () {
         ->name('images.upload');
 
     Route::prefix('/ads')->name('ads.')->group(function () {
-        Route::get('/options', GetOptionsController::class)
-            ->name('index.options')
-            ->can('ads.view');
-        Route::put('/options', UpdateOptionsController::class)  
-            ->name('update.options')
-            ->can('ads.edit');
         Route::get('/', AdsIndexController::class)
             ->name('index')
             ->can('ads.view');
@@ -204,5 +198,14 @@ Route::middleware(['auth:sanctum',])->group(function () {
         Route::post('/{withdrawalRequest}/reject', RejectController::class)  
             ->name('reject')
             ->can('withdrawal-requests.withdraw');
+    });
+
+    Route::prefix('/settings')->name('settings.')->group(function () {
+        Route::get('/', SettingsIndexController::class)
+            ->name('index')
+            ->can('settings.view');
+        Route::post('/', SettingsUpdateController::class)
+            ->name('update')
+            ->can('settings.edit');
     });
 });

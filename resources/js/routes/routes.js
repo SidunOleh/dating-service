@@ -130,20 +130,7 @@ const routes = [{
     meta: {
         access: 'private',
         permission: 'ads.view',
-        menuKey: 'ads.index',
-    },
-}, {
-    path: '/admin/ads/settings',
-    component: defineAsyncComponent({
-        loader: () =>
-            import ('../views/Ads/Settings.vue'),
-        loadingComponent: Loader,
-    }),
-    name: 'ads.settings',
-    meta: {
-        access: 'private',
-        permission: 'ads.view',
-        menuKey: 'ads.settings',
+        menuKey: 'ads',
     },
 }, {
     path: '/admin/creators',
@@ -261,6 +248,19 @@ const routes = [{
         access: 'private',
         permission: 'withdrawal-requests.view',
         menuKey: 'withdrawal-requests',
+    },
+}, {
+    path: '/admin/settings',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/Settings/Index.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'settings.index',
+    meta: {
+        access: 'private',
+        permission: 'settings.view',
+        menuKey: 'settings',
     },
 }, {
     path: '/admin/:pathMatch(.*)*',

@@ -49,26 +49,6 @@ const adsApi = {
 
         return res.data
     },
-    async fetchOptions() {
-        if (!can('ads.view')) {
-            throw new Error('Forbidden.')
-        }
-
-        const res = await axios.get('/api/ads/options')
-
-        return res.data
-    },
-    async editOptions(data) {
-        if (!can('ads.edit')) {
-            throw new Error('Forbidden.')
-        }
-
-        data._method = 'PUT'
-
-        const res = await axios.post('/api/ads/options', data)
-
-        return res.data
-    },
 }
 
 export default adsApi

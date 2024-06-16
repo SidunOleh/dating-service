@@ -63,26 +63,14 @@
             </router-link>
         </MenuItem>
 
-        <SubMenu v-if="can('ads.view')">
+        <MenuItem key="ads">
             <template #icon>
-                <AdIcons />
+                <AdIcon />
             </template>
-            <template #title>
+            <router-link :to="{name: 'ads.index'}">
                 Ads
-            </template>
-
-            <MenuItem key="ads.index">
-                <router-link :to="{name: 'ads.index'}">
-                    Ads
-                </router-link>
-            </MenuItem>
-
-            <MenuItem key="ads.settings">
-                <router-link :to="{name: 'ads.settings'}">
-                    Settings
-                </router-link>
-            </MenuItem>
-        </SubMenu>
+            </router-link>
+        </MenuItem>
 
         <SubMenu 
             v-if="can(['approved-creators.profile-requests.view', 'not-approved-creators.profile-requests.view',])"
@@ -133,6 +121,15 @@
             </router-link>
         </MenuItem>
 
+        <MenuItem key="settings">
+            <template #icon>
+                <SettingsIcon />
+            </template>
+            <router-link :to="{name: 'settings.index'}">
+                Settings
+            </router-link>
+        </MenuItem>
+
     </Menu>
 
 </template>
@@ -144,17 +141,18 @@ import UserIcon from './icons/User.vue'
 import TemplateIcon from './icons/Template.vue'
 import ProfileIcon from './icons/Profile.vue'
 import ApproveIcon from './icons/Approve.vue'
-import AdIcons from './icons/Ad.vue'
+import AdIcon from './icons/Ad.vue'
 import MoneyIcon from './icons/Money.vue'
 import WithdrawalIcon from './icons/Withdrawal.vue'
+import SettingsIcon from './icons/Settings.vue'
 import can from '../helpers/can'
 
 export default {
     components: {
         Menu, MenuItem, DashboardIcon, 
         SubMenu, UserIcon, TemplateIcon,
-        AdIcons, ProfileIcon, ApproveIcon,
-        MoneyIcon, WithdrawalIcon,
+        AdIcon, ProfileIcon, ApproveIcon,
+        MoneyIcon, WithdrawalIcon, SettingsIcon,
     },
     data() {
         return {

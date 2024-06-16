@@ -6,7 +6,7 @@
             v-model:activeKey="activeKey">
 
             <CollapsePanel 
-                header="Settings"
+                header="Ad settings"
                 :showArrow="false"
                 :key="1">
 
@@ -42,6 +42,24 @@
 
             </CollapsePanel>
 
+            <CollapsePanel 
+                header="Referral settings"
+                :showArrow="false"
+                :key="2">
+
+                <FormItem
+                    label="Referral percent"
+                    :required="true">
+                    <InputNumber
+                        placeholder="Referral percent"
+                        style="width: 100%;"
+                        v-model:value="settings.referral_percent"
+                        :min="0"
+                        :max="100"/>
+                </FormItem>
+
+            </CollapsePanel>
+
         </Collapse>
 
         <Button
@@ -56,7 +74,7 @@
 <script>
 import { message, } from 'ant-design-vue'
 import { Button, Form, FormItem, InputNumber, Collapse, CollapsePanel, } from 'ant-design-vue'
-import adsApi from '../../api/ads'
+import settingsApi from '../../api/settings'
 
 export default {
     components: {
@@ -65,7 +83,7 @@ export default {
     },
     data() {
         return {
-            activeKey: [1,],
+            activeKey: [1, 2,],
             settings: {},
             editing: false,
         }
@@ -74,7 +92,7 @@ export default {
         async edit() {
             try {
                 this.editing = true
-                await adsApi.editOptions(this.settings)
+                await settingsApi.edit(this.settings)
                 message.success('Successfully saved.')
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
@@ -86,7 +104,10 @@ export default {
     async mounted() {
         try {
             this.editing = true
-            this.settings = await adsApi.fetchOptions()
+            const settings = await settingsApi.fetch()
+            if (settings) {
+                this.settings = settings
+            }
         } catch (err) {
             message.error(err?.response?.data?.message ?? err.message)
         } finally {

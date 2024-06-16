@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Ads;
+namespace App\Http\Requests\Admin\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateOptionsRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,7 @@ class UpdateOptionsRequest extends FormRequest
             'clicks_between_popups' => 'required|integer|gte:1',
             'seconds_between_popups' => 'required|integer|gte:1',
             'close_popup_seconds' => 'required|integer|gte:1',
+            'referral_percent' => 'required|integer|between:0,100',
         ];
     }
 }

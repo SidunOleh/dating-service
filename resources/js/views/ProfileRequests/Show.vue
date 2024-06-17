@@ -310,7 +310,8 @@
                     <Image
                         style="object-fit: contain;"
                         alt="No photo"
-                        :width="500"
+                        :height="295"
+                        :width="295"
                         :src="data.id_photo ? data.id_photo?.value?.url : data.creator?.id_photo?.url"/>
 
                     <ApproveField
@@ -328,7 +329,8 @@
                     <Image
                         style="object-fit: contain;"
                         alt="No photo"
-                        :width="500"
+                        :height="295"
+                        :width="295"
                         :src="data.street_photo ? data.street_photo?.value?.url : data.creator?.street_photo?.url"/>
 
                     <ApproveField
@@ -361,8 +363,8 @@
                             <Image
                                 v-for="img in data.creator?.photos?.slice(0, 3)"
                                 style="object-fit: contain;"
-                                :width="300"
-                                :height="300"
+                                :height="295"
+                                :width="295"
                                 :src="img.url"/>
 
                         </Flex>
@@ -384,7 +386,7 @@
 
                                 <Image
                                     style="object-fit: contain;"
-                                    :height="500"
+                                    :height="230"
                                     :src="img.url"/>
 
                                 <ApproveField 

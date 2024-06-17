@@ -388,10 +388,6 @@ class Creator extends Authenticatable
 
     public static function mainListTotalCount(): int
     {
-        $verified = self::showOnSite()
-            ->verified()
-            ->count();
-
-        return self::showOnSite()->count() - ($verified < 10 ? $verified : 10);
+        return self::showOnSite()->count();
     } 
 }

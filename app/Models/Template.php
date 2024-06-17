@@ -53,7 +53,7 @@ class Template extends Model
             ) {
                 $this->blocks->push([
                     $roulettes->shift(),
-                    $roulettes->shift()
+                    $roulettes->shift(),
                 ]);
             }
 

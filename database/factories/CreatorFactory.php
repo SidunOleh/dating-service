@@ -29,8 +29,8 @@ class CreatorFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'birthday' => fake()->date(),
-            'id_photo' => 1,
-            'street_photo' => 1,
+            'id_photo' => 3,
+            'street_photo' => 3,
         ];
     }
 }

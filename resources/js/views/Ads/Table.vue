@@ -35,13 +35,6 @@
                 {{ record.clicks_count }}
             </template>
 
-            <template v-if="column.key === 'status'">
-                <Switch 
-                    :loading="editingStatus"
-                    v-model:checked="record.status"
-                    @change="$emit('editStatus', record)"/>
-            </template>
-
             <Tooltip>
                 <template #title>
                     Edit
@@ -83,9 +76,6 @@ import DeleteIcon from '../icons/Delete.vue'
 import adsApi from '../../api/ads'
 
 export default {
-    props: [
-        'editingStatus',
-    ],
     components: {
         Table, EditIcon, DeleteIcon, 
         Tooltip, Tag, Switch,
@@ -113,10 +103,6 @@ export default {
                 {
                     title: 'Clicks count',
                     key: 'clicks_count',
-                },
-                {
-                    title: 'Status',
-                    key: 'status',
                 },
                 {
                     key: 'edit',

@@ -32,7 +32,6 @@ class StoreRequest extends FormRequest
             ],
             'link' => 'required|url', 
             'clicks_limit' => 'required|integer|gte:1', 
-            'status' => 'required|boolean', 
         ];
     }
 }

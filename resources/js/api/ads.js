@@ -37,18 +37,6 @@ const adsApi = {
 
         return res.data
     },
-    async editStatus(id, status) {
-        if (!can('ads.edit')) {
-            throw new Error('Forbidden.')
-        }
-
-        let data = { status }
-        data._method = 'PATCH'
-
-        const res = await axios.post(`/api/ads/${id}/status`, data)
-
-        return res.data
-    },
 }
 
 export default adsApi

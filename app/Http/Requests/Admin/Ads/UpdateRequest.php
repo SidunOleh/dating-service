@@ -23,7 +23,6 @@ class UpdateRequest extends FormRequest
     {
         return [
             'clicks_limit' => 'required|integer|gte:1', 
-            'status' => 'required|boolean', 
         ];
     }
 }

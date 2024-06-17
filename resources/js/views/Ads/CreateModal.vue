@@ -38,12 +38,6 @@
                     :min="1"/>
             </FormItem>
 
-            <FormItem
-                label="Status"
-                :required="true">
-                <Switch v-model:checked="data.status"/>
-            </FormItem>
-
             <Button
                 :loading="creating"
                 @click="create">
@@ -76,7 +70,6 @@ export default {
                 image_id: null,
                 link: '',
                 clicks_limit: 1,
-                status: true,
             },
             creating: false,
         }

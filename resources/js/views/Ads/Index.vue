@@ -20,9 +20,7 @@
 
     <Table
         ref="table"
-        :editingStatus="editingStatus"
         @edit="showEdit"
-        @editStatus="record => editStatus(record)"
         @delete="record => confirmPopup(() => deleteRecord(record), `Are you sure you want to delete ${record.name}?`)"/>
 
 </template>
@@ -49,7 +47,6 @@ export default {
                 open: false,
                 record: null,
             },
-            editingStatus: false,
         }
     },
     methods: {
@@ -57,18 +54,6 @@ export default {
         showEdit(record) {
             this.edit.record = record
             this.edit.open = true
-        },
-        async editStatus(record) {
-            try {
-                this.editingStatus = true
-                await adsApi.editStatus(record.id, record.status)
-                message.success('Successfully saved status.')
-            } catch (err) {
-                record.status = !record.status
-                message.error(err?.response?.data?.message ?? err.message)
-            } finally {
-                this.editingStatus = false
-            }
         },
         async deleteRecord(record) {
             try {

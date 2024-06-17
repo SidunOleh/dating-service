@@ -17,7 +17,6 @@ class Ad extends Model
         'link',
         'clicks_limit',
         'clicks_count',
-        'status',
     ];
 
     public function image(): BelongsTo

@@ -19,7 +19,7 @@ class CreatorFactory extends Factory
         return [
             'email' => fake()->email(),
             'password' => 'secret',
-            'photos' => [3,],
+            'photos' => [1,],
             'name' => fake()->name(),
             'age' => rand(18, 100),
             'gender' => ['Man', 'Woman', 'LGBTQ+'][rand(0, 2)],
@@ -29,8 +29,8 @@ class CreatorFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'birthday' => fake()->date(),
-            'id_photo' => 3,
-            'street_photo' => 3,
+            'id_photo' => 1,
+            'street_photo' => 1,
         ];
     }
 }

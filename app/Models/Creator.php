@@ -131,6 +131,7 @@ class Creator extends Authenticatable
             $code = rand(1000000, 9999999);
         } while (self::firstWhere('referral_code', $code));
         
+        
         return $code;
     }
 

@@ -135,9 +135,6 @@ Route::middleware(['auth:sanctum',])->group(function () {
         Route::put('/{ad}', AdsUpdateController::class)  
             ->name('update')
             ->can('ads.edit');
-        Route::patch('/{ad}/status', UpdateStatusController::class)  
-            ->name('update.status')
-            ->can('ads.edit');
         Route::delete('/{ad}', AdsDeleteController::class)  
             ->name('delete')
             ->can('ads.delete');

@@ -23,7 +23,6 @@ class AdCollection extends ResourceCollection
             $data[$i]['image_url'] = $ad->image->url();
             $data[$i]['clicks_limit'] = $ad->clicks_limit;
             $data[$i]['clicks_count'] = $ad->clicks_count;
-            $data[$i]['status'] = (bool) $ad->status;
         }
 
         $meta = [

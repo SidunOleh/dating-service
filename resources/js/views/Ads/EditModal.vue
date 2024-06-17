@@ -53,12 +53,6 @@
                     :disabled="true"/>
             </FormItem>
 
-            <FormItem
-                label="Status"
-                :required="true">
-                <Switch v-model:checked="data.status"/>
-            </FormItem>
-
             <Button
                 :loading="editing"
                 @click="edit">

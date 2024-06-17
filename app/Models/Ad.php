@@ -24,15 +24,6 @@ class Ad extends Model
     {
         return $this->BelongsTo(Image::class);
     }
-    
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::updating(function (self $ad) {
-            $ad->status = $ad->clicks_limit > $ad->clicks_count;
-        });
-    }
 
     public static function scopeActive(Builder $query): void
     {

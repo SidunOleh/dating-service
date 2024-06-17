@@ -26,6 +26,7 @@ class UpdateRequest extends FormRequest
         return [
             'is_banned' => 'boolean',
             'show_on_site' => 'boolean',
+            'play_roulette' => 'boolean',
 
             'email' => [
                 'required',

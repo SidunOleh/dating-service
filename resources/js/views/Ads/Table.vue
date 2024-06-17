@@ -3,7 +3,11 @@
     <Table
         :columns="columns"
         :dataSource="data.data"
-        :pagination="{pageSize: data.meta?.per_page, total: data.meta?.total}"
+        :pagination="{
+            pageSize: query.perpage, 
+            total: data.meta?.total, 
+            onChange: (page, size) => query.perpage = size
+        }"
         :loading="loading"
         @change="changeQuery">
 
@@ -15,7 +19,7 @@
                     :src="record.image_url"/>
             </template>
 
-            <template v-if="column.key === 'name'">
+            <template v-if="column.key == 'name'">
                 {{ record.name }}
             </template>
 
@@ -145,7 +149,7 @@ export default {
         },
     },
     watch: {
-        meta: {
+        query: {
             handler() {
                this.updateData()
             },

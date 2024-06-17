@@ -6,7 +6,7 @@
             style="margin-bottom: 20px;"
             :gap="20">
             <Flex 
-                align="start"
+                align="center"
                 :gap="5" 
                 :vertical="true">
                 Banned
@@ -14,11 +14,19 @@
             </Flex>
 
             <Flex
-                align="start" 
+                align="center" 
                 :gap="5" 
                 :vertical="true">
                 Show on site
                 <Switch v-model:checked="data.show_on_site"/>
+            </Flex>
+
+            <Flex
+                align="center" 
+                :gap="5" 
+                :vertical="true">
+                Roulette
+                <Switch v-model:checked="data.play_roulette"/>
             </Flex>
         </Flex>
 

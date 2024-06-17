@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 
 class Creator extends Authenticatable
 {
@@ -20,7 +21,8 @@ class Creator extends Authenticatable
         'email',
         'password',
         'is_banned', 
-        'show_on_site', 
+        'show_on_site',
+        'play_roulette', 
         'created_by_admin',
         'photos',
         'name',
@@ -55,6 +57,7 @@ class Creator extends Authenticatable
         'password' => 'hashed',
         'is_banned'=> 'boolean', 
         'show_on_site'=> 'boolean', 
+        'play_roulette'=> 'boolean', 
         'created_by_admin'=> 'boolean', 
         'is_approved' => 'boolean',
         'photos' => 'array',
@@ -250,7 +253,7 @@ class Creator extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-    public function updateAndCreateProfileRequest(array $data): ?ProfileRequest
+    public function updateProfileAndCreateRequest(array $data): ?ProfileRequest
     {
         $this->photos = array_intersect($data['photos'] ?? [], $this->photos ?? []);
         $this->save();
@@ -329,4 +332,65 @@ class Creator extends Authenticatable
     {
         return $this->hasOne(ProfileRequest::class)->latestOfMany();
     }
+
+    public static function scopeShowOnSite(Builder $query): void
+    {
+        $query->where('is_banned', false)
+            ->where('is_approved', true)
+            ->where('show_on_site', true);
+    }   
+
+    public static function scopePlayRoulette(Builder $query): void
+    {
+        $query->where('play_roulette', true);
+    } 
+
+    public static function scopeVerified(Builder $query): void
+    {
+        $query->where('is_verified', true);
+    } 
+
+    public static function seed(): int
+    {
+        if (! $seed = Cache::get('seed')) {
+            $seed = rand();
+            Cache::put('seed', $seed, 120 * 60);
+        }
+
+        return $seed;
+    }
+
+    public static function mainList(int $page, int $perpage): Collection
+    {
+        $seed = self::seed();
+
+        $verified = self::showOnSite()
+            ->verified()
+            ->orderByRaw("rand({$seed})")
+            ->limit(10)
+            ->get();
+
+        $limit = $page == 1 ? $perpage - $verified->count() : $perpage;
+        $limit = $limit < 0 ? 0 : $limit;
+        $offset = $perpage * ($page - 1) - $verified->count();
+        $offset = $offset < 0 ? 0 : $offset;
+
+        $collection = self::whereNotIn('id', $verified->pluck('id'))
+            ->showOnSite()
+            ->orderByRaw("rand({$seed})")
+            ->limit($limit)
+            ->offset($offset)
+            ->get();
+
+        return $page == 1 ? $verified->merge($collection) : $collection;
+    } 
+
+    public static function mainListTotalCount(): int
+    {
+        $verified = self::showOnSite()
+            ->verified()
+            ->count();
+
+        return self::showOnSite()->count() - ($verified < 10 ? $verified : 10);
+    } 
 }

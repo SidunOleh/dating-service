@@ -54,11 +54,10 @@ class PlisioInvoice extends Model
 
         if ($status == 'completed') {
             $this->subscription->activate();
-
+            
             if ($referral = $this->creator->referral) {
                 $percent = (int) Option::getSetting('referral_percent', 0);
-                $percent /= 100;
-                $reward = $this->transaction->usd_amount * $percent;
+                $reward = $this->transaction->usd_amount * $percent / 100;
                 $referral->reward($reward);
             }
         }

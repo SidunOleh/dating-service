@@ -3,7 +3,11 @@
     <Table
         :columns="columns"
         :dataSource="data.data"
-        :pagination="{pageSize: data.meta?.per_page, total: data.meta?.total}"
+        :pagination="{
+            pageSize: query.perpage, 
+            total: data.meta?.total, 
+            onChange: (page, size) => query.perpage = size
+        }"
         :loading="loading"
         @change="changeQuery">
 

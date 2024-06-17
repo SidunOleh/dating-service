@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->boolean('is_banned')->default(false);
             $table->boolean('show_on_site')->default(true);
+            $table->boolean('play_roulette')->default(true);
             $table->boolean('created_by_admin')->default(false);
 
             $table->boolean('is_approved')->default(false);

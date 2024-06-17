@@ -17,7 +17,7 @@ class UpdateController extends Controller
 
         // $creator->update($validated);
         
-        $creator->updateAndCreateProfileRequest($validated);
+        $creator->updateProfileAndCreateRequest($validated);
 
         if ($ban) {
             CreatorInactivated::dispatch($creator);

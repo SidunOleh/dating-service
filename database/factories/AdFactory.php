@@ -17,7 +17,7 @@ class AdFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->text(20),
+            'name' => fake()->text(rand(10, 100)),
             'image_id' => 1,
             'link' => fake()->url(),
             'clicks_limit' => rand(),

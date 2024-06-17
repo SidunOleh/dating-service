@@ -17,7 +17,7 @@ class CreatorFactory extends Factory
     public function definition(): array
     {
         return [
-            'email' => fake()->unique()->email(),
+            'email' => fake()->email(),
             'password' => 'secret',
             'photos' => [3,],
             'name' => fake()->name(),

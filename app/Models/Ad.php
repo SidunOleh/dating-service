@@ -26,6 +26,6 @@ class Ad extends Model
 
     public static function scopeActive(Builder $query): void
     {
-        $query->where('status', true);
+        $query->where('clicks_count', '>=', 'clicks_limit');
     }
 }

@@ -42,8 +42,9 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('region')->nullable();
             $table->string('city')->nullable();
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 11, 8)->nullable();            
+            $table->float('latitude')->nullable();
+            $table->float('longitude')->nullable();     
+            $table->index('latitude');       
 
             $table->boolean('is_verified')->default(false);
             $table->string('first_name')->nullable();

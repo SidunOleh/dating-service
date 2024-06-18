@@ -254,11 +254,8 @@ class Creator extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-    public function updateProfileAndCreateRequest(array $data): ?ProfileRequest
+    public function createProfileRequest(array $data): ?ProfileRequest
     {
-        $this->photos = array_intersect($data['photos'] ?? [], $this->photos ?? []);
-        $this->save();
-
         $request = [];
         foreach ($this->approvable as $field) {
             if (
@@ -351,6 +348,25 @@ class Creator extends Authenticatable
         $query->where('is_verified', true);
     } 
 
+    public static function scopeRadius(
+        Builder $query, 
+        array $center, 
+        int $radius
+    ): void
+    {
+        $latMin = $center['lat'] - ($radius / 1000 / 111);
+        $latMax = $center['lat'] + ($radius / 1000 / 111);
+        $lngMin = $center['lng'] - ($radius / 1000 / 111 * cos($center['lat']));
+        $lngMax = $center['lng'] + ($radius / 1000 / 111 * cos($center['lat']));
+
+        $query->whereBetween('latitude', [$latMin, $latMax])
+            ->whereBetween('longitude', [$lngMin, $lngMax])
+            ->whereRaw("ST_Distance_Sphere(
+                point({$center['lng']}, {$center['lat']}),
+                point(`longitude`, `latitude`)
+            ) <= {$radius}");
+    } 
+
     public static function seed(): int
     {
         if (! $seed = Cache::get('seed')) {
@@ -368,22 +384,20 @@ class Creator extends Authenticatable
         $verified = self::showOnSite()
             ->verified()
             ->orderByRaw("rand({$seed})")
-            ->limit(10)
+            ->limit($perpage < 10 ? $perpage : 10)
             ->get();
 
         $limit = $page == 1 ? $perpage - $verified->count() : $perpage;
-        $limit = $limit < 0 ? 0 : $limit;
         $offset = $perpage * ($page - 1) - $verified->count();
-        $offset = $offset < 0 ? 0 : $offset;
 
-        $collection = self::whereNotIn('id', $verified->pluck('id'))
+        $creators = self::whereNotIn('id', $verified->pluck('id')->all())
             ->showOnSite()
             ->orderByRaw("rand({$seed})")
             ->limit($limit)
             ->offset($offset)
             ->get();
 
-        return $page == 1 ? $verified->merge($collection) : $collection;
+        return $page == 1 ? $verified->merge($creators) : $creators;
     } 
 
     public static function mainListTotalCount(): int

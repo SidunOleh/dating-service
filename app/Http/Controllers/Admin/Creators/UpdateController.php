@@ -17,7 +17,13 @@ class UpdateController extends Controller
 
         // $creator->update($validated);
         
-        $creator->updateProfileAndCreateRequest($validated);
+        $creator->photos = array_intersect(
+            $validated['photos'] ?? [], 
+            $creator->photos ?? []
+        );
+        $creator->save();
+
+        $creator->createProfileRequest($validated);
 
         if ($ban) {
             CreatorInactivated::dispatch($creator);

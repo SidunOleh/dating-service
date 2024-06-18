@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\Ads\DeleteController as AdsDeleteController;
 use App\Http\Controllers\Admin\Ads\IndexController as AdsIndexController;
 use App\Http\Controllers\Admin\Ads\StoreController as AdsStoreController;
 use App\Http\Controllers\Admin\Ads\UpdateController as AdsUpdateController;
-use App\Http\Controllers\Admin\Ads\UpdateStatusController;
 use App\Http\Controllers\Admin\Auth\ResetPassword;
 use App\Http\Controllers\Admin\Auth\SendResetLink;
 use App\Http\Controllers\Admin\Creators\DeleteController as CreatorsDeleteController;

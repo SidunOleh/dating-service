@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('link', 1024);
             $table->integer('clicks_limit');
             $table->integer('clicks_count')->default(0);
-            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

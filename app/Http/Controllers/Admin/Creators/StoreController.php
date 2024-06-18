@@ -18,7 +18,7 @@ class StoreController extends Controller
         $creator = Creator::create(
             $request->only(['email', 'password',])
         );
-        $creator->updateProfileAndCreateRequest($validated);
+        $creator->createProfileRequest($validated);
 
         return response(['id' => $creator->id,]);
     }

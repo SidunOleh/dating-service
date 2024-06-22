@@ -351,8 +351,8 @@ $('#sign-in').submit(function(e) {
             resetResend()
         }).fail(xhr => {
             if (xhr.status == 401) {
-                email.closest('.input-group').addClass('error')
-                email.next('.error-text').text(xhr.responseJSON.message)
+                password.closest('.input-group').addClass('error')
+                password.next('.error-text').text(xhr.responseJSON.message)
             }
 
             if (xhr.status == 422) {

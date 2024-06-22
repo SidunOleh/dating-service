@@ -4,7 +4,7 @@
             
             @php
             $imgs = $creator->photos();
-            $imgs = Auth::check() ? $imgs : $imgs->slice(0, 3);
+            $imgs = (Auth::check() and Auth::user()->subscription()) ? $imgs : $imgs->slice(0, 3);
             @endphp
 
             @foreach($imgs as $img)

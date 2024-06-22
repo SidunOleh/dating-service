@@ -68,6 +68,9 @@
                     Enter password
                 </label>
                 <input type="password" id="password" name="password" placeholder="Password" required />
+                <div class="error-text">
+                    The password is required
+                </div>
                 <div type="button" class="show-password">
                     <img src="{{ asset('assets/img/mdi_eye-outline.svg') }}" alt="" />
                 </div>

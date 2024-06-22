@@ -12,8 +12,8 @@ class UploadController extends Controller
     {
         $image = Image::saveUploaded(
             $request->file('img'),
-            $request->input('thumb', false),
-            $request->input('watermark', false)
+            $request->input('watermark', false),
+            $request->input('compress')
         );
 
         return response([

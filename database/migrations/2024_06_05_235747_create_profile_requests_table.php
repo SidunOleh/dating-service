@@ -32,6 +32,7 @@ return new class extends Migration
             $table->json('first_name')->nullable();
             $table->json('last_name')->nullable();
             $table->json('birthday')->nullable();
+            $table->json('verification_photo')->nullable();
             $table->json('id_photo')->nullable();
             $table->json('street_photo')->nullable();
 

@@ -30,6 +30,7 @@ class ProfileRequest extends Model
         'last_name',
         'birthday',
         'id_photo',
+        'verification_photo',
         'street_photo',
         'status',
         'creator_id',
@@ -53,6 +54,7 @@ class ProfileRequest extends Model
         'first_name' => 'array',
         'last_name' => 'array',
         'birthday' => 'array',
+        'verification_photo' => 'array',
         'id_photo' => 'array',
         'street_photo' => 'array',
     ];
@@ -70,6 +72,11 @@ class ProfileRequest extends Model
     public function photos(): Collection
     {
         return Image::getByIds($this->photos['value'] ?? []);
+    }
+
+    public function verificationPhoto(): ?Image
+    {
+        return Image::find($this->verification_photo['value'] ?? '');
     }
 
     public function idPhoto(): ?Image
@@ -101,6 +108,7 @@ class ProfileRequest extends Model
             'first_name',
             'last_name',
             'birthday',
+            'verification_photo',
             'id_photo',
             'street_photo',
         ] as $field) {

@@ -2,8 +2,16 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
-use App\Http\Controllers\Web\Auth\RegisterController;
+use App\Http\Controllers\Web\Auth\SignInResendCodeController;
+use App\Http\Controllers\Web\Auth\SignInSendCodeController;
+use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
+use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
+use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
+use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Pages\HomeController;
+use App\Http\Controllers\Web\Password\ForgotController;
+use App\Http\Controllers\Web\Password\ResetController;
+use App\Http\Controllers\Web\Password\ResetPageController;
 use App\Http\Controllers\Web\Plisio\CallbackController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +43,28 @@ Route::post('/admin/logout', LogoutController::class)
 /**
  * Auth
  */
-Route::post('/register', RegisterController::class);
+Route::post('/sign-up/send-code', SignUpSendCodeController::class)
+    ->name('sign-up.send-code');
+Route::post('/sign-up/verify-code', SignUpVerifyCodeController::class)
+    ->name('sign-up.verify-code');
+Route::post('/sign-up/resend-code', SignUpResendCodeController::class)
+    ->name('sign-up.resend-code');
+Route::post('/sign-in/send-code', SignInSendCodeController::class)
+    ->name('sign-in.send-code');
+Route::post('/sign-in/verify-code', SignInVerifyCodeController::class)
+    ->name('sign-in.verify-code');
+Route::post('/sign-in/resend-code', SignInResendCodeController::class)
+    ->name('sign-in.resend-code');
+
+/**
+ * Password
+ */
+Route::post('/password/forgot', ForgotController::class)
+    ->name('web.password.forgot');
+Route::get('/password/reset', ResetPageController::class)
+    ->name('web.password.reset.page');
+Route::post('/password/reset', ResetController::class)
+    ->name('web.password.reset');
 
 /**
  * Plisio
@@ -45,4 +74,7 @@ Route::post('/plisio/callback', CallbackController::class);
 /**
  * Pages
  */
-Route::get('/', HomeController::class)->name('pages.home');
+Route::get('/', HomeController::class)
+    ->name('home');
+Route::get('/page/{page}', HomeController::class)
+    ->name('home.page');

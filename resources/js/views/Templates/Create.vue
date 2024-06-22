@@ -1,5 +1,22 @@
 <template>
 
+    <Flex
+        style="margin-bottom: 10px;" 
+        :gap="10">
+        <div>
+            Total: {{ profilesCount + roulettesCount + adsCount }}
+        </div>
+        <div>
+            Profiles: {{ profilesCount }}
+        </div>
+        <div>
+            Roulettes: {{ roulettesCount }}
+        </div>
+        <div>
+            Ads: {{ adsCount }}
+        </div>
+    </Flex>
+
     <Flex   
         v-if="template.length"
         :vertical="true"
@@ -84,6 +101,17 @@ export default {
             template: ['profile',],
             creating: false,
         }
+    },
+    computed: {
+        profilesCount() {
+            return this.template.filter(item => item == 'profile').length
+        },
+        adsCount() {
+            return this.template.filter(item => item == 'ad').length
+        },
+        roulettesCount() {
+            return this.template.filter(item => item == 'roulette').length
+        },
     },
     methods: {
         confirmPopup,

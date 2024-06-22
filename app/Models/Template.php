@@ -18,6 +18,14 @@ class Template extends Model
         'template' => 'array',
     ];
 
+    private int $page = 1;
+    
+    private array $filters = [];
+
+    private Collection $data;
+
+    private int $total;
+
     public function count(string $block): int
     {
         $blocks = array_filter($this->template, fn ($item) => $item == $block);
@@ -25,7 +33,26 @@ class Template extends Model
         return count($blocks);
     }
 
-    public function fillData(int $page = 1): void
+    public function getPage(): int
+    {
+        return $this->page;
+    }
+    
+    public function setPage(int $page): self
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    public function setFilters(array $filters): self
+    {
+        $this->filters = $filters;
+
+        return $this;
+    }
+
+    public function fillData(): void
     {
         $ads = Ad::active()
             ->inRandomOrder()
@@ -36,22 +63,26 @@ class Template extends Model
             ->inRandomOrder()
             ->limit($this->count('roulette') * 2)
             ->get();
-        $profiles = Creator::mainList($page, $this->count('profile'));
+        $profiles = Creator::mainList(
+            $this->page, 
+            $this->count('profile'), 
+            $this->filters
+        );
 
-        $this->blocks = new Collection();
+        $this->data = new Collection();
         foreach ($this->template as $block) {
             if (
                 $block == 'ad' and
                 $ads->count()
             ) {
-                $this->blocks->push($ads->shift());
+                $this->data->push($ads->shift());
             }
 
             if (
                 $block == 'roulette' and
                 $roulettes->count() >= 2
             ) {
-                $this->blocks->push([
+                $this->data->push([
                     $roulettes->shift(),
                     $roulettes->shift(),
                 ]);
@@ -61,13 +92,20 @@ class Template extends Model
                 $block == 'profile' and
                 $profiles->count()
             ) {
-                $this->blocks->push($profiles->shift());
+                $this->data->push($profiles->shift());
             }
         }
+
+        $this->total = ceil(Creator::mainListTotalCount($this->filters) / $this->count('profile'));
+    }
+
+    public function data(): Collection
+    {
+        return $this->data;
     }
 
     public function total(): int
     {
-        return Creator::mainListTotalCount();
+        return $this->total;
     }
 }

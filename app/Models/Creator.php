@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,6 +46,7 @@ class Creator extends Authenticatable
         'first_name',
         'last_name',
         'birthday',
+        'verification_photo',
         'id_photo',
         'street_photo',
     ];
@@ -85,6 +87,7 @@ class Creator extends Authenticatable
         'first_name',
         'last_name',
         'birthday',
+        'verification_photo',
         'id_photo',
         'street_photo',
         'full_address',
@@ -157,6 +160,7 @@ class Creator extends Authenticatable
             $this->first_name and
             $this->last_name and
             $this->birthday and
+            $this->verification_photo and
             $this->id_photo and
             $this->street_photo
         ) {
@@ -166,31 +170,14 @@ class Creator extends Authenticatable
         return false;
     }
 
-    public static function search(string $q): Builder
-    {
-        return self::whereAny([
-            'email',
-            'name',
-            'description',
-            'phone',
-            'profile_email',
-            'instagram',
-            'telegram',
-            'snapchat',
-            'onlyfans',
-            'whatsapp',
-            'full_address',
-            'country',
-            'region',
-            'city',
-            'first_name',
-            'last_name',
-        ], 'like', "%{$q}%");
-    }
-
     public function photos(): Collection
     {
         return Image::getByIds($this->photos ?? []);
+    }
+
+    public function verificationPhoto(): belongsTo
+    {
+        return $this->belongsTo(Image::class, 'verification_photo');
     }
 
     public function idPhoto(): belongsTo
@@ -331,6 +318,44 @@ class Creator extends Authenticatable
         return $this->hasOne(ProfileRequest::class)->latestOfMany();
     }
 
+    public static function scopeAdminSearch(Builder $query, string $q): void
+    {
+        $query->whereAny([
+            'email',
+            'name',
+            'description',
+            'phone',
+            'profile_email',
+            'instagram',
+            'telegram',
+            'snapchat',
+            'onlyfans',
+            'whatsapp',
+            'full_address',
+            'country',
+            'region',
+            'city',
+            'first_name',
+            'last_name',
+        ], 'like', "%{$q}%");
+    }
+
+    public static function scopeSearch(Builder $query, string $q): void
+    {
+        $query->whereAny([
+            'name',
+            'description',
+            'phone',
+            'profile_email',
+            'instagram',
+            'telegram',
+            'snapchat',
+            'onlyfans',
+            'whatsapp',
+            'full_address',
+        ], 'like', "%{$q}%");
+    }
+
     public static function scopeShowOnSite(Builder $query): void
     {
         $query->where('is_banned', false)
@@ -348,21 +373,19 @@ class Creator extends Authenticatable
         $query->where('is_verified', true);
     } 
 
-    public static function scopeRadius(
-        Builder $query, 
-        array $center, 
-        int $radius
-    ): void
+    public static function scopeRadius(Builder $query, array $center, int $radius): void
     {
-        $latMin = $center['lat'] - ($radius / 1000 / 111);
-        $latMax = $center['lat'] + ($radius / 1000 / 111);
-        $lngMin = $center['lng'] - ($radius / 1000 / 111 * cos($center['lat']));
-        $lngMax = $center['lng'] + ($radius / 1000 / 111 * cos($center['lat']));
+        $radians = $radius / 1000 / 6371;
+
+        $latMin = $center['lat'] - $radians * (180 / pi());
+        $latMax = $center['lat'] + $radians * (180 / pi());
+        $lngMin = $center['lng'] - $radians * (180 / pi()) / cos($center['lng'] * pi() / 180);
+        $lngMax = $center['lng'] + $radians * (180 / pi()) / cos($center['lng'] * pi() / 180);
 
         $query->whereBetween('latitude', [$latMin, $latMax])
             ->whereBetween('longitude', [$lngMin, $lngMax])
             ->whereRaw("ST_Distance_Sphere(
-                point({$center['lng']}, {$center['lat']}),
+                point({$center['lng']}, {$center['lat']}), 
                 point(`longitude`, `latitude`)
             ) <= {$radius}");
     } 
@@ -371,37 +394,77 @@ class Creator extends Authenticatable
     {
         if (! $seed = Cache::get('seed')) {
             $seed = rand();
-            Cache::put('seed', $seed, 120 * 60);
+            Cache::put('seed', $seed, 60);
         }
 
         return $seed;
     }
 
-    public static function mainList(int $page, int $perpage): Collection
+    public static function top(int $count, array $filters): Collection
     {
         $seed = self::seed();
 
-        $verified = self::showOnSite()
-            ->verified()
-            ->orderByRaw("rand({$seed})")
-            ->limit($perpage < 10 ? $perpage : 10)
-            ->get();
+        $query = self::showOnSite()->verified();
 
-        $limit = $page == 1 ? $perpage - $verified->count() : $perpage;
-        $offset = $perpage * ($page - 1) - $verified->count();
+        if (isset($filters['s'])) {
+            $query->search($filters['s']);
+        }
 
-        $creators = self::whereNotIn('id', $verified->pluck('id')->all())
-            ->showOnSite()
-            ->orderByRaw("rand({$seed})")
+        if (isset($filters['center']) and isset($filters['radius'])) {
+            $query->radius($filters['center'], $filters['radius']);
+        }
+            
+        return $query->orderByRaw("rand({$seed})")->limit($count)->get();
+    }
+
+    public static function mainList(int $page, int $perpage, array $filters = []): Collection
+    {
+        $top = self::top($perpage < 10 ? $perpage : 10, $filters);
+
+        $seed = self::seed();
+        $limit = $page == 1 ? $perpage - $top->count() : $perpage;
+        $offset = $perpage * ($page - 1) - $top->count();
+        
+        $query = self::whereNotIn('id', $top->pluck('id')->all())->showOnSite();
+
+        if (isset($filters['s'])) {
+            $query->search($filters['s']);
+        }
+
+        if (isset($filters['center']) and isset($filters['radius'])) {
+            $query->radius($filters['center'], $filters['radius']);
+        }
+        
+        $creators = $query->orderByRaw("rand({$seed})")
             ->limit($limit)
             ->offset($offset)
             ->get();
 
-        return $page == 1 ? $verified->merge($creators) : $creators;
+        return $page == 1 ? $top->merge($creators) : $creators;
     } 
 
-    public static function mainListTotalCount(): int
+    public static function mainListTotalCount(array $filters = []): int
     {
-        return self::showOnSite()->count();
+        $query = self::showOnSite();
+
+        if (isset($filters['s'])) {
+            $query->search($filters['s']);
+        }
+
+        if (isset($filters['center']) and isset($filters['radius'])) {
+            $query->radius($filters['center'], $filters['radius']);
+        }
+
+        return $query->count();
     } 
+
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'favorites', 'creator_id', 'favorite_id');
+    }
+
+    public static function makeVerificationCode(): int
+    {
+        return rand(100000, 999999);
+    }
 }

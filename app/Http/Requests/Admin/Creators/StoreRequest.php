@@ -55,6 +55,7 @@ class StoreRequest extends FormRequest
             'first_name' => 'string|nullable',
             'last_name' => 'string|nullable',
             'birthday' => 'date_format:Y-m-d|nullable',
+            'verification_photo' => 'exists:images,id|nullable',
             'id_photo' => 'exists:images,id|nullable',
             'street_photo' => 'exists:images,id|nullable',
         ];

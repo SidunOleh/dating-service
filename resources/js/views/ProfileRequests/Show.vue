@@ -304,12 +304,31 @@
                 </FormItem>
 
                 <FormItem
+                    label="Verification photo"
+                    :class="data.verification_photo?.status">
+
+                    <Image
+                        v-if="data.verification_photo ? data.verification_photo?.value?.url : data.creator?.verification_photo?.url"
+                        style="object-fit: contain;"
+                        :height="295"
+                        :width="295"
+                        :src="data.verification_photo ? data.verification_photo?.value?.url : data.creator?.verification_photo?.url"/>
+
+                    <ApproveField
+                        v-if="data.verification_photo"
+                        style="margin-top: 10px;" 
+                        v-model:status="data.verification_photo.status"
+                        v-model:comment="data.verification_photo.comment"/>
+
+                </FormItem>
+
+                <FormItem
                     label="ID photo"
                     :class="data.id_photo?.status">
 
                     <Image
+                        v-if="data.id_photo ? data.id_photo?.value?.url : data.creator?.id_photo?.url"
                         style="object-fit: contain;"
-                        alt="No photo"
                         :height="295"
                         :width="295"
                         :src="data.id_photo ? data.id_photo?.value?.url : data.creator?.id_photo?.url"/>
@@ -327,8 +346,8 @@
                     :class="data.street_photo?.status">
 
                     <Image
+                        v-if="data.street_photo ? data.street_photo?.value?.url : data.creator?.street_photo?.url"
                         style="object-fit: contain;"
-                        alt="No photo"
                         :height="295"
                         :width="295"
                         :src="data.street_photo ? data.street_photo?.value?.url : data.creator?.street_photo?.url"/>
@@ -443,6 +462,10 @@ export default {
 
             if (data.photos) {
                 data.photos.value = this.data.photos.value.map(img => img.id)
+            }
+
+            if (data.verification_photo) {
+                data.verification_photo.value = this.data.verification_photo.value?.id ?? null
             }
 
             if (data.id_photo) {

@@ -56,6 +56,11 @@ class DoneRequest extends FormRequest
         $rules['birthday.comment'] = 'string|nullable';
         $rules['birthday.show_rejected'] = 'boolean';
 
+        $rules['verification_photo'] = 'array|nullable';
+        $rules['verification_photo.value'] = 'exists:images,id|nullable';
+        $rules['verification_photo.status'] = 'in:approved,rejected';
+        $rules['verification_photo.comment'] = 'string|nullable';
+        $rules['verification_photo.show_rejected'] = 'boolean';
         $rules['id_photo'] = 'array|nullable';
         $rules['id_photo.value'] = 'exists:images,id|nullable';
         $rules['id_photo.status'] = 'in:approved,rejected';

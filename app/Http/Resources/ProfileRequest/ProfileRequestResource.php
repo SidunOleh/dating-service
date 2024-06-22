@@ -21,6 +21,13 @@ class ProfileRequestResource extends JsonResource
                 'url' => $img->url(),
             ]);
         }
+        
+        if ($verificationPhoto = $this->verification_photo) {
+            $verificationPhoto['value'] = ($photo = $this->verificationPhoto()) ? [
+                'id' => $photo->id,
+                'url' => $photo->url(),
+            ] : null; 
+        }
 
         if ($idPhoto = $this->id_photo) {
             $idPhoto['value'] = ($photo = $this->idPhoto()) ? [
@@ -54,6 +61,7 @@ class ProfileRequestResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'birthday' => $this->birthday,
+            'verification_photo' => $verificationPhoto,
             'id_photo' => $idPhoto,
             'street_photo' => $streetPhoto,
             'status' => $this->status,

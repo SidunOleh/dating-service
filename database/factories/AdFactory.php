@@ -18,9 +18,8 @@ class AdFactory extends Factory
     {
         return [
             'name' => fake()->text(rand(10, 100)),
-            'image_id' => 1,
             'link' => fake()->url(),
-            'clicks_limit' => rand(),
+            'clicks_limit' => rand(100, 1000),
         ];
     }
 }

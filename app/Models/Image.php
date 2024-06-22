@@ -19,15 +19,10 @@ class Image extends Model
         'path',
     ];
 
-    public const THUMB_SIZE = [
-        400,
-        400,
-    ];
-
     public static function saveUploaded(
         UploadedFile $uploaded, 
-        bool $thumb = false,
-        bool $watermark = false
+        bool $watermark = false,
+        ?int $compress = null
     ): self
     {
         $manager = new ImageManager(new Driver());
@@ -35,32 +30,24 @@ class Image extends Model
         $img = $manager->read($uploaded->path());
 
         if ($watermark) {
-            $img->place(storage_path('watermark.png'), 'center');
+            $img->place(self::watermark(), 'center');
         }
-
-        $dir = date('Y') . '/' . date('m');
-        if (! is_dir($fullDir = Storage::disk('public')->path($dir))) {
-            mkdir($fullDir, 0775, true);
-        }
-
-        $name = md5(Auth::id() . $uploaded->getClientOriginalName() . microtime());
-        $extention = $uploaded->extension();
-        $path = $fullDir . '/' . $name . '.' . $extention;
         
-        $img->save($path);
+        $name = md5(Auth::id() . $uploaded->getClientOriginalName() . microtime());
+        $path = date('Y') . '/' . date('m') . '/' . $name . '.webp';
 
-        if ($thumb) {
-            $thumbImg = $manager->read($path);
-            $thumbImg->scale(self::THUMB_SIZE[0], self::THUMB_SIZE[1]);
-            $thumbPath = $fullDir . '/' . "{$name}-thumb" . '.' . $extention;
-            $thumbImg->save($thumbPath);
-        }
+        Storage::disk('public')->put(
+            $path, isset($compress) ? $img->toWebp($compress) : $img->toWebp()
+        );
 
-        $image = self::create([
-            'path' => $dir . '/' . $name . '.' . $extention,
-        ]);
+        $image = self::create(['path' => $path,]);
 
         return $image;
+    }
+
+    public static function watermark(): string
+    {
+        return storage_path('watermark.png');
     }
 
     public function url(): string
@@ -68,18 +55,15 @@ class Image extends Model
         return url('storage/' . $this->path);
     }
 
-    public function thumbUrl(): ?string
+    public function deleteFile(): bool
     {
-        $name = explode('.', basename($this->path))[0];
-        $thumbName = $name . '-thumb';
-        $regex = '/' . preg_quote($name) . '/';
-        $thumbPath = preg_replace($regex, $thumbName, $this->path);
-        
-        if (Storage::disk('public')->exists($thumbPath)) {
-            return url('storage/' . $thumbPath);
-        } else {
-            return null;
+        $path = Storage::disk('public')->path($this->path);
+
+        if (! file_exists($path)) {
+            return false;
         }
+
+        return unlink($path);
     }
     
     public static function getByIds(array $ids): Collection

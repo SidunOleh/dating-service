@@ -14,4 +14,6 @@ class ZipCode extends Model
         'latitude',
         'longitude',
     ];
+
+    public $timestamps = false;
 }

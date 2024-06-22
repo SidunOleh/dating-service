@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Creators\IndexController as CreatorsIndexControll
 use App\Http\Controllers\Admin\Creators\ShowController as CreatorsShowController;
 use App\Http\Controllers\Admin\Creators\StoreController as CreatorsStoreController;
 use App\Http\Controllers\Admin\Creators\UpdateController as CreatorsUpdateController;
+use App\Http\Controllers\Admin\Images\DeleteController as ImagesDeleteController;
 use App\Http\Controllers\Admin\Images\UploadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Permissions\DeleteController as PermissionsDeleteController;
@@ -121,8 +122,12 @@ Route::middleware(['auth:sanctum',])->group(function () {
             ->can('templates.delete');
     });
 
-    Route::post('/images/upload', UploadController::class)
-        ->name('images.upload');
+    Route::prefix('/images')->name('images.')->group(function () {
+        Route::post('/upload', UploadController::class)
+            ->name('upload');
+        Route::delete('/{image}', ImagesDeleteController::class)
+            ->name('delete');
+    });
 
     Route::prefix('/ads')->name('ads.')->group(function () {
         Route::get('/', AdsIndexController::class)

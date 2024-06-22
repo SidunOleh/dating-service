@@ -10,8 +10,8 @@
                 label="Image"
                 :required="true">
                 <UploadImg 
-                    :disabled="true"
-                    :uploaded="[{id: record.image_id, url: record.image_url,},]"/>
+                    :uploaded="[{id: record.image_id, url: record.image_url,},]"
+                    :disabled="true"/>
             </FormItem>
 
             <FormItem

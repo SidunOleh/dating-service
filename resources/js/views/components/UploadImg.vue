@@ -5,7 +5,7 @@
 
         <div
             v-for="(img, i) in imgs" 
-            class="uploaded">
+            :class="{uploaded, deleting: deleting,}">
 
             <Image 
                 style="object-fit: contain;"
@@ -29,7 +29,7 @@
                 
                 <span 
                     class="remove"
-                    @click="remove(i)">✖️</span>
+                    @click="!deleting && remove(i)">✖️</span>
             </template>
 
         </div>
@@ -75,17 +75,12 @@ export default {
             type: Boolean,
             default: false,
         },
-        thumb: {
-            type: Boolean,
-            default: false,
-        },
         watermark: {
             type: Boolean,
             default: false,
         },
-        disabled: {
-            type: Boolean,
-            default: false,
+        compress: {
+            type: Number,
         },
         accept: {
             type: Array,
@@ -95,11 +90,16 @@ export default {
                 'image/webp',
             ],
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
             imgs: JSON.parse(JSON.stringify(this.uploaded)),
             loading: false,
+            deleting: false,
         }
     },
     methods: {
@@ -109,8 +109,8 @@ export default {
                 try {
                     const img = await imagesApi.upload(
                         files.item(i),
-                        this.thumb,
-                        this.watermark
+                        this.watermark,
+                        this.compress
                     )
                     this.imgs.push(img)
                     this.$emit('change', this.imgs)
@@ -120,9 +120,18 @@ export default {
             }
             this.loading = false
         },
-        remove(index) {
-            this.imgs = this.imgs.filter((item, i) => i != index)
-            this.$emit('change', this.imgs)
+        async remove(index) {
+            try {
+                this.deleting = true
+                const image = this.imgs.filter((item, i) => i == index)[0]
+                await imagesApi.delete(image.id)
+                this.imgs = this.imgs.filter((item, i) => i != index)
+                this.$emit('change', this.imgs)
+            } catch (err) {
+                message.error(err?.response?.data?.message ?? err.message)
+            } finally {
+                this.deleting = false
+            }
         },
         forward(index) {
             if (index == this.imgs.length - 1) {
@@ -211,6 +220,10 @@ export default {
     border: 1px solid #d9d9d9;
     border-radius: 50px;
     cursor: pointer;
+}
+
+.uploaded.deleting .remove {
+    cursor: progress;
 }
 
 .uploaded .backward, .uploaded .forward {

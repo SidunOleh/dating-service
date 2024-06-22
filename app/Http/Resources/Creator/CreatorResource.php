@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Creator;
 
-use App\Http\Resources\Transaction\TransactionCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -51,6 +50,10 @@ class CreatorResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'birthday' => $this->birthday?->format('Y-m-d'),
+            'verification_photo' => $this->verificationPhoto ? [
+                'id'=> $this->verificationPhoto->id,
+                'url'=> $this->verificationPhoto->url(),
+            ] : null,
             'id_photo' => $this->idPhoto ? [
                 'id'=> $this->idPhoto->id,
                 'url'=> $this->idPhoto->url(),

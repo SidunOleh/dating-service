@@ -69,8 +69,8 @@
                     <UploadImg
                         :uploaded="data.photos"
                         :multiple="true"
-                        :thumb="true"
                         :watermark="true"
+                        :compress="40"
                         @change="imgs => data.photos = imgs"/>
                 </FormItem>
 
@@ -203,14 +203,23 @@
                         v-model:value="data.birthday"/>
                 </FormItem>
 
+                <FormItem label="Verification photo">
+                    <UploadImg
+                        :compress="40"
+                        :uploaded="data.verification_photo ? [data.verification_photo,] : []"
+                        @change="imgs => data.verification_photo = imgs[0] ?? null"/>          
+                </FormItem>
+
                 <FormItem label="ID photo">
                     <UploadImg
+                        :compress="40"
                         :uploaded="data.id_photo ? [data.id_photo,] : []"
                         @change="imgs => data.id_photo = imgs[0] ?? null"/>          
                 </FormItem>
 
                 <FormItem label="Street photo">
                     <UploadImg
+                        :compress="40"
                         :uploaded="data.street_photo ? [data.street_photo,] : []"
                         @change="imgs => data.street_photo = imgs[0] ?? null"/>          
                 </FormItem>
@@ -345,6 +354,7 @@ export default {
         formatDataToSend() {
             const data = JSON.parse(JSON.stringify(this.data))
             data.photos = data.photos.map(photo => photo.id)
+            data.verification_photo = data.verification_photo?.id ?? null
             data.id_photo = data.id_photo?.id ?? null
             data.street_photo = data.street_photo?.id ?? null
 

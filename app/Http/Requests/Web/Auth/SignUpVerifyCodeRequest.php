@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Web\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class RegisterRequest extends FormRequest
+class SignUpVerifyCodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:creators,email',
-            'password' => [
-                'required',
-                Password::min(8)->max(32),
-                'confirmed',
-            ],
+            'code' => 'required|integer|min:100000|max:999999',
         ];
     }
 }

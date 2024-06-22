@@ -3,30 +3,32 @@
 namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
-use App\Models\Creator;
-use App\Models\PlisioWithdrawalRequest;
 use App\Models\Template;
-use App\Models\WithdrawalRequest;
+use App\Models\ZipCode;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Request $request, int $page = 1)
     {
-        // $template = Template::inRandomOrder()->firstOrFail();
-        // $template->fillData(1);
+        $filters = [];
+        $filters['s'] = $request->query('s');
 
-        // dd($template->total(), ...$template->blocks);
+        if (
+            $zip = $request->query('zip') and
+            $zipCode = ZipCode::where('zip', $zip)->first() and
+            $miles = $request->query('miles')
+        ) {
+            $filters['center']['lat'] = $zipCode->latitude;
+            $filters['center']['lng'] = $zipCode->longitude;
+            $filters['radius'] = $miles * 1609;
+        }
 
-        $plisioWithdrawalRequest = PlisioWithdrawalRequest::create([
-            'to' => '1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71',
-            'currency' => 'BTC',
-        ]);
+        $template = Template::inRandomOrder()->firstOrFail();
+        $template->setPage($page)
+            ->setFilters($filters)
+            ->fillData();
 
-        $plisioWithdrawalRequest->common()->create([
-            'gateway' => 'plisio',
-            'usd_amount' => 100,
-            'creator_id' => 1,
-        ]);
+        return view('pages.home', ['template' => $template,]);
     }
 }

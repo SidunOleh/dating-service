@@ -19,18 +19,20 @@ class CreatorFactory extends Factory
         return [
             'email' => fake()->email(),
             'password' => 'secret',
-            'photos' => [1,],
             'name' => fake()->name(),
             'age' => rand(18, 100),
             'gender' => ['Man', 'Woman', 'LGBTQ+'][rand(0, 2)],
             'phone' => fake()->phoneNumber(),
             'description' => fake()->text(150),
-            'profile_email' => fake()->email(),
+            'country' => fake()->country(),
+            'full_address' => fake()->address(),
+            'region' => fake()->state(),
+            'city' => fake()->city(),
+            'latitude' => fake()->latitude(24, 49),
+            'longitude' => fake()->longitude(-125, -67),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'birthday' => fake()->date(),
-            'id_photo' => 1,
-            'street_photo' => 1,
         ];
     }
 }

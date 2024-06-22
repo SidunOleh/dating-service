@@ -23,8 +23,8 @@ class UploadRequest extends FormRequest
     {
         return [
             'img' => 'required|image|mimes:jpg,png,webp',
-            'thumb' => 'boolean',
             'watermark' => 'boolean',
+            'compress' => 'integer|between:0,100|nullable',
         ];
     }
 }

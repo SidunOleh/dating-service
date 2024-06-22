@@ -17,7 +17,7 @@ class IndexController extends Controller
         $order = $request->query('order', 'DESC');
         $q = $request->query('q', '');
 
-        $creators = Creator::search($q)
+        $creators = Creator::adminSearch($q)
             ->orderBy($orderby, $order)
             ->paginate($perpage, ['*'], 'page', $page);
 

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
+            
+            $table->string('slug')->nullable();
 
             $table->boolean('is_banned')->default(false);
             $table->boolean('show_on_site')->default(true);
@@ -50,6 +52,11 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->date('birthday')->nullable();
+            $table->foreignId('verification_photo')
+                ->nullable()
+                ->constrained('images')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
             $table->foreignId('id_photo')
                 ->nullable()
                 ->constrained('images')
@@ -63,6 +70,8 @@ return new class extends Migration
 
             $table->unsignedInteger('referral_code');
             $table->decimal('balance', 10, 2)->default(0);
+
+            $table->unsignedInteger('votes')->default(0);
 
             $table->timestamps();
         });

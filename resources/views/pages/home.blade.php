@@ -5,10 +5,17 @@
 
         <div class="users-list">
 
+            @php
+            $favorites = auth() ? auth()->user()->favorites->pluck('id')->all() : []
+            @endphp
+
             @foreach($template->data() as $block)
 
                 @if($block instanceof App\Models\Creator)
-                    @include('templates.creator', ['creator' => $block,])
+                    @include('templates.creator', [
+                        'creator' => $block, 
+                        'in_favorites' => in_array($block->id, $favorites),
+                    ])
                 @endif
 
                 @if($block instanceof App\Models\Ad)

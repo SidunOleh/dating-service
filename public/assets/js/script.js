@@ -10,7 +10,7 @@ $(".header-menu .close").click(function() {
 
 //__________________________USERS__________________________//
 
-$(".user-image .arrow, .likes .btn").on("click", function(event) {
+$(".user-image .arrow").on("click", function(event) {
     event.preventDefault();
     event.stopPropagation();
 });
@@ -268,7 +268,7 @@ function resetResend() {
     }, 1000)
 }
 
-$('.again').click(() => {
+$('.again').on('click', () => {
     if (resend.timer > 0) {
         return
     }
@@ -444,8 +444,18 @@ $('#forgot-password').submit(function(e) {
 
 //__________________________Favorites_________________________//
 
-$('.likes .btn').click(function() {
+$('.likes').on('click', '.btn:not(.added)', function() {
     const id = $(this).closest('.users-item').data('id')
 
+    $(this).addClass('added')
+
     $.post('/favorites/add', { favorite_id: id, })
+})
+
+$('.likes').on('click', '.btn.added', function() {
+    const id = $(this).closest('.users-item').data('id')
+
+    $(this).removeClass('added')
+
+    $.post('/favorites/remove', { favorite_id: id, })
 })

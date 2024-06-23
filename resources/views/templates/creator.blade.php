@@ -26,7 +26,7 @@
         </div>
         <div class="likes">
             @auth
-            <div class="btn red">
+            <div @class(['btn', 'red', 'added' => $in_favorites,])>
                 <img src="{{ asset('assets/img/like.svg') }}" alt="" />
             </div>
             @endauth

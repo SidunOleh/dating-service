@@ -9,6 +9,7 @@ use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
+use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Pages\HomeController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
@@ -89,4 +90,6 @@ Route::prefix('/favorites')
     ->group(function () {
     Route::post('add', AddToFavotiresController::class)
         ->name('add');
+    Route::post('remove', RemoveFromFavotiresController::class)
+        ->name('remove');
 });

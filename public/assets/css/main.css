@@ -1478,3 +1478,7 @@ input {
 .resetPassword-card.card {
     border-radius: 16px !important;
 }
+
+.users .user-image .likes .btn.added {
+    background: #0263ea;
+}

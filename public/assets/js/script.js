@@ -444,7 +444,10 @@ $('#forgot-password').submit(function(e) {
 
 //__________________________Favorites_________________________//
 
-$('.likes').on('click', '.btn:not(.added)', function() {
+$('.likes').on('click', '.btn:not(.added)', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+
     const id = $(this).closest('.users-item').data('id')
 
     $(this).addClass('added')
@@ -452,7 +455,10 @@ $('.likes').on('click', '.btn:not(.added)', function() {
     $.post('/favorites/add', { favorite_id: id, })
 })
 
-$('.likes').on('click', '.btn.added', function() {
+$('.likes').on('click', '.btn.added', function(e) {
+    e.preventDefault()
+    e.stopPropagation()
+
     const id = $(this).closest('.users-item').data('id')
 
     $(this).removeClass('added')

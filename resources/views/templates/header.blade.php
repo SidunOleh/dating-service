@@ -48,6 +48,12 @@
 
     @auth
     <header class="header" id="header">
+        
+        <a href="#" class="advertising-banner">
+            <img src="{{ asset('assets/img/adv.jpg') }}" alt="" />
+            <p>www.nazarbazar.com</p>
+        </a>
+
         <div class="header-body">
             <div class="left">
                 <a href="{{ route('home') }}" class="btn red">

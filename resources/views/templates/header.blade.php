@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <form method="GET" id="filters-form">
+                <form method="GET" action="{{ route('home') }}" id="filters-form">
                 
                     <div class="search-container">
                         <input 

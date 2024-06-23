@@ -451,7 +451,9 @@ $('.likes').on('click', '.btn:not(.added)', function(e) {
 
     $(this).addClass('added')
 
-    $.post('/favorites/add', { favorite_id: id, })
+    $.post('/favorites/add', { favorite_id: id, }).fail(() => {
+        $(this).removeClass('added')
+    })
 })
 
 $('.likes').on('click', '.btn.added', function(e) {
@@ -461,7 +463,9 @@ $('.likes').on('click', '.btn.added', function(e) {
 
     $(this).removeClass('added')
 
-    $.post('/favorites/remove', { favorite_id: id, })
+    $.post('/favorites/remove', { favorite_id: id, }).fail(() => {
+        $(this).addClass('added')
+    })
 })
 
 //__________________________Filters_________________________//

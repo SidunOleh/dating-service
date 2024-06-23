@@ -6,7 +6,7 @@
         <div class="users-list">
 
             @php
-            $favorites = auth() ? auth()->user()->favorites->pluck('id')->all() : []
+            $favorites = auth()->user() ? auth()->user()->favorites->pluck('id')->all() : []
             @endphp
 
             @foreach($template->data() as $block)

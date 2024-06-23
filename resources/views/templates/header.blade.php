@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <form>
+                <form method="GET" id="filters-form">
                 
                     <div class="search-container">
                         <input 

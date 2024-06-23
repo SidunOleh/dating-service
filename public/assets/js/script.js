@@ -463,3 +463,11 @@ $('.likes').on('click', '.btn.added', function(e) {
 
     $.post('/favorites/remove', { favorite_id: id, })
 })
+
+//__________________________Filters_________________________//
+
+$('#filters-form').submit(function() {
+    $(this).find('input[name]')
+        .filter((i, input) => !input.value)
+        .prop('name', '')
+})

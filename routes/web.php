@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
 use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
+use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Pages\HomeController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
@@ -78,3 +79,14 @@ Route::get('/', HomeController::class)
     ->name('home');
 Route::get('/page/{page}', HomeController::class)
     ->name('home.page');
+
+/**
+ * Favorites
+ */
+Route::prefix('/favorites')
+    ->name('favorites.')
+    ->middleware(['auth',])
+    ->group(function () {
+    Route::post('add', AddToFavotiresController::class)
+        ->name('add');
+});

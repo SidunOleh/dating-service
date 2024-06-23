@@ -65,40 +65,54 @@ function closePopup() {
     header.classList.remove("hidden");
 }
 
-loginBtn.addEventListener("click", () => {
-    openPopup(logInCard);
-});
-
-signupBtn.addEventListener("click", () => {
-    openPopup(signUpCard);
-});
-
-burgerMenu.addEventListener("click", () => {
-    openPopup(logInCard);
-});
-
-signupLink.addEventListener("click", () => {
-    openPopup(signUpCard);
-});
-
-resetPassLink.addEventListener("click", () => {
-    openPopup(resetPasswordCard);
-});
-
-closeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        closePopup();
+if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+        openPopup(logInCard);
     });
-});
+}
 
-popupWrapper.addEventListener("click", (event) => {
-    if (!signUpCard.contains(event.target) &&
-        !logInCard.contains(event.target) &&
-        !resetPasswordCard.contains(event.target)
-    ) {
-        closePopup();
-    }
-});
+if (signupBtn) {
+    signupBtn.addEventListener("click", () => {
+        openPopup(signUpCard);
+    });
+}
+
+if (burgerMenu) {
+    burgerMenu.addEventListener("click", () => {
+        openPopup(logInCard);
+    });
+}
+
+if (signupLink) {
+    signupLink.addEventListener("click", () => {
+        openPopup(signUpCard);
+    });
+}
+
+if (resetPassLink) {
+    resetPassLink.addEventListener("click", () => {
+        openPopup(resetPasswordCard);
+    });
+}
+
+if (closeButtons) {
+    closeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            closePopup();
+        });
+    });
+}
+
+if (popupWrapper) {
+    popupWrapper.addEventListener("click", (event) => {
+        if (!signUpCard.contains(event.target) &&
+            !logInCard.contains(event.target) &&
+            !resetPasswordCard.contains(event.target)
+        ) {
+            closePopup();
+        }
+    });
+}
 
 const showPasswordButtons = document.querySelectorAll(".show-password");
 showPasswordButtons.forEach((button) => {
@@ -115,6 +129,10 @@ showPasswordButtons.forEach((button) => {
 });
 
 const enableSubmitButton = (form) => {
+    if (!form) {
+        return
+    }
+
     const inputs = form.querySelectorAll(
         'input[type="email"], input[type="password"]'
     );
@@ -422,4 +440,12 @@ $('#forgot-password').submit(function(e) {
         }).always(() => {
             removeLoader('.resetPassword-card')
         })
+})
+
+//__________________________Favorites_________________________//
+
+$('.likes .btn').click(function() {
+    const id = $(this).closest('.users-item').data('id')
+
+    $.post('/favorites/add', { favorite_id: id, })
 })

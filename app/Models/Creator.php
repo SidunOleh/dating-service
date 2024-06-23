@@ -460,7 +460,12 @@ class Creator extends Authenticatable
 
     public function favorites(): BelongsToMany
     {
-        return $this->belongsToMany(self::class, 'favorites', 'creator_id', 'favorite_id');
+        return $this->belongsToMany(self::class, 'favorites', 'creator_id', 'favorite_id')->withTimestamps();
+    }
+
+    public function hasInFavorites(int $favoriteId): bool
+    {
+        return (bool) $this->favorites()->where('favorite_id', $favoriteId)->count();
     }
 
     public static function makeVerificationCode(): int

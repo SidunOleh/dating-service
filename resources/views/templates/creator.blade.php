@@ -1,4 +1,7 @@
-<a href="#" @class(['users-item', 'verified' => $creator->is_verified,])>
+<a 
+    href="#" 
+    data-id="{{ $creator->id }}"
+    @class(['users-item', 'verified' => $creator->is_verified,])>
     <div class="user-image">
         <div class="img-slider">
             

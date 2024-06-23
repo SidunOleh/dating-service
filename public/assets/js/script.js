@@ -446,7 +446,6 @@ $('#forgot-password').submit(function(e) {
 
 $('.likes').on('click', '.btn:not(.added)', function(e) {
     e.preventDefault()
-    e.stopPropagation()
 
     const id = $(this).closest('.users-item').data('id')
 
@@ -457,7 +456,6 @@ $('.likes').on('click', '.btn:not(.added)', function(e) {
 
 $('.likes').on('click', '.btn.added', function(e) {
     e.preventDefault()
-    e.stopPropagation()
 
     const id = $(this).closest('.users-item').data('id')
 

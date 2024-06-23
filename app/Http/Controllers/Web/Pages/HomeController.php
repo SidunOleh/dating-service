@@ -13,6 +13,7 @@ class HomeController extends Controller
     {
         $filters = [];
         $filters['s'] = $request->query('s');
+        $filters['gender'] = $request->query('gender');
 
         if (
             $zip = $request->query('zip') and

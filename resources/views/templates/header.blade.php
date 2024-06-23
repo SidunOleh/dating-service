@@ -83,36 +83,69 @@
                         <img src="{{ asset('assets/img/plus.svg') }}" alt="" />
                     </div>
                 </div>
+
+                <form>
                 
-                <div class="search-container">
-                    <input type="text" name="query" class="search-input" placeholder="Search" />
-                    <button type="submit" class="search-button">
-                        <img src="{{ asset('assets/img/search.svg') }}" alt="Search" />
+                    <div class="search-container">
+                        <input 
+                            type="text" 
+                            name="s"
+                            class="search-input" 
+                            placeholder="Search" 
+                            value="{{ request()->query('s') }}"/>
+                    </div>
+
+                    <div class="form-container">
+                        
+                        <div class="form-group">
+                            <label for="category">Show me:</label>
+                            <select id="category" name="gender">
+                                <option disabled selected>
+                                    All
+                                </option>
+                                <option value="Man" @selected(request()->query('gender') == 'Man')>
+                                    Man
+                                </option>
+                                <option value="Woman" @selected(request()->query('gender') == 'Woman')>
+                                    Woman
+                                </option>
+                                <option value="LGBTQ+" @selected(request()->query('gender') == 'LGBTQ+')>
+                                    LGBTQ+
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="zip-distance-group">
+                            <input 
+                                type="text" 
+                                id="zip" 
+                                name="zip" 
+                                class="zip-input" 
+                                placeholder="ZIP code" 
+                                value="{{ request()->query('zip') }}"/>
+                            <select id="distance" name="miles">
+                                <option disabled selected>
+                                    All miles
+                                </option>
+                                <option value="10" @selected(request()->query('miles') == 10)>
+                                    10 miles
+                                </option>
+                                <option value="50" @selected(request()->query('miles') == 50)>
+                                    50 miles
+                                </option>
+                                <option value="100" @selected(request()->query('miles') == 100)>
+                                    100 miles
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn" style="margin: 20px 0 10px 0; width: 100%;">
+                        Apply
                     </button>
-                </div>
 
-                <div class="form-container">
-                    
-                    <div class="form-group">
-                        <label for="category">Show me:</label>
-                        <select id="category" name="category">
-                            <option value="all">All</option>
-                            <option value="category1">Category 1</option>
-                            <option value="category2">Category 2</option>
-                        </select>
-                    </div>
-
-                    <div class="zip-distance-group">
-                        <input type="text" id="zip" name="zip" class="zip-input" placeholder="ZIP code" />
-                        <select id="distance" name="distance">
-                            <option value="all-miles">All miles</option>
-                            <option value="10-miles">10 miles</option>
-                            <option value="50-miles">50 miles</option>
-                            <option value="100-miles">100 miles</option>
-                        </select>
-                    </div>
-
-                </div>
+                </form>
 
                 <div class="pages">
                     

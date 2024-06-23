@@ -410,6 +410,10 @@ class Creator extends Authenticatable
             $query->search($filters['s']);
         }
 
+        if (isset($filters['gender'])) {
+            $query->where('gender', $filters['gender']);
+        }
+
         if (isset($filters['center']) and isset($filters['radius'])) {
             $query->radius($filters['center'], $filters['radius']);
         }
@@ -431,6 +435,10 @@ class Creator extends Authenticatable
             $query->search($filters['s']);
         }
 
+        if (isset($filters['gender'])) {
+            $query->where('gender', $filters['gender']);
+        }
+
         if (isset($filters['center']) and isset($filters['radius'])) {
             $query->radius($filters['center'], $filters['radius']);
         }
@@ -449,6 +457,10 @@ class Creator extends Authenticatable
 
         if (isset($filters['s'])) {
             $query->search($filters['s']);
+        }
+
+        if (isset($filters['gender'])) {
+            $query->where('gender', $filters['gender']);
         }
 
         if (isset($filters['center']) and isset($filters['radius'])) {

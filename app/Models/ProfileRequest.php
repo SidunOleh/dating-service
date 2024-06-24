@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
+use Staudenmeir\EloquentJsonRelations\Relations\BelongsToJson;
 
 class ProfileRequest extends Model
 {
-    use HasFactory;
+    use HasFactory, HasJsonRelationships;
 
     protected $fillable = [
         'name',
@@ -69,24 +70,24 @@ class ProfileRequest extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function photos(): Collection
+    public function gallery(): BelongsToJson
     {
-        return Image::getByIds($this->photos['value'] ?? []);
+        return $this->belongsToJson(Image::class, 'photos->value');
     }
 
-    public function verificationPhoto(): ?Image
+    public function verificationPhoto(): BelongsTo
     {
-        return Image::find($this->verification_photo['value'] ?? '');
+        return $this->belongsTo(Image::class, 'verification_photo->value');
     }
 
-    public function idPhoto(): ?Image
+    public function idPhoto(): BelongsTo
     {
-        return Image::find($this->id_photo['value'] ?? '');
+        return $this->belongsTo(Image::class, 'id_photo->value');
     }
 
-    public function streetPhoto(): ?Image
+    public function streetPhoto(): BelongsTo
     {
-        return Image::find($this->street_photo['value'] ?? '');
+        return $this->belongsTo(Image::class, 'street_photo->value');
     }
 
     public function migrate(): bool

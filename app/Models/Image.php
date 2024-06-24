@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
@@ -64,16 +63,5 @@ class Image extends Model
         }
 
         return unlink($path);
-    }
-    
-    public static function getByIds(array $ids): Collection
-    {
-        if (empty($ids)) {
-            return new Collection();
-        }
-
-        return self::whereIn('id', $ids)
-            ->orderByRaw('FIELD(id, ' . implode(',', $ids) . ')')
-            ->get();
     }
 }

@@ -6,7 +6,7 @@
         <div class="img-slider">
             
             @php
-            $imgs = $creator->photos();
+            $imgs = $creator->gallery;
             $imgs = (auth('web')->check() and auth('web')->user()->subscription()) ? $imgs : $imgs->slice(0, 3);
             @endphp
 

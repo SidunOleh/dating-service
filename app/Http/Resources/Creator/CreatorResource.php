@@ -22,7 +22,7 @@ class CreatorResource extends JsonResource
 
             'email' => $this->email,
 
-            'photos' => $this->photos()->map(fn ($img) => [
+            'photos' => $this->gallery->map(fn ($img) => [
                 'id' => $img->id, 
                 'url' => $img->url(),
             ]),

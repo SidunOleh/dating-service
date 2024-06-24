@@ -17,7 +17,7 @@ class CreatorCollection extends ResourceCollection
         $data = [];
         foreach ($this->collection as $i => $creator) {
             $data[$i]['id'] = $creator->id;
-            $data[$i]['first_photo'] = ($firstPhoto = $creator->photos()->first())
+            $data[$i]['first_photo'] = ($firstPhoto = $creator->gallery->first())
                 ? ['id' => $firstPhoto->id, 'url' => $firstPhoto->url(),]
                 : null;
             $data[$i]['email'] = $creator->email;

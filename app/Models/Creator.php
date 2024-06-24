@@ -13,10 +13,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
+use Staudenmeir\EloquentJsonRelations\Relations\BelongsToJson;
 
 class Creator extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasJsonRelationships;
 
     protected $fillable = [
         'email',
@@ -98,6 +100,10 @@ class Creator extends Authenticatable
         'longitude',
     ];
 
+    protected $with = [
+        'gallery',
+    ];
+
     protected static function boot()
     {
         parent::boot();
@@ -175,9 +181,9 @@ class Creator extends Authenticatable
         return false;
     }
 
-    public function photos(): Collection
+    public function gallery(): BelongsToJson
     {
-        return Image::getByIds($this->photos ?? []);
+        return $this->belongsToJson(Image::class, 'photos');
     }
 
     public function verificationPhoto(): belongsTo

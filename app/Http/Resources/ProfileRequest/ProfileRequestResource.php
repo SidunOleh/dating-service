@@ -16,28 +16,28 @@ class ProfileRequestResource extends JsonResource
     public function toArray(Request $request): array
     {
         if ($photos = $this->photos) {
-            $photos['value'] = $this->photos()->map(fn ($img) => [
+            $photos['value'] = $this->gallery->map(fn ($img) => [
                 'id' => $img->id, 
                 'url' => $img->url(),
             ]);
         }
         
         if ($verificationPhoto = $this->verification_photo) {
-            $verificationPhoto['value'] = ($photo = $this->verificationPhoto()) ? [
+            $verificationPhoto['value'] = ($photo = $this->verificationPhoto) ? [
                 'id' => $photo->id,
                 'url' => $photo->url(),
             ] : null; 
         }
 
         if ($idPhoto = $this->id_photo) {
-            $idPhoto['value'] = ($photo = $this->idPhoto()) ? [
+            $idPhoto['value'] = ($photo = $this->idPhoto) ? [
                 'id' => $photo->id,
                 'url' => $photo->url(),
             ] : null; 
         }
 
         if ($streetPhoto = $this->street_photo) {
-            $streetPhoto['value'] = ($photo = $this->streetPhoto()) ? [
+            $streetPhoto['value'] = ($photo = $this->streetPhoto) ? [
                 'id' => $photo->id,
                 'url' => $photo->url(),
             ] : null; 

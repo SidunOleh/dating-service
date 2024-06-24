@@ -7,7 +7,7 @@
             
             @php
             $imgs = $creator->photos();
-            $imgs = (Auth::check() and Auth::user()->subscription()) ? $imgs : $imgs->slice(0, 3);
+            $imgs = (auth('web')->check() and auth('web')->user()->subscription()) ? $imgs : $imgs->slice(0, 3);
             @endphp
 
             @foreach($imgs as $img)
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="likes">
-            @auth
+            @auth('web')
             <div @class(['btn', 'red', 'added' => $in_favorites,])>
                 <img src="{{ asset('assets/img/like.svg') }}" alt="" />
             </div>

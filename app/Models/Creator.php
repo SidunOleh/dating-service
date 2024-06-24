@@ -128,6 +128,11 @@ class Creator extends Authenticatable
         });
     }
 
+    protected function getDefaultGuardName(): string 
+    { 
+        return 'web';
+    }
+
     public static function generateReferralCode(): string
     {
         do {

@@ -21,7 +21,7 @@ class SignInVerifyCodeController extends Controller
             return response(['message' => 'Bad Request',], 400);
         }
 
-        if (! Auth::attempt(session('signin.credentials'))) {
+        if (! Auth::guard('web')->attempt(session('signin.credentials'))) {
             return response(['message' => 'Wrong credentials.',], 401);
         }
 

@@ -15,7 +15,7 @@ class SignInSendCodeController extends Controller
     {
         $credentials = $request->validated();
 
-        if (! Auth::validate($credentials)) {
+        if (! Auth::guard('web')->validate($credentials)) {
             return response(['message' => 'Wrong credentials.',], 401);
         }
 

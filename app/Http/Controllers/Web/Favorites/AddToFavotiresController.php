@@ -10,8 +10,8 @@ class AddToFavotiresController extends Controller
 {
     public function __invoke(AddToFavotiresRequest $request)
     {
-        $creator = Auth::user();
         $favoriteId = $request->input('favorite_id');
+        $creator = Auth::guard('web')->user();
 
         if (! $creator->hasInFavorites($favoriteId)) {
             $creator->favorites()->attach($favoriteId);

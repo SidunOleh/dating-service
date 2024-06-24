@@ -13,7 +13,7 @@ class DoneController extends Controller
     {
         $data = $request->validated();
         $data['status'] = 'done';
-        $data['user_id'] = Auth::id();
+        $data['user_id'] = Auth::guard('admin')->id();
 
         $approved = $profileRequest->creator->is_approved;
         

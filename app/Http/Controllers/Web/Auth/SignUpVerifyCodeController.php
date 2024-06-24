@@ -23,7 +23,7 @@ class SignUpVerifyCodeController extends Controller
 
         $creator = Creator::create(session('signup.credentials'));
 
-        Auth::login($creator);
+        Auth::guard('web')->login($creator);
 
         session()->forget('signup');
 

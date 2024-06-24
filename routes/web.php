@@ -86,7 +86,7 @@ Route::get('/page/{page}', HomeController::class)
  */
 Route::prefix('/favorites')
     ->name('favorites.')
-    ->middleware(['auth',])
+    ->middleware(['auth:web',])
     ->group(function () {
     Route::post('add', AddToFavotiresController::class)
         ->name('add');

@@ -54,7 +54,7 @@ class WithdrawalRequest extends Model
             $this->creator->debitMoney($this->usd_amount);
         }
 
-        $this->user_id = Auth::id();
+        $this->user_id = Auth::guard('admin')->id();
         $this->status = $transaction->status;
         $this->save();
 

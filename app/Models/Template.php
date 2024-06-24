@@ -96,7 +96,9 @@ class Template extends Model
             }
         }
 
-        $this->total = ceil(Creator::mainListTotalCount($this->filters) / $this->count('profile'));
+        $this->total = ceil(
+            Creator::mainListTotalCount($this->filters) / $this->count('profile')
+        );
     }
 
     public function data(): Collection

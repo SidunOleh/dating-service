@@ -6,7 +6,7 @@
         <div class="users-list">
 
             @php
-            $favorites = auth()->user() ? auth()->user()->favorites->pluck('id')->all() : []
+            $favorites = auth('web')->check() ? auth('web')->user()->favorites->pluck('id')->all() : []
             @endphp
 
             @foreach($template->data() as $block)
@@ -38,9 +38,9 @@
     </div>
 </section>
 
-<!-- @include('modals.ad') -->
+@includeWhen(!auth('web')->check(), 'modals.auth')
 
-@includeWhen(!Auth::check(), 'modals.auth')
-@includeWhen(!Auth::check(), 'modals.verification')
+@include('modals.verification')
+<!-- @include('modals.ad') -->
     
 @include('templates.footer')

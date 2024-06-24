@@ -11,7 +11,7 @@
 
 <body>
 
-    @guest
+    @guest('web')
     <header class="header" id="header">
         
         <a href="#" class="advertising-banner">
@@ -46,7 +46,7 @@
     </header>
     @endguest
 
-    @auth
+    @auth('web')
     <header class="header" id="header">
         
         <a href="#" class="advertising-banner">
@@ -73,7 +73,7 @@
 
                 <div class="head">
                     <div class="user-mail">
-                        {{ Auth::user()->email }}
+                        {{ auth('web')->user()->email }}
                     </div>
                     <div class="close red flex">
                         <img src="{{ asset('assets/img/close.svg') }}" alt="" />
@@ -83,7 +83,7 @@
                 <div class="coins">
                     <img src="{{ asset('assets/img/coins.svg') }}" alt="" />
                     <span>
-                        {{ Auth::user()->balance }}
+                        {{ auth('web')->user()->balance }}
                     </span>
                     <div class="add-coins flex red">
                         <img src="{{ asset('assets/img/plus.svg') }}" alt="" />

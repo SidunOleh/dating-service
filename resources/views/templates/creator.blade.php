@@ -4,7 +4,6 @@
     @class(['users-item', 'verified' => $creator->is_verified,])>
     <div class="user-image">
         <div class="img-slider">
-            
             @php
             $imgs = $creator->gallery;
             $imgs = (auth('web')->check() and auth('web')->user()->subscription()) ? $imgs : $imgs->slice(0, 3);

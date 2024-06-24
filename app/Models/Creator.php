@@ -100,10 +100,6 @@ class Creator extends Authenticatable
         'longitude',
     ];
 
-    protected $with = [
-        'gallery',
-    ];
-
     protected static function boot()
     {
         parent::boot();
@@ -415,7 +411,7 @@ class Creator extends Authenticatable
     {
         $seed = self::seed();
 
-        $query = self::showOnSite()->verified();
+        $query = self::with('gallery')->showOnSite()->verified();
 
         if (isset($filters['s'])) {
             $query->search($filters['s']);
@@ -440,7 +436,7 @@ class Creator extends Authenticatable
         $limit = $page == 1 ? $perpage - $top->count() : $perpage;
         $offset = $perpage * ($page - 1) - $top->count();
         
-        $query = self::whereNotIn('id', $top->pluck('id')->all())->showOnSite();
+        $query = self::with('gallery')->whereNotIn('id', $top->pluck('id')->all())->showOnSite();
 
         if (isset($filters['s'])) {
             $query->search($filters['s']);

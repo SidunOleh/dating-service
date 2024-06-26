@@ -411,7 +411,9 @@ class Creator extends Authenticatable
     {
         $seed = self::seed();
 
-        $query = self::with('gallery')->showOnSite()->verified();
+        $query = self::with('gallery')->withCount('inFavorites')
+            ->showOnSite()
+            ->verified();
 
         if (isset($filters['s'])) {
             $query->search($filters['s']);
@@ -436,7 +438,9 @@ class Creator extends Authenticatable
         $limit = $page == 1 ? $perpage - $top->count() : $perpage;
         $offset = $perpage * ($page - 1) - $top->count();
         
-        $query = self::with('gallery')->whereNotIn('id', $top->pluck('id')->all())->showOnSite();
+        $query = self::with('gallery')->withCount('inFavorites')
+            ->whereNotIn('creators.id', $top->pluck('id')->all())
+            ->showOnSite();
 
         if (isset($filters['s'])) {
             $query->search($filters['s']);
@@ -480,6 +484,11 @@ class Creator extends Authenticatable
     public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(self::class, 'favorites', 'creator_id', 'favorite_id')->withTimestamps();
+    }
+
+    public function inFavorites(): BelongsToMany
+    {
+        return $this->belongsToMany(self::class, 'favorites', 'favorite_id', 'creator_id')->withTimestamps();
     }
 
     public function hasInFavorites(int $favoriteId): bool

@@ -33,4 +33,9 @@ class Option extends Model
 
         return $setting ? $setting->value : $default;
     }
+
+    public static function getSettings(array $names): Collection
+    {
+       return self::whereIn('name', $names)->get();
+    }
 }

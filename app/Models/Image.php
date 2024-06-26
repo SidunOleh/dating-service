@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Drivers\Imagick\Driver;
 
 class Image extends Model
 {
@@ -18,40 +18,48 @@ class Image extends Model
         'path',
     ];
 
-    public static function saveUploaded(
+    protected $appends = [
+        'url',
+    ];
+
+    protected function url(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->getUrl(),
+        );
+    }
+
+    public function getUrl(): string
+    {
+        return url('storage/' . $this->path);
+    }
+
+    public static function processUploaded(
         UploadedFile $uploaded, 
         bool $watermark = false,
-        ?int $compress = null
-    ): self
+        int $quality = 0
+    ): void
     {
         $manager = new ImageManager(new Driver());
 
-        $img = $manager->read($uploaded->path());
+        $img = $manager->read(
+            $manager->read($uploaded->path())->toWebp($quality)->toFilePointer()
+        );
 
         if ($watermark) {
-            $img->place(self::watermark(), 'center');
+            $img->place(storage_path('watermark.png'), 'center');
         }
         
-        $name = md5(Auth::id() . $uploaded->getClientOriginalName() . microtime());
-        $path = date('Y') . '/' . date('m') . '/' . $name . '.webp';
+        $img->save($uploaded->path());
+    }
 
-        Storage::disk('public')->put(
-            $path, isset($compress) ? $img->toWebp($compress) : $img->toWebp()
-        );
+    public static function saveUploaded(UploadedFile $uploaded): self
+    {
+        $path = $uploaded->store(date('Y') . '/' . date('m'), 'public');
 
         $image = self::create(['path' => $path,]);
 
         return $image;
-    }
-
-    public static function watermark(): string
-    {
-        return storage_path('watermark.png');
-    }
-
-    public function url(): string
-    {
-        return url('storage/' . $this->path);
     }
 
     public function deleteFile(): bool

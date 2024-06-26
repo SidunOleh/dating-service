@@ -75,19 +75,28 @@ export default {
             type: Boolean,
             default: false,
         },
+        process: {
+            type: Boolean,
+            default: true,
+        },
         watermark: {
             type: Boolean,
             default: false,
         },
-        compress: {
+        quality: {
             type: Number,
         },
         accept: {
             type: Array,
             default: [
-                'image/jpeg', 
-                'image/png', 
-                'image/webp',
+                '.jpeg', 
+                '.jpg',
+                '.png', 
+                '.webp',
+                '.gif',
+                '.heic', 
+                '.heif',
+                '.svg',
             ],
         },
         disabled: {
@@ -109,8 +118,9 @@ export default {
                 try {
                     const img = await imagesApi.upload(
                         files.item(i),
+                        this.process,
                         this.watermark,
-                        this.compress
+                        this.quality
                     )
                     this.imgs.push(img)
                     this.$emit('change', this.imgs)

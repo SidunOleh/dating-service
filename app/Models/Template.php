@@ -54,7 +54,26 @@ class Template extends Model
 
     public function fillData(): void
     {
-        $ads = Ad::active()
+        $this->data = new Collection();
+        $this->total = 0;
+
+        $profiles = Creator::mainList(
+            $this->page, 
+            $this->count('profile'), 
+            $this->filters
+        );
+
+        if (! $profiles->count()) {
+            return;
+        }
+
+        $this->total = ceil(
+            Creator::mainListTotalCount($this->filters) / $this->count('profile')
+        );
+
+        $ads = Ad::with('image')
+            ->active()
+            ->type('block')
             ->inRandomOrder()
             ->limit($this->count('ad'))
             ->get();
@@ -63,14 +82,16 @@ class Template extends Model
             ->inRandomOrder()
             ->limit($this->count('roulette') * 2)
             ->get();
-        $profiles = Creator::mainList(
-            $this->page, 
-            $this->count('profile'), 
-            $this->filters
-        );
 
-        $this->data = new Collection();
         foreach ($this->template as $block) {
+            if ($block == 'profile') {
+                if ($profiles->count()) {
+                    $this->data->push($profiles->shift());
+                } else {
+                    break;
+                }
+            }
+
             if (
                 $block == 'ad' and
                 $ads->count()
@@ -87,18 +108,7 @@ class Template extends Model
                     $roulettes->shift(),
                 ]);
             }
-
-            if (
-                $block == 'profile' and
-                $profiles->count()
-            ) {
-                $this->data->push($profiles->shift());
-            }
         }
-
-        $this->total = ceil(
-            Creator::mainListTotalCount($this->filters) / $this->count('profile')
-        );
     }
 
     public function data(): Collection

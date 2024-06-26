@@ -12,16 +12,23 @@ class SignUpResendCodeController extends Controller
 {
     public function __invoke()
     {
-        if (
-            ! $signup = session('signup') or
-            now()->lessThan(Carbon::createFromTimestamp($signup['created_at'] + 60))
-        ) {
-            return response(['message' => 'Bad Request',], 400);
+        if (! $signup = session('signup')) {
+            return response(['message' => 'Bad request.',], 400);
+        }
+
+        if ($signup['retry'] + 1 > 5) {
+            return response(['message' => 'Too many attemps.',], 429);
+        }
+
+        if (now()->lessThan(Carbon::createFromTimestamp($signup['created_at'] + 60))) {
+            return response(['message' => 'Too fast.',], 400);
         }
 
         $signup['code'] = Creator::makeVerificationCode();
         $signup['created_at'] = time();
         $signup['expire_at'] = time() + 60 * 10;
+        $signup['try'] = 0;
+        $signup['retry'] += 1;
 
         session(['signup' => $signup,]);
 

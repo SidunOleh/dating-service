@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ad;
+use App\Models\Option;
 use App\Models\Template;
 use App\Models\ZipCode;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,11 +29,34 @@ class HomeController extends Controller
             $filters['radius'] = $miles * 1609;
         }
 
+        session(['filters' => $filters,]);
+
         $template = Template::inRandomOrder()->firstOrFail();
         $template->setPage($page)
             ->setFilters($filters)
             ->fillData();
 
-        return view('pages.home', ['template' => $template,]);
+        $favorites =  Auth::guard('web')->check() ? 
+            Auth::guard('web')->user()->favorites : 
+            new Collection();
+
+        $ads = $template->count('ad') ? Ad::with('image')
+            ->active()
+            ->type('popup')
+            ->inRandomOrder()
+            ->limit(100)
+            ->get() : new Collection();
+        $adsSettings = Option::getSettings([
+            'clicks_between_popups', 
+            'seconds_between_popups', 
+            'close_popup_seconds',
+        ]);
+
+        return view('pages.home', [
+            'template' => $template, 
+            'favorites' => $favorites,
+            'ads' => $ads,
+            'adsSettings' => $adsSettings,
+        ]);
     }
 }

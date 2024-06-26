@@ -22,10 +22,7 @@ class CreatorResource extends JsonResource
 
             'email' => $this->email,
 
-            'photos' => $this->gallery->map(fn ($img) => [
-                'id' => $img->id, 
-                'url' => $img->url(),
-            ]),
+            'photos' => $this->gallery,
 
             'name' => $this->name,
             'age' => $this->age,
@@ -50,18 +47,9 @@ class CreatorResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'birthday' => $this->birthday?->format('Y-m-d'),
-            'verification_photo' => $this->verificationPhoto ? [
-                'id'=> $this->verificationPhoto->id,
-                'url'=> $this->verificationPhoto->url(),
-            ] : null,
-            'id_photo' => $this->idPhoto ? [
-                'id'=> $this->idPhoto->id,
-                'url'=> $this->idPhoto->url(),
-            ] : null,
-            'street_photo' => $this->streetPhoto ? [
-                'id'=> $this->streetPhoto->id,
-                'url'=> $this->streetPhoto->url(),
-            ] : null,
+            'verification_photo' => $this->verificationPhoto,
+            'id_photo' => $this->idPhoto,
+            'street_photo' => $this->streetPhoto,
 
             'balance' => $this->balance,
             'referral_link' => url("/?ref={$this->referral_code}"),

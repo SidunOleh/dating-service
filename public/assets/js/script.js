@@ -304,19 +304,18 @@ $('#sign-up').submit(function(e) {
             $('.signUP-card').removeClass('active')
             resetResend()
         }).fail(xhr => {
-            if (xhr.status != 422) {
+            if (xhr.status == 422) {
+                const errors = xhr.responseJSON.errors
+                if (errors.email) {
+                    email.closest('.input-group').addClass('error')
+                    email.next('.error-text').text(errors.email[0])
+                }
+
+                if (errors.password) {
+                    password.closest('.input-group').addClass('error')
+                    password.next('.error-text').text(errors.password[0])
+                }
                 return
-            }
-
-            const errors = xhr.responseJSON.errors
-            if (errors.email) {
-                email.closest('.input-group').addClass('error')
-                email.next('.error-text').text(errors.email[0])
-            }
-
-            if (errors.password) {
-                password.closest('.input-group').addClass('error')
-                password.next('.error-text').text(errors.password[0])
             }
         }).always(() => {
             removeLoader('.signUP-card')
@@ -340,8 +339,7 @@ function resendSignUpCode() {
     $.post('/sign-up/resend-code')
         .done(() => {
             resetResend()
-        })
-        .always(() => {
+        }).always(() => {
             removeLoader('.verification-container')
         })
 }
@@ -371,6 +369,7 @@ $('#sign-in').submit(function(e) {
             if (xhr.status == 401) {
                 password.closest('.input-group').addClass('error')
                 password.next('.error-text').text(xhr.responseJSON.message)
+                return
             }
 
             if (xhr.status == 422) {
@@ -384,6 +383,7 @@ $('#sign-in').submit(function(e) {
                     password.closest('.input-group').addClass('error')
                     password.next('.error-text').text(errors.password[0])
                 }
+                return
             }
         }).always(() => {
             removeLoader('.logIN-card')
@@ -407,8 +407,7 @@ function resendSignInCode() {
     $.post('/sign-in/resend-code')
         .done(() => {
             resetResend()
-        })
-        .always(() => {
+        }).always(() => {
             removeLoader('.verification-container')
         })
 }
@@ -428,14 +427,13 @@ $('#forgot-password').submit(function(e) {
         .done(() => {
             form[0].reset()
         }).fail(xhr => {
-            if (xhr.status != 422) {
+            if (xhr.status == 422) {
+                const errors = xhr.responseJSON.errors
+                if (errors.email) {
+                    email.closest('.input-group').addClass('error')
+                    email.next('.error-text').text(errors.email[0])
+                }
                 return
-            }
-
-            const errors = xhr.responseJSON.errors
-            if (errors.email) {
-                email.closest('.input-group').addClass('error')
-                email.next('.error-text').text(errors.email[0])
             }
         }).always(() => {
             removeLoader('.resetPassword-card')
@@ -447,24 +445,32 @@ $('#forgot-password').submit(function(e) {
 $('.likes').on('click', '.btn:not(.added)', function(e) {
     e.preventDefault()
 
-    const id = $(this).closest('.users-item').data('id')
-
     $(this).addClass('added')
+    const likes = $(this).closest('.users-item')
+        .find('.likes-count')
+    likes.text(parseInt(likes.text()) + 1)
+
+    const id = $(this).closest('.users-item').data('id')
 
     $.post('/favorites/add', { favorite_id: id, }).fail(() => {
         $(this).removeClass('added')
+        likes.text(parseInt(likes.text()) - 1)
     })
 })
 
 $('.likes').on('click', '.btn.added', function(e) {
     e.preventDefault()
 
-    const id = $(this).closest('.users-item').data('id')
-
     $(this).removeClass('added')
+    const likes = $(this).closest('.users-item')
+        .find('.likes-count')
+    likes.text(parseInt(likes.text()) - 1)
+
+    const id = $(this).closest('.users-item').data('id')
 
     $.post('/favorites/remove', { favorite_id: id, }).fail(() => {
         $(this).addClass('added')
+        likes.text(parseInt(likes.text()) + 1)
     })
 })
 

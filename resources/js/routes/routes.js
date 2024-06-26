@@ -120,17 +120,30 @@ const routes = [{
         menuKey: 'templates',
     },
 }, {
-    path: '/admin/ads',
+    path: '/admin/block-ads',
     component: defineAsyncComponent({
         loader: () =>
-            import ('../views/Ads/Index.vue'),
+            import ('../views/BlockAds/Index.vue'),
         loadingComponent: Loader,
     }),
-    name: 'ads.index',
+    name: 'block-ads.index',
     meta: {
         access: 'private',
         permission: 'ads.view',
-        menuKey: 'ads',
+        menuKey: 'block-ads',
+    },
+}, {
+    path: '/admin/popup-ads',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/PopupAds/Index.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'popup-ads.index',
+    meta: {
+        access: 'private',
+        permission: 'ads.view',
+        menuKey: 'popup-ads',
     },
 }, {
     path: '/admin/creators',

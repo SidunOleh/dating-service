@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Auth\SignInVerifyCodeRequest;
-use App\Models\Creator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +13,22 @@ class SignInVerifyCodeController extends Controller
     {
         $code = $request->input('code');
 
-        if (
-            session('signin.code') != $code or
-            now()->greaterThan(Carbon::createFromTimestamp(session('signin.expire_at')))
-        ) {
-            return response(['message' => 'Bad Request',], 400);
+        if (! $signin = session('signin')) {
+            return response(['message' => 'Bad request.',], 400);
+        }
+
+        if ($signin['try'] + 1 > 5) {
+            return response(['message' => 'Too many attemps.',], 429);
+        }
+
+        session(['signin.try' => $signin['try'] + 1,]);
+
+        if ($signin['code'] != $code) {
+            return response(['message' => 'Invalid verification code.',], 400);
+        }
+
+        if (now()->greaterThan(Carbon::createFromTimestamp($signin['expire_at']))) {
+            return response(['message' => 'Verification code is expired.',], 400);
         }
 
         if (! Auth::guard('web')->attempt(session('signin.credentials'))) {

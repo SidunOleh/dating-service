@@ -6,6 +6,7 @@ use App\Models\Creator;
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Vite;
 
 
@@ -44,5 +45,7 @@ class AppServiceProvider extends ServiceProvider
         Vite::useScriptTagAttributes([
             'defer' => true,
         ]);
+
+        DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);
     }
 }

@@ -17,6 +17,7 @@ class Ad extends Model
         'link',
         'clicks_limit',
         'clicks_count',
+        'type',
     ];
 
     public function image(): BelongsTo
@@ -27,5 +28,10 @@ class Ad extends Model
     public static function scopeActive(Builder $query): void
     {
         $query->where('clicks_count', '>=', 'clicks_limit');
+    }
+
+    public static function scopeType(Builder $query, string $type): void
+    {
+        $query->where('type', $type);
     }
 }

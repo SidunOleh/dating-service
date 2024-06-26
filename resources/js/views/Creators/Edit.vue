@@ -70,7 +70,7 @@
                         :uploaded="data.photos"
                         :multiple="true"
                         :watermark="true"
-                        :compress="20"
+                        :quality="20"
                         @change="imgs => data.photos = imgs"/>
                 </FormItem>
 
@@ -205,21 +205,21 @@
 
                 <FormItem label="Verification photo">
                     <UploadImg
-                        :compress="20"
+                        :quality="20"
                         :uploaded="data.verification_photo ? [data.verification_photo,] : []"
                         @change="imgs => data.verification_photo = imgs[0] ?? null"/>          
                 </FormItem>
 
                 <FormItem label="ID photo">
                     <UploadImg
-                        :compress="20"
+                        :quality="20"
                         :uploaded="data.id_photo ? [data.id_photo,] : []"
                         @change="imgs => data.id_photo = imgs[0] ?? null"/>          
                 </FormItem>
 
                 <FormItem label="Street photo">
                     <UploadImg
-                        :compress="20"
+                        :quality="20"
                         :uploaded="data.street_photo ? [data.street_photo,] : []"
                         @change="imgs => data.street_photo = imgs[0] ?? null"/>          
                 </FormItem>

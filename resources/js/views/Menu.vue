@@ -63,14 +63,27 @@
             </router-link>
         </MenuItem>
 
-        <MenuItem key="ads">
+        <SubMenu v-if="can('ads.view')">
             <template #icon>
                 <AdIcon />
             </template>
-            <router-link :to="{name: 'ads.index'}">
+            <template #title>
                 Ads
-            </router-link>
-        </MenuItem>
+            </template>
+
+            <MenuItem key="block-ads">
+                <router-link :to="{name: 'block-ads.index'}">
+                    Block ads
+                </router-link>
+            </MenuItem>
+
+            <MenuItem key="popup-ads">
+                <router-link :to="{name: 'popup-ads.index'}">
+                    Popup ads
+                </router-link>
+            </MenuItem>
+
+        </SubMenu>
 
         <SubMenu 
             v-if="can(['approved-creators.profile-requests.view', 'not-approved-creators.profile-requests.view',])"

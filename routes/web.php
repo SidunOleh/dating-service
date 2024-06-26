@@ -43,15 +43,21 @@ Route::post('/admin/logout', LogoutController::class)
     ->name('admin-panel.logout');
 
 /**
- * Auth
+ * Sing up
  */
 Route::post('/sign-up/send-code', SignUpSendCodeController::class)
+    ->middleware(['throttle:5,1',])
     ->name('sign-up.send-code');
 Route::post('/sign-up/verify-code', SignUpVerifyCodeController::class)
     ->name('sign-up.verify-code');
 Route::post('/sign-up/resend-code', SignUpResendCodeController::class)
     ->name('sign-up.resend-code');
+
+/**
+ * Sing in
+ */
 Route::post('/sign-in/send-code', SignInSendCodeController::class)
+    ->middleware(['throttle:5,1',])
     ->name('sign-in.send-code');
 Route::post('/sign-in/verify-code', SignInVerifyCodeController::class)
     ->name('sign-in.verify-code');

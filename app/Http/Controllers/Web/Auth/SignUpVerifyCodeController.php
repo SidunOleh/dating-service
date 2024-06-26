@@ -14,11 +14,22 @@ class SignUpVerifyCodeController extends Controller
     {
         $code = $request->input('code');
 
-        if (
-            session('signup.code') != $code or
-            now()->greaterThan(Carbon::createFromTimestamp(session('signup.expire_at')))
-        ) {
-            return response(['message' => 'Bad Request',], 400);
+        if (! $signup = session('signup')) {
+            return response(['message' => 'Bad request.',], 400);
+        }
+
+        if ($signup['try'] + 1 > 5) {
+            return response(['message' => 'Too many attemps.',], 429);
+        }
+
+        session(['signup.try' => $signup['try'] + 1,]);
+
+        if ($signup['code'] != $code) {
+            return response(['message' => 'Invalid verification code.',], 400);
+        }
+
+        if (now()->greaterThan(Carbon::createFromTimestamp($signup['expire_at']))) {
+            return response(['message' => 'Verification code is expired.',], 400);
         }
 
         $creator = Creator::create(session('signup.credentials'));

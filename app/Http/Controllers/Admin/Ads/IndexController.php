@@ -13,8 +13,10 @@ class IndexController extends Controller
     {
         $page = $request->query('page', 1);
         $perpage = $request->query('per_page', 15);
+        $type = $request->query('type');
 
         $ads = Ad::orderBy('created_at', 'DESC')
+            ->type($type)
             ->paginate($perpage, ['*'], 'page', $page);
 
         return response(new AdCollection($ads));

@@ -12,12 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('creators', function (Blueprint $table) {
-            $table->id();
+            $table->id()->from(50000);
             $table->string('email')->unique();
             $table->string('password');
             
-            $table->string('slug')->nullable();
-
             $table->boolean('is_banned')->default(false);
             $table->boolean('show_on_site')->default(true);
             $table->boolean('play_roulette')->default(true);

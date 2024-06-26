@@ -115,6 +115,7 @@ export default {
             query: {
                 page: 1,
                 perpage: 15,
+                type: 'block',
             },
             loading: false,
         }
@@ -123,7 +124,11 @@ export default {
         async updateData() {
             try {
                 this.loading = true
-                this.data = await adsApi.fetch(this.query.page, this.query.perpage) 
+                this.data = await adsApi.fetch(
+                    this.query.page, 
+                    this.query.perpage, 
+                    this.query.type
+                ) 
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
             } finally {

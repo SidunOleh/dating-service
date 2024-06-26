@@ -1,12 +1,12 @@
 import can from '../helpers/can'
 
 const adsApi = {
-    async fetch(page = 1, perpage = 15) {
+    async fetch(page = 1, perpage = 15, type) {
         if (!can('ads.view')) {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get(`/api/ads?page=${page}&per_page=${perpage}`)
+        const res = await axios.get(`/api/ads?page=${page}&per_page=${perpage}&type=${type}`)
 
         return res.data
     },

@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class VerificationCode extends Notification
 {
@@ -35,7 +36,8 @@ class VerificationCode extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line("Verification code: {$this->code}.")
+                    ->line("Verification code:")
+                    ->line(new HtmlString("<div style=\"font-size: 25px; color: #000;\">{$this->code}</div>"))
                     ->action('Go to site', url('/'))
                     ->line('This code will expire in 10 minutes.')
                     ->line('Thank you for using our application!');

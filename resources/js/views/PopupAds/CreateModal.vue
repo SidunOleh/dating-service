@@ -9,7 +9,9 @@
             <FormItem
                 label="Image"
                 :required="true">
-                <UploadImg @change="imgs => data.image_id = imgs[0]?.id"/>
+                <UploadImg
+                    :process="false" 
+                    @change="imgs => data.image_id = imgs[0]?.id"/>
             </FormItem>
 
             <FormItem
@@ -70,6 +72,7 @@ export default {
                 image_id: null,
                 link: '',
                 clicks_limit: 1,
+                type: 'popup',
             },
             creating: false,
         }

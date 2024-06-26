@@ -20,9 +20,10 @@ class AdCollection extends ResourceCollection
             $data[$i]['name'] = $ad->name;
             $data[$i]['link'] = $ad->link;
             $data[$i]['image_id'] = $ad->image_id;
-            $data[$i]['image_url'] = $ad->image->url();
+            $data[$i]['image_url'] = $ad->image->getUrl();
             $data[$i]['clicks_limit'] = $ad->clicks_limit;
             $data[$i]['clicks_count'] = $ad->clicks_count;
+            $data[$i]['type'] = $ad->type;
         }
 
         $meta = [

@@ -22,9 +22,9 @@ class UploadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'img' => 'required|image|mimes:jpg,png,webp',
+            'img' => 'required|file|extensions:jpg,png,webp,gif,heic,heif,svg|size:10240',
             'watermark' => 'boolean',
-            'compress' => 'integer|between:0,100|nullable',
+            'quality' => 'integer|between:0,100|nullable',
         ];
     }
 }

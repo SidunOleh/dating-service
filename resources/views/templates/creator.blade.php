@@ -11,7 +11,7 @@
 
             @foreach($imgs as $img)
             <div class="slide">
-                <img src="{{ $img->url() }}" alt="person" />
+                <img src="{{ $img->getUrl() }}" alt="person" />
             </div>
             @endforeach
         </div>
@@ -30,7 +30,7 @@
             </div>
             @endauth
             <div class="likes-count">
-                {{ $creator->votes }}
+                {{ $creator->in_favorites_count }}
             </div>
         </div>
     </div>

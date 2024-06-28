@@ -45,10 +45,10 @@ class StoreRequest extends FormRequest
             'onlyfans' => 'string|nullable',
             'whatsapp' => 'string|nullable',
 
-            'full_address' => 'string|nullable',
-            'country' => 'string|nullable',
-            'region' => 'string|nullable',
+            'state' => 'string|nullable',
             'city' => 'string|nullable',
+            'first_street' => 'string|nullable',
+            'second_street' => 'string|nullable',
             'latitude' => 'between:-90,90|nullable',
             'longitude' => 'between:-180,180|nullable',
 

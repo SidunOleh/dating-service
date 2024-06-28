@@ -76,10 +76,10 @@ class DoneRequest extends FormRequest
         $rules['location.status'] = 'in:approved,rejected';
         $rules['location.comment'] = 'string|nullable';
         $rules['location.show_rejected'] = 'boolean';
-        $rules['location.value.full_address'] = 'string|nullable';
-        $rules['location.value.country'] = 'string|nullable';
-        $rules['location.value.region'] = 'string|nullable';
+        $rules['location.value.state'] = 'string|nullable';
         $rules['location.value.city'] = 'string|nullable';
+        $rules['location.value.first_street'] = 'string|nullable';
+        $rules['location.value.second_street'] = 'string|nullable';
         $rules['location.value.latitude'] = 'between:-90,90|nullable';
         $rules['location.value.longitude'] = 'between:-180,180|nullable';
 

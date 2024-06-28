@@ -9,34 +9,28 @@ import * as L from 'leaflet'
 
 export default {
     props: [
-        'center',
+        'location',
     ],
     data() {
         return {
             map: null,
-            zoom: 15,
-            circle: null,
+            marker: null,
         }
     },     
     mounted() {
         this.map = L.map('map')
-            .setView(this.center, this.zoom)
+            .setView(this.location, 17)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png')
             .addTo(this.map)
 
-        this.circle = L.circle(this.center, {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 500,
-        })
-        this.circle.addTo(this.map)
+        this.marker = L.marker(this.location)
+        this.marker.addTo(this.map)
     },
     watch: {
-        center(center) {
-            this.map.setView(center)
-            this.circle.setLatLng(center)
+        location(location) {
+            this.map.setView(location)
+            this.marker.setLatLng(location)
         }, 
     }
 }

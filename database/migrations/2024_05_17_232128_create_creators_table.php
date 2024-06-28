@@ -38,12 +38,12 @@ return new class extends Migration
             $table->string('onlyfans')->nullable();
             $table->string('whatsapp')->nullable();
             
-            $table->string('full_address')->nullable();
-            $table->string('country')->nullable();
-            $table->string('region')->nullable();
+            $table->string('state')->nullable();
             $table->string('city')->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();     
+            $table->string('first_street')->nullable();
+            $table->string('second_street')->nullable();
+            $table->decimal('latitude', 9, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();     
             $table->index('latitude');       
 
             $table->boolean('is_verified')->default(false);

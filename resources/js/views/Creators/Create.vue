@@ -138,11 +138,12 @@
                 :key="4">
 
                 <FormItem label="Location">
-                    <LocationInput @change="location => data = Object.assign(data, location)"/>
+                    <FindLocation @change="location => data = Object.assign(data, location)"/>
 
                     <ShowLocation 
                         v-if="data.longitude && data.latitude"
-                        :center="[data.latitude, data.longitude]"/>
+                        style="margin-top: 10px;"
+                        :location="[data.latitude, data.longitude]"/>
                 </FormItem>
 
             </CollapsePanel>
@@ -207,7 +208,7 @@
 <script>
 import { Button, Form, FormItem, Input, Select, InputPassword, InputNumber, Textarea, message, Collapse, CollapsePanel, DatePicker } from 'ant-design-vue'
 import UploadImg from '../components/UploadImg.vue'
-import LocationInput from '../components/LocationInput.vue'
+import FindLocation from '../components/FindLocation.vue'
 import ShowLocation from '../components/ShowLocation.vue'
 import creatorsApi from '../../api/creators'
 
@@ -216,7 +217,7 @@ export default {
         Form, FormItem, Input, 
         Select, Button, InputPassword, InputNumber, 
         Textarea, UploadImg, Collapse, 
-        CollapsePanel, ShowLocation, LocationInput,
+        CollapsePanel, ShowLocation, FindLocation,
         DatePicker,
     },
     data() {
@@ -237,10 +238,10 @@ export default {
                 snapchat: '',
                 onlyfans: '',
                 whatsapp: '',
-                full_address: '',
-                country: '',
-                region: '',
+                state: '',
                 city: '',
+                first_street: '',
+                second_street: '',
                 latitude: null,
                 longitude: null,
                 first_name: '',

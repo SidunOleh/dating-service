@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1440, initial-scale=1, maximum-scale=1" />
-    <title>Admin Panel | {{ env('APP_NAME') }}</title>
+    <title>Admin Panel • {{ env('APP_NAME') }}</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
@@ -77,10 +77,6 @@
             <div class="loader"></div>
         </div>
     </div>
-
-    <script>
-        const google_maps_key = '{{ env("GOOGLE_MAPS_KEY") }}'
-    </script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

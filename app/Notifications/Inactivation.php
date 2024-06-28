@@ -38,7 +38,7 @@ class Inactivation extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("You were inactivated.")
+            ->line("You were banned.")
             ->action('Go to site', url('/'))
             ->line('Thank you for using our application!');
     }

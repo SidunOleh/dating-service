@@ -13,7 +13,6 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
-        "@fawmi/vue-google-maps": "0.9.67",
         "ant-design-vue": "^4.2.1",
         "vue": "^3.4.27",
         "vue-router": "^4.3.2",

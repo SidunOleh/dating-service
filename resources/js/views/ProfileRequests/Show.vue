@@ -198,42 +198,37 @@
                 <FormItem
                     label="Location"
                     :class="data.location?.status">
-
-                    <Input
-                        style="margin-bottom: 10px;"
-                        placeholder="Full address"
-                        readonly
-                        :value="data.location ? data.location?.value?.full_address : data.creator?.full_address"/>
-                
-                    <Input
-                        style="margin-bottom: 10px;"
-                        placeholder="Country"
-                        readonly
-                        :value="data.location ? data.location?.value?.country : data.creator?.country"/>
                     
-                    <Input
-                        style="margin-bottom: 10px;"
-                        placeholder="Region"
-                        readonly
-                        :value="data.location ? data.location?.value?.region : data.creator?.region"/>
-                    
-                    <Input 
-                        style="margin-bottom: 10px;"
-                        placeholder="City"
-                        readonly
-                        :value="data.location ? data.location?.value?.city : data.creator?.city"/>
+                    <Flex :gap="5">
+                        <Input
+                            style="margin-bottom: 10px;"
+                            placeholder="State"
+                            readonly
+                            :value="data.location ? states[data.location?.value?.state] : states[data.creator?.state]"/>
+                        
+                        <Input 
+                            style="margin-bottom: 10px;"
+                            placeholder="City"
+                            readonly
+                            :value="data.location ? data.location?.value?.city : data.creator?.city"/>
 
-                    <Input 
-                        style="margin-bottom: 10px;"
-                        placeholder="Latitude"
-                        readonly
-                        :value="data.location ? data.location?.value?.latitude : data.creator?.latitude"/>
+                        <Input 
+                            style="margin-bottom: 10px;"
+                            placeholder="First street"
+                            readonly
+                            :value="data.location ? data.location?.value?.first_street : data.creator?.first_street"/>
 
-                    <Input 
+                        <Input 
+                            style="margin-bottom: 10px;"
+                            placeholder="Second street"
+                            readonly
+                            :value="data.location ? data.location?.value?.second_street : data.creator?.second_street"/>
+                    </Flex>
+
+                    <ShowLocation 
+                        v-if="data.location?.value?.latitude && data.location?.value?.longitude"
                         style="margin-bottom: 10px;"
-                        placeholder="Longitude"
-                        readonly
-                        :value="data.location ? data.location?.value?.longitude : data.creator?.longitude"/>
+                        :location="[data.location?.value?.latitude, data.location?.value?.longitude]"/>
 
                     <ApproveField
                         v-if="data.location" 
@@ -437,15 +432,16 @@
 <script>
 import { Form, FormItem, Input, InputNumber, Textarea, Image, Flex, Button, message, Collapse, CollapsePanel, } from 'ant-design-vue'
 import ApproveField from '../components/ApproveField.vue'
-import LocationInput from '../components/LocationInput.vue'
+import ShowLocation from '../components/ShowLocation.vue'
 import profileRequestsApi from '../../api/profile-requests'
 import { confirmPopup, } from '../../helpers/popups'
+import states from '../../data/states.json'
 
 export default {
     components: {
         Form, FormItem, Input,
         ApproveField, InputNumber, Textarea,
-        LocationInput, Image, Flex,
+        ShowLocation, Image, Flex,
         Button, Collapse, CollapsePanel,
     },
     data() {
@@ -453,6 +449,7 @@ export default {
             activePanels: [1, 2, 3, 4, 5,],
             data: {},
             loading: false,
+            states,
         }
     },
     methods: {

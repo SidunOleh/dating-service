@@ -16,16 +16,12 @@ class UploadController extends Controller
         $watermark = $request->input('watermark', false);
         $quality = $request->input('quality', 0);
         
-        try {
-            if ($process) {
-                Image::processUploaded($uploaded, $watermark, $quality);
-            }
-    
-            $image = Image::saveUploaded($uploaded);
-    
-            return response($image);
-        } catch (Exception $e) {
-            return response(['message' => $e->getMessage(),], 400);
+        if ($process) {
+            Image::processUploaded($uploaded, $watermark, $quality);
         }
+
+        $image = Image::saveUploaded($uploaded);
+
+        return response($image);
     }
 }

@@ -10,8 +10,8 @@ class DeleteController extends Controller
 {
     public function __invoke(Image $image)
     {
-        $image->deleteFile();
         $image->delete();
+        $image->deleteFile();
 
         return response(['message' => 'OK',]);
     }

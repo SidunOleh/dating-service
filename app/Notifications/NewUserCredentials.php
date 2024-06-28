@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class NewUserCredentials extends Notification
 {
@@ -39,8 +40,10 @@ class NewUserCredentials extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("Login: {$this->user->email}.")
-            ->line("Password: {$this->password}.")
+            ->line('Login:')
+            ->line(new HtmlString("<div style=\"font-size: 20px; color: #000; margin-bottom: 20px;\">{$this->user->email}</div>"))
+            ->line('Password:')
+            ->line(new HtmlString("<div style=\"font-size: 20px; color: #000; margin-bottom: 20px;\">{$this->password}</div>"))
             ->action('Login', url('/admin/login'))
             ->line('Thank you for using our application!');
     }

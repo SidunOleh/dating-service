@@ -167,13 +167,14 @@
                 :key="4">
 
                 <FormItem label="Location">
-                    <LocationInput 
-                        :selected="location"
+                    <FindLocation 
+                        :data="location"
                         @change="location => data = Object.assign(data, location)"/>
 
                     <ShowLocation 
                         v-if="data.longitude && data.latitude"
-                        :center="[data.latitude, data.longitude]"/>
+                        style="margin-top: 10px;"
+                        :location="[data.latitude, data.longitude]"/>
                 </FormItem>
 
             </CollapsePanel>
@@ -287,7 +288,7 @@
 <script>
 import { Button, Form, FormItem, Input, Select, InputPassword, InputNumber, Textarea, message, Collapse, CollapsePanel, Flex, Switch, DatePicker, } from 'ant-design-vue'
 import UploadImg from '../components/UploadImg.vue'
-import LocationInput from '../components/LocationInput.vue'
+import FindLocation from '../components/FindLocation.vue'
 import ShowLocation from '../components/ShowLocation.vue'
 import Referral from './Referrals.vue'
 import Transactions from './Transactions.vue'
@@ -300,7 +301,7 @@ export default {
         Form, FormItem, Input, 
         Select, Button, InputPassword, InputNumber, 
         Textarea, UploadImg, Collapse, 
-        CollapsePanel, LocationInput, Flex,
+        CollapsePanel, FindLocation, Flex,
         Switch, ShowLocation, Referral,
         Transactions, DetailsModal, DatePicker,
     },
@@ -333,10 +334,10 @@ export default {
         },
         location() {
             return {
-                full_address: this.data.full_address,
-                country: this.data.country,
-                region: this.data.region,
+                state: this.data.state,
                 city: this.data.city,
+                first_street: this.data.first_street,
+                second_street: this.data.second_street,
                 latitude: this.data.latitude,
                 longitude: this.data.longitude,
             }

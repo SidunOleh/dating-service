@@ -20,12 +20,10 @@ export default {
         }
     },     
     mounted() {
-        let DefaultIcon = L.icon({
+        L.Marker.prototype.options.icon = L.icon({
             iconUrl: icon,
-            shadowUrl: iconShadow
+            shadowUrl: iconShadow,
         })
-
-        L.Marker.prototype.options.icon = DefaultIcon
 
         this.map = L.map('map')
             .setView(this.location, 17)

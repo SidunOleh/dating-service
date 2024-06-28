@@ -2,3 +2,9 @@ body {
     min-width: 1440px;
     overflow-x: hidden;
 }
+
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+    margin-left: -12px;
+    margin-top: -41px;
+}

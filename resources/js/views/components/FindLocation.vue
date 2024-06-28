@@ -9,17 +9,17 @@
         <Input 
             placeholder="City"
             v-model:value="location.city"
-            @focusout="location.city = location.city.trim().replace(/\s\s+/g, ' ')"/>
+            @focusout="location.city = formatAddress(location.city)"/>
 
         <Input 
             placeholder="First Street"
             v-model:value="location.first_street"
-            @focusout="location.first_street = location.first_street.trim().replace(/\s\s+/g, ' ')"/>
+            @focusout="location.first_street = formatAddress(location.first_street)"/>
 
         <Input 
             placeholder="Second Street"
             v-model:value="location.second_street"
-            @focusout="location.second_street = location.second_street.trim().replace(/\s\s+/g, ' ')"/>
+            @focusout="location.second_street = formatAddress(location.second_street)"/>
 
         <Button 
             :loading="loading"
@@ -69,6 +69,14 @@ export default {
         },
     },  
     methods: {
+        formatAddress(address) {
+            return address.trim()
+                .replace(/\s\s+/g, ' ')
+                .toLowerCase()
+                .split(' ')
+                .map(s => s[0].toUpperCase() + s.slice(1))
+                .join(' ')
+        },
         async find() {
             if (
                 !this.location.state || 

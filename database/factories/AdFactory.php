@@ -20,6 +20,7 @@ class AdFactory extends Factory
             'name' => fake()->text(rand(10, 100)),
             'link' => fake()->url(),
             'clicks_limit' => rand(100, 1000),
+            'type' => ['block', 'popup'][rand(0, 1)],
         ];
     }
 }

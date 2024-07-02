@@ -112,8 +112,10 @@ class Creator extends Authenticatable
 
         static::created(function (self $creator) {
             if (
-                $code = Cookie::get('ref') and
-                $referrer = self::firstWhere('referral_code', $code)
+                ($code = Cookie::get('ref') and
+                $referrer = self::firstWhere('referral_code', $code)) or 
+                ($from = Cookie::get('from') and 
+                $referrer = self::find($from))
             ) {
                 Referral::create([
                     'referrer_id' => $referrer->id,
@@ -121,6 +123,7 @@ class Creator extends Authenticatable
                 ]);
 
                 Cookie::queue(Cookie::forget('ref'));
+                Cookie::queue(Cookie::forget('from'));
             }
         });
 
@@ -488,7 +491,7 @@ class Creator extends Authenticatable
     {        
         $query = self::with('gallery')->withCount('inFavorites')->showOnSite();
 
-        if ($filters['exclude']) {
+        if (isset($filters['exclude'])) {
             $query->whereNotIn('id', $filters['exclude']);
         }
 

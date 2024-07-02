@@ -120,6 +120,19 @@ const routes = [{
         menuKey: 'templates',
     },
 }, {
+    path: '/admin/top-ads',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/TopAds/Index.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'top-ads.index',
+    meta: {
+        access: 'private',
+        permission: 'ads.view',
+        menuKey: 'top-ads',
+    },
+}, {
     path: '/admin/block-ads',
     component: defineAsyncComponent({
         loader: () =>

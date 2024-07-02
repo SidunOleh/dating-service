@@ -72,7 +72,6 @@ export default {
         formatAddress(address) {
             return address.trim()
                 .replace(/\s\s+/g, ' ')
-                .toLowerCase()
                 .split(' ')
                 .map(s => s[0].toUpperCase() + s.slice(1))
                 .join(' ')
@@ -113,7 +112,7 @@ export default {
             return `
             [out:json];
             area["name"="${states[this.location.state]}"]["admin_level"="4"]->.state;
-            area["name"="${this.location.city}"](area.state)->.city;
+            area["name"="${this.location.city}"]->.city;
 
             way["name"="${this.location.first_street}"](area.state)(area.city)->.street1;
             node(w.street1)->.nodes1;

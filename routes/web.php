@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
+use App\Http\Controllers\Web\Ads\ClickController;
 use App\Http\Controllers\Web\Auth\SignInResendCodeController;
 use App\Http\Controllers\Web\Auth\SignInSendCodeController;
 use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Pages\HomeController;
+use App\Http\Controllers\Web\Pages\ProfileController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
 use App\Http\Controllers\Web\Password\ResetPageController;
@@ -86,6 +88,8 @@ Route::get('/', HomeController::class)
     ->name('home');
 Route::get('/page/{page}', HomeController::class)
     ->name('home.page');
+Route::get('/profile/{creator}', ProfileController::class)
+    ->name('profile.page');
 
 /**
  * Favorites
@@ -99,3 +103,8 @@ Route::prefix('/favorites')
     Route::post('remove', RemoveFromFavotiresController::class)
         ->name('remove');
 });
+
+/**
+ * Ads
+ */
+Route::post('/ads/{ad}/click', ClickController::class);

@@ -34,6 +34,7 @@
                 <p class="passRule">
                     Use 8-32 characters for your password
                 </p>
+                <input type="hidden" name="from" value="{{ request()->route()->getName() == 'profile.page' ? $creator->id : '' }}">
             </div>
 
             <button type="submit" class="submit btn red" disabled>

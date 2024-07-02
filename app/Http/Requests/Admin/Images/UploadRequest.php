@@ -21,8 +21,22 @@ class UploadRequest extends FormRequest
      */
     public function rules(): array
     {
+        $mimes = [
+            'image/jpeg',
+            'image/png',
+            'image/webp',
+            'image/gif',
+            'image/svg+xml',
+            'image/SVG',
+            'image/heif',
+            'image/heif-sequence',
+            'image/heic',
+            'image/heic-sequence',
+            'image/avif',
+        ];
+
         return [
-            'img' => 'required|file|extensions:jpg,png,webp,gif,heic,heif,svg|max:10240',
+            'img' => 'required|file|mimetypes:' . implode(',', $mimes) . '|max:10240',
             'watermark' => 'boolean',
             'quality' => 'integer|between:0,100|nullable',
         ];

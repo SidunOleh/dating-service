@@ -7,17 +7,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ env('APP_NAME') }}</title>
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
 </head>
 
 <body>
 
+    <script>
+        const DS = {}
+    </script>
+
     @guest('web')
     <header class="header" id="header">
-        
-        <a href="#" class="advertising-banner">
-            <img src="{{ asset('assets/img/adv.jpg') }}" alt="" />
-            <p>www.nazarbazar.com</p>
-        </a>
+
+        @includeWhen($adsSettings->sole('name', 'show_top_ad')?->value, 'templates.top-ad', ['ad' => $topAd,]) 
 
         <div class="header-body">
             <div class="left">
@@ -43,16 +45,14 @@
                 <img src="{{ asset('assets/img/burger.svg') }}" alt="" />
             </div>
         </div>
+        
     </header>
     @endguest
 
     @auth('web')
     <header class="header" id="header">
         
-        <a href="#" class="advertising-banner">
-            <img src="{{ asset('assets/img/adv.jpg') }}" alt="" />
-            <p>www.nazarbazar.com</p>
-        </a>
+        @includeWhen($adsSettings->sole('name', 'show_top_ad')?->value, 'templates.top-ad', ['ad' => $topAd,]) 
 
         <div class="header-body">
             <div class="left">
@@ -192,5 +192,6 @@
 
             </div>
         </div>
+
     </header>
     @endauth

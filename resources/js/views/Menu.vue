@@ -71,6 +71,12 @@
                 Ads
             </template>
 
+            <MenuItem key="top-ads">
+                <router-link :to="{name: 'top-ads.index'}">
+                    Top ads
+                </router-link>
+            </MenuItem>
+
             <MenuItem key="block-ads">
                 <router-link :to="{name: 'block-ads.index'}">
                     Block ads

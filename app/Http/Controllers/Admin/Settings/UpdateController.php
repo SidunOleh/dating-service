@@ -10,7 +10,7 @@ class UpdateController extends Controller
 {
     public function __invoke(UpdateRequest $request)
     {
-        Option::updateOrCreateSettings($request->validated());
+        Option::updateOrCreateOptions($request->validated());
 
         return response(['message' => 'OK',]);
     }

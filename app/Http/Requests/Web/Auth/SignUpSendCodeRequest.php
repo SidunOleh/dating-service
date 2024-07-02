@@ -24,6 +24,7 @@ class SignUpSendCodeRequest extends FormRequest
         return [
             'email' => 'required|email|unique:creators,email',
             'password' => 'required|string|min:8|max:32',
+            'from' => 'integer|exists:creators,id|nullable',
         ];
     }
 }

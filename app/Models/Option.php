@@ -15,26 +15,28 @@ class Option extends Model
         'value',
     ];
 
-    public static function updateOrCreateSettings(array $settings): Collection
+    public static function updateOrCreateOptions(array $settings): Collection
     {
         $collection = new Collection();
         foreach ($settings as $name => $value) {
-            $collection->push(self::updateOrCreate(
+            $option = self::updateOrCreate(
                 ['name' => $name,], ['value' => $value,]
-            ));
+            );
+
+            $collection->push($option);
         }
         
         return $collection;
     }
 
-    public static function getSetting(string $name, $default = null)
+    public static function getOption(string $name, $default = null)
     {
         $setting = self::where('name', $name)->first();
 
         return $setting ? $setting->value : $default;
     }
 
-    public static function getSettings(array $names): Collection
+    public static function getOptions(array $names): Collection
     {
        return self::whereIn('name', $names)->get();
     }

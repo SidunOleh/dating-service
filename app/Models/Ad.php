@@ -22,7 +22,7 @@ class Ad extends Model
 
     public function image(): BelongsTo
     {
-        return $this->BelongsTo(Image::class);
+        return $this->belongsTo(Image::class);
     }
 
     public static function scopeActive(Builder $query): void

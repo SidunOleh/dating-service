@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Imagick\Driver;
 
 class Image extends Model
 {
@@ -29,31 +27,21 @@ class Image extends Model
         );
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function (self $image) {
+            $image->deleteFile();
+        });
+    }
+
     public function getUrl(): string
     {
         return url('storage/' . $this->path);
     }
 
-    public static function processUploaded(
-        UploadedFile $uploaded, 
-        bool $watermark = false,
-        int $quality = 0
-    ): void
-    {
-        $manager = new ImageManager(new Driver());
-
-        $img = $manager->read(
-            $manager->read($uploaded->path())->toWebp($quality)->toFilePointer()
-        );
-
-        if ($watermark) {
-            $img->place(storage_path('watermark.png'), 'center');
-        }
-        
-        $img->save($uploaded->path());
-    }
-
-    public static function saveUploaded(UploadedFile $uploaded): self
+    public static function saveUploadedFile(UploadedFile $uploaded): self
     {
         $path = $uploaded->store(date('Y') . '/' . date('m'), 'public');
 

@@ -16,7 +16,11 @@ class SettingsCollection extends ResourceCollection
     {
         $data = [];
         foreach ($this->collection as $setting) {
-            $data[$setting->name] = $setting->value;
+            if ($setting->name == 'show_top_ad') {
+                $data[$setting->name] = (bool) $setting->value;
+            } else {
+                $data[$setting->name] = $setting->value;
+            }
         }
 
         return $data;

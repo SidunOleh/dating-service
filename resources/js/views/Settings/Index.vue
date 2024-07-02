@@ -11,6 +11,12 @@
                 :key="1">
 
                 <FormItem
+                    label="Show top ad"
+                    :required="true">
+                    <Switch v-model:checked="settings.show_top_ad"/>
+                </FormItem>
+
+                <FormItem
                     label="Clicks between popus"
                     :required="true">
                     <InputNumber
@@ -72,14 +78,14 @@
 </template>
 
 <script>
-import { message, } from 'ant-design-vue'
-import { Button, Form, FormItem, InputNumber, Collapse, CollapsePanel, } from 'ant-design-vue'
+import { Button, Form, FormItem, InputNumber, Collapse, CollapsePanel, Switch, message, } from 'ant-design-vue'
 import settingsApi from '../../api/settings'
 
 export default {
     components: {
         Button, Form, FormItem, 
         InputNumber,  Collapse, CollapsePanel,
+        Switch,
     },
     data() {
         return {

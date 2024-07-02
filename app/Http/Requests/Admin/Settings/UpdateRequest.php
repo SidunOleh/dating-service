@@ -22,6 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'show_top_ad' => 'required|boolean',
             'clicks_between_popups' => 'required|integer|gte:1',
             'seconds_between_popups' => 'required|integer|gte:1',
             'close_popup_seconds' => 'required|integer|gte:1',

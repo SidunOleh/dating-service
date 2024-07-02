@@ -180,7 +180,7 @@ input {
     width: 100%;
     border-bottom: 1px solid #616166;
     background: #252528;
-    z-index: 9999;
+    z-index: 1000;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear
 }
@@ -305,7 +305,8 @@ input {
 #header .burger-menu {
     width: 40px;
     height: 40px;
-    border-radius: 8px
+    border-radius: 8px;
+    cursor: pointer
 }
 
 #header .header-burger {
@@ -500,7 +501,7 @@ input {
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
-    background-image: url("../../img/select.svg");
+    background-image: url("../img/select.svg");
     background-repeat: no-repeat;
     background-position: right 0.7rem top 50%;
     background-size: 0.95rem auto
@@ -680,7 +681,7 @@ input {
     -ms-flex-pack: center;
     justify-content: center;
     position: absolute;
-    z-index: 1000;
+    z-index: 100;
     font-size: 14px;
     font-weight: 700;
     -webkit-transform: rotate(-9.647deg);
@@ -763,7 +764,7 @@ input {
     -ms-flex-pack: justify;
     justify-content: space-between;
     width: 100%;
-    z-index: 1000;
+    z-index: 100;
     padding: 12px
 }
 
@@ -803,7 +804,7 @@ input {
     -ms-flex-align: center;
     align-items: center;
     gap: 8px;
-    z-index: 1000
+    z-index: 100
 }
 
 .users .user-image .likes .btn {
@@ -949,7 +950,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 999;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1276,7 +1277,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 999;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1368,7 +1369,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 999;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1445,6 +1446,420 @@ input {
     font-weight: 400
 }
 
+.profile {
+    padding: 21px 0
+}
+
+.profile .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 16px;
+    max-width: 1000px
+}
+
+@media screen and (max-width:768px) {
+    .profile .container {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        gap: 24px
+    }
+}
+
+.profile .left-side {
+    width: 39%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 8px;
+    height: 100vh
+}
+
+@media screen and (max-width:768px) {
+    .profile .left-side {
+        width: 100%;
+        height: auto
+    }
+}
+
+.profile .left-side .head-porfile {
+    border-radius: 8px;
+    background: #39393e;
+    overflow: hidden;
+    position: relative
+}
+
+.profile .left-side .head-porfile.verified:after {
+    content: "Verified";
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 100;
+    font-size: 14px;
+    font-weight: 700;
+    -webkit-transform: rotate(-9.647deg);
+    transform: rotate(-9.647deg);
+    color: #b12828;
+    top: 290px;
+    right: 8px
+}
+
+@media screen and (max-width:1024px) {
+    .profile .left-side .head-porfile.verified:after {
+        top: 300px
+    }
+}
+
+.profile .left-side .head-porfile .img-card {
+    position: relative
+}
+
+.profile .left-side .head-porfile .img-card img:not(.likes img) {
+    width: 100%;
+    height: 340px;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.profile .left-side .head-porfile .img-card .likes {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 8px
+}
+
+.profile .left-side .head-porfile .img-card .likes .btn {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
+.profile .left-side .head-porfile .img-card .likes .likes-count {
+    color: #fbfbfb;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal
+}
+
+.profile .left-side .head-porfile .userMain {
+    padding: 12px
+}
+
+.profile .left-side .head-porfile .name {
+    color: var(--white, #fbfbfb);
+    font-size: 14px;
+    font-weight: 700
+}
+
+.profile .left-side .head-porfile .city {
+    color: var(--light-gray, #bebfc0);
+    font-size: 10px;
+    line-height: normal
+}
+
+.profile .left-side .user-info-list {
+    border-radius: 8px;
+    background: #39393e;
+    padding: 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 4px
+}
+
+.profile .left-side .user-info-list .user-info-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 4px;
+    font-size: 10px
+}
+
+.profile .left-side .user-info-list .type {
+    color: #bebfc0
+}
+
+.profile .left-side .user-info-list .info {
+    color: #fbfbfb;
+    font-weight: 600
+}
+
+.profile .left-side .user-location {
+    overflow: hidden;
+    border-radius: 8px;
+    height: 96px
+}
+
+.profile .left-side .description {
+    border-radius: 8px;
+    background: #39393e;
+    padding: 8px;
+    color: #bebfc0;
+    font-size: 10px;
+    line-height: normal
+}
+
+.profile .user-photo-list {
+    width: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px
+}
+
+@media screen and (max-width:768px) {
+    .profile .user-photo-list {
+        width: 100%
+    }
+}
+
+.profile .user-photo-list .user-photo-item {
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+    position: relative
+}
+
+.profile .user-photo-list .user-photo-item .subscribe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.22);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px)
+}
+
+.profile .user-photo-list .user-photo-item .subscribe p {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700
+}
+
+.profile .user-photo-list .user-photo-item .subscribe .btn {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-top: 12px
+}
+
+.profile .user-photo-list .user-photo-item img {
+    width: 100%;
+    height: 500px;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+@media screen and (max-width:768px) {
+    .profile .user-photo-list .user-photo-item img {
+        height: 339px
+    }
+}
+
+.profile .other-user-list {
+    width: 13%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 12px
+}
+
+@media screen and (max-width:768px) {
+    .profile .other-user-list {
+        width: 100%;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row
+    }
+}
+
+.profile .other-user-list .other-user-item {
+    overflow: hidden;
+    border-radius: 8px;
+    background: #4c4c52;
+    position: relative
+}
+
+@media screen and (max-width:768px) {
+    .profile .other-user-list .other-user-item {
+        width: calc((100% - 12px) / 2)
+    }
+    .profile .other-user-list .other-user-item:not(:nth-child(-n+4)) {
+        display: none
+    }
+}
+
+.profile .other-user-list .other-user-item:hover {
+    background-color: #606068
+}
+
+.profile .other-user-list .other-user-item.verified:after {
+    content: "Verified";
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 100;
+    font-size: 8px;
+    font-weight: 700;
+    -webkit-transform: rotate(-9.647deg);
+    transform: rotate(-9.647deg);
+    color: #b12828;
+    top: 100px;
+    right: 4px
+}
+
+@media screen and (max-width:768px) {
+    .profile .other-user-list .other-user-item.verified:after {
+        top: 120px
+    }
+}
+
+.profile .other-user-list .other-user-item img:not(.likes img) {
+    width: 100%;
+    height: 116px;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+@media screen and (max-width:768px) {
+    .profile .other-user-list .other-user-item img:not(.likes img) {
+        height: 139px
+    }
+}
+
+.profile .other-user-list .likes {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 4px
+}
+
+.profile .other-user-list .likes .btn {
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 4px!important
+}
+
+.profile .other-user-list .likes .btn img {
+    width: 10px
+}
+
+.profile .other-user-list .likes .likes-count {
+    color: #fbfbfb;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: normal
+}
+
+.profile .other-user-list .card {
+    padding: 8px
+}
+
+.profile .other-user-list .card .name {
+    color: var(--white, #fbfbfb);
+    font-size: 12px;
+    font-weight: 700
+}
+
+.profile .other-user-list .card .city {
+    color: var(--light-gray, #bebfc0);
+    font-size: 10px;
+    line-height: normal
+}
+
 .center {
     display: flex;
 }
@@ -1479,6 +1894,10 @@ input {
     border-radius: 16px !important;
 }
 
-.users .user-image .likes .btn.added {
+.likes .btn.added {
     background: #0263ea;
+}
+
+#map {
+    height: 96px;
 }

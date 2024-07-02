@@ -31,29 +31,34 @@ class SeedApp extends Command
      */
     public function handle()
     {
-        $images = Image::all();
-
         if ($processes = (int) $this->option('processes')) {
             return $this->spawn($processes);
         }
 
-        for ($i=0; $i < 1000; $i++) { 
+        $images = Image::limit(5)->get();
+
+        for ($i=0; $i < 100; $i++) { 
             try {
                 Creator::factory()->create([
-                    'photos' =>$images->random(rand(1, $images->count()))->pluck('id')->all(),
+                    'photos' => $images->random(rand(1, $images->count()))->pluck('id')->all(),
                     'verification_photo' => [$images->random()->id, null][rand(0, 1)],
                     'id_photo' => [$images->random()->id, null][rand(0, 1)],
                     'street_photo' => [$images->random()->id. null][rand(0, 1)],
                 ]);
-            } catch (Exception) {}
-        }
+            } catch (Exception) {
 
-        for ($i=0; $i < 100; $i++) { 
+            }
+        }
+        $images = Image::offset(5)->limit(5)->get();
+
+        for ($i=0; $i < 30; $i++) { 
             try {
                 Ad::factory()->create([
                     'image_id' => $images->random()->id,
                 ]);
-            } catch (Exception) {}
+            } catch (Exception) {
+
+            }
         }
     }
 

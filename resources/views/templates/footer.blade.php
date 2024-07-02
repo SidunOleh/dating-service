@@ -1,10 +1,10 @@
 <footer class="footer">
     <div class="footer-container">
-        <a href="#" class="footer-link">
+        <a href="" class="footer-link">
             <img src="{{ asset('assets/img/help.svg') }}" alt="question mark" />
             Here is info
         </a>
-        <a href="#" class="footer-link">
+        <a href="" class="footer-link">
             <img src="{{ asset('assets/img/more.svg') }}" alt="plane" />
             Here is More
         </a>

@@ -1,12 +1,12 @@
 <a 
-    href="#" 
-    data-id="{{ $creator->id }}"
+    href="{{ route('profile.page', ['creator' => $creator->id,]) }}" 
+    target="_blank"
     @class(['users-item', 'verified' => $creator->is_verified,])>
     <div class="user-image">
         <div class="img-slider">
             @php
             $imgs = $creator->gallery;
-            $imgs = (auth('web')->check() and auth('web')->user()->subscription()) ? $imgs : $imgs->slice(0, 3);
+            $imgs = (auth('web')->check() and auth('web')->user()->subscription) ? $imgs : $imgs->slice(0, 3);
             @endphp
 
             @foreach($imgs as $img)
@@ -23,7 +23,7 @@
                 <img src="{{ asset('assets/img/next.svg') }}" alt="" />
             </div>
         </div>
-        <div class="likes">
+        <div class="likes" data-id="{{ $creator->id }}">
             @auth('web')
             <div @class(['btn', 'red', 'added' => $in_favorites,])>
                 <img src="{{ asset('assets/img/like.svg') }}" alt="" />
@@ -37,7 +37,7 @@
     <div class="card">
         <div class="title">{{ $creator->name }}, <span class="age">{{ $creator->age }}</span></div>
         <div class="place">
-            {{ $creator->city }}, {{ $creator->region }}
+            {{ $creator->city }}, {{ $creator->state }}
         </div>
         <div class="about">
             {{ $creator->description }}

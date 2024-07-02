@@ -1,3 +1,5 @@
+Fancybox.bind("[data-fancybox]", {});
+
 //__________________________HEADER__________________________//
 
 $(".burger-menu").click(function() {
@@ -35,7 +37,7 @@ const popupWrapper = document.querySelector(".popUp-wrapper");
 const signUpCard = document.querySelector(".signUP-card");
 const logInCard = document.querySelector(".logIN-card");
 const resetPasswordCard = document.querySelector(".resetPassword-card");
-const loginBtn = document.querySelector(".btn.login");
+const loginBtn = $(".btn.login");
 const signupBtn = document.querySelector(".btn.signup");
 const burgerMenu = document.querySelector(".header-burger");
 const closeButtons = document.querySelectorAll(".close");
@@ -65,54 +67,40 @@ function closePopup() {
     header.classList.remove("hidden");
 }
 
-if (loginBtn) {
-    loginBtn.addEventListener("click", () => {
-        openPopup(logInCard);
-    });
-}
+loginBtn.on("click", () => {
+    openPopup(logInCard);
+});
 
-if (signupBtn) {
-    signupBtn.addEventListener("click", () => {
-        openPopup(signUpCard);
-    });
-}
+signupBtn?.addEventListener("click", () => {
+    openPopup(signUpCard);
+});
 
-if (burgerMenu) {
-    burgerMenu.addEventListener("click", () => {
-        openPopup(logInCard);
-    });
-}
+burgerMenu?.addEventListener("click", () => {
+    openPopup(logInCard);
+});
 
-if (signupLink) {
-    signupLink.addEventListener("click", () => {
-        openPopup(signUpCard);
-    });
-}
+signupLink?.addEventListener("click", () => {
+    openPopup(signUpCard);
+});
 
-if (resetPassLink) {
-    resetPassLink.addEventListener("click", () => {
-        openPopup(resetPasswordCard);
-    });
-}
+resetPassLink?.addEventListener("click", () => {
+    openPopup(resetPasswordCard);
+});
 
-if (closeButtons) {
-    closeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            closePopup();
-        });
+closeButtons?.forEach((button) => {
+    button.addEventListener("click", () => {
+        closePopup();
     });
-}
+});
 
-if (popupWrapper) {
-    popupWrapper.addEventListener("click", (event) => {
-        if (!signUpCard.contains(event.target) &&
-            !logInCard.contains(event.target) &&
-            !resetPasswordCard.contains(event.target)
-        ) {
-            closePopup();
-        }
-    });
-}
+popupWrapper?.addEventListener("click", (event) => {
+    if (!signUpCard.contains(event.target) &&
+        !logInCard.contains(event.target) &&
+        !resetPasswordCard.contains(event.target)
+    ) {
+        closePopup();
+    }
+});
 
 const showPasswordButtons = document.querySelectorAll(".show-password");
 showPasswordButtons.forEach((button) => {
@@ -172,45 +160,152 @@ inputs.forEach((input, index) => {
     });
 });
 
-//__________________________ADVERTISING_________________________//
-
-document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(function() {
-        let popup = document.querySelector(".advertising-wrapper");
-        let closeButton = document.querySelector(".advertising-close-timer");
-        let timerSpan = closeButton.querySelector(".timer");
-        let countdown = 5;
-
-        popup.classList.add("show");
-
-        let timerInterval = setInterval(function() {
-            countdown--;
-            timerSpan.textContent = countdown;
-
-            if (countdown === 0) {
-                clearInterval(timerInterval);
-                closeButton.classList.remove("disabled");
-                closeButton.classList.add("enabled");
-            }
-        }, 1000);
-
-        closeButton.addEventListener("click", function() {
-            if (countdown === 0) {
-                popup.classList.remove("show");
-            }
-        });
-    }, 5000);
-});
-
 //__________________________AJAX Setup_________________________//
 
 $.ajaxSetup({
-    beforeSend(xhr) {
-        xhr.setRequestHeader(
-            'X-CSRF-TOKEN',
-            $('meta[name="csrf-token"]').attr('content')
-        )
+    beforeSend: (xhr) => xhr.setRequestHeader(
+        'X-CSRF-TOKEN', 
+        $('meta[name="csrf-token"]').attr('content')
+    ) 
+})
+
+//__________________________ADVERTISING_________________________//
+
+if (DS && DS?.ads?.data && DS?.ads?.settings) {
+    const adPopup = {
+        counters: {
+            secs: 0,
+            clicks: 0,
+        },
+        next: null,
+        showing: false,
+        get secsCount() {
+            return this.counters.secs
+        },
+        set secsCount(count) {
+            if (this.showing) {
+                return
+            }
+
+            if (count >= parseInt(DS.ads.settings.seconds_between_popups)) {
+                this.showing = true
+                this.counters.secs = 0
+                this.counters.clicks = 0
+                this.show()
+            } else {
+                this.counters.secs = count
+            }
+        },
+        get clicksCount() {
+            return this.counters.clicks
+        },
+        set clicksCount(count) {
+            if (this.showing) {
+                return
+            }
+
+            if (count >= parseInt(DS.ads.settings.clicks_between_popups)) {
+                this.showing = true
+                this.counters.secs = 0
+                this.counters.clicks = 0
+                this.show()
+            } else {
+                this.counters.clicks = count
+            }
+        },
+        show() {
+            if (! this.next) {
+                return
+            }
+
+            const popup = $('.advertising-wrapper')
+            const img = $('.advertising-img')
+            const link = $('.advertising-link')
+    
+            popup.data('id', this.next.id)
+            img.attr('src', this.next.image.url)
+            link.attr('href', this.next.link)
+
+            adCloseTimer.start(DS.ads.settings.close_popup_seconds)
+
+            popup.addClass('show')
+
+            this.getNext()
+        },
+        hide() {
+            this.showing = false
+            $('.advertising-wrapper').removeClass('show')
+        },
+        getNext() {
+            const min = 0
+            const max = DS.ads.data.length - 1
+            const rand = Math.floor(Math.random() * (max - min + 1)) + min
+    
+            this.next = DS.ads.data[rand]
+
+            this.predownloadNextImage()
+        },
+        predownloadNextImage() {
+            const image = new Image 
+            image.src = this.next.image.url 
+        },
+        ini() {
+            this.getNext()
+
+            $('.advertising-wrapper').on('click', '.advertising-close-timer.enabled', () => {
+                this.hide()
+            })
+        
+            $('.users-item').on('click auxclick', () => {
+                this.clicksCount += 1
+            })
+        
+            setInterval(() => {
+                this.secsCount += 1
+            }, 1000)
+        },
     }
+
+    const adCloseTimer = {
+        secs: 0,
+        interval: null,
+        start(secs) {
+            const close = $('.advertising-close-timer')
+            close.removeClass('enabled')
+            close.addClass('disabled')
+
+            const timer = $('.advertising-close-timer .timer')
+            timer.text(secs)
+
+            this.secs = secs
+
+            this.interval = setInterval(() => {
+                this.secs--
+
+                timer.text(this.secs)
+
+                if (this.secs <= 0) {
+                    close.addClass('enabled')
+                    close.removeClass('disabled')
+                    clearInterval(this.interval)
+                }
+            }, 1000)
+        }
+    }
+
+    adPopup.ini()
+}
+
+$('.advertising-link').on('auxclick click', function () {
+    const id = $(this).closest('.advertising-wrapper').data('id')
+
+    $.post(`/ads/${id}/click`)
+})
+
+$('.advertising-banner').on('auxclick click', function () {
+    const id = $(this).data('id')
+
+    $.post(`/ads/${id}/click`)
 })
 
 //__________________________Loader_________________________//
@@ -246,30 +341,27 @@ $('.code-inputs input').on('input', () => {
     }
 })
 
-const resend = {
-    timer: 60,
+const resendTimer = {
+    secs: 0,
     interval: null,
-}
+    start(secs) {
+        this.secs = secs
+    
+        this.interval = setInterval(() => {    
+            --this.secs
+    
+            const formatted = (this.secs - (this.secs %= 60)) / 60 + (9 < this.secs ? ':' : ':0') + this.secs
+            $('#countdown').text(formatted)
 
-function resetResend() {
-    resend.timer = 60
-    clearInterval(resend.interval)
-
-    resend.interval = setInterval(() => {
-        if (resend.timer < 1) {
-            return
-        }
-
-        --resend.timer
-
-        const formatted = (resend.timer - (resend.timer %= 60)) / 60 + (9 < resend.timer ? ':' : ':0') + resend.timer
-
-        $('#countdown').text(formatted)
-    }, 1000)
+            if (this.secs <= 0) {
+                clearInterval(this.interval)
+            }
+        }, 1000)
+    },
 }
 
 $('.again').on('click', () => {
-    if (resend.timer > 0) {
+    if (resendTimer.secs > 0) {
         return
     }
 
@@ -302,7 +394,7 @@ $('#sign-up').submit(function(e) {
             verifyPopup.addClass('sign-up-code')
             verifyPopup.addClass('active')
             $('.signUP-card').removeClass('active')
-            resetResend()
+            resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
@@ -315,7 +407,8 @@ $('#sign-up').submit(function(e) {
                     password.closest('.input-group').addClass('error')
                     password.next('.error-text').text(errors.password[0])
                 }
-                return
+            } else {
+                alert(xhr.responseJSON.message)
             }
         }).always(() => {
             removeLoader('.signUP-card')
@@ -327,7 +420,9 @@ function verifySignUpCode(code) {
 
     $.post('/sign-up/verify-code', { code })
         .done(() => {
-            location.href = '/'
+            location.reload()
+        }).fail(err => {
+            alert(err.responseJSON.message)
         }).always(() => {
             removeLoader('.verification-container')
         })
@@ -338,7 +433,9 @@ function resendSignUpCode() {
 
     $.post('/sign-up/resend-code')
         .done(() => {
-            resetResend()
+            resendTimer.start(60)
+        }).fail(err => {
+            alert(err.responseJSON.message)
         }).always(() => {
             removeLoader('.verification-container')
         })
@@ -364,15 +461,12 @@ $('#sign-in').submit(function(e) {
             verifyPopup.addClass('sign-in-code')
             verifyPopup.addClass('active')
             $('.logIN-card').removeClass('active')
-            resetResend()
+            resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 401) {
                 password.closest('.input-group').addClass('error')
                 password.next('.error-text').text(xhr.responseJSON.message)
-                return
-            }
-
-            if (xhr.status == 422) {
+            } else if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
                 if (errors.email) {
                     email.closest('.input-group').addClass('error')
@@ -383,7 +477,8 @@ $('#sign-in').submit(function(e) {
                     password.closest('.input-group').addClass('error')
                     password.next('.error-text').text(errors.password[0])
                 }
-                return
+            } else {
+                alert(xhr.responseJSON.message)
             }
         }).always(() => {
             removeLoader('.logIN-card')
@@ -395,7 +490,9 @@ function verifySignInCode(code) {
 
     $.post('/sign-in/verify-code', { code })
         .done(() => {
-            location.href = '/'
+            location.reload()
+        }).fail(err => {
+            alert(err.responseJSON.message)
         }).always(() => {
             removeLoader('.verification-container')
         })
@@ -406,7 +503,9 @@ function resendSignInCode() {
 
     $.post('/sign-in/resend-code')
         .done(() => {
-            resetResend()
+            resendTimer.start(60)
+        }).fail(err => {
+            alert(err.responseJSON.message)
         }).always(() => {
             removeLoader('.verification-container')
         })
@@ -433,7 +532,8 @@ $('#forgot-password').submit(function(e) {
                     email.closest('.input-group').addClass('error')
                     email.next('.error-text').text(errors.email[0])
                 }
-                return
+            } else {
+                alert(xhr.responseJSON.message)
             }
         }).always(() => {
             removeLoader('.resetPassword-card')
@@ -446,11 +546,11 @@ $('.likes').on('click', '.btn:not(.added)', function(e) {
     e.preventDefault()
 
     $(this).addClass('added')
-    const likes = $(this).closest('.users-item')
+    const likes = $(this).closest('.likes')
         .find('.likes-count')
     likes.text(parseInt(likes.text()) + 1)
 
-    const id = $(this).closest('.users-item').data('id')
+    const id = $(this).closest('.likes').data('id')
 
     $.post('/favorites/add', { favorite_id: id, }).fail(() => {
         $(this).removeClass('added')
@@ -462,11 +562,11 @@ $('.likes').on('click', '.btn.added', function(e) {
     e.preventDefault()
 
     $(this).removeClass('added')
-    const likes = $(this).closest('.users-item')
+    const likes = $(this).closest('.likes')
         .find('.likes-count')
     likes.text(parseInt(likes.text()) - 1)
 
-    const id = $(this).closest('.users-item').data('id')
+    const id = $(this).closest('.likes').data('id')
 
     $.post('/favorites/remove', { favorite_id: id, }).fail(() => {
         $(this).addClass('added')

@@ -1,8 +1,9 @@
 @include('templates.header')
 
 <script>
-    let ads = {{ Js::from($ads) }}
-    let adsSettings = {{ Js::from($adsSettings->pluck('value', 'name')) }}
+    DS.ads = {}
+    DS.ads.data = {{ Js::from($popupAds) }}
+    DS.ads.settings = {{ Js::from($adsSettings->pluck('value', 'name')) }}
 </script>
 
 <section class="users">
@@ -33,21 +34,23 @@
 
             </div>
 
-            @include('templates.pagination', [
+            @includeWhen($template->total() > 1, 'templates.pagination', [
                 'current' => $template->getPage(), 
                 'total' => $template->total(),
             ])
 
         @else
+
             No content
+        
         @endif
 
     </div>
 </section>
 
 @includeWhen(!auth('web')->check(), 'modals.auth')
+@includeWhen(!auth('web')->check(), 'modals.verification')
 
-@include('modals.verification')
-<!-- @include('modals.ad') -->
+@include('modals.ad')
     
 @include('templates.footer')

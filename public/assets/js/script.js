@@ -544,6 +544,7 @@ $('#forgot-password').submit(function(e) {
 
 $('.likes').on('click', '.btn:not(.added)', function(e) {
     e.preventDefault()
+    e.stopPropagation()
 
     $(this).addClass('added')
     const likes = $(this).closest('.likes')
@@ -560,6 +561,7 @@ $('.likes').on('click', '.btn:not(.added)', function(e) {
 
 $('.likes').on('click', '.btn.added', function(e) {
     e.preventDefault()
+    e.stopPropagation()
 
     $(this).removeClass('added')
     const likes = $(this).closest('.likes')

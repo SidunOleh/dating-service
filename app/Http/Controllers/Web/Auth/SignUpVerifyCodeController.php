@@ -18,7 +18,7 @@ class SignUpVerifyCodeController extends Controller
             return response(['message' => 'Bad request.',], 400);
         }
         
-        session(['signup.attemps' => ++$signup['try'],]);
+        session(['signup.attemps' => ++$signup['attemps'],]);
 
         if ($signup['attemps'] > 10) {
             return response(['message' => 'Too many attemps.',], 429);

@@ -39,10 +39,10 @@ class Creator extends Authenticatable
         'snapchat',
         'onlyfans',
         'whatsapp',
+        'zip',
         'state',
         'city',
-        'first_street',
-        'second_street',
+        'street',
         'latitude',
         'longitude', 
         'first_name',
@@ -92,10 +92,10 @@ class Creator extends Authenticatable
         'verification_photo',
         'id_photo',
         'street_photo',
+        'zip',
         'state',
         'city',
-        'first_street',
-        'second_street',
+        'street',
         'latitude',
         'longitude',
     ];
@@ -263,21 +263,21 @@ class Creator extends Authenticatable
             }
 
             if (in_array($field, [
+                'zip',
                 'state', 
                 'city', 
-                'first_street',
-                'second_street',
+                'street',
                 'latitude', 
                 'longitude',
-            ])) {
+            ])) { 
+                $request['location']['value']['zip'] =
+                    $data['zip'];
                 $request['location']['value']['state'] =
                     $data['state'];
                 $request['location']['value']['city'] = 
                     $data['city'];
-                $request['location']['value']['first_street'] =
-                    $data['first_street'];
-                $request['location']['value']['second_street'] = 
-                    $data['second_street'];
+                $request['location']['value']['street'] =
+                    $data['street'];
                 $request['location']['value']['latitude'] = 
                     $data['latitude'];
                 $request['location']['value']['longitude'] =    
@@ -341,10 +341,10 @@ class Creator extends Authenticatable
             'snapchat',
             'onlyfans',
             'whatsapp',
+            'zip',
             'state',
             'city',
-            'first_street',
-            'second_street',
+            'street',
             'first_name',
             'last_name',
         ], 'like', "%{$q}%");
@@ -362,10 +362,10 @@ class Creator extends Authenticatable
             'snapchat',
             'onlyfans',
             'whatsapp',
+            'zip',
             'state',
             'city',
-            'first_street',
-            'second_street',
+            'street',
         ], 'like', "%{$q}%");
     }
 
@@ -487,12 +487,12 @@ class Creator extends Authenticatable
         return $query->count();
     } 
 
-    public static function recommendations(int $count, array $filters = []): Collection
+    public static function recommendations(int $count, array $exlude = [], array $filters = []): Collection
     {        
         $query = self::with('gallery')->withCount('inFavorites')->showOnSite();
 
-        if (isset($filters['exclude'])) {
-            $query->whereNotIn('id', $filters['exclude']);
+        if ($exlude) {
+            $query->whereNotIn('id', $exlude);
         }
 
         if (isset($filters['s'])) {

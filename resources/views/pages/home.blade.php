@@ -16,10 +16,7 @@
                 @foreach($template->data() as $block)
 
                     @if($block instanceof App\Models\Creator)
-                        @include('templates.creator', [
-                            'creator' => $block, 
-                            'in_favorites' => $favorites->contains($block->id),
-                        ])
+                        @include('templates.creator', ['creator' => $block,])
                     @endif
 
                     @if($block instanceof App\Models\Ad)
@@ -40,9 +37,7 @@
             ])
 
         @else
-
             No content
-        
         @endif
 
     </div>

@@ -336,18 +336,23 @@ input {
     }
 }
 
+.header-wrapper {
+    position: relative
+}
+
 .header-menu {
-    position: fixed;
-    height: 100%;
+    position: absolute;
+    height: 100vh;
     width: 100%;
     max-width: 432px;
-    top: 0;
+    top: 0px;
     right: -100%;
     border-left: 1px solid #616166;
     background: #252528;
     padding: 24px 32px;
     -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease
+    transition: all 0.3s ease;
+    z-index: 10
 }
 
 .header-menu.open {
@@ -643,7 +648,8 @@ input {
     overflow: hidden;
     -webkit-transition: all 0.1s ease;
     transition: all 0.1s ease;
-    position: relative
+    position: relative;
+    min-height: 499px
 }
 
 @media screen and (max-width:1024px) {
@@ -713,8 +719,17 @@ input {
     color: #fbfbfb
 }
 
+.users .users-item.add img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center
+}
+
 .users .users-item.battle {
-    border: 1px solid #d33131;
+    border: 0.1px solid #d33131;
     -webkit-box-shadow: 0px 4px 20px 0px rgba(211, 49, 49, 0.44);
     box-shadow: 0px 4px 20px 0px rgba(211, 49, 49, 0.44)
 }
@@ -829,6 +844,14 @@ input {
     line-height: normal
 }
 
+.users .user-image .likes.active .btn {
+    background: #fff!important
+}
+
+.users .user-image .likes.active path {
+    fill: rgb(164, 0, 0)
+}
+
 .users .card {
     padding: 12px
 }
@@ -840,7 +863,11 @@ input {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-bottom: 4px
+    margin-bottom: 4px;
+    max-width: 215px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
 }
 
 .users .place {
@@ -1331,7 +1358,24 @@ input {
     -ms-flex-pack: center;
     justify-content: center;
     gap: 13px;
-    margin: 20px 0
+    margin: 20px 0;
+    position: relative
+}
+
+.verification-wrapper .verification-container .code-inputs.error {
+    padding-bottom: 24px
+}
+
+.verification-wrapper .verification-container .code-inputs.error input {
+    background: #8c4444!important
+}
+
+.verification-wrapper .verification-container .code-inputs.error .error-text {
+    position: absolute;
+    bottom: 0;
+    color: #ff5959;
+    text-align: center;
+    font-size: 14px
 }
 
 .verification-wrapper .verification-container .code-inputs input {
@@ -1386,12 +1430,6 @@ input {
     justify-content: center;
     display: none;
     padding: 16px
-}
-
-.advertising-wrapper.show {
-    display: -webkit-box!important;
-    display: -ms-flexbox!important;
-    display: flex!important
 }
 
 .advertising-wrapper .advertising-popup {
@@ -1455,7 +1493,7 @@ input {
     display: -ms-flexbox;
     display: flex;
     gap: 16px;
-    max-width: 1000px
+    max-width: 1100px
 }
 
 @media screen and (max-width:768px) {
@@ -1469,7 +1507,7 @@ input {
 }
 
 .profile .left-side {
-    width: 39%;
+    width: 44%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1477,8 +1515,7 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    gap: 8px;
-    height: 100vh
+    gap: 8px
 }
 
 @media screen and (max-width:768px) {
@@ -1535,9 +1572,21 @@ input {
 
 .profile .left-side .head-porfile .img-card img:not(.likes img) {
     width: 100%;
-    height: 340px;
+    height: 427px;
     -o-object-fit: cover;
     object-fit: cover
+}
+
+@media screen and (max-width:1024px) {
+    .profile .left-side .head-porfile .img-card img:not(.likes img) {
+        height: 266px
+    }
+}
+
+@media screen and (max-width:768px) {
+    .profile .left-side .head-porfile .img-card img:not(.likes img) {
+        height: 339px
+    }
 }
 
 .profile .left-side .head-porfile .img-card .likes {
@@ -1575,26 +1624,34 @@ input {
     line-height: normal
 }
 
+.profile .left-side .head-porfile .img-card .likes.active .btn {
+    background: #fff!important
+}
+
+.profile .left-side .head-porfile .img-card .likes.active path {
+    fill: rgb(164, 0, 0)
+}
+
 .profile .left-side .head-porfile .userMain {
     padding: 12px
 }
 
 .profile .left-side .head-porfile .name {
     color: var(--white, #fbfbfb);
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 700
 }
 
 .profile .left-side .head-porfile .city {
     color: var(--light-gray, #bebfc0);
-    font-size: 10px;
+    font-size: 16px;
     line-height: normal
 }
 
 .profile .left-side .user-info-list {
     border-radius: 8px;
     background: #39393e;
-    padding: 8px;
+    padding: 12px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1602,7 +1659,7 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    gap: 4px
+    gap: 12px
 }
 
 .profile .left-side .user-info-list .user-info-item {
@@ -1610,7 +1667,7 @@ input {
     display: -ms-flexbox;
     display: flex;
     gap: 4px;
-    font-size: 10px
+    font-size: 16px
 }
 
 .profile .left-side .user-info-list .type {
@@ -1625,20 +1682,20 @@ input {
 .profile .left-side .user-location {
     overflow: hidden;
     border-radius: 8px;
-    height: 96px
+    height: 219px
 }
 
 .profile .left-side .description {
     border-radius: 8px;
     background: #39393e;
-    padding: 8px;
+    padding: 12px;
     color: #bebfc0;
-    font-size: 10px;
+    font-size: 15px;
     line-height: normal
 }
 
 .profile .user-photo-list {
-    width: 50%;
+    width: 44%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1707,6 +1764,12 @@ input {
     object-fit: cover
 }
 
+@media screen and (max-width:1024px) {
+    .profile .user-photo-list .user-photo-item img {
+        height: 356px
+    }
+}
+
 @media screen and (max-width:768px) {
     .profile .user-photo-list .user-photo-item img {
         height: 339px
@@ -1714,7 +1777,7 @@ input {
 }
 
 .profile .other-user-list {
-    width: 13%;
+    width: 12%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1844,6 +1907,14 @@ input {
     line-height: normal
 }
 
+.profile .other-user-list .likes.active .btn {
+    background: #fff!important
+}
+
+.profile .other-user-list .likes.active path {
+    fill: rgb(164, 0, 0)
+}
+
 .profile .other-user-list .card {
     padding: 8px
 }
@@ -1858,6 +1929,512 @@ input {
     color: var(--light-gray, #bebfc0);
     font-size: 10px;
     line-height: normal
+}
+
+.toggle-container {
+    margin-top: 32px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px
+}
+
+.toggle-container .toggle-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 12px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.toggle-container .toggle-group label {
+    white-space: nowrap;
+    color: #fbfbfb;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600
+}
+
+.toggle-container .toggle-group .toggle-body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 16px
+}
+
+.toggle-container .toggle-group .toggle-body span {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16px
+}
+
+.toggle-container .toggle-group .toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 32px
+}
+
+.toggle-container .toggle-group .toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0
+}
+
+.toggle-container .toggle-group .toggle .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(204, 204, 204, 0);
+    outline: 1px solid #919090;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 34px
+}
+
+.toggle-container .toggle-group .toggle .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 3px;
+    background-color: #919191;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%
+}
+
+.toggle-container .toggle-group .toggle input:checked+.slider {
+    outline: 1px solid #fff
+}
+
+.toggle-container .toggle-group .toggle input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    transform: translateX(26px);
+    background-color: #fff
+}
+
+.toggle-container .toggle-group span {
+    display: inline-block
+}
+
+.toggle-container .info-text a {
+    color: red;
+    display: block;
+    text-align: center
+}
+
+.toggle-container .info-text a:hover {
+    text-decoration: underline
+}
+
+.profile-filling {
+    padding: 40px 0
+}
+
+.profile-filling .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 1100px;
+    width: 100%;
+    gap: 24px
+}
+
+.profile-filling .left-card {
+    border-radius: 16px;
+    background: #39393e;
+    padding: 24px;
+    width: 39%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content
+}
+
+.profile-filling .title {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px
+}
+
+.profile-filling .statistic-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 12px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.profile-filling .statistic-list .statistic-item {
+    color: #fbfbfb;
+    font-size: 16px
+}
+
+.profile-filling .statistic-list .statistic-item span {
+    color: #bebfc0;
+    text-align: center;
+    font-size: 16px
+}
+
+.profile-filling .form-container {
+    width: 61%
+}
+
+.profile-filling .form-container #multiStepForm {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px
+}
+
+.profile-filling .form-step {
+    border-radius: 8px;
+    background: #39393e;
+    padding: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative
+}
+
+.profile-filling .rules {
+    color: var(--white, #fbfbfb);
+    font-family: Inter;
+    font-size: 14px
+}
+
+.profile-filling .rules .title {
+    color: var(--white, #fbfbfb);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600
+}
+
+.profile-filling .form-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px
+}
+
+.profile-filling .form-group h2 {
+    margin-bottom: -5px;
+    color: #fbfbfb;
+    font-size: 16px;
+    font-weight: 600;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 8px
+}
+
+.profile-filling .form-group h2 span {
+    font-size: 16px;
+    color: #252528;
+    font-weight: 600;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    background-color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 50%
+}
+
+.profile-filling .form-group .input-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.profile-filling .form-group label {
+    margin-bottom: 8px;
+    color: #fbfbfb;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 4px
+}
+
+.profile-filling .form-group input,
+.profile-filling .form-group textarea {
+    border: none;
+    border-bottom: 1px solid #bebfc0;
+    resize: none;
+    background-color: transparent;
+    padding-bottom: 8px;
+    color: var(--white, #fbfbfb);
+    font-family: Inter;
+    font-size: 16px
+}
+
+.profile-filling .form-group input::-webkit-input-placeholder,
+.profile-filling .form-group textarea::-webkit-input-placeholder {
+    color: #bebfc0;
+    font-size: 16px
+}
+
+.profile-filling .form-group input::-moz-placeholder,
+.profile-filling .form-group textarea::-moz-placeholder {
+    color: #bebfc0;
+    font-size: 16px
+}
+
+.profile-filling .form-group input:-ms-input-placeholder,
+.profile-filling .form-group textarea:-ms-input-placeholder {
+    color: #bebfc0;
+    font-size: 16px
+}
+
+.profile-filling .form-group input::-ms-input-placeholder,
+.profile-filling .form-group textarea::-ms-input-placeholder {
+    color: #bebfc0;
+    font-size: 16px
+}
+
+.profile-filling .form-group input::placeholder,
+.profile-filling .form-group textarea::placeholder {
+    color: #bebfc0;
+    font-size: 16px
+}
+
+.profile-filling .form-group input textarea,
+.profile-filling .form-group textarea textarea {
+    overflow: visible
+}
+
+.profile-filling .form-group input:focus,
+.profile-filling .form-group textarea:focus {
+    outline: none;
+    border-bottom: 1px solid #b80006
+}
+
+.profile-filling .form-group .rule {
+    color: #dedfe1;
+    font-size: 13px;
+    margin-top: 8px
+}
+
+.profile-filling .btn-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 8px
+}
+
+.profile-filling .btn-group .btn {
+    margin-top: 16px
+}
+
+.profile-filling #nextBtn5 {
+    display: none;
+    margin: 0
+}
+
+.profile-filling #nextBtn5.active {
+    display: block
+}
+
+.profile-filling #customButton1.active {
+    display: none
+}
+
+.profile-filling #customButton2 {
+    display: none;
+    background-color: transparent;
+    border: 1px solid #fbfbfb;
+    color: #fbfbfb;
+    margin-top: 0
+}
+
+.profile-filling #customButton2.active {
+    display: block
+}
+
+.profile-filling #customButton2:disabled {
+    opacity: 0.5;
+    cursor: no-drop
+}
+
+.profile-filling #photoCount {
+    display: none;
+    color: #fbfbfb;
+    font-size: 14px
+}
+
+.profile-filling .photo-container {
+    width: 100%;
+    margin: auto;
+    text-align: center
+}
+
+.profile-filling .photo-container h5 {
+    margin-top: 20px;
+    font-size: 1.2em
+}
+
+.profile-filling .photo-container p {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px
+}
+
+.profile-filling .photo-container p span {
+    color: var(--white, #fbfbfb);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 300
+}
+
+.profile-filling .photo-container input[type=file] {
+    display: none
+}
+
+.profile-filling .photo-container #photos {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px
+}
+
+.profile-filling .photo-container img {
+    width: 100%;
+    height: 100%;
+    max-height: 600px;
+    min-height: 600px;
+    border-radius: 8px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    position: relative;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.profile-filling .photo-container .remove-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    background: var(--Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+    width: 32px;
+    height: 32px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-bottom: 3px;
+    border-radius: 8px
+}
+
+.profile-filling .move-button {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: var(--Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff
+}
+
+.profile-filling .move-button.move-down {
+    top: 60px
+}
+
+.profile-filling .move-button:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#b00107), to(#ea020b));
+    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%)
 }
 
 .center {
@@ -1894,10 +2471,28 @@ input {
     border-radius: 16px !important;
 }
 
-.likes .btn.added {
-    background: #0263ea;
+#map {
+    height: 219px;
 }
 
-#map {
-    height: 96px;
+.advertising-wrapper.show {
+    display: -webkit-box!important;
+    display: -ms-flexbox!important;
+    display: flex!important
+}
+
+.users .user-image .likes .btn.active {
+    background: #fff!important
+}
+
+.users .user-image .likes .btn.active path {
+    fill: rgb(164, 0, 0)
+}
+
+.profile .left-side .head-porfile .img-card .likes .btn.active {
+    background: #fff!important
+}
+
+.profile .left-side .head-porfile .img-card .likes .btn.active path {
+    fill: rgb(164, 0, 0)
 }

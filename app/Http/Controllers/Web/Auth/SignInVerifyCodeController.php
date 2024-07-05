@@ -17,11 +17,11 @@ class SignInVerifyCodeController extends Controller
             return response(['message' => 'Bad request.',], 400);
         }
 
-        if ($signin['try'] + 1 > 5) {
+        session(['signin.attemps' => ++$signin['attemps'],]);
+
+        if ($signin['attemps'] > 10) {
             return response(['message' => 'Too many attemps.',], 429);
         }
-
-        session(['signin.try' => $signin['try'] + 1,]);
 
         if ($signin['code'] != $code) {
             return response(['message' => 'Invalid verification code.',], 400);

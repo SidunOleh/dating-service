@@ -30,12 +30,15 @@ class ImportZipCodes extends Command
 
         $file = fopen($this->argument('path'), 'r');
         
-        while (($row = fgetcsv($file)) !== false) {
+        while (($row = fgetcsv($file, null, "\t")) !== false) {
             $zip = ZipCode::create([
-                'zip' => $row[0],
-                'latitude' => $row[1],
-                'longitude' => $row[2],
+                'zip' => $row[1],
+                'city' => $row[2],
+                'state' => $row[4],
+                'latitude' => $row[9],
+                'longitude' => $row[10],
             ]);
+
             $this->info("zip: {$zip->zip}");
         }
     }

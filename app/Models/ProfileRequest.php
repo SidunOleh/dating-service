@@ -126,10 +126,10 @@ class ProfileRequest extends Model
             $this->location['status'] == 'approved'
         ) {
             foreach ([
+                'zip',
                 'state',
                 'city',
-                'first_street',
-                'second_street',
+                'street',
                 'latitude',
                 'longitude',
             ] as $field) {

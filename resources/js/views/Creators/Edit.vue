@@ -171,6 +171,12 @@
                         :data="location"
                         @change="location => data = Object.assign(data, location)"/>
 
+                    <div
+                        v-if="data.city && data.state"
+                        style="margin-top: 10px;">
+                        {{ data.city }}, {{ data.state }}
+                    </div>
+
                     <ShowLocation 
                         v-if="data.longitude && data.latitude"
                         style="margin-top: 10px;"
@@ -334,10 +340,10 @@ export default {
         },
         location() {
             return {
+                zip: this.data.zip,
                 state: this.data.state,
                 city: this.data.city,
-                first_street: this.data.first_street,
-                second_street: this.data.second_street,
+                street: this.data.street,
                 latitude: this.data.latitude,
                 longitude: this.data.longitude,
             }

@@ -40,11 +40,11 @@ class HomeController extends Controller
             Auth::guard('web')->user()->favorites : 
             new Collection();
 
-        $topAd = Ad::active()
-            ->type('top')
+        $topAd = Ad::type('top')
             ->inRandomOrder()
             ->first();
-        $popupAds = $template->count('ad') ? Ad::with('image')
+        $popupAds = $template->count('ad') ? Ad::select('id', 'link', 'image_id')
+            ->with('image')
             ->active()
             ->type('popup')
             ->get() : new Collection();

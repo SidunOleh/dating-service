@@ -6,6 +6,7 @@ use App\Events\CreatorInactivated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Creators\UpdateRequest;
 use App\Models\Creator;
+use App\Models\Image;
 
 class UpdateController extends Controller
 {
@@ -15,16 +16,17 @@ class UpdateController extends Controller
 
         $ban = $validated['is_banned'] and ! $creator->is_banned;
 
-        // $creator->update($validated);
-        
-        $creator->photos = array_intersect(
-            $validated['photos'] ?? [], 
-            $creator->photos ?? []
+        $imgsToDelete = array_diff(
+            $creator->photos ?? [],
+            $validated['photos'] ?? []
         );
-        $creator->save();
+
+        // $creator->update($validated);
 
         $creator->createProfileRequest($validated);
 
+        Image::deleteByIds($imgsToDelete);
+        
         if ($ban) {
             CreatorInactivated::dispatch($creator);
         }

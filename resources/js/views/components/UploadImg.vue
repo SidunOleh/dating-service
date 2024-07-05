@@ -141,17 +141,8 @@ export default {
             this.loading = false
         },
         async remove(index) {
-            try {
-                this.deleting = true
-                const image = this.imgs.filter((item, i) => i == index)[0]
-                await imagesApi.delete(image.id)
-                this.imgs = this.imgs.filter((item, i) => i != index)
-                this.$emit('change', this.imgs)
-            } catch (err) {
-                message.error(err?.response?.data?.message ?? err.message)
-            } finally {
-                this.deleting = false
-            }
+            this.imgs = this.imgs.filter((item, i) => i != index)
+            this.$emit('change', this.imgs)
         },
         forward(index) {
             if (index == this.imgs.length - 1) {

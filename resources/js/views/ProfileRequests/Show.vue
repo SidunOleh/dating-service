@@ -200,30 +200,26 @@
                     :class="data.location?.status">
                     
                     <Flex :gap="5">
+
+                        <Input 
+                            style="margin-bottom: 10px;"
+                            placeholder="Street"
+                            readonly
+                            :value="data.location ? data.location?.value?.street : data.creator?.street"/>
+
                         <Input
-                            style="margin-bottom: 10px;"
-                            placeholder="State"
+                            style="margin-bottom: 10px; width: 300px;"
+                            placeholder="Zip"
                             readonly
-                            :value="data.location ? states[data.location?.value?.state] : states[data.creator?.state]"/>
-                        
-                        <Input 
-                            style="margin-bottom: 10px;"
-                            placeholder="City"
-                            readonly
-                            :value="data.location ? data.location?.value?.city : data.creator?.city"/>
+                            :value="data.location ? data.location?.value?.zip : data.location?.value?.zip"/>
 
-                        <Input 
-                            style="margin-bottom: 10px;"
-                            placeholder="First street"
-                            readonly
-                            :value="data.location ? data.location?.value?.first_street : data.creator?.first_street"/>
-
-                        <Input 
-                            style="margin-bottom: 10px;"
-                            placeholder="Second street"
-                            readonly
-                            :value="data.location ? data.location?.value?.second_street : data.creator?.second_street"/>
                     </Flex>
+
+                    <div
+                        v-if="data.location?.value?.city && data.location?.value?.state"
+                        style="margin-bottom: 10px;">
+                        {{ data.location?.value?.city }}, {{ data.location?.value?.state }}
+                    </div>
 
                     <ShowLocation 
                         v-if="data.location?.value?.latitude && data.location?.value?.longitude"
@@ -435,7 +431,6 @@ import ApproveField from '../components/ApproveField.vue'
 import ShowLocation from '../components/ShowLocation.vue'
 import profileRequestsApi from '../../api/profile-requests'
 import { confirmPopup, } from '../../helpers/popups'
-import states from '../../data/states.json'
 
 export default {
     components: {
@@ -449,7 +444,6 @@ export default {
             activePanels: [1, 2, 3, 4, 5,],
             data: {},
             loading: false,
-            states,
         }
     },
     methods: {

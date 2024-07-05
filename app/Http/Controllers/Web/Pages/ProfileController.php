@@ -17,9 +17,12 @@ class ProfileController extends Controller
             return redirect()->round('home');
         }
 
-        $filters = session('filters', []);
-        $filters['exclude'] = [$creator->id,];
-        $recommendations = Creator::recommendations(7, $filters);
+        $recommendations = 
+            Creator::recommendations(7, [$creator->id,], session('filters', []));
+        if (! $recommendations->count()) {
+            $recommendations = 
+                Creator::recommendations(7, [$creator->id,]);
+        }
 
         $favorites = Auth::guard('web')->check() ? 
             Auth::guard('web')->user()->favorites : 
@@ -27,8 +30,7 @@ class ProfileController extends Controller
 
         $creator->loadCount('inFavorites');
 
-        $topAd = Ad::active()
-            ->type('top')
+        $topAd = Ad::type('top')
             ->inRandomOrder()
             ->first();
         $adsSettings = Option::getOptions([

@@ -46,9 +46,10 @@ class SeedApp extends Command
                     'street_photo' => [$images->random()->id. null][rand(0, 1)],
                 ]);
             } catch (Exception) {
-
+                
             }
         }
+
         $images = Image::offset(5)->limit(5)->get();
 
         for ($i=0; $i < 30; $i++) { 

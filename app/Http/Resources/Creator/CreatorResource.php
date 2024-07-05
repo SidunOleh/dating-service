@@ -37,10 +37,10 @@ class CreatorResource extends JsonResource
             'onlyfans' => $this->onlyfans,
             'whatsapp' => $this->whatsapp,
 
+            'zip' => $this->zip,
             'state' => $this->state,
             'city' => $this->city,
-            'first_street' => $this->first_street,
-            'second_street' => $this->second_street,
+            'street' => $this->street,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
 

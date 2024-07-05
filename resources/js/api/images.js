@@ -16,15 +16,6 @@ const imagesApi = {
 
         return res.data
     },
-    async delete(id) {
-        if (!store.getters.logged) {
-            throw new Error('Forbidden.')
-        }
-
-        const res = await axios.delete(`/api/images/${id}`)
-
-        return res.data
-    },
 }
 
 export default imagesApi

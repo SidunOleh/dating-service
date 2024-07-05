@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('zip_codes', function (Blueprint $table) {
             $table->integer('zip')->unique();
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->string('city');
+            $table->char('state', 2);
+            $table->decimal('latitude', 9, 7);
+            $table->decimal('longitude', 10, 7);         
         });
     }
 

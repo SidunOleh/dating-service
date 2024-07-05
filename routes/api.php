@@ -11,7 +11,6 @@ use App\Http\Controllers\Admin\Creators\IndexController as CreatorsIndexControll
 use App\Http\Controllers\Admin\Creators\ShowController as CreatorsShowController;
 use App\Http\Controllers\Admin\Creators\StoreController as CreatorsStoreController;
 use App\Http\Controllers\Admin\Creators\UpdateController as CreatorsUpdateController;
-use App\Http\Controllers\Admin\Images\DeleteController as ImagesDeleteController;
 use App\Http\Controllers\Admin\Images\UploadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Permissions\DeleteController as PermissionsDeleteController;
@@ -42,6 +41,7 @@ use App\Http\Controllers\Admin\WithdrawalRequests\DeleteController as Withdrawal
 use App\Http\Controllers\Admin\WithdrawalRequests\IndexController as WithdrawalRequestsIndexController;
 use App\Http\Controllers\Admin\WithdrawalRequests\RejectController;
 use App\Http\Controllers\Admin\WithdrawalRequests\WithdrawController;
+use App\Http\Controllers\Admin\ZipCodes\ShowController as ZipCodesShowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,8 +125,6 @@ Route::middleware(['auth:sanctum',])->group(function () {
     Route::prefix('/images')->name('images.')->group(function () {
         Route::post('/upload', UploadController::class)
             ->name('upload');
-        Route::delete('/{image}', ImagesDeleteController::class)
-            ->name('delete');
     });
 
     Route::prefix('/ads')->name('ads.')->group(function () {
@@ -209,4 +207,7 @@ Route::middleware(['auth:sanctum',])->group(function () {
             ->name('update')
             ->can('settings.edit');
     });
+
+    Route::get('/zips/{zipCode:zip}', ZipCodesShowController::class)
+        ->name('zips.show');
 });

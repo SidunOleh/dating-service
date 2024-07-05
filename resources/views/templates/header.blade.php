@@ -19,30 +19,32 @@
     @guest('web')
     <header class="header" id="header">
 
-        @includeWhen($adsSettings->sole('name', 'show_top_ad')?->value, 'templates.top-ad', ['ad' => $topAd,]) 
+        <div class="header-wrapper">
+            @includeWhen($adsSettings->sole('name', 'show_top_ad')->value and $topAd, 'templates.top-ad', ['ad' => $topAd,]) 
 
-        <div class="header-body">
-            <div class="left">
-                <a href="{{ route('home') }}" class="btn red">
-                    <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
+            <div class="header-body">
+                <div class="left">
+                    <a href="{{ route('home') }}" class="btn red">
+                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
+                    </a>
+                </div>
+                
+                <a href="{{ route('home') }}" class="logo">
+                    {{ env('APP_NAME') }}
                 </a>
-            </div>
-            
-            <a href="{{ route('home') }}" class="logo">
-                {{ env('APP_NAME') }}
-            </a>
 
-            <div class="right">
-                <div class="btn red login">
-                    Log in
+                <div class="right">
+                    <div class="btn red login">
+                        Log in
+                    </div>
+                    <div class="btn signup">
+                        Sign up
+                    </div>
                 </div>
-                <div class="btn signup">
-                    Sign up
-                </div>
-            </div>
 
-            <div class="header-burger">
-                <img src="{{ asset('assets/img/burger.svg') }}" alt="" />
+                <div class="header-burger">
+                    <img src="{{ asset('assets/img/burger.svg') }}" alt="" />
+                </div>
             </div>
         </div>
         
@@ -52,23 +54,10 @@
     @auth('web')
     <header class="header" id="header">
         
-        @includeWhen($adsSettings->sole('name', 'show_top_ad')?->value, 'templates.top-ad', ['ad' => $topAd,]) 
+        @includeWhen($adsSettings->sole('name', 'show_top_ad')->value and $topAd, 'templates.top-ad', ['ad' => $topAd,]) 
+        
+        <div class="header-wrapper">
 
-        <div class="header-body">
-            <div class="left">
-                <a href="{{ route('home') }}" class="btn red">
-                    <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
-                </a>
-            </div>
-
-            <a href="{{ route('home') }}" class="logo">
-                {{ env('APP_NAME') }}
-            </a>
-            
-            <div class="burger-menu red flex">
-                <img src="{{ asset('assets/img/burger.svg') }}" alt="" />
-            </div>
-            
             <div class="header-menu">
 
                 <div class="head">
@@ -79,7 +68,7 @@
                         <img src="{{ asset('assets/img/close.svg') }}" alt="" />
                     </div>
                 </div>
-                
+
                 <div class="coins">
                     <img src="{{ asset('assets/img/coins.svg') }}" alt="" />
                     <span>
@@ -91,7 +80,7 @@
                 </div>
 
                 <form method="GET" action="{{ route('home') }}" id="filters-form">
-                
+
                     <div class="search-container">
                         <input 
                             type="text" 
@@ -99,25 +88,27 @@
                             class="search-input" 
                             placeholder="Search" 
                             value="{{ request()->query('s') }}"/>
+
+                        <button type="submit" class="search-button">
+                            <img src="{{ asset('assets/img/search.svg') }}" alt="Search" />
+                        </button>
                     </div>
 
                     <div class="form-container">
                         
                         <div class="form-group">
-                            <label for="category">Show me:</label>
+                            <label for="category">
+                                Show me:
+                            </label>
                             <select id="category" name="gender">
                                 <option disabled selected>
                                     All
                                 </option>
-                                <option value="Man" @selected(request()->query('gender') == 'Man')>
-                                    Man
+                                @foreach(['Man', 'Woman', 'LGBTQ+',] as $gender)
+                                <option value="{{ $gender }}" @selected(request()->query('gender') == $gender)>
+                                    {{ $gender }}
                                 </option>
-                                <option value="Woman" @selected(request()->query('gender') == 'Woman')>
-                                    Woman
-                                </option>
-                                <option value="LGBTQ+" @selected(request()->query('gender') == 'LGBTQ+')>
-                                    LGBTQ+
-                                </option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -129,19 +120,16 @@
                                 class="zip-input" 
                                 placeholder="ZIP code" 
                                 value="{{ request()->query('zip') }}"/>
+
                             <select id="distance" name="miles">
                                 <option disabled selected>
                                     All miles
                                 </option>
-                                <option value="10" @selected(request()->query('miles') == 10)>
-                                    10 miles
+                                @foreach([10, 50, 100,] as $miles)
+                                <option value="{{ $miles }}" @selected(request()->query('miles') == $miles)>
+                                    {{ $miles }} miles
                                 </option>
-                                <option value="50" @selected(request()->query('miles') == 50)>
-                                    50 miles
-                                </option>
-                                <option value="100" @selected(request()->query('miles') == 100)>
-                                    100 miles
-                                </option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -191,6 +179,23 @@
                 </div>
 
             </div>
+
+            <div class="header-body">
+                <div class="left">
+                    <a href="{{ route('home') }}" class="btn red">
+                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
+                    </a>
+                </div>
+
+                <a href="{{ route('home') }}" class="logo">
+                    {{ env('APP_NAME') }}
+                </a>
+                
+                <div class="burger-menu red flex">
+                    <img src="{{ asset('assets/img/burger.svg') }}" alt="" />
+                </div>
+            </div>
+
         </div>
 
     </header>

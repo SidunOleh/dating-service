@@ -73,6 +73,7 @@
                 }
             }
         </style>
+        
         <div class="loader-body">
             <div class="loader"></div>
         </div>

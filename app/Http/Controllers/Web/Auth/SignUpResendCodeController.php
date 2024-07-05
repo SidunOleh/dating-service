@@ -16,7 +16,7 @@ class SignUpResendCodeController extends Controller
             return response(['message' => 'Bad request.',], 400);
         }
 
-        if ($signup['retry'] + 1 > 5) {
+        if ($signup['resend'] + 1 > 5) {
             return response(['message' => 'Too many attemps.',], 429);
         }
 
@@ -27,8 +27,8 @@ class SignUpResendCodeController extends Controller
         $signup['code'] = Creator::makeVerificationCode();
         $signup['created_at'] = time();
         $signup['expire_at'] = time() + 60 * 10;
-        $signup['try'] = 0;
-        $signup['retry'] += 1;
+        $signup['attemps'] = 0;
+        $signup['resend'] += 1;
 
         session(['signup' => $signup,]);
 

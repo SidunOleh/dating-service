@@ -140,6 +140,12 @@
                 <FormItem label="Location">
                     <FindLocation @change="location => data = Object.assign(data, location)"/>
 
+                    <div
+                        v-if="data.city && data.state"
+                        style="margin-top: 10px;">
+                        {{ data.city }}, {{ data.state }}
+                    </div>
+                    
                     <ShowLocation 
                         v-if="data.longitude && data.latitude"
                         style="margin-top: 10px;"
@@ -238,10 +244,10 @@ export default {
                 snapchat: '',
                 onlyfans: '',
                 whatsapp: '',
+                zip: null,
                 state: '',
                 city: '',
-                first_street: '',
-                second_street: '',
+                street: '',
                 latitude: null,
                 longitude: null,
                 first_name: '',

@@ -11,6 +11,8 @@ class ZipCode extends Model
 
     protected $fillable = [
         'zip',
+        'city',
+        'state',
         'latitude',
         'longitude',
     ];

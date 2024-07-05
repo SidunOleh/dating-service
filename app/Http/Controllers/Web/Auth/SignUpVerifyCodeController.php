@@ -17,12 +17,12 @@ class SignUpVerifyCodeController extends Controller
         if (! $signup = session('signup')) {
             return response(['message' => 'Bad request.',], 400);
         }
+        
+        session(['signup.attemps' => ++$signup['try'],]);
 
-        if ($signup['try'] + 1 > 5) {
+        if ($signup['attemps'] > 10) {
             return response(['message' => 'Too many attemps.',], 429);
         }
-
-        session(['signup.try' => $signup['try'] + 1,]);
 
         if ($signup['code'] != $code) {
             return response(['message' => 'Invalid verification code.',], 400);

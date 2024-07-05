@@ -22,8 +22,8 @@ class SignUpSendCodeController extends Controller
             'created_at' => time(),
             'expire_at' => time() + 60 * 10,
             'credentials' => $credentials,
-            'try' => 0,
-            'retry' => 0,
+            'attemps' => 0,
+            'resend' => 0,
         ],]);
 
         Notification::route('mail', $credentials['email'])->notify(new VerificationCode($code));

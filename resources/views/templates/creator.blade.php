@@ -1,8 +1,10 @@
 <a 
     href="{{ route('profile.page', ['creator' => $creator->id,]) }}" 
     target="_blank"
-    @class(['users-item', 'verified' => $creator->is_verified,])>
+    @class(['users-item', 'profile-item', 'verified' => $creator->is_verified,])>
+
     <div class="user-image">
+
         <div class="img-slider">
             @php
             $imgs = $creator->gallery;
@@ -23,17 +25,15 @@
                 <img src="{{ asset('assets/img/next.svg') }}" alt="" />
             </div>
         </div>
-        <div class="likes" data-id="{{ $creator->id }}">
-            @auth('web')
-            <div @class(['btn', 'red', 'added' => $in_favorites,])>
-                <img src="{{ asset('assets/img/like.svg') }}" alt="" />
-            </div>
-            @endauth
-            <div class="likes-count">
-                {{ $creator->in_favorites_count }}
-            </div>
-        </div>
+
+        @include('templates.favorite', [
+            'id' => $creator->id, 
+            'count' => $creator->in_favorites_count,
+            'active' => $favorites->contains($creator->id),
+        ])
+
     </div>
+
     <div class="card">
         <div class="title">{{ $creator->name }}, <span class="age">{{ $creator->age }}</span></div>
         <div class="place">
@@ -43,4 +43,5 @@
             {{ $creator->description }}
         </div>
     </div>
+    
 </a>

@@ -67,7 +67,7 @@ $(document).ready(function () {
     // });
   
     $(".show-password").on("click", function () {
-      const $passwordInput = $(this).prev();
+      const $passwordInput = $(this).closest('.input-group').find('input');
       const isPassword = $passwordInput.attr("type") === "password";
       $passwordInput.attr("type", isPassword ? "text" : "password");
       $(this).toggleClass("open", isPassword);

@@ -30,6 +30,12 @@
             </Flex>
         </Flex>
 
+        <div style="margin-bottom: 10px;">
+            <a :href="`/profile/${this.$route.params.id}`">
+                View
+            </a>
+        </div>
+
         <Collapse 
             style="margin-bottom: 20px;"
             v-model:activeKey="activePanels">

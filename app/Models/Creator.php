@@ -489,7 +489,7 @@ class Creator extends Authenticatable
 
     public static function recommendations(int $count, array $exlude = [], array $filters = []): Collection
     {        
-        $query = self::with('gallery')->withCount('inFavorites')->showOnSite();
+        $query = self::with('gallery')->showOnSite();
 
         if ($exlude) {
             $query->whereNotIn('id', $exlude);
@@ -530,5 +530,32 @@ class Creator extends Authenticatable
     public static function makeVerificationCode(): int
     {
         return rand(100000, 999999);
+    }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(ProfileVisit::class);
+    }
+
+    public function visitsCount(?string $interval = null): int
+    {   
+        $query = $this->visits();
+
+        if ($interval == 'year') {
+            $query->whereRaw("YEAR(`created_at`) = " . date('Y'));
+        }
+
+        if ($interval == 'month') {
+            $query->whereRaw("YEAR(`created_at`) = " . date('Y'))
+                ->whereRaw("MONTH(`created_at`) = " . date('m'));
+        }
+
+        if ($interval == 'day') {
+            $query->whereRaw('YEAR(`created_at`) = ' . date('Y'))
+                ->whereRaw('MONTH(`created_at`) = ' . date('m'))
+                ->whereRaw('DAY(`created_at`) = ' . date('d'));
+        }
+
+        return $query->count();
     }
 }

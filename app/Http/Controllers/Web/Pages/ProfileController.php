@@ -13,8 +13,11 @@ class ProfileController extends Controller
 {
     public function __invoke(Creator $creator)
     {
-        if (! $creator->is_approved) {
-            return redirect()->round('home');
+        if (
+            ! $creator->is_approved or 
+            ! $creator->show_on_site
+        ) {
+            return redirect()->route('home');
         }
 
         $recommendations = 

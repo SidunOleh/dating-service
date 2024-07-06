@@ -6,7 +6,7 @@
         <p class="email">
         </p>
         
-        <form class="code-inputs">
+        <form class="code-inputs" autocomplete="off">
             <input type="text" maxlength="1" />
             <input type="text" maxlength="1" />
             <input type="text" maxlength="1" />

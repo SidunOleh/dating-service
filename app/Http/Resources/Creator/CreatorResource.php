@@ -19,6 +19,7 @@ class CreatorResource extends JsonResource
             'is_banned' => $this->is_banned,
             'show_on_site' => $this->show_on_site,
             'play_roulette' => $this->play_roulette,
+            'is_approved' => $this->is_approved,
 
             'email' => $this->email,
 

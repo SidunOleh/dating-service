@@ -200,8 +200,8 @@ if (DS && DS.ads?.data && DS.ads?.settings) {
             const min = 0
             const max = DS.ads.data.length - 1
             const rand = Math.floor(Math.random() * (max - min + 1)) + min
-
             this.next = DS.ads.data[rand]
+
             this.predownloadNextImage()
         },
         predownloadNextImage() {
@@ -544,10 +544,7 @@ $('.likes').on('click', '.btn:not(.active)', function(e) {
 
     const id = $(this).closest('.likes').data('id')
 
-    $.post('/favorites/add', { favorite_id: id, }).fail(() => {
-        $(this).removeClass('active')
-        likes.text(parseInt(likes.text()) - 1)
-    })
+    $.post('/favorites/add', { favorite_id: id, })
 })
 
 $('.likes').on('click', '.btn.active', function(e) {
@@ -562,10 +559,7 @@ $('.likes').on('click', '.btn.active', function(e) {
 
     const id = $(this).closest('.likes').data('id')
 
-    $.post('/favorites/remove', { favorite_id: id, }).fail(() => {
-        $(this).addClass('active')
-        likes.text(parseInt(likes.text()) + 1)
-    })
+    $.post('/favorites/remove', { favorite_id: id, })
 })
 
 //__________________________Filters_________________________//

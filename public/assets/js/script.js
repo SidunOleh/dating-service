@@ -67,7 +67,7 @@ $(document).ready(function () {
     // });
   
     $(".show-password").on("click", function () {
-      const $passwordInput = $(this).closest('.input-group').find('input');
+      const $passwordInput = $(this).closest(".input-group").find("input");
       const isPassword = $passwordInput.attr("type") === "password";
       $passwordInput.attr("type", isPassword ? "text" : "password");
       $(this).toggleClass("open", isPassword);
@@ -193,13 +193,16 @@ if (DS && DS.ads?.data && DS.ads?.settings) {
             $('.advertising-wrapper').removeClass('show')
         },
         getNext() {
+            if (! DS.ads.data.length) {
+                return
+            }
+
             const min = 0
             const max = DS.ads.data.length - 1
             const rand = Math.floor(Math.random() * (max - min + 1)) + min
 
-            if (this.next = DS.ads.data[rand]) {
-                this.predownloadNextImage()
-            }
+            this.next = DS.ads.data[rand]
+            this.predownloadNextImage()
         },
         predownloadNextImage() {
             const image = new Image 
@@ -289,7 +292,17 @@ const resendTimer = {
     },
 }
 
-$('.verification-wrapper .code-inputs input').on('input', () => {
+$('input').on('paste', function (e) {
+    e.preventDefault()
+
+    const inputs = $('.code-inputs input')
+
+    let code = (e.originalEvent.clipboardData || window.clipboardData).getData('text')
+    code = code.split('')
+    code.forEach((number, i) => $(inputs[i]).val(number))
+})
+
+$('.verification-wrapper .code-inputs input').on('input paste', () => {
     const code = []
     $('.code-inputs input').each((i, input) => {
         if (input.value) {

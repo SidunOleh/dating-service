@@ -388,15 +388,13 @@ class Creator extends Authenticatable
 
     public static function scopeRadius(Builder $query, array $center, int $radius): void
     {
-        $radians = $radius / 1000 / 6371;
+        $maxLat = $center['lat'] + rad2deg($radius / 1000 / 6371);
+        $minLat = $center['lat'] - rad2deg($radius / 1000 / 6371);
+        $maxLng = $center['lng'] + rad2deg(asin($radius / 1000 / 6371) / cos(deg2rad($center['lat'])));
+        $minLng = $center['lng'] - rad2deg(asin($radius / 1000 / 6371) / cos(deg2rad($center['lat'])));
 
-        $latMin = $center['lat'] - $radians * (180 / pi());
-        $latMax = $center['lat'] + $radians * (180 / pi());
-        $lngMin = $center['lng'] - $radians * (180 / pi()) / cos($center['lng'] * pi() / 180);
-        $lngMax = $center['lng'] + $radians * (180 / pi()) / cos($center['lng'] * pi() / 180);
-
-        $query->whereBetween('latitude', [$latMin, $latMax])
-            ->whereBetween('longitude', [$lngMin, $lngMax])
+        $query->whereBetween('latitude', [$minLat, $maxLat])
+            ->whereBetween('longitude', [$minLng, $maxLng])
             ->whereRaw("ST_Distance_Sphere(
                 point({$center['lng']}, {$center['lat']}), 
                 point(`longitude`, `latitude`)

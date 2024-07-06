@@ -292,7 +292,7 @@ const resendTimer = {
     },
 }
 
-$('input').on('paste', function (e) {
+$('.code-inputs input').on('paste', function (e) {
     e.preventDefault()
 
     const inputs = $('.code-inputs input')

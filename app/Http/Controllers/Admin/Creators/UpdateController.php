@@ -21,9 +21,9 @@ class UpdateController extends Controller
             $validated['photos'] ?? []
         );
 
-        // $creator->update($validated);
+        $creator->update($validated);
 
-        $creator->createProfileRequest($validated);
+        // $creator->createProfileRequest($validated);
 
         Image::deleteByIds($imgsToDelete);
         

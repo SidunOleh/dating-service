@@ -88,9 +88,7 @@
                     <div class="btn red login">
                         Log in
                     </div>
-                    @endif
-                    
-                    @if(!auth('web')->user()->subscription)
+                    @else
                     <p>Subscribe, to get full access!</p>
                     <a href="#" class="btn red">
                         Subscribe

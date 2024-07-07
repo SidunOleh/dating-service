@@ -13,12 +13,7 @@ class StoreController extends Controller
         $validated = $request->validated();
         $validated['created_by_admin'] = true;
 
-        // $creator = Creator::create($validated);
-
-        $creator = Creator::create(
-            $request->only(['email', 'password',])
-        );
-        $creator->createProfileRequest($validated);
+        $creator = Creator::create($validated);
 
         return response(['id' => $creator->id,]);
     }

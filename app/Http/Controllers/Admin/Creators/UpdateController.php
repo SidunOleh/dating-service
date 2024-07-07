@@ -23,8 +23,6 @@ class UpdateController extends Controller
 
         $creator->update($validated);
 
-        // $creator->createProfileRequest($validated);
-
         Image::deleteByIds($imgsToDelete);
         
         if ($ban) {

@@ -21,10 +21,10 @@ class ProfileController extends Controller
         }
 
         $recommendations = 
-            Creator::recommendations(7, [$creator->id,], session('filters', []));
+            Creator::recommendations(count($creator->photos) * 3, [$creator->id,], session('filters', []));
         if (! $recommendations->count()) {
             $recommendations = 
-                Creator::recommendations(7, [$creator->id,]);
+                Creator::recommendations(count($creator->photos) * 3, [$creator->id,]);
         }
 
         $favorites = Auth::guard('web')->check() ? 

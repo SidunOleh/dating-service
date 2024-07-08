@@ -20,11 +20,21 @@ class ProfileController extends Controller
             return redirect()->route('home');
         }
 
+        if (
+            Auth::guard('web')->check() and 
+            Auth::guard('web')->user()->subscription
+        ) {
+            $recommendationsCount = count($creator->photos) * 3;
+        } else {
+            $recommendationsCount = count($creator->photos) > 3 ? 3 : count($creator->photos);
+            $recommendationsCount = $recommendationsCount * 3 + 3;
+        }
+
         $recommendations = 
-            Creator::recommendations(count($creator->photos) * 3, [$creator->id,], session('filters', []));
+            Creator::recommendations($recommendationsCount, [$creator->id,], session('filters', []));
         if (! $recommendations->count()) {
             $recommendations = 
-                Creator::recommendations(count($creator->photos) * 3, [$creator->id,]);
+                Creator::recommendations($recommendationsCount, [$creator->id,]);
         }
 
         $favorites = Auth::guard('web')->check() ? 

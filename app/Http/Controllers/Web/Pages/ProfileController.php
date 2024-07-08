@@ -15,7 +15,8 @@ class ProfileController extends Controller
     {
         if (
             ! $creator->is_approved or 
-            ! $creator->show_on_site
+            ! $creator->show_on_site or
+            $creator->is_banned
         ) {
             return redirect()->route('home');
         }
@@ -30,11 +31,14 @@ class ProfileController extends Controller
             $recommendationsCount = $recommendationsCount * 3 + 3;
         }
 
-        $recommendations = 
-            Creator::recommendations($recommendationsCount, [$creator->id,], session('filters', []));
+        $recommendations =  Creator::recommendations(
+            $recommendationsCount, 
+            [$creator->id,], 
+            session('filters', [])
+        );
+
         if (! $recommendations->count()) {
-            $recommendations = 
-                Creator::recommendations($recommendationsCount, [$creator->id,]);
+            $recommendations =  Creator::recommendations($recommendationsCount, [$creator->id,]);
         }
 
         $favorites = Auth::guard('web')->check() ? 

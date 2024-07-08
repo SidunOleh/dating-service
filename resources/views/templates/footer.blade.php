@@ -17,5 +17,5 @@
 <script src="{{ asset('assets/js/just-validate.production.min.js') }}"></script>
 <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
-{{ dd($GLOBALS['sql']) }}
+
 </html>

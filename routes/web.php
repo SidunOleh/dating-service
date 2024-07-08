@@ -89,7 +89,7 @@ Route::get('/', HomeController::class)
 Route::get('/page/{page}', HomeController::class)
     ->name('home.page');
 Route::get('/profile/{creator}', ProfileController::class)
-    ->middleware(['track.profile-visits',])
+    // ->middleware(['track.profile-visits',])
     ->name('profile.page');
 
 /**

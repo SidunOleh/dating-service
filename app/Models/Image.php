@@ -70,11 +70,17 @@ class Image extends Model
     {
         $path = $uploaded->store(date('Y') . '/' . date('m'), $disk);
 
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+        } else {
+            $user = Auth::guard('web')->user();
+        }
+
         $image = self::create([
             'path' => $path,
             'disk' => $disk,
-            'user_id' => Auth::id(),
-            'user_type' => get_class(Auth::user()),
+            'user_id' => $user->id,
+            'user_type' => get_class($user),
         ]);
 
         return $image;

@@ -2992,3 +2992,7 @@ input {
 #header {
     overflow: visible !important;
 }
+
+.none {
+    display: none !important;
+}

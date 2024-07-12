@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Images;
+namespace App\Http\Controllers\Web\Images;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Images\UploadRequest;
+use App\Http\Requests\Web\Images\UploadRequest;
 use App\Models\Image;
 
 class UploadController extends Controller
@@ -11,13 +11,9 @@ class UploadController extends Controller
     public function __invoke(UploadRequest $request)
     {
         $uploaded = $request->file('img');
-        $process = $request->input('process', false);
         $watermark = $request->input('watermark', false);
-        $quality = (int) $request->input('quality', 0);
 
-        if ($process) {
-            Image::processUploadedFile($uploaded, $watermark, $quality);
-        }
+        Image::processUploadedFile($uploaded, $watermark, 20);
 
         $image = Image::saveUploadedFile($uploaded);
 

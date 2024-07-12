@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
+use App\Http\Controllers\Web\Images\UploadController;
 use App\Http\Controllers\Web\Ads\ClickController;
 use App\Http\Controllers\Web\Auth\SignInResendCodeController;
 use App\Http\Controllers\Web\Auth\SignInSendCodeController;
@@ -17,6 +18,12 @@ use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
 use App\Http\Controllers\Web\Password\ResetPageController;
 use App\Http\Controllers\Web\Plisio\CallbackController;
+use App\Http\Controllers\Web\Profile\CreateController;
+use App\Http\Controllers\Web\Profile\EditController;
+use App\Http\Controllers\Web\Profile\ShowController;
+use App\Http\Controllers\Web\Profile\StoreController;
+use App\Http\Controllers\Web\Profile\SwitchOptionController;
+use App\Http\Controllers\Web\Profile\UpdateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,7 +96,7 @@ Route::get('/', HomeController::class)
 Route::get('/page/{page}', HomeController::class)
     ->name('home.page');
 Route::get('/profile/{creator}', ProfileController::class)
-    // ->middleware(['track.profile-visits',])
+    ->middleware(['track.profile-visits',])
     ->name('profile.page');
 
 /**
@@ -109,3 +116,32 @@ Route::prefix('/favorites')
  * Ads
  */
 Route::post('/ads/{ad}/click', ClickController::class);
+
+/**
+ * Profile
+ */
+Route::prefix('/my-profile')
+    ->middleware(['auth:web',])
+    ->name('my-profile.')
+    ->group(function () {
+    Route::get('/', ShowController::class)
+        ->name('show');
+    Route::get('/create', CreateController::class)
+        ->name('create');
+    Route::post('/', StoreController::class)
+        ->name('store');
+    Route::get('/edit', EditController::class)
+        ->name('edit');
+    Route::put('/', UpdateController::class)
+        ->name('update');
+    Route::patch('/switch-option', SwitchOptionController::class)
+        ->name('switch-option');
+});
+
+/**
+ * Images
+ */
+Route::prefix('/images')->name('images.')->group(function () {
+    Route::post('/upload', UploadController::class)
+        ->name('upload');
+});

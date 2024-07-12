@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\ImageManager;
 
 class Image extends Model
 {
@@ -14,6 +17,9 @@ class Image extends Model
 
     protected $fillable = [
         'path',
+        'disk',
+        'user_id',
+        'user_type',
     ];
 
     protected $appends = [
@@ -41,18 +47,42 @@ class Image extends Model
         return url('storage/' . $this->path);
     }
 
-    public static function saveUploadedFile(UploadedFile $uploaded): self
+    public static function processUploadedFile(UploadedFile $uploaded, $watermark = false, $quality = 0): void
     {
-        $path = $uploaded->store(date('Y') . '/' . date('m'), 'public');
+        $manager = new ImageManager(new Driver());
 
-        $image = self::create(['path' => $path,]);
+        $img = $manager->read(
+            $manager->read($uploaded->path())
+                ->toWebp($quality)
+                ->toFilePointer()
+        );
+
+        if ($watermark) {
+            $watermarkImg = $manager->read(storage_path('watermark.png'));
+            $watermarkImg->cover($img->width(), $img->height());
+            $img->place($watermarkImg, 'center', opacity: 10);
+        }
+        
+        $img->save($uploaded->path());
+    }
+
+    public static function saveUploadedFile(UploadedFile $uploaded, string $disk = 'public'): self
+    {
+        $path = $uploaded->store(date('Y') . '/' . date('m'), $disk);
+
+        $image = self::create([
+            'path' => $path,
+            'disk' => $disk,
+            'user_id' => Auth::id(),
+            'user_type' => get_class(Auth::user()),
+        ]);
 
         return $image;
     }
 
     public function deleteFile(): bool
     {
-        $path = Storage::disk('public')->path($this->path);
+        $path = Storage::disk($this->disk)->path($this->path);
 
         if (! file_exists($path)) {
             return false;

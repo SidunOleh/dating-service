@@ -78,6 +78,9 @@ img {
     text-align: center;
     font-weight: 600;
     line-height: normal;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     color: #7a0004;
     cursor: pointer
 }
@@ -96,8 +99,21 @@ img {
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%)
 }
 
+@-webkit-keyframes spin {
+    to {
+        rotate: -1turn
+    }
+}
+
+@keyframes spin {
+    to {
+        rotate: -1turn
+    }
+}
+
 button {
-    border: none
+    border: none;
+    text-align: center
 }
 
 input {
@@ -182,7 +198,8 @@ input {
     background: #252528;
     z-index: 1000;
     -webkit-transition: all 0.2s linear;
-    transition: all 0.2s linear
+    transition: all 0.2s linear;
+    overflow: hidden
 }
 
 #header.hidden {
@@ -458,15 +475,24 @@ input {
 }
 
 .header-menu .form-container {
+    padding: 16px 0;
+    border-top: 1px solid #525252;
+    border-bottom: 1px solid #525252
+}
+
+.header-menu .form-container form .form-fields {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    padding: 12px 0;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     gap: 10px
+}
+
+.header-menu .form-container form .btn {
+    width: 100%;
+    margin-top: 12px
 }
 
 .header-menu .form-container .form-group {
@@ -480,12 +506,7 @@ input {
     -ms-flex-align: center;
     align-items: center;
     gap: 10px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #5d5d62
-}
-
-.header-menu .form-container .form-group select {
-    width: 50px
+    width: 33.33%
 }
 
 .header-menu .form-container .form-group label {
@@ -508,21 +529,17 @@ input {
     line-height: normal;
     background-image: url("../img/select.svg");
     background-repeat: no-repeat;
-    background-position: right 0.7rem top 50%;
-    background-size: 0.95rem auto
+    background-position: right 0.3rem top 50%;
+    background-size: 0.99rem auto;
+    background-color: #252528;
+    border-radius: 8px;
+    border: 1px solid #525252;
+    padding: 12px;
+    width: 100%
 }
 
 .header-menu .form-container .zip-distance-group {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    gap: 10px
+    width: 33.33%
 }
 
 .header-menu .form-container .zip-distance-group input {
@@ -532,23 +549,12 @@ input {
     background: #525252;
     color: #fff;
     font-size: 16px;
-    outline: none
-}
-
-.header-menu .form-container .zip-distance-group .zip-input {
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 50%
-}
-
-.header-menu .form-container .zip-distance-group select {
-    width: 90px
+    outline: none;
+    width: 100%
 }
 
 .header-menu .pages {
-    padding-top: 24px;
-    border-top: 1px solid #5d5d62
+    padding-top: 24px
 }
 
 .header-menu .pages .pages-list {
@@ -978,9 +984,6 @@ input {
     width: 100%;
     height: 100%;
     z-index: 999;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -1237,6 +1240,56 @@ input {
     transform: translatey(-50%) rotate(45deg)
 }
 
+.popUp-wrapper .res-succes-send {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+    background: #525252
+}
+
+.popUp-wrapper .res-succes-send .title {
+    margin: 0
+}
+
+.popUp-wrapper .res-succes-send .mail {
+    color: #56b1f3;
+    text-align: center;
+    font-size: 16px
+}
+
+.popUp-wrapper .addNew-pass-card {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 16px 16px 24px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
+.popUp-wrapper .pass-succes {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 16px
+}
+
+@media screen and (max-width:768px) {
+    .popUp-wrapper .pass-succes {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center
+    }
+}
+
 .popUp-wrapper .passRule,
 .popUp-wrapper .reset-pass,
 .popUp-wrapper .switch-to-signup {
@@ -1275,24 +1328,6 @@ input {
 .popUp-wrapper .submit:disabled {
     opacity: 0.4;
     pointer-events: none
-}
-
-.popUp-wrapper .recaptcha-placeholder {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    margin-top: 16px
-}
-
-@media screen and (max-width:1024px) {
-    .popUp-wrapper .recaptcha-placeholder {
-        position: absolute;
-        bottom: 48px;
-        right: 16px
-    }
 }
 
 .verification-wrapper {
@@ -1556,7 +1591,7 @@ input {
     -webkit-transform: rotate(-9.647deg);
     transform: rotate(-9.647deg);
     color: #b12828;
-    top: 290px;
+    top: 380px;
     right: 8px
 }
 
@@ -1931,6 +1966,193 @@ input {
     line-height: normal
 }
 
+.profile.account .left-side {
+    gap: 24px
+}
+
+@media screen and (max-width:1024px) {
+    .profile.account .left-side {
+        gap: 16px
+    }
+}
+
+.profile.account .left-side,
+.profile.account .user-photo-list {
+    width: 50%
+}
+
+@media screen and (max-width:768px) {
+    .profile.account .left-side,
+    .profile.account .user-photo-list {
+        width: 100%
+    }
+}
+
+.profile.account .container {
+    max-width: 950px
+}
+
+.profile.account .left-card {
+    border-radius: 16px;
+    background: #39393e;
+    padding: 24px;
+    width: 100%
+}
+
+.profile.account .left-card .title {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px
+}
+
+.profile.account .left-card .statistic-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 12px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.profile.account .left-card .statistic-list .statistic-item {
+    color: #fbfbfb;
+    font-size: 16px
+}
+
+.profile.account .left-card .statistic-list .statistic-item span {
+    color: #bebfc0;
+    text-align: center;
+    font-size: 16px
+}
+
+.profile.account .edit-info-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-top: 40px
+}
+
+.profile.account .edit-info-btn .btn {
+    width: 100%;
+    max-width: 343px
+}
+
+@media screen and (max-width:768px) {
+    .profile.account .edit-info-btn {
+        margin-top: 24px
+    }
+}
+
+.profile.account .delete-wrapper {
+    padding: 16px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background: rgba(37, 37, 40, 0.43);
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: none
+}
+
+.profile.account .delete-wrapper.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.profile.account .delete-wrapper .delete-popup {
+    border-radius: 8px;
+    background: #39393e;
+    padding: 24px;
+    max-width: 427px
+}
+
+.profile.account .delete-wrapper .title {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px
+}
+
+.profile.account .delete-wrapper .btn-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 8px
+}
+
+.profile.account .delete-wrapper .btn {
+    width: 50%
+}
+
+.profile.account .delete-wrapper .white {
+    color: #000
+}
+
+.profile.account .user-location {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    overflow: hidden
+}
+
+.profile.account .user-location iframe {
+    height: 250px
+}
+
+.profile.account .location-address {
+    padding: 8px;
+    color: #fbfbfb;
+    padding: 8px;
+    border-radius: 8px;
+    background: #39393e;
+    margin-top: -6px
+}
+
+.profile .info-title {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 8px;
+    color: #fbfbfb;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px
+}
+
+.profile .user-location {
+    background: #39393e
+}
+
+.profile .user-location .info-title {
+    padding: 12px
+}
+
+.profile .description .info-title {
+    margin-bottom: 12px
+}
+
 .toggle-container {
     margin-top: 32px;
     display: -webkit-box;
@@ -2039,13 +2261,19 @@ input {
     display: inline-block
 }
 
-.toggle-container .info-text a {
-    color: red;
+.toggle-container .info-text a,
+.toggle-container p {
+    cursor: pointer;
+    background: var(--Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: block;
     text-align: center
 }
 
-.toggle-container .info-text a:hover {
+.toggle-container .info-text a:hover,
+.toggle-container p:hover {
     text-decoration: underline
 }
 
@@ -2066,13 +2294,13 @@ input {
     border-radius: 16px;
     background: #39393e;
     padding: 24px;
-    width: 39%;
+    width: 38%;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content
 }
 
-.profile-filling .title {
+.profile-filling .left-card .title {
     color: #fbfbfb;
     text-align: center;
     font-size: 16px;
@@ -2080,7 +2308,7 @@ input {
     margin-bottom: 12px
 }
 
-.profile-filling .statistic-list {
+.profile-filling .left-card .statistic-list {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2094,19 +2322,19 @@ input {
     align-items: center
 }
 
-.profile-filling .statistic-list .statistic-item {
+.profile-filling .left-card .statistic-list .statistic-item {
     color: #fbfbfb;
     font-size: 16px
 }
 
-.profile-filling .statistic-list .statistic-item span {
+.profile-filling .left-card .statistic-list .statistic-item span {
     color: #bebfc0;
     text-align: center;
     font-size: 16px
 }
 
 .profile-filling .form-container {
-    width: 61%
+    width: 62%
 }
 
 .profile-filling .form-container #multiStepForm {
@@ -2123,7 +2351,7 @@ input {
 .profile-filling .form-step {
     border-radius: 8px;
     background: #39393e;
-    padding: 16px;
+    padding: 10px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2131,7 +2359,12 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    gap: 12px;
     position: relative
+}
+
+.profile-filling .form-step.active .step-body {
+    display: block
 }
 
 .profile-filling .rules {
@@ -2145,22 +2378,12 @@ input {
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
-    font-weight: 600
+    font-weight: 600;
+    text-align: left;
+    margin: 0
 }
 
-.profile-filling .form-group {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 16px
-}
-
-.profile-filling .form-group h2 {
-    margin-bottom: -5px;
+.profile-filling h2 {
     color: #fbfbfb;
     font-size: 16px;
     font-weight: 600;
@@ -2173,7 +2396,7 @@ input {
     gap: 8px
 }
 
-.profile-filling .form-group h2 span {
+.profile-filling h2 span {
     font-size: 16px;
     color: #252528;
     font-weight: 600;
@@ -2193,6 +2416,17 @@ input {
     border-radius: 50%
 }
 
+.profile-filling .form-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px
+}
+
 .profile-filling .form-group .input-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2201,6 +2435,13 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column
+}
+
+.profile-filling .form-group .input-wrapper .error-text {
+    color: #ff696f;
+    font-family: Inter;
+    font-size: 13px;
+    margin-top: 6px
 }
 
 .profile-filling .form-group label {
@@ -2281,11 +2522,42 @@ input {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    gap: 8px
+    gap: 8px;
+    margin-top: 16px
 }
 
 .profile-filling .btn-group .btn {
-    margin-top: 16px
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 8px
+}
+
+.profile-filling .btn-group .btn .loader {
+    animation: spin 1s linear infinite reverse
+}
+
+.profile-filling .map {
+    height: 320px;
+    border-radius: 8px;
+    overflow: hidden
+}
+
+@media screen and (max-width:1024px) {
+    .profile-filling .map {
+        height: 250px
+    }
+}
+
+.profile-filling .map iframe,
+.profile-filling .map img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover
 }
 
 .profile-filling #nextBtn5 {
@@ -2437,11 +2709,215 @@ input {
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%)
 }
 
+.profile-filling .text {
+    font-size: 14px;
+    color: #fbfbfb
+}
+
+.profile-filling .request {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 8px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #fbfbfb;
+    display: none
+}
+
+.profile-filling .request .title {
+    font-size: 16px;
+    font-weight: 600
+}
+
+.profile-filling .request .text {
+    font-size: 14px
+}
+
+.step-6 ol li {
+    color: #fbfbfb;
+    font-size: 14px
+}
+
+.step-6 .verification-section label {
+    color: #fbfbfb;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 8px
+}
+
+.step-6 .verification-section .btn-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 16px;
+    gap: 16px
+}
+
+.step-6 .image-card {
+    height: 334px
+}
+
+@media screen and (max-width:1024px) {
+    .step-6 .image-card {
+        height: 219px
+    }
+}
+
+@media screen and (max-width:768px) {
+    .step-6 .image-card {
+        height: 174px
+    }
+}
+
+.step-6 .image-card img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center
+}
+
+.step-6 .custom-upload-btn {
+    border-radius: 8px;
+    border: 1px solid #fbfbfb;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: #fbfbfb;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.step-6 .custom-remove-btn {
+    padding: 12px 24px;
+    background-color: transparent;
+    border-radius: 8px;
+    border: 1px solid #fb7478;
+    color: #fb7478;
+    cursor: pointer;
+    font-weight: 600
+}
+
+.step-6 .custom-remove-btn,
+.step-6 .custom-upload-btn {
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease
+}
+
+.step-6 .custom-remove-btn:hover,
+.step-6 .custom-upload-btn:hover {
+    opacity: 0.7
+}
+
+.step-6 .user-info-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px
+}
+
+.step-6 #skip {
+    width: 128px;
+    color: #000
+}
+
+.noResults {
+    height: calc(100vh - 112px)
+}
+
+.noResults .container {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.noResults .title {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700
+}
+
+.noResults .text {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16px
+}
+
+.noResults img {
+    width: 100%;
+    max-width: 283px
+}
+
+.section-404 {
+    height: calc(100vh - 112px)
+}
+
+.section-404 .container {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.section-404 .title {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700
+}
+
+.section-404 img {
+    width: 100%;
+    max-width: 283px
+}
+
 .center {
     display: flex;
 }
 
-.loader {
+.loading {
     position: absolute;
     z-index: 1000;
     padding: 0;
@@ -2495,4 +2971,24 @@ input {
 
 .profile .left-side .head-porfile .img-card .likes .btn.active path {
     fill: rgb(164, 0, 0)
+}
+
+.step-body {
+    display: none;
+}
+
+.profile-filling #customButton2 {
+    display: flex !important;
+}
+
+.profile-filling #nextBtn5 {
+    display: block !important;
+}
+
+.profile-filling #photoCount {
+    display: block !important;
+}
+
+#header {
+    overflow: visible !important;
 }

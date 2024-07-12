@@ -25,20 +25,16 @@ class ProfileController extends Controller
             Auth::guard('web')->check() and 
             Auth::guard('web')->user()->subscription
         ) {
-            $recommendationsCount = count($creator->photos) * 3;
+            $recommendCount = count($creator->photos) * 3;
         } else {
-            $recommendationsCount = count($creator->photos) > 3 ? 3 : count($creator->photos);
-            $recommendationsCount = $recommendationsCount * 3 + 3;
+            $recommendCount = count($creator->photos) > 3 ? 3 : count($creator->photos);
+            $recommendCount = $recommendCount * 3 + 3;
         }
 
-        $recommendations =  Creator::recommendations(
-            $recommendationsCount, 
-            [$creator->id,], 
-            session('filters', [])
-        );
+        $recommendations =  Creator::recommendations($recommendCount, [$creator->id,], session('filters', []));
 
-        if (! $recommendations->count()) {
-            $recommendations =  Creator::recommendations($recommendationsCount, [$creator->id,]);
+        if ($recommendations->count() != $recommendCount) {
+            $recommendations->merge(Creator::recommendations($recommendCount - $recommendations->count(), [$creator->id,]));
         }
 
         $favorites = Auth::guard('web')->check() ? 
@@ -47,19 +43,10 @@ class ProfileController extends Controller
 
         $creator->loadCount('inFavorites');
 
-        $topAd = Ad::type('top')
-            ->inRandomOrder()
-            ->first();
-        $adsSettings = Option::getOptions([
-            'show_top_ad',
-        ]);
-
         return view('pages.profile', [
             'creator' => $creator,
             'recommendations' => $recommendations,
             'favorites' => $favorites,
-            'topAd' => $topAd,
-            'adsSettings' => $adsSettings,
         ]);
     }
 }

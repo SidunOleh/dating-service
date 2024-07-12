@@ -127,7 +127,7 @@ $.ajaxSetup({
 
 //__________________________ADVERTISING_________________________//
 
-if (DS && DS.ads?.data && DS.ads?.settings) {
+if (DS.ads?.data && DS.ads?.settings) {
     const adPopup = {
         counters: {
             secs: 0,
@@ -218,6 +218,10 @@ if (DS && DS.ads?.data && DS.ads?.settings) {
             $('.users-item.profile-item').on('click auxclick', () => {
                 this.clicksCount += 1
             })
+
+            $('.advertising-link').on('auxclick click', function () {
+                $.post(`/ads/${$(this).data('id')}/click`)
+            })
         
             setInterval(() => {
                 this.secsCount += 1
@@ -255,20 +259,18 @@ if (DS && DS.ads?.data && DS.ads?.settings) {
     adPopup.ini()
 }
 
-$('.advertising-link, .advertising-banner, .users-item.add').on('auxclick click', function () {
-    const id = $(this).data('id')
-
-    $.post(`/ads/${id}/click`)
+$('.advertising-banner, .users-item.add').on('auxclick click', function () {
+    $.post(`/ads/${$(this).data('id')}/click`)
 })
 
 //__________________________Loader_________________________//
 
 function addLoader(selector) {
-    $(selector).append('<div class="loader"></div>')
+    $(selector).append('<div class="loading"></div>')
 }
 
 function removeLoader(selector) {
-    $(selector).find('.loader').remove()
+    $(selector).find('.loading').remove()
 }
 
 //__________________________Verification Code_________________________//
@@ -389,7 +391,7 @@ function verifySignUpCode(code) {
 
     $.post('/sign-up/verify-code', { code })
         .done(() => {
-            location.reload()
+            location.href = '/my-profile'
         }).fail(err => {
             codeForm.addClass('error')
             codeError.text(err.responseJSON.message)
@@ -472,7 +474,7 @@ function verifySignInCode(code) {
 
     $.post('/sign-in/verify-code', { code })
         .done(() => {
-            location.reload()
+            location.href = '/my-profile'
         }).fail(err => {
             codeForm.addClass('error')
             codeError.text(err.responseJSON.message)
@@ -568,4 +570,18 @@ $('#filters-form').submit(function() {
     $(this).find('input[name]')
         .filter((i, input) => !input.value)
         .prop('name', '')
+})
+
+//__________________________Change options_________________________//
+
+$('#vote-battle, #account-visibility').on('change', function () {
+    const name = $(this).attr('name')
+    const value = $(this).prop('checked')
+
+    $.ajax({
+        type: 'PATCH',
+        url: '/my-profile/switch-option', 
+        data: JSON.stringify({name, value}),
+        contentType: 'application/json',
+    })
 })

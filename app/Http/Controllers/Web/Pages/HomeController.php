@@ -40,16 +40,12 @@ class HomeController extends Controller
             Auth::guard('web')->user()->favorites : 
             new Collection();
 
-        $topAd = Ad::type('top')
-            ->inRandomOrder()
-            ->first();
         $popupAds = $template->count('ad') ? Ad::select('id', 'link', 'image_id')
             ->with('image')
             ->active()
             ->type('popup')
             ->get() : new Collection();
         $adsSettings = Option::getOptions([
-            'show_top_ad',
             'clicks_between_popups', 
             'seconds_between_popups', 
             'close_popup_seconds',
@@ -58,7 +54,6 @@ class HomeController extends Controller
         return view('pages.home', [
             'template' => $template, 
             'favorites' => $favorites,
-            'topAd' => $topAd,
             'popupAds' => $popupAds,
             'adsSettings' => $adsSettings,
         ]);

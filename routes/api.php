@@ -209,5 +209,6 @@ Route::middleware(['auth:sanctum',])->group(function () {
     });
 
     Route::get('/zips/{zipCode:zip}', ZipCodesShowController::class)
+        ->withoutMiddleware(['auth:sanctum',])
         ->name('zips.show');
 });

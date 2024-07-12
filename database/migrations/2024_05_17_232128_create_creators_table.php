@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('password');
             
             $table->boolean('is_banned')->default(false);
-            $table->boolean('show_on_site')->default(true);
-            $table->boolean('play_roulette')->default(true);
+            $table->boolean('show_on_site')->default(false);
+            $table->boolean('play_roulette')->default(false);
             $table->boolean('created_by_admin')->default(false);
-
+            $table->boolean('profile_is_created')->default(false);
             $table->boolean('is_approved')->default(false);
+            $table->boolean('is_verified')->default(false);
 
             $table->json('photos')->nullable();
 
@@ -46,7 +47,6 @@ return new class extends Migration
             $table->decimal('longitude', 10, 7)->nullable();     
             $table->index('latitude');       
 
-            $table->boolean('is_verified')->default(false);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->date('birthday')->nullable();

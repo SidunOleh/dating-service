@@ -156,7 +156,12 @@ class Creator extends Authenticatable
             $this->description and
             $this->photos and
             count($this->photos) >= 1 and
-            ($this->phone or $this->telegram or $this->whatsapp)
+            ($this->phone or $this->telegram or $this->whatsapp) and 
+            $this->zip and
+            $this->state and
+            $this->city and
+            $this->latitude and
+            $this->longitude
         ) {
             return true;
         }
@@ -539,13 +544,14 @@ class Creator extends Authenticatable
     {   
         $query = $this->visits();
 
-        if ($interval == 'year') {
-            $query->whereRaw("YEAR(`created_at`) = " . date('Y'));
-        }
-
         if ($interval == 'month') {
             $query->whereRaw("YEAR(`created_at`) = " . date('Y'))
                 ->whereRaw("MONTH(`created_at`) = " . date('m'));
+        }
+
+        if ($interval == 'week') {
+            $query->whereRaw("YEAR(`created_at`) = " . date('Y'))
+                ->whereRaw("WEEK(`created_at`) = " . date('W') - 1);
         }
 
         if ($interval == 'day') {

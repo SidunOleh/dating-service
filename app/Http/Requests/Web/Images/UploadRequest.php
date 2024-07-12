@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Images;
+namespace App\Http\Requests\Web\Images;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,9 +25,6 @@ class UploadRequest extends FormRequest
             'image/jpeg',
             'image/png',
             'image/webp',
-            'image/gif',
-            'image/svg+xml',
-            'image/SVG',
             'image/heif',
             'image/heif-sequence',
             'image/heic',
@@ -37,9 +34,7 @@ class UploadRequest extends FormRequest
 
         return [
             'img' => 'required|file|mimetypes:' . implode(',', $mimes) . '|max:10240',
-            'process' => 'boolean',
             'watermark' => 'boolean',
-            'quality' => 'integer|between:0,100|nullable',
         ];
     }
 }

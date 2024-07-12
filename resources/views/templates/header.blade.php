@@ -20,7 +20,7 @@
     <header class="header" id="header">
 
         <div class="header-wrapper">
-            @includeWhen($adsSettings->sole('name', 'show_top_ad')->value and $topAd, 'templates.top-ad', ['ad' => $topAd,]) 
+            @includeWhen(isset($topAd), 'templates.top-ad', ['ad' => $topAd ?? null,]) 
 
             <div class="header-body">
                 <div class="left">
@@ -54,7 +54,7 @@
     @auth('web')
     <header class="header" id="header">
         
-        @includeWhen($adsSettings->sole('name', 'show_top_ad')->value and $topAd, 'templates.top-ad', ['ad' => $topAd,]) 
+        @includeWhen(isset($topAd), 'templates.top-ad', ['ad' => $topAd ?? null,]) 
         
         <div class="header-wrapper">
 
@@ -79,67 +79,69 @@
                     </div>
                 </div>
 
-                <form method="GET" action="{{ route('home') }}" id="filters-form">
-
-                    <div class="search-container">
+                <div class="search-container">
+                    <form action="/" method="GET">
                         <input 
                             type="text" 
                             name="s"
                             class="search-input" 
                             placeholder="Search" 
                             value="{{ request()->query('s') }}"/>
-
                         <button type="submit" class="search-button">
                             <img src="{{ asset('assets/img/search.svg') }}" alt="Search" />
                         </button>
-                    </div>
+                    </form>
+                </div>
 
-                    <div class="form-container">
-                        
-                        <div class="form-group">
-                            <label for="category">
-                                Show me:
-                            </label>
-                            <select id="category" name="gender">
-                                <option disabled selected>
-                                    All
-                                </option>
-                                @foreach(['Man', 'Woman', 'LGBTQ+',] as $gender)
-                                <option value="{{ $gender }}" @selected(request()->query('gender') == $gender)>
-                                    {{ $gender }}
-                                </option>
-                                @endforeach
-                            </select>
+                <div class="form-container">
+                    <form id="filters-form" action="/" method="GET">
+
+                        <div class="form-fields">
+
+                            <div class="zip-distance-group form-group">
+                                <input 
+                                    type="text" 
+                                    id="zip" 
+                                    name="zip" 
+                                    class="zip-input" 
+                                    placeholder="ZIP code" 
+                                    value="{{ request()->query('zip') }}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <select id="distance" name="miles">
+                                    <option disabled selected>
+                                        All miles
+                                    </option>
+                                    @foreach([10, 50, 100,] as $miles)
+                                    <option value="{{ $miles }}" @selected(request()->query('miles') == $miles)>
+                                        {{ $miles }} miles
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <select id="category" name="gender">
+                                    <option disabled selected>
+                                        All
+                                    </option>
+                                    @foreach(['Man', 'Woman', 'LGBTQ+',] as $gender)
+                                    <option value="{{ $gender }}" @selected(request()->query('gender') == $gender)>
+                                        {{ $gender }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
 
-                        <div class="zip-distance-group">
-                            <input 
-                                type="text" 
-                                id="zip" 
-                                name="zip" 
-                                class="zip-input" 
-                                placeholder="ZIP code" 
-                                value="{{ request()->query('zip') }}"/>
+                        <button type="submit" class="btn red">
+                            Show matches
+                        </button>
 
-                            <select id="distance" name="miles">
-                                <option disabled selected>
-                                    All miles
-                                </option>
-                                @foreach([10, 50, 100,] as $miles)
-                                <option value="{{ $miles }}" @selected(request()->query('miles') == $miles)>
-                                    {{ $miles }} miles
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <button type="submit" class="btn" style="margin: 20px 0 10px 0; width: 100%;">
-                        Apply
-                    </button>
-
-                </form>
+                    </form>
+                </div>
 
                 <div class="pages">
                     

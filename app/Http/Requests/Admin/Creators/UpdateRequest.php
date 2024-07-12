@@ -58,7 +58,7 @@ class UpdateRequest extends FormRequest
             'onlyfans' => 'string|nullable',
             'whatsapp' => 'string|nullable',
             
-            'zip' => 'integer|exists:zip_codes,zip|nullable',
+            'zip' => 'exists:zip_codes,zip|nullable',
             'state' => 'string|nullable',
             'city' => 'string|nullable',
             'street' => 'string|nullable',

@@ -31,7 +31,7 @@ class StoreRequest extends FormRequest
             'profile_email' => 'email|nullable',
 
             'street' => 'required|string',
-            'zip' => 'required|integer|exists:zip_codes,zip',
+            'zip' => 'required|exists:zip_codes,zip',
             'state' => 'required|string',
             'city' => 'required|string',
             'latitude' => 'required|between:-90,90',

@@ -557,6 +557,7 @@
                                     required
                                     onkeydown="return event.key != 'Enter'"
                                     v-model="data.phone"
+                                    maxlength="14"
                                     @input="formatPhone"/>
                                 <div v-if="errors.phone" class="error-text">
                                     {{ errors.phone }}

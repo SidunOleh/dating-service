@@ -107,16 +107,14 @@
                 target="_blank" 
                 href="{{ route('profile.page', ['creator' => $recommendation->id,]) }}" 
                 @class(['other-user-item', 'verified' => $recommendation->is_verified,])>
-
                 <div class="img-card">
                     <img src="{{ $recommendation->gallery->first()->getUrl() }}" alt="" />
                 </div>
                 
                 <div class="card">
-                    <p class="name">{{ $recommendation->name }}, {{ $recommendation->age }}</p>
+                    <p class="name">{{ mb_strlen($recommendation->name) > 5 ? mb_substr($recommendation->name, 0, 5) . '...' : $recommendation->name }}, {{ $recommendation->age }}</p>
                     <p class="city">{{ $recommendation->city }}, {{ $recommendation->state }}</p>
                 </div>
-                
             </a>
             @endforeach
         </div>

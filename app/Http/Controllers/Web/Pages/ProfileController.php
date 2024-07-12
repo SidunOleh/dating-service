@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ad;
 use App\Models\Creator;
-use App\Models\Option;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,8 +31,11 @@ class ProfileController extends Controller
 
         $recommendations =  Creator::recommendations($recommendCount, [$creator->id,], session('filters', []));
 
-        if ($recommendations->count() != $recommendCount) {
-            $recommendations->merge(Creator::recommendations($recommendCount - $recommendations->count(), [$creator->id,]));
+        if ($recommendations->count() < $recommendCount) {
+            $count = $recommendCount - $recommendations->count();
+            $exlude = [$creator->id, ...$recommendations->pluck('id')->all(),];
+            
+            $recommendations->merge(Creator::recommendations($count, $exlude));
         }
 
         $favorites = Auth::guard('web')->check() ? 

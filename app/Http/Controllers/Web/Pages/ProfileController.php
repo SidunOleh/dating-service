@@ -34,8 +34,8 @@ class ProfileController extends Controller
         if ($recommendations->count() < $recommendCount) {
             $count = $recommendCount - $recommendations->count();
             $exlude = [$creator->id, ...$recommendations->pluck('id')->all(),];
-            
-            $recommendations->merge(Creator::recommendations($count, $exlude));
+
+            $recommendations = $recommendations->merge(Creator::recommendations($count, $exlude));
         }
 
         $favorites = Auth::guard('web')->check() ? 

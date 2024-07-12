@@ -44,6 +44,8 @@ class SeedApp extends Command
                     'verification_photo' => [$images->random()->id, null][rand(0, 1)],
                     'id_photo' => [$images->random()->id, null][rand(0, 1)],
                     'street_photo' => [$images->random()->id. null][rand(0, 1)],
+                    'show_on_site' => true,
+                    'profile_is_created' => true,
                 ]);
             } catch (Exception) {
                 

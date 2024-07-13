@@ -442,7 +442,18 @@
                     this.data.photos[i] = next
                 },
                 remove(i) {
-                    this.data.photos.forEach((photo, index) => index == i && this.data.photos.splice(i, 1))
+                    this.data.photos.forEach((photo, index) => {
+                        if (index == i) {
+                            this.deleteImage(this.data.photos[i].id)
+                            this.data.photos.splice(i, 1)
+                        }
+                    })
+                },
+                deleteImage(id) {
+                    return $.ajax({
+                        type: 'DELETE',
+                        url: `/images/${id}`,
+                    })
                 },
                 uploadVerificationPhoto(e) {
                     const file = e.target.files[0]

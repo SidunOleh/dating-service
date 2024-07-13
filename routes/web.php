@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
+use App\Http\Controllers\Web\Images\DeleteController;
 use App\Http\Controllers\Web\Pages\HomeController;
 use App\Http\Controllers\Web\Pages\ProfileController;
 use App\Http\Controllers\Web\Password\ForgotController;
@@ -144,4 +145,6 @@ Route::prefix('/my-profile')
 Route::prefix('/images')->name('images.')->middleware(['auth:web',])->group(function () {
     Route::post('/upload', UploadController::class)
         ->name('upload');
+    Route::delete('/{image}', DeleteController::class)
+        ->name('delete');
 });

@@ -11,6 +11,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "spatie/image": "^3.6",
         "spatie/laravel-permission": "^6.7",
         "staudenmeir/eloquent-json-relations": "^1.1"
     },

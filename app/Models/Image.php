@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
+use Spatie\Image\Image as SImage;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Unit;
 
 class Image extends Model
 {
@@ -58,9 +61,9 @@ class Image extends Model
         );
 
         if ($watermark) {
-            $watermarkImg = $manager->read(storage_path('watermark.png'));
+            // $watermarkImg = $manager->read(storage_path('watermark.png'));
             // $watermarkImg->cover($img->width(), $img->height());
-            $img->place($watermarkImg, 'center', opacity: 100);
+            // $img->place(storage_path('watermark.png'), 'center', opacity: 100);
         }
         
         $img->save($uploaded->path());
@@ -76,6 +79,16 @@ class Image extends Model
             'user_id' => $user->id,
             'user_type' => get_class($user),
         ]);
+
+        SImage::load(Storage::disk($image->disk)->path($image->path))->watermark(
+            storage_path('watermark.png'),
+            AlignPosition::Top,
+            width: 100,
+            widthUnit: Unit::Percent,
+            height: 100,
+            heightUnit: Unit::Percent,
+            alpha: 10,
+        )->save();
 
         return $image;
     }

@@ -67,16 +67,14 @@ class Image extends Model
         $dir = date('Y') . '/' . date('m');
 
         if ($process) {
-            $manager = new ImageManager(new Driver());
-
             $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
             $path = $dir . '/' . $name;
-            $fullPath = Storage::disk($disk)->path($path);
 
-            $manager->read($uploaded->path())->toWebp($quality)->save($fullPath);
+            $manager = new ImageManager(new Driver());
+            $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));
 
             if ($watermark) {
-                SpatieImage::load($fullPath)->watermark(
+                SpatieImage::load(Storage::disk($disk)->path($path))->watermark(
                     storage_path('watermark.png'),
                     AlignPosition::Center,
                     width: 100,

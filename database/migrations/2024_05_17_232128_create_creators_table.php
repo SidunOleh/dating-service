@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('onlyfans')->nullable();
             $table->string('whatsapp')->nullable();
             
-            $table->integer('zip')->nullable();
+            $table->string('zip', 10)->nullable();
             $table->char('state', 2)->nullable();
             $table->string('city')->nullable();
             $table->string('street')->nullable();

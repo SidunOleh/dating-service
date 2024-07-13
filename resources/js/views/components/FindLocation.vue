@@ -5,7 +5,7 @@
             placeholder="Street and house number"
             v-model:value="location.street"/>
 
-        <InputNumber    
+        <Input    
             style="width: 300px;"
             placeholder="Zip"
             v-model:value="location.zip"/>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { Flex, Input, FormItem, Button, message, Select, InputNumber, } from 'ant-design-vue'
+import { Flex, Input, FormItem, Button, message, Select, } from 'ant-design-vue'
 
 export default {
     props: [
@@ -28,7 +28,7 @@ export default {
     ],
     components: {
         Input, FormItem, Flex,
-        Button, Select, InputNumber,
+        Button, Select,
     },
     data() {
         return {

@@ -59,8 +59,8 @@ class Image extends Model
 
         if ($watermark) {
             $watermarkImg = $manager->read(storage_path('watermark.png'));
-            $watermarkImg->cover($img->width(), $img->height());
-            $img->place($watermarkImg, 'center', opacity: 10);
+            // $watermarkImg->cover($img->width(), $img->height());
+            $img->place($watermarkImg, 'center', opacity: 100);
         }
         
         $img->save($uploaded->path());

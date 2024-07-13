@@ -44,7 +44,7 @@ class HomeController extends Controller
             ->with('image')
             ->active()
             ->type('popup')
-            ->limit(5)
+            ->limit(50)
             ->inRandomOrder()
             ->get() : new Collection();
         $adsSettings = Option::getOptions([

@@ -239,7 +239,7 @@
                 location: {
                     map: null,
                     marker: null,
-                    loading: false,
+                    show: false,
                 },
                 images: {
                     count: 12,
@@ -366,6 +366,7 @@
                             .setView([lat, lng], 15)
                         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png')
                             .addTo(this.location.map)
+                        window.dispatchEvent(new Event('resize'))
                     } else {
                         this.location.map.setView([lat, lng], 15)
                     }

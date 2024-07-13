@@ -202,7 +202,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             const rand = Math.floor(Math.random() * (max - min + 1)) + min
             this.next = DS.ads.data[rand]
 
-            // this.predownloadNextImage()
+            this.predownloadNextImage()
         },
         predownloadNextImage() {
             const image = new Image 

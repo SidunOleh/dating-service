@@ -44,7 +44,8 @@ class HomeController extends Controller
             ->with('image')
             ->active()
             ->type('popup')
-            ->get() : new Collection();
+            ->inRandomOrder()
+            ->limit(5) : new Collection();
         $adsSettings = Option::getOptions([
             'clicks_between_popups', 
             'seconds_between_popups', 

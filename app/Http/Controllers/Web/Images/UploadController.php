@@ -14,9 +14,7 @@ class UploadController extends Controller
         $uploaded = $request->file('img');
         $watermark = $request->input('watermark', false);
 
-        Image::processUploadedFile($uploaded, $watermark, 20);
-
-        $image = Image::saveUploadedFile($uploaded, Auth::guard('web')->user());
+        $image = Image::saveUploadedFile($uploaded, true, 10, $watermark);
 
         return response($image);
     }

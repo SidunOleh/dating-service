@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
-use Spatie\Image\Image as SImage;
+use Spatie\Image\Image as SpatieImage;
 use Spatie\Image\Enums\AlignPosition;
 use Spatie\Image\Enums\Unit;
 
@@ -50,46 +50,47 @@ class Image extends Model
         return url('storage/' . $this->path);
     }
 
-    public static function processUploadedFile(UploadedFile $uploaded, $watermark = false, $quality = 0): void
+    public static function saveUploadedFile(
+        UploadedFile $uploaded,
+        bool $process = false,
+        int $quality = 0,
+        bool $watermark = false, 
+        string $disk = 'public'
+    ): self
     {
-        $manager = new ImageManager(new Driver());
+        $dir = date('Y') . '/' . date('m');
 
-        $img = $manager->read(
-            $manager->read($uploaded->path())
-                ->toWebp($quality)
-                ->toFilePointer()
-        );
+        if ($process) {
+            $manager = new ImageManager(new Driver());
 
-        if ($watermark) {
-            // $watermarkImg = $manager->read(storage_path('watermark.png'));
-            // $watermarkImg->cover($img->width(), $img->height());
-            // $img->place(storage_path('watermark.png'), 'center', opacity: 100);
+            $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
+            $path = $dir . '/' . $name;
+            $fullPath = Storage::disk($disk)->path($path);
+
+            $manager->read($uploaded->path())->toWebp($quality)->save($fullPath);
+
+            if ($watermark) {
+                SpatieImage::load($fullPath)->watermark(
+                    storage_path('watermark.png'),
+                    AlignPosition::Center,
+                    width: 100,
+                    widthUnit: Unit::Percent,
+                    height: 100,
+                    heightUnit: Unit::Percent,
+                    alpha: 10
+                )->save();
+            }
+        } else {
+            $path = $uploaded->store(date('Y') . '/' . date('m'), $disk);
         }
-        
-        $img->save($uploaded->path());
-    }
-
-    public static function saveUploadedFile(UploadedFile $uploaded, $user, string $disk = 'public'): self
-    {
-        $path = $uploaded->store(date('Y') . '/' . date('m'), $disk);
 
         $image = self::create([
             'path' => $path,
             'disk' => $disk,
-            'user_id' => $user->id,
-            'user_type' => get_class($user),
+            'user_id' => Auth::id(),
+            'user_type' => get_class(Auth::user()),
         ]);
-
-        SImage::load(Storage::disk($image->disk)->path($image->path))->watermark(
-            storage_path('watermark.png'),
-            AlignPosition::Top,
-            width: 100,
-            widthUnit: Unit::Percent,
-            height: 100,
-            heightUnit: Unit::Percent,
-            alpha: 10,
-        )->save();
-
+        
         return $image;
     }
 

@@ -16,11 +16,7 @@ class UploadController extends Controller
         $watermark = $request->input('watermark', false);
         $quality = (int) $request->input('quality', 0);
 
-        if ($process) {
-            Image::processUploadedFile($uploaded, $watermark, $quality);
-        }
-
-        $image = Image::saveUploadedFile($uploaded, Auth::guard('admin')->user());
+        $image = Image::saveUploadedFile($uploaded, $process, $quality, $watermark);
 
         return response($image);
     }

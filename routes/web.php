@@ -141,7 +141,7 @@ Route::prefix('/my-profile')
 /**
  * Images
  */
-Route::prefix('/images')->name('images.')->group(function () {
+Route::prefix('/images')->name('images.')->middleware(['auth:web',])->group(function () {
     Route::post('/upload', UploadController::class)
         ->name('upload');
 });

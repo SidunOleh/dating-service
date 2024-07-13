@@ -474,6 +474,10 @@
                             this.data[name] = null
                         })
                 },
+                removeVerificationPhoto(photo) {
+                    this.deleteImage(this.data[photo].id)
+                    this.data[photo] = null
+                },
                 async send() {
                     this.loading = true
 
@@ -867,7 +871,7 @@
                                 <label for="document-photo">Photo of the document (driver's license)*</label>
                                 <div class="image-card">
                                     <img v-if="!data.id_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.id_photo" :src="data.id_photo.status == 'loaded' ? data.id_photo.url : '/assets/img/img-loading.webp'" alt="">
+                                    <img v-if="data.id_photo" :src="data.id_photo?.status == 'loaded' ? data.id_photo.url : '/assets/img/img-loading.webp'" alt="">
                                 </div>
                                 <input
                                     type="file"
@@ -891,7 +895,7 @@
                                     type="button"
                                     class="custom-remove-btn"
                                     data-img="document-photo-img"
-                                    @click="data.id_photo = null">
+                                    @click="removeVerificationPhoto('id_photo')">
                                     Remove Photo
                                 </button>
                                 </div>
@@ -901,7 +905,7 @@
                                 <label for="permission-photo">A photo with "I give permission to use this photo"*</label>
                                 <div class="image-card">
                                     <img v-if="!data.verification_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.verification_photo" :src="data.verification_photo.status == 'loaded' ? data.verification_photo.url : '/assets/img/img-loading.webp'" alt="">
+                                    <img v-if="data.verification_photo" :src="data.verification_photo?.status == 'loaded' ? data.verification_photo.url : '/assets/img/img-loading.webp'" alt="">
                                 </div>
                                 <input
                                     type="file"
@@ -925,7 +929,7 @@
                                         type="button"
                                         class="custom-remove-btn"
                                         data-img="permission-photo-img"
-                                        @click="data.verification_photo = null">
+                                        @click="removeVerificationPhoto('verification_photo')">
                                         Remove Photo
                                     </button>
                                 </div>
@@ -935,7 +939,7 @@
                                 <label for="street-photo">Street photo*</label>
                                 <div class="image-card">
                                     <img v-if="!data.street_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.street_photo" :src="data.street_photo.status == 'loaded' ? data.street_photo.url : '/assets/img/img-loading.webp'" alt="">
+                                    <img v-if="data.street_photo" :src="data.street_photo?.status == 'loaded' ? data.street_photo.url : '/assets/img/img-loading.webp'" alt="">
                                 </div>
                                 <input 
                                     type="file" 
@@ -959,7 +963,7 @@
                                         type="button" 
                                         class="custom-remove-btn"
                                         data-img="street-photo-img" 
-                                        @click="data.street_photo = null">
+                                        @click="removeVerificationPhoto('street_photo')">
                                         Remove Photo
                                     </button>
                                 </div>

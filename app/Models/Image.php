@@ -64,11 +64,9 @@ class Image extends Model
         string $disk = 'public'
     ): self
     {
-        $dir = date('Y') . '/' . date('m');
-
         if ($process) {
             $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
-            $path = $dir . '/' . $name;
+            $path = date('Y') . '/' . date('m') . '/' . $name;
 
             $manager = new ImageManager(new Driver());
             $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));

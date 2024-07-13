@@ -76,7 +76,7 @@ class DoneRequest extends FormRequest
         $rules['location.status'] = 'in:approved,rejected';
         $rules['location.comment'] = 'string|nullable';
         $rules['location.show_rejected'] = 'boolean';
-        $rules['location.value.zip'] = 'exists:zip_codes,zip|nullable';
+        $rules['location.value.zip'] = 'numeric|exists:zip_codes,zip|nullable';
         $rules['location.value.state'] = 'string|nullable';
         $rules['location.value.city'] = 'string|nullable';
         $rules['location.value.street'] = 'string|nullable';

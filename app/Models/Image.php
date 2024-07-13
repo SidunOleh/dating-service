@@ -66,15 +66,9 @@ class Image extends Model
         $img->save($uploaded->path());
     }
 
-    public static function saveUploadedFile(UploadedFile $uploaded, string $disk = 'public'): self
+    public static function saveUploadedFile(UploadedFile $uploaded, $user, string $disk = 'public'): self
     {
         $path = $uploaded->store(date('Y') . '/' . date('m'), $disk);
-
-        if (Auth::guard('admin')->check()) {
-            $user = Auth::guard('admin')->user();
-        } else {
-            $user = Auth::guard('web')->user();
-        }
 
         $image = self::create([
             'path' => $path,

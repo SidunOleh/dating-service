@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Images;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Images\UploadRequest;
 use App\Models\Image;
+use Illuminate\Support\Facades\Auth;
 
 class UploadController extends Controller
 {
@@ -19,7 +20,7 @@ class UploadController extends Controller
             Image::processUploadedFile($uploaded, $watermark, $quality);
         }
 
-        $image = Image::saveUploadedFile($uploaded);
+        $image = Image::saveUploadedFile($uploaded, Auth::guard('admin')->user());
 
         return response($image);
     }

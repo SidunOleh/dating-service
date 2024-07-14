@@ -148,6 +148,7 @@ if (DS.ads?.data && DS.ads?.settings) {
                 this.showing = true
                 this.counters.secs = 0
                 this.counters.clicks = 0
+                clearInterval(this.interval)
                 this.show()
             } else {
                 this.counters.secs = count
@@ -165,7 +166,6 @@ if (DS.ads?.data && DS.ads?.settings) {
                 this.showing = true
                 this.counters.secs = 0
                 this.counters.clicks = 0
-                clearInterval(this.interval)
                 this.show()
             } else {
                 this.counters.clicks = count
@@ -194,9 +194,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             this.showing = false
 
             this.interval = setInterval(() => {
-                if (! this.showing) {
-                    this.secsCount += 1
-                }
+                this.secsCount += 1
             }, 1000)
 
             $('.advertising-wrapper').removeClass('show')
@@ -233,9 +231,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             })
         
             this.interval = setInterval(() => {
-                if (! this.showing) {
-                    this.secsCount += 1
-                }
+                this.secsCount += 1
             }, 1000)
         },
     }

@@ -181,7 +181,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             link.data('id', this.next.id)
             link.attr('href', this.next.link)
 
-            adCloseTimer.start(DS.ads.settings.close_popup_seconds)
+            // adCloseTimer.start(DS.ads.settings.close_popup_seconds)
 
             popup.addClass('show')
 

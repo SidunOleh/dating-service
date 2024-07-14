@@ -146,8 +146,6 @@ if (DS.ads?.data && DS.ads?.settings) {
 
             if (count >= parseInt(DS.ads.settings.seconds_between_popups)) {
                 this.showing = true
-                this.counters.secs = 0
-                this.counters.clicks = 0
                 clearInterval(this.interval)
                 this.show()
             } else {
@@ -164,8 +162,7 @@ if (DS.ads?.data && DS.ads?.settings) {
 
             if (count >= parseInt(DS.ads.settings.clicks_between_popups)) {
                 this.showing = true
-                this.counters.secs = 0
-                this.counters.clicks = 0
+                clearInterval(this.interval)
                 this.show()
             } else {
                 this.counters.clicks = count
@@ -191,11 +188,14 @@ if (DS.ads?.data && DS.ads?.settings) {
             this.getNext()
         },
         hide() {
-            this.showing = false
+            this.counters.secs = 0
+            this.counters.clicks = 0
 
             this.interval = setInterval(() => {
                 this.secsCount += 1
             }, 1000)
+
+            this.showing = false
 
             $('.advertising-wrapper').removeClass('show')
         },

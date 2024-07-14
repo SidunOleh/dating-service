@@ -135,6 +135,7 @@ if (DS.ads?.data && DS.ads?.settings) {
         },
         next: null,
         showing: false,
+        interval: null,
         get secsCount() {
             return this.counters.secs
         },
@@ -164,6 +165,7 @@ if (DS.ads?.data && DS.ads?.settings) {
                 this.showing = true
                 this.counters.secs = 0
                 this.counters.clicks = 0
+                clearInterval(this.interval)
                 this.show()
             } else {
                 this.counters.clicks = count
@@ -190,6 +192,13 @@ if (DS.ads?.data && DS.ads?.settings) {
         },
         hide() {
             this.showing = false
+
+            this.interval = setInterval(() => {
+                if (! this.showing) {
+                    this.secsCount += 1
+                }
+            }, 1000)
+
             $('.advertising-wrapper').removeClass('show')
         },
         getNext() {
@@ -223,7 +232,7 @@ if (DS.ads?.data && DS.ads?.settings) {
                 $.post(`/ads/${$(this).data('id')}/click`)
             })
         
-            setInterval(() => {
+            this.interval = setInterval(() => {
                 if (! this.showing) {
                     this.secsCount += 1
                 }

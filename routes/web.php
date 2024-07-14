@@ -95,9 +95,11 @@ Route::post('/plisio/callback', CallbackController::class);
 Route::get('/', HomeController::class)
     ->name('home');
 Route::get('/page/{page}', HomeController::class)
+    ->where('page', '[0-9]+')
     ->name('home.page');
 Route::get('/profile/{creator}', ProfileController::class)
     ->middleware(['track.profile-visits',])
+    ->where('page', '[0-9]+')
     ->name('profile.page');
 
 /**

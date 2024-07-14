@@ -185,7 +185,7 @@ if (DS.ads?.data && DS.ads?.settings) {
 
             popup.addClass('show')
 
-            // this.getNext()
+            this.getNext()
         },
         hide() {
             this.counters.secs = 0

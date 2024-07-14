@@ -224,7 +224,9 @@ if (DS.ads?.data && DS.ads?.settings) {
             })
         
             setInterval(() => {
-                this.secsCount += 1
+                if (! this.showing) {
+                    this.secsCount += 1
+                }
             }, 1000)
         },
     }

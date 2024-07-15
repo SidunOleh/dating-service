@@ -975,9 +975,7 @@ input {
 }
 
 .popUp-wrapper {
-    background: rgba(57, 57, 62, 0.08);
-    /* -webkit-backdrop-filter: blur(40px);
-    backdrop-filter: blur(40px); */
+    background: rgb(0 0 0 / 80%);
     position: fixed;
     top: 0;
     left: 0;
@@ -1331,9 +1329,7 @@ input {
 }
 
 .verification-wrapper {
-    background: rgba(57, 57, 62, 0.08);
-    /* -webkit-backdrop-filter: blur(40px);
-    backdrop-filter: blur(40px); */
+    background: rgb(0 0 0 / 80%);
     position: fixed;
     top: 0;
     left: 0;
@@ -1440,9 +1436,7 @@ input {
 }
 
 .advertising-wrapper {
-    background: rgba(57, 57, 62, 0.08);
-    /* -webkit-backdrop-filter: blur(40px);
-    backdrop-filter: blur(40px); */
+    background: rgb(0 0 0 / 80%);
     position: fixed;
     top: 0;
     left: 0;

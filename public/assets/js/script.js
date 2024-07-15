@@ -50,6 +50,7 @@ $(document).ready(function () {
   
       Object.values($cards).forEach(($c) => $c.removeClass("active"));
       if (show) $card.addClass("active");
+      window.dispatchEvent(new Event('resize'))
     }
   
     $(".btn.login, .header-burger").on("click", () => togglePopup("logIn", true));

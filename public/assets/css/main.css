@@ -976,8 +976,8 @@ input {
 
 .popUp-wrapper {
     background: rgba(57, 57, 62, 0.08);
-    -webkit-backdrop-filter: blur(40px);
-    backdrop-filter: blur(40px);
+    /* -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px); */
     position: fixed;
     top: 0;
     left: 0;

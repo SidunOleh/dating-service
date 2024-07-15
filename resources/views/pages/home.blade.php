@@ -10,7 +10,6 @@
     <div class="container">
 
         @if($template->total())
-
             <div class="users-list">
 
                 @foreach($template->data() as $block)
@@ -35,7 +34,6 @@
                 'current' => $template->getPage(), 
                 'total' => $template->total(),
             ])
-
         @else
         <section class="noResults">
             <div class="container">

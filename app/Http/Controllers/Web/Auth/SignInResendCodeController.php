@@ -16,7 +16,7 @@ class SignInResendCodeController extends Controller
             return response(['message' => 'Bad request.',], 400);
         }
 
-        if ($signin['resend'] + 1 > 5) {
+        if ($signin['resend'] == config('auth.attemps.resend')) {
             return response(['message' => 'Too many attemps.',], 429);
         }
 

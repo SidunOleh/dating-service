@@ -1,5 +1,5 @@
+@auth('web')
 <div class="likes" data-id="{{ $id }}">
-    @auth('web')
     <div @class(['btn', 'red', 'active' => $active,])>
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,9 +26,9 @@
             </defs>
         </svg>
     </div>
-    @endauth
 
     <div class="likes-count">
         {{ $count }}
     </div>
 </div>
+@endauth

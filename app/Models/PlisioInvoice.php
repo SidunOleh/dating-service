@@ -45,10 +45,11 @@ class PlisioInvoice extends Model
         return $this->transaction->creator;
     }
 
-    public function changeStatus(string $status): bool
+    public function changeStatus(string $status): void
     {
         $this->status = $status;
         $this->save();
+        
         $this->transaction->status = $status;
         $this->transaction->save();
 
@@ -58,10 +59,9 @@ class PlisioInvoice extends Model
             if ($referral = $this->creator->referral) {
                 $percent = (int) Option::getOption('referral_percent', 0);
                 $reward = $this->transaction->usd_amount * $percent / 100;
+
                 $referral->reward($reward);
             }
         }
-
-        return true;
     }
 }

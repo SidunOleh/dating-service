@@ -20,7 +20,7 @@ class SignUpVerifyCodeController extends Controller
         
         session(['signup.attemps' => ++$signup['attemps'],]);
 
-        if ($signup['attemps'] > 10) {
+        if ($signup['attemps'] > config('auth.attemps.verify')) {
             return response(['message' => 'Too many attemps.',], 429);
         }
 

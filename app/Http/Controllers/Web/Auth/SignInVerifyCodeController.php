@@ -19,7 +19,7 @@ class SignInVerifyCodeController extends Controller
 
         session(['signin.attemps' => ++$signin['attemps'],]);
 
-        if ($signin['attemps'] > 10) {
+        if ($signin['attemps'] > config('auth.attemps.verify')) {
             return response(['message' => 'Too many attemps.',], 429);
         }
 

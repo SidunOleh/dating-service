@@ -222,11 +222,11 @@ if (DS.ads?.data && DS.ads?.settings) {
                 this.hide()
             })
         
-            $('.users-item.profile-item').on('click auxclick', () => {
+            $('.users-item.profile-item').bind('click auxclick', () => {
                 this.clicksCount += 1
             })
 
-            $('.advertising-link').on('auxclick click', function () {
+            $('.advertising-link').bind('auxclick click', function () {
                 $.post(`/ads/${$(this).data('id')}/click`)
             })
         
@@ -266,7 +266,7 @@ if (DS.ads?.data && DS.ads?.settings) {
     adPopup.ini()
 }
 
-$('.advertising-banner, .users-item.add').on('auxclick click', function () {
+$('.advertising-banner, .users-item.add').bind('auxclick click', function () {
     $.post(`/ads/${$(this).data('id')}/click`)
 })
 
@@ -301,7 +301,7 @@ const resendTimer = {
     },
 }
 
-$('.code-inputs input').on('paste', function (e) {
+$('.code-inputs input').bind('paste', function (e) {
     e.preventDefault()
 
     const inputs = $('.code-inputs input')
@@ -311,7 +311,7 @@ $('.code-inputs input').on('paste', function (e) {
     code.forEach((number, i) => $(inputs[i]).val(number))
 })
 
-$('.verification-wrapper .code-inputs input').on('input paste', () => {
+$('.verification-wrapper .code-inputs input').bind('input paste', () => {
     const code = []
     $('.code-inputs input').each((i, input) => {
         if (input.value) {
@@ -581,7 +581,7 @@ $('#filters-form').submit(function() {
 
 //__________________________Change options_________________________//
 
-$('#vote-battle, #account-visibility').on('change', function () {
+$('#vote-battle, #account-visibility').bind('change', function () {
     const name = $(this).attr('name')
     const value = $(this).prop('checked')
 

@@ -14,20 +14,17 @@ class UpdateController extends Controller
     {
         $validated = $request->validated();
 
-        $ban = $validated['is_banned'] and ! $creator->is_banned;
+        if ($validated['is_banned'] and ! $creator->is_banned) {
+            CreatorInactivated::dispatch($creator);
+        }
 
-        $imgsToDelete = array_diff(
+        $deletedPhotos = array_diff(
             $creator->photos ?? [],
             $validated['photos'] ?? []
         );
+        Image::deleteByIds($deletedPhotos);
 
         $creator->update($validated);
-
-        Image::deleteByIds($imgsToDelete);
-        
-        if ($ban) {
-            CreatorInactivated::dispatch($creator);
-        }
 
         return response(['message' => 'OK',]);
     }

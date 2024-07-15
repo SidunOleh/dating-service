@@ -35,7 +35,7 @@ class SeedApp extends Command
             return $this->spawn($processes);
         }
 
-        $images = Image::limit(5)->get();
+        $images = Image::all();
 
         for ($i=0; $i < 100; $i++) { 
             try {
@@ -51,8 +51,6 @@ class SeedApp extends Command
                 
             }
         }
-
-        $images = Image::offset(5)->limit(5)->get();
 
         for ($i=0; $i < 30; $i++) { 
             try {

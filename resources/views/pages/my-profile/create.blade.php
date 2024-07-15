@@ -239,7 +239,6 @@
                 location: {
                     map: null,
                     marker: null,
-                    show: false,
                 },
                 images: {
                     count: 12,
@@ -345,7 +344,7 @@
                 },
                 async nomitamin(street, zip) {
                     try {
-                        let locations = await $.get(`https://nominatim.openstreetmap.org/search?street=${street}}&postalcode=${zip}&countrycodes=US&addressdetails=1&format=json`)
+                        let locations = await $.get(`https://nominatim.openstreetmap.org/search?street=${street}&postalcode=${zip}&countrycodes=US&addressdetails=1&format=json`)
                         
                         locations = locations.filter(location => {
                             if (! location.address.postcode) {
@@ -362,10 +361,10 @@
                 },
                 createMap(lat, lng) {
                     if (! this.location.map) {
-                        this.location.map = L.map('location')
-                            .setView([lat, lng], 15)
-                        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png')
-                            .addTo(this.location.map)
+                        this.location.map = L.map('location').setView([lat, lng], 15)
+
+                        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.location.map)
+                        
                         window.dispatchEvent(new Event('resize'))
                     } else {
                         this.location.map.setView([lat, lng], 15)

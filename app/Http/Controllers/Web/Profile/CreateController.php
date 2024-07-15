@@ -11,9 +11,9 @@ class CreateController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
-        // if ($creator->profile_is_created) {
-        //     return redirect()->route('my-profile.show');
-        // }
+        if ($creator->profile_is_created) {
+            return redirect()->route('my-profile.show');
+        }
 
         return view('pages.my-profile.create', [
             'creator' => $creator,

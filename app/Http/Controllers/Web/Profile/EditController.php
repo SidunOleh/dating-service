@@ -11,8 +11,19 @@ class EditController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
+        if (! $creator->profile_is_created) {
+            return redirect()->route('my-profile.create');
+        }
+
+        if ($creator->profileRequests()->where('status', 'undone')->count()) {
+            return redirect()->route('my-profile.show');
+        }
+
+        $request = $creator->latestProfileRequest;
+
         return view('pages.my-profile.edit', [
             'creator' => $creator,
+            'request' => $request,
         ]);
     }
 }

@@ -70,20 +70,20 @@ class Image extends Model
 
             $manager = new ImageManager(new Driver());
             $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));
-
-            if ($watermark) {
-                SpatieImage::load(Storage::disk($disk)->path($path))->watermark(
-                    storage_path('watermark.png'),
-                    AlignPosition::Center,
-                    width: 100,
-                    widthUnit: Unit::Percent,
-                    height: 100,
-                    heightUnit: Unit::Percent,
-                    alpha: 10
-                )->save();
-            }
         } else {
             $path = $uploaded->store(date('Y') . '/' . date('m'), $disk);
+        }
+
+        if ($watermark) {
+            SpatieImage::load(Storage::disk($disk)->path($path))->watermark(
+                storage_path('watermark.png'),
+                AlignPosition::Center,
+                width: 100,
+                widthUnit: Unit::Percent,
+                height: 100,
+                heightUnit: Unit::Percent,
+                alpha: 10
+            )->save();
         }
 
         $image = self::create([

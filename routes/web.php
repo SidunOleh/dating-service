@@ -20,6 +20,7 @@ use App\Http\Controllers\Web\Password\ResetController;
 use App\Http\Controllers\Web\Password\ResetPageController;
 use App\Http\Controllers\Web\Plisio\CallbackController;
 use App\Http\Controllers\Web\Profile\CreateController;
+use App\Http\Controllers\Web\Profile\DeleteController as ProfileDeleteController;
 use App\Http\Controllers\Web\Profile\EditController;
 use App\Http\Controllers\Web\Profile\ShowController;
 use App\Http\Controllers\Web\Profile\StoreController;
@@ -139,6 +140,8 @@ Route::prefix('/my-profile')
         ->name('update');
     Route::patch('/switch-option', SwitchOptionController::class)
         ->name('switch-option');
+    Route::delete('/{creator}', ProfileDeleteController::class)
+        ->name('delete');
 });
 
 /**

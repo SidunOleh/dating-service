@@ -22,16 +22,16 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [            
-            'phone' => 'string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
-            'telegram' => 'string|nullable',
-            'whatsapp' => 'string|nullable',
+            'phone' => 'required_without_all:telegram,whatsapp|string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
+            'telegram' => 'required_without_all:phone,whatsapp|string|nullable',
+            'whatsapp' => 'required_without_all:telegram,phone|string|nullable',
             'snapchat' => 'string|nullable',
             'instagram' => 'string|nullable',
             'onlyfans' => 'string|nullable',
             'profile_email' => 'email|nullable',
 
             'street' => 'required|string',
-            'zip' => 'required|exists:zip_codes,zip',
+            'zip' => 'required|numeric|exists:zip_codes,zip',
             'state' => 'required|string',
             'city' => 'required|string',
             'latitude' => 'required|between:-90,90',

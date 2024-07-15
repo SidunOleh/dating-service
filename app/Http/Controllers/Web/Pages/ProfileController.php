@@ -29,7 +29,7 @@ class ProfileController extends Controller
             $recommendCount = $recommendCount * 3 + 3;
         }
 
-        $recommendations =  Creator::recommendations($recommendCount, [$creator->id,], session('filters', []));
+        $recommendations = Creator::recommendations($recommendCount, [$creator->id,], session('filters', []));
 
         if ($recommendations->count() < $recommendCount) {
             $count = $recommendCount - $recommendations->count();

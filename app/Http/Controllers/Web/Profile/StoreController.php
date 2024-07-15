@@ -15,7 +15,7 @@ class StoreController extends Controller
         if ($creator->profile_is_created) {
             return abort(400);
         }
-        
+
         $creator->createProfileRequest($requets->validated());
         
         $creator->profile_is_created = true;

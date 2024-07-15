@@ -256,6 +256,27 @@ class Creator extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
+    public function updateWithoutRequest(array $data): bool
+    {
+        foreach ($this->approvable as $field) {
+            if (! array_key_exists($field, $data)) {
+                continue;
+            }
+
+            if (! $data[$field]) {
+                $this->{$field} = null;
+            }
+
+            if ($field == 'photos') {
+                $this->photos = array_intersect($this->photos ?? [], $data['photos']);
+                $deletedPhotos = array_diff($this->photos ?? [], $data['photos']);
+                Image::deleteByIds($deletedPhotos);
+            }
+        }
+
+        return $this->save();
+    }
+
     public function createProfileRequest(array $data): ?ProfileRequest
     {
         $request = [];
@@ -321,6 +342,17 @@ class Creator extends Authenticatable
         }
 
         return $this->{$field} != $value;
+    }
+    
+    public function deleteProfile(): bool
+    {
+        foreach ($this->approvable as $field) {
+            $this->{$field} = null;
+        }
+
+        $this->profile_is_created = false;
+
+        return $this->save();
     }
 
     public function profileRequests(): HasMany
@@ -542,24 +574,24 @@ class Creator extends Authenticatable
 
     public function visitsCount(?string $interval = null): int
     {   
-        $query = $this->visits();
+        $visits = $this->visits();
 
         if ($interval == 'month') {
-            $query->whereRaw("YEAR(`created_at`) = " . date('Y'))
+            $visits->whereRaw("YEAR(`created_at`) = " . date('Y'))
                 ->whereRaw("MONTH(`created_at`) = " . date('m'));
         }
 
         if ($interval == 'week') {
-            $query->whereRaw("YEAR(`created_at`) = " . date('Y'))
+            $visits->whereRaw("YEAR(`created_at`) = " . date('Y'))
                 ->whereRaw("WEEK(`created_at`) = " . date('W') - 1);
         }
 
         if ($interval == 'day') {
-            $query->whereRaw('YEAR(`created_at`) = ' . date('Y'))
+            $visits->whereRaw('YEAR(`created_at`) = ' . date('Y'))
                 ->whereRaw('MONTH(`created_at`) = ' . date('m'))
                 ->whereRaw('DAY(`created_at`) = ' . date('d'));
         }
 
-        return $query->count();
+        return $visits->count();
     }
 }

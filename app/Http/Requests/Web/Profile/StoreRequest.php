@@ -32,14 +32,12 @@ class StoreRequest extends FormRequest
 
             'street' => 'required|string',
             'zip' => 'required|numeric|exists:zip_codes,zip',
-            'state' => 'required|string',
-            'city' => 'required|string',
             'latitude' => 'required|between:-90,90',
             'longitude' => 'required|between:-180,180',
 
             'name' => 'required|string|min:2|max:8',
             'age' => 'required|integer|between:18,100',
-            'gender' => 'string|in:Man,Woman,LGBTQ|nullable',
+            'gender' => 'string|in:Man,Woman,LGBTQIA+|nullable',
             'description' => 'required|string|min:50|max:150',
 
             'photos' => 'required|array|min:1|max:12',

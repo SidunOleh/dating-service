@@ -593,3 +593,22 @@ $('#vote-battle, #account-visibility').bind('change', function () {
         contentType: 'application/json',
     })
 })
+
+//__________________________Delete profile_________________________//
+
+$('.delete-acc').click(() => $('#delete-popup').addClass('active'))
+
+$('#delete-popup #close-popup-btn').click(() => {
+    $('#delete-popup').removeClass('active')
+})
+
+$('#delete-popup #confirm-delete').click(() => {
+    $.ajax({
+        type: 'DELETE',
+        url: '/my-profile',
+    }).then(() => {
+        location.href = '/my-profile/create'
+    }).catch(jqXHR => {
+        alert(jqXHR.responseJSON.message)
+    })
+})

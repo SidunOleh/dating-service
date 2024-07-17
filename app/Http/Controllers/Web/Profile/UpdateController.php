@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Profile\UpdateRequest;
+use App\Models\ZipCode;
 use Illuminate\Support\Facades\Auth;
 
 class UpdateController extends Controller
@@ -22,7 +23,12 @@ class UpdateController extends Controller
 
         $validated = $requets->validated();
 
+        $zip = ZipCode::firstWhere('zip', $validated['zip']);
+        $validated['state'] = $zip['state'];
+        $validated['city'] = $zip['city'];
+
         $creator->updateWithoutRequest($validated);
+        
         $creator->createProfileRequest($validated);
 
         return response(['message' => 'OK',]);

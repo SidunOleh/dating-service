@@ -41,41 +41,34 @@ class DoneRequest extends FormRequest
             $rules["{$field}.value"] = 'string|nullable';
             $rules["{$field}.status"] = 'in:approved,rejected';
             $rules["{$field}.comment"] = 'string|nullable';
-            $rules["{$field}.show_rejected"] = 'boolean';
         } 
 
         $rules['age'] = 'array|nullable';
         $rules['age.value'] = 'integer|nullable';
         $rules['age.status'] = 'in:approved,rejected';
         $rules['age.comment'] = 'string|nullable';
-        $rules['age.show_rejected'] = 'boolean';
 
         $rules['birthday'] = 'array|nullable';
         $rules['birthday.value'] = 'date_format:Y-m-d|nullable';
         $rules['birthday.status'] = 'in:approved,rejected';
         $rules['birthday.comment'] = 'string|nullable';
-        $rules['birthday.show_rejected'] = 'boolean';
 
         $rules['verification_photo'] = 'array|nullable';
         $rules['verification_photo.value'] = 'exists:images,id|nullable';
         $rules['verification_photo.status'] = 'in:approved,rejected';
         $rules['verification_photo.comment'] = 'string|nullable';
-        $rules['verification_photo.show_rejected'] = 'boolean';
         $rules['id_photo'] = 'array|nullable';
         $rules['id_photo.value'] = 'exists:images,id|nullable';
         $rules['id_photo.status'] = 'in:approved,rejected';
         $rules['id_photo.comment'] = 'string|nullable';
-        $rules['id_photo.show_rejected'] = 'boolean';
         $rules['street_photo'] = 'array|nullable';
         $rules['street_photo.value'] = 'exists:images,id|nullable';
         $rules['street_photo.status'] = 'in:approved,rejected';
         $rules['street_photo.comment'] = 'string|nullable';
-        $rules['street_photo.show_rejected'] = 'boolean';
 
         $rules['location'] = 'array|nullable';
         $rules['location.status'] = 'in:approved,rejected';
         $rules['location.comment'] = 'string|nullable';
-        $rules['location.show_rejected'] = 'boolean';
         $rules['location.value.zip'] = 'numeric|exists:zip_codes,zip|nullable';
         $rules['location.value.state'] = 'string|nullable';
         $rules['location.value.city'] = 'string|nullable';
@@ -90,8 +83,6 @@ class DoneRequest extends FormRequest
         $rules['photos.status.*'] = 'in:approved,rejected';
         $rules['photos.comment'] = 'array';
         $rules['photos.comment.*'] = 'string|nullable';
-        $rules['photos.show_rejected'] = 'array';
-        $rules['photos.show_rejected.*'] = 'boolean';
 
         return $rules;
     }

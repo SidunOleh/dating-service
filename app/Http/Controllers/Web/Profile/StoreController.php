@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Profile\StoreRequest;
+use App\Models\ZipCode;
 use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
@@ -16,7 +17,13 @@ class StoreController extends Controller
             return abort(400);
         }
 
-        $creator->createProfileRequest($requets->validated());
+        $validated = $requets->validated();
+
+        $zip = ZipCode::firstWhere('zip', $validated['zip']);
+        $validated['state'] = $zip->state;
+        $validated['city'] = $zip->city;
+
+        $creator->createProfileRequest($validated);
         
         $creator->profile_is_created = true;
         $creator->save();

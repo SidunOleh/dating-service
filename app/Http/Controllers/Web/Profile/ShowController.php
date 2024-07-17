@@ -15,8 +15,11 @@ class ShowController extends Controller
             return redirect()->route('my-profile.create');
         }
 
+        $request = $creator->latestProfileRequest;
+
         return view('pages.my-profile.show', [
             'creator' => $creator,
+            'request' => $request,
         ]);
     }
 }

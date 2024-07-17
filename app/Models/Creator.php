@@ -187,7 +187,27 @@ class Creator extends Authenticatable
 
     public function gallery(): BelongsToJson
     {
-        return $this->belongsToJson(Image::class, 'photos');
+        if ($this->photos) {
+            $ids = implode(',', $this->photos);
+
+            return $this->belongsToJson(Image::class, 'photos')->orderByRaw("FIELD(`id`, {$ids})");
+        } else {
+            return $this->belongsToJson(Image::class, 'photos');
+        }
+    }
+
+    public function fullAddress(): string
+    {
+        if (! $this->street or ! $this->city or ! $this->state or ! $this->zip) {
+            return '';
+        }
+
+        return "{$this->street}, {$this->city}, {$this->state} {$this->zip}";
+    }
+
+    public function coordinates(): array
+    {
+        return ($this->latitude and $this->longitude) ? [$this->latitude, $this->longitude]: [];
     }
 
     public function verificationPhoto(): belongsTo
@@ -268,9 +288,9 @@ class Creator extends Authenticatable
             }
 
             if ($field == 'photos') {
-                $this->photos = array_intersect($this->photos ?? [], $data['photos']);
-                $deletedPhotos = array_diff($this->photos ?? [], $data['photos']);
-                Image::deleteByIds($deletedPhotos);
+                $this->photos = array_intersect($data['photos'], $this->photos ?? []);
+
+                Image::deleteByIds(array_diff($this->photos ?? [], $data['photos']));
             }
         }
 
@@ -310,7 +330,6 @@ class Creator extends Authenticatable
                     $data['longitude'];
                 $request['location']['status'] = 'pending';
                 $request['location']['comment'] = '';
-                $request['location']['show_rejected'] = true;
             } elseif ($field == 'photos') {
                 $photos = array_diff($data['photos'], $this->photos ?? []);
                 $request['photos']['value'] = $photos;
@@ -318,13 +337,10 @@ class Creator extends Authenticatable
                     array_fill(0, count($photos), 'pending');
                 $request['photos']['comment'] = 
                     array_fill(0, count($photos), '');
-                $request['photos']['show_rejected'] = 
-                    array_fill(0, count($photos), true);
             } else {
                 $request[$field]['value'] = $data[$field];
                 $request[$field]['status'] = 'pending';
                 $request[$field]['comment'] = '';
-                $request[$field]['show_rejected'] = true;
             }
         }
 
@@ -347,6 +363,10 @@ class Creator extends Authenticatable
     public function deleteProfile(): bool
     {
         foreach ($this->approvable as $field) {
+            if ($field == 'photos' and $this->{$field}) {
+                Image::deleteByIds($this->photos);
+            } 
+
             $this->{$field} = null;
         }
 

@@ -3,68 +3,14 @@
 <section class="profile-filling">
     <div class="container">
         
-        <div class="left-card">
-            <div class="title">Visit statistis</div>
-
-            <div class="statistic-list">
-                <div class="statistic-item">
-                    <span>Day:</span> {{ $creator->visitsCount('day') }}
-                </div>
-                <div class="statistic-item">
-                    <span>Week:</span> {{ $creator->visitsCount('week') }}
-                </div>
-                <div class="statistic-item">
-                    <span>Month:</span> {{ $creator->visitsCount('month') }}
-                </div>
-                <div class="statistic-item">
-                    <span>All time:</span> {{ $creator->visitsCount() }}
-                </div>
-            </div>
-            
-            <div class="toggle-container">
-                <div class="toggle-group">
-                    <label for="vote-battle">Vote battle</label>
-                    <div class="toggle-body">
-                        <span>Disabled</span>
-                        <label class="toggle">
-                            <input 
-                                type="checkbox" 
-                                id="vote-battle" 
-                                name="play_roulette"
-                                @checked($creator->play_roulette) />
-                            <span class="slider"></span>
-                        </label>
-                        <span>Enabled</span>
-                    </div>
-                </div>
-                <div class="info-text">
-                    <a href="#">What is it Roulette?</a>
-                </div>
-                <div class="toggle-group">
-                    <label for="account-visibility">Account visibility</label>
-                    <div class="toggle-body">
-                        <span>Disabled</span>
-                        <label class="toggle">
-                            <input 
-                                type="checkbox" 
-                                id="account-visibility"
-                                name="show_on_site"
-                                @checked($creator->show_on_site) />
-                            <span class="slider"></span>
-                        </label>
-                        <span>Enabled</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        @include('templates.options')
 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script type="module">
             import { createApp } from 'https://unpkg.com/petite-vue?module'
 
-            const multistepForm = {
+            const createForm = {
                 data: {
                     phone: '',
                     telegram: '',
@@ -75,8 +21,6 @@
                     profile_email: '',
                     street: '',
                     zip: null,
-                    state: '',
-                    city: '',
                     latitude: null,
                     longitude: null,
                     name: '',
@@ -92,19 +36,19 @@
                 },
                 steps: [
                     [],
-                    ['phone', 'telegram', 'whatsapp', 
-                    'instagram', 'snapchat', 'onlyfans', 
-                    'profile_email',],
-                    ['zip', 'street', 'state', 'latitude', 
-                    'longitude',],
-                    ['name', 'age', 'city', 'description',],
+                    ['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',],
+                    ['zip', 'street', 'latitude', 'longitude',],
+                    ['name', 'age', 'description',],
                     ['photos',],
-                    ['id_photo', 'id_photo', 'verification_photo', 
-                    'street_photo', 'first_name', 'last_name', 
-                    'birthday',],
+                    ['id_photo', 'verification_photo', 'street_photo', 'first_name', 'last_name', 'birthday',],
+                    [],
                 ],
                 rules: {
                     phone: [
+                        {
+                            message: 'One from Phone, Telegram, Whatsapp fields required',
+                            fn: val => val || createForm.data.telegram || createForm.data.whatsapp,
+                        },
                         {
                             message: 'Invalid format',
                             fn: val => ! val || val.match(/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/)
@@ -162,12 +106,6 @@
                         {
                             message: 'Maximum age 100',
                             fn: val => val <= 100,
-                        },
-                    ],
-                    city: [
-                        {
-                            message: 'City required',
-                            fn: val => val,
                         },
                     ],
                     description: [
@@ -239,6 +177,7 @@
                 location: {
                     map: null,
                     marker: null,
+                    loading: false,
                 },
                 images: {
                     count: 12,
@@ -248,42 +187,34 @@
                 step(number) {
                     const step = $(`[data-step=${number}]`)
                     step.addClass('active')
-
-                    const topOffset = step[0].offsetTop - $('#header').height()
-                    window.scrollTo({top: topOffset, behavior: 'smooth',})
+                    
+                    const offset = step[0].offsetTop - $('#header').height()
+                    window.scrollTo({top: offset, behavior: 'smooth',})
                 },
-                next(next) {
-                    const current = next - 1
+                next(number) {
+                    const fields = this.steps[number-2]
 
-                    const fields = this.steps[current-1]
-             
                     this.resetErrors(fields)
-                           
+                    
                     fields.forEach(field => this.validateField(field))
-
-                    if (current == 2 && !this.data.phone && !this.data.telegram && !this.data.whatsapp) {
-                        this.errors.phone = 'One from Phone, Telegram, Whatsapp fields required'
-                    }
                     
                     if (this.hasError(fields)) {
                         return
                     }
 
-                    if (current == 3) {
+                    if (number == 4) {
                         this.searchLocation()
                     } else {
-                        this.step(next)
+                        this.step(number)
                     }
                 },
                 resetErrors(fields) {
                     fields.forEach(field => delete this.errors[field])
                 },
                 validateField(field) {
-                    const rules = this.rules[field] ?? []
-
-                    for (let i = 0; i < rules.length; i++) {
-                        if (! rules[i].fn(this.data[field])) {
-                            this.errors[field] = rules[i].message
+                    for (const rule of this.rules[field] ?? []) {
+                        if (! rule.fn(this.data[field])) {
+                            this.errors[field] = rule.message
                             return
                         }
                     }
@@ -298,18 +229,18 @@
                     return false
                 },
                 formatPhone(e) {
-                    let x = e.target.value
+                    const phone = $(e.target).val()
                         .replace(/\D/g, '')
                         .match(/(\d{0,3})(\d{0,3})(\d{0,4})/)
-                    e.target.value = !x[2]
-                        ? x[1]
-                        : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '')
+                    $(e.target).val(
+                        !phone[2] ? 
+                        phone[1] : 
+                        '(' + phone[1] + ') ' + phone[2] + (phone[3] ? '-' + phone[3] : '')
+                    )
                 },
                 async searchLocation() {
                     this.location.loading = true
 
-                    this.data.state = ''
-                    this.data.city = ''
                     this.data.latitude = null 
                     this.data.longitude = null 
 
@@ -319,8 +250,6 @@
                         this.location.loading = false
                         return
                     }
-                    this.data.state = zip.state
-                    this.data.city = zip.city
 
                     const location = await this.nomitamin(this.data.street, this.data.zip)
                     if (! location) {
@@ -328,8 +257,9 @@
                         this.location.loading = false
                         return
                     }
-                    this.data.latitude = location.lat
-                    this.data.longitude = location.lon
+
+                    this.data.latitude = parseFloat(location.lat).toFixed(7)
+                    this.data.longitude = parseFloat(location.lon).toFixed(7)
                     
                     this.createMap(this.data.latitude, this.data.longitude)
 
@@ -344,7 +274,15 @@
                 },
                 async nomitamin(street, zip) {
                     try {
-                        let locations = await $.get(`https://nominatim.openstreetmap.org/search?street=${street}&postalcode=${zip}&countrycodes=US&addressdetails=1&format=json`)
+                        const params = new URLSearchParams({
+                            street: street,
+                            postalcode: zip,
+                            countrycodes: 'US',
+                            addressdetails: 1,
+                            format: 'json',
+                        })
+
+                        let locations = await $.get(`https://nominatim.openstreetmap.org/search?${params.toString()}`)
                         
                         locations = locations.filter(location => {
                             if (! location.address.postcode) {
@@ -354,7 +292,7 @@
                             return location.address.postcode == zip
                         })
 
-                        return locations[0] 
+                        return locations[0]
                     } catch {
                         return false
                     }
@@ -362,7 +300,6 @@
                 createMap(lat, lng) {
                     if (! this.location.map) {
                         this.location.map = L.map('location').setView([lat, lng], 15)
-
                         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.location.map)
                         
                         window.dispatchEvent(new Event('resize'))
@@ -490,14 +427,23 @@
                     }).done(data => {
                         location.href = '/my-profile'
                     }).fail(jqXHR => {
-                        alert(jqXHR.responseJSON.message)
+                        if (jqXHR.status == 422) {
+                            const errors = jqXHR.responseJSON.errors
+                            for (const field in errors) {
+                                this.errors[field] = errors[field][0]    
+                            }
+
+                            this.step(1)
+                        } else {
+                            alert(jqXHR.responseJSON.message)
+                        }
                     }).always(() => {
                         this.loading = false
                     })
                 },
                 formatData() {
                     const data = {...this.data}
-                    
+
                     data.photos = data.photos.map(photo => photo.id)
                     data.id_photo = data.id_photo?.id ?? null
                     data.verification_photo = data.verification_photo?.id ?? null
@@ -511,12 +457,13 @@
                 },
             }
 
-            createApp(multistepForm).mount('#create-profile')
+            createApp(createForm).mount('#create-profile')
         </script>
 
         @verbatim
         <div class="form-container" id="create-profile">
             <form id="multiStepForm">
+
                 <!-- Step 1 -->
                 <div class="form-step active" data-step="1">
                     <div class="step-head">
@@ -545,7 +492,7 @@
                             </ul>
                         </div>
                         <div class="btn-group">
-                            <button class="btn red next-btn" type="button" id="nextBtn1" @click="next(2)">
+                            <button class="btn red next-btn" type="button" id="nextBtn1" @click="step(2)">
                                 I Agree
                             </button>
                         </div>
@@ -570,9 +517,9 @@
                                     id="tel"
                                     placeholder="(xxx) xxx-xxxx"
                                     required
+                                    maxlength="14"
                                     onkeydown="return event.key != 'Enter'"
                                     v-model="data.phone"
-                                    maxlength="14"
                                     @input="formatPhone"/>
                                 <div v-if="errors.phone" class="error-text">
                                     {{ errors.phone }}
@@ -758,20 +705,6 @@
                                     {{ errors.age }}
                                 </div>
                             </div>
-                            
-                            <div class="input-wrapper">
-                                <label for="city">Your city:*</label>
-                                <input 
-                                    type="text" 
-                                    id="city" 
-                                    placeholder="City" 
-                                    readonly
-                                    onkeydown="return event.key != 'Enter'"
-                                    v-model="data.city"/>
-                                <div v-if="errors.city" class="error-text">
-                                    {{ errors.city }}
-                                </div>
-                            </div>
 
                             <div class="input-wrapper">
                                 <label for="description">Description:*</label>
@@ -827,9 +760,12 @@
                                 <div id="photos">
 
                                     <div v-for="(photo, i) in data.photos" style="position: relative; display: inline-block;">
-                                        <img :src="photo.status == 'loaded' ? photo.url : '/assets/img/img-loading.webp'">
+                                        <img v-if="photo.status == 'loaded'" :src="photo.url">
+                                        <img v-if="photo.status == 'loading'" src="/assets/img/img-loading.webp">
+
                                         <button class="move-button move-up" type="button" @click="moveUp(i)">↑</button>
                                         <button class="move-button move-down" type="button" @click="moveDown(i)">↓</button>
+                                        
                                         <span :class="{'remove-photo': true, 'none': photo.status == 'loading'}" @click="remove(i)">×</span>
                                     </div>
 
@@ -837,11 +773,11 @@
                             </div>
 
                             <div v-if="data.photos.length >= 1" class="photo-count" id="photoCount">
-                                Available number of photos: {{ data.photos.length }}/12
+                                Available number of photos: {{ data.photos.length }}/{{ images.count }}
                             </div>
                             
                             <div class="btn-group">
-                                <button v-if="data.photos.length >= 1 && data.photos.length < 12" id="customButton2" type="button" class="btn" @click="$('#photoInput').click()">
+                                <button v-if="data.photos.length >= 1 && data.photos.length < images.count" id="customButton2" type="button" class="btn" @click="$('#photoInput').click()">
                                     Add photo
                                 </button>
                                 <button v-if="data.photos.length >= 1" class="btn red next-btn" type="button" id="nextBtn5" @click="next(6)">
@@ -870,7 +806,8 @@
                                 <label for="document-photo">Photo of the document (driver's license)*</label>
                                 <div class="image-card">
                                     <img v-if="!data.id_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.id_photo" :src="data.id_photo?.status == 'loaded' ? data.id_photo.url : '/assets/img/img-loading.webp'" alt="">
+                                    <img v-if="data.id_photo?.status == 'loading'" src="/assets/img/img-loading.webp" alt="">
+                                    <img v-if="data.id_photo?.status == 'loaded'" :src="data.id_photo?.url" alt="">
                                 </div>
                                 <input
                                     type="file"
@@ -904,7 +841,8 @@
                                 <label for="permission-photo">A photo with "I give permission to use this photo"*</label>
                                 <div class="image-card">
                                     <img v-if="!data.verification_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.verification_photo" :src="data.verification_photo?.status == 'loaded' ? data.verification_photo.url : '/assets/img/img-loading.webp'" alt="">
+                                    <img v-if="data.verification_photo?.status == 'loading'" src="/assets/img/img-loading.webp" alt="">
+                                    <img v-if="data.verification_photo?.status == 'loaded'" :src="data.verification_photo?.url" alt="">
                                 </div>
                                 <input
                                     type="file"
@@ -937,8 +875,9 @@
                             <div class="verification-section">
                                 <label for="street-photo">Street photo*</label>
                                 <div class="image-card">
-                                    <img v-if="!data.street_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.street_photo" :src="data.street_photo?.status == 'loaded' ? data.street_photo.url : '/assets/img/img-loading.webp'" alt="">
+                                <img v-if="!data.street_photo" src="/assets/img/person-doc.jpeg" alt=""/>
+                                    <img v-if="data.street_photo?.status == 'loading'" src="/assets/img/img-loading.webp" alt="">
+                                    <img v-if="data.street_photo?.status == 'loaded'" :src="data.street_photo?.url" alt="">
                                 </div>
                                 <input 
                                     type="file" 
@@ -983,6 +922,7 @@
                                         {{ errors.first_name }}
                                     </div>
                                 </div>
+
                                 <div class="input-wrapper">
                                     <label for="last-name">Last name*</label>
                                     <input 
@@ -1015,11 +955,11 @@
                             </div>
 
                             <div class="btn-group">
-                                <button class="btn red next-btn" type="button" id="nextBtn6" @click="next(7)">
-                                    Next step
-                                </button>
                                 <button class="btn next-btn" type="button" id="skip" @click="step(7)">
                                     Skip
+                                </button>
+                                <button class="btn red next-btn" type="button" id="nextBtn6" @click="next(7)">
+                                    Next step
                                 </button>
                             </div>
                         </div>
@@ -1048,6 +988,7 @@
                         </div>
                     </div>
                 </div>
+                
             </form>
         </div>
         @endverbatim

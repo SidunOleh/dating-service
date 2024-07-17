@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -58,6 +59,23 @@ class ProfileRequest extends Model
         'verification_photo' => 'array',
         'id_photo' => 'array',
         'street_photo' => 'array',
+    ];
+
+    protected $sections = [
+        'info' => [
+            'name', 
+            'age', 
+            'gender',
+        ],
+        'contacts' => [
+            'phone', 
+            'profile_email',
+            'instagram',
+            'telegram',
+            'snapchat',
+            'onlyfans',
+            'whatsapp',
+        ],
     ];
 
     public function creator(): BelongsTo
@@ -154,5 +172,90 @@ class ProfileRequest extends Model
             ->whereHas('creator', function (Builder $query) use($approved) {
                 $query->where('is_approved', $approved);
             })->orderBy('created_at', 'DESC')->first();
+    }
+
+    public function fullAddress(): string
+    {
+        return $this->location ? "{$this->location['value']['street']}, {$this->location['value']['city']}, {$this->location['value']['state']} {$this->location['value']['zip']}" : '';
+    }
+
+    public function coordinates()
+    {
+        return $this->location ? [$this->location['value']['latitude'], $this->location['value']['longitude']]: [];
+    }
+
+    public function sectionStatus(string $section): string
+    {
+        foreach ($this->sections[$section] ?? [] as $field) {
+            if (! $this->{$field} or $this->{$field}['status'] == 'approved') {
+                continue;
+            }
+
+            return $this->{$field}['status'];
+        }
+
+        return 'approved';
+    }
+
+    public function sectionComments(string $section): array
+    {
+        $comments = [];
+        foreach ($this->sections[$section] ?? [] as $field) {
+            if (! $this->{$field} or ! $this->{$field}['comment']) {
+                continue;
+            }
+
+            $comments[] = $this->{$field}['comment'];
+        }
+
+        return $comments;
+    }
+
+    public function editFormData(): array
+    {
+        $data = [];
+
+        foreach ([
+            'phone',
+            'telegram',
+            'whatsapp',
+            'telegram',
+            'instagram',
+            'snapchat',
+            'onlyfans',
+            'profile_email',
+            'name',
+            'age',
+            'description',
+            'first_name',
+            'last_name',
+        ] as $field) {
+            $data[$field] = $this->{$field}['value'] ?? $this->creator->{$field};
+        }
+
+        foreach ([
+            'street',
+            'zip',
+            'state',
+            'city',
+            'latitude',
+            'longitude',
+        ] as $field) {
+            $data[$field] = $this->location['value'][$field] ?? $this->creator->{$field};
+        }
+        
+        $data['photos'] = $this->creator->gallery;
+        
+        $data['id_photo'] = $this->idPhoto ?? $this->creator->idPhoto;
+        $data['verification_photo'] = $this->verificationPhoto ?? $this->creator->verificationPhoto;
+        $data['street_photo'] = $this->streetPhoto ?? $this->creator->streetPhoto;
+
+        if ($this->birthday) {
+            $data['birthday'] = Carbon::parse($this->birthday['value'])->format('m/d/Y');
+        } else {
+            $data['birthday'] = $this->creator->birthday ? $this->creator->birthday->format('m/d/Y') : '';
+        }
+
+        return $data;
     }
 }

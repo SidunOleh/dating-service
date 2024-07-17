@@ -109,22 +109,6 @@
                 </FormItem>
 
                 <FormItem
-                    label="Email"
-                    :class="data.profile_email?.status">
-                    
-                    <Input
-                        style="margin-bottom: 10px;"
-                        readonly 
-                        :value="data.profile_email ? data.profile_email?.value : data.creator?.profile_email"/>
-                    
-                    <ApproveField
-                        v-if="data.profile_email" 
-                        v-model:status="data.profile_email.status"
-                        v-model:comment="data.profile_email.comment"/>
-
-                </FormItem>
-
-                <FormItem
                     label="Telegram"
                     :class="data.telegram?.status">
                     
@@ -137,6 +121,38 @@
                         v-if="data.telegram" 
                         v-model:status="data.telegram.status"
                         v-model:comment="data.telegram.comment"/>
+
+                </FormItem>
+
+                <FormItem
+                    label="Whatsapp"
+                    :class="data.whatsapp?.status">
+                    
+                    <Input
+                        style="margin-bottom: 10px;"
+                        readonly 
+                        :value="data.whatsapp ? data.whatsapp?.value : data.creator?.whatsapp"/>
+                    
+                    <ApproveField
+                        v-if="data.whatsapp" 
+                        v-model:status="data.whatsapp.status"
+                        v-model:comment="data.whatsapp.comment"/>
+
+                </FormItem>
+
+                <FormItem
+                    label="Email"
+                    :class="data.profile_email?.status">
+                    
+                    <Input
+                        style="margin-bottom: 10px;"
+                        readonly 
+                        :value="data.profile_email ? data.profile_email?.value : data.creator?.profile_email"/>
+                    
+                    <ApproveField
+                        v-if="data.profile_email" 
+                        v-model:status="data.profile_email.status"
+                        v-model:comment="data.profile_email.comment"/>
 
                 </FormItem>
 
@@ -495,6 +511,7 @@ export default {
                     this.data[field]?.status == 'pending' ||
                     this.data[field]?.status?.includes('pending')
                 ) {
+                    console.log(this.data, field)
                     return false
                 }
             }

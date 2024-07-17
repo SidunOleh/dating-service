@@ -140,7 +140,7 @@ Route::prefix('/my-profile')
         ->name('update');
     Route::patch('/switch-option', SwitchOptionController::class)
         ->name('switch-option');
-    Route::delete('/{creator}', ProfileDeleteController::class)
+    Route::delete('/', ProfileDeleteController::class)
         ->name('delete');
 });
 

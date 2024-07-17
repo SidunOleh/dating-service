@@ -21,9 +21,12 @@ class EditController extends Controller
 
         $request = $creator->latestProfileRequest;
 
+        $data = $creator->latestProfileRequest->editFormData();
+
         return view('pages.my-profile.edit', [
             'creator' => $creator,
             'request' => $request,
+            'data' => $data,
         ]);
     }
 }

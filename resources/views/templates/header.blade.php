@@ -126,7 +126,7 @@
                                     <option disabled selected>
                                         All
                                     </option>
-                                    @foreach(['Man', 'Woman', 'LGBTQ+',] as $gender)
+                                    @foreach(['Man', 'Woman', 'LGBTQIA+',] as $gender)
                                     <option value="{{ $gender }}" @selected(request()->query('gender') == $gender)>
                                         {{ $gender }}
                                     </option>
@@ -162,7 +162,7 @@
                             <img src="{{ asset('assets/img/top.svg') }}" alt="" class="icon" />
                         </a>
                         
-                        <a href="" class="pages-item red">
+                        <a href="{{ route('my-profile.show') }}" class="pages-item red">
                             <p class="name">My post</p>
                             <img src="{{ asset('assets/img/post.svg') }}" alt="" class="icon" />
                         </a>

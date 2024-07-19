@@ -603,6 +603,8 @@ $('#delete-popup #close-popup-btn').click(() => {
 })
 
 $('#delete-popup #confirm-delete').click(() => {
+    $(this).prop('disabled', true)
+
     $.ajax({
         type: 'DELETE',
         url: '/my-profile',
@@ -610,5 +612,6 @@ $('#delete-popup #confirm-delete').click(() => {
         location.href = '/my-profile/create'
     }).catch(jqXHR => {
         alert(jqXHR.responseJSON.message)
+        $(this).prop('disabled', false)
     })
 })

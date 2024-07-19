@@ -17,7 +17,7 @@ class UpdateController extends Controller
             return abort(400);
         }
 
-        if ($creator->profileRequests()->where('status', 'undone')->count()) {
+        if ($creator->hasUndoneProfileRequest()) {
             return abort(400);
         }
 
@@ -27,8 +27,7 @@ class UpdateController extends Controller
         $validated['state'] = $zip['state'];
         $validated['city'] = $zip['city'];
 
-        $creator->updateWithoutRequest($validated);
-        
+        $creator->saveNotApprovableProfileChanges($validated);
         $creator->createProfileRequest($validated);
 
         return response(['message' => 'OK',]);

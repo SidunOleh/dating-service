@@ -13,7 +13,16 @@
             const data = {{ Js::from($data) }}
             
             const editForm = {
-                data,
+                data: data,
+                steps: [
+                    [],
+                    ['phone', 'telegram', 'whatsapp', 'snapchat', 'instagram', 'onlyfans', 'profile_email',],
+                    ['zip', 'street', 'latitude', 'longitude',],
+                    ['name', 'age', 'gender', 'description',],
+                    ['photos',],
+                    ['id_photo', 'verification_photo', 'street_photo', 'first_name', 'last_name', 'birthday',],
+                    [],
+                ],
                 rules: {
                     phone: [
                         {
@@ -44,7 +53,7 @@
                         },
                         {
                             message: 'ZIP Code invalid',
-                            fn: val => val.match(/[0-9]{5}/), 
+                            fn: val => val.match(/^[0-9]{5}$/), 
                         },
                     ],
                     name: [
@@ -68,7 +77,7 @@
                         },
                         {
                             message: 'Invalid age',
-                            fn: val => !isNaN(val),
+                            fn: val => val.match(/^[0-9]{1,}$/),
                         },
                         {
                             message: 'Must be 18+',
@@ -89,12 +98,6 @@
                             fn: val => val.length >= 50 && val.length <= 150
                         },
                     ],
-                    photos: [
-                        {
-                            message: 'At least 1 photo',
-                            fn: val => val.length >= 1,
-                        },
-                    ],
                     first_name: [
                         {
                             message: 'At least 2 letters',
@@ -105,12 +108,6 @@
                         {
                             message: 'At least 2 letters',
                             fn: val => ! val || val.length >= 2,
-                        },
-                    ],
-                    birthday: [
-                        {
-                            message: 'Invalid format',
-                            fn: val => ! val || (val.match(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/) && !isNaN(Date.parse(val)))
                         },
                     ],
                 },
@@ -125,6 +122,12 @@
                     size: 10 * 1024 * 1024,
                 },
                 loading: false,
+                step(number) {
+                    const step = $(`[data-step=${number}]`)
+                    
+                    const offset = step[0].offsetTop - $('#header').height()
+                    window.scrollTo({top: offset, behavior: 'smooth',})
+                },
                 validateField(field) {
                     delete this.errors[field]
 
@@ -158,12 +161,16 @@
                         return
                     }
 
+                    delete this.errors.zip
+
                     const location = await this.nomitamin(this.data.street, this.data.zip)
                     if (! location) {
                         this.errors.street = 'Address Not Found'
                         this.location.loading = false
                         return
                     }
+
+                    delete this.errors.street
 
                     this.data.latitude = parseFloat(location.lat).toFixed(7)
                     this.data.longitude = parseFloat(location.lon).toFixed(7)
@@ -287,15 +294,8 @@
                 remove(i) {
                     this.data.photos.forEach((photo, index) => {
                         if (index == i) {
-                            this.deleteImage(this.data.photos[i].id)
                             this.data.photos.splice(i, 1)
                         }
-                    })
-                },
-                deleteImage(id) {
-                    return $.ajax({
-                        type: 'DELETE',
-                        url: `/images/${id}`,
                     })
                 },
                 uploadVerificationPhoto(e) {
@@ -318,15 +318,19 @@
                         })
                 },
                 removeVerificationPhoto(photo) {
-                    this.deleteImage(this.data[photo].id)
                     this.data[photo] = null
                 },
+                scrollToError() {
+                    for (let i = 0; i < this.steps.length; i++) {
+                        for (const field of this.steps[i]) {
+                            if (field in this.errors) {
+                                this.step(i+1)
+                                return
+                            }
+                        }
+                    }
+                },
                 async send() {
-                    // if (Object.keys(this.errors).length) {
-                    //     window.scrollTo({top: 0, behavior: 'smooth',})
-                    //     return
-                    // }
-
                     this.loading = true
 
                     const data = this.formatData()
@@ -340,12 +344,13 @@
                         location.href = '/my-profile'
                     }).fail(jqXHR => {
                         if (jqXHR.status == 422) {
+                            this.errors = {}
                             const errors = jqXHR.responseJSON.errors
                             for (const field in errors) {
                                 this.errors[field] = errors[field][0]    
                             }
 
-                            window.scrollTo({top: 0, behavior: 'smooth',})
+                            this.scrollToError()
                         } else {
                             alert(jqXHR.responseJSON.message)
                         }
@@ -357,6 +362,7 @@
                     const data = {...this.data}
 
                     data.photos = data.photos.map(photo => photo.id)
+
                     data.id_photo = data.id_photo?.id ?? null
                     data.verification_photo = data.verification_photo?.id ?? null
                     data.street_photo = data.street_photo?.id ?? null
@@ -371,10 +377,9 @@
                     location.href = '/my-profile'
                 },
                 mounted() {
-                    this.createMap(
-                        this.data.latitude, 
-                        this.data.longitude
-                    )
+                    if (this.data.latitude && this.data.longitude) {
+                        this.createMap(this.data.latitude, this.data.longitude)
+                    }
                     
                     $('[v-clock]').removeAttr('v-clock')
                 },
@@ -392,7 +397,6 @@
         @verbatim
         <div class="form-container" id="create-profile" @vue:mounted="mounted">
             <form id="multiStepForm">
-
                 <!-- Step 1 -->
                 <div class="form-step active" data-step="1">
                     <div class="step-head">
@@ -438,7 +442,7 @@
                                 </label>
                                 <input
                                     type="text"
-                                    id="tel"
+                                    id="phone"
                                     placeholder="(xxx) xxx-xxxx"
                                     required
                                     maxlength="14"
@@ -578,11 +582,11 @@
                         </div>
 
                         <div class="btn-group">
-                            <button v-if="!location.map" class="btn red" type="button" id="search-location" @click="searchLocation">
+                            <button v-if="data.street && data.zip && !location.map" class="btn red" type="button" id="search-location" @click="searchLocation">
                                 <img v-if="location.loading" src="/assets/img/btn-loader.svg" alt="" class="loader" />
                                 Search
                             </button>
-                            <button v-if="location.map" class="btn" type="button" id="research-location" @click="searchLocation">
+                            <button v-if="data.street && data.zip && location.map" class="btn" type="button" id="research-location" @click="searchLocation">
                                 <img v-if="location.loading" src="/assets/img/btn-loader.svg" alt="" class="loader" />
                                 Research
                             </button>
@@ -853,13 +857,11 @@
                                 <div class="input-wrapper">
                                     <label for="dob">Date of birth</label>
                                     <input 
-                                        type="text"
+                                        type="date"
                                         id="dob" 
                                         name="dob" 
-                                        placeholder="06/22/2024" 
-                                        maxlength="10"
                                         onkeydown="return event.key != 'Enter'"
-                                        v-model="data.birthday" 
+                                        v-model="data.birthday"
                                         @focusout="validateField('birthday')"/>
                                     <div v-if="errors.birthday" class="error-text">
                                         {{ errors.birthday }}
@@ -895,7 +897,6 @@
                         </div>
                     </div>
                 </div>
-
             </form>
         </div>
         @endverbatim

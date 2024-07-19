@@ -28,36 +28,34 @@ class StoreRequest extends FormRequest
                 'required',
                 Password::min(8)->max(32),
             ],
-            
-            'photos' => 'array',
+
+            'photos' => 'required|array|min:1|max:12',
             'photos.*' => 'exists:images,id',
+
+            'name' => 'required|string|min:2|max:8',
+            'age' => 'required|integer|between:18,100',
+            'gender' => 'in:Man,Woman,LGBTQIA+|nullable',
+            'description' => 'required|string|min:50|max:150',
             
-            'name' => 'string|nullable',
-            'age' => 'integer|between:18,100|nullable',
-            'gender' => 'in:Man,Woman,LGBTQ+|nullable',
-            'description' => 'string|max:150|nullable',
-            
-            'phone' => 'string|nullable',
-            'profile_email' => 'email|nullable',
-            'instagram' => 'string|nullable',
-            'telegram' => 'string|nullable',
+            'phone' => 'required_without_all:telegram,whatsapp|string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
+            'telegram' => 'required_without_all:phone,whatsapp|string|nullable',
+            'whatsapp' => 'required_without_all:phone,telegram|string|nullable',
             'snapchat' => 'string|nullable',
+            'instagram' => 'string|nullable',
             'onlyfans' => 'string|nullable',
-            'whatsapp' => 'string|nullable',
+            'profile_email' => 'email|nullable',
 
-            'zip' => 'numeric|exists:zip_codes,zip|nullable',
-            'state' => 'string|nullable',
-            'city' => 'string|nullable',
-            'street' => 'string|nullable',
-            'latitude' => 'between:-90,90|nullable',
-            'longitude' => 'between:-180,180|nullable',
+            'street' => 'required|string',
+            'zip' => 'required|regex:/^[0-9]{5}$/|exists:zip_codes,zip',
+            'latitude' => 'required|between:-90,90',
+            'longitude' => 'required|between:-180,180',
 
-            'first_name' => 'string|nullable',
-            'last_name' => 'string|nullable',
-            'birthday' => 'date_format:Y-m-d|nullable',
-            'verification_photo' => 'exists:images,id|nullable',
-            'id_photo' => 'exists:images,id|nullable',
-            'street_photo' => 'exists:images,id|nullable',
+            'id_photo' => 'required_with:street_photo,verification_photo,first_name,last_name,birthday|exists:images,id|nullable',
+            'street_photo' => 'required_with:id_photo,verification_photo,first_name,last_name,birthday|exists:images,id|nullable',
+            'verification_photo' => 'required_with:id_photo,street_photo,first_name,last_name,birthday|exists:images,id|nullable',
+            'first_name' => 'required_with:id_photo,street_photo,verification_photo,last_name,birthday|string|min:2|nullable',
+            'last_name' => 'required_with:id_photo,street_photo,verification_photo,first_name,birthday|string|min:2|nullable',
+            'birthday' => 'required_with:id_photo,street_photo,verification_photo,first_name,last_name|date_format:Y-m-d|nullable',
         ];
     }
 }

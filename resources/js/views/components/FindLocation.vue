@@ -62,6 +62,7 @@ export default {
                 this.location.state = zip.data.state
 
                 const nominatim = await axios.get(`https://nominatim.openstreetmap.org/search?street=${this.location.street}&postalcode=${this.location.zip}&countrycodes=US&addressdetails=1&format=json`)
+                
                 nominatim.data = nominatim.data.filter(location => {
                     if (! location.address.postcode) {
                         return true

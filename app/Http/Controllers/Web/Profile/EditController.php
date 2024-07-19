@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Creator\EditCreatorData;
 use Illuminate\Support\Facades\Auth;
 
 class EditController extends Controller
@@ -15,18 +16,13 @@ class EditController extends Controller
             return redirect()->route('my-profile.create');
         }
 
-        if ($creator->profileRequests()->where('status', 'undone')->count()) {
+        if ($creator->hasUndoneProfileRequest()) {
             return redirect()->route('my-profile.show');
         }
 
-        $request = $creator->latestProfileRequest;
-
-        $data = $creator->latestProfileRequest->editFormData();
-
         return view('pages.my-profile.edit', [
             'creator' => $creator,
-            'request' => $request,
-            'data' => $data,
+            'data' => new EditCreatorData($creator),
         ]);
     }
 }

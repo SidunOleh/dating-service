@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -61,21 +60,26 @@ class ProfileRequest extends Model
         'street_photo' => 'array',
     ];
 
-    protected $sections = [
-        'info' => [
-            'name', 
-            'age', 
-            'gender',
-        ],
-        'contacts' => [
-            'phone', 
-            'profile_email',
-            'instagram',
-            'telegram',
-            'snapchat',
-            'onlyfans',
-            'whatsapp',
-        ],
+    protected $profileFields = [
+        'name',
+        'age',
+        'gender',
+        'description',
+        'phone',
+        'telegram',
+        'whatsapp',
+        'snapchat',
+        'instagram',
+        'onlyfans',
+        'profile_email',
+        'location',
+        'first_name',
+        'last_name',
+        'birthday',
+        'id_photo',
+        'street_photo',
+        'verification_photo',
+        'photos',
     ];
 
     public function creator(): BelongsTo
@@ -108,62 +112,89 @@ class ProfileRequest extends Model
         return $this->belongsTo(Image::class, 'street_photo->value');
     }
 
-    public function migrate(): bool
+    public function migrateDataToProfile(): bool
+    {
+        foreach ($this->profileFields as $field) {
+            if (! $this->{$field}) {
+                continue;
+            }
+
+            if (is_array($this->{$field}['status'])) {
+                $values = array_filter($this->{$field}['value'], function ($i) use($field) {
+                    return $this->{$field}['status'][$i] == 'approved';
+                }, ARRAY_FILTER_USE_KEY);
+    
+                $this->creator[$field] = array_merge($this->creator->{$field} ?? [], $values);
+                continue;
+            }
+
+            if ($this->{$field}['status'] != 'approved') {
+                continue;
+            }
+
+            $this->creator[$field] = $this->{$field}['value'];
+        }
+
+        return $this->creator->save();
+    }
+
+    public function profileData(): array
     {
         $data = [];
+        foreach ($this->profileFields as $field) {
+            $data[$field]['value'] = $this->{$field} ? 
+                $this->{$field}['value'] : 
+                $this->creator->{$field};
+            $data[$field]['status'] = $this->{$field} ? 
+                $this->{$field}['status'] : 
+                null;
+            $data[$field]['comment'] = $this->{$field} ? 
+                $this->{$field}['comment'] : 
+                null;
+        }
 
-        foreach ([
-            'name',
-            'age',
-            'gender',
-            'phone',
-            'profile_email',
-            'instagram',
-            'telegram',
-            'snapchat',
-            'onlyfans',
-            'whatsapp',
-            'description',
-            'first_name',
-            'last_name',
-            'birthday',
-            'verification_photo',
-            'id_photo',
-            'street_photo',
-        ] as $field) {
+        return $data;
+    }
+
+    public function status(array $fields): ?string
+    {
+        $hasApproved = false;
+        foreach ($fields as $field) {
+            if (! $this->{$field}) {
+                continue;
+            }
+
+            if ($this->{$field}['status'] == 'approved') {
+                $hasApproved = true;
+            }
+
             if (
-                isset($this->{$field}) and 
-                $this->{$field}['status'] == 'approved'
+                $this->{$field}['status'] == 'pending' or 
+                $this->{$field}['status'] == 'rejected'
             ) {
-                $data[$field] = $this->{$field}['value'];
+                return $this->{$field}['status'];
             }
         }
 
-        if (
-            isset($this->location) and 
-            $this->location['status'] == 'approved'
-        ) {
-            foreach ([
-                'zip',
-                'state',
-                'city',
-                'street',
-                'latitude',
-                'longitude',
-            ] as $field) {
-                $data[$field] = $this->location['value'][$field];
+        return $hasApproved ? 'approved' : null;
+    }
+
+    public function comments(array $fields): array
+    {
+        $comments = [];
+        foreach ($fields ?? [] as $field) {
+            if (! $this->{$field} or $this->{$field}['status'] != 'rejected') {
+                continue;
+            }
+
+            if (is_array($this->{$field}['comment'])) {
+                $comments = array_merge($comments, $this->{$field}['comment']);
+            } else {
+                $comments[] = $this->{$field}['comment'];
             }
         }
 
-        if (isset($this->photos)) {
-            $photos = array_filter($this->photos['value'], function ($i) {
-                return $this->photos['status'][$i] == 'approved';
-            }, ARRAY_FILTER_USE_KEY);
-
-            $data['photos'] = array_merge($this->creator->photos ?? [], $photos);
-        }
-
-        return $this->creator->update($data);
+        return $comments;
     }
 
     public static function next(bool $approved): ?ProfileRequest
@@ -172,90 +203,5 @@ class ProfileRequest extends Model
             ->whereHas('creator', function (Builder $query) use($approved) {
                 $query->where('is_approved', $approved);
             })->orderBy('created_at', 'DESC')->first();
-    }
-
-    public function fullAddress(): string
-    {
-        return $this->location ? "{$this->location['value']['street']}, {$this->location['value']['city']}, {$this->location['value']['state']} {$this->location['value']['zip']}" : '';
-    }
-
-    public function coordinates()
-    {
-        return $this->location ? [$this->location['value']['latitude'], $this->location['value']['longitude']]: [];
-    }
-
-    public function sectionStatus(string $section): string
-    {
-        foreach ($this->sections[$section] ?? [] as $field) {
-            if (! $this->{$field} or $this->{$field}['status'] == 'approved') {
-                continue;
-            }
-
-            return $this->{$field}['status'];
-        }
-
-        return 'approved';
-    }
-
-    public function sectionComments(string $section): array
-    {
-        $comments = [];
-        foreach ($this->sections[$section] ?? [] as $field) {
-            if (! $this->{$field} or ! $this->{$field}['comment']) {
-                continue;
-            }
-
-            $comments[] = $this->{$field}['comment'];
-        }
-
-        return $comments;
-    }
-
-    public function editFormData(): array
-    {
-        $data = [];
-
-        foreach ([
-            'phone',
-            'telegram',
-            'whatsapp',
-            'telegram',
-            'instagram',
-            'snapchat',
-            'onlyfans',
-            'profile_email',
-            'name',
-            'age',
-            'description',
-            'first_name',
-            'last_name',
-        ] as $field) {
-            $data[$field] = $this->{$field}['value'] ?? $this->creator->{$field};
-        }
-
-        foreach ([
-            'street',
-            'zip',
-            'state',
-            'city',
-            'latitude',
-            'longitude',
-        ] as $field) {
-            $data[$field] = $this->location['value'][$field] ?? $this->creator->{$field};
-        }
-        
-        $data['photos'] = $this->creator->gallery;
-        
-        $data['id_photo'] = $this->idPhoto ?? $this->creator->idPhoto;
-        $data['verification_photo'] = $this->verificationPhoto ?? $this->creator->verificationPhoto;
-        $data['street_photo'] = $this->streetPhoto ?? $this->creator->streetPhoto;
-
-        if ($this->birthday) {
-            $data['birthday'] = Carbon::parse($this->birthday['value'])->format('m/d/Y');
-        } else {
-            $data['birthday'] = $this->creator->birthday ? $this->creator->birthday->format('m/d/Y') : '';
-        }
-
-        return $data;
     }
 }

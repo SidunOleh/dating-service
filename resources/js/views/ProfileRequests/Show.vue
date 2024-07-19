@@ -4,8 +4,7 @@
         {{ data.creator?.email }}
     </router-link>
 
-    <br>
-    <br>
+    <br><br>
                 
     <Form layout="vertical">
 
@@ -21,23 +20,20 @@
                 <FormItem
                     label="Name"
                     :class="data.name?.status">
-
                     <Input
                         style="margin-bottom: 10px;"
                         readonly 
-                        :value="data.name ? data.name?.value : data.data?.name"/>
+                        :value="data.name ? data.name?.value : data.creator?.name"/>
                     
                     <ApproveField
                         v-if="data.name" 
                         v-model:status="data.name.status"
                         v-model:comment="data.name.comment"/>
-
                 </FormItem>
 
                 <FormItem
                     label="Age"
                     :class="data.age?.status">
-                    
                     <InputNumber
                         style="margin-bottom: 10px; width: 100%;"
                         readonly 
@@ -47,13 +43,11 @@
                         v-if="data.age" 
                         v-model:status="data.age.status"
                         v-model:comment="data.age.comment"/>
-
                 </FormItem>
 
                 <FormItem
                     label="Gender"
                     :class="data.gender?.status">
-                    
                     <Input
                         style="margin-bottom: 10px;"
                         readonly 
@@ -63,13 +57,11 @@
                         v-if="data.gender" 
                         v-model:status="data.gender.status"
                         v-model:comment="data.gender.comment"/>
-
                 </FormItem>
 
                 <FormItem
                     label="Description"
                     :class="data.description?.status">
-                    
                     <Textarea
                         style="margin-bottom: 10px;"
                         readonly
@@ -82,7 +74,6 @@
                         v-if="data.description" 
                         v-model:status="data.description.status"
                         v-model:comment="data.description.comment"/>
-
                 </FormItem>
 
             </CollapsePanel>
@@ -95,7 +86,6 @@
                 <FormItem
                     label="Phone"
                     :class="data.phone?.status">
-                    
                     <Input
                         style="margin-bottom: 10px;"
                         readonly 
@@ -105,13 +95,11 @@
                         v-if="data.phone" 
                         v-model:status="data.phone.status"
                         v-model:comment="data.phone.comment"/>
-
                 </FormItem>
 
                 <FormItem
                     label="Telegram"
                     :class="data.telegram?.status">
-                    
                     <Input
                         style="margin-bottom: 10px;"
                         readonly 
@@ -121,13 +109,11 @@
                         v-if="data.telegram" 
                         v-model:status="data.telegram.status"
                         v-model:comment="data.telegram.comment"/>
-
                 </FormItem>
 
                 <FormItem
                     label="Whatsapp"
                     :class="data.whatsapp?.status">
-                    
                     <Input
                         style="margin-bottom: 10px;"
                         readonly 
@@ -137,45 +123,11 @@
                         v-if="data.whatsapp" 
                         v-model:status="data.whatsapp.status"
                         v-model:comment="data.whatsapp.comment"/>
-
-                </FormItem>
-
-                <FormItem
-                    label="Email"
-                    :class="data.profile_email?.status">
-                    
-                    <Input
-                        style="margin-bottom: 10px;"
-                        readonly 
-                        :value="data.profile_email ? data.profile_email?.value : data.creator?.profile_email"/>
-                    
-                    <ApproveField
-                        v-if="data.profile_email" 
-                        v-model:status="data.profile_email.status"
-                        v-model:comment="data.profile_email.comment"/>
-
-                </FormItem>
-
-                <FormItem
-                    label="Instagram"
-                    :class="data.instagram?.status">
-                    
-                    <Input
-                        style="margin-bottom: 10px;"
-                        readonly 
-                        :value="data.instagram ? data.instagram?.value : data.creator?.instagram"/>
-                    
-                    <ApproveField
-                        v-if="data.instagram" 
-                        v-model:status="data.instagram.status"
-                        v-model:comment="data.instagram.comment"/>
-
                 </FormItem>
 
                 <FormItem
                     label="SnapChat"
                     :class="data.snapchat?.status">
-                    
                     <Input
                         style="margin-bottom: 10px;"
                         readonly 
@@ -185,13 +137,25 @@
                         v-if="data.snapchat" 
                         v-model:status="data.snapchat.status"
                         v-model:comment="data.snapchat.comment"/>
+                </FormItem>
 
+                <FormItem
+                    label="Instagram"
+                    :class="data.instagram?.status">
+                    <Input
+                        style="margin-bottom: 10px;"
+                        readonly 
+                        :value="data.instagram ? data.instagram?.value : data.creator?.instagram"/>
+                    
+                    <ApproveField
+                        v-if="data.instagram" 
+                        v-model:status="data.instagram.status"
+                        v-model:comment="data.instagram.comment"/>
                 </FormItem>
 
                 <FormItem
                     label="Onlyfans"
-                    :class="data.onlyfans?.status">
-                    
+                    :class="data.onlyfans?.status">                   
                     <Input
                         style="margin-bottom: 10px;"
                         readonly 
@@ -201,7 +165,20 @@
                         v-if="data.onlyfans" 
                         v-model:status="data.onlyfans.status"
                         v-model:comment="data.onlyfans.comment"/>
+                </FormItem>
 
+                <FormItem
+                    label="Email"
+                    :class="data.profile_email?.status">
+                    <Input
+                        style="margin-bottom: 10px;"
+                        readonly 
+                        :value="data.profile_email ? data.profile_email?.value : data.creator?.profile_email"/>
+                    
+                    <ApproveField
+                        v-if="data.profile_email" 
+                        v-model:status="data.profile_email.status"
+                        v-model:comment="data.profile_email.comment"/>
                 </FormItem>
 
             </CollapsePanel>
@@ -216,7 +193,6 @@
                     :class="data.location?.status">
                     
                     <Flex :gap="5">
-
                         <Input 
                             style="margin-bottom: 10px;"
                             placeholder="Street"
@@ -227,25 +203,33 @@
                             style="margin-bottom: 10px; width: 300px;"
                             placeholder="Zip"
                             readonly
-                            :value="data.location ? data.location?.value?.zip : data.location?.value?.zip"/>
-
+                            :value="data.location ? data.location?.value?.zip : data.creator?.zip"/>
                     </Flex>
 
-                    <div
-                        v-if="data.location?.value?.city && data.location?.value?.state"
-                        style="margin-bottom: 10px;">
-                        {{ data.location?.value?.city }}, {{ data.location?.value?.state }}
+                    <div v-if="data.location">
+                        <div style="margin-bottom: 10px;">
+                            {{ data.location?.value?.city }}, {{ data.location?.value?.state }}
+                        </div>
+
+                        <ShowLocation 
+                            style="margin-bottom: 10px;"
+                            :location="[data.location?.value?.latitude, data.location?.value?.longitude]"/>
+
+                        <ApproveField
+                            style="margin-top: 10px;" 
+                            v-model:status="data.location.status"
+                            v-model:comment="data.location.comment"/>
                     </div>
 
-                    <ShowLocation 
-                        v-if="data.location?.value?.latitude && data.location?.value?.longitude"
-                        style="margin-bottom: 10px;"
-                        :location="[data.location?.value?.latitude, data.location?.value?.longitude]"/>
+                    <div v-if="!data.location && data.creator?.city && data.creator?.state && data.creator?.latitude && data.creator?.longitude">
+                        <div style="margin-bottom: 10px;">
+                            {{ data.creator?.city }}, {{ data.creator?.state }}
+                        </div>
 
-                    <ApproveField
-                        v-if="data.location" 
-                        v-model:status="data.location.status"
-                        v-model:comment="data.location.comment"/>
+                        <ShowLocation 
+                            style="margin-bottom: 10px;"
+                            :location="[data.creator?.latitude, data.creator?.longitude]"/>
+                    </div>
 
                 </FormItem>
 
@@ -311,28 +295,8 @@
                 </FormItem>
 
                 <FormItem
-                    label="Verification photo"
-                    :class="data.verification_photo?.status">
-
-                    <Image
-                        v-if="data.verification_photo ? data.verification_photo?.value?.url : data.creator?.verification_photo?.url"
-                        style="object-fit: contain;"
-                        :height="295"
-                        :width="295"
-                        :src="data.verification_photo ? data.verification_photo?.value?.url : data.creator?.verification_photo?.url"/>
-
-                    <ApproveField
-                        v-if="data.verification_photo"
-                        style="margin-top: 10px;" 
-                        v-model:status="data.verification_photo.status"
-                        v-model:comment="data.verification_photo.comment"/>
-
-                </FormItem>
-
-                <FormItem
                     label="ID photo"
                     :class="data.id_photo?.status">
-
                     <Image
                         v-if="data.id_photo ? data.id_photo?.value?.url : data.creator?.id_photo?.url"
                         style="object-fit: contain;"
@@ -345,13 +309,11 @@
                         style="margin-top: 10px;" 
                         v-model:status="data.id_photo.status"
                         v-model:comment="data.id_photo.comment"/>
-
                 </FormItem>
 
                 <FormItem
                     label="Street photo"
                     :class="data.street_photo?.status">
-
                     <Image
                         v-if="data.street_photo ? data.street_photo?.value?.url : data.creator?.street_photo?.url"
                         style="object-fit: contain;"
@@ -364,7 +326,23 @@
                         style="margin-top: 10px;" 
                         v-model:status="data.street_photo.status"
                         v-model:comment="data.street_photo.comment"/>
+                </FormItem>
 
+                <FormItem
+                    label="Verification photo"
+                    :class="data.verification_photo?.status">
+                    <Image
+                        v-if="data.verification_photo ? data.verification_photo?.value?.url : data.creator?.verification_photo?.url"
+                        style="object-fit: contain;"
+                        :height="295"
+                        :width="295"
+                        :src="data.verification_photo ? data.verification_photo?.value?.url : data.creator?.verification_photo?.url"/>
+
+                    <ApproveField
+                        v-if="data.verification_photo"
+                        style="margin-top: 10px;" 
+                        v-model:status="data.verification_photo.status"
+                        v-model:comment="data.verification_photo.comment"/>
                 </FormItem>
 
             </CollapsePanel>
@@ -375,13 +353,11 @@
                 :key="5">
 
                 <FormItem label="Photos">
-
                     <Flex :gap="20">
-                
+
                         <Flex 
                             :vertical="true"
                             :gap="20">
-
                             <div style="padding: 10px; background: #f0f0f0; width: 300px;">
                                 Old
                             </div>
@@ -392,14 +368,12 @@
                                 :height="295"
                                 :width="295"
                                 :src="img.url"/>
-
                         </Flex>
                     
                         <Flex
                             style="flex-grow: 1;"
                             :vertical="true"
                             :gap="20">
-
                             <div style="padding: 10px; background:#f0f0f0;">
                                 New
                             </div>
@@ -409,7 +383,6 @@
                                 :class="data.photos.status[i]"
                                 :vertical="true"
                                 :gap="10">
-
                                 <Image
                                     style="object-fit: contain;"
                                     :height="230"
@@ -418,13 +391,10 @@
                                 <ApproveField 
                                     v-model:status="data.photos.status[i]"
                                     v-model:comment="data.photos.comment[i]"/>
-
                             </Flex>
-                           
                         </Flex>
 
                     </Flex>
-
                 </FormItem>
 
             </CollapsePanel>
@@ -464,31 +434,10 @@ export default {
     },
     methods: {
         confirmPopup,
-        formatDataToSend() {
-            const data = JSON.parse(JSON.stringify(this.data))
-
-            if (data.photos) {
-                data.photos.value = this.data.photos.value.map(img => img.id)
-            }
-
-            if (data.verification_photo) {
-                data.verification_photo.value = this.data.verification_photo.value?.id ?? null
-            }
-
-            if (data.id_photo) {
-                data.id_photo.value = this.data.id_photo.value?.id ?? null
-            }
-
-            if (data.street_photo) {
-                data.street_photo.value = this.data.street_photo.value?.id ?? null
-            }
-
-            return data
-        },
         async done() {
             if (! this.allIsApproved()) {
-                this.scrollToPending()
                 message.error('You have to approve all fields.')
+                this.scrollToPending()
                 return
             }
 
@@ -511,7 +460,6 @@ export default {
                     this.data[field]?.status == 'pending' ||
                     this.data[field]?.status?.includes('pending')
                 ) {
-                    console.log(this.data, field)
                     return false
                 }
             }
@@ -520,6 +468,27 @@ export default {
         },
         scrollToPending() {
             document.querySelector('.pending').scrollIntoView({behavior: 'smooth',})
+        },
+        formatDataToSend() {
+            const data = JSON.parse(JSON.stringify(this.data))
+
+            if (data.photos) {
+                data.photos.value = this.data.photos.value.map(img => img.id)
+            }
+
+            if (data.verification_photo) {
+                data.verification_photo.value = this.data.verification_photo.value?.id ?? null
+            }
+
+            if (data.id_photo) {
+                data.id_photo.value = this.data.id_photo.value?.id ?? null
+            }
+
+            if (data.street_photo) {
+                data.street_photo.value = this.data.street_photo.value?.id ?? null
+            }
+
+            return data
         },
         goToNext(next) {
             if (next) {

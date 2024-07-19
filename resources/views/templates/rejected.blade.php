@@ -1,13 +1,17 @@
+@php
+$comments = array_filter($comments, fn ($comment) => $comment);
+@endphp 
+
 <div class="reject">
     <p class="reason">
-        @if (! $texts)
+        @if (! $comments)
             {{ 'Rejected' }}
-        @else
-            @foreach($texts as $text)
-                {{ $text ?: 'Rejected' }}
-                <br>
-                <br>
-            @endforeach
         @endif
+
+        @foreach($comments as $comment)
+            {{ $comment }}
+            <br>
+            <br>
+        @endforeach
     </p>
 </div>

@@ -18,7 +18,7 @@ class DoneController extends Controller
         $approved = $profileRequest->creator->is_approved;
         
         $profileRequest->update($data);
-        $profileRequest->migrate();
+        $profileRequest->migrateDataToProfile();
 
         $nextProfileRequest = ProfileRequest::next($approved);
 

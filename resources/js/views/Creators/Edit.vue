@@ -71,7 +71,9 @@
                 :showArrow="false"
                 :key="2">
 
-                <FormItem label="Photos">
+                <FormItem 
+                    label="Photos"
+                    :required="true">
                     <UploadImg
                         :uploaded="data.photos"
                         :multiple="true"
@@ -80,13 +82,17 @@
                         @change="imgs => data.photos = imgs"/>
                 </FormItem>
 
-                <FormItem label="Name">
+                <FormItem 
+                    label="Name"
+                    :required="true">
                     <Input
                         placeholder="Enter name"
                         v-model:value="data.name"/>
                 </FormItem>
 
-                <FormItem label="Age">
+                <FormItem 
+                    label="Age"
+                    :required="true">
                     <InputNumber
                         style="width: 100%;"
                         placeholder="Enter age"
@@ -102,11 +108,14 @@
                         :options="genderOptions"/>
                 </FormItem>
                 
-                <FormItem label="Description">
+                <FormItem 
+                    label="Description"
+                    :required="true">
                     <Textarea
                         placeholder="Enter description"
                         v-model:value="data.description"
                         show-count
+                        :minlength="50"
                         :maxlength="150"
                         :rows="5"/>
                 </FormItem>
@@ -118,23 +127,15 @@
                 :showArrow="false"
                 :key="3">
 
-                <FormItem label="Phone">
+                <FormItem 
+                    label="Phone"
+                    :required="true">
                     <Input
                         placeholder="Enter phone"
-                        v-model:value="data.phone"/>
-                </FormItem>
-
-                <FormItem label="Email">
-                    <Input
-                        placeholder="Enter email"
-                        v-model:value="data.profile_email"/>
-                </FormItem>
-
-                <FormItem label="Instagram">
-                    <Input
-                        placeholder="Enter instagram account"
-                        prefix="@"
-                        v-model:value="data.instagram"/>
+                        :required="true"
+                        :maxlength="14"
+                        v-model:value="data.phone"
+                        @input="formatPhone"/>
                 </FormItem>
 
                 <FormItem label="Telegram">
@@ -144,11 +145,25 @@
                         v-model:value="data.telegram"/>
                 </FormItem>
 
+                <FormItem label="WhatsApp">
+                    <Input
+                        placeholder="Enter whatsapp account"
+                        prefix="@"
+                        v-model:value="data.whatsapp"/>
+                </FormItem>
+
                 <FormItem label="SnapChat">
                     <Input
                         placeholder="Enter snapchat account"
                         prefix="@"
                         v-model:value="data.snapchat"/>
+                </FormItem>
+
+                <FormItem label="Instagram">
+                    <Input
+                        placeholder="Enter instagram account"
+                        prefix="@"
+                        v-model:value="data.instagram"/>
                 </FormItem>
 
                 <FormItem label="OnlyFans">
@@ -158,11 +173,10 @@
                         v-model:value="data.onlyfans"/>
                 </FormItem>
 
-                <FormItem label="WhatsApp">
+                <FormItem label="Email">
                     <Input
-                        placeholder="Enter whatsapp account"
-                        prefix="@"
-                        v-model:value="data.whatsapp"/>
+                        placeholder="Enter email"
+                        v-model:value="data.profile_email"/>
                 </FormItem>
 
             </CollapsePanel>
@@ -172,7 +186,9 @@
                 :showArrow="false"
                 :key="4">
 
-                <FormItem label="Location">
+                <FormItem 
+                    label="Location"
+                    :required="true">
                     <FindLocation 
                         :data="location"
                         @change="location => data = Object.assign(data, location)"/>
@@ -216,13 +232,6 @@
                         v-model:value="data.birthday"/>
                 </FormItem>
 
-                <FormItem label="Verification photo">
-                    <UploadImg
-                        :quality="20"
-                        :uploaded="data.verification_photo ? [data.verification_photo,] : []"
-                        @change="imgs => data.verification_photo = imgs[0] ?? null"/>          
-                </FormItem>
-
                 <FormItem label="ID photo">
                     <UploadImg
                         :quality="20"
@@ -235,6 +244,13 @@
                         :quality="20"
                         :uploaded="data.street_photo ? [data.street_photo,] : []"
                         @change="imgs => data.street_photo = imgs[0] ?? null"/>          
+                </FormItem>
+
+                <FormItem label="Verification photo">
+                    <UploadImg
+                        :quality="20"
+                        :uploaded="data.verification_photo ? [data.verification_photo,] : []"
+                        @change="imgs => data.verification_photo = imgs[0] ?? null"/>          
                 </FormItem>
 
             </CollapsePanel>
@@ -324,7 +340,7 @@ export default {
             genders: [
                 'Man',
                 'Woman',
-                'LGBTQ+',
+                'LGBTQIA+',
             ],
             transactions: {
                 open: false,
@@ -359,6 +375,15 @@ export default {
         confirmPopup,
         generatePassword() {
             this.data.password = Math.random().toString(36).substring(2)
+        },
+        formatPhone(e) {
+            const phone = this.data.phone
+                .replace(/\D/g, '')
+                .match(/(\d{0,3})(\d{0,3})(\d{0,4})/)
+            this.data.phone =
+                !phone[2] ? 
+                phone[1] : 
+                '(' + phone[1] + ') ' + phone[2] + (phone[3] ? '-' + phone[3] : '')
         },
         showTransaction(record) {
             this.transactions.record = record

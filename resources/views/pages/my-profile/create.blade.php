@@ -73,7 +73,7 @@
                         },
                         {
                             message: 'ZIP Code invalid',
-                            fn: val => val.match(/[0-9]{5}/), 
+                            fn: val => val.match(/^[0-9]{5}$/), 
                         },
                     ],
                     name: [
@@ -97,7 +97,7 @@
                         },
                         {
                             message: 'Invalid age',
-                            fn: val => !isNaN(val),
+                            fn: val => ! isNaN(val),
                         },
                         {
                             message: 'Must be 18+',
@@ -166,10 +166,6 @@
                         {
                             message: 'Birthday required',
                             fn: val => val,
-                        },
-                        {
-                            message: 'Invalid format',
-                            fn: val => val.match(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/) && !isNaN(Date.parse(val))
                         },
                     ],
                 },
@@ -251,12 +247,16 @@
                         return
                     }
 
+                    delete this.errors.zip
+
                     const location = await this.nomitamin(this.data.street, this.data.zip)
                     if (! location) {
                         this.errors.street = 'Address Not Found'
                         this.location.loading = false
                         return
                     }
+
+                    delete this.errors.street
 
                     this.data.latitude = parseFloat(location.lat).toFixed(7)
                     this.data.longitude = parseFloat(location.lon).toFixed(7)
@@ -414,6 +414,16 @@
                     this.deleteImage(this.data[photo].id)
                     this.data[photo] = null
                 },
+                scrollToError() {
+                    for (let i = 0; i < this.steps.length; i++) {
+                        for (const field of this.steps[i]) {
+                            if (field in this.errors) {
+                                this.step(i+1)
+                                return
+                            }
+                        }
+                    }
+                },
                 async send() {
                     this.loading = true
 
@@ -428,12 +438,13 @@
                         location.href = '/my-profile'
                     }).fail(jqXHR => {
                         if (jqXHR.status == 422) {
+                            this.errors = {}
                             const errors = jqXHR.responseJSON.errors
                             for (const field in errors) {
                                 this.errors[field] = errors[field][0]    
                             }
 
-                            this.step(1)
+                            this.scrollToError()
                         } else {
                             alert(jqXHR.responseJSON.message)
                         }
@@ -445,6 +456,7 @@
                     const data = {...this.data}
 
                     data.photos = data.photos.map(photo => photo.id)
+                    
                     data.id_photo = data.id_photo?.id ?? null
                     data.verification_photo = data.verification_photo?.id ?? null
                     data.street_photo = data.street_photo?.id ?? null
@@ -463,7 +475,6 @@
         @verbatim
         <div class="form-container" id="create-profile">
             <form id="multiStepForm">
-
                 <!-- Step 1 -->
                 <div class="form-step active" data-step="1">
                     <div class="step-head">
@@ -514,7 +525,7 @@
                                 </label>
                                 <input
                                     type="text"
-                                    id="tel"
+                                    id="phone"
                                     placeholder="(xxx) xxx-xxxx"
                                     required
                                     maxlength="14"
@@ -656,15 +667,15 @@
                         </div>
 
                         <div class="btn-group">
-                            <button v-if="!location.map" class="btn red" type="button" id="search-location" @click="next(4)">
+                            <button v-if="data.street && data.zip && !location.map" class="btn red" type="button" id="search-location" @click="next(4)">
                                 <img v-if="location.loading" src="/assets/img/btn-loader.svg" alt="" class="loader" />
                                 Search
                             </button>
-                            <button v-if="location.map" class="btn" type="button" id="research-location" @click="next(4)">
+                            <button v-if="data.street && data.zip && location.map" class="btn" type="button" id="research-location" @click="next(4)">
                                 <img v-if="location.loading" src="/assets/img/btn-loader.svg" alt="" class="loader" />
                                 Research
                             </button>
-                            <button v-if="data.latitude && data.longitude" class="btn red next-btn" type="button" id="nextBtn3" @click="step(4)">
+                            <button v-if="data.street && data.zip && data.latitude && data.longitude" class="btn red next-btn" type="button" id="nextBtn3" @click="step(4)">
                                 Next step
                             </button>
                         </div>
@@ -714,7 +725,9 @@
                                     placeholder="Description" 
                                     maxlength="150"
                                     v-model="data.description"></textarea>
-                                <p class="rule">No more than 150 characters</p>
+                                <p class="rule">
+                                    No more than 150 characters
+                                </p>
                                 <div v-if="errors.description" class="error-text">
                                     {{ errors.description }}
                                 </div>
@@ -754,8 +767,6 @@
                                 <button v-if="data.photos.length == 0" id="customButton1" type="button" class="btn red" @click="$('#photoInput').click()">
                                     Add photo
                                 </button>
-
-                                <img src="/assets/img/img-loading.webp" style="display: none;" alt="">
 
                                 <div id="photos">
 
@@ -806,8 +817,7 @@
                                 <label for="document-photo">Photo of the document (driver's license)*</label>
                                 <div class="image-card">
                                     <img v-if="!data.id_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.id_photo?.status == 'loading'" src="/assets/img/img-loading.webp" alt="">
-                                    <img v-if="data.id_photo?.status == 'loaded'" :src="data.id_photo?.url" alt="">
+                                    <img v-else :src="data.id_photo?.status == 'loading' ? '/assets/img/img-loading.webp' : data.id_photo?.url" alt="">
                                 </div>
                                 <input
                                     type="file"
@@ -841,8 +851,7 @@
                                 <label for="permission-photo">A photo with "I give permission to use this photo"*</label>
                                 <div class="image-card">
                                     <img v-if="!data.verification_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.verification_photo?.status == 'loading'" src="/assets/img/img-loading.webp" alt="">
-                                    <img v-if="data.verification_photo?.status == 'loaded'" :src="data.verification_photo?.url" alt="">
+                                    <img v-else :src="data.verification_photo?.status == 'loading' ? '/assets/img/img-loading.webp' : data.verification_photo?.url" alt="">
                                 </div>
                                 <input
                                     type="file"
@@ -875,9 +884,8 @@
                             <div class="verification-section">
                                 <label for="street-photo">Street photo*</label>
                                 <div class="image-card">
-                                <img v-if="!data.street_photo" src="/assets/img/person-doc.jpeg" alt=""/>
-                                    <img v-if="data.street_photo?.status == 'loading'" src="/assets/img/img-loading.webp" alt="">
-                                    <img v-if="data.street_photo?.status == 'loaded'" :src="data.street_photo?.url" alt="">
+                                    <img v-if="!data.street_photo" src="/assets/img/person-doc.jpeg" alt=""/>
+                                    <img v-else :src="data.street_photo?.status == 'loading' ? '/assets/img/img-loading.webp' : data.street_photo?.url" alt="">
                                 </div>
                                 <input 
                                     type="file" 
@@ -941,11 +949,9 @@
                                 <div class="input-wrapper">
                                     <label for="dob">Date of birth*</label>
                                     <input 
-                                        type="text"
+                                        type="date"
                                         id="dob" 
                                         name="dob" 
-                                        placeholder="06/22/2024" 
-                                        maxlength="10"
                                         onkeydown="return event.key != 'Enter'"
                                         v-model="data.birthday" />
                                     <div v-if="errors.birthday" class="error-text">
@@ -988,7 +994,6 @@
                         </div>
                     </div>
                 </div>
-                
             </form>
         </div>
         @endverbatim

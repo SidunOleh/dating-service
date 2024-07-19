@@ -21,7 +21,7 @@ class CreatorFactory extends Factory
             'password' => 'secret',
             'name' => fake()->name(),
             'age' => rand(18, 100),
-            'gender' => ['Man', 'Woman', 'LGBTQ+'][rand(0, 2)],
+            'gender' => ['Man', 'Woman', 'LGBTQIA+'][rand(0, 2)],
             'phone' => fake()->phoneNumber(),
             'description' => fake()->text(150),
             'zip' => rand(501, 99950),

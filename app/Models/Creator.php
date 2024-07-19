@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
 use Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
 use Staudenmeir\EloquentJsonRelations\Relations\BelongsToJson;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Creator extends Authenticatable
 {
@@ -73,7 +74,7 @@ class Creator extends Authenticatable
         'birthday' => 'date',
     ];
 
-    protected $approvable = [
+    protected $profileFields = [
         'name',
         'age',
         'gender',
@@ -130,6 +131,22 @@ class Creator extends Authenticatable
         static::updating(function (self $creator) {
             $creator->is_approved = $creator->isApproved();
             $creator->is_verified = $creator->isVerified();
+
+            if ($photos = array_diff($creator->getOriginal('photos') ?? [], $creator->photos ?? [])) {
+                Image::deleteByIds($photos);
+            }
+
+            if ($creator->getOriginal('verification_photo') and ! $creator->verification_photo) {
+                Image::deleteByIds([$creator->getOriginal('verification_photo')]);
+            }
+
+            if ($creator->getOriginal('street_photo') and ! $creator->street_photo) {
+                Image::deleteByIds([$creator->getOriginal('street_photo')]);
+            }
+
+            if ($creator->getOriginal('id_photo') and ! $creator->id_photo) {
+                Image::deleteByIds([$creator->getOriginal('id_photo')]);
+            }
         });
     }
 
@@ -146,6 +163,11 @@ class Creator extends Authenticatable
         
         
         return $code;
+    }
+
+    public static function makeVerificationCode(): int
+    {
+        return rand(100000, 999999);
     }
 
     public function isApproved(): bool
@@ -185,6 +207,28 @@ class Creator extends Authenticatable
         return false;
     }
 
+    public function location(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => [
+                'zip' => $attributes['zip'],
+                'state' => $attributes['state'],
+                'city' => $attributes['city'],
+                'street' => $attributes['street'],
+                'latitude' => $attributes['latitude'],
+                'longitude' => $attributes['longitude'],
+            ],
+            set: fn (mixed $value) => [
+                'zip' => $value['zip'],
+                'state' => $value['state'],
+                'city' => $value['city'],
+                'street' => $value['street'],
+                'latitude' => $value['latitude'],
+                'longitude' => $value['longitude'],
+            ],
+        );
+    }
+
     public function gallery(): BelongsToJson
     {
         if ($this->photos) {
@@ -194,20 +238,6 @@ class Creator extends Authenticatable
         } else {
             return $this->belongsToJson(Image::class, 'photos');
         }
-    }
-
-    public function fullAddress(): string
-    {
-        if (! $this->street or ! $this->city or ! $this->state or ! $this->zip) {
-            return '';
-        }
-
-        return "{$this->street}, {$this->city}, {$this->state} {$this->zip}";
-    }
-
-    public function coordinates(): array
-    {
-        return ($this->latitude and $this->longitude) ? [$this->latitude, $this->longitude]: [];
     }
 
     public function verificationPhoto(): belongsTo
@@ -265,10 +295,12 @@ class Creator extends Authenticatable
 
     public function subscription(): HasOne
     {
-        return $this->hasOne(Subscription::class)->ofMany(
-            ['id' => 'max',], 
-            fn (Builder $query) => $query->where('status', 'active')
-        );
+        return $this->hasOne(Subscription::class)->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', 'active'));
+    }
+
+    public function subscribed(): bool
+    {
+        return (bool) $this->subscription;
     }
 
     public function transactions(): HasMany
@@ -276,21 +308,19 @@ class Creator extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-    public function updateWithoutRequest(array $data): bool
+    public function saveNotApprovableProfileChanges(array $data): bool
     {
-        foreach ($this->approvable as $field) {
+        foreach ($this->profileFields as $field) {
             if (! array_key_exists($field, $data)) {
                 continue;
             }
 
-            if (! $data[$field]) {
-                $this->{$field} = null;
-            }
-
             if ($field == 'photos') {
                 $this->photos = array_intersect($data['photos'], $this->photos ?? []);
+            }
 
-                Image::deleteByIds(array_diff($this->photos ?? [], $data['photos']));
+            if (! $data[$field]) {
+                $this->{$field} = null;
             }
         }
 
@@ -300,10 +330,10 @@ class Creator extends Authenticatable
     public function createProfileRequest(array $data): ?ProfileRequest
     {
         $request = [];
-        foreach ($this->approvable as $field) {
+        foreach ($this->profileFields as $field) {
             if (
                 ! array_key_exists($field, $data) or 
-                ! $this->fieldChanged($field, $data[$field])
+                ! $this->profileFieldChanged($field, $data[$field])
             ) {
                 continue;
             }
@@ -347,14 +377,14 @@ class Creator extends Authenticatable
         return $request ? $this->profileRequests()->create($request) : null;
     }
 
-    private function fieldChanged(string $field, $value): bool
+    private function profileFieldChanged(string $field, $value): bool
     {
-        if ($field == 'birthday') {
-            return $this->birthday?->format('Y-m-d') != $value;
-        }
-
         if ($field == 'photos') {
             return (bool) array_diff($value, $this->photos ?? []);   
+        }
+
+        if ($field == 'birthday') {
+            return $this->birthday?->format('Y-m-d') != $value;
         }
 
         return $this->{$field} != $value;
@@ -362,11 +392,7 @@ class Creator extends Authenticatable
     
     public function deleteProfile(): bool
     {
-        foreach ($this->approvable as $field) {
-            if ($field == 'photos' and $this->{$field}) {
-                Image::deleteByIds($this->photos);
-            } 
-
+        foreach ($this->profileFields as $field) {
             $this->{$field} = null;
         }
 
@@ -383,6 +409,11 @@ class Creator extends Authenticatable
     public function latestProfileRequest(): HasOne
     {
         return $this->hasOne(ProfileRequest::class)->latestOfMany();
+    }
+
+    public function hasUndoneProfileRequest(): bool
+    {
+        return (bool) $this->profileRequests()->where('status', 'undone')->first();
     }
 
     public static function scopeAdminSearch(Builder $query, string $q): void
@@ -580,11 +611,6 @@ class Creator extends Authenticatable
     public function hasInFavorites(int $favoriteId): bool
     {
         return (bool) $this->favorites()->where('favorite_id', $favoriteId)->count();
-    }
-
-    public static function makeVerificationCode(): int
-    {
-        return rand(100000, 999999);
     }
 
     public function visits(): HasMany

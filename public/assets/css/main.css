@@ -1545,7 +1545,7 @@ input {
     position: relative
 }
 
-.profile .info-group.pending:after {
+.profile .info-group.pending:before {
     content: "Pending up to 72h...";
     position: absolute;
     left: 0;
@@ -1570,6 +1570,7 @@ input {
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
+    z-index: 500;
 }
 
 .profile .info-group.rejected .reject {

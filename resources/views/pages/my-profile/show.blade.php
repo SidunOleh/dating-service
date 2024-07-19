@@ -11,111 +11,117 @@
                 'head-porfile',  
                 'info-group',
                 'verified' => $creator->is_verified,
-                'pending' => $request->sectionStatus('info') == 'pending',
-                'rejected' => $request->sectionStatus('info') == 'rejected',
+                'pending' => $request->status(['name', 'age', 'location',]) == 'pending',
+                'rejected' => $request->status(['name', 'age', 'location',]) == 'rejected',
                 ])>
 
                 <div class="img-card">
-                    @if($creator->gallery->count())
+                    @if($creator->photos)
                     <img src="{{ $creator->gallery[0]->getUrl() }}" alt="" />
                     @else
                     <img src="{{ $request->gallery[0]->getUrl() }}" alt="" />
                     @endif
+
+                    @include('templates.favorite', [
+                        'id' => $creator->id, 
+                        'count' => $creator->favorites()->count(),
+                        'active' => $creator->hasInFavorites($creator->id),
+                    ])
                 </div>
 
                 <div class="userMain">
                     <p class="name">
-                    {{ $request->name['value'] ?? $creator->name }}, {{ $request->age['value'] ?? $creator->age }}
+                        {{ $data['name']['value'] }}, {{ $data['age']['value'] }}
                     </p>
                     <p class="city">
-                        {{ $request->gender['value'] ?? $creator->gender }}
+                        {{ $data['location']['value']['city'] }}, {{ $data['location']['value']['state'] }}
                     </p>
                 </div>
 
                 @includeWhen(
-                    $request->sectionStatus('info') == 'rejected', 
+                    $request->status(['name', 'age', 'location',]) == 'rejected', 
                     'templates.rejected', 
-                    ['texts' => $request->sectionComments('info'),]
+                    ['comments' => $request->comments(['name', 'age', 'location',]),]
                 )
             </div>
 
-            <div class="user-info-list info-group {{ $request->sectionStatus('contacts') }}">
+            <div class="user-info-list info-group {{ $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) }}">
                 <p class="info-title">
                     <img src="{{ asset('/assets/img/user-card.svg') }}" alt="" /> 
                     Your сontact information
                 </p>
 
-                @if($request->phone['value'] ?? $creator->phone)
+                @if($data['phone']['value'])
                 <div class="user-info-item">
                     <span class="type">Phone:</span>
                     <p class="info">
-                        {{ $request->phone['value'] ?? $creator->phone }}
+                        {{ $data['phone']['value'] }}
                     </p>
                 </div>
                 @endif
 
-                @if($request->telegram['value'] ?? $creator->telegram)
+                @if($data['telegram']['value'])
                 <div class="user-info-item">
                     <span class="type">Telegram:</span>
                     <p class="info">
-                        {{ $request->telegram['value'] ?? $creator->telegram }}
+                        {{ $data['telegram']['value'] }}
                     </p>
                 </div>
                 @endif 
 
-                @if($request->whatsapp['value'] ?? $creator->whatsapp)
+                @if($data['whatsapp']['value'])
                 <div class="user-info-item">
                     <span class="type">Whatsapp:</span>
                     <p class="info">
-                        {{ $request->whatsapp['value'] ?? $creator->whatsapp }}
+                        {{ $data['whatsapp']['value'] }}
                     </p>
                 </div>
                 @endif
 
-                @if($request->instagram['value'] ?? $creator->instagram)
+                @if($data['instagram']['value'])
                 <div class="user-info-item">
                     <span class="type">Instagram:</span>
                     <p class="info">
-                        {{ $request->instagram['value'] ?? $creator->instagram }}
+                        {{ $data['instagram']['value'] }}
                     </p>
                 </div>
                 @endif
 
-                @if($request->snapchat['value'] ?? $creator->snapchat)
+                @if($data['snapchat']['value'])
                 <div class="user-info-item">
                     <span class="type">Snapchat:</span>
                     <p class="info">
-                        {{ $request->snapchat['value'] ?? $creator->snapchat }}
+                        {{ $data['snapchat']['value'] }}
                     </p>
                 </div>
                 @endif
 
-                @if($request->onlyfans['value'] ?? $creator->onlyfans)
+                @if($data['onlyfans']['value'])
                 <div class="user-info-item">
                     <span class="type">OnlyFans:</span>
                     <p class="info">
-                        {{ $request->onlyfans['value'] ?? $creator->onlyfans }}
+                        {{ $data['onlyfans']['value'] }}
                     </p>
                 </div>
                 @endif
 
-                @if($request->profile_email['value'] ?? $creator->profile_email)
+                @if($data['profile_email']['value'])
                 <div class="user-info-item">
                     <span class="type">Email:</span>
                     <p class="info">
-                        {{ $request->profile_email['value'] ?? $creator->profile_email }}
+                        {{ $data['profile_email']['value'] }}
                     </p>
                 </div>
                 @endif
 
                 @includeWhen(
-                    $request->sectionStatus('contacts') == 'rejected', 
+                    $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) == 'rejected', 
                     'templates.rejected', 
-                    ['texts' => $request->sectionComments('contacts'),]
+                    ['comments' => $request->comments(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]),]
                 )
             </div>
 
-            <div class="info-group {{ $request->location['status'] ?? '' == 'rejected' }}">
+            <div class="info-group {{ $data['location']['status'] }}">
                 <div class="user-location">
                     <p class="info-title">
                         <img src="{{ asset('/assets/img/local.svg') }}" alt="" /> 
@@ -126,32 +132,33 @@
                 </div>
                 
                 <div class="location-address">
-                    {{ $request->fullAddress() ?: $creator->fullAddress() }}
+                    {{ "{$data['location']['value']['street']}, {$data['location']['value']['city']}, {$data['location']['value']['state']} {$data['location']['value']['zip']}" }}
                 </div>
 
                 @includeWhen(
-                    $request->location['status'] ?? '' == 'rejected', 
+                    $data['location']['status'] == 'rejected', 
                     'templates.rejected', 
-                    ['texts' => [$request->location['comment'] ?? ''],]
+                    ['comments' => [$data['location']['comment'],],]
                 )
             </div>
 
-            <div class="description info-group {{ $request->description['status'] ?? '' }}">
+            <div class="description info-group {{ $data['description']['status'] }}">
                 <p class="info-title">
                     <img src="{{ asset('/assets/img/description.svg') }}" alt="" /> 
                     Your descrittion
                 </p>
 
-                {{ $request->description['value'] ?? $creator->description }}
+                {{ $data['description']['value'] }}
                 
                 @includeWhen(
-                    $request->description['status'] ?? '' == 'rejected', 
+                    $data['description']['status'] == 'rejected', 
                     'templates.rejected', 
-                    ['texts' => [$request->description['comment'] ?? ''],]
+                    ['comments' => [$data['description']['comment'],],]
                 )
             </div>
+
         </div>
-        
+
         <div class="user-photo-list">
             @foreach($creator->gallery as $photo)
                 <a href="{{ $photo->getUrl() }}" data-fancybox="user-photos" class="user-photo-item info-group">
@@ -160,24 +167,22 @@
             @endforeach
 
             @foreach($request->gallery as $i => $photo)
-            
-                @if($request->photos['status'][$i] != 'approved')
-                <a href="{{ $photo->getUrl() }}" data-fancybox="user-photos" class="user-photo-item info-group {{ $request->photos['status'][$i] }}">
+                @if($data['photos']['status'][$i] != 'approved')
+                <a href="{{ $photo->getUrl() }}" data-fancybox="user-photos" class="user-photo-item info-group {{ $data['photos']['status'][$i] }}">
                     <img src="{{ $photo->getUrl() }}" alt="" />
 
                     @includeWhen(
-                        $request->photos['status'][$i] == 'rejected', 
+                        $data['photos']['status'][$i] == 'rejected', 
                         'templates.rejected', 
-                        ['texts' => [$request->photos['comment'][$i]],]
+                        ['comments' => [$data['photos']['comment'][$i],],]
                     )
                 </a>
                 @endif
-                
             @endforeach
         </div>
     </div>
 
-    @if(! $creator->profileRequests()->where('status', 'undone')->count())
+    @if(! $creator->hasUndoneProfileRequest())
     <div class="edit-info-btn">
         <a href="{{ route('my-profile.edit') }}" class="btn red">
             Edit information
@@ -192,7 +197,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-    const latlng = {{ Js::from($request->coordinates() ?: $creator->coordinates()) }}
+    const latlng = {{ Js::from([$data['location']['value']['latitude'], $data['location']['value']['longitude']]) }}
 
     const map = L.map('map').setView(latlng, 15)
 

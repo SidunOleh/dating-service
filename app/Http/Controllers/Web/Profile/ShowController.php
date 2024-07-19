@@ -17,9 +17,12 @@ class ShowController extends Controller
 
         $request = $creator->latestProfileRequest;
 
+        $data = $request->profileData();
+
         return view('pages.my-profile.show', [
             'creator' => $creator,
             'request' => $request,
+            'data' => $data,
         ]);
     }
 }

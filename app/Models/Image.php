@@ -64,14 +64,16 @@ class Image extends Model
         string $disk = 'public'
     ): self
     {
+        $dir = self::dir($disk);
+
         if ($process) {
             $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
-            $path = date('Y') . '/' . date('m') . '/' . $name;
+            $path = $dir . '/' . $name;
 
             $manager = new ImageManager(new Driver());
             $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));
         } else {
-            $path = $uploaded->store(date('Y') . '/' . date('m'), $disk);
+            $path = $uploaded->store($dir, $disk);
         }
 
         if ($watermark) {
@@ -94,6 +96,19 @@ class Image extends Model
         ]);
         
         return $image;
+    }
+
+    public static function dir(string $disk): string
+    {
+        $dir = date('Y') . '/' . date('m');
+        
+        $path = Storage::disk($disk)->path($dir);
+
+        if (! file_exists($path)) {
+            mkdir($path, recursive: true);
+        }
+
+        return $dir;
     }
 
     public function deleteFile(): bool

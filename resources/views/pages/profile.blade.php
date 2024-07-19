@@ -71,7 +71,7 @@
         <div class="user-photo-list">
             @php
             $imgs = $creator->gallery;
-            $imgs = (auth('web')->check() and auth('web')->user()->subscription) ? $imgs : $imgs->slice(0, 3);
+            $imgs = (auth('web')->check() and auth('web')->user()->subscribed()) ? $imgs : $imgs->slice(0, 3);
             @endphp
 
             @foreach($imgs as $img)
@@ -80,7 +80,7 @@
             </a>
             @endforeach
 
-            @if (!auth('web')->check() or !auth('web')->user()->subscription)
+            @if (!auth('web')->check() or !auth('web')->user()->subscribed())
             <div class="user-photo-item">
                 <div class="subscribe">
                     @if(!auth('web')->check())

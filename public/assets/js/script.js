@@ -612,6 +612,7 @@ $('#delete-popup #confirm-delete:not(.load)').click(function () {
         location.href = '/my-profile/create'
     }).catch(jqXHR => {
         alert(jqXHR.responseJSON.message)
+        
         $(this).removeClass('load')
     })
 })

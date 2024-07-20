@@ -24,7 +24,7 @@
 
                     @include('templates.favorite', [
                         'id' => $creator->id, 
-                        'count' => $creator->favorites()->count(),
+                        'count' => $creator->inFavorites()->count(),
                         'active' => $creator->hasInFavorites($creator->id),
                     ])
                 </div>

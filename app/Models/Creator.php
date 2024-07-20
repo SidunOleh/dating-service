@@ -493,7 +493,7 @@ class Creator extends Authenticatable
     {
         if (! $seed = Cache::get('seed')) {
             $seed = rand();
-            Cache::put('seed', $seed, 60);
+            Cache::put('seed', $seed, 3600 * 2);
         }
 
         return $seed;

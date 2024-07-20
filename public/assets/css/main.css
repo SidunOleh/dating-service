@@ -3152,3 +3152,16 @@ input {
 .delete-wrapper .white {
     color: #000
 }
+
+#confirm-delete {
+    display: flex;
+    gap: 10px;
+}
+
+#confirm-delete .loader {
+    display: none;
+}
+
+#confirm-delete.load .loader {
+    display: block !important;
+}

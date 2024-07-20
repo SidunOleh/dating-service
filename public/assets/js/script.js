@@ -602,8 +602,8 @@ $('#delete-popup #close-popup-btn').click(() => {
     $('#delete-popup').removeClass('active')
 })
 
-$('#delete-popup #confirm-delete').click(() => {
-    $(this).prop('disabled', true)
+$('#delete-popup #confirm-delete:not(.load)').click(function () {
+    $(this).addClass('load')
 
     $.ajax({
         type: 'DELETE',
@@ -612,6 +612,6 @@ $('#delete-popup #confirm-delete').click(() => {
         location.href = '/my-profile/create'
     }).catch(jqXHR => {
         alert(jqXHR.responseJSON.message)
-        $(this).prop('disabled', false)
+        $(this).removeClass('load')
     })
 })

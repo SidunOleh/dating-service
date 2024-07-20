@@ -8,6 +8,7 @@
                 Close
             </button>
             <button class="white btn" id="confirm-delete">
+                <img src="{{ asset('/assets/img/btn-loader.svg') }}" alt="" class="loader" />
                 Confirm
             </button>
         </div>

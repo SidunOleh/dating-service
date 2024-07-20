@@ -3160,6 +3160,7 @@ input {
 
 #confirm-delete .loader {
     display: none;
+    animation: spin 1s linear infinite reverse
 }
 
 #confirm-delete.load .loader {

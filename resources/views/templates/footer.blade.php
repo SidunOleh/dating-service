@@ -16,7 +16,7 @@
     function getReCaptchaV3(action) {
         return new Promise((resolve, reject) => {
             grecaptcha.ready(() => {
-                grecaptcha.execute({{ env('RECAPTCHA_SITE_KEY') }}, {
+                grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {
                     action: action,
                 }).then(resolve)
             })

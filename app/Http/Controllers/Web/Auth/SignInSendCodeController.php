@@ -13,7 +13,7 @@ class SignInSendCodeController extends Controller
 {
     public function __invoke(SignInSendCodeRequest $request)
     {
-        $credentials = $request->validated();
+        $credentials = $request->except('recaptcha');
 
         if (! Auth::guard('web')->validate($credentials)) {
             return response(['message' => 'Wrong credentials.',], 401);
@@ -27,7 +27,6 @@ class SignInSendCodeController extends Controller
             'expire_at' => time() + 60 * 10,
             'credentials' => $credentials,
             'attemps' => 0,
-            'resend' => 0,
         ],]);
 
         Notification::route('mail', $credentials['email'])->notify(new VerificationCode($code));

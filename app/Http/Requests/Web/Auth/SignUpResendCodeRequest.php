@@ -5,7 +5,7 @@ namespace App\Http\Requests\Web\Auth;
 use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignInSendCodeRequest extends FormRequest
+class SignUpResendCodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,6 @@ class SignInSendCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:creators,email',
-            'password' => 'required|string',
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }

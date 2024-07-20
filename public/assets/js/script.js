@@ -349,7 +349,7 @@ $('.verification-wrapper .again').on('click', () => {
 
 //__________________________Sign Up_________________________//
 
-$('#sign-up').submit(function(e) {
+$('#sign-up').submit(async function(e) {
     e.preventDefault()
     
     addLoader('.signUP-card')
@@ -360,7 +360,9 @@ $('#sign-up').submit(function(e) {
     email.closest('.input-group').removeClass('error')
     password.closest('.input-group').removeClass('error')
 
-    $.post('/sign-up/send-code', form.serialize())
+    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
+
+    $.post('/sign-up/send-code', data)
         .done(() => {
             const verifyPopup = $('.verification-wrapper')
             verifyPopup.find('.email').text(email.val())
@@ -408,7 +410,7 @@ function verifySignUpCode(code) {
         })
 }
 
-function resendSignUpCode() {
+async function resendSignUpCode() {
     addLoader('.verification-container')
 
     const codeForm = $('.code-inputs')
@@ -416,7 +418,9 @@ function resendSignUpCode() {
     const codeError = codeForm.find('.error-text')
     codeError.text('')
 
-    $.post('/sign-up/resend-code')
+    const data = `recaptcha=${await getReCaptchaV3('resend_signup')}`
+
+    $.post('/sign-up/resend-code', data)
         .done(() => {
             resendTimer.start(60)
         }).fail(err => {
@@ -429,7 +433,7 @@ function resendSignUpCode() {
 
 //__________________________Sign In_________________________//
 
-$('#sign-in').submit(function(e) {
+$('#sign-in').submit(async function(e) {
     e.preventDefault()
 
     addLoader('.logIN-card')
@@ -440,7 +444,9 @@ $('#sign-in').submit(function(e) {
     email.closest('.input-group').removeClass('error')
     password.closest('.input-group').removeClass('error')
 
-    $.post('/sign-in/send-code', form.serialize())
+    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
+
+    $.post('/sign-in/send-code', data)
         .done(() => {
             const verifyPopup = $('.verification-wrapper')
             verifyPopup.find('.email').text(email.val())
@@ -491,7 +497,7 @@ function verifySignInCode(code) {
         })
 }
 
-function resendSignInCode() {
+async function resendSignInCode() {
     addLoader('.verification-container')
 
     const codeForm = $('.code-inputs')
@@ -499,7 +505,9 @@ function resendSignInCode() {
     const codeError = codeForm.find('.error-text')
     codeError.text('')
 
-    $.post('/sign-in/resend-code')
+    const data = `recaptcha=${await getReCaptchaV3('resend_signin')}`
+
+    $.post('/sign-in/resend-code', data)
         .done(() => {
             resendTimer.start(60)
         }).fail(err => {
@@ -596,7 +604,9 @@ $('#vote-battle, #account-visibility').bind('change', function () {
 
 //__________________________Delete profile_________________________//
 
-$('.delete-acc').click(() => $('#delete-popup').addClass('active'))
+$('.delete-acc').click(() => {
+    $('#delete-popup').addClass('active')
+})
 
 $('#delete-popup #close-popup-btn').click(() => {
     $('#delete-popup').removeClass('active')

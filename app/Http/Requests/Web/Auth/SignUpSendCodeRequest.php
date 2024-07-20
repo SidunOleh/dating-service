@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Auth;
 
+use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SignUpSendCodeRequest extends FormRequest
@@ -25,6 +26,7 @@ class SignUpSendCodeRequest extends FormRequest
             'email' => 'required|email|unique:creators,email',
             'password' => 'required|string|min:8|max:32',
             'from' => 'integer|exists:creators,id|nullable',
+            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

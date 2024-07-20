@@ -11,16 +11,20 @@
                 'head-porfile',  
                 'info-group',
                 'verified' => $creator->is_verified,
-                'pending' => $request->status(['name', 'age', 'location',]) == 'pending',
-                'rejected' => $request->status(['name', 'age', 'location',]) == 'rejected',
+                'pending' => $request->status([
+                    'name', 
+                    'age', 
+                    'location',
+                ]) == 'pending',
+                'rejected' => $request->status([
+                    'name', 
+                    'age', 
+                    'location',
+                ]) == 'rejected',
                 ])>
 
                 <div class="img-card">
-                    @if($creator->photos)
-                    <img src="{{ $creator->gallery[0]->getUrl() }}" alt="" />
-                    @else
-                    <img src="{{ $request->gallery[0]->getUrl() }}" alt="" />
-                    @endif
+                    <img src="{{ $creator->gallery->count() ? $creator->gallery[0]->getUrl() : $request->gallery[0]->getUrl() }}" alt="" />
 
                     @include('templates.favorite', [
                         'id' => $creator->id, 

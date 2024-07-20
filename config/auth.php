@@ -128,6 +128,5 @@ return [
 
     'attemps' => [
         'verify' => 3,
-        'resend' => 5,
     ],
 ];

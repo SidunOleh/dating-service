@@ -1,15 +1,28 @@
-<footer class="footer">
+<footer class="footer" onclick="onClicks">
     <div class="footer-container">
         <a href="#" class="footer-link">
             <img src="{{ asset('assets/img/help.svg') }}" alt="question mark" />
             Here is info
         </a>
         <a href="#" class="footer-link">
-            <img src="{{ asset('assets/img/more.svg') }}" alt="plane" />
+            <img src="{{ asset('assets/img/more.svg') }}" alt="plane"/>
             Here is More
         </a>
     </div>
 </footer>
+
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+<script>
+    function getReCaptchaV3(action) {
+        return new Promise((resolve, reject) => {
+            grecaptcha.ready(() => {
+                grecaptcha.execute({{ env('RECAPTCHA_SITE_KEY') }}, {
+                    action: action,
+                }).then(resolve)
+            })
+        })
+    }
+</script>
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/fancybox.umd.js') }}"></script>

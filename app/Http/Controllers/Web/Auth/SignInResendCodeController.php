@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Auth\SignInResendCodeRequest;
 use App\Models\Creator;
 use App\Notifications\VerificationCode;
 use Carbon\Carbon;
@@ -10,14 +11,10 @@ use Illuminate\Support\Facades\Notification;
 
 class SignInResendCodeController extends Controller
 {
-    public function __invoke()
+    public function __invoke(SignInResendCodeRequest $request)
     {
         if (! $signin = session('signin')) {
             return response(['message' => 'Bad request.',], 400);
-        }
-
-        if ($signin['resend'] == config('auth.attemps.resend')) {
-            return response(['message' => 'Too many attemps.',], 429);
         }
 
         if (now()->lessThan(Carbon::createFromTimestamp($signin['created_at'] + 60))) {
@@ -28,7 +25,6 @@ class SignInResendCodeController extends Controller
         $signin['created_at'] = time();
         $signin['expire_at'] = time() + 60 * 10;
         $signin['attemps'] = 0;
-        $signin['resend'] += 1;
 
         session(['signin' => $signin,]);
 

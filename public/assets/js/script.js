@@ -486,7 +486,7 @@ function verifySignInCode(code) {
     const codeError = codeForm.find('.error-text')
     codeError.text('')
 
-    $.post('/sign-in/verify-code', { code })
+    $.post('/sign-in/verify-code', {code})
         .done(() => {
             location.href = '/my-profile'
         }).fail(err => {
@@ -520,7 +520,7 @@ async function resendSignInCode() {
 
 //__________________________Forgot Password_________________________//
 
-$('#forgot-password').submit(function(e) {
+$('#forgot-password').submit(async function(e) {
     e.preventDefault()
 
     addLoader('.resetPassword-card')
@@ -529,7 +529,9 @@ $('#forgot-password').submit(function(e) {
     const email = form.find('#reset-email')
     email.closest('.input-group').removeClass('error')
 
-    $.post('/password/forgot', form.serialize())
+    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
+
+    $.post('/password/forgot', data)
         .done(() => {
             form[0].reset()
         }).fail(xhr => {

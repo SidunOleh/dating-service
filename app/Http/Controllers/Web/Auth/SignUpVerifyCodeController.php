@@ -24,12 +24,12 @@ class SignUpVerifyCodeController extends Controller
             return response(['message' => 'Too many attemps.',], 429);
         }
 
-        if ($signup['code'] != $code) {
-            return response(['message' => 'Invalid verification code.',], 400);
-        }
-
         if (now()->greaterThan(Carbon::createFromTimestamp($signup['expire_at']))) {
             return response(['message' => 'Verification code is expired.',], 400);
+        }
+
+        if ($signup['code'] != $code) {
+            return response(['message' => 'Invalid verification code.',], 400);
         }
 
         $creator = Creator::create(session('signup.credentials'));

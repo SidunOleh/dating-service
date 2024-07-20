@@ -10,7 +10,7 @@ class ForgotController extends Controller
 {
     public function __invoke(ForgotRequest $request)
     {
-        $status = Password::broker('creators')->sendResetLink($request->validated());
+        $status = Password::broker('creators')->sendResetLink($request->only('email'));
 
         return response(['message' =>__($status),], $status == Password::RESET_LINK_SENT ? 200 : 400);
     }

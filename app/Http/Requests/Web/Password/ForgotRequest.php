@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Password;
 
+use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ForgotRequest extends FormRequest
@@ -23,6 +24,7 @@ class ForgotRequest extends FormRequest
     {
         return [
             'email' => 'required|email|exists:creators,email',
+            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

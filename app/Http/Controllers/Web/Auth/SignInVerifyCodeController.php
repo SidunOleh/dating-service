@@ -23,12 +23,12 @@ class SignInVerifyCodeController extends Controller
             return response(['message' => 'Too many attemps.',], 429);
         }
 
-        if ($signin['code'] != $code) {
-            return response(['message' => 'Invalid verification code.',], 400);
-        }
-
         if (now()->greaterThan(Carbon::createFromTimestamp($signin['expire_at']))) {
             return response(['message' => 'Verification code is expired.',], 400);
+        }
+
+        if ($signin['code'] != $code) {
+            return response(['message' => 'Invalid verification code.',], 400);
         }
 
         if (! Auth::guard('web')->attempt(session('signin.credentials'))) {

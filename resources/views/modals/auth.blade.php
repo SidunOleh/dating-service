@@ -136,4 +136,14 @@
         </form>
     </div>
 
+    <div class="res-succes-send card" id="res-succes-send">
+        <p class="title">
+          Your password reset message has been successfully sent to your email:
+        </p>
+        <p class="mail">email@gmail.com</p>
+        <a class="btn red">
+            Close
+        </a>
+    </div>
+
 </div>

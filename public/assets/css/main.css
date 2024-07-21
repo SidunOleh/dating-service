@@ -3166,3 +3166,9 @@ input {
 #confirm-delete.load .loader {
     display: block !important;
 }
+
+.res-succes-send .btn {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+}

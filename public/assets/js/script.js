@@ -119,12 +119,7 @@ $(document).ready(function () {
 
 //__________________________AJAX Setup_________________________//
 
-$.ajaxSetup({
-    beforeSend: (xhr) => xhr.setRequestHeader(
-        'X-CSRF-TOKEN', 
-        $('meta[name="csrf-token"]').attr('content')
-    ) 
-})
+$.ajaxSetup({beforeSend: xhr => xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content')),})
 
 //__________________________ADVERTISING_________________________//
 
@@ -529,10 +524,16 @@ $('#forgot-password').submit(async function(e) {
     const email = form.find('#reset-email')
     email.closest('.input-group').removeClass('error')
 
-    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
+    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('forgot')}`
 
     $.post('/password/forgot', data)
         .done(() => {
+            $('.resetPassword-card').removeClass('active')
+
+            const successPopup = $('.res-succes-send')
+            successPopup.find('.mail').text(email.val())
+            successPopup.addClass('active')
+
             form[0].reset()
         }).fail(xhr => {
             if (xhr.status == 422) {
@@ -543,11 +544,17 @@ $('#forgot-password').submit(async function(e) {
                     email.next('.error-text').text(errors.email[0])
                 }
             } else {
-                alert(xhr.responseJSON.message)
+                email.closest('.input-group').addClass('error')
+                email.next('.error-text').text(xhr.responseJSON.message)
             }
         }).always(() => {
             removeLoader('.resetPassword-card')
         })
+})
+
+$('.res-succes-send .btn').click(() => {
+    $('.popUp-wrapper').removeClass('active')
+    $('.res-succes-send').removeClass('active')
 })
 
 //__________________________Favorites_________________________//

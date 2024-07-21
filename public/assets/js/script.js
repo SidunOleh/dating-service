@@ -33,89 +33,88 @@ $(".img-slider").each(function () {
 
 //_____________________SIGN-UP_LOG-IN______________________//
 
-$(document).ready(function () {
-    const $popupWrapper = $(".popUp-wrapper");
-    const $header = $(".header");
-    const $cards = {
-      signUp: $(".signUP-card"),
-      logIn: $(".logIN-card"),
-      resetPassword: $(".resetPassword-card"),
+const $popupWrapper = $(".popUp-wrapper");
+const $header = $(".header");
+const $cards = {
+    signUp: $(".signUP-card"),
+    logIn: $(".logIN-card"),
+    resetPassword: $(".resetPassword-card"),
+    resSuccesSend: $(".res-succes-send"),
+};
+
+function togglePopup(cardName, show) {
+    const $card = $cards[cardName];
+    $popupWrapper.toggleClass("active", show);
+    $("html").toggleClass("no-scroll", show);
+    $header.toggleClass("hidden", show && $(window).width() < 768);
+
+    Object.values($cards).forEach(($c) => $c.removeClass("active"));
+    if (show) $card.addClass("active");
+    window.dispatchEvent(new Event('resize'))
+}
+
+$(".btn.login, .header-burger").on("click", () => togglePopup("logIn", true));
+$(".btn.signup, .signup-link").on("click", () => togglePopup("signUp", true));
+$(".reset-pass").on("click", () => togglePopup("resetPassword", true));
+$(".close").on("click", () => togglePopup("", false));
+
+// $popupWrapper.on("click", function (event) {
+//   if (
+//     !$(event.target).closest(".signUP-card, .logIN-card, .resetPassword-card")
+//       .length
+//   ) {
+//     togglePopup("", false);
+//   }
+// });
+
+$(".show-password").on("click", function () {
+    const $passwordInput = $(this).closest(".input-group").find("input");
+    const isPassword = $passwordInput.attr("type") === "password";
+    $passwordInput.attr("type", isPassword ? "text" : "password");
+    $(this).toggleClass("open", isPassword);
+});
+
+function enableSubmitButton($form) {
+    const $inputs = $form.find('input[type="email"], input[type="password"]');
+    const $submitButton = $form.find(".submit.btn");
+
+    const checkInputs = () => {
+    const allFilled = $inputs
+        .toArray()
+        .every((input) => $(input).val().trim() !== "");
+    $submitButton.prop("disabled", !allFilled);
     };
-  
-    function togglePopup(cardName, show) {
-      const $card = $cards[cardName];
-      $popupWrapper.toggleClass("active", show);
-      $("html").toggleClass("no-scroll", show);
-      $header.toggleClass("hidden", show && $(window).width() < 768);
-  
-      Object.values($cards).forEach(($c) => $c.removeClass("active"));
-      if (show) $card.addClass("active");
-      window.dispatchEvent(new Event('resize'))
+
+    $inputs.on("input", checkInputs);
+    checkInputs();
+}
+
+$(".signUP-card form, .logIN-card form, .resetPassword-card form").each(
+    function () {
+    enableSubmitButton($(this));
     }
-  
-    $(".btn.login, .header-burger").on("click", () => togglePopup("logIn", true));
-    $(".btn.signup, .signup-link").on("click", () => togglePopup("signUp", true));
-    $(".reset-pass").on("click", () => togglePopup("resetPassword", true));
-    $(".close").on("click", () => togglePopup("", false));
-  
-    // $popupWrapper.on("click", function (event) {
-    //   if (
-    //     !$(event.target).closest(".signUP-card, .logIN-card, .resetPassword-card")
-    //       .length
-    //   ) {
-    //     togglePopup("", false);
-    //   }
-    // });
-  
-    $(".show-password").on("click", function () {
-      const $passwordInput = $(this).closest(".input-group").find("input");
-      const isPassword = $passwordInput.attr("type") === "password";
-      $passwordInput.attr("type", isPassword ? "text" : "password");
-      $(this).toggleClass("open", isPassword);
+);
+
+$(".code-inputs input").each(function (index, input) {
+    $(input)
+    .on("input", function () {
+        if (
+        this.value.length === 1 &&
+        index < $(".code-inputs input").length - 1
+        ) {
+        $(".code-inputs input")
+            .eq(index + 1)
+            .focus();
+        }
+    })
+    .on("keydown", function (e) {
+        if (e.key === "Backspace" && index > 0 && this.value === "") {
+        $(".code-inputs input")
+            .eq(index - 1)
+            .focus();
+        }
     });
-  
-    function enableSubmitButton($form) {
-      const $inputs = $form.find('input[type="email"], input[type="password"]');
-      const $submitButton = $form.find(".submit.btn");
-  
-      const checkInputs = () => {
-        const allFilled = $inputs
-          .toArray()
-          .every((input) => $(input).val().trim() !== "");
-        $submitButton.prop("disabled", !allFilled);
-      };
-  
-      $inputs.on("input", checkInputs);
-      checkInputs();
-    }
-  
-    $(".signUP-card form, .logIN-card form, .resetPassword-card form").each(
-      function () {
-        enableSubmitButton($(this));
-      }
-    );
-  
-    $(".code-inputs input").each(function (index, input) {
-      $(input)
-        .on("input", function () {
-          if (
-            this.value.length === 1 &&
-            index < $(".code-inputs input").length - 1
-          ) {
-            $(".code-inputs input")
-              .eq(index + 1)
-              .focus();
-          }
-        })
-        .on("keydown", function (e) {
-          if (e.key === "Backspace" && index > 0 && this.value === "") {
-            $(".code-inputs input")
-              .eq(index - 1)
-              .focus();
-          }
-        });
-    });
-  });
+});
 
 //__________________________AJAX Setup_________________________//
 
@@ -539,10 +538,8 @@ $('#forgot-password').submit(async function(e) {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
                 
-                if (errors.email) {
-                    email.closest('.input-group').addClass('error')
-                    email.next('.error-text').text(errors.email[0])
-                }
+                email.closest('.input-group').addClass('error')
+                email.next('.error-text').text(errors.email[0])
             } else {
                 email.closest('.input-group').addClass('error')
                 email.next('.error-text').text(xhr.responseJSON.message)
@@ -553,8 +550,7 @@ $('#forgot-password').submit(async function(e) {
 })
 
 $('.res-succes-send .btn').click(() => {
-    $('.popUp-wrapper').removeClass('active')
-    $('.res-succes-send').removeClass('active')
+    togglePopup('resSuccesSend', false)
 })
 
 //__________________________Favorites_________________________//

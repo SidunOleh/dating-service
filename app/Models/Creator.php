@@ -411,6 +411,15 @@ class Creator extends Authenticatable
         return $this->hasOne(ProfileRequest::class)->latestOfMany();
     }
 
+    public function secondLastProfileRequest(): ?ProfileRequest
+    {
+        return ProfileRequest::where('creator_id', $this->id)
+            ->orderBy('id', 'DESC')
+            ->offset(1)
+            ->limit(1)
+            ->first();
+    }
+
     public function hasUndoneProfileRequest(): bool
     {
         return (bool) $this->profileRequests()->where('status', 'undone')->first();

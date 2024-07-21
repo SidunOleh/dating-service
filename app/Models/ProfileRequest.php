@@ -197,6 +197,29 @@ class ProfileRequest extends Model
         return $comments;
     }
 
+    public function deleteRejectedPhotos(): void
+    {
+        $approved = [];
+        $rejected = [];
+        foreach ($this->photos['status'] ?? [] as $i => $status) {
+            if ($status == 'rejected') {
+                $rejected[] = $this->photos['value'][$i];
+            } else {
+                $approved['value'][] = 
+                    $this->photos['value'][$i];
+                $approved['status'][] = 
+                    $this->photos['status'][$i];
+                $approved['comment'][] = 
+                    $this->photos['comment'][$i];
+            }
+        }
+
+        Image::deleteByIds($rejected);
+
+        $this->photos = $approved ?: null;
+        $this->save();
+    }
+
     public static function next(bool $approved): ?ProfileRequest
     {
         return ProfileRequest::where('status', 'undone')

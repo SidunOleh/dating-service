@@ -20,6 +20,8 @@ class DoneController extends Controller
         $profileRequest->update($data);
         $profileRequest->migrateDataToProfile();
 
+        $profileRequest->creator->secondLastProfileRequest()?->deleteRejectedPhotos();
+
         $nextProfileRequest = ProfileRequest::next($approved);
 
         return response(['next' => $nextProfileRequest?->id,]);

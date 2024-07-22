@@ -664,24 +664,19 @@ function initializeBattle($battle) {
         if (! nextPair) {
             return
         }
-    
-        $battle.find('#photo1').replaceWith(`
-            <div class="photo-container photo" id="photo1" data-id="${nextPair[0].id}">
-                <img src="${nextPair[0].photo.url}" alt="Photo 1">
+
+        const html = (creator) => {
+            return `
+            <div class="photo-container photo" data-id="${creator.id}">
+                <img src="${creator.photo.url}">
                 <div class="info">
-                    ${nextPair[0].name.length > 5 ? nextPair[0].name.substr(0, 5) : nextPair[0].name}..., ${nextPair[0].age}
+                    ${creator.name.length > 5 ? creator.name.substr(0, 5) : creator.name}..., ${creator.age}
                 </div>
-            </div>
-        `)
-    
-        $battle.find('#photo2').replaceWith(`
-            <div class="photo-container photo" id="photo2" data-id="${nextPair[1].id}">
-                <img src="${nextPair[1].photo.url}" alt="Photo 2">
-                <div class="info">
-                    ${nextPair[1].name.length > 5 ? nextPair[1].name.substr(0, 5) : nextPair[1].name}..., ${nextPair[1].age}
-                </div>
-            </div>
-        `)
+            </div>`
+        }
+
+        $battle.find('.photo:first').replaceWith(html(nextPair[0]))
+        $battle.find('.photo:last').replaceWith(html(nextPair[1]))
     }
 
     function vote(id) {

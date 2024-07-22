@@ -11,6 +11,11 @@
     </div>
 </footer>
 
+<style>
+    .grecaptcha-badge {
+        z-index: 100;
+    }
+</style>
 <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
 <script>
     function getReCaptchaV3(action) {
@@ -23,11 +28,6 @@
         })
     }
 </script>
-<style>
-    .grecaptcha-badge {
-        z-index: 100;
-    }
-</style>
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/fancybox.umd.js') }}"></script>

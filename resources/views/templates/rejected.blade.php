@@ -11,8 +11,7 @@ $comments = array_filter($comments, fn ($comment) => $comment);
         @foreach($comments as $i => $comment)
             {{ $comment }}
             @if ($i != count($comments)-1)
-            <br>
-            <br>
+            <br><br>
             @endif
         @endforeach
     </p>

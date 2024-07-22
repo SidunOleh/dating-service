@@ -23,6 +23,11 @@
         })
     }
 </script>
+<style>
+    .grecaptcha-badge {
+        z-index: 100;
+    }
+</style>
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/fancybox.umd.js') }}"></script>

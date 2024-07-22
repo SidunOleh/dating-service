@@ -8,10 +8,12 @@ $comments = array_filter($comments, fn ($comment) => $comment);
             {{ 'Rejected' }}
         @endif
 
-        @foreach($comments as $comment)
+        @foreach($comments as $i => $comment)
             {{ $comment }}
+            @if ($i != array_count($comments)-1)
             <br>
             <br>
+            @endif
         @endforeach
     </p>
 </div>

@@ -704,7 +704,7 @@ function initializeBattle($battle) {
       setTimeout(() => activateRepeatButton($this), 5000);
     });
 
-    $battle.on('click', ".photo", function () {
+    $battle.on("click", ".photo", function () {
       const $selectedPhoto = $(this);
       
       if ($selectedPhoto.hasClass('selected')) {

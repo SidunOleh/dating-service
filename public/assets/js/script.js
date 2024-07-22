@@ -719,7 +719,7 @@ function initializeBattle($battle) {
       } 
     });
 
-    $battle.find(".repeat").click(function () {
+    $battle.on("click", ".repeat.active", function () {
       getNextPair()
       setTimeout(() => {
           renderNextPair()

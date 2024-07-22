@@ -41,10 +41,11 @@ class SeedApp extends Command
             try {
                 Creator::factory()->create([
                     'photos' => $images->random(rand(1, $images->count()))->pluck('id')->all(),
-                    'verification_photo' => [$images->random()->id, null][rand(0, 1)],
-                    'id_photo' => [$images->random()->id, null][rand(0, 1)],
-                    'street_photo' => [$images->random()->id. null][rand(0, 1)],
+                    'verification_photo' => $images->random()->id,
+                    'id_photo' => $images->random()->id,
+                    'street_photo' => $images->random()->id,
                     'show_on_site' => true,
+                    'play_roulette' => true,
                     'profile_is_created' => true,
                 ]);
             } catch (Exception) {

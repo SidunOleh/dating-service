@@ -902,6 +902,219 @@ input {
     text-overflow: ellipsis
 }
 
+.battle-container {
+    height: 100%;
+    position: relative
+}
+
+.battle-container .startBattle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 16px 16px 0px;
+    background: rgba(57, 57, 62, 0.5);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    z-index: 100;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transition: all 0.9s ease;
+    transition: all 0.9s ease
+}
+
+.battle-container .startBattle .start_btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+    color: var(--white, #fbfbfb);
+    font-size: 14px;
+    font-weight: 600;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative
+}
+
+.battle-container .startBattle .start_btn:before {
+    content: "Vote";
+    position: absolute;
+    top: -36px;
+    font-size: 20px
+}
+
+.battle-container .startBattle .start_btn:after {
+    content: "Battle";
+    position: absolute;
+    bottom: -36px;
+    font-size: 20px
+}
+
+.battle-container .startBattle.hidden {
+    bottom: -100%
+}
+
+.battle-container .loader .loader-L {
+    position: absolute;
+    left: -100%;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(57, 57, 62, 0.5);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+    z-index: 100;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out
+}
+
+.battle-container .loader .loader-R {
+    position: absolute;
+    right: -100%;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(57, 57, 62, 0.5);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+    z-index: 100;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out
+}
+
+.battle-container .loader.open .loader-R {
+    right: 0
+}
+
+.battle-container .loader.open .loader-L {
+    left: 0
+}
+
+.battle-container .photo-battle {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgba(39, 39, 39, 0.9725490196)
+}
+
+.battle-container .photo-battle .repeat {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    z-index: 10;
+    background: -webkit-gradient(linear, left top, left bottom, from(#725354), to(#827d7d));
+    background: linear-gradient(180deg, #725354 0%, #827d7d 100%);
+    font-size: 14px;
+    font-weight: 600;
+    color: #bebfc0;
+    cursor: not-allowed
+}
+
+.battle-container .photo-battle .repeat.active {
+    cursor: pointer;
+    background: var(--Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+    color: #fbfbfb
+}
+
+.battle-container .photo-battle .repeat.active .progress-ring {
+    display: none
+}
+
+.battle-container .photo-battle .repeat .progress-ring {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 80px;
+    height: 80px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg)
+}
+
+.battle-container .photo-battle .repeat .progress-ring__circle {
+    -webkit-transition: stroke-dasharray 6s linear;
+    transition: stroke-dasharray 6s linear;
+    stroke-dasharray: 0 213.6
+}
+
+.battle-container .photo-container {
+    width: 50%;
+    position: relative;
+    overflow: hidden;
+    -webkit-transition: width 0.5s ease, -webkit-filter 0.5s ease;
+    transition: width 0.5s ease, -webkit-filter 0.5s ease;
+    transition: width 0.5s ease, filter 0.5s ease;
+    transition: width 0.5s ease, filter 0.5s ease, -webkit-filter 0.5s ease;
+    height: 100%;
+    cursor: pointer
+}
+
+.battle-container .photo-container img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.battle-container .photo-container .info {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    color: white;
+    font-family: Inter;
+    font-size: 20px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-weight: 700
+}
+
+.battle-container .photo-container.blurred {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+    width: 15%
+}
+
+.battle-container .photo-container.selected {
+    width: 85%
+}
+
 .pagination {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -975,7 +1188,7 @@ input {
 }
 
 .popUp-wrapper {
-    background: rgb(0 0 0 / 80%);
+    background: rgba(0, 0, 0, 0.8);
     position: fixed;
     top: 0;
     left: 0;
@@ -1329,7 +1542,7 @@ input {
 }
 
 .verification-wrapper {
-    background: rgb(0 0 0 / 80%);
+    background: rgba(0, 0, 0, 0.8);
     position: fixed;
     top: 0;
     left: 0;
@@ -1436,7 +1649,7 @@ input {
 }
 
 .advertising-wrapper {
-    background: rgb(0 0 0 / 80%);
+    background: rgba(0, 0, 0, 0.8);
     position: fixed;
     top: 0;
     left: 0;
@@ -1459,12 +1672,6 @@ input {
     justify-content: center;
     display: none;
     padding: 16px
-}
-
-.advertising-wrapper.show {
-    display: -webkit-box!important;
-    display: -ms-flexbox!important;
-    display: flex!important
 }
 
 .advertising-wrapper .advertising-popup {
@@ -1570,7 +1777,6 @@ input {
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
-    z-index: 500;
 }
 
 .profile .info-group.rejected .reject {
@@ -3171,4 +3377,8 @@ input {
     display: inline-block;
     width: 100%;
     margin-top: 10px;
+}
+
+.profile .info-group.pending:before {
+    z-index: 400;
 }

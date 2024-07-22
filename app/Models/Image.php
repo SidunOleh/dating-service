@@ -125,7 +125,7 @@ class Image extends Model
     public static function deleteByIds(array $ids): void
     {
         foreach ($ids as $id) {
-            Image::find($id)->delete();
+            Image::find($id)?->delete();
         }
     }
 }

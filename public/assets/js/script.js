@@ -631,3 +631,147 @@ $('#delete-popup #confirm-delete:not(.load)').click(function () {
         $(this).removeClass('load')
     })
 })
+
+//__________________________Roulette_________________________//
+
+
+function initializeBattle($battle) {
+    let nextPair = null
+
+    function getNextPair() {
+        $.get('/roulette/get-pair').then(res => {
+            if (! res.pair) {
+                return
+            }
+
+            nextPair = res.pair
+
+            predownloadPhoto(nextPair[0].photo.url)
+            predownloadPhoto(nextPair[1].photo.url)
+        })
+    }
+
+    getNextPair()
+
+    function predownloadPhoto(url) {
+        const image = new Image 
+        image.src = url
+    }
+    
+    function renderNextPair() {
+        if (! nextPair) {
+            return
+        }
+    
+        $battle.find('#photo1').replaceWith(`
+            <div class="photo-container photo" id="photo1" data-id="${nextPair[0].id}">
+                <img src="${nextPair[0].photo.url}" alt="Photo 1">
+                <div class="info">
+                    ${nextPair[0].name}, ${nextPair[0].age}
+                </div>
+            </div>
+        `)
+    
+        $battle.find('#photo2').replaceWith(`
+            <div class="photo-container photo" id="photo2" data-id="${nextPair[1].id}">
+                <img src="${nextPair[1].photo.url}" alt="Photo 2">
+                <div class="info">
+                    ${nextPair[1].name}, ${nextPair[1].age}
+                </div>
+            </div>
+        `)
+    }
+
+    function vote(id) {
+        $.post(`/roulette/vote/${id}`)
+    }
+
+    const $circle = $battle.find(".progress-ring__circle");
+    const radius = $circle[0].r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+
+    $circle.css({
+      strokeDasharray: circumference,
+      strokeDashoffset: circumference,
+    });
+
+    let hasSelected = false;
+
+    $battle.find(".start_btn").click(function () {
+      const $this = $(this);
+      $this.closest(".startBattle").addClass("hidden");
+      startProgressAnimation($circle, 5000);
+      setTimeout(() => activateRepeatButton($this), 5000);
+    });
+
+    $battle.on('click', ".photo", function () {
+      const $selectedPhoto = $(this);
+      
+      if ($selectedPhoto.hasClass('selected')) {
+        window.open(`/profile/${$selectedPhoto.data('id')}`, '_blank')
+      }
+
+      if (!hasSelected) {
+        const $blurredPhoto = $battle.find(".photo").not($selectedPhoto);
+        selectPhoto($selectedPhoto, $blurredPhoto);
+        hasSelected = true;
+        vote($selectedPhoto.data('id'))
+      } 
+    });
+
+    $battle.find(".repeat").click(function () {
+      getNextPair()
+      setTimeout(() => {
+          renderNextPair()
+          hasSelected = false
+      }, 500)
+      
+      const $this = $(this);
+      const $loader = $battle.find(".loader");
+
+      $this.removeClass("active");
+      $loader.addClass("open");
+
+      setTimeout(() => {
+        $loader.removeClass("open");
+      }, 1500);
+
+      restartProgressAnimation($circle, 5000);
+      setTimeout(() => activateRepeatButton($this), 6500);
+    });
+
+    function startProgressAnimation($circle, duration) {
+      setTimeout(() => {
+        $circle.css({
+          transition: `stroke-dashoffset ${duration / 1000}s linear`,
+          strokeDashoffset: "0",
+        });
+      }, 0);
+    }
+
+    function restartProgressAnimation($circle, duration) {
+      $circle.css({
+        transition: "none",
+        strokeDashoffset: circumference,
+      });
+
+      setTimeout(() => {
+        startProgressAnimation($circle, duration);
+      }, 1500);
+    }
+
+    function activateRepeatButton($button) {
+      $button.closest(".battle").find(".repeat").addClass("active");
+    }
+
+    function selectPhoto($selectedPhoto, $blurredPhoto) {
+      $selectedPhoto.addClass("selected").removeClass("blurred");
+      $blurredPhoto.addClass("blurred").removeClass("selected");
+
+      $selectedPhoto.find(".info").text("Click to open profile");
+    }
+  }
+
+  $(".battle").each(function () {
+    initializeBattle($(this));
+  });

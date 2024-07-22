@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Cache;
 use Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
 use Staudenmeir\EloquentJsonRelations\Relations\BelongsToJson;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\DB;
 
 class Creator extends Authenticatable
 {
@@ -648,5 +649,21 @@ class Creator extends Authenticatable
         }
 
         return $visits->count();
+    }
+
+    public static function roulettePair(): Collection
+    {
+        $pair = self::select('id', 'name', 'age', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photo'),)
+            ->showOnSite()
+            ->playRoulette()
+            ->inRandomOrder()
+            ->limit(2)
+            ->get();
+
+        foreach ($pair as $creator) {
+            $creator->photo = Image::find($creator->photo);
+        }
+
+        return $pair;
     }
 }

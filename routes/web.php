@@ -26,6 +26,8 @@ use App\Http\Controllers\Web\Profile\ShowController;
 use App\Http\Controllers\Web\Profile\StoreController;
 use App\Http\Controllers\Web\Profile\SwitchOptionController;
 use App\Http\Controllers\Web\Profile\UpdateController;
+use App\Http\Controllers\Web\Roulette\GetPairController;
+use App\Http\Controllers\Web\Roulette\VoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -152,4 +154,14 @@ Route::prefix('/images')->name('images.')->middleware(['auth:web',])->group(func
         ->name('upload');
     Route::delete('/{image}', DeleteController::class)
         ->name('delete');
+});
+
+/**
+ * Roulette
+ */
+Route::prefix('/roulette')->name('roulette.')->group(function () {
+    Route::get('/get-pair', GetPairController::class)
+        ->name('get-pair');
+    Route::post('/vote/{creator}', VoteController::class)
+        ->name('vote');
 });

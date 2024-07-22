@@ -42,12 +42,6 @@ const $cards = {
     resSuccesSend: $(".res-succes-send"),
 };
 
-function closeAllCards() {
-    for (const $card in $cards) {
-        togglePopup($card, false)
-    }
-}
-
 function togglePopup(cardName, show) {
     const $card = $cards[cardName];
     $popupWrapper.toggleClass("active", show);
@@ -364,7 +358,7 @@ $('#sign-up').submit(async function(e) {
 
     $.post('/sign-up/send-code', data)
         .done(() => {
-            closeAllCards()
+            togglePopup('signUp', false)
             const verifyPopup = $('.verification-wrapper')
             verifyPopup.find('.email').text(email.val())
             verifyPopup.data('action', 'sign-up')
@@ -449,7 +443,7 @@ $('#sign-in').submit(async function(e) {
 
     $.post('/sign-in/send-code', data)
         .done(() => {
-            closeAllCards()
+            togglePopup('logIn', false)
             const verifyPopup = $('.verification-wrapper')
             verifyPopup.find('.email').text(email.val())
             verifyPopup.data('action', 'sign-in')

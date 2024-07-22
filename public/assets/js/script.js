@@ -720,9 +720,9 @@ function initializeBattle($battle) {
     });
 
     $battle.on("click", ".repeat.active", function () {
-      getNextPair()
       setTimeout(() => {
           renderNextPair()
+          getNextPair()
           hasSelected = false
       }, 500)
       

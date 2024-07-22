@@ -13,6 +13,7 @@ use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
 use Spatie\Image\Image as SpatieImage;
 use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
 use Spatie\Image\Enums\Unit;
 
 class Image extends Model
@@ -84,7 +85,8 @@ class Image extends Model
                 widthUnit: Unit::Percent,
                 height: 100,
                 heightUnit: Unit::Percent,
-                alpha: 10
+                fit: Fit::Stretch,
+                alpha: 5,
             )->save();
         }
 

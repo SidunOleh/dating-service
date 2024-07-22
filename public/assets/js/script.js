@@ -667,7 +667,7 @@ function initializeBattle($battle) {
             <div class="photo-container photo" id="photo1" data-id="${nextPair[0].id}">
                 <img src="${nextPair[0].photo.url}" alt="Photo 1">
                 <div class="info">
-                    ${nextPair[0].name}, ${nextPair[0].age}
+                    ${nextPair[0].name.length > 5 ? nextPair[0].name.substr(0, 5) : nextPair[0].name}..., ${nextPair[0].age}
                 </div>
             </div>
         `)
@@ -676,7 +676,7 @@ function initializeBattle($battle) {
             <div class="photo-container photo" id="photo2" data-id="${nextPair[1].id}">
                 <img src="${nextPair[1].photo.url}" alt="Photo 2">
                 <div class="info">
-                    ${nextPair[1].name}, ${nextPair[1].age}
+                    ${nextPair[1].name.length > 5 ? nextPair[1].name.substr(0, 5) : nextPair[1].name}..., ${nextPair[1].age}
                 </div>
             </div>
         `)

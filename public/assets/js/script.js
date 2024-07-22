@@ -648,24 +648,24 @@ function initializeBattle($battle) {
 
             nextPair = res.pair
 
+            const predownloadPhoto = url => {
+                const image = new Image 
+                image.src = url
+            }
+
             predownloadPhoto(nextPair[0].photo.url)
             predownloadPhoto(nextPair[1].photo.url)
         })
     }
 
     getNextPair()
-
-    function predownloadPhoto(url) {
-        const image = new Image 
-        image.src = url
-    }
     
     function renderNextPair() {
         if (! nextPair) {
             return
         }
 
-        const html = (creator) => {
+        const html = creator => {
             return `
             <div class="photo-container photo" data-id="${creator.id}">
                 <img src="${creator.photo.url}">

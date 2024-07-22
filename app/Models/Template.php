@@ -77,7 +77,8 @@ class Template extends Model
             ->inRandomOrder()
             ->limit($this->count('ad'))
             ->get();
-        $roulettes = Creator::showOnSite()
+        $roulettes = Creator::with('gallery')
+            ->showOnSite()
             ->playRoulette()
             ->inRandomOrder()
             ->limit($this->count('roulette') * 2)

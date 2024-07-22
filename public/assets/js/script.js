@@ -722,8 +722,8 @@ function initializeBattle($battle) {
     $battle.on("click", ".repeat.active", function () {
       setTimeout(() => {
           renderNextPair()
-          getNextPair()
           hasSelected = false
+          getNextPair()
       }, 500)
       
       const $this = $(this);

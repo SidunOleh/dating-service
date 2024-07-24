@@ -373,7 +373,6 @@ $('#sign-up').submit(async function(e) {
             togglePopup('signUp', false)
             
             openVerifyPopup('sign-up', email.val())
-                        
             resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 422) {
@@ -465,7 +464,6 @@ $('#sign-in').submit(async function(e) {
             togglePopup('logIn', false)
 
             openVerifyPopup('sign-in', email.val())
-                        
             resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 401) {
@@ -555,12 +553,11 @@ $('#forgot-password').submit(async function(e) {
 
     $.post('/password/forgot', data)
         .done(() => {
-            $('.res-succes-send').find('.mail').text(email.val())
-
             togglePopup('resetPassword', false)
-            togglePopup('resSuccesSend', true)
-
             form[0].reset()
+
+            $('.res-succes-send').find('.mail').text(email.val())
+            togglePopup('resSuccesSend', true)
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
@@ -606,9 +603,9 @@ $('#new-password-form').submit(async function (e) {
     $.post('/password/reset', data)
         .done(() => {
             togglePopup('addNewPassCard', false)
-            togglePopup('passSucces', true)
-
             form[0].reset()
+
+            togglePopup('passSucces', true)
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors

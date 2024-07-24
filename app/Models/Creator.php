@@ -605,6 +605,13 @@ class Creator extends Authenticatable
         
         $creators = $query->inRandomOrder()->limit($count)->get();
 
+        if ($creators->count() < $count) {
+            $count = $count - $creators->count();
+            $exlude = [...$exlude, ...$creators->pluck('id')->all(),];
+
+            $creators = $creators->merge(self::recommendations($count, $exlude));
+        }
+
         return $creators;
     } 
 

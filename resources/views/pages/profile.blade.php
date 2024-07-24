@@ -8,11 +8,15 @@
             <div @class(['head-porfile', 'verified' => $creator->is_verified,])>
                 <div class="img-card">
                     <img src="{{ $creator->gallery->first()->getUrl() }}" alt="" />
-                    @include('templates.favorite', [
-                        'id' => $creator->id, 
-                        'count' => $creator->in_favorites_count,
-                        'active' => $favorites->contains($creator->id),
-                    ])
+
+                    @auth('web')
+                        @include('templates.favorite', [
+                            'id' => $creator->id, 
+                            'count' => $creator->inFavorites()->count(),
+                            'active' => auth('web')->user()->favorites->contains($creator->id),
+                        ])
+                    @endauth
+                
                 </div>
                 <div class="userMain">
                     <p class="name">{{ $creator->name }}, {{ $creator->age }}</p>
@@ -71,7 +75,12 @@
         <div class="user-photo-list">
             @php
             $imgs = $creator->gallery;
-            $imgs = (auth('web')->check() and auth('web')->user()->subscribed()) ? $imgs : $imgs->slice(0, 3);
+            $imgs = auth('web')->user()?->subscribed() ? $imgs : $imgs->slice(0, 3);
+
+            $blur = scandir(storage_path('app/public/blur'));
+            $blur = array_filter($blur, fn ($file) => ! in_array($file, ['.', '..',]));
+            shuffle($blur);
+            $blur = array_slice($blur, 0, $creator->gallery->count() - $imgs->count());
             @endphp
 
             @foreach($imgs as $img)
@@ -80,7 +89,7 @@
             </a>
             @endforeach
 
-            @if (!auth('web')->check() or !auth('web')->user()->subscribed())
+            @foreach($blur as $img)
             <div class="user-photo-item">
                 <div class="subscribe">
                     @if(!auth('web')->check())
@@ -95,9 +104,9 @@
                     </a>
                     @endif
                 </div>
-                <img src="{{ asset('assets/img/person.png') }}" alt="" />
+                <img src="{{ asset("storage/blur/{$img}") }}" alt="" />
             </div>
-            @endif
+            @endforeach
 
         </div>
     

@@ -35,13 +35,17 @@
                 'total' => $template->total(),
             ])
         @else
-        <section class="noResults">
-            <div class="container">
-                <div class="title">No search results found!</div>
-                <p class="text">Please try configuring the filters again</p>
-                <img src="{{ asset('/assets/img/noRes.svg') }}" alt="" />
-            </div>
-        </section>
+            <section class="noResults">
+                <div class="container">
+                    <div class="title">
+                        No search results found!
+                    </div>
+                    <p class="text">
+                        Please try configuring the filters again
+                    </p>
+                    <img src="{{ asset('/assets/img/noRes.svg') }}" alt="" />
+                </div>
+            </section>
         @endif
 
     </div>

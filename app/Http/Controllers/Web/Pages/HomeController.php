@@ -7,9 +7,7 @@ use App\Models\Ad;
 use App\Models\Option;
 use App\Models\Template;
 use App\Models\ZipCode;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -36,17 +34,13 @@ class HomeController extends Controller
             ->setFilters($filters)
             ->fillData();
 
-        $favorites =  Auth::guard('web')->check() ? 
-            Auth::guard('web')->user()->favorites : 
-            new Collection();
-
-        $popupAds = $template->count('ad') ? Ad::select('id', 'link', 'image_id')
+        $popupAds = Ad::select('id', 'link', 'image_id')
             ->with('image')
             ->active()
             ->type('popup')
-            ->limit(50)
+            ->limit($template->count('ad') ? 50 : 0)
             ->inRandomOrder()
-            ->get() : new Collection();
+            ->get();
         $adsSettings = Option::getOptions([
             'clicks_between_popups', 
             'seconds_between_popups', 
@@ -55,7 +49,6 @@ class HomeController extends Controller
 
         return view('pages.home', [
             'template' => $template, 
-            'favorites' => $favorites,
             'popupAds' => $popupAds,
             'adsSettings' => $adsSettings,
         ]);

@@ -8,7 +8,7 @@
         <div class="img-slider">
             @php
             $imgs = $creator->gallery;
-            $imgs = (auth('web')->check() and auth('web')->user()->subscribed()) ? $imgs : $imgs->slice(0, 3);
+            $imgs = auth('web')->user()?->subscribed() ? $imgs : $imgs->slice(0, 3);
             @endphp
 
             @foreach($imgs as $img)
@@ -26,11 +26,13 @@
             </div>
         </div>
 
-        @include('templates.favorite', [
-            'id' => $creator->id, 
-            'count' => $creator->in_favorites_count,
-            'active' => $favorites->contains($creator->id),
-        ])
+        @auth('web')
+            @include('templates.favorite', [
+                'id' => $creator->id, 
+                'count' => $creator->in_favorites_count,
+                'active' => auth('web')->user()->favorites->contains($creator->id),
+            ])
+        @endauth
 
     </div>
 

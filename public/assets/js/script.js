@@ -542,9 +542,10 @@ $('#forgot-password').submit(async function(e) {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
                 
-                if (errors.email) {
+                for (const field in errors) {
                     email.closest('.input-group').addClass('error')
-                    email.next('.error-text').text(errors.email[0])
+                    email.next('.error-text').text(errors[field][0])
+                    break
                 }
             } else {
                 email.closest('.input-group').addClass('error')
@@ -800,10 +801,10 @@ $('#new-password-form').submit(async function (e) {
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
-                
-                if (errors.password) {
+                for (const field in errors) {
                     password.closest('.input-group').addClass('error')
-                    password.next('.error-text').text(errors.password[0])
+                    password.next('.error-text').text(errors[field][0])
+                    break
                 }
             } else {
                 password.closest('.input-group').addClass('error')

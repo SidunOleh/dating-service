@@ -59,6 +59,8 @@ $isResetPage = request()->query('token') and request()->query('email');
                 Sign up
             </button>
         </form>
+
+        <div class="text-error"></div>
     </div>
 
     <div class="logIN-card card">
@@ -113,6 +115,8 @@ $isResetPage = request()->query('token') and request()->query('email');
                 Don’t have an account? <span class="signup-link">Sign up</span>
             </p>
         </form>
+
+        <div class="text-error"></div>
     
     </div>
 
@@ -138,6 +142,8 @@ $isResetPage = request()->query('token') and request()->query('email');
                 Confirm
             </button>
         </form>
+
+        <div class="text-error"></div>
     </div>
 
     <div class="res-succes-send card" id="res-succes-send">
@@ -184,6 +190,8 @@ $isResetPage = request()->query('token') and request()->query('email');
                 Confirm
             </button>
         </form>
+
+        <div class="text-error"></div>
     </div>
 
     <div class="pass-succes card" id="res-succes-send">

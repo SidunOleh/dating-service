@@ -3393,3 +3393,19 @@ input {
 .profile .info-group.pending:before {
     z-index: 400;
 }
+
+.text-error {
+    color: #ff5959;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.text-error.show {
+    display: block;
+}

@@ -369,9 +369,7 @@ $('#sign-up').submit(async function(e) {
             verifyPopup.find('.email').text(email.val())
             verifyPopup.data('action', 'sign-up')
             verifyPopup.addClass('active')
-            
-            $('.signUP-card').removeClass('active')
-            
+                        
             resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 422) {
@@ -466,9 +464,7 @@ $('#sign-in').submit(async function(e) {
             verifyPopup.find('.email').text(email.val())
             verifyPopup.data('action', 'sign-in')
             verifyPopup.addClass('active')
-            
-            $('.logIN-card').removeClass('active')
-            
+                        
             resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 401) {
@@ -558,11 +554,10 @@ $('#forgot-password').submit(async function(e) {
 
     $.post('/password/forgot', data)
         .done(() => {
-            $('.resetPassword-card').removeClass('active')
+            $('.res-succes-send').find('.mail').text(email.val())
 
-            const successPopup = $('.res-succes-send')
-            successPopup.find('.mail').text(email.val())
-            successPopup.addClass('active')
+            togglePopup('resetPassword', false)
+            togglePopup('resSuccesSend', true)
 
             form[0].reset()
         }).fail(xhr => {
@@ -609,10 +604,8 @@ $('#new-password-form').submit(async function (e) {
 
     $.post('/password/reset', data)
         .done(() => {
-            $('.addNew-pass-card').removeClass('active')
-
-            const successPopup = $('.pass-succes')
-            successPopup.addClass('active')
+            togglePopup('addNewPassCard', false)
+            togglePopup('passSucces', true)
 
             form[0].reset()
         }).fail(xhr => {

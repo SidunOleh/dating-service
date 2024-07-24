@@ -24,13 +24,13 @@ class ResetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'token' => 'required|string',
-            'email' => 'required|email|exists:users,email',
             'password' => [
                 'required', 
                 'string', 
                 Password::min(8)->max(32),
             ],
+            'token' => 'required|string',
+            'email' => 'required|email|exists:users,email',
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }

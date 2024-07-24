@@ -541,12 +541,8 @@ $('#forgot-password').submit(async function(e) {
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
-                
-                for (const field in errors) {
-                    email.closest('.input-group').addClass('error')
-                    email.next('.error-text').text(errors[field][0])
-                    break
-                }
+                email.closest('.input-group').addClass('error')
+                email.next('.error-text').text(errors[Object.keys(errors)[0]])
             } else {
                 email.closest('.input-group').addClass('error')
                 email.next('.error-text').text(xhr.responseJSON.message)
@@ -801,11 +797,8 @@ $('#new-password-form').submit(async function (e) {
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
-                for (const field in errors) {
-                    password.closest('.input-group').addClass('error')
-                    password.next('.error-text').text(errors[field][0])
-                    break
-                }
+                password.closest('.input-group').addClass('error')
+                password.next('.error-text').text(errors[Object.keys(errors)[0]])
             } else {
                 password.closest('.input-group').addClass('error')
                 password.next('.error-text').text(xhr.responseJSON.message)

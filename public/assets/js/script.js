@@ -653,8 +653,8 @@ function initializeBattle($battle) {
                 image.src = url
             }
 
-            predownloadPhoto(nextPair[0].photo.url)
-            predownloadPhoto(nextPair[1].photo.url)
+            predownloadPhoto(nextPair[0].gallery[0].url)
+            predownloadPhoto(nextPair[1].gallery[0].url)
         })
     }
 
@@ -668,7 +668,7 @@ function initializeBattle($battle) {
         const html = creator => {
             return `
             <div class="photo-container photo" data-id="${creator.id}">
-                <img src="${creator.photo.url}">
+                <img src="${creator.gallery[0].url}">
                 <div class="info">
                     ${creator.name.length > 5 ? creator.name.substr(0, 5) + '...' : creator.name}, ${creator.age}
                 </div>

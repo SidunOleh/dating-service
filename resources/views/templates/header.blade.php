@@ -157,7 +157,7 @@
                             <img src="{{ asset('assets/img/earn.svg') }}" alt="" class="icon" />
                         </a>
                         
-                        <a href="" class="pages-item red">
+                        <a href="{{ route('top-vote.page') }}" class="pages-item red">
                             <p class="name">Top vote</p>
                             <img src="{{ asset('assets/img/top.svg') }}" alt="" class="icon" />
                         </a>

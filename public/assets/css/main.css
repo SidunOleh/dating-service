@@ -632,6 +632,16 @@ input {
     padding: 40px 0
 }
 
+.users.vote {
+    padding-bottom: 0
+}
+
+.users.vote .users-list {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
 .users .users-list {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1752,7 +1762,7 @@ input {
     position: relative
 }
 
-.profile .info-group.pending:before {
+.profile .info-group.pending:after {
     content: "Pending up to 72h...";
     position: absolute;
     left: 0;
@@ -1776,7 +1786,7 @@ input {
     text-align: center;
     font-family: Inter;
     font-size: 20px;
-    font-style: normal;
+    font-style: normal
 }
 
 .profile .info-group.rejected .reject {

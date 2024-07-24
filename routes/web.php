@@ -15,6 +15,7 @@ use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Images\DeleteController;
 use App\Http\Controllers\Web\Pages\HomeController;
 use App\Http\Controllers\Web\Pages\ProfileController;
+use App\Http\Controllers\Web\Pages\TopVoteController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
 use App\Http\Controllers\Web\Password\ResetPageController;
@@ -104,6 +105,9 @@ Route::get('/profile/{creator}', ProfileController::class)
     ->middleware(['track.profile-visits',])
     ->where('page', '[0-9]+')
     ->name('profile.page');
+Route::get('/top-votes', TopVoteController::class)
+    ->middleware(['auth:web',])
+    ->name('top-vote.page');
 
 /**
  * Favorites

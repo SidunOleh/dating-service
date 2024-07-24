@@ -660,17 +660,23 @@ class Creator extends Authenticatable
 
     public static function roulettePair(): Collection
     {
-        $pair = self::select('id', 'name', 'age', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photo'),)
+        $pair = self::with('gallery')
+            ->select('id', 'name', 'age', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photos'),)
             ->showOnSite()
             ->playRoulette()
             ->inRandomOrder()
             ->limit(2)
             ->get();
 
-        foreach ($pair as $creator) {
-            $creator->photo = Image::find($creator->photo);
-        }
-
         return $pair;
+    }
+
+    public static function topVote(int $count): Collection
+    {
+        return self::withCount('inFavorites')
+            ->with('gallery')
+            ->orderBy('votes', 'DESC')
+            ->limit($count)
+            ->get();
     }
 }

@@ -343,6 +343,13 @@ $('.verification-wrapper .again').on('click', () => {
     }
 })
 
+function openVerifyPopup(action, email) {
+    const verifyPopup = $('.verification-wrapper')
+    verifyPopup.data('action', action)
+    verifyPopup.find('.email').text(email)
+    verifyPopup.addClass('active')
+}
+
 //__________________________Sign Up_________________________//
 
 $('#sign-up').submit(async function(e) {
@@ -364,11 +371,8 @@ $('#sign-up').submit(async function(e) {
     $.post('/sign-up/send-code', data)
         .done(() => {
             togglePopup('signUp', false)
-
-            const verifyPopup = $('.verification-wrapper')
-            verifyPopup.find('.email').text(email.val())
-            verifyPopup.data('action', 'sign-up')
-            verifyPopup.addClass('active')
+            
+            openVerifyPopup('sign-up', email.val())
                         
             resendTimer.start(60)
         }).fail(xhr => {
@@ -460,10 +464,7 @@ $('#sign-in').submit(async function(e) {
         .done(() => {
             togglePopup('logIn', false)
 
-            const verifyPopup = $('.verification-wrapper')
-            verifyPopup.find('.email').text(email.val())
-            verifyPopup.data('action', 'sign-in')
-            verifyPopup.addClass('active')
+            openVerifyPopup('sign-in', email.val())
                         
             resendTimer.start(60)
         }).fail(xhr => {

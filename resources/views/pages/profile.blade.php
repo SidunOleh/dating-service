@@ -77,7 +77,7 @@
             $imgs = $creator->gallery;
             $imgs = auth('web')->user()?->subscribed() ? $imgs : $imgs->slice(0, 3);
 
-            $blur = scandir(storage_path('app/public/blur'));
+            $blur = scandir(public_path('assets/img/blur'));
             $blur = array_filter($blur, fn ($file) => ! in_array($file, ['.', '..',]));
             shuffle($blur);
             $blur = array_slice($blur, 0, $creator->gallery->count() - $imgs->count());
@@ -104,7 +104,7 @@
                     </a>
                     @endif
                 </div>
-                <img src="{{ asset("storage/blur/{$img}") }}" alt="" />
+                <img src="{{ asset("assets/img/blur/{$img}") }}" alt="" />
             </div>
             @endforeach
 

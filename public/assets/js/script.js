@@ -372,8 +372,8 @@ $('#sign-up').submit(async function(e) {
         .done(() => {
             togglePopup('signUp', false)
             
-            openVerifyPopup('sign-up', email.val())
             resendTimer.start(60)
+            openVerifyPopup('sign-up', email.val())
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
@@ -463,8 +463,8 @@ $('#sign-in').submit(async function(e) {
         .done(() => {
             togglePopup('logIn', false)
 
-            openVerifyPopup('sign-in', email.val())
             resendTimer.start(60)
+            openVerifyPopup('sign-in', email.val())
         }).fail(xhr => {
             if (xhr.status == 401) {
                 password.closest('.input-group').addClass('error')

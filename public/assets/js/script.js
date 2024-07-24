@@ -380,8 +380,14 @@ $('#sign-up').submit(async function(e) {
                     password.closest('.input-group').addClass('error')
                     password.next('.error-text').text(errors.password[0])
                 }
+
+                if (errors.recaptcha) {
+                    password.closest('.input-group').addClass('error')
+                    password.next('.error-text').text(errors.recaptcha[0])
+                }
             } else {
-                alert(xhr.responseJSON.message)
+                password.closest('.input-group').addClass('error')
+                password.next('.error-text').text(xhr.responseJSON.message)
             }
         }).always(() => {
             removeLoader('.signUP-card')
@@ -453,10 +459,7 @@ $('#sign-in').submit(async function(e) {
             $('.logIN-card').removeClass('active')
             resendTimer.start(60)
         }).fail(xhr => {
-            if (xhr.status == 401) {
-                password.closest('.input-group').addClass('error')
-                password.next('.error-text').text(xhr.responseJSON.message)
-            } else if (xhr.status == 422) {
+            if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
 
                 if (errors.email) {
@@ -468,8 +471,14 @@ $('#sign-in').submit(async function(e) {
                     password.closest('.input-group').addClass('error')
                     password.next('.error-text').text(errors.password[0])
                 }
+
+                if (errors.recaptcha) {
+                    password.closest('.input-group').addClass('error')
+                    password.next('.error-text').text(errors.recaptcha[0])
+                }
             } else {
-                alert(xhr.responseJSON.message)
+                password.closest('.input-group').addClass('error')
+                password.next('.error-text').text(xhr.responseJSON.message)
             }
         }).always(() => {
             removeLoader('.logIN-card')

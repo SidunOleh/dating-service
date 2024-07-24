@@ -40,6 +40,8 @@ const $cards = {
     logIn: $(".logIN-card"),
     resetPassword: $(".resetPassword-card"),
     resSuccesSend: $(".res-succes-send"),
+    addNewPassCard: $(".addNew-pass-card"),
+    passSucces: $(".pass-succes"),
 };
 
 function togglePopup(cardName, show) {
@@ -636,7 +638,6 @@ $('#delete-popup #confirm-delete:not(.load)').click(function () {
 
 //__________________________Roulette_________________________//
 
-
 function initializeBattle($battle) {
     let nextPair = null
 
@@ -772,3 +773,39 @@ function initializeBattle($battle) {
   $(".battle").each(function () {
     initializeBattle($(this));
   });
+
+//__________________________Reset password_________________________//
+
+$('#new-password-form').submit(async function (e) {
+    e.preventDefault()
+
+    addLoader('.addNew-pass-card')
+
+    const form = $(this)
+    const password = form.find('#new-password')
+    password.closest('.input-group').removeClass('error')
+
+    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('forgot')}`
+
+    $.post('/password/reset', data)
+        .done(() => {
+            $('.addNew-pass-card').removeClass('active')
+
+            const successPopup = $('.pass-succes')
+            successPopup.addClass('active')
+
+            form[0].reset()
+        }).fail(xhr => {
+            if (xhr.status == 422) {
+                const errors = xhr.responseJSON.errors
+                
+                password.closest('.input-group').addClass('error')
+                password.next('.error-text').text(errors.password[0])
+            } else {
+                password.closest('.input-group').addClass('error')
+                password.next('.error-text').text(xhr.responseJSON.message)
+            }
+        }).always(() => {
+            removeLoader('.addNew-pass-card')
+        })
+})

@@ -1,4 +1,8 @@
-<div class="popUp-wrapper">
+@php
+$isResetPage = request()->query('token') and request()->query('email');
+@endphp 
+
+<div class="popUp-wrapper {{ $isResetPage ? 'active' : '' }}">
 
     <div class="signUP-card card">
         <div class="close">
@@ -143,6 +147,51 @@
         <p class="mail">email@gmail.com</p>
         <a class="btn red">
             Close
+        </a>
+    </div>
+
+    <div class="addNew-pass-card card {{ $isResetPage ? 'active' : '' }}">
+        <div class="close">
+            <img src="{{ asset('assets/img/close.svg') }}" alt="" />
+        </div>
+        <p class="title">
+            Add new password
+        </p>
+        <form id="new-password-form">
+            <input type="hidden" name="token" value="{{ request()->query('token') }}">
+            <input type="hidden" name="email" value="{{ request()->query('email') }}">
+            <div class="input-group">
+                <label for="new-password">
+                    Enter new password
+                </label>
+                <input
+                    type="password"
+                    id="new-password"
+                    name="password"
+                    placeholder="Password"
+                    required/>
+                <div class="error-text">
+                    The password is required
+                </div>
+            <div type="button" class="show-password">
+                <img src="{{ asset('assets/img/mdi_eye-outline.svg') }}" alt="" />
+            </div>
+                <p class="passRule">
+                    Use 8-32 characters for your new password
+                </p>
+            </div>
+            <button type="submit" class="submit btn red">
+                Confirm
+            </button>
+        </form>
+    </div>
+
+    <div class="pass-succes card" id="res-succes-send">
+        <p class="title">
+            Your password has been successfully changed
+        </p>
+        <a class="btn red login">
+            Log in
         </a>
     </div>
 

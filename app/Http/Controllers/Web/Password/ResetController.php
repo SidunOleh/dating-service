@@ -11,7 +11,7 @@ class ResetController extends Controller
 {
     public function __invoke(ResetRequest $request)
     {
-        $credentials = $request->validated();
+        $credentials = $request->except('recaptcha');
 
         $status = Password::broker('creators')->reset($credentials, function (Creator $creator, string $password) {
             $creator->password = $password;

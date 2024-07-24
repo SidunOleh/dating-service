@@ -3383,7 +3383,8 @@ input {
     display: block !important;
 }
 
-.res-succes-send .btn {
+.res-succes-send .btn,
+.pass-succes .btn {
     display: inline-block;
     width: 100%;
     margin-top: 10px;

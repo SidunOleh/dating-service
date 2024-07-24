@@ -79,6 +79,7 @@ class Template extends Model
             ->limit($this->count('ad'))
             ->get();
         $roulettes = Creator::with('gallery')
+            ->select('id', 'name', 'age', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photos'),)
             ->showOnSite()
             ->playRoulette()
             ->inRandomOrder()

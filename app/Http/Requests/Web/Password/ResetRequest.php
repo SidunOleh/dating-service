@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Password;
 
+use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -29,8 +30,8 @@ class ResetRequest extends FormRequest
                 'required', 
                 'string', 
                 Password::min(8)->max(32),
-                'confirmed',
             ],
+            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

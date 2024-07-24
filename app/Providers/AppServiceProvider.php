@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             }
 
             if ($model instanceof Creator) {
-                return route('web.password.reset.page', [
+                return route('home.index', [
                     'token' => $token,
                     'email' => $model->email,
                 ]);

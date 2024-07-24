@@ -351,6 +351,7 @@ $('#sign-up').submit(async function(e) {
     addLoader('.signUP-card')
 
     const form = $(this)
+
     const email = form.find('#email')
     email.closest('.input-group').removeClass('error')
     const password = form.find('#password')
@@ -363,15 +364,19 @@ $('#sign-up').submit(async function(e) {
     $.post('/sign-up/send-code', data)
         .done(() => {
             togglePopup('signUp', false)
+
             const verifyPopup = $('.verification-wrapper')
             verifyPopup.find('.email').text(email.val())
             verifyPopup.data('action', 'sign-up')
             verifyPopup.addClass('active')
+            
             $('.signUP-card').removeClass('active')
+            
             resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
+
                 for (const field in errors) {
                     if (field == 'email') {
                         email.closest('.input-group').addClass('error')
@@ -443,6 +448,7 @@ $('#sign-in').submit(async function(e) {
     addLoader('.logIN-card')
 
     const form = $(this)
+
     const email = form.find('#email')
     email.closest('.input-group').removeClass('error')
     const password = form.find('#password')
@@ -455,11 +461,14 @@ $('#sign-in').submit(async function(e) {
     $.post('/sign-in/send-code', data)
         .done(() => {
             togglePopup('logIn', false)
+
             const verifyPopup = $('.verification-wrapper')
             verifyPopup.find('.email').text(email.val())
             verifyPopup.data('action', 'sign-in')
             verifyPopup.addClass('active')
+            
             $('.logIN-card').removeClass('active')
+            
             resendTimer.start(60)
         }).fail(xhr => {
             if (xhr.status == 401) {
@@ -467,6 +476,7 @@ $('#sign-in').submit(async function(e) {
                 password.next('.error-text').text(xhr.responseJSON.message)
             } else if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
+
                 for (const field in errors) {
                     if (field == 'email') {
                         email.closest('.input-group').addClass('error')
@@ -538,6 +548,7 @@ $('#forgot-password').submit(async function(e) {
     addLoader('.resetPassword-card')
 
     const form = $(this)
+
     const email = form.find('#reset-email')
     email.closest('.input-group').removeClass('error')
     const error = form.closest('.resetPassword-card').find('.text-error')
@@ -557,6 +568,7 @@ $('#forgot-password').submit(async function(e) {
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
+
                 for (const field in errors) {
                     if (field == 'email') {
                         email.closest('.input-group').addClass('error')
@@ -587,6 +599,7 @@ $('#new-password-form').submit(async function (e) {
     addLoader('.addNew-pass-card')
 
     const form = $(this)
+
     const password = form.find('#new-password')
     password.closest('.input-group').removeClass('error')
     const error = form.closest('.addNew-pass-card').find('.text-error')
@@ -605,6 +618,7 @@ $('#new-password-form').submit(async function (e) {
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
+
                 for (const field in errors) {
                     if (field == 'password') {
                         password.closest('.input-group').addClass('error')

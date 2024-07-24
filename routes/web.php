@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Images\DeleteController;
+use App\Http\Controllers\Web\Pages\FavoritesController;
 use App\Http\Controllers\Web\Pages\HomeController;
 use App\Http\Controllers\Web\Pages\ProfileController;
 use App\Http\Controllers\Web\Pages\TopVoteController;
@@ -97,8 +98,8 @@ Route::post('/plisio/callback', CallbackController::class);
  * Pages
  */
 Route::get('/', HomeController::class)
-    ->name('home');
-Route::get('/page/{page}', HomeController::class)
+    ->name('home.index');
+Route::get('/page/{page?}', HomeController::class)
     ->where('page', '[0-9]+')
     ->name('home.page');
 Route::get('/profile/{creator}', ProfileController::class)
@@ -108,6 +109,12 @@ Route::get('/profile/{creator}', ProfileController::class)
 Route::get('/top-votes', TopVoteController::class)
     ->middleware(['auth:web',])
     ->name('top-vote.page');
+Route::get('/favorites', FavoritesController::class)
+    ->middleware(['auth:web',])
+    ->name('favorites.index');
+Route::get('/favorites/page/{page}', FavoritesController::class)
+    ->middleware(['auth:web',])
+    ->name('favorites.page');
 
 /**
  * Favorites

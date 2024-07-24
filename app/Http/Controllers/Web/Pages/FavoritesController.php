@@ -3,30 +3,18 @@
 namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ad;
+use App\Models\Option;
+use App\Models\Template;
+use Illuminate\Support\Facades\Auth;
 
 class FavoritesController extends Controller
 {
-    public function __invoke()
+    public function __invoke(int $page = 1)
     {
-        $filters = [];
-        $filters['s'] = $request->query('s');
-        $filters['gender'] = $request->query('gender');
-
-        if (
-            $zip = $request->query('zip') and
-            $zipCode = ZipCode::where('zip', $zip)->first() and
-            $miles = $request->query('miles')
-        ) {
-            $filters['center']['lat'] = $zipCode->latitude;
-            $filters['center']['lng'] = $zipCode->longitude;
-            $filters['radius'] = $miles * 1609;
-        }
-
-        session(['filters' => $filters,]);
-
         $template = Template::inRandomOrder()->firstOrFail();
         $template->setPage($page)
-            ->setFilters($filters)
+            ->setFilters(['in_favorites' => Auth::guard('web')->id(),])
             ->fillData();
 
         $popupAds = Ad::select('id', 'link', 'image_id')
@@ -42,7 +30,7 @@ class FavoritesController extends Controller
             'close_popup_seconds',
         ]);
 
-        return view('pages.home', [
+        return view('pages.favorites', [
             'template' => $template, 
             'popupAds' => $popupAds,
             'adsSettings' => $adsSettings,

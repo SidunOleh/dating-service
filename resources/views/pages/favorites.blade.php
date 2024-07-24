@@ -33,7 +33,7 @@
             @includeWhen($template->total() > 1, 'templates.pagination', [
                 'current' => $template->getPage(), 
                 'total' => $template->total(),
-                'route' => 'home.page',
+                'route' => 'favorites.page',
             ])
         @else
             <section class="noResults">

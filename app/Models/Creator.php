@@ -528,6 +528,10 @@ class Creator extends Authenticatable
         if (isset($filters['center']) and isset($filters['radius'])) {
             $query->radius($filters['center'], $filters['radius']);
         }
+
+        if (isset($filters['in_favorites'])) {
+            $query->whereHas('inFavorites', fn (Builder $query) => $query->where('creator_id', $filters['in_favorites']));
+        }
             
         return $query->orderByRaw("rand({$seed})")->limit($count)->get();
     }
@@ -555,6 +559,10 @@ class Creator extends Authenticatable
         if (isset($filters['center']) and isset($filters['radius'])) {
             $query->radius($filters['center'], $filters['radius']);
         }
+
+        if (isset($filters['in_favorites'])) {
+            $query->whereHas('inFavorites', fn (Builder $query) => $query->where('creator_id', $filters['in_favorites']));
+        }
         
         $creators = $query->orderByRaw("rand({$seed})")
             ->limit($limit)
@@ -578,6 +586,10 @@ class Creator extends Authenticatable
 
         if (isset($filters['center']) and isset($filters['radius'])) {
             $query->radius($filters['center'], $filters['radius']);
+        }
+
+        if (isset($filters['in_favorites'])) {
+            $query->whereHas('inFavorites', fn (Builder $query) => $query->where('creator_id', $filters['in_favorites']));
         }
 
         return $query->count();

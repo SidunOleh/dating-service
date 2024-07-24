@@ -5,7 +5,7 @@
         <div class="title">
             Ops, this page does not seem to exist
         </div>
-        <a href="{{ route('home') }}" class="btn red">
+        <a href="{{ route('home.index') }}" class="btn red">
             Back home page
         </a>
         <img src="{{ asset('/assets/img/404.svg') }}" alt="" />

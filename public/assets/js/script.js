@@ -542,8 +542,10 @@ $('#forgot-password').submit(async function(e) {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
                 
-                email.closest('.input-group').addClass('error')
-                email.next('.error-text').text(errors.email[0])
+                if (errors.email) {
+                    email.closest('.input-group').addClass('error')
+                    email.next('.error-text').text(errors.email[0])
+                }
             } else {
                 email.closest('.input-group').addClass('error')
                 email.next('.error-text').text(xhr.responseJSON.message)
@@ -799,8 +801,10 @@ $('#new-password-form').submit(async function (e) {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
                 
-                password.closest('.input-group').addClass('error')
-                password.next('.error-text').text(errors.password[0])
+                if (errors.password) {
+                    password.closest('.input-group').addClass('error')
+                    password.next('.error-text').text(errors.password[0])
+                }
             } else {
                 password.closest('.input-group').addClass('error')
                 password.next('.error-text').text(xhr.responseJSON.message)

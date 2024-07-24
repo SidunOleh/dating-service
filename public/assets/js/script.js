@@ -393,7 +393,7 @@ $('#sign-up').submit(async function(e) {
         })
 })
 
-function verifySignUpCode(code) {
+async function verifySignUpCode(code) {
     addLoader('.verification-container')
 
     const codeForm = $('.code-inputs')
@@ -401,7 +401,9 @@ function verifySignUpCode(code) {
     const codeError = codeForm.find('.error-text')
     codeError.text('')
 
-    $.post('/sign-up/verify-code', { code })
+    const data = `code=${code}&recaptcha=${await getReCaptchaV3('verify_signup')}`
+
+    $.post('/sign-up/verify-code', data)
         .done(() => {
             location.href = '/my-profile'
         }).fail(err => {
@@ -486,7 +488,7 @@ $('#sign-in').submit(async function(e) {
         })
 })
 
-function verifySignInCode(code) {
+async function verifySignInCode(code) {
     addLoader('.verification-container')
 
     const codeForm = $('.code-inputs')
@@ -494,7 +496,9 @@ function verifySignInCode(code) {
     const codeError = codeForm.find('.error-text')
     codeError.text('')
 
-    $.post('/sign-in/verify-code', {code})
+    const data = `code=${code}&recaptcha=${await getReCaptchaV3('verify_signin')}`
+
+    $.post('/sign-in/verify-code', data)
         .done(() => {
             location.href = '/my-profile'
         }).fail(err => {

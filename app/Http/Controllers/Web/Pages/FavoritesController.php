@@ -3,9 +3,49 @@
 namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class FavoritesController extends Controller
 {
-    //
+    public function __invoke()
+    {
+        $filters = [];
+        $filters['s'] = $request->query('s');
+        $filters['gender'] = $request->query('gender');
+
+        if (
+            $zip = $request->query('zip') and
+            $zipCode = ZipCode::where('zip', $zip)->first() and
+            $miles = $request->query('miles')
+        ) {
+            $filters['center']['lat'] = $zipCode->latitude;
+            $filters['center']['lng'] = $zipCode->longitude;
+            $filters['radius'] = $miles * 1609;
+        }
+
+        session(['filters' => $filters,]);
+
+        $template = Template::inRandomOrder()->firstOrFail();
+        $template->setPage($page)
+            ->setFilters($filters)
+            ->fillData();
+
+        $popupAds = Ad::select('id', 'link', 'image_id')
+            ->with('image')
+            ->active()
+            ->type('popup')
+            ->limit($template->count('ad') ? 50 : 0)
+            ->inRandomOrder()
+            ->get();
+        $adsSettings = Option::getOptions([
+            'clicks_between_popups', 
+            'seconds_between_popups', 
+            'close_popup_seconds',
+        ]);
+
+        return view('pages.home', [
+            'template' => $template, 
+            'popupAds' => $popupAds,
+            'adsSettings' => $adsSettings,
+        ]);
+    }
 }

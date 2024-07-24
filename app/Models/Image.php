@@ -86,7 +86,7 @@ class Image extends Model
                 height: 100,
                 heightUnit: Unit::Percent,
                 fit: Fit::Stretch,
-                alpha: 5,
+                alpha: 10,
             )->save();
         }
 

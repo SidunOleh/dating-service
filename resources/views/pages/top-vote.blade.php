@@ -14,11 +14,11 @@
     <div class="container">
         <div class="users-list">
            
-        @foreach($topVote as $creator)
+            @foreach($topVote as $creator)
 
-            @include('templates.creator', ['creator' => $creator,])
+                @include('templates.creator', ['creator' => $creator,])
 
-        @endforeach
+            @endforeach
 
         </div>
     </div>

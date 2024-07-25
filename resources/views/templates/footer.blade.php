@@ -29,29 +29,6 @@
     }
 </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const lazyImages = document.querySelectorAll('img[cloading="lazy"]');
-        const imageObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    const lazyImage = entry.target;
-                    lazyImage.src = lazyImage.dataset.src;
-                    lazyImage.onload = function() {
-                        lazyImage.removeAttribute("data-src");
-                        lazyImage.removeAttribute("loading");
-                    };
-                    observer.unobserve(lazyImage);
-                }
-            });
-        });
-
-        lazyImages.forEach(function(lazyImage) {
-            imageObserver.observe(lazyImage);
-        });
-    });
-</script>
-
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/fancybox.umd.js') }}"></script>
 <script src="{{ asset('assets/js/slick.min.js') }}"></script>

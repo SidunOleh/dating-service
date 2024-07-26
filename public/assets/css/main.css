@@ -3409,3 +3409,34 @@ input {
 .text-error.show {
     display: block;
 }
+
+.form-error {
+    color: #ff5959;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 6px;
+}
+
+select#gender {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    color: #fbfbfb;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    background-image: url("../img/select.svg");
+    background-repeat: no-repeat;
+    background-position: right 0.3rem top 50%;
+    background-size: 0.99rem auto;
+    background-color: #39393e;
+    border-radius: 8px;
+    border: 1px solid #525252;
+    padding: 12px;
+    width: 100%
+}

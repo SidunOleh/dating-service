@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Profile;
 
+use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -49,6 +50,8 @@ class StoreRequest extends FormRequest
             'first_name' => 'required_with:id_photo,street_photo,verification_photo,last_name,birthday|string|min:2|nullable',
             'last_name' => 'required_with:id_photo,street_photo,verification_photo,first_name,birthday|string|min:2|nullable',
             'birthday' => 'required_with:id_photo,street_photo,verification_photo,first_name,last_name|date_format:Y-m-d|nullable',
+
+            'recaptcha' => [new ReCaptchaV3()],
         ];
     }
 
@@ -62,9 +65,9 @@ class StoreRequest extends FormRequest
             'prfofile_email.email' => 'Invalid format',
 
             'street.required' => 'Street required',
-            'zip.required' => 'Zip Code required',
-            'zip.regex' => 'Zip Code invalid',
-            'zip.exists' => 'Zip Code Not Found',
+            'zip.required' => 'ZIP Code required',
+            'zip.regex' => 'ZIP Code invalid',
+            'zip.exists' => 'ZIP Code Not Found',
 
             'name.required' => 'Name required',
             'name.min' => 'At least 2 letters',
@@ -77,9 +80,14 @@ class StoreRequest extends FormRequest
             'description.min' => 'Must be 50-150 words',
             'description.max' => 'Must be 50-150 words',
             
-            'first_name.required_with' => 'Name required',
+            'photos.required' => 'Photos required',
+
+            'id_photo.required_with' => 'Photo required',
+            'street_photo.required_with' => 'Photo required',
+            'verification_photo.required_with' => 'Photo required',
+            'first_name.required_with' => 'First name required',
             'first_name.min' => 'At least 2 letters',
-            'last_name.required_with' => 'Name required',
+            'last_name.required_with' => 'Last name required',
             'last_name.min' => 'At least 2 letters',
             'birthday.required_with' => 'Birthday required',
         ];

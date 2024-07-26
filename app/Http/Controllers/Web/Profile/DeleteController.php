@@ -11,6 +11,10 @@ class DeleteController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
+        if (! $creator->profile_is_created) {
+            return abort(400);
+        }
+
         $creator->deleteProfile();
 
         return response(['message' => 'OK',]);

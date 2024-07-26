@@ -348,6 +348,8 @@ function openVerifyPopup(action, email) {
     verifyPopup.data('action', action)
     verifyPopup.find('.email').text(email)
     verifyPopup.addClass('active')
+
+    resendTimer.start(60)
 }
 
 //__________________________Sign Up_________________________//
@@ -372,7 +374,6 @@ $('#sign-up').submit(async function(e) {
         .done(() => {
             togglePopup('signUp', false)
             
-            resendTimer.start(60)
             openVerifyPopup('sign-up', email.val())
         }).fail(xhr => {
             if (xhr.status == 422) {
@@ -463,7 +464,6 @@ $('#sign-in').submit(async function(e) {
         .done(() => {
             togglePopup('logIn', false)
 
-            resendTimer.start(60)
             openVerifyPopup('sign-in', email.val())
         }).fail(xhr => {
             if (xhr.status == 401) {
@@ -553,8 +553,8 @@ $('#forgot-password').submit(async function(e) {
 
     $.post('/password/forgot', data)
         .done(() => {
-            togglePopup('resetPassword', false)
             form[0].reset()
+            togglePopup('resetPassword', false)
 
             $('.res-succes-send').find('.mail').text(email.val())
             togglePopup('resSuccesSend', true)
@@ -602,8 +602,8 @@ $('#new-password-form').submit(async function (e) {
 
     $.post('/password/reset', data)
         .done(() => {
-            togglePopup('addNewPassCard', false)
             form[0].reset()
+            togglePopup('addNewPassCard', false)
 
             togglePopup('passSucces', true)
         }).fail(xhr => {

@@ -184,12 +184,12 @@
 
             <div class="header-body">
                 <div class="left">
-                    <a href="{{ route('home') }}" class="btn red">
+                    <a href="{{ route('home.index') }}" class="btn red">
                         <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
                     </a>
                 </div>
 
-                <a href="{{ route('home') }}" class="logo">
+                <a href="{{ route('home.index') }}" class="logo">
                     {{ env('APP_NAME') }}
                 </a>
                 

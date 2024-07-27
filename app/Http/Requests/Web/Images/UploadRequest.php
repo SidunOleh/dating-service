@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Images;
 
+use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UploadRequest extends FormRequest
@@ -35,6 +36,7 @@ class UploadRequest extends FormRequest
         return [
             'img' => 'required|file|mimetypes:' . implode(',', $mimes) . '|max:10240',
             'watermark' => 'boolean',
+            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

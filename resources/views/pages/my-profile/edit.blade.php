@@ -355,10 +355,11 @@
                     }
                 },
 
-                uploadImage(img, watermark) {
+                async uploadImage(img, watermark) {
                     const data = new FormData()
                     data.append('img', img)
                     data.append('watermark', watermark ? 1 : 0)
+                    data.append('recaptcha', await getReCaptchaV3('upload_image'))
                     
                     return $.ajax({
                         type: 'POST',
@@ -934,6 +935,10 @@
                                 class="photo-count" 
                                 id="photoCount">
                                 Available number of photos: {{ data.photos.length }}/12
+                            </div>
+
+                            <div v-if="errors.photos" class="form-error">
+                                {{ errors.photos }}
                             </div>
                             
                             <div class="btn-group">

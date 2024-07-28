@@ -12,17 +12,16 @@ class Subscription extends Model
 
     protected $fillable = [
         'creator_id',
-        'name',
         'starts_at',
         'ends_at',
         'status',
-        'auto_resume',
+        'unsubscribed',
     ];
 
     protected $casts = [
         'starts_at' => 'datetime',
         'ends_at' => 'datetime',
-        'auto_resume' => 'boolean',
+        'unsubscribed' => 'boolean',
     ];
 
     public function creator(): BelongsTo
@@ -35,7 +34,7 @@ class Subscription extends Model
         return $this->update(['status' => 'active',]);
     }
 
-    public function cancel(): bool
+    public function inactivate(): bool
     {
         return $this->update(['status' => 'inactive',]);
     }
@@ -43,6 +42,11 @@ class Subscription extends Model
     public function expired(): bool
     {
         return ! $this->ends_at->gt(now());
+    }
+
+    public function unsubscribe(): bool
+    {
+        return $this->update(['unsubscribed' => true,]);
     }
 
     public function resume(): bool

@@ -373,7 +373,7 @@ $('#sign-up').submit(async function(e) {
     $.post('/sign-up/send-code', data)
         .done(() => {
             togglePopup('signUp', false)
-            
+
             openVerifyPopup('sign-up', email.val())
         }).fail(xhr => {
             if (xhr.status == 422) {

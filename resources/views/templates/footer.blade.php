@@ -12,21 +12,19 @@
 </footer>
 
 <style>
-    .grecaptcha-badge {
-        z-index: 100;
-    }
+.grecaptcha-badge {
+    z-index: 100;
+}
 </style>
+
 <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" async></script>
 <script>
-    function getReCaptchaV3(action) {
-        return new Promise((resolve, reject) => {
-            grecaptcha.ready(() => {
-                grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {
-                    action: action,
-                }).then(resolve)
-            })
-        })
-    }
+function getReCaptchaV3(action) {
+    return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha
+        .execute('{{ env('RECAPTCHA_SITE_KEY') }}', {action,})
+        .then(resolve))
+    )
+}
 </script>
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>

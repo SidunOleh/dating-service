@@ -52,16 +52,5 @@ class PlisioInvoice extends Model
         
         $this->transaction->status = $status;
         $this->transaction->save();
-
-        if ($status == 'completed') {
-            $this->subscription->activate();
-            
-            if ($referral = $this->creator->referral) {
-                $percent = (int) Option::getOption('referral_percent', 0);
-                $reward = $this->transaction->usd_amount * $percent / 100;
-
-                $referral->reward($reward);
-            }
-        }
     }
 }

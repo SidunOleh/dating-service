@@ -19,7 +19,6 @@ use App\Http\Controllers\Web\Pages\ProfileController;
 use App\Http\Controllers\Web\Pages\TopVoteController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
-use App\Http\Controllers\Web\Password\ResetPageController;
 use App\Http\Controllers\Web\Plisio\CallbackController;
 use App\Http\Controllers\Web\Profile\CreateController;
 use App\Http\Controllers\Web\Profile\DeleteController as ProfileDeleteController;
@@ -30,6 +29,8 @@ use App\Http\Controllers\Web\Profile\SwitchOptionController;
 use App\Http\Controllers\Web\Profile\UpdateController;
 use App\Http\Controllers\Web\Roulette\GetPairController;
 use App\Http\Controllers\Web\Roulette\VoteController;
+use App\Http\Controllers\Web\Subscription\SubscribeController;
+use App\Http\Controllers\Web\Subscription\UnsubscribeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,8 +85,6 @@ Route::post('/sign-in/resend-code', SignInResendCodeController::class)
  */
 Route::post('/password/forgot', ForgotController::class)
     ->name('web.password.forgot');
-Route::get('/password/reset', ResetPageController::class)
-    ->name('web.password.reset.page');
 Route::post('/password/reset', ResetController::class)
     ->name('web.password.reset');
 
@@ -176,3 +175,13 @@ Route::prefix('/roulette')->name('roulette.')->group(function () {
     Route::post('/vote/{creator}', VoteController::class)
         ->name('vote');
 });
+
+/**
+ * Subscribtion
+ */
+Route::get('/subscribe', SubscribeController::class)
+    ->middleware(['auth:web',])
+    ->name('subscribe');
+Route::get('/unsubscribe', UnsubscribeController::class)
+    ->middleware(['auth:web',])
+    ->name('unsubscribe');

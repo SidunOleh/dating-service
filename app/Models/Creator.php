@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -302,6 +303,42 @@ class Creator extends Authenticatable
     public function subscribed(): bool
     {
         return (bool) $this->subscription;
+    }
+
+    public function subscribe(): Subscription
+    {
+        if (! $this->debitMoney(5)) {
+            throw new Exception('Not enough money on balance');
+        }
+
+        $subscription = $this->subscriptions()->create([
+            'status' => 'active',
+            'starts_at' => now(),
+            'ends_at' => now()->addMonth(),
+        ]);
+
+        if ($this->referral and is_null($this->referral->reward)) {
+            $percent = (int) Option::getOption('referral_percent', 0);
+            $reward = 5 * $percent / 100;
+
+            $this->referral->reward($reward);
+        }
+
+        return $subscription;
+    }
+
+    public function unsubscribe(): bool
+    {
+        return $this->subscription->unsubscribe();
+    }
+
+    public function resumeSubscription(): bool
+    {
+        if (! $this->debitMoney(5)) {
+            throw new Exception('Not enough money on balance');
+        }
+
+        return $this->subscription->resume();
     }
 
     public function transactions(): HasMany
@@ -687,8 +724,25 @@ class Creator extends Authenticatable
     {
         return self::withCount('inFavorites')
             ->with('gallery')
+            ->showOnSite()
             ->orderBy('votes', 'DESC')
             ->limit($count)
             ->get();
+    }
+
+    public function uploads(): HasMany
+    {
+        return $this->hasMany(Upload::class);
+    }
+
+    public function canUpload(): bool
+    {
+        $count = $this->uploads()
+            ->whereRaw('YEAR(`created_at`) = ' . date('Y'))
+            ->whereRaw('MONTH(`created_at`) = ' . date('m'))
+            ->whereRaw('DAY(`created_at`) = ' . date('d'))
+            ->count();
+
+        return $count < 30;
     }
 }

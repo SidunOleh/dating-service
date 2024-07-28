@@ -487,7 +487,9 @@
                             this.data[photo].id = data.id
                             this.data[photo].url = data.url
                             this.data[photo].status = 'loaded'
-                        }).catch(() => {
+                        }).catch(jqXHR => {
+                            this.errors[photo] = jqXHR.responseJSON.message
+
                             this.data[photo] = null
                         })
                 },

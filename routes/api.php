@@ -207,7 +207,7 @@ Route::middleware(['auth:sanctum',])->group(function () {
             ->name('update')
             ->can('settings.edit');
     });
-});
 
-Route::get('/zips/{zipCode:zip}', ZipCodesShowController::class)
-    ->name('zips.show');
+    Route::get('/zips/{zipCode:zip}', ZipCodesShowController::class)
+        ->name('zips.show');
+});

@@ -452,7 +452,9 @@
                             this.data[photo].id = data.id
                             this.data[photo].url = data.url
                             this.data[photo].status = 'loaded'
-                        }).catch(() => {
+                        }).catch(jqXHR => {
+                            this.errors[photo] = jqXHR.responseJSON.message
+                            
                             this.data[photo] = null
                         })
                 },
@@ -942,6 +944,7 @@
                             </div>
                             
                             <div class="btn-group">
+
                                 <button 
                                     v-if="data.photos.length >= 1 && data.photos.length < 12" 
                                     id="customButton2" 
@@ -950,6 +953,7 @@
                                     @click="$('#photoInput').click()">
                                     Add photo
                                 </button>
+
                             </div>
                         </div>
                     </div>

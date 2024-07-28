@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Subscription;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 
@@ -30,15 +31,19 @@ class CheckSubscriptions extends Command
         Subscription::where('status', 'active')
             ->chunk(1000, function (Collection $subscriptions) {
                 foreach ($subscriptions as $subscription) {
-                    if ($subscription->expired()) {
-                        if (
-                            $subscription->auto_resume and 
-                            $subscription->creator->debitMoney(3)
-                        ) {
-                            $subscription->resume();
-                        } else {
-                            $subscription->cancel();
-                        }
+                    if (! $subscription->expired()) {
+                        continue;
+                    }
+
+                    if ($subscription->unsubscribed) {
+                        $subscription->inactivate();
+                        continue;
+                    }
+
+                    try {
+                        $subscription->creator->resumeSubscription();
+                    } catch (Exception) {
+                        $subscription->inactivate();
                     }
                 }
             });

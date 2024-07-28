@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
 use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
+use App\Http\Controllers\Web\Deposit\MakeController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Images\DeleteController;
@@ -185,3 +186,10 @@ Route::get('/subscribe', SubscribeController::class)
 Route::get('/unsubscribe', UnsubscribeController::class)
     ->middleware(['auth:web',])
     ->name('unsubscribe');
+
+/**
+ * Deposit
+ */
+Route::get('/deposit/make', MakeController::class)
+    ->middleware(['auth:web',])
+    ->name('deposit.make');

@@ -32,7 +32,7 @@ class CallbackController extends Controller
             if ($data['ipn_type'] == 'invoice') {
                 $invoice = PlisioInvoice::where('txn_id', $data['txn_id'])->firstOrFail();
                 
-                $invoice->changeStatus($data['status']);
+                $invoice->change($data);
             }
         } catch (Exception $e) {
             $webhookLog->exception = [

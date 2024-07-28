@@ -9,7 +9,7 @@ class InvoiceWhiteLabelResponse extends InvoiceResponse
         string $invoiceUrl,
         private float $amount,
         private string $currency,
-        private int $orderNumber,
+        private string $orderNumber,
         private string $orderName,
         private string $status,
         private string $walletHash,
@@ -36,7 +36,7 @@ class InvoiceWhiteLabelResponse extends InvoiceResponse
         return $this->currency;
     }
 
-    public function orderNumber(): int
+    public function orderNumber(): string
     {
         return $this->orderNumber;
     }

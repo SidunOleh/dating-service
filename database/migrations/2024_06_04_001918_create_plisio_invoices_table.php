@@ -19,7 +19,7 @@ return new class extends Migration
             
             $table->decimal('amount', 16, 8)->nullable();
             $table->string('currency')->nullable();
-            $table->unsignedBigInteger('order_number')->nullable();
+            $table->string('order_number')->nullable();
             $table->string('order_name')->nullable();
             $table->string('status')->default('new');
             $table->string('wallet_hash')->nullable();

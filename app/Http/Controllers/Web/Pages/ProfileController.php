@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\Creator;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -18,15 +17,28 @@ class ProfileController extends Controller
             return abort(404);
         }
 
-        $recommendations = Creator::recommendations(
-            count($creator->photos) * 3, 
-            [$creator->id,], 
+        $count = count($creator->photos) * 3;
+        $exclude = [$creator->id,];
+
+        $recommends = Creator::recommends(
+            $count, 
+            $exclude, 
             session('filters', [])
         );
 
+        if ($recommends->count() < $count) {
+            $count = $count - $recommends->count();
+            $exclude = [...$exclude, ...$recommends->pluck('id')];
+
+            $recommends = $recommends->merge(Creator::recommends(
+                $count,  
+                $exclude
+            ));
+        }
+
         return view('pages.profile', [
             'creator' => $creator,
-            'recommendations' => $recommendations,
+            'recommends' => $recommends,
         ]);
     }
 }

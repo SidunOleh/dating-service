@@ -632,7 +632,7 @@ class Creator extends Authenticatable
         return $query->count();
     } 
 
-    public static function recommendations(int $count, array $exlude = [], array $filters = []): Collection
+    public static function recommends(int $count, array $exlude = [], array $filters = []): Collection
     {        
         $query = self::with('gallery')->showOnSite();
 
@@ -653,13 +653,6 @@ class Creator extends Authenticatable
         }
         
         $creators = $query->inRandomOrder()->limit($count)->get();
-
-        if ($creators->count() < $count) {
-            $count = $count - $creators->count();
-            $exlude = [...$exlude, ...$creators->pluck('id')->all(),];
-
-            $creators = $creators->merge(self::recommendations($count, $exlude));
-        }
 
         return $creators;
     } 

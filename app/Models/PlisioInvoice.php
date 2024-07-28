@@ -80,7 +80,7 @@ class PlisioInvoice extends Model
 
     public function change(array $data): void
     {
-        $this->amount = $data['amount'];
+        $this->received = $data['amount'];
         $this->status = $data['status'];
         $this->save();
         

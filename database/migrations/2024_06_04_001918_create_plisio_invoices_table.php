@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('invoice_url');
             
             $table->decimal('amount', 16, 8)->nullable();
+            $table->decimal('received', 16, 8)->default(0);
             $table->string('currency')->nullable();
             $table->string('order_number')->nullable();
             $table->string('order_name')->nullable();

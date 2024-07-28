@@ -788,7 +788,7 @@
                         <div class="btn-group">
 
                             <button 
-                                v-if="!location.map" 
+                                v-if="! data.latitude && ! data.longitude" 
                                 class="btn red" 
                                 type="button" 
                                 id="search-location" 
@@ -798,7 +798,7 @@
                             </button>
 
                             <button 
-                                v-if="location.map" 
+                                v-if="data.latitude && data.longitude" 
                                 class="btn" 
                                 type="button" 
                                 id="research-location" 

@@ -454,7 +454,7 @@
                             this.data[photo].status = 'loaded'
                         }).catch(jqXHR => {
                             this.errors[photo] = jqXHR.responseJSON.message
-                            
+
                             this.data[photo] = null
                         })
                 },
@@ -760,7 +760,7 @@
                         <div class="btn-group">
 
                             <button 
-                                v-if="!location.map" 
+                                v-if="! data.latitude && ! data.longitude" 
                                 class="btn red" 
                                 type="button" 
                                 id="search-location" 
@@ -770,7 +770,7 @@
                             </button>
 
                             <button 
-                                v-if="location.map" 
+                                v-if="data.latitude && data.longitude" 
                                 class="btn" 
                                 type="button" 
                                 id="research-location" 

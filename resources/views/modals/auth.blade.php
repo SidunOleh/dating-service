@@ -53,7 +53,7 @@ $isResetPage = request()->query('token') and request()->query('email');
             <input 
                 type="hidden" 
                 name="from" 
-                value="{{ request()->route()->getName() == 'profile.page' ? $creator->id : '' }}">
+                value="{{ request()->route()?->getName() == 'profile.page' ? $creator->id : '' }}">
 
             <button type="submit" class="submit btn red" disabled>
                 Sign up

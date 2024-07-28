@@ -19,22 +19,12 @@ class ProfileController extends Controller
 
         $count = count($creator->photos) * 3;
         $exclude = [$creator->id,];
-
+        
         $recommends = Creator::recommends(
             $count, 
             $exclude, 
             session('filters', [])
         );
-
-        if ($recommends->count() < $count) {
-            $count = $count - $recommends->count();
-            $exclude = [...$exclude, ...$recommends->pluck('id')];
-
-            $recommends = $recommends->merge(Creator::recommends(
-                $count,  
-                $exclude
-            ));
-        }
 
         return view('pages.profile', [
             'creator' => $creator,

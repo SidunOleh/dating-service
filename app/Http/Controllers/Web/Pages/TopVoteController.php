@@ -10,6 +10,7 @@ class TopVoteController extends Controller
     public function __invoke()
     {
         $topVote = Creator::topVote(100);
+        
         $roulette = Creator::roulettePair();
 
         return view('pages.top-vote', [

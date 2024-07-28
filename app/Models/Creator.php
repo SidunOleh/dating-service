@@ -317,7 +317,7 @@ class Creator extends Authenticatable
             'ends_at' => now()->addMonth(),
         ]);
 
-        if ($this->referral and is_null($this->referral->reward)) {
+        if ($this->referral and ! $this->referral->rewarded()) {
             $percent = (int) Option::getOption('referral_percent', 0);
             $reward = 5 * $percent / 100;
 
@@ -632,12 +632,17 @@ class Creator extends Authenticatable
         return $query->count();
     } 
 
-    public static function recommends(int $count, array $exlude = [], array $filters = []): Collection
+    public static function recommends(
+        int $count, 
+        array $exclude = [], 
+        array $filters = [], 
+        bool $appendWithoutFilters = true
+    ): Collection
     {        
         $query = self::with('gallery')->showOnSite();
 
-        if ($exlude) {
-            $query->whereNotIn('id', $exlude);
+        if ($exclude) {
+            $query->whereNotIn('id', $exclude);
         }
 
         if (isset($filters['s'])) {
@@ -652,9 +657,21 @@ class Creator extends Authenticatable
             $query->radius($filters['center'], $filters['radius']);
         }
         
-        $creators = $query->inRandomOrder()->limit($count)->get();
+        $recommends = $query->inRandomOrder()->limit($count)->get();
 
-        return $creators;
+        if ($recommends->count() < $count and $appendWithoutFilters) {
+            $count = $count - $recommends->count();
+            $exclude = [...$exclude, ...$recommends->pluck('id')];
+
+            $recommends = $recommends->merge(self::recommends(
+                $count,  
+                $exclude,
+                [],
+                false
+            ));
+        }
+
+        return $recommends;
     } 
 
     public function favorites(): BelongsToMany

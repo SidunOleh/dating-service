@@ -636,7 +636,7 @@ class Creator extends Authenticatable
         int $count, 
         array $exclude = [], 
         array $filters = [], 
-        bool $appendWithoutFilters = true
+        int $level = 1
     ): Collection
     {        
         $query = self::with('gallery')->showOnSite();
@@ -659,7 +659,7 @@ class Creator extends Authenticatable
         
         $recommends = $query->inRandomOrder()->limit($count)->get();
 
-        if ($recommends->count() < $count and $appendWithoutFilters) {
+        if ($recommends->count() < $count and $level == 1) {
             $count = $count - $recommends->count();
             $exclude = [...$exclude, ...$recommends->pluck('id')];
 
@@ -667,7 +667,7 @@ class Creator extends Authenticatable
                 $count,  
                 $exclude,
                 [],
-                false
+                $level + 1
             ));
         }
 

@@ -18,6 +18,7 @@ class PlisioInvoice extends Model
         'txn_id',
         'invoice_url',
         'amount',
+        'received',
         'currency',
         'wallet_hash',
         'source_amount',
@@ -83,7 +84,7 @@ class PlisioInvoice extends Model
         $this->received = $data['amount'];
         $this->status = $data['status'];
         $this->save();
-        
+
         $this->transaction->status = $data['status'];
         $this->transaction->save();
 

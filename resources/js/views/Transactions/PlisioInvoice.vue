@@ -8,6 +8,13 @@
                 :value="record.details.amount"/>
         </FormItem>
 
+        <FormItem label="Received">
+            <Input
+                placeholder="Received"
+                readonly
+                :value="record.details.received"/>
+        </FormItem>
+
         <FormItem label="Currency">
             <Input
                 placeholder="Currency"

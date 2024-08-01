@@ -23,7 +23,7 @@ class SignInSendCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:creators,email',
+            'email' => 'required|email',
             'password' => 'required|string',
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];

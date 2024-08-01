@@ -335,8 +335,7 @@ $('.verification-wrapper input').on('input paste', async () => {
 
     const codeForm = $('.code-inputs')
     codeForm.removeClass('error')
-    const codeError = codeForm.find('.error-text')
-    codeError.text('')
+    codeForm.find('.error-text').text('')
 
     const action = $('.verification-wrapper').data('action')
     const verifyUrl = $('.verification-wrapper').data('verify_url')
@@ -350,7 +349,7 @@ $('.verification-wrapper input').on('input paste', async () => {
             $(document).trigger(`${action}-verified`)
         }).fail(err => {
             codeForm.addClass('error')
-            codeError.text(err.responseJSON.message)
+            codeForm.find('.error-text').text(err.responseJSON.message)
         }).always(() => {
             removeLoader('.verification-container')
         })
@@ -367,8 +366,7 @@ $('.verification-wrapper .again').on('click', async () => {
 
     const codeForm = $('.code-inputs')
     codeForm.removeClass('error')
-    const codeError = codeForm.find('.error-text')
-    codeError.text('')
+    codeForm.find('.error-text').text('')
 
     const action = $('.verification-wrapper').data('action')
     const resendUrl = $('.verification-wrapper').data('resend_url')
@@ -380,13 +378,13 @@ $('.verification-wrapper .again').on('click', async () => {
             resendTimer.start(60)
         }).fail(err => {
             codeForm.addClass('error')
-            codeError.text(err.responseJSON.message)
+            codeForm.find('.error-text').text(err.responseJSON.message)
         }).always(() => {
             removeLoader('.verification-container')
         })
 })
 
-//__________________________Forms_________________________//
+//__________________________Error handling_________________________//
 
 function handleFail(form, xhr) {
     const error = form

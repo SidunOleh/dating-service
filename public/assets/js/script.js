@@ -386,6 +386,37 @@ $('.verification-wrapper .again').on('click', async () => {
         })
 })
 
+//__________________________Forms_________________________//
+
+function handleFail(form, xhr) {
+    const error = form
+        .closest('.card')
+        .find('.text-error')
+
+    if (xhr.status == 422) {
+        const errors = xhr.responseJSON.errors
+
+        for (const field in errors) {
+            const input = form.find(`[name=${field}]`)
+
+            if (! input.length || input.attr('type') == 'hidden') {
+                error.text(errors[field][0])
+                error.addClass('show')
+            } else {
+                form.find(`[name=${field}]`)
+                    .closest('.input-group')
+                    .addClass('error')
+                form.find(`[name=${field}]`)
+                    .next('.error-text')
+                    .text(errors[field][0])
+            }
+        }
+    } else {
+        error.addClass('show')
+        error.text(xhr.responseJSON.message)
+    }
+}
+
 //__________________________Sign Up_________________________//
 
 $('#sign-up').submit(async function(e) {
@@ -395,12 +426,12 @@ $('#sign-up').submit(async function(e) {
 
     const form = $(this)
 
-    const email = form.find('#email')
-    email.closest('.input-group').removeClass('error')
-    const password = form.find('#password')
-    password.closest('.input-group').removeClass('error')
-    const error = form.closest('.signUP-card').find('.text-error')
-    error.removeClass('show')
+    const fields = ['email', 'password',]
+
+    fields.forEach(field => form
+        .find(`[name=${field}]`)
+        .closest('.input-group')
+        .removeClass('error'))
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
 
@@ -412,29 +443,13 @@ $('#sign-up').submit(async function(e) {
                 'sign_up', 
                 '/sign-up/verify-code', 
                 '/sign-up/resend-code', 
-                email.val()
+                form.find('[name=email]').val()
             )
-        }).fail(xhr => {
-            if (xhr.status == 422) {
-                const errors = xhr.responseJSON.errors
-
-                for (const field in errors) {
-                    if (field == 'email') {
-                        email.closest('.input-group').addClass('error')
-                        email.next('.error-text').text(errors.email[0])
-                    } else if (field == 'password') {
-                        password.closest('.input-group').addClass('error')
-                        password.next('.error-text').text(errors.password[0])
-                    } else {
-                        error.text(errors[field][0])
-                        error.addClass('show')
-                    }
-                }
-            } else {
-                error.text(xhr.responseJSON.message)
-                error.addClass('show')
-            }
-        }).always(() => {
+        })
+        .fail(xhr => {
+            handleFail(form, xhr)
+        })
+        .always(() => {
             removeLoader('.signUP-card')
         })
 })
@@ -452,12 +467,12 @@ $('#sign-in').submit(async function(e) {
 
     const form = $(this)
 
-    const email = form.find('#email')
-    email.closest('.input-group').removeClass('error')
-    const password = form.find('#password')
-    password.closest('.input-group').removeClass('error')
-    const error = form.closest('.logIN-card').find('.text-error')
-    error.removeClass('show')
+    const fields = ['email', 'password',]
+
+    fields.forEach(field => form
+        .find(`[name=${field}]`)
+        .closest('.input-group')
+        .removeClass('error'))
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
 
@@ -469,32 +484,13 @@ $('#sign-in').submit(async function(e) {
                 'sign_in', 
                 '/sign-in/verify-code', 
                 '/sign-in/resend-code', 
-                email.val()
+                form.find('[name=email]').val()
             )
-        }).fail(xhr => {
-            if (xhr.status == 401) {
-                password.closest('.input-group').addClass('error')
-                password.next('.error-text').text(xhr.responseJSON.message)
-            } else if (xhr.status == 422) {
-                const errors = xhr.responseJSON.errors
-
-                for (const field in errors) {
-                    if (field == 'email') {
-                        email.closest('.input-group').addClass('error')
-                        email.next('.error-text').text(errors.email[0])
-                    } else if (field == 'password') {
-                        password.closest('.input-group').addClass('error')
-                        password.next('.error-text').text(errors.password[0])
-                    } else {
-                        error.text(errors[field][0])
-                        error.addClass('show')
-                    }
-                }
-            } else {
-                error.text(xhr.responseJSON.message)
-                error.addClass('show')
-            }
-        }).always(() => {
+        })
+        .fail(xhr => {
+            handleFail(form, xhr)
+        })
+        .always(() => {
             removeLoader('.logIN-card')
         })
 })
@@ -512,38 +508,30 @@ $('#forgot-password').submit(async function(e) {
 
     const form = $(this)
 
-    const email = form.find('#reset-email')
-    email.closest('.input-group').removeClass('error')
-    const error = form.closest('.resetPassword-card').find('.text-error')
-    error.removeClass('show')
+    const fields = ['email',]
+
+    fields.forEach(field => form
+        .find(`[name=${field}]`)
+        .closest('.input-group')
+        .removeClass('error'))
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('forgot')}`
 
     $.post('/password/forgot', data)
         .done(() => {
             form[0].reset()
+
             togglePopup('resetPassword', false)
 
-            $('.res-succes-send').find('.mail').text(email.val())
+            $('.res-succes-send')
+                .find('.mail')
+                .text(form.find('[name=email]').val())
             togglePopup('resSuccesSend', true)
-        }).fail(xhr => {
-            if (xhr.status == 422) {
-                const errors = xhr.responseJSON.errors
-
-                for (const field in errors) {
-                    if (field == 'email') {
-                        email.closest('.input-group').addClass('error')
-                        email.next('.error-text').text(errors.email[0])
-                    } else {
-                        error.text(errors[field][0])
-                        error.addClass('show')
-                    }
-                }
-            } else {
-                error.addClass('show')
-                error.text(xhr.responseJSON.message)
-            }
-        }).always(() => {
+        })
+        .fail(xhr => {
+            handleFail(form, xhr)
+        })
+        .always(() => {
             removeLoader('.resetPassword-card')
         })
 })
@@ -561,37 +549,27 @@ $('#new-password-form').submit(async function (e) {
 
     const form = $(this)
 
-    const password = form.find('#new-password')
-    password.closest('.input-group').removeClass('error')
-    const error = form.closest('.addNew-pass-card').find('.text-error')
-    error.removeClass('show')
+    const fields = ['password',]
+
+    fields.forEach(field => form
+        .find(`[name=${field}]`)
+        .closest('.input-group')
+        .removeClass('error'))
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('forgot')}`
 
     $.post('/password/reset', data)
         .done(() => {
             form[0].reset()
+
             togglePopup('addNewPassCard', false)
-
+            
             togglePopup('passSucces', true)
-        }).fail(xhr => {
-            if (xhr.status == 422) {
-                const errors = xhr.responseJSON.errors
-
-                for (const field in errors) {
-                    if (field == 'password') {
-                        password.closest('.input-group').addClass('error')
-                        password.next('.error-text').text(errors.password[0])
-                    } else {
-                        error.text(errors[field][0])
-                        error.addClass('show')
-                    }
-                }
-            } else {
-                error.addClass('show')
-                error.text(xhr.responseJSON.message)
-            }
-        }).always(() => {
+        })
+        .fail(xhr => {
+            handleFail(form, xhr)
+        })
+        .always(() => {
             removeLoader('.addNew-pass-card')
         })
 })
@@ -816,10 +794,12 @@ $('#change-email-form').submit(async function(e) {
 
     const form = $(this)
 
-    const email = form.find('#your-email')
-    email.closest('.input-group').removeClass('error')
-    const error = form.closest('.enter-new-email').find('.text-error')
-    error.removeClass('show')
+    const fields = ['new_email',]
+
+    fields.forEach(field => form
+        .find(`[name=${field}]`)
+        .closest('.input-group')
+        .removeClass('error'))
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('change_email')}`
 
@@ -835,24 +815,11 @@ $('#change-email-form').submit(async function(e) {
                 '/change-email/resend-code', 
                 $('.current.email').text()
             )
-        }).fail(xhr => {
-            if (xhr.status == 422) {
-                const errors = xhr.responseJSON.errors
-
-                for (const field in errors) {
-                    if (field == 'new_email') {
-                        email.closest('.input-group').addClass('error')
-                        email.next('.error-text').text(errors.new_email[0])
-                    } else {
-                        error.text(errors[field][0])
-                        error.addClass('show')
-                    }
-                }
-            } else {
-                error.text(xhr.responseJSON.message)
-                error.addClass('show')
-            }
-        }).always(() => {
+        })
+        .fail(xhr => {
+            handleFail(form, xhr)
+        })
+        .always(() => {
             removeLoader('.enter-new-email')
         })
 })
@@ -878,12 +845,12 @@ $('#change-password-form').submit(async function(e) {
 
     const form = $(this)
 
-    const oldPassword = form.find('#old-password')
-    oldPassword.closest('.input-group').removeClass('error')
-    const newPassword = form.find('#new-password')
-    newPassword.closest('.input-group').removeClass('error')
-    const error = form.closest('.enter-new-email').find('.text-error')
-    error.removeClass('show')
+    const fields = ['new_password', 'old_password']
+
+    fields.forEach(field => form
+        .find(`[name=${field}]`)
+        .closest('.input-group')
+        .removeClass('error'))
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('change_password')}`
 
@@ -892,27 +859,11 @@ $('#change-password-form').submit(async function(e) {
             form[0].reset()
 
             togglePopup('passSuccesChanged', true)
-        }).fail(xhr => {
-            if (xhr.status == 422) {
-                const errors = xhr.responseJSON.errors
-
-                for (const field in errors) {
-                    if (field == 'old_password') {
-                        oldPassword.closest('.input-group').addClass('error')
-                        oldPassword.next('.error-text').text(errors.old_password[0])
-                    } else if (field == 'new_password') {
-                        newPassword.closest('.input-group').addClass('error')
-                        newPassword.next('.error-text').text(errors.new_password[0])
-                    } else {
-                        error.text(errors[field][0])
-                        error.addClass('show')
-                    }
-                }
-            } else {
-                error.text(xhr.responseJSON.message)
-                error.addClass('show')
-            }
-        }).always(() => {
+        })
+        .fail(xhr => {
+            handleFail(form, xhr)
+        })
+        .always(() => {
             removeLoader('.add-new-pass')
         })
 })

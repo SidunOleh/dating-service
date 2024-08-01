@@ -99,7 +99,7 @@
                     </div>
                     @else
                     <p>Subscribe, to get full access!</p>
-                    <a href="#" class="btn red">
+                    <a href="{{ route('subscription.page') }}" class="btn red">
                         Subscribe
                     </a>
                     @endif

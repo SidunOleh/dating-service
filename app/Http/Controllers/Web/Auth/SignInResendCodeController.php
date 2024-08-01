@@ -4,32 +4,23 @@ namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Auth\SignInResendCodeRequest;
-use App\Models\Creator;
-use App\Notifications\VerificationCode;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Notification;
+use App\Services\VerificationCode;
+use Exception;
 
 class SignInResendCodeController extends Controller
 {
     public function __invoke(SignInResendCodeRequest $request)
     {
-        if (! $signin = session('signin')) {
-            return response(['message' => 'Bad request.',], 400);
+        try {
+            $code = new VerificationCode('signin');
+
+            $credentials = $code->data();
+
+            $code->resend($credentials['email']);
+
+            return response(['message' => 'OK',]);
+        } catch (Exception $e) {
+            return response(['message' => $e->getMessage()], 400);
         }
-
-        if (now()->lessThan(Carbon::createFromTimestamp($signin['created_at'] + 60))) {
-            return response(['message' => 'Too fast.',], 400);
-        }
-
-        $signin['code'] = Creator::makeVerificationCode();
-        $signin['created_at'] = time();
-        $signin['expire_at'] = time() + 60 * 10;
-        $signin['attemps'] = 0;
-
-        session(['signin' => $signin,]);
-
-        Notification::route('mail', $signin['credentials']['email'])->notify(new VerificationCode($signin['code']));
-
-        return response(['message' => 'OK',]);
     }
 }

@@ -24,6 +24,8 @@ class Subscription extends Model
         'unsubscribed' => 'boolean',
     ];
 
+    public const PRICE = 5;
+
     public function creator(): BelongsTo
     {
         return $this->belongsTo(Creator::class);

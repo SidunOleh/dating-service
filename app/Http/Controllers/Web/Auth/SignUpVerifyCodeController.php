@@ -5,39 +5,29 @@ namespace App\Http\Controllers\Web\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Auth\SignUpVerifyCodeRequest;
 use App\Models\Creator;
-use Carbon\Carbon;
+use App\Services\VerificationCode;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class SignUpVerifyCodeController extends Controller
 {
     public function __invoke(SignUpVerifyCodeRequest $request)
     {
-        $code = $request->input('code');
+        try {
+            $code = new VerificationCode('signup');
+            $code->verify($request->input('code'));
 
-        if (! $signup = session('signup')) {
-            return response(['message' => 'Bad request.',], 400);
+            $credentials = $code->data();
+
+            $creator = Creator::create($credentials);
+
+            Auth::guard('web')->login($creator);
+
+            $code->forget();
+
+            return response(['message' => 'OK',]);
+        } catch (Exception $e) {
+            return response(['message' => $e->getMessage(),], 400);
         }
-        
-        session(['signup.attemps' => ++$signup['attemps'],]);
-
-        if ($signup['attemps'] > config('auth.attemps.verify')) {
-            return response(['message' => 'Too many attemps.',], 429);
-        }
-
-        if (now()->greaterThan(Carbon::createFromTimestamp($signup['expire_at']))) {
-            return response(['message' => 'Verification code is expired.',], 400);
-        }
-
-        if ($signup['code'] != $code) {
-            return response(['message' => 'Invalid verification code.',], 400);
-        }
-
-        $creator = Creator::create(session('signup.credentials'));
-
-        Auth::guard('web')->login($creator);
-
-        session()->forget('signup');
-
-        return response(['message' => 'OK',]);
     }
 }

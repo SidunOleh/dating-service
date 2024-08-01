@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
 </head>
 
-<body>
+<body @class(['height' => Route::currentRouteName() == 'settings.page' ])>
 
     <script>
         const DS = {}
@@ -147,12 +147,12 @@
                     
                     <div class="pages-list">
 
-                        <a href="" class="pages-item red">
+                        <a href="{{ route('subscription.page') }}" class="pages-item red">
                             <p class="name">Subscription</p>
                             <img src="{{ asset('assets/img/sub.svg') }}" alt="" class="icon" />
                         </a>
                         
-                        <a href="" class="pages-item red">
+                        <a href="{{ route('earn.page') }}" class="pages-item red">
                             <p class="name">Earn with us</p>
                             <img src="{{ asset('assets/img/earn.svg') }}" alt="" class="icon" />
                         </a>
@@ -172,7 +172,7 @@
                             <img src="{{ asset('assets/img/favorite.svg') }}" alt="" class="icon" />
                         </a>
                         
-                        <a href="" class="pages-item red">
+                        <a href="{{ route('settings.page') }}" class="pages-item red">
                             <p class="name">Settings</p>
                             <img src="{{ asset('assets/img/settings.svg') }}" alt="" class="icon" />
                         </a>

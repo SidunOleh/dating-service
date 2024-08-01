@@ -4,32 +4,21 @@ namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Auth\SignInSendCodeRequest;
-use App\Models\Creator;
-use App\Notifications\VerificationCode;
+use App\Services\VerificationCode;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 
 class SignInSendCodeController extends Controller
 {
     public function __invoke(SignInSendCodeRequest $request)
     {
-        $credentials = $request->except('recaptcha');
+        $credentials = $request->only(['email', 'password',]);
 
         if (! Auth::guard('web')->validate($credentials)) {
             return response(['message' => 'Wrong credentials.',], 401);
         }
 
-        $code = Creator::makeVerificationCode();
-
-        session(['signin' => [
-            'code' => $code,
-            'created_at' => time(),
-            'expire_at' => time() + 60 * 10,
-            'credentials' => $credentials,
-            'attemps' => 0,
-        ],]);
-
-        Notification::route('mail', $credentials['email'])->notify(new VerificationCode($code));
+        $code = VerificationCode::create('signin', $credentials);
+        $code->send($credentials['email']);
 
         return response(['message' => 'OK',]);
     }

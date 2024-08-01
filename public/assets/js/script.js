@@ -1,128 +1,114 @@
-Fancybox.bind("[data-fancybox]", {});
+Fancybox.bind('[data-fancybox]', {})
 
-//__________________________HEADER__________________________//
+//__________________________Header__________________________//
 
-$(".burger-menu").click(function () {
-  $(".header-menu").toggleClass("open");
-});
+$('.burger-menu').click(function () {
+    $('.header-menu').toggleClass('open')
+})
 
-$(".header-menu .close").click(function () {
-  $(".header-menu").removeClass("open");
-});
+$('.header-menu .close').click(function () {
+    $('.header-menu').removeClass('open')
+})
 
-//__________________________USERS-CARD__________________________//
+//__________________________Cards__________________________//
 
-$(".user-image .arrow").on("click", function (event) {
-  event.preventDefault();
-  event.stopPropagation();
-});
+$('.user-image .arrow').on('click', function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+})
 
-//__________________________SLIDERS__________________________//
+//__________________________Sliders__________________________//
 
-$(".img-slider").each(function () {
-  var $slider = $(this);
-  var $parent = $slider.closest(".user-image");
+$('.img-slider').each(function () {
+    var $slider = $(this)
+    var $parent = $slider.closest('.user-image')
 
-  $slider.slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    prevArrow: $parent.find(".prev"),
-    nextArrow: $parent.find(".next"),
-  });
-});
+    $slider.slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: $parent.find('.prev'),
+        nextArrow: $parent.find('.next'),
+    })
+})
 
-//_____________________SIGN-UP_LOG-IN______________________//
+//_____________________Popups______________________//
 
-const $popupWrapper = $(".popUp-wrapper");
-const $header = $(".header");
+const $popupWrapper = $('.popUp-wrapper')
+const $header = $('.header')
 const $cards = {
-    signUp: $(".signUP-card"),
-    logIn: $(".logIN-card"),
-    resetPassword: $(".resetPassword-card"),
-    resSuccesSend: $(".res-succes-send"),
-    addNewPassCard: $(".addNew-pass-card"),
-    passSucces: $(".pass-succes"),
-};
+    signUp: $('.signUP-card'),
+    logIn: $('.logIN-card'),
+    resetPassword: $('.resetPassword-card'),
+    resSuccesSend: $('.res-succes-send'),
+    addNewPassCard: $('.addNew-pass-card'),
+    passSucces: $('.pass-succes'),
+    newEmail: $('.enter-new-email'),
+    newPass: $('.add-new-pass'),
+    passSuccesChanged: $('#pass-succes-changed'),
+    emailSuccesChanged: $('#email-succes-changed'),
+}
 
 function togglePopup(cardName, show) {
-    const $card = $cards[cardName];
-    $popupWrapper.toggleClass("active", show);
-    $("html").toggleClass("no-scroll", show);
-    $header.toggleClass("hidden", show && $(window).width() < 768);
+    $popupWrapper.toggleClass('active', show)
+    
+    $('html').toggleClass('no-scroll', show)
+    
+    $header.toggleClass('hidden', show && $(window).width() < 768)
 
-    Object.values($cards).forEach(($c) => $c.removeClass("active"));
-    if (show) $card.addClass("active");
-    window.dispatchEvent(new Event('resize'))
+    Object.values($cards).forEach($c => $c.removeClass('active'))
+
+    if (show) {
+        $cards[cardName].addClass('active')
+    }
 }
 
-$(".btn.login, .header-burger").on("click", () => togglePopup("logIn", true));
-$(".btn.signup, .signup-link").on("click", () => togglePopup("signUp", true));
-$(".reset-pass").on("click", () => togglePopup("resetPassword", true));
-$(".close").on("click", () => togglePopup("", false));
+$('.btn.login, .header-burger').on('click', () => togglePopup('logIn', true))
+$('.btn.signup, .signup-link').on('click', () => togglePopup('signUp', true))
+$('.reset-pass').on('click', () => togglePopup('resetPassword', true))
+$('.close').on('click', () => togglePopup('', false))
 
-// $popupWrapper.on("click", function (event) {
-//   if (
-//     !$(event.target).closest(".signUP-card, .logIN-card, .resetPassword-card")
-//       .length
-//   ) {
-//     togglePopup("", false);
-//   }
-// });
-
-$(".show-password").on("click", function () {
-    const $passwordInput = $(this).closest(".input-group").find("input");
-    const isPassword = $passwordInput.attr("type") === "password";
-    $passwordInput.attr("type", isPassword ? "text" : "password");
-    $(this).toggleClass("open", isPassword);
-});
+$('.show-password').on('click', function () {
+    const $passwordInput = $(this).closest('.input-group').find('input')
+    const isPassword = $passwordInput.attr('type') === 'password'
+    $passwordInput.attr('type', isPassword ? 'text' : 'password')
+    $(this).toggleClass('open', isPassword)
+})
 
 function enableSubmitButton($form) {
-    const $inputs = $form.find('input[type="email"], input[type="password"]');
-    const $submitButton = $form.find(".submit.btn");
+    const $inputs = $form.find('input[type="email"], input[type="password"]')
+    const $submitButton = $form.find('.submit.btn')
 
     const checkInputs = () => {
-    const allFilled = $inputs
-        .toArray()
-        .every((input) => $(input).val().trim() !== "");
-    $submitButton.prop("disabled", !allFilled);
-    };
+        const allFilled = $inputs
+            .toArray()
+            .every((input) => $(input).val().trim() !== '')
+        $submitButton.prop('disabled', !allFilled)
+    }
 
-    $inputs.on("input", checkInputs);
-    checkInputs();
+    $inputs.on('input', checkInputs)
+
+    checkInputs()
 }
 
-$(".signUP-card form, .logIN-card form, .resetPassword-card form").each(
-    function () {
-    enableSubmitButton($(this));
-    }
-);
-
-$(".code-inputs input").each(function (index, input) {
-    $(input)
-    .on("input", function () {
-        if (
-        this.value.length === 1 &&
-        index < $(".code-inputs input").length - 1
-        ) {
-        $(".code-inputs input")
-            .eq(index + 1)
-            .focus();
-        }
-    })
-    .on("keydown", function (e) {
-        if (e.key === "Backspace" && index > 0 && this.value === "") {
-        $(".code-inputs input")
-            .eq(index - 1)
-            .focus();
-        }
-    });
-});
+$('.signUP-card form, .logIN-card form, .resetPassword-card form').each(function () {
+    enableSubmitButton($(this))
+})
 
 //__________________________AJAX Setup_________________________//
 
 $.ajaxSetup({beforeSend: xhr => xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content')),})
 
-//__________________________ADVERTISING_________________________//
+//__________________________Loader_________________________//
+
+function addLoader(selector) {
+    $(selector).append('<div class="loading"></div>')
+}
+
+function removeLoader(selector) {
+    $(selector).find('.loading').remove()
+}
+
+//__________________________Advertising_________________________//
 
 if (DS.ads?.data && DS.ads?.settings) {
     const adPopup = {
@@ -267,17 +253,7 @@ $('.advertising-banner, .users-item.add').bind('auxclick click', function () {
     $.post(`/ads/${$(this).data('id')}/click`)
 })
 
-//__________________________Loader_________________________//
-
-function addLoader(selector) {
-    $(selector).append('<div class="loading"></div>')
-}
-
-function removeLoader(selector) {
-    $(selector).find('.loading').remove()
-}
-
-//__________________________Verification Code_________________________//
+//__________________________Verification_________________________//
 
 const resendTimer = {
     secs: 0,
@@ -298,59 +274,117 @@ const resendTimer = {
     },
 }
 
-$('.code-inputs input').bind('paste', function (e) {
+function openVerifyPopup(action, verifyUrl, resendUrl, email) {
+    const verifyPopup = $('.verification-wrapper')
+
+    verifyPopup.data('action', action)
+    verifyPopup.data('verify_url', verifyUrl)
+    verifyPopup.data('resend_url', resendUrl)
+
+    verifyPopup.find('.email').text(email)
+    
+    verifyPopup.addClass('active')
+
+    resendTimer.start(60)
+}
+
+$('.code-inputs input').each((index, input) => {
+    $(input).on('input', function () {
+        if (isNaN(this.value)) {
+            this.value = ''
+            return
+        }
+
+        if (
+            this.value.length === 1 &&
+            index < $('.code-inputs input').length - 1
+        ) {
+            $('.code-inputs input').eq(index + 1).focus()
+        }
+    }).on('keydown', function (e) {
+        if (
+            e.key === 'Backspace' && 
+            index > 0 && 
+            this.value === ''
+        ) {
+            $('.code-inputs input').eq(index - 1).focus()
+        }
+    })
+})
+
+$('.code-inputs input').on('paste', e => {
     e.preventDefault()
 
     const inputs = $('.code-inputs input')
 
     let code = (e.originalEvent.clipboardData || window.clipboardData).getData('text')
-    code = code.split('')
-    code.forEach((number, i) => $(inputs[i]).val(number))
+
+    code.split('').forEach((number, i) => ! isNaN(number) && $(inputs[i]).val(number))
 })
 
-$('.verification-wrapper .code-inputs input').bind('input paste', () => {
+$('.verification-wrapper input').on('input paste', async () => {
     const code = []
-    $('.code-inputs input').each((i, input) => {
-        if (input.value) {
-            code.push(input.value)
-        }
-    })
+
+    $('.code-inputs input').each((i, input) => input.value && code.push(input.value))
 
     if (code.length != 6) {
         return
     }
 
-    if ($('.verification-wrapper').data('action') == 'sign-up') {
-        verifySignUpCode(code.join(''))
-    }
+    addLoader('.verification-container')
 
-    if ($('.verification-wrapper').data('action') == 'sign-in') {
-        verifySignInCode(code.join(''))
-    }
+    const codeForm = $('.code-inputs')
+    codeForm.removeClass('error')
+    const codeError = codeForm.find('.error-text')
+    codeError.text('')
+
+    const action = $('.verification-wrapper').data('action')
+    const verifyUrl = $('.verification-wrapper').data('verify_url')
+
+    const data = `code=${code.join('')}&recaptcha=${await getReCaptchaV3(action)}`
+
+    $.post(verifyUrl, data)
+        .done(() => {
+            $('.verification-wrapper').removeClass('active')
+
+            $(document).trigger(`${action}-verified`)
+        }).fail(err => {
+            codeForm.addClass('error')
+            codeError.text(err.responseJSON.message)
+        }).always(() => {
+            removeLoader('.verification-container')
+        })
 })
 
-$('.verification-wrapper .again').on('click', () => {
+$('.verification-wrapper .again').on('click', async () => {
     if (resendTimer.secs > 0) {
         return
     }
 
-    if ($('.verification-wrapper').data('action') == 'sign-up') {
-        resendSignUpCode()
-    }
+    addLoader('.verification-container')
 
-    if ($('.verification-wrapper').data('action') == 'sign-in') {
-        resendSignInCode()
-    }
+    $('.code-inputs input').each((i, input) => input.value = '')
+
+    const codeForm = $('.code-inputs')
+    codeForm.removeClass('error')
+    const codeError = codeForm.find('.error-text')
+    codeError.text('')
+
+    const action = $('.verification-wrapper').data('action')
+    const resendUrl = $('.verification-wrapper').data('resend_url')
+
+    const data = `recaptcha=${await getReCaptchaV3(action)}`
+
+    $.post(resendUrl, data)
+        .done(() => {
+            resendTimer.start(60)
+        }).fail(err => {
+            codeForm.addClass('error')
+            codeError.text(err.responseJSON.message)
+        }).always(() => {
+            removeLoader('.verification-container')
+        })
 })
-
-function openVerifyPopup(action, email) {
-    const verifyPopup = $('.verification-wrapper')
-    verifyPopup.data('action', action)
-    verifyPopup.find('.email').text(email)
-    verifyPopup.addClass('active')
-
-    resendTimer.start(60)
-}
 
 //__________________________Sign Up_________________________//
 
@@ -374,7 +408,12 @@ $('#sign-up').submit(async function(e) {
         .done(() => {
             togglePopup('signUp', false)
 
-            openVerifyPopup('sign-up', email.val())
+            openVerifyPopup(
+                'sign_up', 
+                '/sign-up/verify-code', 
+                '/sign-up/resend-code', 
+                email.val()
+            )
         }).fail(xhr => {
             if (xhr.status == 422) {
                 const errors = xhr.responseJSON.errors
@@ -400,47 +439,9 @@ $('#sign-up').submit(async function(e) {
         })
 })
 
-async function verifySignUpCode(code) {
-    addLoader('.verification-container')
-
-    const codeForm = $('.code-inputs')
-    codeForm.removeClass('error')
-    const codeError = codeForm.find('.error-text')
-    codeError.text('')
-
-    const data = `code=${code}&recaptcha=${await getReCaptchaV3('verify_signup')}`
-
-    $.post('/sign-up/verify-code', data)
-        .done(() => {
-            location.href = '/my-profile'
-        }).fail(err => {
-            codeForm.addClass('error')
-            codeError.text(err.responseJSON.message)
-        }).always(() => {
-            removeLoader('.verification-container')
-        })
-}
-
-async function resendSignUpCode() {
-    addLoader('.verification-container')
-
-    const codeForm = $('.code-inputs')
-    codeForm.removeClass('error')
-    const codeError = codeForm.find('.error-text')
-    codeError.text('')
-
-    const data = `recaptcha=${await getReCaptchaV3('resend_signup')}`
-
-    $.post('/sign-up/resend-code', data)
-        .done(() => {
-            resendTimer.start(60)
-        }).fail(err => {
-            codeForm.addClass('error')
-            codeError.text(err.responseJSON.message)
-        }).always(() => {
-            removeLoader('.verification-container')
-        })
-}
+$(document).on('sign_up-verified',() => {
+    location.href = '/my-profile'
+})
 
 //__________________________Sign In_________________________//
 
@@ -464,7 +465,12 @@ $('#sign-in').submit(async function(e) {
         .done(() => {
             togglePopup('logIn', false)
 
-            openVerifyPopup('sign-in', email.val())
+            openVerifyPopup(
+                'sign_in', 
+                '/sign-in/verify-code', 
+                '/sign-in/resend-code', 
+                email.val()
+            )
         }).fail(xhr => {
             if (xhr.status == 401) {
                 password.closest('.input-group').addClass('error')
@@ -493,47 +499,9 @@ $('#sign-in').submit(async function(e) {
         })
 })
 
-async function verifySignInCode(code) {
-    addLoader('.verification-container')
-
-    const codeForm = $('.code-inputs')
-    codeForm.removeClass('error')
-    const codeError = codeForm.find('.error-text')
-    codeError.text('')
-
-    const data = `code=${code}&recaptcha=${await getReCaptchaV3('verify_signin')}`
-
-    $.post('/sign-in/verify-code', data)
-        .done(() => {
-            location.href = '/my-profile'
-        }).fail(err => {
-            codeForm.addClass('error')
-            codeError.text(err.responseJSON.message)
-        }).always(() => {
-            removeLoader('.verification-container')
-        })
-}
-
-async function resendSignInCode() {
-    addLoader('.verification-container')
-
-    const codeForm = $('.code-inputs')
-    codeForm.removeClass('error')
-    const codeError = codeForm.find('.error-text')
-    codeError.text('')
-
-    const data = `recaptcha=${await getReCaptchaV3('resend_signin')}`
-
-    $.post('/sign-in/resend-code', data)
-        .done(() => {
-            resendTimer.start(60)
-        }).fail(err => {
-            codeForm.addClass('error')
-            codeError.text(err.responseJSON.message)
-        }).always(() => {
-            removeLoader('.verification-container')
-        })
-}
+$(document).on('sign_in-verified', () => {
+    location.href = '/my-profile'
+})
 
 //__________________________Forgot Password_________________________//
 
@@ -630,34 +598,28 @@ $('#new-password-form').submit(async function (e) {
 
 //__________________________Favorites_________________________//
 
-$('.likes').on('click', '.btn:not(.active)', function(e) {
+$('.likes').on('click', '.btn', function(e) {
     e.preventDefault()
     e.stopPropagation()
 
-    $(this).addClass('active')
     const likes = $(this)
         .closest('.likes')
         .find('.likes-count')
-    likes.text(parseInt(likes.text()) + 1)
-
     const id = $(this).closest('.likes').data('id')
 
-    $.post('/favorites/add', { favorite_id: id, })
-})
+    if ($(this).hasClass('active')) {
+        $(this).removeClass('active')
+        
+        likes.text(parseInt(likes.text()) - 1)
 
-$('.likes').on('click', '.btn.active', function(e) {
-    e.preventDefault()
-    e.stopPropagation()
+        $.post('/favorites/remove', {favorite_id: id,})
+    } else {
+        $(this).addClass('active')
 
-    $(this).removeClass('active')
-    const likes = $(this)
-        .closest('.likes')
-        .find('.likes-count')
-    likes.text(parseInt(likes.text()) - 1)
-
-    const id = $(this).closest('.likes').data('id')
-
-    $.post('/favorites/remove', { favorite_id: id, })
+        likes.text(parseInt(likes.text()) + 1)
+    
+        $.post('/favorites/add', {favorite_id: id,})
+    }
 })
 
 //__________________________Filters_________________________//
@@ -755,92 +717,210 @@ function initializeBattle($battle) {
         $.post(`/roulette/vote/${id}`)
     }
 
-    const $circle = $battle.find(".progress-ring__circle");
-    const radius = $circle[0].r.baseVal.value;
-    const circumference = 2 * Math.PI * radius;
+    const $circle = $battle.find('.progress-ring__circle')
+    const radius = $circle[0].r.baseVal.value
+    const circumference = 2 * Math.PI * radius
 
     $circle.css({
-      strokeDasharray: circumference,
-      strokeDashoffset: circumference,
-    });
-
-    let hasSelected = false;
-
-    $battle.find(".start_btn").click(function () {
-      const $this = $(this);
-      $this.closest(".startBattle").addClass("hidden");
-      startProgressAnimation($circle, 5000);
-      setTimeout(() => activateRepeatButton($this), 5000);
-    });
-
-    $battle.on("click", ".photo", function () {
-      const $selectedPhoto = $(this);
-      
-      if ($selectedPhoto.hasClass('selected')) {
-        window.open(`/profile/${$selectedPhoto.data('id')}`, '_blank')
-      }
-
-      if (!hasSelected) {
-        const $blurredPhoto = $battle.find(".photo").not($selectedPhoto);
-        selectPhoto($selectedPhoto, $blurredPhoto);
-        hasSelected = true;
-        vote($selectedPhoto.data('id'))
-      } 
-    });
-
-    $battle.on("click", ".repeat.active", function () {
-      setTimeout(() => {
-          renderNextPair()
-          hasSelected = false
-          getNextPair()
-      }, 500)
-      
-      const $this = $(this);
-      const $loader = $battle.find(".loader");
-
-      $this.removeClass("active");
-      $loader.addClass("open");
-
-      setTimeout(() => {
-        $loader.removeClass("open");
-      }, 1500);
-
-      restartProgressAnimation($circle, 5000);
-      setTimeout(() => activateRepeatButton($this), 6500);
-    });
-
-    function startProgressAnimation($circle, duration) {
-      setTimeout(() => {
-        $circle.css({
-          transition: `stroke-dashoffset ${duration / 1000}s linear`,
-          strokeDashoffset: "0",
-        });
-      }, 0);
-    }
-
-    function restartProgressAnimation($circle, duration) {
-      $circle.css({
-        transition: "none",
+        strokeDasharray: circumference,
         strokeDashoffset: circumference,
-      });
+    })
 
-      setTimeout(() => {
-        startProgressAnimation($circle, duration);
-      }, 1500);
+    let hasSelected = false
+
+    $battle.find('.start_btn').click(function () {
+        const $this = $(this)
+        $this.closest('.startBattle').addClass('hidden')
+        startProgressAnimation($circle, 5000)
+        setTimeout(() => activateRepeatButton($this), 5000)
+    })
+
+    $battle.on('click', '.photo', function () {
+        const $selectedPhoto = $(this);
+
+        if ($selectedPhoto.hasClass('selected')) {
+            window.open(`/profile/${$selectedPhoto.data('id')}`, '_blank')
+        }
+
+        if (! hasSelected) {
+            const $blurredPhoto = $battle.find('.photo').not($selectedPhoto)
+            selectPhoto($selectedPhoto, $blurredPhoto)
+            hasSelected = true
+            vote($selectedPhoto.data('id'))
+        } 
+    });
+
+    $battle.on('click', '.repeat.active', function () {
+        setTimeout(() => {
+            renderNextPair()
+            hasSelected = false
+            getNextPair()
+        }, 500)
+
+        const $this = $(this)
+        const $loader = $battle.find('.loader')
+
+        $this.removeClass('active')
+        $loader.addClass('open')
+
+        setTimeout(() => {
+            $loader.removeClass('open')
+        }, 1500)
+
+        restartProgressAnimation($circle, 5000)
+            setTimeout(() => activateRepeatButton($this), 6500)
+        })
+
+        function startProgressAnimation($circle, duration) {
+            setTimeout(() => {
+                $circle.css({
+                    transition: `stroke-dashoffset ${duration / 1000}s linear`,
+                    strokeDashoffset: '0',
+                })
+            }, 0)
+        }
+
+        function restartProgressAnimation($circle, duration) {
+            $circle.css({
+                transition: 'none',
+                strokeDashoffset: circumference,
+            })
+
+        setTimeout(() => {
+            startProgressAnimation($circle, duration)
+        }, 1500)
     }
 
     function activateRepeatButton($button) {
-      $button.closest(".battle").find(".repeat").addClass("active");
+        $button.closest('.battle').find('.repeat').addClass('active')
     }
 
     function selectPhoto($selectedPhoto, $blurredPhoto) {
-      $selectedPhoto.addClass("selected").removeClass("blurred");
-      $blurredPhoto.addClass("blurred").removeClass("selected");
+        $selectedPhoto.addClass('selected').removeClass('blurred')
+        $blurredPhoto.addClass('blurred').removeClass('selected')
 
-      $selectedPhoto.find(".info").text("Click to open profile");
+        $selectedPhoto.find('.info').text('Click to open profile')
     }
-  }
+}
 
-  $(".battle").each(function () {
-    initializeBattle($(this));
-  });
+$('.battle').each(function () {
+    initializeBattle($(this))
+})
+
+//__________________________New email_________________________//
+
+$('#change-email-form').submit(async function(e) {
+    e.preventDefault()
+
+    addLoader('.enter-new-email')
+
+    const form = $(this)
+
+    const email = form.find('#your-email')
+    email.closest('.input-group').removeClass('error')
+    const error = form.closest('.enter-new-email').find('.text-error')
+    error.removeClass('show')
+
+    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('change_email')}`
+
+    $.post('/change-email/send-code', data)
+        .done(() => {
+            form[0].reset()
+
+            togglePopup('newEmail', false)
+
+            openVerifyPopup(
+                'change_email', 
+                '/change-email/verify-code', 
+                '/change-email/resend-code', 
+                $('.current.email').text()
+            )
+        }).fail(xhr => {
+            if (xhr.status == 422) {
+                const errors = xhr.responseJSON.errors
+
+                for (const field in errors) {
+                    if (field == 'new_email') {
+                        email.closest('.input-group').addClass('error')
+                        email.next('.error-text').text(errors.new_email[0])
+                    } else {
+                        error.text(errors[field][0])
+                        error.addClass('show')
+                    }
+                }
+            } else {
+                error.text(xhr.responseJSON.message)
+                error.addClass('show')
+            }
+        }).always(() => {
+            removeLoader('.enter-new-email')
+        })
+})
+
+$(document).on('change_email-verified', () => {
+    togglePopup('emailSuccesChanged', true)
+})
+
+$('.reset-btn.email').click(() => {
+    togglePopup('newEmail', true)
+})
+
+$('#pass-succes-changed .btn').click(() => {
+    togglePopup('passSuccesChanged', false)
+})
+
+//__________________________New password_________________________//
+
+$('#change-password-form').submit(async function(e) {
+    e.preventDefault()
+
+    addLoader('.add-new-pass')
+
+    const form = $(this)
+
+    const oldPassword = form.find('#old-password')
+    oldPassword.closest('.input-group').removeClass('error')
+    const newPassword = form.find('#new-password')
+    newPassword.closest('.input-group').removeClass('error')
+    const error = form.closest('.enter-new-email').find('.text-error')
+    error.removeClass('show')
+
+    const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('change_password')}`
+
+    $.post('/change-password', data)
+        .done(() => {
+            form[0].reset()
+
+            togglePopup('passSuccesChanged', true)
+        }).fail(xhr => {
+            if (xhr.status == 422) {
+                const errors = xhr.responseJSON.errors
+
+                for (const field in errors) {
+                    if (field == 'old_password') {
+                        oldPassword.closest('.input-group').addClass('error')
+                        oldPassword.next('.error-text').text(errors.old_password[0])
+                    } else if (field == 'new_password') {
+                        newPassword.closest('.input-group').addClass('error')
+                        newPassword.next('.error-text').text(errors.new_password[0])
+                    } else {
+                        error.text(errors[field][0])
+                        error.addClass('show')
+                    }
+                }
+            } else {
+                error.text(xhr.responseJSON.message)
+                error.addClass('show')
+            }
+        }).always(() => {
+            removeLoader('.add-new-pass')
+        })
+})
+
+$('.reset-btn.pass').click(() => {
+    togglePopup('newPass', true)
+})
+
+$('#email-succes-changed .btn').click(() => {
+    togglePopup('emailSuccesChanged', false)
+})

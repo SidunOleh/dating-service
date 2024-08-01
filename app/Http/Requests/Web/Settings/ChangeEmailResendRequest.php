@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Web\Password;
+namespace App\Http\Requests\Web\Settings;
 
 use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class ResetRequest extends FormRequest
+class ChangeEmailResendRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +23,6 @@ class ResetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' => [
-                'required', 
-                Password::min(8)->max(32),
-            ],
-            'token' => 'required|string',
-            'email' => 'required|email|exists:users,email',
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }

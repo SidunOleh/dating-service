@@ -38,7 +38,7 @@
         </div>
 
         <div class="info-text">
-            <a href="#">
+            <a href="{{ route('faq.page') }}">
                 What is it Roulette?
             </a>
         </div>

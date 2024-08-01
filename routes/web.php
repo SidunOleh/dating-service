@@ -14,9 +14,13 @@ use App\Http\Controllers\Web\Deposit\PlisioController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Images\DeleteController;
+use App\Http\Controllers\Web\Pages\EarnController;
+use App\Http\Controllers\Web\Pages\FAQController;
 use App\Http\Controllers\Web\Pages\FavoritesController;
 use App\Http\Controllers\Web\Pages\HomeController;
 use App\Http\Controllers\Web\Pages\ProfileController;
+use App\Http\Controllers\Web\Pages\SettingsController;
+use App\Http\Controllers\Web\Pages\SubscriptionController;
 use App\Http\Controllers\Web\Pages\TopVoteController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
@@ -30,6 +34,10 @@ use App\Http\Controllers\Web\Profile\SwitchOptionController;
 use App\Http\Controllers\Web\Profile\UpdateController;
 use App\Http\Controllers\Web\Roulette\GetPairController;
 use App\Http\Controllers\Web\Roulette\VoteController;
+use App\Http\Controllers\Web\Settings\ChangeEmailResendController;
+use App\Http\Controllers\Web\Settings\ChangeEmailSendController;
+use App\Http\Controllers\Web\Settings\ChangeEmailVerifyController;
+use App\Http\Controllers\Web\Settings\ChangePasswordController;
 use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
 use Illuminate\Support\Facades\Route;
@@ -115,6 +123,17 @@ Route::get('/favorites', FavoritesController::class)
 Route::get('/favorites/page/{page}', FavoritesController::class)
     ->middleware(['auth:web',])
     ->name('favorites.page');
+Route::get('/subscription', SubscriptionController::class)
+    ->middleware(['auth:web',])
+    ->name('subscription.page');
+Route::get('/earn', EarnController::class)
+    ->middleware(['auth:web',])
+    ->name('earn.page');
+Route::get('/settings', SettingsController::class)
+    ->middleware(['auth:web',])
+    ->name('settings.page');
+Route::get('/faq', FAQController::class)
+    ->name('faq.page');
 
 /**
  * Favorites
@@ -180,10 +199,10 @@ Route::prefix('/roulette')->name('roulette.')->group(function () {
 /**
  * Subscribtion
  */
-Route::get('/subscribe', SubscribeController::class)
+Route::post('/subscribe', SubscribeController::class)
     ->middleware(['auth:web',])
     ->name('subscribe');
-Route::get('/unsubscribe', UnsubscribeController::class)
+Route::post('/unsubscribe', UnsubscribeController::class)
     ->middleware(['auth:web',])
     ->name('unsubscribe');
 
@@ -193,3 +212,20 @@ Route::get('/unsubscribe', UnsubscribeController::class)
 Route::get('/deposit/plisio', PlisioController::class)
     ->middleware(['auth:web',])
     ->name('deposit.plisio');
+
+/**
+ * Settings
+ */
+Route::post('/change-email/send-code', ChangeEmailSendController::class)
+    ->middleware(['auth:web',])
+    ->name('change-email.send-code');
+Route::post('/change-email/verify-code', ChangeEmailVerifyController::class)
+    ->middleware(['auth:web',])
+    ->name('change-email.verify-code');
+Route::post('/change-email/resend-code', ChangeEmailResendController::class)
+    ->middleware(['auth:web',])
+    ->name('change-email.resend-code');
+
+Route::post('/change-password', ChangePasswordController::class)
+    ->middleware(['auth:web',])
+    ->name('change-password.resend-code');

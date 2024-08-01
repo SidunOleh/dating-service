@@ -167,11 +167,6 @@ class Creator extends Authenticatable
         return $code;
     }
 
-    public static function makeVerificationCode(): int
-    {
-        return rand(100000, 999999);
-    }
-
     public function isApproved(): bool
     {
         if (
@@ -262,6 +257,29 @@ class Creator extends Authenticatable
         return $this->hasMany(Referral::class, 'referrer_id');
     }
 
+    public function referralsCount(?string $interval = null): int
+    {   
+        $visits = $this->referrals();
+
+        if ($interval == 'month') {
+            $visits->whereRaw("YEAR(`created_at`) = " . date('Y'))
+                ->whereRaw("MONTH(`created_at`) = " . date('m'));
+        }
+
+        if ($interval == 'week') {
+            $visits->whereRaw("YEAR(`created_at`) = " . date('Y'))
+                ->whereRaw("WEEK(`created_at`) = " . date('W') - 1);
+        }
+
+        if ($interval == 'day') {
+            $visits->whereRaw('YEAR(`created_at`) = ' . date('Y'))
+                ->whereRaw('MONTH(`created_at`) = ' . date('m'))
+                ->whereRaw('DAY(`created_at`) = ' . date('d'));
+        }
+
+        return $visits->count();
+    }
+
     public function referral(): HasOne
     {
         return $this->hasOne(Referral::class, 'referee_id');
@@ -307,7 +325,7 @@ class Creator extends Authenticatable
 
     public function subscribe(): Subscription
     {
-        if (! $this->debitMoney(5)) {
+        if (! $this->debitMoney(Subscription::PRICE)) {
             throw new Exception('Not enough money on balance');
         }
 
@@ -319,7 +337,7 @@ class Creator extends Authenticatable
 
         if ($this->referral and ! $this->referral->rewarded()) {
             $percent = (int) Option::getOption('referral_percent', 0);
-            $reward = 5 * $percent / 100;
+            $reward = Subscription::PRICE * $percent / 100;
 
             $this->referral->reward($reward);
         }
@@ -334,7 +352,7 @@ class Creator extends Authenticatable
 
     public function resumeSubscription(): bool
     {
-        if (! $this->debitMoney(5)) {
+        if (! $this->debitMoney(Subscription::PRICE)) {
             throw new Exception('Not enough money on balance');
         }
 

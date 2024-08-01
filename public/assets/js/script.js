@@ -400,13 +400,12 @@ function handleFail(form, xhr) {
             const input = form.find(`[name=${field}]`)
 
             if (! input.length || input.attr('type') == 'hidden') {
-                error.addClass('show').text(errors[field][0])
+                error.addClass('show')
+                    .text(errors[field][0])
             } else {
-                form.find(`[name=${field}]`)
-                    .closest('.input-group')
+                input.closest('.input-group')
                     .addClass('error')
-                form.find(`[name=${field}]`)
-                    .next('.error-text')
+                input.next('.error-text')
                     .text(errors[field][0])
             }
         }

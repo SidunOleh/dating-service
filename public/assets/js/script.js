@@ -400,8 +400,7 @@ function handleFail(form, xhr) {
             const input = form.find(`[name=${field}]`)
 
             if (! input.length || input.attr('type') == 'hidden') {
-                error.text(errors[field][0])
-                error.addClass('show')
+                error.addClass('show').text(errors[field][0])
             } else {
                 form.find(`[name=${field}]`)
                     .closest('.input-group')
@@ -412,8 +411,7 @@ function handleFail(form, xhr) {
             }
         }
     } else {
-        error.addClass('show')
-        error.text(xhr.responseJSON.message)
+        error.addClass('show').text(xhr.responseJSON.message)
     }
 }
 

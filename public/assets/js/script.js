@@ -384,7 +384,7 @@ $('.verification-wrapper .again').on('click', async () => {
         })
 })
 
-//__________________________Error handling_________________________//
+//__________________________Errors_________________________//
 
 function handleFail(form, xhr) {
     const error = form
@@ -412,6 +412,15 @@ function handleFail(form, xhr) {
     }
 }
 
+function resetErrors(form) {
+    form.find('.error')
+        .removeClass('error')
+    form.closest('.card')
+        .find('.text-error')
+        .removeClass('show')
+        .text('')
+}
+
 //__________________________Sign Up_________________________//
 
 $('#sign-up').submit(async function(e) {
@@ -421,12 +430,7 @@ $('#sign-up').submit(async function(e) {
 
     const form = $(this)
 
-    const fields = ['email', 'password',]
-
-    fields.forEach(field => form
-        .find(`[name=${field}]`)
-        .closest('.input-group')
-        .removeClass('error'))
+    resetErrors(form)
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
 
@@ -462,12 +466,7 @@ $('#sign-in').submit(async function(e) {
 
     const form = $(this)
 
-    const fields = ['email', 'password',]
-
-    fields.forEach(field => form
-        .find(`[name=${field}]`)
-        .closest('.input-group')
-        .removeClass('error'))
+    resetErrors(form)
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('signin')}`
 
@@ -503,12 +502,7 @@ $('#forgot-password').submit(async function(e) {
 
     const form = $(this)
 
-    const fields = ['email',]
-
-    fields.forEach(field => form
-        .find(`[name=${field}]`)
-        .closest('.input-group')
-        .removeClass('error'))
+    resetErrors(form)
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('forgot')}`
 
@@ -544,12 +538,7 @@ $('#new-password-form').submit(async function (e) {
 
     const form = $(this)
 
-    const fields = ['password',]
-
-    fields.forEach(field => form
-        .find(`[name=${field}]`)
-        .closest('.input-group')
-        .removeClass('error'))
+    resetErrors(form)
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('forgot')}`
 
@@ -789,12 +778,7 @@ $('#change-email-form').submit(async function(e) {
 
     const form = $(this)
 
-    const fields = ['new_email',]
-
-    fields.forEach(field => form
-        .find(`[name=${field}]`)
-        .closest('.input-group')
-        .removeClass('error'))
+    resetErrors(form)
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('change_email')}`
 
@@ -840,12 +824,7 @@ $('#change-password-form').submit(async function(e) {
 
     const form = $(this)
 
-    const fields = ['new_password', 'old_password']
-
-    fields.forEach(field => form
-        .find(`[name=${field}]`)
-        .closest('.input-group')
-        .removeClass('error'))
+    resetErrors(form)
 
     const data = form.serialize() + `&recaptcha=${await getReCaptchaV3('change_password')}`
 

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\CreatorSubscribed;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,7 +17,6 @@ class Subscription extends Model
         'starts_at',
         'ends_at',
         'status',
-        'unsubscribed',
     ];
 
     protected $casts = [
@@ -26,35 +27,35 @@ class Subscription extends Model
 
     public const PRICE = 5;
 
+    public const MONTHS = 1;
+
     public function creator(): BelongsTo
     {
         return $this->belongsTo(Creator::class);
     }
 
-    public function activate(): bool
+    public static function subscribe(Creator $creator): self
     {
-        return $this->update(['status' => 'active',]);
+        if (! $creator->debitMoney(self::PRICE)) {
+            throw new Exception("Not enough money on {$creator->email} balance");
+        }
+
+        $subscription = self::create([
+            'status' => 'active',
+            'starts_at' => now(),
+            'ends_at' => now()->addMonths(self::MONTHS),
+            'creator_id' => $creator->id,
+        ]);
+
+        $creator->update(['subscribed' => true,]);
+
+        CreatorSubscribed::dispatch($creator);
+
+        return $subscription;
     }
 
     public function inactivate(): bool
     {
         return $this->update(['status' => 'inactive',]);
-    }
-
-    public function expired(): bool
-    {
-        return ! $this->ends_at->gt(now());
-    }
-
-    public function unsubscribe(): bool
-    {
-        return $this->update(['unsubscribed' => true,]);
-    }
-
-    public function resume(): bool
-    {
-        $this->ends_at = $this->ends_at->addMonths(1);
-
-        return $this->save();
     }
 }

@@ -75,7 +75,7 @@
         <div class="user-photo-list">
             @php
             $imgs = $creator->gallery;
-            $imgs = auth('web')->user()?->subscribed() ? $imgs : $imgs->slice(0, 3);
+            $imgs = auth('web')->user()?->activeSubscription ? $imgs : $imgs->slice(0, 3);
 
             $blur = scandir(public_path('assets/img/blur'));
             $blur = array_filter($blur, fn ($file) => ! in_array($file, ['.', '..',]));

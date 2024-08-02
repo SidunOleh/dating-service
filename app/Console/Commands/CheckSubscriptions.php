@@ -6,6 +6,7 @@ use App\Models\Subscription;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 class CheckSubscriptions extends Command
 {
@@ -29,23 +30,24 @@ class CheckSubscriptions extends Command
     public function handle()
     {
         Subscription::where('status', 'active')
-            ->chunk(1000, function (Collection $subscriptions) {
-                foreach ($subscriptions as $subscription) {
-                    if (! $subscription->expired()) {
-                        continue;
-                    }
+            ->whereRaw('DATE(ends_at) <= "' . now()->format('Y-m-d') . '"')
+            ->chunk(1000, [$this, 'check']);
+    }
 
-                    if ($subscription->unsubscribed) {
-                        $subscription->inactivate();
-                        continue;
-                    }
+    public function check(Collection $subscriptions): void
+    {
+        foreach ($subscriptions as $subscription) {
+            try {
+                $subscription->inactivate();
 
-                    try {
-                        $subscription->creator->resumeSubscription();
-                    } catch (Exception) {
-                        $subscription->inactivate();
-                    }
+                if (! $subscription->creator->subscribed) {
+                    continue;
                 }
-            });
+
+                $subscription->creator->subscribe();
+            } catch (Exception $e) {
+                Log::error($e->getMessage());
+            }
+        }
     }
 }

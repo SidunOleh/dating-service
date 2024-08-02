@@ -26,15 +26,15 @@ class Referral extends Model
         return $this->belongsTo(Creator::class, 'referee_id');
     }
 
-    public function rewaded(): bool
+    public function rewarded(): bool
     {
-        return ! is_null($this->referral->reward);
+        return ! is_null($this->reward);
     }
 
-    public function reward(float $amout): bool
+    public function reward(float $amout): void
     {
-        $this->reward = $amout;
-
-        return $this->save() and $this->referrer->creditMoney($amout);
+        $this->referrer->creditMoney($amout);
+        
+        $this->update(['reward' => $amout]);
     }
 }

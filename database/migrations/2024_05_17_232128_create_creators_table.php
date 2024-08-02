@@ -71,6 +71,8 @@ return new class extends Migration
 
             $table->unsignedInteger('votes')->default(0);
 
+            $table->boolean('subscribed')->default(false);
+
             $table->timestamps();
         });
     }

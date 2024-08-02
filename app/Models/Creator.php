@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CreatorSubscribed;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -54,6 +55,7 @@ class Creator extends Authenticatable
         'verification_photo',
         'id_photo',
         'street_photo',
+        'subscribed',
     ];
 
     protected $hidden = [
@@ -74,6 +76,7 @@ class Creator extends Authenticatable
         'balance' => 'float',
         'is_verified' => 'boolean',
         'birthday' => 'date',
+        'subscribed' => 'boolean',
     ];
 
     protected $profileFields = [
@@ -285,11 +288,6 @@ class Creator extends Authenticatable
         return $this->hasOne(Referral::class, 'referee_id');
     }
 
-    public function hasEnoughMoney(float $amount): bool
-    {
-        return $this->balance >= $amount;
-    }
-
     public function creditMoney(float $amount): bool
     {
         $this->balance += $amount;
@@ -313,50 +311,19 @@ class Creator extends Authenticatable
         return $this->hasMany(Subscription::class);
     }
 
-    public function subscription(): HasOne
+    public function activeSubscription(): HasOne
     {
         return $this->hasOne(Subscription::class)->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', 'active'));
     }
 
-    public function subscribed(): bool
-    {
-        return (bool) $this->subscription;
-    }
-
     public function subscribe(): Subscription
     {
-        if (! $this->debitMoney(Subscription::PRICE)) {
-            throw new Exception('Not enough money on balance');
-        }
-
-        $subscription = $this->subscriptions()->create([
-            'status' => 'active',
-            'starts_at' => now(),
-            'ends_at' => now()->addMonth(),
-        ]);
-
-        if ($this->referral and ! $this->referral->rewarded()) {
-            $percent = (int) Option::getOption('referral_percent', 0);
-            $reward = Subscription::PRICE * $percent / 100;
-
-            $this->referral->reward($reward);
-        }
-
-        return $subscription;
+        return Subscription::subscribe($this);
     }
 
     public function unsubscribe(): bool
     {
-        return $this->subscription->unsubscribe();
-    }
-
-    public function resumeSubscription(): bool
-    {
-        if (! $this->debitMoney(Subscription::PRICE)) {
-            throw new Exception('Not enough money on balance');
-        }
-
-        return $this->subscription->resume();
+        return $this->update(['subscribed' => false,]);
     }
 
     public function transactions(): HasMany

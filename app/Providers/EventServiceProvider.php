@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\CreatorInactivated;
+use App\Events\CreatorSubscribed;
 use App\Events\UserCreated;
+use App\Listeners\PayPercentReferrer;
 use App\Listeners\SendEmailToInactivatedCreator;
 use App\Listeners\SendEmailWithCredentialsToNewUser;
 use Illuminate\Auth\Events\Registered;
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CreatorInactivated::class => [
             SendEmailToInactivatedCreator::class,
+        ],
+        CreatorSubscribed::class => [
+            PayPercentReferrer::class,
         ],
     ];
 

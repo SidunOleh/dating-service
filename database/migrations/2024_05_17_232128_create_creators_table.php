@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('creators', function (Blueprint $table) {
             $table->id()->from(50000);
+            
             $table->string('email')->unique();
             $table->string('password');
             
@@ -70,8 +71,6 @@ return new class extends Migration
             $table->decimal('balance', 10, 2)->default(0);
 
             $table->unsignedInteger('votes')->default(0);
-
-            $table->boolean('subscribed')->default(false);
 
             $table->timestamps();
         });

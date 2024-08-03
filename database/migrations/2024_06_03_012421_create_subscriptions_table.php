@@ -16,6 +16,7 @@ return new class extends Migration
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->enum('status', ['active', 'inactive',]);
+            $table->boolean('unsubscribed')->default(false);
             $table->foreignId('creator_id')
                 ->constrained()                
                 ->onUpdate('cascade')

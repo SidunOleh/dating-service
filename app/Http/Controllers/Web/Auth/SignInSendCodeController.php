@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Auth\SignInSendCodeRequest;
-use App\Services\VerificationCode;
+use App\Services\Verification\Code;
 use Illuminate\Support\Facades\Auth;
 
 class SignInSendCodeController extends Controller
@@ -17,7 +17,7 @@ class SignInSendCodeController extends Controller
             return response(['message' => 'Wrong credentials.',], 401);
         }
 
-        $code = VerificationCode::create('signin', $credentials);
+        $code = Code::create('signin', $credentials);
         $code->send($credentials['email']);
 
         return response(['message' => 'OK',]);

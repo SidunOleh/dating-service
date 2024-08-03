@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PaymentGateways\Plisio\Invoice;
+namespace App\Services\PaymentGateways\Plisio\Api\Invoice;
 
 class InvoiceResponse
 {

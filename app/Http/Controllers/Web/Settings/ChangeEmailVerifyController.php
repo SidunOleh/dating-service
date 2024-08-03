@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Settings\ChangeEmailVerifyRequest;
-use App\Services\VerificationCode;
+use App\Services\Verification\Code;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +13,7 @@ class ChangeEmailVerifyController extends Controller
     public function __invoke(ChangeEmailVerifyRequest $request)
     {
         try {
-            $code = new VerificationCode('change_email');
+            $code = new Code('change_email');
             $code->verify($request->input('code'));
 
             $data = $code->data();

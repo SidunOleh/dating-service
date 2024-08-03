@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PaymentGateways\Plisio\Exceptions;
+namespace App\Services\PaymentGateways\Plisio\Api\Exceptions;
 
 use Exception;
 

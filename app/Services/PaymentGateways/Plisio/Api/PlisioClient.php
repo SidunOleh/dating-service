@@ -1,17 +1,17 @@
 <?php
 
-namespace App\PaymentGateways\Plisio;
+namespace App\Services\PaymentGateways\Plisio\Api;
 
-use App\PaymentGateways\Plisio\Exceptions\RateNotFoundException;
-use App\PaymentGateways\Plisio\Exceptions\RateRequestErrorException;
-use App\PaymentGateways\Plisio\Invoice\Exceptions\InvoiceRequestErrorException;
-use App\PaymentGateways\Plisio\Invoice\Exceptions\InvoiceUnverifyResponseException;
-use App\PaymentGateways\Plisio\Invoice\InvoiceRequest;
-use App\PaymentGateways\Plisio\Invoice\InvoiceResponse;
-use App\PaymentGateways\Plisio\Invoice\InvoiceWhiteLabelResponse;
-use App\PaymentGateways\Plisio\Withdrawal\Exceptions\WithdrawalRequestErrorException;
-use App\PaymentGateways\Plisio\Withdrawal\WithdrawalRequest;
-use App\PaymentGateways\Plisio\Withdrawal\WithdrawalResponse;
+use App\Services\PaymentGateways\Plisio\Api\Exceptions\RateNotFoundException;
+use App\Services\PaymentGateways\Plisio\Api\Exceptions\RateRequestErrorException;
+use App\Services\PaymentGateways\Plisio\Api\Invoice\Exceptions\InvoiceRequestErrorException;
+use App\Services\PaymentGateways\Plisio\Api\Invoice\Exceptions\InvoiceUnverifyResponseException;
+use App\Services\PaymentGateways\Plisio\Api\Invoice\InvoiceRequest;
+use App\Services\PaymentGateways\Plisio\Api\Invoice\InvoiceResponse;
+use App\Services\PaymentGateways\Plisio\Api\Invoice\InvoiceWhiteLabelResponse;
+use App\Services\PaymentGateways\Plisio\Api\Withdrawal\Exceptions\WithdrawalRequestErrorException;
+use App\Services\PaymentGateways\Plisio\Api\Withdrawal\WithdrawalRequest;
+use App\Services\PaymentGateways\Plisio\Api\Withdrawal\WithdrawalResponse;
 use Illuminate\Support\Facades\Http;
 
 class PlisioClient

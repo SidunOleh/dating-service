@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PaymentGateways\Plisio\Withdrawal\Exceptions;
+namespace App\Services\PaymentGateways\Plisio\Api\Withdrawal\Exceptions;
 
 use Exception;
 

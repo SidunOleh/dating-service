@@ -17,6 +17,7 @@ class Subscription extends Model
         'starts_at',
         'ends_at',
         'status',
+        'unsubscribed',
     ];
 
     protected $casts = [
@@ -47,11 +48,14 @@ class Subscription extends Model
             'creator_id' => $creator->id,
         ]);
 
-        $creator->update(['subscribed' => true,]);
-
         CreatorSubscribed::dispatch($creator);
 
         return $subscription;
+    }
+
+    public function unsubscribe(): bool
+    {
+        return $this->update(['unsubscribed' => true,]);
     }
 
     public function inactivate(): bool

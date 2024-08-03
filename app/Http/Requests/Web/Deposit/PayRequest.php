@@ -5,7 +5,7 @@ namespace App\Http\Requests\Web\Deposit;
 use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlisioRequest extends FormRequest
+class PayRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

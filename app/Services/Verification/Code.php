@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Verification;
 
 use App\Notifications\VerificationCode as NotificationsVerificationCode;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Notification;
 
-class VerificationCode
+class Code
 {
     private string $action;
 

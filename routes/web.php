@@ -10,7 +10,7 @@ use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
 use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
-use App\Http\Controllers\Web\Deposit\PlisioController;
+use App\Http\Controllers\Web\Deposit\PayController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Images\DeleteController;
@@ -24,7 +24,6 @@ use App\Http\Controllers\Web\Pages\SubscriptionController;
 use App\Http\Controllers\Web\Pages\TopVoteController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
-use App\Http\Controllers\Web\Plisio\CallbackController;
 use App\Http\Controllers\Web\Profile\CreateController;
 use App\Http\Controllers\Web\Profile\DeleteController as ProfileDeleteController;
 use App\Http\Controllers\Web\Profile\EditController;
@@ -40,6 +39,7 @@ use App\Http\Controllers\Web\Settings\ChangeEmailVerifyController;
 use App\Http\Controllers\Web\Settings\ChangePasswordController;
 use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
+use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,9 +98,9 @@ Route::post('/password/reset', ResetController::class)
     ->name('web.password.reset');
 
 /**
- * Plisio
+ * Webhooks
  */
-Route::post('/plisio/callback', CallbackController::class);
+Route::post('/plisio/callback', PlisioCallbackController::class);
 
 /**
  * Pages
@@ -209,9 +209,10 @@ Route::post('/unsubscribe', UnsubscribeController::class)
 /**
  * Deposit
  */
-Route::get('/deposit/plisio', PlisioController::class)
+Route::get('/deposit/{gateway}', PayController::class)
+    ->where('gateway', 'plisio')
     ->middleware(['auth:web',])
-    ->name('deposit.plisio');
+    ->name('deposit');
 
 /**
  * Settings

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Auth\SignUpResendCodeRequest;
-use App\Services\VerificationCode;
+use App\Services\Verification\Code;
 use Exception;
 
 class SignUpResendCodeController extends Controller
@@ -12,7 +12,7 @@ class SignUpResendCodeController extends Controller
     public function __invoke(SignUpResendCodeRequest $request)
     {
         try {
-            $code = new VerificationCode('signup');
+            $code = new Code('signup');
 
             $credentials = $code->data();
 

@@ -11,7 +11,7 @@ class SubscribeController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
-        if ($creator->subscribed()) {
+        if ($creator->activeSubscription) {
             abort(400);
         }
 

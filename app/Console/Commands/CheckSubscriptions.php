@@ -40,11 +40,9 @@ class CheckSubscriptions extends Command
             try {
                 $subscription->inactivate();
 
-                if (! $subscription->creator->subscribed) {
-                    continue;
+                if (! $subscription->unsubscribed) {
+                    $subscription->creator->subscribe();
                 }
-
-                $subscription->creator->subscribe();
             } catch (Exception $e) {
                 Log::error($e->getMessage());
             }

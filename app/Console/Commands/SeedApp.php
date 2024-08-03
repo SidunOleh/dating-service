@@ -48,9 +48,7 @@ class SeedApp extends Command
                     'play_roulette' => true,
                     'profile_is_created' => true,
                 ]);
-            } catch (Exception) {
-                
-            }
+            } catch (Exception) {}
         }
 
         for ($i=0; $i < 30; $i++) { 
@@ -58,9 +56,7 @@ class SeedApp extends Command
                 Ad::factory()->create([
                     'image_id' => $images->random()->id,
                 ]);
-            } catch (Exception) {
-
-            }
+            } catch (Exception) {}
         }
     }
 

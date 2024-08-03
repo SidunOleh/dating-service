@@ -1,6 +1,6 @@
 <?php
 
-namespace App\PaymentGateways\Plisio\Withdrawal;
+namespace App\Services\PaymentGateways\Plisio\Api\Withdrawal;
 
 class WithdrawalResponse
 {

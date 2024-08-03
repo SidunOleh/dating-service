@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\CreatorSubscribed;
-use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -55,7 +53,6 @@ class Creator extends Authenticatable
         'verification_photo',
         'id_photo',
         'street_photo',
-        'subscribed',
     ];
 
     protected $hidden = [
@@ -76,7 +73,6 @@ class Creator extends Authenticatable
         'balance' => 'float',
         'is_verified' => 'boolean',
         'birthday' => 'date',
-        'subscribed' => 'boolean',
     ];
 
     protected $profileFields = [
@@ -313,7 +309,9 @@ class Creator extends Authenticatable
 
     public function activeSubscription(): HasOne
     {
-        return $this->hasOne(Subscription::class)->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', 'active'));
+        return $this
+            ->hasOne(Subscription::class)
+            ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', 'active'));
     }
 
     public function subscribe(): Subscription
@@ -323,7 +321,7 @@ class Creator extends Authenticatable
 
     public function unsubscribe(): bool
     {
-        return $this->update(['subscribed' => false,]);
+        return $this->activeSubscription->unsubscribe();
     }
 
     public function transactions(): HasMany

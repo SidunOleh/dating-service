@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Web\Deposit;
+namespace App\Http\Requests\Web\Payments;
 
-use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
-class PayRequest extends FormRequest
+class WithdrawRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,11 @@ class PayRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'currency' => 'required|in:',
-            // 'amount' => 'required|integer|min:',
-            // 'recaptcha' => ['required', new ReCaptchaV3(),],
+            'gateway' => 'required|in:plisio',
+            'amount' => 'required|integer',
+            
+            'currency' => 'required_if:gateway,plisio|in:BTC',
+            'to' => 'required_if:gateway,plisio|string',
         ];
     }
 }

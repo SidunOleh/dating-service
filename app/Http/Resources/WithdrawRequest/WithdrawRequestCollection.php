@@ -18,7 +18,7 @@ class WithdrawRequestCollection extends ResourceCollection
         foreach ($this->collection as $i => $transaction) {
             $data[$i]['id'] = $transaction->id;
             $data[$i]['gateway'] = $transaction->gateway;
-            $data[$i]['usd_amount'] = $transaction->usd_amount;
+            $data[$i]['amount'] = $transaction->amount;
             $data[$i]['status'] = $transaction->status;
             $data[$i]['concrete'] = $transaction->concrete;
             $data[$i]['creator']['id'] = $transaction->creator->id; 

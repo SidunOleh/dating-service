@@ -16,7 +16,7 @@ return new class extends Migration
             
             $table->string('gateway');
             $table->string('type');
-            $table->decimal('usd_amount', 10, 2);
+            $table->decimal('amount', 10, 2);
             $table->string('status');
 
             $table->string('details_type');

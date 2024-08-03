@@ -1,11 +1,11 @@
 <template>
     <Form layout="vertical">
 
-        <FormItem label="USD amount" >
+        <FormItem label="Amount" >
             <Input
-                placeholder="USD amount"
+                placeholder="Amount"
                 readonly
-                :value="record.usd_amount"/>
+                :value="record.amount"/>
         </FormItem>
 
         <FormItem label="Currency" >

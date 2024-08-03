@@ -19,7 +19,7 @@ class TransactionCollection extends ResourceCollection
             $data[$i]['id'] = $transaction->id;
             $data[$i]['gateway'] = $transaction->gateway;
             $data[$i]['type'] = $transaction->type;
-            $data[$i]['usd_amount'] = $transaction->usd_amount;
+            $data[$i]['amount'] = $transaction->amount;
             $data[$i]['status'] = $transaction->status;
             $data[$i]['creator'] = $transaction->creator ? [
                 'id' => $transaction->creator->id,

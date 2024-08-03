@@ -2,12 +2,14 @@
 
 namespace App\Services\PaymentGateways\Plisio;
 
+use App\Models\Creator;
 use App\Models\PlisioInvoice;
+use App\Models\PlisioWithdrawal;
 use App\Models\Transaction;
 use App\Services\PaymentGateways\Plisio\Api\Invoice\InvoiceRequest;
 use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
 use App\Services\PaymentGateways\PaymentGateway;
-use Illuminate\Support\Facades\Auth;
+use App\Services\PaymentGateways\Plisio\Api\Withdrawal\WithdrawalRequest;
 
 class PlisioGateway extends PaymentGateway
 {
@@ -18,16 +20,17 @@ class PlisioGateway extends PaymentGateway
         $this->client = $client;
     }
 
-    public function pay(
-        float $usdAmount,
-        string $currency 
+    public function deposit(
+        Creator $creator,
+        float $amount, 
+        array $data = []
     ): Transaction
     {
         $request = new InvoiceRequest(
-            uniqid(Auth::id(), true), 
+            uniqid($creator->id, true),
             'deposit', 
-            currency: $currency,
-            sourceAmount: $usdAmount, 
+            currency: $data['currency'],
+            sourceAmount: $amount, 
             sourceCurrency: 'USD'
         );
 
@@ -35,14 +38,38 @@ class PlisioGateway extends PaymentGateway
 
         $invoice = PlisioInvoice::create($response->toArray());
         
-        $transaction = Transaction::create([
+        $transaction = $invoice->transaction()->create([
             'gateway' => 'plisio',
             'type' => 'invoice',
-            'usd_amount' => $usdAmount,
+            'amount' => $amount,
             'status' => 'new',
-            'details_type' => PlisioInvoice::class,
-            'details_id' => $invoice->id,
-            'creator_id' => Auth::id(),
+            'creator_id' => $creator->id,
+        ]);
+
+        return $transaction;
+    }
+
+    public function withdraw(
+        Creator $creator,
+        float $amount, 
+        array $data = []
+    ): Transaction
+    {
+        $rate = $this->client->rate('USD', $data['currency']);
+        $amount = $rate * $amount;
+
+        $withdrawalResponse = $this->client->createWithdrawal(
+            new WithdrawalRequest($amount, $data['currency'], $data['to'], 'cash_out')
+        );
+
+        $withdrawal = PlisioWithdrawal::create($withdrawalResponse->toArray());
+
+        $transaction = $withdrawal->transaction()->create([
+            'gateway' => 'plsio',
+            'type' => 'withdrawal',
+            'amount' => $amount,
+            'status' => $withdrawal->status,
+            'creator_id' => $creator->id,
         ]);
 
         return $transaction;

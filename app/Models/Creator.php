@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\PaymentGateways\PaymentGateway;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -284,6 +285,11 @@ class Creator extends Authenticatable
         return $this->hasOne(Referral::class, 'referee_id');
     }
 
+    public function hasEnoughMoney(float $amount): bool
+    {
+        return $amount <= $this->balance;
+    }
+
     public function creditMoney(float $amount): bool
     {
         $this->balance += $amount;
@@ -327,6 +333,24 @@ class Creator extends Authenticatable
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function deposit(string $gateway, float $amount, array $data = []): Transaction
+    {
+        $paymentGateway = PaymentGateway::create($gateway);
+
+        $transaction = $paymentGateway->deposit($this, $amount, $data);
+
+        return $transaction;
+    }
+
+    public function withdraw(string $gateway, float $amount, array $data = []): Transaction
+    {
+        $paymentGateway = PaymentGateway::create($gateway);
+
+        $transaction = $paymentGateway->withdraw($this, $amount, $data);
+
+        return $transaction;
     }
 
     public function saveNotApprovableProfileChanges(array $data): bool

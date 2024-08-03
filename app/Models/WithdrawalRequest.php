@@ -15,7 +15,7 @@ class WithdrawalRequest extends Model
 
     protected $fillable = [
         'gateway',
-        'usd_amount',
+        'amount',
         'status',
         'concrete_type',
         'concrete_id',
@@ -24,7 +24,7 @@ class WithdrawalRequest extends Model
     ];
 
     protected $cast = [
-        'usd_amount' => 'float',
+        'amount' => 'float',
     ];
 
     public function concrete(): MorphTo
@@ -44,14 +44,14 @@ class WithdrawalRequest extends Model
 
     public function withdraw(): Transaction
     {
-        if (! $this->creator->hasEnoughMoney($this->usd_amount)) {
-            throw new Exception('Not enough money on creator\'s balance.');
+        if (! $this->creator->hasEnoughMoney($this->amount)) {
+            throw new Exception('Not enough money on balance.');
         }
 
         $transaction = $this->concrete->withdraw();
 
         if ($transaction->status == 'completed') {
-            $this->creator->debitMoney($this->usd_amount);
+            $this->creator->debitMoney($this->amount);
         }
 
         $this->user_id = Auth::guard('admin')->id();
@@ -59,5 +59,25 @@ class WithdrawalRequest extends Model
         $this->save();
 
         return $transaction;
+    }
+
+    public static function createRequest(array $data): self
+    {
+        switch ($data['gateway']) {
+            case 'plisio':
+                $request = PlisioWithdrawalRequest::create([
+                    'to' => $data['to'],
+                    'currency' => $data['currency'],
+                ]);
+            break;
+            default:
+                throw new Exception("Not found gateway {$data['gateway']}.");
+        }
+
+        return $request->common()->create([
+            'gateway' => $data['gateway'],
+            'amount' => $data['amount'],
+            'creator_id' => Auth::guard('web')->id(),
+        ]);
     }
 }

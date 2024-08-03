@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('gateway');
-            $table->decimal('usd_amount', 10, 2);
+            $table->decimal('amount', 10, 2);
             $table->string('status')->default('pending');
             
             $table->string('concrete_type');

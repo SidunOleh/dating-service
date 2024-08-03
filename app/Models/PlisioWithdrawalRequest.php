@@ -25,24 +25,11 @@ class PlisioWithdrawalRequest extends Model
 
     public function withdraw(): Transaction
     {
-        $plisioClient = new PlisioClient(env('PLISIO_SECRET_KEY'));
-
-        $rate = $plisioClient->rate('USD', $this->currency);
-        $amount = $rate * $this->common->usd_amount;
-
-        $withdrawalResponse = $plisioClient->createWithdrawal(
-            new WithdrawalRequest($amount, $this->currency, $this->to, 'cash_out')
+        $transaction = $this->common->creator->withdraw(
+            'plisio', 
+            $this->common->amount, 
+            ['currency' => $this->currency, 'to' => $this->to,]
         );
-
-        $withdrawal = PlisioWithdrawal::create($withdrawalResponse->toArray());
-
-        $transaction = $withdrawal->transaction()->create([
-            'gateway' => 'plsio',
-            'type' => 'withdrawal',
-            'usd_amount' => $this->common->usd_amount,
-            'status' => $withdrawal->status,
-            'creator_id' => $withdrawal->creator_id,
-        ]);
 
         return $transaction;
     }

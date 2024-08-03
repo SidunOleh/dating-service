@@ -38,7 +38,7 @@ class Subscription extends Model
     public static function subscribe(Creator $creator): self
     {
         if (! $creator->debitMoney(self::PRICE)) {
-            throw new Exception("Not enough money on {$creator->email} balance");
+            throw new Exception('Not enough money on balance.');
         }
 
         $subscription = self::create([

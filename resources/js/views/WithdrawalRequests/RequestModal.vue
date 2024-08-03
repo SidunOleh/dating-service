@@ -55,7 +55,7 @@ export default {
             try {
                 this.loading.withdraw = true
                 const res = await withdrawalRequestsApi.amount(this.record.id)
-                confirmPopup(this.withdraw, `Withdraw ${res.amount} ${this.record.concrete.currency}(${this.record.usd_amount} USD) to ${this.record.concrete.to}?`)
+                confirmPopup(this.withdraw, `Withdraw ${res.amount} ${this.record.concrete.currency}(${this.record.amount} USD) to ${this.record.concrete.to}?`)
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
             } finally {

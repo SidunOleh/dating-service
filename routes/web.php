@@ -10,7 +10,6 @@ use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
 use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
-use App\Http\Controllers\Web\Deposit\PayController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Images\DeleteController;
@@ -24,6 +23,8 @@ use App\Http\Controllers\Web\Pages\SubscriptionController;
 use App\Http\Controllers\Web\Pages\TopVoteController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
+use App\Http\Controllers\Web\Payments\DepositController;
+use App\Http\Controllers\Web\Payments\WithdrawController;
 use App\Http\Controllers\Web\Profile\CreateController;
 use App\Http\Controllers\Web\Profile\DeleteController as ProfileDeleteController;
 use App\Http\Controllers\Web\Profile\EditController;
@@ -207,12 +208,14 @@ Route::post('/unsubscribe', UnsubscribeController::class)
     ->name('unsubscribe');
 
 /**
- * Deposit
+ * Payments
  */
-Route::get('/deposit/{gateway}', PayController::class)
-    ->where('gateway', 'plisio')
+Route::post('/payments/deposit', DepositController::class)
     ->middleware(['auth:web',])
-    ->name('deposit');
+    ->name('payments.deposit');
+Route::post('payments/withdraw', WithdrawController::class)
+    ->middleware(['auth:web',])
+    ->name('payments.withdraw');
 
 /**
  * Settings

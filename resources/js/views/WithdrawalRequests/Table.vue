@@ -23,8 +23,8 @@
                 {{ record.gateway }}
             </template>
 
-            <template v-if="column.key === 'usd_amount'">
-                {{ record.usd_amount }}
+            <template v-if="column.key === 'amount'">
+                {{ record.amount }}
             </template>
 
             <template v-if="column.key === 'status'">
@@ -92,8 +92,8 @@ export default {
                     key: 'gateway',
                 },
                 {
-                    title: 'USD amount',
-                    key: 'usd_amount',
+                    title: 'Amount',
+                    key: 'amount',
                     sorter: true,
                 },
                 {

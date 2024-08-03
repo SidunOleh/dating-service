@@ -17,6 +17,8 @@ class PayController extends Controller
 
         $transaction = $paymentGateway->pay($usdAmount, $currency);
 
-        return response(['message' => 'OK',]);
+        $transaction->details;
+
+        return response(['transaction' => $transaction,]);
     }
 }

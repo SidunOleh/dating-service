@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\Ads\StoreController as AdsStoreController;
 use App\Http\Controllers\Admin\Ads\UpdateController as AdsUpdateController;
 use App\Http\Controllers\Admin\Auth\ResetPassword;
 use App\Http\Controllers\Admin\Auth\SendResetLink;
+use App\Http\Controllers\Admin\Content\IndexController as ContentIndexController;
+use App\Http\Controllers\Admin\Content\UpdateController as ContentUpdateController;
 use App\Http\Controllers\Admin\Creators\DeleteController as CreatorsDeleteController;
 use App\Http\Controllers\Admin\Creators\IndexController as CreatorsIndexController;
 use App\Http\Controllers\Admin\Creators\ShowController as CreatorsShowController;
@@ -210,4 +212,13 @@ Route::middleware(['auth:sanctum',])->group(function () {
 
     Route::get('/zips/{zipCode:zip}', ZipCodesShowController::class)
         ->name('zips.show');
+
+    Route::prefix('/content')->name('content.')->group(function () {
+        Route::get('/', ContentIndexController::class)
+            ->name('index')
+            ->can('content.view');
+        Route::post('/', ContentUpdateController::class)
+            ->name('update')
+            ->can('content.edit');
+    });
 });

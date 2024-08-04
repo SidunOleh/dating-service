@@ -140,6 +140,17 @@
             </router-link>
         </MenuItem>
 
+        <MenuItem
+            v-if="can('content.view')" 
+            key="content">
+            <template #icon>
+                <ContentIcon />
+            </template>
+            <router-link :to="{name: 'content.index'}">
+                Content
+            </router-link>
+        </MenuItem>
+
         <MenuItem key="settings">
             <template #icon>
                 <SettingsIcon />
@@ -164,6 +175,7 @@ import AdIcon from './icons/Ad.vue'
 import MoneyIcon from './icons/Money.vue'
 import WithdrawalIcon from './icons/Withdrawal.vue'
 import SettingsIcon from './icons/Settings.vue'
+import ContentIcon from './icons/Content.vue'
 import can from '../helpers/can'
 
 export default {
@@ -172,6 +184,7 @@ export default {
         SubMenu, UserIcon, TemplateIcon,
         AdIcon, ProfileIcon, ApproveIcon,
         MoneyIcon, WithdrawalIcon, SettingsIcon,
+        ContentIcon,
     },
     data() {
         return {

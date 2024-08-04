@@ -289,6 +289,19 @@ const routes = [{
         menuKey: 'settings',
     },
 }, {
+    path: '/admin/content',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/Content/Index.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'content.index',
+    meta: {
+        access: 'private',
+        permission: 'content.view',
+        menuKey: 'content',
+    },
+}, {
     path: '/admin/:pathMatch(.*)*',
     component: defineAsyncComponent({
         loader: () =>

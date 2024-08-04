@@ -23,6 +23,7 @@
                         v-model:value="item.title"/>
 
                     <Textarea
+                        v-if="! item.children.length"
                         placeholder="Text"  
                         :rows="7"
                         v-model:value="item.text"/>

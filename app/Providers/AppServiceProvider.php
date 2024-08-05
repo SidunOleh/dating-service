@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             'defer' => true,
         ]);
 
-        View::composer(['pages.*',], function (ViewView $view) {
+        View::composer(['pages.*', 'errors.*',], function (ViewView $view) {
             if (! Option::getOption('show_top_ad', false)) {
                 return;
             }

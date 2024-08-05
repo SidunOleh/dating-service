@@ -64,10 +64,7 @@ export default {
         try {
             this.editing = true
             const data = await contentApi.fetch()
-            
-            if (data) {
-                this.data = data
-            }
+            this.data = Object.assign(this.data, data)
         } catch (err) {
             message.error(err?.response?.data?.message ?? err.message)
         } finally {

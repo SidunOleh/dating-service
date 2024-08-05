@@ -90,7 +90,13 @@ export default {
     data() {
         return {
             activeKey: [1, 2,],
-            settings: {},
+            settings: {
+                show_top_ad: false,
+                clicks_between_popups: null,
+                seconds_between_popups: null,
+                close_popup_seconds: null,
+                referral_percent: null,
+            },
             editing: false,
         }
     },
@@ -111,9 +117,7 @@ export default {
         try {
             this.editing = true
             const settings = await settingsApi.fetch()
-            if (settings) {
-                this.settings = settings
-            }
+            this.settings = Object.assign(this.settings, settings)
         } catch (err) {
             message.error(err?.response?.data?.message ?? err.message)
         } finally {

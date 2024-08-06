@@ -881,7 +881,7 @@
                                 <p>
                                     Maximum number of photos: 12
                                     <br />
-                                    <span>.jpeg, .png, .webp, .heic, up to 10MB</span>
+                                    <span>.jpeg, .webp, .heic, up to 10MB</span>
                                 </p>
 
                                 <input 

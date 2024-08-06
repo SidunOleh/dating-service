@@ -24,7 +24,6 @@ class UploadRequest extends FormRequest
     {
         $mimes = [
             'image/jpeg',
-            'image/png',
             'image/webp',
             'image/heif',
             'image/heif-sequence',

@@ -241,3 +241,10 @@ Route::post('/change-email/resend-code', ChangeEmailResendController::class)
 Route::post('/change-password', ChangePasswordController::class)
     ->middleware(['auth:web',])
     ->name('change-password.resend-code');
+
+/**
+ * 404
+ */
+Route::fallback(function() {
+    return view('errors.404');
+});

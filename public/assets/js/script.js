@@ -1164,7 +1164,6 @@ const withdraw = {
     currency: null,
     to: null,
     amount: null,
-
 }
 
 // currency

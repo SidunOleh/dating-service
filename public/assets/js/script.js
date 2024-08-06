@@ -1031,7 +1031,7 @@ $('.transaction-wrapper .close').click(() => {
 //__________________________Subscribe__________________________//
 
 function formatDate(date) {
-    return `${String(date.getDay()).padStart(2, '0')}.${String(date.getMonth()+1).padStart(2, '0')}.${date.getFullYear()}`
+    return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth()+1).padStart(2, '0')}.${date.getFullYear()}`
 }
 
 $('.subscribe-Btn:not(.after)').on('click', () => {

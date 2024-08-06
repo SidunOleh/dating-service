@@ -14,6 +14,8 @@ class UnsubscribeController extends Controller
         if (! $creator->activeSub) {
             abort(400);
         }
+        
+        dd($creator, $creator->activeSub);
 
         $creator->unsubscribe();
 

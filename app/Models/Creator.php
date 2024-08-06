@@ -327,7 +327,7 @@ class Creator extends Authenticatable
 
     public function unsubscribe(): bool
     {
-        return $this->activeSubscription->unsubscribe();
+        return $this->activeSub->unsubscribe();
     }
 
     public function transactions(): HasMany

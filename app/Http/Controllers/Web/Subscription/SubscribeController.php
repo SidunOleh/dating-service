@@ -11,12 +11,12 @@ class SubscribeController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
-        if ($creator->activeSubscription) {
+        if ($creator->activeSub) {
             abort(400);
         }
 
-        $creator->subscribe();
+        $subscription = $creator->subscribe();
 
-        return response(['message' => 'OK',]);
+        return response($subscription);
     }
 }

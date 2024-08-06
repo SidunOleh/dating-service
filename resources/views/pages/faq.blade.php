@@ -82,7 +82,7 @@
                                     {{ $item['title'] }}
                                 </h2>
                                 <p>
-                                    {!! nl2br($item['text']) !!}
+                                    {!! $item['text'] !!}
                                 </p>
                             </div>
 

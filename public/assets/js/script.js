@@ -1017,3 +1017,305 @@ $(document).ready(function () {
       }
     });
   });
+
+//__________________________Transactions__________________________//
+  
+$('.open-transaction').click(() => {
+    $('.transaction-wrapper').toggleClass('active')
+})
+
+$('.transaction-wrapper .close').click(() => {
+    $('.transaction-wrapper').toggleClass('active')
+})
+
+//__________________________Subscribe__________________________//
+
+function formatDate(date) {
+    return `${String(date.getDay()).padStart(2, '0')}.${String(date.getMonth()+1).padStart(2, '0')}.${date.getFullYear()}`
+}
+
+$('.subscribe-Btn:not(.after)').on('click', () => {
+    addLoader('.subscribe-Btn')
+
+    $('.subscribe-card .text-error').removeClass('show')
+
+    $.post('/subscribe')
+        .done(res => {
+            $('.subscribe-Btn').addClass('none')
+            $('.renewal')
+                .removeClass('none')
+                .find('span')
+                .text(formatDate(new Date(res.ends_at)))
+            $('.un-subscribe-Btn').removeClass('none')
+        })
+        .fail(xhr => {
+            $('.subscribe-card .text-error')
+                .text(xhr.responseJSON.message)
+                .addClass('show')
+        })
+        .always(() => {
+            removeLoader('.subscribe-Btn')
+        })
+})
+
+$('.un-subscribe-Btn').on('click', () => {
+    $('.unsubcribe-wrapper .text span').text(
+        $('.renewal span').text()
+    )
+    $('.unsubcribe-wrapper').addClass('active')
+})
+
+$('.unsubcribe-wrapper .close').on('click', () => {
+    $('.unsubcribe-wrapper').removeClass('active')
+})
+
+$('.unsubcribe-wrapper .btn').on('click', () => {
+    $('.unsubcribe-wrapper').removeClass('active')
+
+    addLoader('.un-subscribe-Btn')
+
+    $('.subscribe-card .text-error').removeClass('show')
+
+    $.post('/unsubscribe')
+        .done(() => {
+            $('.renewal').addClass('none')
+            $('.un-subscribe-Btn').addClass('none')
+            $('.end-date')
+                .removeClass('none')
+                .find('span')
+                .text($('.renewal span').text())
+            $('.subscribe-Btn')
+                .removeClass('none')
+                .addClass('after')
+        })
+        .fail(xhr => {
+            $('.subscribe-card .text-error')
+                .text(xhr.responseJSON.message)
+                .addClass('show')
+        })
+        .always(() => {
+            removeLoader('.un-subscribe-Btn')
+        })
+})
+
+//__________________________Deposit__________________________//
+
+const deposit = {
+    currency: null,
+    amount: null,
+}
+
+// curency
+$('.deposit-type').on('click', function () {
+    deposit.currency = $(this).data('currency')
+
+    $('.coins-wrapper').addClass('active')
+})
+
+// amount
+$('.repaymant-item').on('click', async function () {
+    addLoader('.coins-popup')
+
+    deposit.amount = $(this).data('amount')
+
+    $.post('/payments/deposit', {
+        gateway: 'plisio',
+        currency: deposit.currency,
+        amount: deposit.amount,
+        recaptcha: await getReCaptchaV3('deposit'),
+    })
+    .done(res => {
+        $('.coins-wrapper').removeClass('active')
+
+        $('.qr-code img').attr('src', res.details.qr_code)
+        $('.network .type').text(res.details.currency)
+        $('.course span').text(`1 USD - ${res.details.source_rate} ${res.details.currency}`)
+        $('.key .title').text(res.details.wallet_hash)
+        $('.deposit-wrapper').addClass('active')
+    })
+    .always(() => {
+        removeLoader('.coins-popup')
+    })
+})
+
+$('.copy').on('click', () => {
+    let keyText = $('.key .title').text()
+
+    let $tempInput = $('<input>')
+    $('body').append($tempInput)
+    $tempInput.val(keyText).select()
+    document.execCommand('copy')
+    $tempInput.remove()
+
+    $('.message').show().delay(2000).fadeOut()
+})
+
+$('.coins-wrapper .close').click(() => {
+    $('.coins-wrapper').toggleClass('active')
+})
+
+$('.deposit-wrapper .close').click(() => {
+    $('.deposit-wrapper').toggleClass('active')
+})
+
+//__________________________Withdraw__________________________//
+
+const withdraw = {
+    currency: null,
+    to: null,
+    amount: null,
+
+}
+
+// currency
+$('.referral-out').on('click', function () {
+    withdraw.currency = $(this).data('currency')
+
+    $('.crypto-address .network-icon').attr('src', $(this).find('img').attr('src'))
+    $('.crypto-address .crypto-name span').text(withdraw.currency)
+    $('.referral-out-wrapper').addClass('active')
+    $('.referral-out-wrapper .card').removeClass('active')
+    $('.crypto-address').addClass('active')
+})
+
+// to
+$('.crypto-address .next').on('click', () => {
+    withdraw.to = $('#cryptoAddress').val()
+
+    $('.crypto-address-input').removeClass('error')
+
+    let valid = true
+
+    if (! withdraw.to) {
+        $('.crypto-address-input').addClass('error')
+        $('.crypto-address-input')
+            .find('.error-text')
+            .text('Address is required')
+        valid = false
+    }
+
+    if (! valid) {
+        return
+    }
+
+    $('.crypto-address').removeClass('active')
+
+    $('.withdrawn-amount .current-network span')
+        .text(withdraw.currency)
+    $('.withdrawn-amount .crypto-rate span')
+        .text(`${DS.rates[withdraw.currency]} ${withdraw.currency}`)
+    $('.withdrawn-amount').addClass('active')
+})
+
+// amount
+$('.withdrawn-amount .next').on('click', () => {
+    withdraw.amount = parseInt($('.withdrawn-amount #amount').val())
+
+    $('.amount-input').removeClass('error')
+
+    let valid = true
+
+    if (! withdraw.amount) {
+        $('.amount-input').addClass('error')
+        $('.amount-input').find('.error-text').text('Amount is required')
+        valid = false
+    }
+
+    const max = parseInt($('.withdrawn-amount #amount').attr('max'))
+
+    if (withdraw.amount > max) {
+        $('.amount-input').addClass('error')
+        $('.amount-input').find('.error-text').text('Not enough amount')
+        valid = false
+    }
+
+    if (! valid) {
+        return
+    }
+
+    $('.withdrawn-amount').removeClass('active')
+
+    $('.withdrawn-details .to').text(withdraw.to)
+    $('.withdrawn-details .currency')
+        .text(withdraw.currency)
+    $('.withdrawn-details .amount')
+        .text(`${withdraw.amount} USD - ${withdraw.amount * DS.rates[withdraw.currency]} ${withdraw.currency}`)
+    $('.withdrawn-details').addClass('active')
+})
+
+// total
+$('.withdrawn-details .next').on('click', () => {
+    $('.withdrawn-details').removeClass('active')
+    $('.withdrawn-final').addClass('active')
+})
+
+// confirm
+$('.withdrawn-final .btn').on('click', async () => {
+    addLoader('.withdrawn-final')
+
+    $.post('/payments/withdraw/send-code', {
+        ...withdraw,
+        gateway: 'plisio',
+        recaptcha: await getReCaptchaV3('withdraw'),
+    }).done(() => {
+        $('.referral-out-wrapper').removeClass('active')
+
+        openVerifyPopup(
+            'withdraw',
+            '/payments/withdraw/verify-code',
+            '/payments/withdraw/resend-code',
+            $('.user-mail').text()
+        )
+    }).always(() => {
+        removeLoader('.withdrawn-final')
+    })
+})
+
+$('.referral-out-wrapper .back').on('click', function () {
+    const card = $(this).closest('.card')
+
+    card.removeClass('active')
+    card.prev().addClass('active')
+
+    if (card.hasClass('crypto-address')) {
+        $('.referral-out-wrapper').removeClass('active')
+    }
+})
+
+$('.referral-out-wrapper .close').on('click', () => {
+    $('.referral-out-wrapper').removeClass('active')
+})
+
+$('.load-more img').on('click', () => {
+    $('.referal-item.none').each((i, item) => {
+        if (i > 9) {
+            return
+        }
+
+        $(item).removeClass('none')
+    })
+
+    if (! $('.referal-item.none').length) {
+        $('.load-more').addClass('none')
+    }
+})
+
+$('.copy-link').on('click', () => {
+    let linkText = $('.link-body .link').text()
+
+    let $tempInput = $('<input>')
+    $('body').append($tempInput)
+    $tempInput.val(linkText).select()
+    document.execCommand('copy')
+    $tempInput.remove()
+
+    $('.link-body .message').show().delay(2000).fadeOut()
+})
+
+$('#pasteButton').on('click', function () {
+    navigator.clipboard
+        .readText()
+        .then(text => {
+            $('#cryptoAddress').val(text)
+        })
+})

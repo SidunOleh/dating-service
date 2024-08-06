@@ -1,10 +1,6 @@
 <template>
 
-    <div class="list">
-
-        <div style="margin-bottom: 10px;">
-            Level {{ level }}
-        </div>
+    <div :class="`list level-${level}`">
 
         <div
             v-for="(item, i) in list" 
@@ -22,11 +18,12 @@
                         placeholder="Title" 
                         v-model:value="item.title"/>
 
-                    <Textarea
+                    <QuillEditor 
                         v-if="! item.children.length"
-                        placeholder="Text"  
-                        :rows="7"
-                        v-model:value="item.text"/>
+                        style="min-height: 200px;"
+                        contentType="html"
+                        toolbar="full"
+                        v-model:content="item.text"></QuillEditor>
 
                 </Flex>
 
@@ -80,22 +77,18 @@ export default {
 .list {
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #002140;
+    border: 1px solid gray;
 }
 
-.list .list {
-   margin: 10px 0;
+.level-2 {
+    margin: 10px 0px 10px 20px !important;
 }
 
 .item {
-    margin-bottom: 10px;
+    margin: 10px 0px;
 }
 
 .ant-input {
     margin-bottom: 5px;
-}
-
-.add-btn {
-    margin-top: 10px;
 }
 </style>

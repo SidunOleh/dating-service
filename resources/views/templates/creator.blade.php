@@ -8,7 +8,7 @@
         <div class="img-slider">
             @php
             $imgs = $creator->gallery;
-            $imgs = auth('web')->user()?->activeSubscription ? $imgs : $imgs->slice(0, 3);
+            $imgs = auth('web')->user()?->activeSub ? $imgs : $imgs->slice(0, 3);
             @endphp
 
             @foreach($imgs as $img)

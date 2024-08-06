@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Settings\ChangeEmailResendRequest;
 use App\Services\Verification\Code;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class ChangeEmailResendController extends Controller
 {
@@ -14,7 +13,10 @@ class ChangeEmailResendController extends Controller
     {
         try {
             $code = new Code('change_email');
-            $code->resend(Auth::guard('web')->user()->email);
+            
+            $data = $code->data();
+
+            $code->resend($data['new_email']);
 
             return response(['message' => 'OK',]);
         } catch (Exception $e) {

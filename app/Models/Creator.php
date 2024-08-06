@@ -313,7 +313,7 @@ class Creator extends Authenticatable
         return $this->hasMany(Subscription::class);
     }
 
-    public function activeSubscription(): HasOne
+    public function activeSub(): HasOne
     {
         return $this
             ->hasOne(Subscription::class)

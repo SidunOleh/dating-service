@@ -11,7 +11,7 @@ class UnsubscribeController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
-        if (! $creator->activeSubscription) {
+        if (! $creator->activeSub) {
             abort(400);
         }
 

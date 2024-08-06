@@ -2,13 +2,13 @@
 
 namespace App\Notifications;
 
-use App\Models\Creator;
+use App\Models\WithdrawalRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class Inactivation extends Notification
+class WithdrawRequestRejected extends Notification
 {
     use Queueable;
 
@@ -16,7 +16,7 @@ class Inactivation extends Notification
      * Create a new notification instance.
      */
     public function __construct(
-        public Creator $creator
+        private WithdrawalRequest $withdrawalRequest
     )
     {
         //
@@ -38,7 +38,7 @@ class Inactivation extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("Your {$this->creator->email} account was banned.")
+            ->line('Your withdraw request was rejected.')
             ->action('Go to site', url('/'))
             ->line('Thank you for using our application!');
     }

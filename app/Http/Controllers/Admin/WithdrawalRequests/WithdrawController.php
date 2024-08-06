@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\WithdrawalRequests;
 
+use App\Events\WithdrawRequestSuccess;
 use App\Http\Controllers\Controller;
 use App\Models\WithdrawalRequest;
 use Exception;
@@ -12,6 +13,8 @@ class WithdrawController extends Controller
     {
         try {
             $withdrawalRequest->withdraw();
+
+            WithdrawRequestSuccess::dispatch($withdrawalRequest);
 
             return response(['message' => 'OK',]);
         } catch (Exception $e) {

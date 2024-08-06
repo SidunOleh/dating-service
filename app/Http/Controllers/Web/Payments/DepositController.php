@@ -19,6 +19,6 @@ class DepositController extends Controller
         );
         $transaction->details;
 
-        return response(['transaction' => $transaction,]);
+        return response($transaction);
     }
 }

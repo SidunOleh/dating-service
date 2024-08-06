@@ -24,7 +24,9 @@ use App\Http\Controllers\Web\Pages\TopVoteController;
 use App\Http\Controllers\Web\Password\ForgotController;
 use App\Http\Controllers\Web\Password\ResetController;
 use App\Http\Controllers\Web\Payments\DepositController;
-use App\Http\Controllers\Web\Payments\WithdrawController;
+use App\Http\Controllers\Web\Payments\WithdrawResendController;
+use App\Http\Controllers\Web\Payments\WithdrawSendController;
+use App\Http\Controllers\Web\Payments\WithdrawVerifyController;
 use App\Http\Controllers\Web\Profile\CreateController;
 use App\Http\Controllers\Web\Profile\DeleteController as ProfileDeleteController;
 use App\Http\Controllers\Web\Profile\EditController;
@@ -213,9 +215,15 @@ Route::post('/unsubscribe', UnsubscribeController::class)
 Route::post('/payments/deposit', DepositController::class)
     ->middleware(['auth:web',])
     ->name('payments.deposit');
-Route::post('payments/withdraw', WithdrawController::class)
+    Route::post('/payments/withdraw/send-code', WithdrawSendController::class)
     ->middleware(['auth:web',])
-    ->name('payments.withdraw');
+    ->name('payments.withdraw.send-code');
+Route::post('/payments/withdraw/verify-code', WithdrawVerifyController::class)
+    ->middleware(['auth:web',])
+    ->name('payments.withdraw.verify-code');
+Route::post('/payments/withdraw/resend-code', WithdrawResendController::class)
+    ->middleware(['auth:web',])
+    ->name('payments.withdraw.resend-code');
 
 /**
  * Settings

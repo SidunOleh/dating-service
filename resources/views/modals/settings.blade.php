@@ -14,6 +14,21 @@
                     required />
                 <div class="error-text"></div>
             </div>
+            <div class="input-group">
+                <label for="password">
+                    Enter password
+                </label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Password" 
+                    required />
+                <div class="error-text"></div>
+                <div type="button" class="show-password">
+                    <img src="{{ asset('/assets/img/mdi_eye-outline.svg') }}" alt="" />
+                </div>
+            </div>
             <button type="submit" class="submit btn red">
                 Confirm
             </button>

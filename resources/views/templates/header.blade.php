@@ -75,7 +75,9 @@
                         {{ auth('web')->user()->balance }}
                     </span>
                     <div class="add-coins flex red">
-                        <img src="{{ asset('assets/img/plus.svg') }}" alt="" />
+                        <a href="{{ route('subscription.page') }}#deposit">
+                            <img src="{{ asset('/assets/img/plus.svg') }}" alt="" />
+                        </a>
                     </div>
                 </div>
 

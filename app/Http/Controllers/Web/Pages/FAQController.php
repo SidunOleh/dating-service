@@ -10,7 +10,7 @@ class FAQController extends Controller
     public function __invoke()
     {
         $content = json_decode(Option::getOption('content', '[]'), true);
-
+        
         $faq = $content['faq'] ?? [];
 
         return view('pages.faq', [

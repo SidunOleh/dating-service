@@ -13,6 +13,7 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "@vueup/vue-quill": "^1.2.0",
         "ant-design-vue": "^4.2.1",
         "vue": "^3.4.27",
         "vue-router": "^4.3.2",

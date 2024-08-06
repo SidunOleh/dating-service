@@ -5,7 +5,7 @@ namespace App\Http\Requests\Web\Payments;
 use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepositRequest extends FormRequest
+class WithdrawResendRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,6 @@ class DepositRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gateway' => 'required|in:plisio',
-            'amount' => 'required|integer|in:2',
-            
-            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('app.currencies')),
-
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }

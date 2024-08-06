@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Settings\ChangeEmailSendRequest;
 use App\Services\Verification\Code;
-use Illuminate\Support\Facades\Auth;
 
 class ChangeEmailSendController extends Controller
 {
@@ -14,7 +13,7 @@ class ChangeEmailSendController extends Controller
         $code = Code::create('change_email', [
             'new_email' => $request->input('new_email'),
         ]);
-        $code->send(Auth::guard('web')->user()->email);
+        $code->send($request->input('new_email'));
 
         return response(['message' => 'OK',]);
     }

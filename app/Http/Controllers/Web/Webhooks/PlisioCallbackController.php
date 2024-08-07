@@ -32,16 +32,15 @@ class PlisioCallbackController extends Controller
             if ($data['ipn_type'] == 'invoice') {
                 $invoice = PlisioInvoice::where('txn_id', $data['txn_id'])->firstOrFail();
                 
-                $invoice->updateInvoiceData($data);
+                $invoice->webhookCallback($data);
             }
         } catch (Exception $e) {
-            $webhookLog->exception = [
+            $webhookLog->update([
                 'code' => $e->getCode(),
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
-            ];
-            $webhookLog->save();
+            ]);
         }
     }
 }

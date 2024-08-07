@@ -614,7 +614,7 @@ class Creator extends Authenticatable
         $creators = $query->orderByRaw("rand({$seed})")
             ->limit($limit)
             ->offset($offset)
-            ->dd();
+            ->get();
 
         return $page == 1 ? $top->merge($creators) : $creators;
     } 

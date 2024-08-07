@@ -376,7 +376,7 @@
                     })
                 },
 
-                uploadPhotos(e) {
+                async uploadPhotos(e) {
                     const files = e.target.files
                     for (let i = 0; i < files.length; i++) {
                         if (this.data.photos.length == 12) {
@@ -394,7 +394,7 @@
                         
                         this.data.photos.push(photo)
 
-                        this.uploadImage(photo.file, true)
+                        await this.uploadImage(photo.file, true)
                             .then(data => {
                                 photo.id = data.id
                                 photo.url = data.url
@@ -403,7 +403,7 @@
                                 this.data.photos.forEach((item, i) => item.file == photo.file && this.data.photos.splice(i, 1))
                                 this.data.photos.push({...photo})
                             }).catch(jqXHR => {
-                                this.errors.photos = jqXHR.responseJSON.message
+                                this.errors.photos = jqXHR.responseJSON?.message
 
                                 this.data.photos.forEach((item, i) => item.file == photo.file && this.data.photos.splice(i, 1))
                             })
@@ -453,7 +453,7 @@
                             this.data[photo].url = data.url
                             this.data[photo].status = 'loaded'
                         }).catch(jqXHR => {
-                            this.errors[photo] = jqXHR.responseJSON.message
+                            this.errors[photo] = jqXHR.responseJSON?.message
 
                             this.data[photo] = null
                         })

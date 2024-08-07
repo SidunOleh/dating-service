@@ -67,7 +67,7 @@ class Image extends Model
     {
         $dir = self::dir($disk);
 
-        if ($process and false) {
+        if ($process) {
             $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
             $path = $dir . '/' . $name;
 
@@ -77,18 +77,18 @@ class Image extends Model
             $path = $uploaded->store($dir, $disk);
         }
 
-        // if ($watermark) {
-        //     SpatieImage::load(Storage::disk($disk)->path($path))->watermark(
-        //         storage_path('watermark.png'),
-        //         AlignPosition::Center,
-        //         width: 100,
-        //         widthUnit: Unit::Percent,
-        //         height: 100,
-        //         heightUnit: Unit::Percent,
-        //         fit: Fit::Stretch,
-        //         alpha: 10,
-        //     )->save();
-        // }
+        if ($watermark) {
+            SpatieImage::load(Storage::disk($disk)->path($path))->watermark(
+                storage_path('watermark.png'),
+                AlignPosition::Center,
+                width: 100,
+                widthUnit: Unit::Percent,
+                height: 100,
+                heightUnit: Unit::Percent,
+                fit: Fit::Stretch,
+                alpha: 10,
+            )->save();
+        }
 
         $image = self::create([
             'path' => $path,

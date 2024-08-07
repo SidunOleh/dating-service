@@ -44,7 +44,12 @@ class CheckSubscriptions extends Command
                     $subscription->creator->subscribe();
                 }
             } catch (Exception $e) {
-                Log::error($e->getMessage());
+                Log::error($e->getMessage(), [
+                    'code' => $e->getCode(),
+                    'creator_id' => $subscription->creator->id,
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine(),
+                ]);
             }
         }
     }

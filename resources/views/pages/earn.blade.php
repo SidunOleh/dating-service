@@ -89,7 +89,7 @@
                         @foreach($referrals as $i => $referral)
                             <tr @class(['referal-item', 'none' => $i > 9,])>
                                 <td class="date">
-                                    {{ $referral->created_at->format('d.m.Y') }}
+                                    {{ $referral->created_at->setTimezone('America/New_York')->format('d.m.Y') }}
                                 </td>
                                 <td class="email">
                                     <span>

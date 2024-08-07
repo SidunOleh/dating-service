@@ -23,14 +23,14 @@
                 'renewal',
                 'none' => ! $creator->activeSub or $creator->activeSub->unsubscribed
             ])>
-                Renewal Date: <span>{{ $creator->activeSub?->ends_at->format('d.m.Y') }}</span>
+                Renewal Date: <span>{{ $creator->activeSub?->ends_at->setTimezone('America/New_York')->format('d.m.Y') }}</span>
             </p>
 
             <div @class([
                 'end-date',    
                 'none' => ! $creator->activeSub or ! $creator->activeSub->unsubscribed
             ])>
-                Subscription end date: <span>{{ $creator->activeSub?->ends_at->format('d.m.Y') }}</span>
+                Subscription end date: <span>{{ $creator->activeSub?->ends_at->setTimezone('America/New_York')->format('d.m.Y') }}</span>
             </div>
 
             <div @class([

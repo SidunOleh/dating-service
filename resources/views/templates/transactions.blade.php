@@ -18,7 +18,7 @@
                     @foreach($transactions as $transaction)
                     <tr class="transaction-item">
                         <td class="date">
-                            {{ $transaction->created_at->format('d.m.Y') }}
+                            {{ $transaction->created_at->setTimezone('America/New_York')->format('d.m.Y') }}
                         </td>
                         <td class="type">
                             {{ $transaction->type }}

@@ -12,4 +12,6 @@ class Upload extends Model
     protected $fillable = [
         'creator_id',
     ];
+
+    public const MAX = 30;
 }

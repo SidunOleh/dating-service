@@ -760,6 +760,6 @@ class Creator extends Authenticatable
             ->whereRaw('DAY(`created_at`) = ' . date('d'))
             ->count();
 
-        return $count < 30;
+        return $count < Upload::MAX;
     }
 }

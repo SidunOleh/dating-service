@@ -9,12 +9,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Imagick\Driver;
-use Intervention\Image\ImageManager;
-use Spatie\Image\Image as SpatieImage;
-use Spatie\Image\Enums\AlignPosition;
-use Spatie\Image\Enums\Fit;
-use Spatie\Image\Enums\Unit;
 
 class Image extends Model
 {
@@ -25,6 +19,7 @@ class Image extends Model
         'disk',
         'user_id',
         'user_type',
+        'processed',
     ];
 
     protected $appends = [
@@ -57,38 +52,19 @@ class Image extends Model
         return url('storage/' . $this->path);
     }
 
+    public function getPath(): string
+    {
+        return Storage::disk($this->disk)->path($this->path);
+    }
+
     public static function saveUploadedFile(
         UploadedFile $uploaded,
-        bool $process = false,
-        int $quality = 0,
-        bool $watermark = false, 
         string $disk = 'public'
     ): self
     {
         $dir = self::dir($disk);
 
-        if ($process) {
-            $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
-            $path = $dir . '/' . $name;
-
-            $manager = new ImageManager(new Driver());
-            $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));
-        } else {
-            $path = $uploaded->store($dir, $disk);
-        }
-
-        if ($watermark) {
-            SpatieImage::load(Storage::disk($disk)->path($path))->watermark(
-                storage_path('watermark.png'),
-                AlignPosition::Center,
-                width: 100,
-                widthUnit: Unit::Percent,
-                height: 100,
-                heightUnit: Unit::Percent,
-                fit: Fit::Stretch,
-                alpha: 10,
-            )->save();
-        }
+        $path = $uploaded->store($dir, $disk);
 
         $image = self::create([
             'path' => $path,

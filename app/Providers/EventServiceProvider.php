@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Events\CreatorInactivated;
 use App\Events\CreatorSubscribed;
+use App\Events\ImageUploaded;
 use App\Events\UserCreated;
 use App\Events\WithdrawRequestRejected;
 use App\Events\WithdrawRequestSuccess;
 use App\Listeners\PayPercentReferrer;
+use App\Listeners\ProcessImage;
 use App\Listeners\SendEmailToInactivatedCreator;
 use App\Listeners\SendEmailWithCredentialsToNewUser;
 use App\Listeners\WithdrawRequestRejectedSendMail;
@@ -42,6 +44,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         WithdrawRequestRejected::class => [
             WithdrawRequestRejectedSendMail::class,
+        ],
+        ImageUploaded::class => [
+            ProcessImage::class,
         ],
     ];
 

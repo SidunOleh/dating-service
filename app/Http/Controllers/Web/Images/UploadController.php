@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Images;
 
+use App\Events\ImageUploaded;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Images\UploadRequest;
 use App\Models\Image;
@@ -23,7 +24,9 @@ class UploadController extends Controller
         $uploaded = $request->file('img');
         $watermark = $request->input('watermark', false);
 
-        $image = Image::saveUploadedFile($uploaded, true, 10, $watermark);
+        $image = Image::saveUploadedFile($uploaded);
+
+        ImageUploaded::dispatch($image, true, 10, $watermark);
 
         return response($image);
     }

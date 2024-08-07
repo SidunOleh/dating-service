@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('subscriptions:check')->daily();
+        $schedule->command('subscriptions:check')->hourly();
         $schedule->command('plisio:rate')->hourly();
     }
 

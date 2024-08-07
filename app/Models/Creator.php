@@ -538,9 +538,12 @@ class Creator extends Authenticatable
         $query->whereBetween('latitude', [$minLat, $maxLat])
             ->whereBetween('longitude', [$minLng, $maxLng])
             ->whereRaw("ST_Distance_Sphere(
-                point({$center['lng']}, {$center['lat']}), 
+                point(?, ?), 
                 point(`longitude`, `latitude`)
-            ) <= {$radius}");
+            ) <= {$radius}", [
+                $center['lng'], 
+                $center['lat'],
+            ]);
     } 
 
     public static function seed(): int
@@ -611,7 +614,7 @@ class Creator extends Authenticatable
         $creators = $query->orderByRaw("rand({$seed})")
             ->limit($limit)
             ->offset($offset)
-            ->get();
+            ->dd();
 
         return $page == 1 ? $top->merge($creators) : $creators;
     } 

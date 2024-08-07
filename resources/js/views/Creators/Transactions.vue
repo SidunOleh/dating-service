@@ -15,8 +15,8 @@
                 {{ record.type }}
             </template>
 
-            <template v-if="column.key === 'usd_amount'">
-                {{ record.usd_amount }}
+            <template v-if="column.key === 'amount'">
+                {{ record.amount }}
             </template>
 
             <template v-if="column.key === 'status'">
@@ -70,10 +70,10 @@ export default {
                     key: 'type',
                 },
                 {
-                    title: 'USD amount',
-                    key: 'usd_amount',
+                    title: 'Amount',
+                    key: 'amount',
                     sorter: {
-                        compare: (a, b) => a.usd_amount - b.usd_amount
+                        compare: (a, b) => a.amount - b.amount
                     },
                 },
 

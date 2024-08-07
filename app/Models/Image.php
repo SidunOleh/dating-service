@@ -67,7 +67,7 @@ class Image extends Model
     {
         $dir = self::dir($disk);
 
-        if ($process) {
+        if ($process and false) {
             $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
             $path = $dir . '/' . $name;
 

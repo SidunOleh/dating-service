@@ -71,7 +71,7 @@ class CreatorResource extends JsonResource
                     'id' => $transaction->id,
                     'gateway' => $transaction->gateway,
                     'type' => $transaction->type,
-                    'usd_amount' => $transaction->usd_amount,
+                    'amount' => $transaction->amount,
                     'status' => $transaction->status,
                     'creator' => $transaction->creator ? [
                         'id' => $transaction->creator->id,

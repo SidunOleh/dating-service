@@ -267,9 +267,15 @@
                 </FormItem>
 
                 <FormItem label="Balance">
-                    <Input
-                        readonly
-                        :value="data.balance"/>
+                    <Flex :gap="10">
+                        <Input v-model:value="data.balance"/>
+
+                        <Button
+                            :loading="loading.balance" 
+                            @click="updateBalance">
+                            Update
+                        </Button>
+                    </Flex>
                 </FormItem>
 
                 <Referral 
@@ -349,6 +355,7 @@ export default {
             loading: {
                 delete: false,
                 edit: false,
+                balance: false,
             },
         }
     },
@@ -401,6 +408,17 @@ export default {
             }
 
             return data
+        },
+        async updateBalance() {
+            try {
+                this.loading.balace = true
+                await creatorsApi.updateBalance(this.$route.params.id, this.data.balance)
+                message.success('Successfully saved.')
+            } catch (err) {
+                message.error(err?.response?.data?.message ?? err.message)
+            } finally {
+                this.loading.balace = false
+            }
         },
         async edit() {
             try {

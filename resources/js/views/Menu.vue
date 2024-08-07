@@ -151,7 +151,9 @@
             </router-link>
         </MenuItem>
 
-        <MenuItem key="settings">
+        <MenuItem
+            v-if="can('settings.view')"  
+            key="settings">
             <template #icon>
                 <SettingsIcon />
             </template>

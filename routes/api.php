@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Creators\DeleteController as CreatorsDeleteContro
 use App\Http\Controllers\Admin\Creators\IndexController as CreatorsIndexController;
 use App\Http\Controllers\Admin\Creators\ShowController as CreatorsShowController;
 use App\Http\Controllers\Admin\Creators\StoreController as CreatorsStoreController;
+use App\Http\Controllers\Admin\Creators\UpdateBalanceController;
 use App\Http\Controllers\Admin\Creators\UpdateController as CreatorsUpdateController;
 use App\Http\Controllers\Admin\Images\UploadController;
 use Illuminate\Support\Facades\Route;
@@ -118,7 +119,7 @@ Route::middleware(['auth:sanctum',])->group(function () {
             ->can('templates.create');
         Route::put('/{template}', TemplatesUpdateController::class)  
             ->name('update')
-            ->can('templates.update');
+            ->can('templates.edit');
         Route::delete('/{template}', TemplatesDeleteController::class)  
             ->name('delete')
             ->can('templates.delete');
@@ -156,10 +157,13 @@ Route::middleware(['auth:sanctum',])->group(function () {
             ->can('creators.create');
         Route::put('/{creator}', CreatorsUpdateController::class)  
             ->name('update')
-            ->can('creators.update');
+            ->can('creators.edit');
         Route::delete('/{creator}', CreatorsDeleteController::class)  
             ->name('delete')
             ->can('creators.delete');
+        Route::post('/{creator}/balance', UpdateBalanceController::class)  
+            ->name('update.balance')
+            ->can('creators.edit-balance');
     });
 
     Route::prefix('/profile-requests')->name('profile-requests')->group(function () {

@@ -60,6 +60,15 @@ const creatorsApi = {
 
         return res.data
     },
+    async updateBalance(id, balance) {
+        if (!can('creators.edit-balance')) {
+            throw new Error('Forbidden.')
+        }
+
+        const res = await axios.post(`/api/creators/${id}/balance`, { balance })
+
+        return res.data
+    },
 }
 
 export default creatorsApi

@@ -9,7 +9,6 @@
 
                 @foreach ($faq as $item)
                     @if (! $item['children'])
-
                         <li class="sidebar-menu-item" data-target="{{ Str::slug($item['title']) }}">
                             {{ $item['title'] }}
                         </li>

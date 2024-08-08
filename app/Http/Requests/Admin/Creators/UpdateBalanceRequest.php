@@ -22,7 +22,7 @@ class UpdateBalanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'balance' => 'required|integer|min:0',
+            'balance' => 'required|numeric|min:0',
         ];
     }
 }

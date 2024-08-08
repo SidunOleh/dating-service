@@ -19,19 +19,17 @@
                 </div>
             </div>
 
-            <p @class([
-                'renewal',
-                'none' => ! $creator->activeSub or $creator->activeSub->unsubscribed
-            ])>
-                Renewal Date: <span>{{ $creator->activeSub?->ends_at->setTimezone('America/New_York')->format('d.m.Y') }}</span>
+            @if($creator->activeSub and ! $creator->activeSub->unsubscribed)
+            <p class="renewal">
+                Renewal Date: <span>{{ $creator->activeSub->ends_at->format('d.m.Y') }}</span>
             </p>
+            @endif
 
-            <div @class([
-                'end-date',    
-                'none' => ! $creator->activeSub or ! $creator->activeSub->unsubscribed
-            ])>
-                Subscription end date: <span>{{ $creator->activeSub?->ends_at->setTimezone('America/New_York')->format('d.m.Y') }}</span>
+            @if($creator->activeSub and $creator->activeSub->unsubscribed)
+            <div class="end-date">
+                Subscription end date: <span>{{ $creator->activeSub->ends_at->format('d.m.Y') }}</span>
             </div>
+            @endif
 
             <div @class([
                 'subscribe-Btn btn red', 
@@ -50,13 +48,12 @@
                 </div>
             </div>
 
-            <div @class([
-                'un-subscribe-Btn btn',
-                'none' => ! $creator->activeSub or $creator->activeSub->unsubscribed,   
-            ])>
+            @if($creator->activeSub and ! $creator->activeSub->unsubscribed)
+            <div class="un-subscribe-Btn btn">
                 Unsubscribe
                 <img src="{{ asset('/assets/img/chery.svg') }}" alt="" />
             </div>
+            @endif
 
             <div class="text-error"></div>
             

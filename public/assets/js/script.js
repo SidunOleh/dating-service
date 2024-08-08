@@ -1030,23 +1030,14 @@ $('.transaction-wrapper .close').click(() => {
 
 //__________________________Subscribe__________________________//
 
-function formatDate(date) {
-    return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth()+1).padStart(2, '0')}.${date.getFullYear()}`
-}
-
 $('.subscribe-Btn:not(.after)').on('click', () => {
     addLoader('.subscribe-Btn')
 
     $('.subscribe-card .text-error').removeClass('show')
 
     $.post('/subscribe')
-        .done(res => {
-            $('.subscribe-Btn').addClass('none')
-            $('.renewal')
-                .removeClass('none')
-                .find('span')
-                .text(formatDate(new Date(res.ends_at)))
-            $('.un-subscribe-Btn').removeClass('none')
+        .done(() => {
+            location.reload()
         })
         .fail(xhr => {
             $('.subscribe-card .text-error')
@@ -1078,15 +1069,7 @@ $('.unsubcribe-wrapper .btn').on('click', () => {
 
     $.post('/unsubscribe')
         .done(() => {
-            $('.renewal').addClass('none')
-            $('.un-subscribe-Btn').addClass('none')
-            $('.end-date')
-                .removeClass('none')
-                .find('span')
-                .text($('.renewal span').text())
-            $('.subscribe-Btn')
-                .removeClass('none')
-                .addClass('after')
+            location.reload()
         })
         .fail(xhr => {
             $('.subscribe-card .text-error')
@@ -1242,15 +1225,9 @@ $('.withdrawn-amount .next').on('click', () => {
     $('.withdrawn-details').addClass('active')
 })
 
-// total
-$('.withdrawn-details .next').on('click', () => {
-    $('.withdrawn-details').removeClass('active')
-    $('.withdrawn-final').addClass('active')
-})
-
-// confirm
-$('.withdrawn-final .btn').on('click', async () => {
-    addLoader('.withdrawn-final')
+// details
+$('.withdrawn-details .next').on('click', async () => {
+    addLoader('.withdrawn-details')
 
     $.post('/payments/withdraw/send-code', {
         ...withdraw,
@@ -1258,6 +1235,7 @@ $('.withdrawn-final .btn').on('click', async () => {
         recaptcha: await getReCaptchaV3('withdraw'),
     }).done(() => {
         $('.referral-out-wrapper').removeClass('active')
+        $('.withdrawn-details').removeClass('active')
 
         openVerifyPopup(
             'withdraw',
@@ -1266,8 +1244,17 @@ $('.withdrawn-final .btn').on('click', async () => {
             $('.user-mail').text()
         )
     }).always(() => {
-        removeLoader('.withdrawn-final')
+        removeLoader('.withdrawn-details')
     })
+})
+
+$(document).on('withdraw-verified', () => {
+    $('.referral-out-wrapper').addClass('active')
+    $('.withdrawn-final').addClass('active')
+})
+
+$('.withdrawn-final .btn').on('click', async () => {
+    $('.referral-out-wrapper').removeClass('active')
 })
 
 $('.referral-out-wrapper .back').on('click', function () {

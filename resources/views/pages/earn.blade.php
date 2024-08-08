@@ -194,7 +194,7 @@
         <p class="title">
             Your withdrawal request will be processed within 72 hours. <br /> You will receive a notification by email.
         </p>
-        <div class="btn red">Confirm</div>
+        <div class="btn red">Close</div>
     </div>
 
 </div>

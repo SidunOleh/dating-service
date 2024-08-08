@@ -3,7 +3,7 @@
 <script>
     DS.ads = {}
     DS.ads.data = {{ Js::from($popupAds) }}
-    DS.ads.settings = {{ Js::from($adsSettings) }}
+    DS.ads.settings = {{ Js::from($settings) }}
 </script>
 
 <section class="users">

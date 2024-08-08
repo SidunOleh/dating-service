@@ -41,7 +41,7 @@
 
             <div class="sub-link">
                 <div class="title">
-                    You receive <span>{{ $percent }}%</span> for each client who subscribies using your link
+                    You receive <span>{{ $settings['referral_percent'] }}%</span> for each client who subscribies using your link
                 </div>
                 <div class="link-body">
                     <p class="link">

@@ -41,12 +41,13 @@ class HomeController extends Controller
             ->limit($template->count('ad') ? 50 : 0)
             ->inRandomOrder()
             ->get();
-        $adsSettings = json_decode(Option::getOption('settings'), true);
+
+        $settings = json_decode(Option::getOption('settings'), true);
 
         return view('pages.home', [
             'template' => $template, 
             'popupAds' => $popupAds,
-            'adsSettings' => $adsSettings,
+            'settings' => $settings,
         ]);
     }
 }

@@ -14,14 +14,7 @@
                 readonly
                 :value="record.details.currency"/>
         </FormItem>
-
-        <FormItem label="To">
-            <Input
-                placeholder="To"
-                readonly
-                :value="record.details.to"/>
-        </FormItem>
-
+        
         <FormItem label="Type">
             <Input
                 placeholder="Type"

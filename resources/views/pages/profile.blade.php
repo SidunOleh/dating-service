@@ -26,40 +26,40 @@
 
             <div class="user-info-list">
                 @if($creator->phone)
-                    <div class="user-info-item">
-                        <span class="type">Phone:</span>
-                        <p class="info">{{ $creator->phone }}</p>
-                    </div>
+                <div class="user-info-item">
+                    <span class="type">Phone:</span>
+                    <p class="info">{{ $creator->phone }}</p>
+                </div>
                 @endif
                 @if($creator->instagram)
-                    <div class="user-info-item">
-                        <span class="type">Instagram:</span>
-                        <p class="info">{{ $creator->instagram }}</p>
-                    </div>
+                <div class="user-info-item">
+                    <span class="type">Instagram:</span>
+                    <p class="info">{{ $creator->instagram }}</p>
+                </div>
                 @endif
                 @if($creator->telegram)
-                    <div class="user-info-item">
-                        <span class="type">Telegram:</span>
-                        <p class="info">{{ $creator->telegram }}</p>
-                    </div>
+                <div class="user-info-item">
+                    <span class="type">Telegram:</span>
+                    <p class="info">{{ $creator->telegram }}</p>
+                </div>
                 @endif
                 @if($creator->snapchat)
-                    <div class="user-info-item">
-                        <span class="type">Snapchat:</span>
-                        <p class="info">{{ $creator->snapchat }}</p>
-                    </div>
+                <div class="user-info-item">
+                    <span class="type">Snapchat:</span>
+                    <p class="info">{{ $creator->snapchat }}</p>
+                </div>
                 @endif
                 @if($creator->onlyfans)
-                    <div class="user-info-item">
-                        <span class="type">OnlyFans:</span>
-                        <p class="info">{{ $creator->onlyfans }}</p>
-                    </div>
+                <div class="user-info-item">
+                    <span class="type">OnlyFans:</span>
+                    <p class="info">{{ $creator->onlyfans }}</p>
+                </div>
                 @endif
                 @if($creator->profile_email)
-                    <div class="user-info-item">
-                        <span class="type">Email:</span>
-                        <p class="info">{{ $creator->profile_email }}</p>
-                    </div>
+                <div class="user-info-item">
+                    <span class="type">Email:</span>
+                    <p class="info">{{ $creator->profile_email }}</p>
+                </div>
                 @endif
             </div>
 
@@ -84,51 +84,51 @@
             @endphp
 
             @foreach($imgs as $img)
-                <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
-                    <img src="{{ $img->getUrl() }}" alt="" />
-                </a>
+            <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
+                <img src="{{ $img->getUrl() }}" alt="" />
+            </a>
             @endforeach
 
             @foreach($blur as $img)
-                <div class="user-photo-item">
-                    <div class="subscribe">
-                        @if(!auth('web')->check())
-                            <p>Log in, to get full access!</p>
-                            <div class="btn red login">
-                                Log in
-                            </div>
-                        @else
-                            <p>Subscribe, to get full access!</p>
-                            <a href="{{ route('subscription.page') }}" class="btn red">
-                                Subscribe
-                            </a>
-                        @endif
+            <div class="user-photo-item">
+                <div class="subscribe">
+                    @if(!auth('web')->check())
+                    <p>Log in, to get full access!</p>
+                    <div class="btn red login">
+                        Log in
                     </div>
-                    <img src="{{ asset("assets/img/blur/{$img}") }}" alt="" />
+                    @else
+                    <p>Subscribe, to get full access!</p>
+                    <a href="{{ route('subscription.page') }}" class="btn red">
+                        Subscribe
+                    </a>
+                    @endif
                 </div>
+                <img src="{{ asset("assets/img/blur/{$img}") }}" alt="" />
+            </div>
             @endforeach
 
         </div>
     
         <div class="other-user-list">
             @foreach($recommends as $recommend)
-                <a 
-                    target="_blank" 
-                    href="{{ route('profile.page', ['creator' => $recommend->id,]) }}" 
-                    @class(['other-user-item', 'verified' => $recommend->is_verified,])>
-                    <div class="img-card">
-                        <img src="{{ $recommend->gallery->first()->getUrl() }}" alt="" />
-                    </div>
-                    
-                    <div class="card">
-                        <p class="name">
-                            {{ mb_strlen($recommend->name) > 5 ? mb_substr($recommend->name, 0, 5) . '...' : $recommend->name }}, {{ $recommend->age }}
-                        </p>
-                        <p class="city">
-                            {{ $recommend->city }}, {{ $recommend->state }}
-                        </p>
-                    </div>
-                </a>
+            <a 
+                target="_blank" 
+                href="{{ route('profile.page', ['creator' => $recommend->id,]) }}" 
+                @class(['other-user-item', 'verified' => $recommend->is_verified,])>
+                <div class="img-card">
+                    <img src="{{ $recommend->gallery->first()->getUrl() }}" alt="" />
+                </div>
+                
+                <div class="card">
+                    <p class="name">
+                        {{ mb_strlen($recommend->name) > 5 ? mb_substr($recommend->name, 0, 5) . '...' : $recommend->name }}, {{ $recommend->age }}
+                    </p>
+                    <p class="city">
+                        {{ $recommend->city }}, {{ $recommend->state }}
+                    </p>
+                </div>
+            </a>
             @endforeach
         </div>
     

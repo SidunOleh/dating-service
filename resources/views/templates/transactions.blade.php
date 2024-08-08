@@ -29,7 +29,7 @@
                                     {{ $transaction->status }}
                                 </td>
                                 <td class="sum">
-                                    {{ $transaction->details->received }}
+                                    {{ $transaction->details->amount }}
                                 </td>
                                 <td class="currency">
                                     {{ $transaction->details->currency }}

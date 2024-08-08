@@ -13,6 +13,7 @@ class SubscriptionController extends Controller
 
         $transactions = $creator
             ->transactions()
+            ->with('details')
             ->orderBy('created_at', 'DESC')
             ->get();
 

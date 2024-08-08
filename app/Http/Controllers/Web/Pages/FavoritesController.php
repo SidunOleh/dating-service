@@ -24,8 +24,8 @@ class FavoritesController extends Controller
             ->limit($template->count('ad') ? 50 : 0)
             ->inRandomOrder()
             ->get();
-            
-        $settings = json_decode(Option::getOption('settings'), true);
+
+        $settings = Option::getSettings();
 
         return view('pages.favorites', [
             'template' => $template, 

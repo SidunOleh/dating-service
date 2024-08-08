@@ -23,8 +23,8 @@ class EarnController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        $settings = json_decode(Option::getOption('settings'), true);
-
+        $settings = Option::getSettings();
+        
         return view('pages.earn', [
             'creator' => $creator,
             'referrals' => $referrals,

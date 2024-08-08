@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $settings = Option::getOption('settings');
+        $settings = Option::getSettings();
         
         return response($settings);
     }

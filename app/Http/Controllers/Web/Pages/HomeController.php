@@ -42,7 +42,7 @@ class HomeController extends Controller
             ->inRandomOrder()
             ->get();
 
-        $settings = json_decode(Option::getOption('settings'), true);
+        $settings = Option::getSettings();
 
         return view('pages.home', [
             'template' => $template, 

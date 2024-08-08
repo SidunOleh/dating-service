@@ -135,7 +135,7 @@ input {
 .red {
     background: var(
         --Linear,
-        linear-gradient(181deg, #7a0004 0%, #ba0007 100%)
+        linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
     );
 }
 

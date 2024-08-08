@@ -6,6 +6,7 @@ use App\Events\WithdrawRequestSuccess;
 use App\Http\Controllers\Controller;
 use App\Models\WithdrawalRequest;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class WithdrawController extends Controller
 {
@@ -18,6 +19,10 @@ class WithdrawController extends Controller
 
             return response(['message' => 'OK',]);
         } catch (Exception $e) {
+            Log::error($e->getMessage(), [
+                'withdrawal_request' => $withdrawalRequest->id,
+            ]);
+
             return response(['message' => $e->getMessage(),], 400);
         }
     }

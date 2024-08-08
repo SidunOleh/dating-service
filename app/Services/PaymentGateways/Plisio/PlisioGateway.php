@@ -10,6 +10,7 @@ use App\Services\PaymentGateways\Plisio\Api\Invoice\InvoiceRequest;
 use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
 use App\Services\PaymentGateways\PaymentGateway;
 use App\Services\PaymentGateways\Plisio\Api\Withdrawal\WithdrawalRequest;
+use Illuminate\Support\Facades\Log;
 
 class PlisioGateway extends PaymentGateway
 {
@@ -61,6 +62,8 @@ class PlisioGateway extends PaymentGateway
         $withdrawalResponse = $this->client->createWithdrawal(
             new WithdrawalRequest($amount, $data['currency'], $data['to'], 'cash_out')
         );
+
+        Log::info('withdraw', $withdrawalResponse->toArray());
 
         $withdrawal = PlisioWithdrawal::create($withdrawalResponse->toArray());
 

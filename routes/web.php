@@ -43,6 +43,7 @@ use App\Http\Controllers\Web\Settings\ChangePasswordController;
 use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
 use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
+use App\Models\PlisioInvoice;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -247,4 +248,8 @@ Route::post('/change-password', ChangePasswordController::class)
  */
 Route::fallback(function() {
     return view('errors.404');
+});
+
+Route::get('/dd', function () {
+    PlisioInvoice::find(1)->webhookCallback(['status' => 'expired', 'amount' => '10', 'source_rate' => '1']);
 });

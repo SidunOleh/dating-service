@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Log;
 
 class PlisioInvoice extends Model
 {
@@ -57,10 +58,15 @@ class PlisioInvoice extends Model
             'status' => $data['status'],
         ]);
 
+        Log::info('', $data);
+
+        Log::info('', [$this->transaction->creator->email]);
+
         if (in_array($data['status'], ['expired', 'completed', 'mismatch',])) {
-            $this->creator->balance += 
+            Log::info('sum', [[$this->transaction->creator->balance + (float) $data['amount'] / (float) $data['source_rate']]]);
+            $this->transaction->creator->balance += 
                 (float) $data['amount'] / (float) $data['source_rate'];
-            $this->creator->save();
+            $this->transaction->creator->save();
         }
     }
 }

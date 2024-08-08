@@ -69,8 +69,8 @@ class PlisioClient
             $response['data']['params']['source_amount'],
             $response['data']['source_currency'],
             $response['data']['source_rate'],
-            $response['data']['invoice_sum'],
             $response['data']['invoice_commission'],
+            $response['data']['invoice_sum'],
             $response['data']['invoice_total_sum'],
             $response['data']['qr_code'],
             $response['data']['expire_at_utc']

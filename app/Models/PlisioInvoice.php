@@ -46,7 +46,7 @@ class PlisioInvoice extends Model
         return $this->transaction->creator;
     }
 
-    public function updateInvoiceData(array $data): void
+    public function webhookCallback(array $data): void
     {
         $this->update([
             'received' => $data['amount'],

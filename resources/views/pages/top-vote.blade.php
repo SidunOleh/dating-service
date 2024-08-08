@@ -15,9 +15,7 @@
         <div class="users-list">
            
             @foreach($topVote as $creator)
-
                 @include('templates.creator', ['creator' => $creator,])
-
             @endforeach
 
         </div>

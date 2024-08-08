@@ -16,20 +16,20 @@
                 </thead>
                 <tbody>
                     @foreach($transactions as $transaction)
-                    <tr class="transaction-item">
-                        <td class="date">
-                            {{ $transaction->created_at->setTimezone('America/New_York')->format('d.m.Y') }}
-                        </td>
-                        <td class="type">
-                            {{ $transaction->type }}
-                        </td>
-                        <td class="status">
-                            {{ $transaction->status }}
-                        </td>
-                        <td class="sum">
-                            {{ $transaction->amount }}
-                        </td>
-                    </tr>
+                        <tr class="transaction-item">
+                            <td class="date">
+                                {{ $transaction->created_at->setTimezone('America/New_York')->format('d.m.Y') }}
+                            </td>
+                            <td class="type">
+                                {{ $transaction->type }}
+                            </td>
+                            <td class="status">
+                                {{ $transaction->status }}
+                            </td>
+                            <td class="sum">
+                                {{ $transaction->amount }}
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

@@ -13,9 +13,7 @@
                         <li class="sidebar-menu-item" data-target="{{ Str::slug($item['title']) }}">
                             {{ $item['title'] }}
                         </li>
-                    
                     @else
-                        
                         <li class="sidebar-menu-item accordion">
                             <p class="accordion-open">
                                 {{ $item['title'] }}
@@ -30,15 +28,12 @@
                             </p>
                             <ul class="accordion-pannel">
                                 @foreach ($item['children'] as $item)
-                                
                                     <li class="accordion-item" data-target="{{ Str::slug($item['title']) }}">
                                         {{ $item['title'] }}
                                     </li>
-
                                 @endforeach
                             </ul>
                         </li>
-
                     @endif
                 @endforeach
             </ul>
@@ -61,9 +56,7 @@
             <div class="content">
 
                 @foreach ($faq as $item)
-
                     @if (! $item['children'])
-
                         <div class="faq-content" id="{{ Str::slug($item['title']) }}">
                             <h2>
                                 {{ $item['title'] }}
@@ -72,11 +65,8 @@
                                 {!! nl2br($item['text']) !!}
                             </p>
                         </div>
-
                     @else
-
                         @foreach ($item['children'] as $item)
-
                             <div class="faq-content" id="{{ Str::slug($item['title']) }}">
                                 <h2>
                                     {{ $item['title'] }}
@@ -85,11 +75,8 @@
                                     {!! $item['text'] !!}
                                 </p>
                             </div>
-
                         @endforeach
-
                     @endif
-
                 @endforeach
 
             </div>

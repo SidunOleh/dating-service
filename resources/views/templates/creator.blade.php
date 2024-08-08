@@ -12,9 +12,9 @@
             @endphp
 
             @foreach($imgs as $img)
-            <div class="slide">
-                <img src="{{ $img->getUrl() }}" alt="person" />
-            </div>
+                <div class="slide">
+                    <img src="{{ $img->getUrl() }}" alt="person" />
+                </div>
             @endforeach
         </div>
         <div class="slider-navigation">

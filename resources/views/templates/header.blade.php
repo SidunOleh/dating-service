@@ -116,9 +116,9 @@
                                         All miles
                                     </option>
                                     @foreach([10, 50, 100,] as $miles)
-                                    <option value="{{ $miles }}" @selected(request()->query('miles') == $miles)>
-                                        {{ $miles }} miles
-                                    </option>
+                                        <option value="{{ $miles }}" @selected(request()->query('miles') == $miles)>
+                                            {{ $miles }} miles
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -129,9 +129,9 @@
                                         All
                                     </option>
                                     @foreach(['Man', 'Woman', 'LGBTQIA+',] as $gender)
-                                    <option value="{{ $gender }}" @selected(request()->query('gender') == $gender)>
-                                        {{ $gender }}
-                                    </option>
+                                        <option value="{{ $gender }}" @selected(request()->query('gender') == $gender)>
+                                            {{ $gender }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

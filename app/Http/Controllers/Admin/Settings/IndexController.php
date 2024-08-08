@@ -10,10 +10,8 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $settings = Option::all();
+        $settings = Option::getOption('settings');
         
-        $response = $settings->count() ? new SettingsCollection($settings) : null;
-
-        return response($response);
+        return response($settings);
     }
 }

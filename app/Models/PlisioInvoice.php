@@ -58,9 +58,9 @@ class PlisioInvoice extends Model
         ]);
 
         if (in_array($data['status'], ['expired', 'completed', 'mismatch',])) {
-            $this->creator->balance += 
+            $this->transaction->creator->balance += 
                 (float) $data['amount'] / (float) $data['source_rate'];
-            $this->creator->save();
+            $this->transaction->creator->save();
         }
     }
 }

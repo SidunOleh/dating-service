@@ -41,16 +41,13 @@ class HomeController extends Controller
             ->limit($template->count('ad') ? 50 : 0)
             ->inRandomOrder()
             ->get();
-        $adsSettings = Option::getOptions([
-            'clicks_between_popups', 
-            'seconds_between_popups', 
-            'close_popup_seconds',
-        ]);
+
+        $settings = Option::getSettings();
 
         return view('pages.home', [
             'template' => $template, 
             'popupAds' => $popupAds,
-            'adsSettings' => $adsSettings,
+            'settings' => $settings,
         ]);
     }
 }

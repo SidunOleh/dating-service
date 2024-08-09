@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,20 +14,6 @@ class Option extends Model
         'value',
     ];
 
-    public static function updateOrCreateOptions(array $options): Collection
-    {
-        $collection = new Collection();
-        foreach ($options as $name => $value) {
-            $option = self::updateOrCreate(
-                ['name' => $name,], ['value' => $value,]
-            );
-
-            $collection->push($option);
-        }
-        
-        return $collection;
-    }
-
     public static function getOption(string $name, $default = null)
     {
         $option = self::where('name', $name)->first();
@@ -36,8 +21,28 @@ class Option extends Model
         return $option ? $option->value : $default;
     }
 
-    public static function getOptions(array $names): Collection
+    public static function getSettings(): array
     {
-       return self::whereIn('name', $names)->get();
+        $settings = json_decode(self::getOption('settings', '[]'), true);
+
+        return [
+            'show_top_ad' => 
+                $settings['show_top_ad'] ?? false,
+            'clicks_between_popups' => 
+                $settings['clicks_between_popups'] ?? 10,
+            'seconds_between_popups' => 
+                $settings['seconds_between_popups'] ?? 60,
+            'close_popup_seconds' =>
+                 $settings['close_popup_seconds'] ?? 5,
+            'referral_percent' => 
+                $settings['referral_percent'] ?? 0,
+        ];
+    }
+
+    public static function getContent(): array
+    {
+        $content = json_decode(self::getOption('content', '[]'), true);
+
+        return $content;
     }
 }

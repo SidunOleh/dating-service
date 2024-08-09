@@ -11,25 +11,51 @@
                         <th>Date</th>
                         <th>Type</th>
                         <th>Status</th>
-                        <th>Sum</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($transactions as $transaction)
-                    <tr class="transaction-item">
-                        <td class="date">
-                            {{ $transaction->created_at->setTimezone('America/New_York')->format('d.m.Y') }}
-                        </td>
-                        <td class="type">
-                            {{ $transaction->type }}
-                        </td>
-                        <td class="status">
-                            {{ $transaction->status }}
-                        </td>
-                        <td class="sum">
-                            {{ $transaction->amount }}
-                        </td>
-                    </tr>
+                        @if($transaction->gateway == 'plisio' and $transaction->type == 'invoice')
+                            <tr class="transaction-item">
+                                <td class="date">
+                                    {{ $transaction->created_at->format('d.m.Y') }}
+                                </td>
+                                <td class="type">
+                                    IN
+                                </td>
+                                <td class="status">
+                                    {{ $transaction->status }}
+                                </td>
+                                <td class="sum">
+                                    {{ $transaction->details->amount }}
+                                </td>
+                                <td class="currency">
+                                    {{ $transaction->details->currency }}
+                                </td>
+                            </tr>
+                        @endif
+
+                        @if($transaction->gateway == 'plisio' and $transaction->type == 'withdrawal')
+                            <tr class="transaction-item">
+                                <td class="date">
+                                    {{ $transaction->created_at->format('d.m.Y') }}
+                                </td>
+                                <td class="type">
+                                    OUT
+                                </td>
+                                <td class="status">
+                                    {{ $transaction->status }}
+                                </td>
+                                <td class="sum">
+                                    {{ $transaction->details->amount }}
+                                </td>
+                                <td class="currency">
+                                    {{ $transaction->details->currency }}
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

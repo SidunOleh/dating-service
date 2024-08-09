@@ -2,6 +2,7 @@
 
 namespace App\Services\PaymentGateways\Plisio\Api;
 
+use App\Services\PaymentGateways\Plisio\Api\Exceptions\GetTransactionException;
 use App\Services\PaymentGateways\Plisio\Api\Exceptions\RateNotFoundException;
 use App\Services\PaymentGateways\Plisio\Api\Exceptions\RateRequestErrorException;
 use App\Services\PaymentGateways\Plisio\Api\Invoice\Exceptions\InvoiceRequestErrorException;
@@ -69,8 +70,8 @@ class PlisioClient
             $response['data']['params']['source_amount'],
             $response['data']['source_currency'],
             $response['data']['source_rate'],
-            $response['data']['invoice_sum'],
             $response['data']['invoice_commission'],
+            $response['data']['invoice_sum'],
             $response['data']['invoice_total_sum'],
             $response['data']['qr_code'],
             $response['data']['expire_at_utc']
@@ -150,5 +151,17 @@ class PlisioClient
         }
 
         return $rate;
+    }
+
+    public function transaction(string $id): array
+    {
+        $response = Http::get("{$this->baseUri}operations/{$id}", ['api_key' => $this->secretKey,]);
+        $response = $response->json();
+        
+        if ($response['status'] == 'error') {
+            throw new GetTransactionException($response['data']['message'], $response['data']['code']);
+        }
+
+        return $response['data'];
     }
 }

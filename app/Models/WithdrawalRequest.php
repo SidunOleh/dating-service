@@ -50,12 +50,10 @@ class WithdrawalRequest extends Model
 
         $transaction = $this->concrete->withdraw();
 
-        if ($transaction->status == 'completed') {
-            $this->creator->debitMoney($this->amount);
-        }
+        $this->creator->debitMoney($this->amount);
 
         $this->user_id = Auth::guard('admin')->id();
-        $this->status = $transaction->status;
+        $this->status = 'completed';
         $this->save();
 
         return $transaction;

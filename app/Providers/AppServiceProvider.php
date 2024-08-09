@@ -50,7 +50,9 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         View::composer(['pages.*', 'errors.*',], function (ViewView $view) {
-            if (! Option::getOption('show_top_ad', false)) {
+            $settings = Option::getSettings();
+
+            if (! $settings['show_top_ad']) {
                 return;
             }
 

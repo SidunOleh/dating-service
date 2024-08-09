@@ -41,7 +41,7 @@
 
             <div class="sub-link">
                 <div class="title">
-                    You receive <span>{{ $percent }}%</span> for each client who subscribies using your link
+                    You receive <span>{{ $settings['referral_percent'] }}%</span> for each client who subscribies using your link
                 </div>
                 <div class="link-body">
                     <p class="link">
@@ -194,7 +194,7 @@
         <p class="title">
             Your withdrawal request will be processed within 72 hours. <br /> You will receive a notification by email.
         </p>
-        <div class="btn red">Confirm</div>
+        <div class="btn red">Close</div>
     </div>
 
 </div>

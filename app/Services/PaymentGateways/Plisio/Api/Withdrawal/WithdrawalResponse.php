@@ -79,7 +79,7 @@ class WithdrawalResponse
         $response['source_currency'] = $this->sourceCurrency;
         $response['source_rate'] = $this->sourceRate;
         $response['fee'] = $this->fee;
-        $response['id'] = $this->id;
+        $response['plisio_id'] = $this->id;
         $response['type'] = $this->type;
         $response['wallet_hash'] = $this->walletHash;
         $response['sendmany'] = $this->sendmany;

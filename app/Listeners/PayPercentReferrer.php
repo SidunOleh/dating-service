@@ -25,8 +25,9 @@ class PayPercentReferrer
         $creator = $event->creator;
         
         if ($creator->referral and ! $creator->referral->rewarded()) {
-            $percent = (int) Option::getOption('referral_percent', 0);
-            $amount = Subscription::PRICE * $percent / 100;
+            $settings = Option::getSettings();
+                        
+            $amount = Subscription::PRICE * $settings['referral_percent'] / 100;
 
             $creator->referral->reward($amount);
         }

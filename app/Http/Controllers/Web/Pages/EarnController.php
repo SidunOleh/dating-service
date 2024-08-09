@@ -19,15 +19,17 @@ class EarnController extends Controller
             ->get();
         $transactions = $creator
             ->transactions()
+            ->with('details')
             ->orderBy('created_at', 'DESC')
             ->get();
-        $percent = (int) Option::getOption('referral_percent', 0);
 
+        $settings = Option::getSettings();
+        
         return view('pages.earn', [
             'creator' => $creator,
             'referrals' => $referrals,
             'transactions' => $transactions,
-            'percent' => $percent,
+            'settings' => $settings,
         ]);
     }
 }

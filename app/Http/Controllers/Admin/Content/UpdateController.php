@@ -10,9 +10,10 @@ class UpdateController extends Controller
 {
     public function __invoke(Request $request)
     {
-        Option::updateOrCreateOptions([
-            'content' => json_encode($request->all()),
-        ]);
+        Option::updateOrCreate(
+            ['name' => 'content',], 
+            ['value' => json_encode($request->all()),]
+        );
 
         return response(['message' => 'OK',]);
     }

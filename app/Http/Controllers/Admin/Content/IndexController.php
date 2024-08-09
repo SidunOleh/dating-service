@@ -9,8 +9,8 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $content = Option::getOption('content', '[]');
+        $content = Option::getContent();
 
-        return response(json_decode($content, true));
+        return response($content);
     }
 }

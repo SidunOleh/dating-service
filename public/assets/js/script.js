@@ -4,6 +4,7 @@ Fancybox.bind("[data-fancybox]", {});
 
 $(".burger-menu").click(function () {
     $(".header-menu").toggleClass("open");
+    $("#header").toggleClass("open");
 });
 
 $(".header-menu .close").click(function () {

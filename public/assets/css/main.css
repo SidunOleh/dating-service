@@ -5183,7 +5183,7 @@ input {
     display: block !important;
 }
 
-#header {
+#header.open {
     overflow: visible !important;
 }
 

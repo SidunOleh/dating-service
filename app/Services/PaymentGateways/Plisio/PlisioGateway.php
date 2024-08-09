@@ -56,7 +56,7 @@ class PlisioGateway extends PaymentGateway
     ): Transaction
     {
         $rate = $this->client->rate('USD', $data['currency']);
-        
+
         $currencyAmount = $rate * $amount;
 
         $withdrawalResponse = $this->client->createWithdrawal(
@@ -73,7 +73,7 @@ class PlisioGateway extends PaymentGateway
         );
 
         $transaction = $withdrawal->transaction()->create([
-            'gateway' => 'plsio',
+            'gateway' => 'plisio',
             'type' => 'withdrawal',
             'amount' => $amount,
             'status' => $withdrawal->status,

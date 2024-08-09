@@ -27,11 +27,11 @@ function getReCaptchaV3(action) {
 }
 </script>
 
-<script src="{{ asset('assets/js/lazysizes.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/jquery.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/fancybox.umd.js') }}" defer></script>
-<script src="{{ asset('assets/js/slick.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/script.js') }}" defer></script>
+<script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/fancybox.umd.js') }}"></script>
+<script src="{{ asset('assets/js/slick.min.js') }}"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>

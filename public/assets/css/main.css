@@ -923,7 +923,7 @@ input {
     margin-bottom: 4px;
 }
 .users .title .user-name {
-    max-width: 190px;
+    max-width: 192px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

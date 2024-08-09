@@ -1201,6 +1201,7 @@ input {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .pagination .pagination-list a {

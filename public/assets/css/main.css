@@ -1422,6 +1422,7 @@ input {
 
 .popUp-wrapper .resetPassword-card {
     border-radius: 8px !important;
+    padding-top: 50px;
 }
 
 @media screen and (max-width: 768px) {

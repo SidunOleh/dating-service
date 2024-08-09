@@ -17,7 +17,7 @@
 }
 </style>
 
-<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" async></script>
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" defer></script>
 <script>
 function getReCaptchaV3(action) {
     return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha

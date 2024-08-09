@@ -8,6 +8,7 @@ use App\Models\Option;
 use App\Models\Template;
 use App\Models\ZipCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -44,10 +45,10 @@ class HomeController extends Controller
 
         $settings = Option::getSettings();
 
-        return view('pages.home', [
+        return Cache::remember('home', 60, fn () => view('pages.home', [
             'template' => $template, 
             'popupAds' => $popupAds,
             'settings' => $settings,
-        ]);
+        ]));
     }
 }

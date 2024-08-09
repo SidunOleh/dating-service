@@ -61,6 +61,9 @@ $isResetPage = request()->query('token') and request()->query('email');
         </form>
 
         <div class="text-error"></div>
+        <p class="switch-to-login">
+            Have an account? <span class="login-link">Log in</span>
+        </p>
     </div>
 
     <div class="logIN-card card">

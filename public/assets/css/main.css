@@ -1628,7 +1628,8 @@ input {
 
 .popUp-wrapper .passRule,
 .popUp-wrapper .reset-pass,
-.popUp-wrapper .switch-to-signup {
+.popUp-wrapper .switch-to-signup,
+.popUp-wrapper .switch-to-login {
     color: var(--white, #fbfbfb);
     font-family: Inter;
     font-size: 13px;
@@ -1637,18 +1638,21 @@ input {
     line-height: 120%;
 }
 
-.popUp-wrapper .switch-to-signup {
+.popUp-wrapper .switch-to-signup,
+.popUp-wrapper .switch-to-login {
     font-size: 14px;
     text-align: center;
     margin-top: 16px;
 }
 
-.popUp-wrapper .switch-to-signup span {
+.popUp-wrapper .switch-to-signup span,
+.popUp-wrapper .switch-to-login span {
     color: #fb2e35;
     cursor: pointer;
 }
 
-.popUp-wrapper .switch-to-signup span:hover {
+.popUp-wrapper .switch-to-signup span:hover,
+.popUp-wrapper .switch-to-login span:hover {
     text-decoration: underline;
 }
 

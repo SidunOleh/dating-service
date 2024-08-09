@@ -924,7 +924,7 @@ input {
     line-height: normal;
     margin-bottom: 4px;
     display: flex;
-    gap: 8px;
+    gap: 4px;
 }
 .users .title .user-name {
     max-width: 130px;

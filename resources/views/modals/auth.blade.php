@@ -121,6 +121,7 @@ $isResetPage = request()->query('token') and request()->query('email');
     </div>
 
     <div class="resetPassword-card card">
+        <div class="close"> <img src="{{ asset('/assets/img/close.svg') }}" alt="" ></div>
         <p class="title">
             Enter email for reset the password
         </p>

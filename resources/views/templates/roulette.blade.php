@@ -26,14 +26,14 @@
             </div>
 
             <div class="photo-container photo" id="photo1" data-id="{{ $creators[0]->id }}">
-                <img src="{{ $creators[0]->gallery->random()->url }}" alt="Photo 1" />
+                <img data-src="{{ $creators[0]->gallery->random()->url }}" class="lazyload" alt="Photo 1" />
                 <div class="info">
                     {{ mb_strlen($creators[0]->name) > 5 ? mb_substr($creators[0]->name, 0, 5) . '...' : $creators[0]->name }}, {{ $creators[0]->age }}
                 </div>
             </div>
             
             <div class="photo-container photo" id="photo2" data-id="{{ $creators[1]->id }}">
-                <img src="{{ $creators[1]->gallery->random()->url }}" alt="Photo 2" />
+                <img data-src="{{ $creators[1]->gallery->random()->url }}" class="lazyload" alt="Photo 2" />
                 <div class="info">
                     {{ mb_strlen($creators[1]->name) > 5 ? mb_substr($creators[1]->name, 0, 5) . '...' : $creators[1]->name }}, {{ $creators[1]->age }}
                 </div>

@@ -190,6 +190,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             $("html").removeClass("no-scroll");
             $(".advertising-wrapper").removeClass("show");
         },
+
         getNext() {
             if (!DS.ads.data.length) {
                 return;

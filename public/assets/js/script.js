@@ -64,7 +64,7 @@ function togglePopup(cardName, show) {
 
 $(".btn.login, .header-burger").on("click", () => togglePopup("logIn", true));
 $(".btn.signup, .signup-link").on("click", () => togglePopup("signUp", true));
-$(".btn.signup, .login-link").on("click", () => togglePopup("logIn", true));
+$(".login-link").on("click", () => togglePopup("logIn", true));
 $(".reset-pass").on("click", () => togglePopup("resetPassword", true));
 $(".close").on("click", () => togglePopup("", false));
 

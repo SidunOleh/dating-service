@@ -913,16 +913,17 @@ input {
 .users .card {
     padding: 12px;
 }
-
 .users .title {
     color: var(--white, #fbfbfb);
     font-family: Inter;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     margin-bottom: 4px;
-    max-width: 215px;
+}
+.users .title .user-name {
+    max-width: 190px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

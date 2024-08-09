@@ -37,7 +37,7 @@
     </div>
 
     <div class="card">
-        <div class="title">{{ $creator->name }}, <span class="age">{{ $creator->age }}</span></div>
+        <div class="title"><span class="user-name">{{ $creator->name }},</span> <span class="age">{{ $creator->age }}</span></div>
         <div class="place">
             {{ $creator->city }}, {{ $creator->state }}
         </div>

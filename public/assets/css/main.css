@@ -1375,7 +1375,9 @@ input {
     top: 16px;
     cursor: pointer;
 }
-
+.add-new-pass .close {
+   
+}
 .popUp-wrapper .card .close:hover {
     background: -webkit-gradient(
         linear,

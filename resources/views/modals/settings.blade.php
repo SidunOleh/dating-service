@@ -38,7 +38,8 @@
     </div>
 
     <div class="add-new-pass card">
-        <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close">
+        <div class="close"> <img src="{{ asset('/assets/img/close.svg') }}" alt="" ></div>
+       
         <form id="change-password-form">
             <div class="input-group">
                 <label for="password">

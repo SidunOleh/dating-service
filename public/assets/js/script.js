@@ -163,7 +163,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             if (!this.next) {
                 return;
             }
-            $("html").removeClass("no-scroll");
+            $("html").addClass("no-scroll");
             const popup = $(".advertising-wrapper");
             const img = $(".advertising-img");
             const link = $(".advertising-link");

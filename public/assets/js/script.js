@@ -155,7 +155,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             if (! this.next) {
                 return
             }
-
+            $('body').removeClass('lock')
             const popup = $('.advertising-wrapper')
             const img = $('.advertising-img')
             const link = $('.advertising-link')
@@ -179,7 +179,7 @@ if (DS.ads?.data && DS.ads?.settings) {
             }, 1000)
 
             this.showing = false
-
+            $('body').removeClass('lock')
             $('.advertising-wrapper').removeClass('show')
         },
         getNext() {

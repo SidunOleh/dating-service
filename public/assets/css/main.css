@@ -24,7 +24,9 @@ body {
     padding-bottom: 56px;
     min-height: 100vh;
 }
-
+body.lock {
+    overflow: hidden;
+}
 ol,
 ul {
     list-style: none;

@@ -89,7 +89,11 @@
 
             @foreach($imgs as $img)
             <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
-                <img data-src="{{ $img->getUrl() }}" class="lazyload" alt="" />
+                <img 
+                    src="{{ asset('assets/img/placeholder.png') }}" 
+                    data-src="{{ $img->getUrl() }}" 
+                    class="lazyload" 
+                    alt="" />
             </a>
             @endforeach
 
@@ -111,7 +115,8 @@
                 <img
                     src="{{ asset('assets/img/placeholder.png') }}" 
                     data-src="{{ asset("assets/img/blur/{$img}") }}" 
-                    class="lazyload" />
+                    class="lazyload"
+                    alt="" />
             </div>
             @endforeach
 

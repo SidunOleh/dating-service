@@ -9,6 +9,10 @@
 
     @embedstyles(Route::currentRouteName() == 'profile.page', 'assets/css/fancybox.css')
     @embedstyles(true, 'assets/css/main.css')
+
+    @if (Route::currentRouteName() == 'home.index')
+        <link rel="preload" href="{{ $template->data()[0]->gallery[0]->getUrl() }}" as="image">
+    @endif
 </head>
 
 <body @class(['height' => Route::currentRouteName() == 'settings.page' ])>

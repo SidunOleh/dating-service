@@ -11,12 +11,6 @@
     </div>
 </footer>
 
-<style>
-.grecaptcha-badge {
-    z-index: 100;
-}
-</style>
-
 <script data-src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" data-type="lazy"></script>
 <script>
 function getReCaptchaV3(action) {

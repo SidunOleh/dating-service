@@ -23,7 +23,7 @@
                     @endif
 
                     @if(is_array($block))
-                        @include('templates.roulette', ['creators' => $block,])
+                        @include('templates.roulette', ['pair' => $block,])
                     @endif
 
                 @endforeach

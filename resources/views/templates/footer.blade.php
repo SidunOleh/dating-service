@@ -27,7 +27,7 @@ function getReCaptchaV3(action) {
 }
 </script>
 
-<script data-src="{{ asset('assets/js/lazysizes.min.js') }}" data-type="lazy"></script>
+<script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
 <script data-src="{{ asset('assets/js/jquery.min.js') }}" data-type="lazy"></script>
 <script data-src="{{ asset('assets/js/fancybox.umd.js') }}" data-type="lazy"></script>
 <script data-src="{{ asset('assets/js/slick.min.js') }}" data-type="lazy"></script>

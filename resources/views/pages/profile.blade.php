@@ -7,7 +7,10 @@
 
             <div @class(['head-porfile', 'verified' => $creator->is_verified,])>
                 <div class="img-card">
-                    <img data-src="{{ $creator->gallery->first()->getUrl() }}" class="lazyload" alt="" />
+                    <img
+                        src="{{ asset('assets/img/placeholder.png') }}"  
+                        data-src="{{ $creator->gallery->first()->getUrl() }}" 
+                        class="lazyload" />
 
                     @auth('web')
                         @include('templates.favorite', [
@@ -104,7 +107,10 @@
                     </a>
                     @endif
                 </div>
-                <img data-src="{{ asset("assets/img/blur/{$img}") }}" class="lazyload" alt="" />
+                <img
+                    src="{{ asset('assets/img/placeholder.png') }}" 
+                    data-src="{{ asset("assets/img/blur/{$img}") }}" 
+                    class="lazyload" />
             </div>
             @endforeach
 
@@ -117,7 +123,10 @@
                 href="{{ route('profile.page', ['creator' => $recommend->id,]) }}" 
                 @class(['other-user-item', 'verified' => $recommend->is_verified,])>
                 <div class="img-card">
-                    <img data-src="{{ $recommend->gallery->first()->getUrl() }}" class="lazyload" alt="" />
+                    <img
+                        src="{{ asset('assets/img/placeholder.png') }}" 
+                        data-src="{{ $recommend->gallery->first()->getUrl() }}"
+                        class="lazyload" />
                 </div>
                 
                 <div class="card">

@@ -13,7 +13,10 @@
 
             @foreach($imgs as $img)
             <div class="slide">
-                <img data-src="{{ $img->getUrl() }}" class="lazyload" alt="person" />
+                <img 
+                    src="{{ asset('assets/img/placeholder.png') }}" 
+                    data-src="{{ $img->getUrl() }}" 
+                    class="lazyload" />
             </div>
             @endforeach
         </div>

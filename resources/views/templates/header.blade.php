@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ env('APP_NAME') }}</title>
 
-    @embedstyles('assets/css/fancybox.css')
-    @embedstyles('assets/css/main.css')
+    @embedstyles(Route::currentRouteName() == 'profile.page', 'assets/css/fancybox.css')
+    @embedstyles(true, 'assets/css/main.css')
 </head>
 
 <body @class(['height' => Route::currentRouteName() == 'settings.page' ])>

@@ -20,7 +20,6 @@
                             'active' => auth('web')->user()->favorites->contains($creator->id),
                         ])
                     @endauth
-                
                 </div>
                 <div class="userMain">
                     <p class="name">{{ $creator->name }}, {{ $creator->age }}</p>
@@ -88,36 +87,36 @@
             @endphp
 
             @foreach($imgs as $img)
-            <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
-                <img 
-                    src="{{ asset('assets/img/placeholder.png') }}" 
-                    data-src="{{ $img->getUrl() }}" 
-                    class="lazyload" 
-                    alt="" />
-            </a>
+                <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
+                    <img 
+                        src="{{ asset('assets/img/placeholder.png') }}" 
+                        data-src="{{ $img->getUrl() }}" 
+                        class="lazyload" 
+                        alt="" />
+                </a>
             @endforeach
 
             @foreach($blur as $img)
-            <div class="user-photo-item">
-                <div class="subscribe">
-                    @if(!auth('web')->check())
-                    <p>Log in, to get full access!</p>
-                    <div class="btn red login">
-                        Log in
+                <div class="user-photo-item">
+                    <div class="subscribe">
+                        @if(!auth('web')->check())
+                            <p>Log in, to get full access!</p>
+                            <div class="btn red login">
+                                Log in
+                            </div>
+                        @else
+                            <p>Subscribe, to get full access!</p>
+                            <a href="{{ route('subscription.page') }}" class="btn red">
+                                Subscribe
+                            </a>
+                        @endif
                     </div>
-                    @else
-                    <p>Subscribe, to get full access!</p>
-                    <a href="{{ route('subscription.page') }}" class="btn red">
-                        Subscribe
-                    </a>
-                    @endif
+                    <img
+                        src="{{ asset('assets/img/placeholder.png') }}" 
+                        data-src="{{ asset("assets/img/blur/{$img}") }}" 
+                        class="lazyload"
+                        alt="" />
                 </div>
-                <img
-                    src="{{ asset('assets/img/placeholder.png') }}" 
-                    data-src="{{ asset("assets/img/blur/{$img}") }}" 
-                    class="lazyload"
-                    alt="" />
-            </div>
             @endforeach
 
         </div>

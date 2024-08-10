@@ -2,5 +2,6 @@
     <img 
         src="{{ asset('assets/img/placeholder.png') }}" 
         data-src="{{ $ad->image->getUrl() }}" 
-        class="lazyload" alt="">
+        class="lazyload" 
+        alt="image" >
 </a>

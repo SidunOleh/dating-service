@@ -29,7 +29,8 @@
                 <img
                     src="{{ asset('assets/img/placeholder.png') }}" 
                     data-src="{{ $creators[0]->gallery->random()->url }}" 
-                    class="lazyload" />
+                    class="lazyload" 
+                    alt="image" />
                 <div class="info">
                     {{ mb_strlen($creators[0]->name) > 5 ? mb_substr($creators[0]->name, 0, 5) . '...' : $creators[0]->name }}, {{ $creators[0]->age }}
                 </div>
@@ -39,7 +40,8 @@
                 <img
                     src="{{ asset('assets/img/placeholder.png') }}" 
                     data-src="{{ $creators[1]->gallery->random()->url }}" 
-                    class="lazyload" />
+                    class="lazyload" 
+                    alt="image" />
                 <div class="info">
                     {{ mb_strlen($creators[1]->name) > 5 ? mb_substr($creators[1]->name, 0, 5) . '...' : $creators[1]->name }}, {{ $creators[1]->age }}
                 </div>

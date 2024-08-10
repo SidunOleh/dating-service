@@ -16,7 +16,8 @@
                 <img 
                     src="{{ asset('assets/img/placeholder.png') }}" 
                     data-src="{{ $img->getUrl() }}" 
-                    class="lazyload" />
+                    class="lazyload"
+                    alt="image" />
             </div>
             @endforeach
         </div>

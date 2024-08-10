@@ -11,7 +11,7 @@
     @embedstyles(true, 'assets/css/main.css')
 </head>
 
-<body @class(['height' => Route::currentRouteName() == 'settings.page' ])>
+<body @class(['height' => Route::currentRouteName() == 'settings.page',])>
 
     <script>
         const DS = {}

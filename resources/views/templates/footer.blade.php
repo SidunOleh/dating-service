@@ -29,15 +29,12 @@ function getReCaptchaV3(action) {
 
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
 
-<script data-src="{{ asset('assets/js/jquery.min.js') }}" data-type="lazy"></script>
-<script data-src="{{ asset('assets/js/fancybox.umd.js') }}" data-type="lazy"></script>
-<script data-src="{{ asset('assets/js/slick.min.js') }}" data-type="lazy"></script>
-<script data-src="{{ asset('assets/js/script.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/bundle.js') }}" data-type="lazy"></script>
 
 <script>
     const load = () => {
-        document.querySelectorAll("script[data-type='lazy']").forEach(el => {
-            el.setAttribute("src", el.getAttribute("data-src"))
+        document.querySelectorAll("script[data-type='lazy']").forEach(script => {
+            script.setAttribute("src", script.getAttribute("data-src"))
         })
         
         clearTimeout(timer)

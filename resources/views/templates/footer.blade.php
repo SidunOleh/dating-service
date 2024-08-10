@@ -26,9 +26,7 @@ function getReCaptchaV3(action) {
     )
 }
 </script>
-
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
-
 <script data-src="{{ asset('assets/js/bundle.js') }}" data-type="lazy"></script>
 
 <script>

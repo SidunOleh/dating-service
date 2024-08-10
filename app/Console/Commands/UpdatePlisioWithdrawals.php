@@ -48,10 +48,7 @@ class UpdatePlisioWithdrawals extends Command
                     'status' => $data['status'],
                 ]);
             } catch (Exception $e) {
-                Log::error($e->getMessage(), [
-                    'code' => $e->getCode(),
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
+                Log::error($e, [
                     'plisio_withdrawal_id' => $withdrawal->id,
                 ]);
             }

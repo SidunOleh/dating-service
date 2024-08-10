@@ -21,11 +21,7 @@ class AmountController extends Controller
 
             return response(['amount' => $amount,]);
         } catch (Exception $e) {
-            Log::error($e->getMessage(), [
-                'code' => $e->getCode(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-            ]);
+            Log::error($e);
 
             return response(['message' => $e->getMessage(),], 400);
         }

@@ -29,10 +29,10 @@ function getReCaptchaV3(action) {
 
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
 
-<script data-src="{{ asset('assets/js/jquery.min.js') }}" data-type="lazy"></script>
-<script data-src="{{ asset('assets/js/fancybox.umd.js') }}" data-type="lazy"></script>
-<script data-src="{{ asset('assets/js/slick.min.js') }}" data-type="lazy"></script>
-<script data-src="{{ asset('assets/js/script.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/jquery.min.js') }}" data-type="lazy" defer></script>
+<script data-src="{{ asset('assets/js/fancybox.umd.js') }}" data-type="lazy" defer></script>
+<script data-src="{{ asset('assets/js/slick.min.js') }}" data-type="lazy" defer></script>
+<script data-src="{{ asset('assets/js/script.js') }}" data-type="lazy" defer></script>
 
 <script>
     const load = () => {

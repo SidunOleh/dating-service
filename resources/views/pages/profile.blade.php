@@ -7,7 +7,7 @@
 
             <div @class(['head-porfile', 'verified' => $creator->is_verified,])>
                 <div class="img-card">
-                    <img src="{{ $creator->gallery->first()->getUrl() }}" alt="" />
+                    <img data-src="{{ $creator->gallery->first()->getUrl() }}" class="lazyload" alt="" />
 
                     @auth('web')
                         @include('templates.favorite', [
@@ -85,7 +85,7 @@
 
             @foreach($imgs as $img)
             <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
-                <img src="{{ $img->getUrl() }}" alt="" />
+                <img data-src="{{ $img->getUrl() }}" class="lazyload" alt="" />
             </a>
             @endforeach
 
@@ -104,7 +104,7 @@
                     </a>
                     @endif
                 </div>
-                <img src="{{ asset("assets/img/blur/{$img}") }}" alt="" />
+                <img data-src="{{ asset("assets/img/blur/{$img}") }}" class="lazyload" alt="" />
             </div>
             @endforeach
 
@@ -117,7 +117,7 @@
                 href="{{ route('profile.page', ['creator' => $recommend->id,]) }}" 
                 @class(['other-user-item', 'verified' => $recommend->is_verified,])>
                 <div class="img-card">
-                    <img src="{{ $recommend->gallery->first()->getUrl() }}" alt="" />
+                    <img data-src="{{ $recommend->gallery->first()->getUrl() }}" class="lazyload" alt="" />
                 </div>
                 
                 <div class="card">

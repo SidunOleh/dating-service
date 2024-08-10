@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ env('APP_NAME') }}</title>
-    
+
     @embedstyles('assets/css/fancybox.css')
     @embedstyles('assets/css/main.css')
+
+    <link rel="preload" href="http://vps63409.hyperhost.name/storage/2024/08/9d80c5f9bef27fb7d34584ac88571781.webp" as="image">
 </head>
 
 <body @class(['height' => Route::currentRouteName() == 'settings.page' ])>

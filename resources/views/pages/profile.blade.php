@@ -10,7 +10,8 @@
                     <img
                         src="{{ asset('assets/img/placeholder.png') }}"  
                         data-src="{{ $creator->gallery->first()->getUrl() }}" 
-                        class="lazyload" />
+                        class="lazyload"
+                        alt="" />
 
                     @auth('web')
                         @include('templates.favorite', [
@@ -126,7 +127,8 @@
                     <img
                         src="{{ asset('assets/img/placeholder.png') }}" 
                         data-src="{{ $recommend->gallery->first()->getUrl() }}"
-                        class="lazyload" />
+                        class="lazyload"
+                        alt="" />
                 </div>
                 
                 <div class="card">

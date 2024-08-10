@@ -10,7 +10,7 @@
     @embedstyles('assets/css/fancybox.css')
     @embedstyles('assets/css/main.css')
 
-    <link rel="preload" href="http://vps63409.hyperhost.name/storage/2024/08/6567591da8709dc7bca1153039372467.webp" as="image">
+    <link rel="preload" href="http://vps63409.hyperhost.name/storage/2024/08/9d80c5f9bef27fb7d34584ac88571781.webp" as="image">
 </head>
 
 <body @class(['height' => Route::currentRouteName() == 'settings.page' ])>

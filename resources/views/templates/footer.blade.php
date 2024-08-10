@@ -17,7 +17,7 @@
 }
 </style>
 
-<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" data-type="lazy"></script>
 <script>
 function getReCaptchaV3(action) {
     return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha
@@ -29,14 +29,16 @@ function getReCaptchaV3(action) {
 
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
 
-<script data-src="{{ asset('assets/js/jquery.min.js') }}" data-type="lazy" defer></script>
-<script data-src="{{ asset('assets/js/fancybox.umd.js') }}" data-type="lazy" defer></script>
-<script data-src="{{ asset('assets/js/slick.min.js') }}" data-type="lazy" defer></script>
-<script data-src="{{ asset('assets/js/script.js') }}" data-type="lazy" defer></script>
+<script data-src="{{ asset('assets/js/jquery.min.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/fancybox.umd.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/slick.min.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/script.js') }}" data-type="lazy"></script>
 
 <script>
     const load = () => {
-        document.querySelectorAll("script[data-type='lazy']").forEach(el => el.setAttribute("src", el.getAttribute("data-src")))
+        document.querySelectorAll("script[data-type='lazy']").forEach(el => {
+            el.setAttribute("src", el.getAttribute("data-src"))
+        })
         
         clearTimeout(timer)
     }

@@ -12,9 +12,15 @@
             @endphp
 
             @foreach($imgs as $img)
-            <div class="slide">
-                <img data-src="{{ $img->getUrl() }}" class="lazyload" alt="person" />
-            </div>
+                @if($lazy)
+                <div class="slide">
+                    <img data-src="{{ $img->getUrl() }}" class="lazyload" alt="person" />
+                </div>
+                @else
+                <div class="slide">
+                    <img src="{{ $img->getUrl() }}" alt="person" />
+                </div>
+                @endif
             @endforeach
         </div>
         <div class="slider-navigation">

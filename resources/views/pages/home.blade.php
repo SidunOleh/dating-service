@@ -12,10 +12,10 @@
         @if($template->total())
             <div class="users-list">
 
-                @foreach($template->data() as $block)
+                @foreach($template->data() as $i => $block)
 
                     @if($block instanceof App\Models\Creator)
-                        @include('templates.creator', ['creator' => $block,])
+                        @include('templates.creator', ['creator' => $block, 'lazy' => $i == 0,])
                     @endif
 
                     @if($block instanceof App\Models\Ad)

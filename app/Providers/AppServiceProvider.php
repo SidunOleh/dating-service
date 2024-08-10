@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('embedstyles', function ($expression) {
             $params = explode(',', $expression);
 
-            return "<?php if ({$params[0]}): ?><style><?php echo file_get_contents({$params[1]}); ?></style><?php endif; ?>";
+            return "<?php if ({$params[0]}): ?><style><?php echo minify_css(file_get_contents({$params[1]})); ?></style><?php endif; ?>";
         });
 
         DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);

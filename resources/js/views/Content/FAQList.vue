@@ -86,10 +86,19 @@ export default {
                         return
                     }
 
-                    const res = await imagesApi.upload(file, false, false, 0)
-                    
                     const range = editor.getSelection()
-                    editor.insertEmbed(range.index, 'image', res.url)
+
+                    editor.insertEmbed(range.index, 'image', '/assets/img/img-loading.webp')
+
+                    try {
+                        const res = await imagesApi.upload(file, false, false, 0)
+                        
+                        editor.deleteText(range.index, 1)
+                        editor.insertEmbed(range.index, 'image', res.url)
+
+                    } catch {
+                        editor.deleteText(range.index, 1)
+                    }
                 }
             })
         },

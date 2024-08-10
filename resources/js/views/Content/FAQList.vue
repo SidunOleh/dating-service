@@ -24,7 +24,7 @@
                         contentType="html"
                         toolbar="full"
                         v-model:content="item.text"
-                        @ready="ready"></QuillEditor>
+                        @ready="quillReady"></QuillEditor>
 
                 </Flex>
 
@@ -72,7 +72,7 @@ export default {
         Flex, Tooltip,
     },
     methods: {
-        ready(editor) {
+        quillReady(editor) {
             const toolbar = editor.getModule('toolbar')
             toolbar.addHandler('image', () => {
                 const input = document.createElement('input')
@@ -88,14 +88,13 @@ export default {
 
                     const range = editor.getSelection()
 
-                    editor.insertEmbed(range.index, 'image', '/assets/img/img-loading.webp')
+                    editor.insertEmbed(range.index, 'image', '/assets/img/lazy-loading.gif')
 
                     try {
                         const res = await imagesApi.upload(file, false, false, 0)
                         
                         editor.deleteText(range.index, 1)
                         editor.insertEmbed(range.index, 'image', res.url)
-
                     } catch {
                         editor.deleteText(range.index, 1)
                     }

@@ -8,13 +8,6 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 const globalOptions = {
     theme: 'snow',
-    modules: {
-        imageUploader: {
-            upload: file => {
-                console.log(file)
-            }
-        }
-    }
 }
 
 QuillEditor.props.globalOptions.default = () => globalOptions

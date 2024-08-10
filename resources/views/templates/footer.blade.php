@@ -27,11 +27,27 @@ function getReCaptchaV3(action) {
 }
 </script>
 
-<script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/fancybox.umd.js') }}"></script>
-<script src="{{ asset('assets/js/slick.min.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}"></script>
+<script data-src="{{ asset('assets/js/lazysizes.min.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/jquery.min.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/fancybox.umd.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/slick.min.js') }}" data-type="lazy"></script>
+<script data-src="{{ asset('assets/js/script.js') }}" data-type="lazy"></script>
+
+<script>
+{
+    const load = () => {
+        document.querySelectorAll("script[data-type='lazy']").forEach(el => el.setAttribute("src", el.getAttribute("data-src")));
+        document.querySelectorAll("iframe[data-type='lazy']").forEach(el => el.setAttribute("src", el.getAttribute("data-src")));
+    }
+    const timer = setTimeout(load, 5000);
+    const trigger = () => {
+        load();
+        clearTimeout(timer);
+    }
+    const events = ["mouseover","keydown","touchmove","touchstart"];
+    events.forEach(e => window.addEventListener(e, trigger, {passive: true, once: true}));
+}
+</script>
 </body>
 
 </html>

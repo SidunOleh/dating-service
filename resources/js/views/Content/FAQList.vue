@@ -87,7 +87,7 @@ export default {
                     }
 
                     const range = editor.getSelection()
-
+                    
                     editor.insertEmbed(range.index, 'image', '/assets/img/lazy-loading.gif')
 
                     try {

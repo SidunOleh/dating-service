@@ -13,16 +13,6 @@
     @embedstyles(true, 'assets/css/main.css')
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHJRHLJE88"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GHJRHLJE88');
-</script>
-
 <body @class(['height' => Route::currentRouteName() == 'settings.page',])>
 
     <script>

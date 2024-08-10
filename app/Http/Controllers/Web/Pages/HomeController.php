@@ -45,10 +45,10 @@ class HomeController extends Controller
 
         $settings = Option::getSettings();
 
-        return view('pages.home', [
+        return Cache::remember('home', 60, fn () => view('pages.home', [
             'template' => $template, 
             'popupAds' => $popupAds,
             'settings' => $settings,
-        ]);
+        ])->render());
     }
 }

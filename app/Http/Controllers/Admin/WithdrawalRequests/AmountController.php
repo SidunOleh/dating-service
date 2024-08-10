@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\WithdrawalRequest;
 use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class AmountController extends Controller
 {
@@ -20,6 +21,12 @@ class AmountController extends Controller
 
             return response(['amount' => $amount,]);
         } catch (Exception $e) {
+            Log::error($e->getMessage(), [
+                'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
             return response(['message' => $e->getMessage(),], 400);
         }
     }

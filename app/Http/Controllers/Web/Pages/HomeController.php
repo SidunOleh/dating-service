@@ -8,7 +8,6 @@ use App\Models\Option;
 use App\Models\Template;
 use App\Models\ZipCode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {

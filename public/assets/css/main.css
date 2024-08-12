@@ -2176,7 +2176,9 @@ input {
     border-radius: 8px;
     height: 219px;
 }
-
+#location {
+    z-index: 0;
+}
 .profile .left-side .description {
     border-radius: 8px;
     background: #39393e;

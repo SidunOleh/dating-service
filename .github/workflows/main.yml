@@ -36,7 +36,6 @@ jobs:
           sed -i 's/RECAPTCHA_SITE_KEY=/RECAPTCHA_SITE_KEY=${{ secrets.RECAPTCHA_SITE_KEY }}/g' .env
           sed -i 's/RECAPTCHA_SECRET_KEY=/RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}/g' .env
           sed -i 's/QUEUE_CONNECTION=sync/QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}/g' .env
-          sed -i 's/APP_KEY=/APP_KEY=${{ secrets.APP_KEY }}/g' .env
 
       - name: Setup Laravel
         run: |

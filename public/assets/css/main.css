@@ -5346,14 +5346,13 @@ select#gender {
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
-    background-image: url("/public/assets/img/select.svg");
+    /* background-image: url("/public/assets/img/select.svg");
     background-repeat: no-repeat;
     background-position: right 0.3rem top 50%;
-    background-size: 0.99rem auto;
+    background-size: 0.99rem auto; */
     background-color: #39393e;
-
     border-bottom: 1px solid #bebfc0;
-    padding: 12px;
+    padding: 12px 0;
     width: 100%;
 }
 select#gender:focus,

@@ -7,6 +7,7 @@ use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 
 class UpdatePlisioWithdrawals extends Command
 {
@@ -47,7 +48,9 @@ class UpdatePlisioWithdrawals extends Command
                     'status' => $data['status'],
                 ]);
             } catch (Exception $e) {
- 
+                Log::error($e, [
+                    'plisio_withdrawal_id' => $withdrawal->id,
+                ]);
             }
         }
     }

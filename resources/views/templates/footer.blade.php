@@ -11,13 +11,7 @@
     </div>
 </footer>
 
-<style>
-.grecaptcha-badge {
-    z-index: 100;
-}
-</style>
-
-<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" async></script>
+<script data-src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" data-type="lazy"></script>
 <script>
 function getReCaptchaV3(action) {
     return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha
@@ -26,11 +20,27 @@ function getReCaptchaV3(action) {
     )
 }
 </script>
+<script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
+<script data-src="{{ asset('assets/js/bundle.js') }}" data-type="lazy"></script>
 
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/fancybox.umd.js') }}"></script>
-<script src="{{ asset('assets/js/slick.min.js') }}"></script>
-<script src="{{ asset('assets/js/script.js') }}"></script>
+<script>
+    const load = () => {
+        document.querySelectorAll("script[data-type='lazy']").forEach(script => {
+            script.setAttribute("src", script.getAttribute("data-src"))
+        })
+        
+        clearTimeout(timer)
+    }
+
+    const timer = setTimeout(load, 5000)
+
+    const events = ["mouseover", "keydown", "touchmove", "touchstart",]
+
+    events.forEach(e => window.addEventListener(e, load, {
+        passive: true, 
+        once: true,
+    }))
+</script>
 </body>
 
 </html>

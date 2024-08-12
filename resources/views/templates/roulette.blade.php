@@ -25,17 +25,25 @@
                   </svg>
             </div>
 
-            <div class="photo-container photo" id="photo1" data-id="{{ $creators[0]->id }}">
-                <img src="{{ $creators[0]->gallery->random()->url }}" alt="Photo 1" />
+            <div class="photo-container photo" id="photo1" data-id="{{ $pair[0]->id }}">
+                <img
+                    src="{{ asset('assets/img/placeholder.png') }}" 
+                    data-src="{{ $pair[0]->gallery->random()->url }}" 
+                    class="lazyload" 
+                    alt="image" />
                 <div class="info">
-                    {{ mb_strlen($creators[0]->name) > 5 ? mb_substr($creators[0]->name, 0, 5) . '...' : $creators[0]->name }}, {{ $creators[0]->age }}
+                    {{ mb_strlen($pair[0]->name) > 5 ? mb_substr($pair[0]->name, 0, 5) . '...' : $pair[0]->name }}, {{ $pair[0]->age }}
                 </div>
             </div>
             
-            <div class="photo-container photo" id="photo2" data-id="{{ $creators[1]->id }}">
-                <img src="{{ $creators[1]->gallery->random()->url }}" alt="Photo 2" />
+            <div class="photo-container photo" id="photo2" data-id="{{ $pair[1]->id }}">
+                <img
+                    src="{{ asset('assets/img/placeholder.png') }}" 
+                    data-src="{{ $pair[1]->gallery->random()->url }}" 
+                    class="lazyload" 
+                    alt="image" />
                 <div class="info">
-                    {{ mb_strlen($creators[1]->name) > 5 ? mb_substr($creators[1]->name, 0, 5) . '...' : $creators[1]->name }}, {{ $creators[1]->age }}
+                    {{ mb_strlen($pair[1]->name) > 5 ? mb_substr($pair[1]->name, 0, 5) . '...' : $pair[1]->name }}, {{ $pair[1]->age }}
                 </div>
             </div>
 

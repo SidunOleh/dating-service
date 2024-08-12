@@ -23,7 +23,8 @@
                         style="min-height: 200px;"
                         contentType="html"
                         toolbar="full"
-                        v-model:content="item.text"></QuillEditor>
+                        v-model:content="item.text"
+                        @ready="quillReady"></QuillEditor>
 
                 </Flex>
 
@@ -59,7 +60,7 @@
 
 <script>
 import { Button, Input, Textarea, Flex, Tooltip, } from 'ant-design-vue'
-
+import imagesApi from '../../api/images'
 
 export default {
     props: [
@@ -70,6 +71,37 @@ export default {
         Button, Input, Textarea,
         Flex, Tooltip,
     },
+    methods: {
+        quillReady(editor) {
+            const toolbar = editor.getModule('toolbar')
+            toolbar.addHandler('image', () => {
+                const input = document.createElement('input')
+                input.setAttribute('type', 'file')
+                input.setAttribute('accept', 'image/*')
+                input.click()
+                input.onchange = async () => {
+                    const file = input.files[0]
+
+                    if (! file) {
+                        return
+                    }
+
+                    const range = editor.getSelection()
+                    
+                    editor.insertEmbed(range.index, 'image', '/assets/img/lazy-loading.gif')
+
+                    try {
+                        const res = await imagesApi.upload(file, false, false, 0)
+                        
+                        editor.deleteText(range.index, 1)
+                        editor.insertEmbed(range.index, 'image', res.url)
+                    } catch {
+                        editor.deleteText(range.index, 1)
+                    }
+                }
+            })
+        },
+    }
 }
 </script>
 

@@ -3,13 +3,15 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "bundle-js": "npx uglifyjs public/assets/js/jquery.min.js public/assets/js/fancybox.umd.js public/assets/js/slick.min.js  public/assets/js/script.js -o public/assets/js/bundle.js"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.0.4",
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0.0",
         "leaflet": "^1.9.4",
+        "uglify-js": "^3.19.2",
         "vite": "^5.0.0"
     },
     "dependencies": {

@@ -8,6 +8,7 @@ use App\Models\Option;
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
@@ -59,6 +60,12 @@ class AppServiceProvider extends ServiceProvider
             $topAd = Ad::type('top')->inRandomOrder()->first();
 
             $view->with('topAd', $topAd);
+        });
+
+        Blade::directive('embedstyles', function ($expression) {
+            $params = explode(',', $expression);
+
+            return "<?php if ({$params[0]}): ?><style><?php echo minify_css(file_get_contents({$params[1]})); ?></style><?php endif; ?>";
         });
 
         DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);

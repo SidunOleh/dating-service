@@ -4,7 +4,7 @@
     <div class="container">
         <div class="users-list">
 
-            @includeWhen($roulette->count() == 2, 'templates.roulette', ['creators' => $roulette,])
+            @includeWhen($roulette->count() == 2, 'templates.roulette', ['pair' => $roulette,])
         
         </div>
     </div>

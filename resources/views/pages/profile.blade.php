@@ -7,7 +7,11 @@
 
             <div @class(['head-porfile', 'verified' => $creator->is_verified,])>
                 <div class="img-card">
-                    <img src="{{ $creator->gallery->first()->getUrl() }}" alt="" />
+                    <img
+                        src="{{ asset('assets/img/placeholder.png') }}"  
+                        data-src="{{ $creator->gallery->first()->getUrl() }}" 
+                        class="lazyload"
+                        alt="" />
 
                     @auth('web')
                         @include('templates.favorite', [
@@ -16,7 +20,6 @@
                             'active' => auth('web')->user()->favorites->contains($creator->id),
                         ])
                     @endauth
-                
                 </div>
                 <div class="userMain">
                     <p class="name">{{ $creator->name }}, {{ $creator->age }}</p>
@@ -84,28 +87,36 @@
             @endphp
 
             @foreach($imgs as $img)
-            <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
-                <img src="{{ $img->getUrl() }}" alt="" />
-            </a>
+                <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
+                    <img 
+                        src="{{ asset('assets/img/placeholder.png') }}" 
+                        data-src="{{ $img->getUrl() }}" 
+                        class="lazyload" 
+                        alt="" />
+                </a>
             @endforeach
 
             @foreach($blur as $img)
-            <div class="user-photo-item">
-                <div class="subscribe">
-                    @if(!auth('web')->check())
-                    <p>Log in, to get full access!</p>
-                    <div class="btn red login">
-                        Log in
+                <div class="user-photo-item">
+                    <div class="subscribe">
+                        @if(!auth('web')->check())
+                            <p>Log in, to get full access!</p>
+                            <div class="btn red login">
+                                Log in
+                            </div>
+                        @else
+                            <p>Subscribe, to get full access!</p>
+                            <a href="{{ route('subscription.page') }}" class="btn red">
+                                Subscribe
+                            </a>
+                        @endif
                     </div>
-                    @else
-                    <p>Subscribe, to get full access!</p>
-                    <a href="{{ route('subscription.page') }}" class="btn red">
-                        Subscribe
-                    </a>
-                    @endif
+                    <img
+                        src="{{ asset('assets/img/placeholder.png') }}" 
+                        data-src="{{ asset("assets/img/blur/{$img}") }}" 
+                        class="lazyload"
+                        alt="" />
                 </div>
-                <img src="{{ asset("assets/img/blur/{$img}") }}" alt="" />
-            </div>
             @endforeach
 
         </div>
@@ -117,7 +128,11 @@
                 href="{{ route('profile.page', ['creator' => $recommend->id,]) }}" 
                 @class(['other-user-item', 'verified' => $recommend->is_verified,])>
                 <div class="img-card">
-                    <img src="{{ $recommend->gallery->first()->getUrl() }}" alt="" />
+                    <img
+                        src="{{ asset('assets/img/placeholder.png') }}" 
+                        data-src="{{ $recommend->gallery->first()->getUrl() }}"
+                        class="lazyload"
+                        alt="" />
                 </div>
                 
                 <div class="card">

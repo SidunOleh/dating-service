@@ -19,8 +19,8 @@ class WithdrawController extends Controller
 
             return response(['message' => 'OK',]);
         } catch (Exception $e) {
-            Log::error($e->getMessage(), [
-                'withdrawal_request' => $withdrawalRequest->id,
+            Log::error($e, [
+                'withdrawal_request_id' => $withdrawalRequest->id,
             ]);
 
             return response(['message' => $e->getMessage(),], 400);

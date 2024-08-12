@@ -40,7 +40,10 @@ class CheckSubscriptions extends Command
             try {
                 $subscription->inactivate();
 
-                if (! $subscription->unsubscribed) {
+                if (
+                    ! $subscription->unsubscribed and 
+                    $subscription->creator->hasEnoughMoney(Subscription::PRICE)
+                ) {
                     $subscription->creator->subscribe();
                 }
             } catch (Exception $e) {

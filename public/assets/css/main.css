@@ -586,9 +586,9 @@ input {
 }
 
 .header-menu .form-container select {
-    /* -webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none; */
+    appearance: none;
     background-color: transparent;
     color: #fbfbfb;
     border: none;
@@ -5344,7 +5344,8 @@ select#gender {
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
-    background-image: url("../img/select.svg");
+    background-image: url("{{ asset('assets/img/select.svg') }}");
+
     background-repeat: no-repeat;
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;

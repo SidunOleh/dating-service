@@ -5179,6 +5179,7 @@ input {
 
 #map {
     height: 219px;
+    z-index: 0;
 }
 
 .advertising-wrapper.show {

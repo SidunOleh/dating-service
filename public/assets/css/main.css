@@ -586,9 +586,9 @@ input {
 }
 
 .header-menu .form-container select {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
+    appearance: none; */
     background-color: transparent;
     color: #fbfbfb;
     border: none;

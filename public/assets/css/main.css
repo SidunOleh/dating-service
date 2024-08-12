@@ -2921,7 +2921,9 @@ input {
     font-family: Inter;
     font-size: 16px;
 }
-
+.profile-filling .form-group textarea {
+    min-height: 60px;
+}
 .profile-filling .form-group input::-webkit-input-placeholder,
 .profile-filling .form-group textarea::-webkit-input-placeholder {
     color: #bebfc0;
@@ -2952,8 +2954,7 @@ input {
     font-size: 16px;
 }
 
-.profile-filling .form-group input textarea,
-.profile-filling .form-group textarea textarea {
+.profile-filling .form-group textarea {
     overflow: visible;
 }
 

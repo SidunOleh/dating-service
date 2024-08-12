@@ -1268,7 +1268,6 @@
                     <div class="step-head">
                         <h2><span>7</span> Sending for approval</h2>
                     </div>
-
                     <div class="step-body">
                         <div class="form-group">
                             <p class="text">

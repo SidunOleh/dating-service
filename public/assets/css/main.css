@@ -967,7 +967,7 @@ input {
 }
 
 .users .title .user-name {
-    max-width: 150px;
+    max-width: 153px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

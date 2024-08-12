@@ -788,7 +788,7 @@ input {
 
 @media screen and (max-width: 1024px) {
     .users .users-item.verified:after {
-        top: 300px;
+        top: 355px;
     }
 }
 
@@ -967,7 +967,7 @@ input {
 }
 
 .users .title .user-name {
-    max-width: 130px;
+    max-width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

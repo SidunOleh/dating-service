@@ -595,7 +595,8 @@ input {
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
-    background-image: url("../../assets/img/select.svg");
+    background-image: url("{{ mix('assets/img/select.svg') }}");
+
     background-repeat: no-repeat;
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;

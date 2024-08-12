@@ -596,7 +596,6 @@ input {
     font-weight: 400;
     line-height: normal;
     background-image: url("{{ asset('assets/img/select.svg') }}");
-
     background-repeat: no-repeat;
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;

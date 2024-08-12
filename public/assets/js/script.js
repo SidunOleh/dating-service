@@ -9,6 +9,7 @@ $(".burger-menu").click(function () {
 
 $(".header-menu .close").click(function () {
     $(".header-menu").removeClass("open");
+    $("#header").toggleClass("open");
 });
 
 //__________________________Cards__________________________//

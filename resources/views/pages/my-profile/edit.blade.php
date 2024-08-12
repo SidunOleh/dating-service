@@ -526,7 +526,9 @@
                         this.createMap(this.data.latitude, this.data.longitude)
                     }
                     
-                    $('[v-clock]').removeAttr('v-clock')
+                    document.querySelectorAll('[v-clock]').forEach(el => {
+                        el.removeAttribute('v-clock')
+                    })
                 },
             }
 

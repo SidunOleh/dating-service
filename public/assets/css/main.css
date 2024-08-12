@@ -5351,8 +5351,8 @@ select#gender {
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;
     background-color: #39393e;
-    border-radius: 8px;
-    border: 1px solid #525252;
+
+    border-bottom: 1px solid #bebfc0;
     padding: 12px;
     width: 100%;
 }

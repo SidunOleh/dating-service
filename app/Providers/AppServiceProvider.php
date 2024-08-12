@@ -63,9 +63,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::directive('embedstyles', function ($expression) {
-            $params = explode(',', $expression);
+            eval("\$args = [$expression];");
 
-            return "<?php if ({$params[0]}): ?><style><?php echo minify_css(file_get_contents({$params[1]})); ?></style><?php endif; ?>";
+            $bool = $args[0] ? 'true' : 'false';
+            $path = $args[1];
+
+            return "<?php if ({$bool}): ?><style><?php echo minify_css(file_get_contents('{$path}')); ?></style><?php endif; ?>";
         });
 
         DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);

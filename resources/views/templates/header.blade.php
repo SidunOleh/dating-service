@@ -9,7 +9,10 @@
 
     <title>{{ env('APP_NAME') }}</title>
 
-    @embedstyles(Route::currentRouteName() == 'profile.page', 'assets/css/fancybox.css')
+    @embedstyles(
+        in_array(Route::currentRouteName(), ['profile.page', 'my-profile.show',]),
+        'assets/css/fancybox.css'
+    )
     @embedstyles(true, 'assets/css/main.css')
 </head>
 

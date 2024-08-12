@@ -5356,7 +5356,10 @@ select#gender {
     padding: 12px;
     width: 100%;
 }
-
+select#gender:focus,
+select#gender:active {
+    border-bottom: 1px solid #b80006;
+}
 .un-subscribe-Btn.after {
     color: #877e7e;
     border-radius: 16px;

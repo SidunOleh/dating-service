@@ -868,7 +868,7 @@
                                     id="gender" 
                                     name="gender" 
                                     v-model="data.gender">
-                                    
+                                    <option selected>Gender</option>
                                     <option 
                                         v-for="gender in genders"
                                         :value="gender">

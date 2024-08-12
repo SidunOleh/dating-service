@@ -5351,14 +5351,11 @@ select#gender {
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto; */
     background-color: #39393e;
-    border-bottom: 1px solid #bebfc0;
+    border: 1px solid #bebfc0;
     padding: 12px 0;
     width: 100%;
 }
-select#gender:focus,
-select#gender:active {
-    border-bottom: 1px solid #b80006;
-}
+
 .un-subscribe-Btn.after {
     color: #877e7e;
     border-radius: 16px;

@@ -5374,9 +5374,9 @@ input {
 }
 
 select#gender {
-    /* -webkit-appearance: none;
+    -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none; */
+    appearance: none;
     background-color: transparent;
     color: #fbfbfb;
     border: none;
@@ -5390,7 +5390,7 @@ select#gender {
     background-color: #39393e;
     border-radius: 5px;
     border: 1px solid #bebfc0;
-    padding: 12px 0;
+    padding: 16px 0;
     width: 100%;
 }
 

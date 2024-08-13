@@ -1612,9 +1612,15 @@ input {
 .popUp-wrapper .input-group .show-password {
     position: absolute;
     right: 12px;
-    top: 36px;
+    top: 37px;
     cursor: pointer;
     opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+    .popUp-wrapper .input-group .show-password {
+        top: 39px;
+    }
 }
 
 .popUp-wrapper .input-group .show-password:hover {
@@ -2193,7 +2199,7 @@ input {
 }
 
 .profile .left-side .user-info-list .info {
-    color: #fbfbfb;
+    color: #fbfbfb !important;
     font-weight: 600;
 }
 

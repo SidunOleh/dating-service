@@ -1474,10 +1474,16 @@ input {
 
 .popUp-wrapper .resetPassword-card {
     border-radius: 8px !important;
-    padding-top: 55px;
+
     padding-bottom: 16px;
 }
-
+.popUp-wrapper .resetPassword-card .close {
+    background: transparent !important;
+    width: 30px !important;
+    height: 30px !important;
+    top: 5px !important;
+    right: 5px !important;
+}
 @media screen and (max-width: 768px) {
     .popUp-wrapper .resetPassword-card {
         height: auto;

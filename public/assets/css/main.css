@@ -1682,6 +1682,16 @@ input {
         -ms-flex-pack: center;
         justify-content: center;
     }
+    .res-succes-send {
+        height: auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 8px;
+    }
+    .res-succes-send .title {
+        font-size: 17px;
+    }
 }
 
 .popUp-wrapper .passRule,

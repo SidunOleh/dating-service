@@ -37,7 +37,7 @@
                 'after' => $creator->activeSub and $creator->activeSub->unsubscribed,
             ])>
                 Subscribe
-                <img src="{{ asset('/assets/img/chery.svg') }}" alt="" />
+                <img src="{{ asset('assets/img/chery.svg') }}" alt="" />
                 <div class="loader"><img src="./img/btn-loader.svg" alt="" /></div>
                 <div class="sub-cost">
                     Subscription for 1 month:

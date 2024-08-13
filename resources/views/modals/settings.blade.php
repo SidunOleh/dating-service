@@ -1,6 +1,7 @@
 <div class="popUp-wrapper settings-popup">
 
     <div class="enter-new-email card">
+        <div class="close"> <img src="{{ asset('/assets/img/close.svg') }}" alt="" ></div>
         <form id="change-email-form">
             <div class="input-group">
                 <label for="password">

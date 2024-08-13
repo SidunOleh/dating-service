@@ -2193,7 +2193,7 @@ input {
 }
 
 .profile .left-side .user-info-list .info {
-    color: #fbfbfb;
+    color: #fbfbfb !important;
     font-weight: 600;
 }
 

@@ -3881,8 +3881,8 @@ input {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
-.deposit-type span,
-.referral-out span {
+.deposit-type .name,
+.referral-out .name {
     margin-bottom: 3px;
 }
 .abbr {

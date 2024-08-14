@@ -1443,7 +1443,15 @@ input {
 .add-new-pass {
     padding-top: 40px;
 }
-
+.add-new-pass .if-forgot {
+    color: var(--white, #fbfbfb);
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 .popUp-wrapper .card .close:hover {
     background: -webkit-gradient(
         linear,

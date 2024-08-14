@@ -79,6 +79,10 @@
             <button type="submit" class="submit btn red">
                 Confirm
             </button>
+            
+            <div class="if-forgot">
+                If you forget your password, you can log out of your account and <br> change it in the Forgot Password window
+            </div>
 
             <div class="text-error"></div>
         </form>

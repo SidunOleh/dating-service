@@ -93,45 +93,45 @@
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/eth.svg') }}" alt="" /> 
                         <span>Ethereum<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             ETH
-                        </span>
+                        </p>
                     </div>
 
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/usdt.svg') }}" alt="" /> 
                         <span>Tether ERC-20<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             USDT
-                        </span>
+                        </p>
                     </div>
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/usdt-trx.svg') }}" alt="" /> 
                         <span>Tether TRC-20<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             USDT_TRX
-                        </span>
+                        </p>
                     </div>
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/usdc.svg') }}" alt="" /> 
                         <span>USDC ERC-20<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             USDC
-                        </span>
+                        </p>
                     </div>
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/doge.svg') }}" alt="" /> 
                         <span>Dogecoln<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             DOGE
-                        </span>
+                        </p>
                     </div>
                     <div class="deposit-type" data-currency="TRX">
                         <img src="{{ asset('/assets/img/bnb.svg') }}" alt="" /> 
                         <span>BNB Chain<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             BNB
-                        </span>
+                        </p>
                     </div>
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/bch.svg') }}" alt="" /> 
@@ -143,9 +143,9 @@
                     <div class="deposit-type" data-currency="TRX">
                         <img src="{{ asset('/assets/img/busd.svg') }}" alt="" /> 
                         <span>BUSD (BEP-20)<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             BUSD
-                        </span>
+                        </p>
                     </div>
                 </div>
             </div>

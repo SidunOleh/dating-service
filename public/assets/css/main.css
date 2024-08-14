@@ -3845,7 +3845,7 @@ input {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    max-width: 340px;
+    max-width: 343px;
     margin: 0 auto;
     gap: 12px;
 }
@@ -3866,20 +3866,25 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    gap: 8px;
+    gap: 3px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 600;
     color: #fbfbfb;
     cursor: pointer;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
+    padding: 0 8px;
+}
+.deposit-type .name,
+.referral-out .name {
+    margin-bottom: 3px;
 }
 .abbr {
     color: var(--white, #fbfbfb);

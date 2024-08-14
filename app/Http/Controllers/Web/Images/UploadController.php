@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Images;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Images\UploadRequest;
+use App\Jobs\ProcessImage;
 use App\Models\Image;
 use App\Models\Upload;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +21,9 @@ class UploadController extends Controller
 
         Upload::create(['creator_id' => $creator->id,]);
 
-        $uploaded = $request->file('img');
-        $watermark = $request->input('watermark', false);
+        $image = Image::saveUploadedFile($request->file('img'));
 
-        $image = Image::saveUploadedFile($uploaded, true, 10, $watermark);
+        ProcessImage::dispatch($image, 10, $request->input('watermark', false));
 
         return response($image);
     }

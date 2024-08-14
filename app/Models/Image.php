@@ -57,41 +57,21 @@ class Image extends Model
         return url('storage/' . $this->path);
     }
 
+    public function getPath(): string
+    {
+        return Storage::disk($this->disk)->path($this->path);
+    }
+
     public static function saveUploadedFile(
         UploadedFile $uploaded,
-        bool $process = false,
-        int $quality = 0,
-        bool $watermark = false, 
         string $disk = 'public'
     ): self
     {
         $dir = self::dir($disk);
 
-        // if ($process) {
-        //     $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
-        //     $path = $dir . '/' . $name;
+        $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
 
-        //     $manager = new ImageManager(new Driver());
-        //     // $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));
-        //     $manager->read($uploaded->path())->toWebp()->save(Storage::disk($disk)->path($path));
-        // } else {
-        //     $path = $uploaded->store($dir, $disk);
-        // }
-
-        $path = $uploaded->store($dir, $disk);
-
-        // if ($watermark) {
-        //     SpatieImage::load(Storage::disk($disk)->path($path))->watermark(
-        //         storage_path('watermark.png'),
-        //         AlignPosition::Center,
-        //         width: 100,
-        //         widthUnit: Unit::Percent,
-        //         height: 100,
-        //         heightUnit: Unit::Percent,
-        //         fit: Fit::Stretch,
-        //         alpha: 10,
-        //     )->save();
-        // }
+        $path = $uploaded->storeAs($dir, $name, $disk);
 
         $image = self::create([
             'path' => $path,

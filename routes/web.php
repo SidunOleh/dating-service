@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Web\Images\UploadController;
 use App\Http\Controllers\Web\Ads\ClickController;
+use App\Http\Controllers\Web\Auth\LogOutController as AuthLogOutController;
 use App\Http\Controllers\Web\Auth\SignInResendCodeController;
 use App\Http\Controllers\Web\Auth\SignInSendCodeController;
 use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
@@ -91,6 +92,12 @@ Route::post('/sign-in/verify-code', SignInVerifyCodeController::class)
     ->name('sign-in.verify-code');
 Route::post('/sign-in/resend-code', SignInResendCodeController::class)
     ->name('sign-in.resend-code');
+
+/**
+ * Log out
+ */
+Route::get('/logo-out', AuthLogOutController::class)
+    ->name('web.logout');
 
 /**
  * Password

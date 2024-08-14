@@ -394,7 +394,7 @@
                         
                         this.data.photos.push(photo)
 
-                        this.uploadImage(photo.file, true)
+                        await this.uploadImage(photo.file, true)
                             .then(data => {
                                 photo.id = data.id
                                 photo.url = data.url

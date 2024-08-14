@@ -40,6 +40,10 @@
         </div>
         <div class="main">
 
+            <div class="open-faq btn red">
+                Show categories
+            </div>
+
             <div class="top">
                 <div class="search-wrapper">
                     <div class="input-wrapper">

@@ -537,7 +537,7 @@ input {
     opacity: 0.6;
 }
 
-.header-menu .search-container .search-button img {
+.header-menu .search-container .search-button path {
     width: 20px;
     height: 20px;
 }

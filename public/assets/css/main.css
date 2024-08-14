@@ -664,7 +664,7 @@ input {
 .header-menu .log-out {
     width: 100%;
     max-width: 200px;
-    margin-top: auto;
+    margin: 25px auto;
 }
 
 .footer {

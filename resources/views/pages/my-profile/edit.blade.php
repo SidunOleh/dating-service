@@ -379,9 +379,9 @@
                 async uploadPhotos(e) {
                     const files = e.target.files
                     for (let i = 0; i < files.length; i++) {
-                        if (this.data.photos.length == 12) {
-                            break
-                        }
+                        // if (this.data.photos.length == 12) {
+                        //     break
+                        // }
 
                         if (files[i].size > 10 * 1024 * 1024) {
                             continue
@@ -394,7 +394,7 @@
                         
                         this.data.photos.push(photo)
 
-                        await this.uploadImage(photo.file, true)
+                        this.uploadImage(photo.file, true)
                             .then(data => {
                                 photo.id = data.id
                                 photo.url = data.url

@@ -42,7 +42,7 @@ class EditCreatorData extends JsonResource
             'verification_photo' => $this->verificationPhoto,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'birthday' => $this->birthday?->format('Y-m-d') ?? '',
+            'birthday' => $this->birthday?->format('m/d/Y') ?? '',
         ];
     }
 }

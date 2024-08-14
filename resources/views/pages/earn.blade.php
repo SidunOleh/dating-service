@@ -65,11 +65,70 @@
                 <p class="title">Withdraw</p>
                 <div class="deposit-types">
 
-                    <div class="referral-out" data-currency="TRX">
-                        <img src="{{ asset('/assets/img/TRX.svg') }}" alt="" /> 
-                        Tron
+                    <div class="referral-out" data-currency="">
+                        <img src="{{ asset('/assets/img/btc.svg') }}" alt="" /> 
+                        <span>Bitcoin<span>
+                        <p class="abbr">
+                            BTC
+                        </p>
+                    </div>
+                    <div class="referral-out" data-currency="">
+                        <img src="{{ asset('/assets/img/eth.svg') }}" alt="" /> 
+                        <span>Ethereum<span>
+                        <p class="abbr">
+                            ETH
+                        </p>
                     </div>
 
+                    <div class="referral-out" data-currency="">
+                        <img src="{{ asset('/assets/img/usdt.svg') }}" alt="" /> 
+                        <span>Tether ERC-20<span>
+                        <p class="abbr">
+                            USDT
+                        </p>
+                    </div>
+                    <div class="referral-out" data-currency="">
+                        <img src="{{ asset('/assets/img/usdt-trx.svg') }}" alt="" /> 
+                        <span>Tether TRC-20<span>
+                        <p class="abbr">
+                            USDT_TRX
+                        </p>
+                    </div>
+                    <div class="referral-out" data-currency="">
+                        <img src="{{ asset('/assets/img/usdc.svg') }}" alt="" /> 
+                        <span>USDC ERC-20<span>
+                        <p class="abbr">
+                            USDC
+                        </p>
+                    </div>
+                    <div class="referral-out" data-currency="">
+                        <img src="{{ asset('/assets/img/doge.svg') }}" alt="" /> 
+                        <span>Dogecoln<span>
+                        <p class="abbr">
+                            DOGE
+                        </p>
+                    </div>
+                    <div class="referral-out" data-currency="TRX">
+                        <img src="{{ asset('/assets/img/bnb.svg') }}" alt="" /> 
+                        <span>BNB Chain<span>
+                        <p class="abbr">
+                            BNB
+                        </p>
+                    </div>
+                    <div class="referral-out" data-currency="">
+                        <img src="{{ asset('/assets/img/bch.svg') }}" alt="" /> 
+                        <span>Bitcoin Cash<span>
+                        <p class="abbr">
+                            BCH
+                        </p>
+                    </div>
+                    <div class="referral-out" data-currency="TRX">
+                        <img src="{{ asset('/assets/img/busd.svg') }}" alt="" /> 
+                        <span>BUSD (BEP-20)<span>
+                        <p class="abbr">
+                            BUSD
+                        </p>
+                    </div>
                 </div>
             </div>
 

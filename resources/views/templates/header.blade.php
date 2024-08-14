@@ -96,7 +96,13 @@
                             value="{{ request()->query('s') }}"/>
                         <button type="submit" class="search-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M16.8931 16.92L19.9731 20M19.0841 11.581C19.0841 15.768 15.7011 19.162 11.5291 19.162C7.35614 19.162 3.97314 15.768 3.97314 11.582C3.97314 7.393 7.35614 4 11.5281 4C15.7011 4 19.0841 7.394 19.0841 11.581Z" stroke="#BEBFC0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16.893 16.92L19.973 20M19.084 11.581C19.084 15.768 15.701 19.162 11.529 19.162C7.35602 19.162 3.97302 15.768 3.97302 11.582C3.97302 7.393 7.35602 4 11.528 4C15.701 4 19.084 7.394 19.084 11.581Z" stroke="url(#paint0_linear_1306_19139)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <defs>
+                                    <linearGradient id="paint0_linear_1306_19139" x1="11.973" y1="4" x2="11.973" y2="20" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#7A0004"/>
+                                    <stop offset="1" stop-color="#BA0007"/>
+                                    </linearGradient>
+                                </defs>
                             </svg>  
                         </button>
                     </form>

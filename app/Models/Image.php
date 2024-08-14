@@ -67,16 +67,18 @@ class Image extends Model
     {
         $dir = self::dir($disk);
 
-        if ($process) {
-            $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
-            $path = $dir . '/' . $name;
+        // if ($process) {
+        //     $name = md5(Auth::id() . microtime() . $uploaded->getClientOriginalName()) . '.webp';
+        //     $path = $dir . '/' . $name;
 
-            $manager = new ImageManager(new Driver());
-            // $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));
-            $manager->read($uploaded->path())->toWebp()->save(Storage::disk($disk)->path($path));
-        } else {
-            $path = $uploaded->store($dir, $disk);
-        }
+        //     $manager = new ImageManager(new Driver());
+        //     // $manager->read($uploaded->path())->toWebp($quality)->save(Storage::disk($disk)->path($path));
+        //     $manager->read($uploaded->path())->toWebp()->save(Storage::disk($disk)->path($path));
+        // } else {
+        //     $path = $uploaded->store($dir, $disk);
+        // }
+
+        $path = $uploaded->store($dir, $disk);
 
         // if ($watermark) {
         //     SpatieImage::load(Storage::disk($disk)->path($path))->watermark(

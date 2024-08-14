@@ -20,6 +20,8 @@ class UploadController extends Controller
 
         if ($process) {
             ProcessImage::dispatch($image, $quality, $watermark)->delay(now()->addMinutes(1));
+        } else {
+            $image->update(['processed' => true,]);
         }
 
         return response($image);

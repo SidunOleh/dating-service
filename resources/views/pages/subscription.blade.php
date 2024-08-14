@@ -90,10 +90,6 @@
                             BTC
                         </span>
                     </div>
-
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/eth.svg') }}" alt="" /> 
                         <span>Ethereum<span>
@@ -102,9 +98,6 @@
                         </span>
                     </div>
 
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/usdt.svg') }}" alt="" /> 
                         <span>Tether ERC-20<span>
@@ -112,10 +105,6 @@
                             USDT
                         </span>
                     </div>
-
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/usdt-trx.svg') }}" alt="" /> 
                         <span>Tether TRC-20<span>
@@ -123,10 +112,6 @@
                             USDT_TRX
                         </span>
                     </div>
-
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/usdc.svg') }}" alt="" /> 
                         <span>USDC ERC-20<span>
@@ -134,10 +119,6 @@
                             USDC
                         </span>
                     </div>
-
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/doge.svg') }}" alt="" /> 
                         <span>Dogecoln<span>
@@ -145,10 +126,6 @@
                             DOGE
                         </span>
                     </div>
-
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="TRX">
                         <img src="{{ asset('/assets/img/bnb.svg') }}" alt="" /> 
                         <span>BNB Chain<span>
@@ -156,10 +133,6 @@
                             BNB
                         </span>
                     </div>
-
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/bch.svg') }}" alt="" /> 
                         <span>Bitcoin Cash<span>
@@ -167,10 +140,6 @@
                             BCH
                         </span>
                     </div>
-
-                </div>
-                <div class="deposit-types">
-                    
                     <div class="deposit-type" data-currency="TRX">
                         <img src="{{ asset('/assets/img/busd.svg') }}" alt="" /> 
                         <span>BUSD (BEP-20)<span>
@@ -180,6 +149,7 @@
                     </div>
 
                 </div>
+               
                 
             </div>
 

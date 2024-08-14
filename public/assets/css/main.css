@@ -3023,6 +3023,10 @@ input {
     resize: none;
     border-radius: 8px;
     background-color: #4c4c52;
+    border: 1px solid #bebfc0;
+    padding: 8px;
+    font-family: Inter;
+    font-size: 16px;
 }
 
 .profile-filling .form-group input::-webkit-input-placeholder,
@@ -3059,10 +3063,12 @@ input {
     overflow: visible;
 }
 
-.profile-filling .form-group input:focus,
-.profile-filling .form-group textarea:focus {
+.profile-filling .form-group input:focus {
     outline: none;
     border-bottom: 1px solid #b80006;
+}
+.profile-filling .form-group textarea:focus {
+    outline: 1px solid #b80006;
 }
 
 .profile-filling .form-group .rule {

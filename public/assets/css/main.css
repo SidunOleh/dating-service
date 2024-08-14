@@ -3023,10 +3023,11 @@ input {
     resize: none;
     border-radius: 8px;
     background-color: #4c4c52;
-    border: 1px solid #bebfc0;
+    border: 1px solid #8585858d;
     padding: 8px;
     font-family: Inter;
     font-size: 16px;
+    color: var(--white, #fbfbfb);
 }
 
 .profile-filling .form-group input::-webkit-input-placeholder,

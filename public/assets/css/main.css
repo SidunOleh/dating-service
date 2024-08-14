@@ -3005,11 +3005,9 @@ input {
     gap: 4px;
 }
 
-.profile-filling .form-group input,
-.profile-filling .form-group textarea {
+.profile-filling .form-group input {
     border: none;
     border-bottom: 1px solid #bebfc0;
-    resize: none;
     background-color: transparent;
     padding-bottom: 8px;
     color: var(--white, #fbfbfb);
@@ -3019,6 +3017,9 @@ input {
 
 .profile-filling .form-group textarea {
     min-height: 60px;
+    resize: none;
+    border-radius: 8px;
+    background-color: #4c4c52;
 }
 
 .profile-filling .form-group input::-webkit-input-placeholder,

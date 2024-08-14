@@ -2342,7 +2342,7 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
 }
 
 @media screen and (max-width: 768px) {
@@ -2413,7 +2413,7 @@ input {
 
 .profile .other-user-list .other-user-item img:not(.likes img) {
     width: 100%;
-    height: 116px;
+    height: 113px;
     -o-object-fit: cover;
     object-fit: cover;
 }
@@ -2486,6 +2486,10 @@ input {
     color: var(--light-gray, #bebfc0);
     font-size: 10px;
     line-height: normal;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .profile.account .left-side {

@@ -6,9 +6,13 @@
     DS.ads.settings = {{ Js::from($settings) }}
 </script>
 
-<div class="user-message">
-    Search by location and filtration is available after registration on the site
+
+<div class="warning container">
+    <div class="warning-message">
+        Search by location and filtration is available after registration on the site
+    </div>
 </div>
+
 
 <section class="users">
     <div class="container">

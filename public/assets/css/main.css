@@ -27,6 +27,15 @@
         U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+.warning-message {
+    border-radius: 16px;
+    border: 0.5px solid #fff;
+    background: rgba(217, 217, 217, 0.1);
+    padding: 15px 13px;
+    width: fit-content;
+    margin: 24px auto;
+}
+
 *,
 :after,
 :before {

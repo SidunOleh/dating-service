@@ -23,7 +23,7 @@ class UploadController extends Controller
 
         $image = Image::saveUploadedFile($request->file('img'));
 
-        ProcessImage::dispatch($image, 10, $request->input('watermark', false));
+        ProcessImage::dispatch($image, 10, $request->input('watermark', false))->delay(now()->addMinutes(1));
 
         return response($image);
     }

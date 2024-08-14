@@ -3884,6 +3884,7 @@ input {
 .abbr {
     color: var(--white, #fbfbfb);
     text-align: center;
+    font-family: Inter;
     font-size: 10px;
     font-weight: 400;
 }

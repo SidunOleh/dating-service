@@ -3845,7 +3845,7 @@ input {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    max-width: 340px;
+    max-width: 343px;
     margin: 0 auto;
     gap: 12px;
 }
@@ -3873,7 +3873,7 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 600;
     color: #fbfbfb;

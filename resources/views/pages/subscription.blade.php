@@ -147,10 +147,7 @@
                             BUSD
                         </span>
                     </div>
-
                 </div>
-               
-                
             </div>
 
         </div>

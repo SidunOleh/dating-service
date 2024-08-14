@@ -272,7 +272,7 @@
 
                         <Button
                             :loading="loading.balance" 
-                            @click="updateBalance">
+                            @click="confirmPopup(() => updateBalance(), 'Are you sure you want to change balance?')">
                             Update
                         </Button>
                     </Flex>

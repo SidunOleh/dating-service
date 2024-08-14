@@ -86,9 +86,9 @@
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/btc.svg') }}" alt="" /> 
                         <span>Bitcoin<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             BTC
-                        </span>
+                        </p>
                     </div>
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/eth.svg') }}" alt="" /> 
@@ -136,9 +136,9 @@
                     <div class="deposit-type" data-currency="">
                         <img src="{{ asset('/assets/img/bch.svg') }}" alt="" /> 
                         <span>Bitcoin Cash<span>
-                        <span class="abbr">
+                        <p class="abbr">
                             BCH
-                        </span>
+                        </p>
                     </div>
                     <div class="deposit-type" data-currency="TRX">
                         <img src="{{ asset('/assets/img/busd.svg') }}" alt="" /> 

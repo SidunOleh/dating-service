@@ -661,6 +661,11 @@ input {
     font-weight: 400;
     line-height: normal;
 }
+.header-menu .log-out {
+    width: 100%;
+    max-width: 200px;
+    margin-top: auto;
+}
 
 .footer {
     position: absolute;

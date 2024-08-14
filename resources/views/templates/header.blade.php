@@ -187,6 +187,8 @@
                     </div>
                 </div>
 
+                <div class="log-out btn red">Log out</div>
+
             </div>
 
             <div class="header-body">

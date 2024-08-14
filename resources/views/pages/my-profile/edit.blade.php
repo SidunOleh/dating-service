@@ -1192,7 +1192,7 @@
                                     <input 
                                         id="dob" 
                                         name="dob" 
-                                        placeholder="MM/DD/YYYY"
+                                        placeholder="mm/dd/yyyy"
                                         onkeydown="return event.key != 'Enter'"
                                         v-model="data.birthday"
                                         @focusout="validate('birthday')"/>

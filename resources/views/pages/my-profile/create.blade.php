@@ -1231,7 +1231,7 @@
                                         id="dob" 
                                         name="dob" 
                                         onkeydown="return event.key != 'Enter'"
-                                        placeholder="mm/dd/yyyy"
+                                        placeholder="MM/DD/YYYY"
                                         v-model="data.birthday" />
                                     <div v-if="errors.birthday" class="error-text">
                                         {{ errors.birthday }}

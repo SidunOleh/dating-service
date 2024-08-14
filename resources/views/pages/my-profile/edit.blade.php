@@ -1190,7 +1190,6 @@
                                         Date of birth*
                                     </label>
                                     <input 
-                                        type="date"
                                         id="dob" 
                                         name="dob" 
                                         onkeydown="return event.key != 'Enter'"

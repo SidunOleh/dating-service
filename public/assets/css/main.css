@@ -3881,7 +3881,12 @@ input {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
-
+.abbr {
+    color: var(--white, #fbfbfb);
+    text-align: center;
+    font-size: 10px;
+    font-weight: 400;
+}
 .deposit-type:hover,
 .referral-out:hover {
     -webkit-transform: translateY(-5px);

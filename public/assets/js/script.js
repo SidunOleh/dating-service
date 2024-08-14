@@ -954,12 +954,6 @@ $(document).ready(function () {
             $(".accordion-pannel").slideUp();
         }
     }
-
-    if (window.location.hash) {
-        $(`[data-target=${window.location.hash.substring(1)}]`).click();
-    } else {
-        $(`[data-target]`).first().click();
-    }
 });
 $(document).ready(function () {
     $(".search-input").on("input", function () {

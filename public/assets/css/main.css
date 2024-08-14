@@ -3881,6 +3881,10 @@ input {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
+.deposit-type span,
+.referral-out span {
+    margin-bottom: 3px;
+}
 .abbr {
     color: var(--white, #fbfbfb);
     text-align: center;

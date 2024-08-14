@@ -93,11 +93,15 @@
 
 <script>
     if (window.location.hash) {
-        document.querySelector(`[data-target=${window.location.hash.substring(1)}]`).classList.add('open')
-        document.querySelector(window.location.hash).style.display = 'block'
+        document.querySelector(`[data-target=${window.location.hash.substring(1)}]`)
+            .classList.add('open')
+        document.querySelector(window.location.hash)
+            .style.display = 'block'
     } else {
-        document.querySelector('[data-target]').classList.add('open')
-        document.querySelector('.faq-content').style.display = 'block'
+        document.querySelector('[data-target]')
+            .classList.add('open')
+        document.querySelector('.faq-content')
+            .style.display = 'block'
     }
 </script>
 

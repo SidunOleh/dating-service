@@ -7,8 +7,8 @@
 </script>
 
 
-<div class="warning container">
-    <div class="warning-message">
+<div class="notification container">
+    <div class="notification-message">
         Search by location and filtration is available after registration on the site
     </div>
 </div>

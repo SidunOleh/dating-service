@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
-use Spatie\Image\Image as SpatieImage;
-use Spatie\Image\Enums\AlignPosition;
-use Spatie\Image\Enums\Fit;
-use Spatie\Image\Enums\Unit;
 
 class Image extends Model
 {
@@ -79,6 +75,18 @@ class Image extends Model
             'user_id' => Auth::id(),
             'user_type' => get_class(Auth::user()),
         ]);
+
+        if (in_array($uploaded->getMimeType(), [
+            'image/heif', 
+            'image/heif-sequence', 
+            'image/heic', 
+            'image/heic-sequence', 
+            'image/avif',
+        ])) {
+            $manager = new ImageManager(new Driver());
+        
+            $manager->read($image->getPath())->toWebp()->save($image->getPath());
+        }
         
         return $image;
     }

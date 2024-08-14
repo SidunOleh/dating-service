@@ -24,9 +24,9 @@ class ProcessImage implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        public Image $image,
-        public int $quality,
-        public int $watermark,
+        private Image $image,
+        private int $quality,
+        private int $watermark,
     )
     {
         //
@@ -38,7 +38,7 @@ class ProcessImage implements ShouldQueue
     public function handle(): void
     {
         $manager = new ImageManager(new Driver());
-        
+
         $manager->read($this->image->getPath())->toWebp($this->quality)->save($this->image->getPath());
 
         if ($this->watermark) {

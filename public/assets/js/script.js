@@ -33,7 +33,7 @@ $(".img-slider").each(function () {
     });
 });
 
-//_____________________Popups______________________//
+//_________________________Popups___________________________//
 
 const $popupWrapper = $(".popUp-wrapper");
 const $header = $(".header");
@@ -1350,4 +1350,19 @@ $("#pasteButton").on("click", function () {
     navigator.clipboard.readText().then((text) => {
         $("#cryptoAddress").val(text);
     });
+});
+
+$("#dob").on("input", function () {
+    let input = $(this).val().replace(/\D/g, "").substring(0, 8);
+    let day = input.substring(0, 2);
+    let month = input.substring(2, 4);
+    let year = input.substring(4, 8);
+
+    if (input.length >= 5) {
+        $(this).val(day + "/" + month + "/" + year);
+    } else if (input.length >= 3) {
+        $(this).val(day + "/" + month);
+    } else if (input.length >= 1) {
+        $(this).val(day);
+    }
 });

@@ -1190,9 +1190,9 @@
                                         Date of birth*
                                     </label>
                                     <input 
-                                        type="date"
                                         id="dob" 
                                         name="dob" 
+                                        placeholder="mm/dd/yyyy"
                                         onkeydown="return event.key != 'Enter'"
                                         v-model="data.birthday"
                                         @focusout="validate('birthday')"/>

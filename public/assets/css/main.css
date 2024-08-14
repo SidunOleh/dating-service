@@ -4481,7 +4481,9 @@ input {
     padding: 32px;
     width: 50%;
 }
-
+.settings .settings-item img {
+    height: 84px;
+}
 @media screen and (max-width: 768px) {
     .settings .settings-item {
         padding: 16px;
@@ -4489,6 +4491,7 @@ input {
     }
     .settings .settings-item img {
         width: 20px;
+        height: auto;
     }
 }
 

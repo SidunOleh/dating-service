@@ -21,12 +21,14 @@ class DepositController extends Controller
                 $vaidated
             );
             $transaction->details;
+
+            return response($transaction);
         } catch (Exception $e) {
             Log::error($e, [
                 'creator_id' => Auth::guard('web')->id(),
             ]);
-        }
 
-        return response($transaction);
+            return response(['message' => 'Bad request',], 400);
+        }
     }
 }

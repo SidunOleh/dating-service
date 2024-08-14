@@ -18,7 +18,7 @@ class WithdrawResendController extends Controller
 
             return response(['message' => 'OK',]);
         } catch (Exception $e) {
-            return response(['message' => $e->getMessage()], 400);
+            return response(['message' => 'Bad request',], 400);
         }
     }
 }

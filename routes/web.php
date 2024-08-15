@@ -96,7 +96,7 @@ Route::post('/sign-in/resend-code', SignInResendCodeController::class)
 /**
  * Log out
  */
-Route::get('/logo-out', AuthLogOutController::class)
+Route::get('/log-out', AuthLogOutController::class)
     ->name('web.logout');
 
 /**

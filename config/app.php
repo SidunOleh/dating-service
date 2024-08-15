@@ -186,7 +186,15 @@ return [
     ])->toArray(),
 
     'currencies' => [
-        'TRX',
+        'BTC',
+        'ETH',
+        'USDT',
+        'USDT_TRX',
+        'USDC',
+        'DOGE',
+        'BNB',
+        'BCH',
+        'BUSD',
     ],
 
 ];

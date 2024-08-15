@@ -272,6 +272,12 @@
                                 return Boolean(val)
                             },
                         },
+                        {
+                            message: 'Date is invalid',
+                            fn: (val, data) => {
+                                return ! isNaN(Date.parse(val))
+                            },
+                        },
                     ],
                 },
                 errors: {},
@@ -326,6 +332,22 @@
                         ! phone[2] ? 
                         phone[1] : 
                         '(' + phone[1] + ') ' + phone[2] + (phone[3] ? '-' + phone[3] : '')
+                },
+                formatDate(e) {
+                    let birthday = this.data.birthday.replace(/\D/g, "").substring(0, 8)
+                    let day = birthday.substring(0, 2)
+                    let month = birthday.substring(2, 4)
+                    let year = birthday.substring(4, 8)
+
+                    if (birthday.length >= 5) {
+                        this.data.birthday = day + "/" + month + "/" + year
+                    } else if (birthday.length >= 3) {
+                        this.data.birthday = day + "/" + month
+                    } else if (birthday.length >= 1) {
+                        this.data.birthday = day
+                    } else {
+                        this.data.birthday = ''
+                    }
                 },
 
                 async search() {
@@ -507,6 +529,12 @@
                     data.id_photo = data.id_photo?.id ?? null
                     data.verification_photo = data.verification_photo?.id ?? null
                     data.street_photo = data.street_photo?.id ?? null
+
+                    if (data.birthday) {
+                        const birthday = data.birthday.replaceAll('/', '')
+                        
+                        data.birthday = `${birthday.substring(4, 8)}-${birthday.substring(0, 2)}-${birthday.substring(2, 4)}`
+                    }
 
                     data.recaptcha = await getReCaptchaV3('create_profile')
                     
@@ -1232,7 +1260,8 @@
                                         name="dob" 
                                         onkeydown="return event.key != 'Enter'"
                                         placeholder="mm/dd/yyyy"
-                                        v-model="data.birthday" />
+                                        v-model="data.birthday" 
+                                        @input="formatDate"/>
                                     <div v-if="errors.birthday" class="error-text">
                                         {{ errors.birthday }}
                                     </div>

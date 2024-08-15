@@ -248,6 +248,12 @@
                                 return Boolean(val)
                             },
                         },
+                        {
+                            message: 'Date is invalid',
+                            fn: (val, data) => {
+                                return ! isNaN(Date.parse(val))
+                            },
+                        },
                     ],
                 },
                 errors: {},
@@ -289,6 +295,22 @@
                         ! phone[2] ? 
                         phone[1] : 
                         '(' + phone[1] + ') ' + phone[2] + (phone[3] ? '-' + phone[3] : '')
+                },
+                formatDate(e) {
+                    let birthday = this.data.birthday.replace(/\D/g, "").substring(0, 8)
+                    let day = birthday.substring(0, 2)
+                    let month = birthday.substring(2, 4)
+                    let year = birthday.substring(4, 8)
+
+                    if (birthday.length >= 5) {
+                        this.data.birthday = day + "/" + month + "/" + year
+                    } else if (birthday.length >= 3) {
+                        this.data.birthday = day + "/" + month
+                    } else if (birthday.length >= 1) {
+                        this.data.birthday = day
+                    } else {
+                        this.data.birthday = ''
+                    }
                 },
                 
                 async search() {
@@ -379,9 +401,9 @@
                 async uploadPhotos(e) {
                     const files = e.target.files
                     for (let i = 0; i < files.length; i++) {
-                        // if (this.data.photos.length == 12) {
-                        //     break
-                        // }
+                        if (this.data.photos.length == 12) {
+                            break
+                        }
 
                         if (files[i].size > 10 * 1024 * 1024) {
                             continue
@@ -394,7 +416,7 @@
                         
                         this.data.photos.push(photo)
 
-                        this.uploadImage(photo.file, true)
+                        await this.uploadImage(photo.file, true)
                             .then(data => {
                                 photo.id = data.id
                                 photo.url = data.url
@@ -474,6 +496,12 @@
                     data.id_photo = data.id_photo?.id ?? null
                     data.verification_photo = data.verification_photo?.id ?? null
                     data.street_photo = data.street_photo?.id ?? null
+
+                    if (data.birthday) {
+                        const birthday = data.birthday.replaceAll('/', '')
+                        
+                        data.birthday = `${birthday.substring(4, 8)}-${birthday.substring(0, 2)}-${birthday.substring(2, 4)}`
+                    }
 
                     data.recaptcha = await getReCaptchaV3('edit_profile')
                     
@@ -1195,7 +1223,8 @@
                                         placeholder="mm/dd/yyyy"
                                         onkeydown="return event.key != 'Enter'"
                                         v-model="data.birthday"
-                                        @focusout="validate('birthday')"/>
+                                        @focusout="validate('birthday')"
+                                        @input="formatDate"/>
                                     <div v-if="errors.birthday" class="error-text">
                                         {{ errors.birthday }}
                                     </div>

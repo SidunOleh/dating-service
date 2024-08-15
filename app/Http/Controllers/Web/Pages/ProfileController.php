@@ -16,13 +16,10 @@ class ProfileController extends Controller
         ) {
             return abort(404);
         }
-
-        $count = count($creator->photos) * 3;
-        $exclude = [$creator->id,];
         
         $recommends = Creator::recommends(
-            $count, 
-            $exclude, 
+            count($creator->photos) * 3,
+            [$creator->id,], 
             session('filters', [])
         );
 

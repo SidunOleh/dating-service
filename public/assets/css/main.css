@@ -3853,7 +3853,6 @@ input {
 .deposit-type,
 .referral-out {
     width: calc((100% - 24px) / 3);
-    height: 87px;
     border-radius: 8px;
     background: var(
         --Linear,
@@ -3880,11 +3879,11 @@ input {
     cursor: pointer;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
-    padding: 0 8px;
+    padding: 8px 0px;
 }
 .deposit-type .name,
 .referral-out .name {
-    margin-bottom: 3px;
+    margin-top: 2px;
 }
 .abbr {
     color: var(--white, #fbfbfb);

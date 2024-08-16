@@ -60,7 +60,7 @@ class ProcessImage implements ShouldQueue
                 $image->height()
             );
 
-            $image->place($watermark, 'center')->save($this->image->getPath());
+            $image->place($watermark, 'center', 0, 0, 10)->save($this->image->getPath());
         }
 
         $this->image->update(['processed' => true,]);

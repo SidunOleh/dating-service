@@ -44,7 +44,7 @@ class Subscription extends Model
         $subscription = self::create([
             'status' => 'active',
             'starts_at' => now(),
-            'ends_at' => now()->addMonths(self::MONTHS),
+            'ends_at' => now()->addDays(self::MONTHS),
             'creator_id' => $creator->id,
         ]);
 

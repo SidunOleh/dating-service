@@ -14,15 +14,15 @@ class PlisioCallbackController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $webhookLog = PaymentGatewayWebhookLog::create([
-            'gateway' => 'plisio',
-            'url' => $request->fullUrl(),
-            'ip' => $request->ip(),
-            'headers' => $request->headers->all(),
-            'body' => $request->all(),
-        ]);
-
         try {
+            $webhookLog = PaymentGatewayWebhookLog::create([
+                'gateway' => 'plisio',
+                'url' => $request->fullUrl(),
+                'ip' => $request->ip(),
+                'headers' => $request->headers->all(),
+                'body' => $request->all(),
+            ]);
+            
             $client = new PlisioClient(env('PLISIO_SECRET_KEY'));
 
             if (! $client->verifyData($data = $request->all())) {

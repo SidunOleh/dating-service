@@ -44,7 +44,6 @@ class UpdatePlisioWithdrawals extends Command
                 $withdrawal->update([
                     'status' => $data['status'],
                 ]);
-                
                 $withdrawal->transaction->update([
                     'status' => $data['status'],
                 ]);

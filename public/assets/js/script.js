@@ -1065,9 +1065,10 @@ $(".transaction-wrapper .close").click(() => {
 
 //__________________________Subscribe__________________________//
 
-$(".subscribe-Btn:not(.after)").on("click", () => {
+$(document).on("click", ".subscribe-Btn:not(.after,.loading)", () => {
     addLoader(".subscribe-Btn");
 
+    $(".subscribe-Btn").addClass("loading");
     $(".subscribe-card .text-error").removeClass("show");
 
     $.post("/subscribe")
@@ -1080,6 +1081,7 @@ $(".subscribe-Btn:not(.after)").on("click", () => {
                 .addClass("show");
         })
         .always(() => {
+            $(".subscribe-Btn").removeClass("loading");
             removeLoader(".subscribe-Btn");
         });
 });

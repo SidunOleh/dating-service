@@ -155,9 +155,9 @@ $isResetPage = request()->query('token') and request()->query('email');
           Your password reset message has been successfully sent to your email:
         </p>
         <p class="mail">email@gmail.com</p>
-        <a class="btn red">
+        <div class="btn red">
             Close
-        </a>
+        </div>
     </div>
 
     <div class="addNew-pass-card card {{ $isResetPage ? 'active' : '' }}">
@@ -202,9 +202,9 @@ $isResetPage = request()->query('token') and request()->query('email');
         <p class="title">
             Your password has been successfully changed
         </p>
-        <a class="btn red login">
+        <div class="btn red login">
             Log in
-        </a>
+        </div>
     </div>
 
 </div>

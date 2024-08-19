@@ -3,7 +3,7 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -59,10 +59,11 @@ jobs:
           port: 22
           script: |
               cd /var/www/date
-              chmod -R 755 storage bootstrap/cache
+              chown -R www-data:www-data storage bootstrap/cache
+              chmod -R 775 storage bootstrap/cache
+              php artisan storage:link
+              php artisan migrate
               php artisan config:cache
               php artisan event:cache
               php artisan route:cache
               php artisan view:cache
-              php artisan storage:link
-              php artisan migrate

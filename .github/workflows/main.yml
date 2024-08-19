@@ -32,7 +32,7 @@ jobs:
           sed -i 's/RECAPTCHA_SECRET_KEY=/RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}/g' .env
           sed -i 's/QUEUE_CONNECTION=sync/QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}/g' .env
 
-      - run: chmod -R 777 storage bootstrap/cache
+      - run: chmod -R 755 storage bootstrap/cache
 
       - uses: actions/setup-node@v2
         with:

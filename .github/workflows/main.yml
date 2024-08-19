@@ -60,7 +60,9 @@ jobs:
           port: 22
           script: |
               cd /var/www/date
-              chown -R www-data:www-data storage bootstrap/cache
+              chown -R www-data:www-data .
+              find . -type f -exec chmod 644
+              find . -type d -exec chmod 755
               chmod -R 775 storage bootstrap/cache
               php artisan storage:link
               php artisan migrate

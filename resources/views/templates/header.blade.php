@@ -7,11 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="{{ env('APP_NAME') }}">
 
-    <title>{{ env('APP_NAME') }}xxx</title>
+    <title>{{ env('APP_NAME') }}</title>
 
     @if(in_array(Route::currentRouteName(), ['profile.page', 'my-profile.show',]))
         @embedstyles('assets/css/fancybox.css')
     @endif
+
     @embedstyles('assets/css/main.css')
 </head>
 

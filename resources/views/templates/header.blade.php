@@ -32,7 +32,7 @@
 
             <div class="header-body">
                 <div class="left">
-                    <a href="{{ route('home.index') }}" class="btn red">
+                    <a href="{{ route('home.index') }}" class="btn red" aria-label="Go to home">
                         <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
                     </a>
                 </div>
@@ -209,7 +209,7 @@
             <div class="header-body">
                 <div class="left">
                     <a href="{{ route('home.index') }}" class="btn red">
-                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
+                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" aria-label="Go to home"/>
                     </a>
                 </div>
 

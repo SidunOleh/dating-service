@@ -34,12 +34,7 @@ jobs:
 
       - run: chmod -R 777 storage bootstrap/cache
 
-      - run: |
-          php artisan config:cache
-          php artisan event:cache
-          php artisan route:cache
-          php artisan view:cache
-          php artisan storage:link
+      - run: php artisan storage:link
 
       - uses: actions/setup-node@v2
         with:
@@ -68,4 +63,9 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script:
-            cd /var/www/date && php artisan migrate
+            cd /var/www/date && \
+              php artisan config:cache && \
+              php artisan event:cache && \
+              php artisan route:cache && \
+              php artisan view:cache && \
+              php artisan migrate

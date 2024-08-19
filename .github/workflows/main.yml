@@ -34,8 +34,6 @@ jobs:
 
       - run: chmod -R 777 storage bootstrap/cache
 
-      - run: php artisan storage:link
-
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
@@ -68,4 +66,5 @@ jobs:
               php artisan event:cache
               php artisan route:cache
               php artisan view:cache
+              php artisan storage:link
               php artisan migrate

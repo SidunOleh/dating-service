@@ -249,10 +249,6 @@ Route::post('/change-password', ChangePasswordController::class)
     ->middleware(['auth:web',])
     ->name('change-password.resend-code');
 
-Route::get('/dd', function () {
-    return `whoami`;
-});
-
 /**
  * 404
  */

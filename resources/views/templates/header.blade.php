@@ -9,6 +9,8 @@
 
     <title>{{ env('APP_NAME') }}</title>
 
+    <link rel="icon" type="image/svg" href="/favicon.svg">
+
     @if(in_array(Route::currentRouteName(), ['profile.page', 'my-profile.show',]))
         @embedstyles('assets/css/fancybox.css')
     @endif

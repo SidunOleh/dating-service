@@ -10,6 +10,7 @@
                     <img
                         src="{{ asset('assets/img/placeholder.png') }}"  
                         data-src="{{ $creator->gallery->first()->getUrl() }}" 
+                        class="lazyload"
                         alt="" />
 
                     @auth('web')

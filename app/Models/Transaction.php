@@ -21,6 +21,10 @@ class Transaction extends Model
         'creator_id',
     ];
 
+    protected $casts = [
+        'amount' => 'float',
+    ];
+
     public function details(): MorphTo
     {
         return $this->morphTo();

@@ -47,6 +47,11 @@ class UpdatePlisioWithdrawals extends Command
                 $withdrawal->transaction->update([
                     'status' => $data['status'],
                 ]);
+
+                if ($data['status'] == 'error') {
+                    $withdrawal->transaction->creator->balance += $withdrawal->transaction->amount;
+                    $withdrawal->transaction->creator->save();
+                }
             } catch (Exception $e) {
                 Log::error($e, [
                     'plisio_withdrawal_id' => $withdrawal->id,

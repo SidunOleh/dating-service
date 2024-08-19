@@ -32,8 +32,6 @@ jobs:
           sed -i 's/RECAPTCHA_SECRET_KEY=/RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}/g' .env
           sed -i 's/QUEUE_CONNECTION=sync/QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}/g' .env
 
-      - run: chmod -R 755 storage bootstrap/cache
-
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
@@ -42,8 +40,7 @@ jobs:
           npm install
           npm run build
           npm run bundle-js
-
-      - run: rm -rf node_modules
+          rm -rf node_modules
 
       - uses: appleboy/scp-action@v0.1.4
         with:
@@ -62,6 +59,7 @@ jobs:
           port: 22
           script: |
               cd /var/www/date
+              chmod -R 755 storage bootstrap/cache
               php artisan config:cache
               php artisan event:cache
               php artisan route:cache

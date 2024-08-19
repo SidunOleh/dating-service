@@ -64,9 +64,7 @@ jobs:
               find . -type d -exec chmod 755 {} \;
               chmod -R 775 storage bootstrap/cache
               find . -type f -exec chmod 644 {} \;
-              if ! grep -q '^APP_KEY=.' .env; then 
-                php artisan key:generate 
-              fi
+              php artisan key:generate
               php artisan storage:link
               php artisan migrate
               php artisan event:cache

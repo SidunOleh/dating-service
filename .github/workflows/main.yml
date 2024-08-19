@@ -61,9 +61,9 @@ jobs:
           script: |
               cd /var/www/date
               chown -R www-data:www-data .
-              find . -type d -exec chmod 755
+              find . -type d -exec chmod 755 {} \
               chmod -R 775 storage bootstrap/cache
-              find . -type f -exec chmod 644
+              find . -type f -exec chmod 644 {} \
               php artisan storage:link
               php artisan migrate
               php artisan event:cache

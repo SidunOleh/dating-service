@@ -17,7 +17,8 @@ jobs:
 
       - run: |
           cp .env.example .env
-          sed -i 's/APP_NAME=Laravel/APP_NAME="Dating Service"/g' .env
+          sed -i 's/APP_NAME=Laravel/APP_NAME="${{ secrets.APP_NAME }}"/g' .env
+          sed -i 's/APP_DEBUG=true/APP_DEBUG=${{ secrets.APP_DEBUG }}/g' .env
           sed -i 's|APP_URL=http://localhost|APP_URL=${{ secrets.APP_URL }}|g' .env
           sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g' .env
           sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g' .env

@@ -334,6 +334,8 @@ $(".code-inputs input").each((index, input) => {
 });
 
 $(".code-inputs input").on("paste", (e) => {
+    e.preventDefault();
+
     const inputs = $(".code-inputs input");
 
     let code = (e.originalEvent.clipboardData || window.clipboardData).getData(

@@ -44,13 +44,6 @@ return [
         ],
 
         'mysql' => [
-            'read' => [
-                'host' => '16.171.195.135',
-                'username' => 'date',
-                'password' => 'secret',
-            ],
-            'write' => [
-            ],
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),

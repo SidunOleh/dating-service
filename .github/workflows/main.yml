@@ -23,6 +23,7 @@ jobs:
           sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g' .env
           sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g' .env
           sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g' .env
+          sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g' .env
           sed -i 's/MAIL_HOST=mailpit/MAIL_HOST=${{ secrets.MAIL_HOST }}/g' .env
           sed -i 's/MAIL_PORT=1025/MAIL_PORT=${{ secrets.MAIL_PORT }}/g' .env
           sed -i 's/MAIL_USERNAME=null/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/g' .env

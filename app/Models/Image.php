@@ -21,6 +21,7 @@ class Image extends Model
         'disk',
         'user_id',
         'user_type',
+        'processed',
     ];
 
     protected $appends = [

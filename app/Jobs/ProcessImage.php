@@ -64,6 +64,7 @@ class ProcessImage implements ShouldQueue
             $image->place($watermark, 'center', 0, 0, 20)->save($this->image->getPath());
         }
 
-        $this->image->update(['processed' => true,]);
+        $this->image->processed = true;
+        $this->image->save();
     }
 }

@@ -255,5 +255,3 @@ Route::post('/change-password', ChangePasswordController::class)
 Route::fallback(function() {
     return view('errors.404');
 });
-
-Route::get('/ddd', fn() => 1);

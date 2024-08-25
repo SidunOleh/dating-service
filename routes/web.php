@@ -256,4 +256,4 @@ Route::fallback(function() {
     return view('errors.404');
 });
 
-Route::get('/dd', fn() => 1);
+Route::get('/ddd', fn() => 1);

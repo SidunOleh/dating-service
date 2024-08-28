@@ -214,7 +214,7 @@
         </div>
         <div class="amount-input">
             <img src="{{ asset('/assets/img/coins.svg') }}" alt="" class="input-label" />
-            <input id="amount" type="number" placeholder="Enter the amount" max="{{ $creator->balance }}" />
+            <input id="amount" type="number" placeholder="Enter the amount" min="0" max="{{ $creator->balance }}" />
             <p class="error-text"></p>
         </div>
         <div class="referral-out-navigation">

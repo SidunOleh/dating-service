@@ -66,6 +66,6 @@ class AppServiceProvider extends ServiceProvider
             return "<style><?php echo minify_css(file_get_contents({$expression})); ?></style>";
         });
 
-        DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);
+        // DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);
     }
 }

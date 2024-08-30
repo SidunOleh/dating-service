@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use App\Models\Template;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -12,7 +14,7 @@ class ExampleTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate --seed');
+        $this->artisan('migrate');
     }
 
     /**
@@ -20,6 +22,11 @@ class ExampleTest extends TestCase
      */
     public function test_the_application_returns_a_successful_response(): void
     {
+
+        Template::factory()->create([
+            'template' => '["profile"]',
+        ]);
+
         $response = $this->get('/');
 
         $response->assertStatus(200);

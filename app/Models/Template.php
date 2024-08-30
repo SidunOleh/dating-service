@@ -28,7 +28,7 @@ class Template extends Model
 
     private int $total;
 
-    protected function firstName(): Attribute
+    protected function template(): Attribute
     {
         return Attribute::make(
             get: fn (string $value) => json_decode($value, true),

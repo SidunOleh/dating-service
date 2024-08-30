@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -27,13 +26,6 @@ class Template extends Model
     private Collection $data;
 
     private int $total;
-
-    protected function template(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => json_decode($value, true),
-        );
-    }
 
     public function count(string $block): int
     {
@@ -62,7 +54,7 @@ class Template extends Model
     }
 
     public function fillData(): void
-    {        
+    {
         $this->data = new Collection();
         $this->total = 0;
 

@@ -45,6 +45,8 @@ jobs:
           npm run bundle-js
           rm -rf node_modules
 
+      - run: php artisan test
+
       - uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SERVER_IP }}

@@ -12,10 +12,10 @@
     <link rel="icon" type="image/svg" href="/favicon.svg">
 
     @if(in_array(Route::currentRouteName(), ['profile.page', 'my-profile.show',]))
-        @embedstyles('assets/css/fancybox.css')
+        @embedstyles(public_path('assets/css/fancybox.css'))
     @endif
 
-    @embedstyles('assets/css/main.css')
+    @embedstyles(public_path('assets/css/main.css'))
 </head>
 
 <body @class(['height' => Route::currentRouteName() == 'settings.page',])>

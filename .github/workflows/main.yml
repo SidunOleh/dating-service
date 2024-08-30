@@ -16,7 +16,7 @@ jobs:
       - run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
 
       - run: |
-          php artisan migrate --env=testing
+          php artisan migrate --database=sqlite_test
           php artisan key:generate --env=testing
           php artisan test --env=testing
 

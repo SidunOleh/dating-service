@@ -53,6 +53,8 @@ jobs:
           sed -i 's/RECAPTCHA_SECRET_KEY=/RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}/g' .env
           sed -i 's/QUEUE_CONNECTION=sync/QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}/g' .env
 
+      - run: php artisan key:generate
+
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
@@ -84,7 +86,6 @@ jobs:
               find . -type d -exec chmod 755 {} \;
               chmod -R 775 storage bootstrap/cache
               find . -type f -exec chmod 644 {} \;
-              php artisan key:generate
               php artisan migrate
               php artisan storage:link
               php artisan event:cache

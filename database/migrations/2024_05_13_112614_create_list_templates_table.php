@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
-            $table->json('template');
+            $table->text('template');
             $table->timestamps();
         });
     }

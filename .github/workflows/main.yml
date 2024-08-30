@@ -47,6 +47,7 @@ jobs:
 
       - run: |
           php artisan key:generate
+          php artisan migrate --database=sqlite
           php artisan test
 
       - uses: appleboy/scp-action@v0.1.4

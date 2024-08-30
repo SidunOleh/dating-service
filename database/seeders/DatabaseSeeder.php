@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 
 
         Template::create([
-            'template' => '["profile"]',
+            'template' => '[]',
         ]);
     }
 }

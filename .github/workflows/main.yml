@@ -45,7 +45,9 @@ jobs:
           npm run bundle-js
           rm -rf node_modules
 
-      - run: php artisan test
+      - run: |
+          php artisan key:generate
+          php artisan test
 
       - uses: appleboy/scp-action@v0.1.4
         with:

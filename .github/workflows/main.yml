@@ -16,10 +16,12 @@ jobs:
       - run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
 
       - env:
-          DB_CONNECTION: 'sqllite_db'
+          DB_CONNECTION: 'sqllite_test'
         run: |
-          php artisan migrate --env=testing
-          php artisan test --env=testing
+          cp .env.example .env
+          php artisan key:generate
+          php artisan migrate
+          php artisan test
 
   build-and-deploy:
     runs-on: ubuntu-latest

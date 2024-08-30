@@ -38,7 +38,7 @@ class HomeController extends Controller
             ->with('image')
             ->active()
             ->type('popup')
-            ->limit($template->count('ad') ? 50 : 0)
+            ->limit(1)
             ->inRandomOrder()
             ->get();
 

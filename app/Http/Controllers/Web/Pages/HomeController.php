@@ -29,16 +29,16 @@ class HomeController extends Controller
 
         session(['filters' => $filters,]);
 
-        // $template = Template::inRandomOrder()->firstOrFail();
-        // $template->setPage($page)
-        //     ->setFilters($filters)
-        //     ->fillData();
+        $template = Template::inRandomOrder()->firstOrFail();
+        $template->setPage($page)
+            ->setFilters($filters)
+            ->fillData();
 
         $popupAds = Ad::select('id', 'link', 'image_id')
             ->with('image')
             ->active()
             ->type('popup')
-            ->limit(1)
+            ->limit($template->count('ad') ? 50 : 0)
             ->inRandomOrder()
             ->get();
 

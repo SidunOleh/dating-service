@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
-            $table->text('template');
+            $table->json('template');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('list_templates');
+        Schema::dropIfExists('templates');
     }
 };

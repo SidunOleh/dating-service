@@ -17,6 +17,7 @@ jobs:
 
       - run: |
           php artisan key:generate --env=testing
+          touch database/date
           php artisan test --env=testing
 
   build-and-deploy:

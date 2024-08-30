@@ -12,7 +12,7 @@ class ExampleTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate');
+        $this->artisan('migrate --seed');
     }
 
     /**

@@ -19,6 +19,7 @@ jobs:
 
       - run: |
           php artisan migrate
+          php artisan key:generate
           php artisan test
 
   build-and-deploy:

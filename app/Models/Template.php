@@ -55,6 +55,8 @@ class Template extends Model
 
     public function fillData(): void
     {
+        dd($this->template);
+        
         $this->data = new Collection();
         $this->total = 0;
 

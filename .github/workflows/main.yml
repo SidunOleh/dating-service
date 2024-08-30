@@ -16,7 +16,7 @@ jobs:
       - run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
 
       - env:
-          DB_CONNECTION: 'sqllite_test'
+          DB_CONNECTION: 'sqlite_db'
         run: |
           cp .env.example .env
           php artisan key:generate

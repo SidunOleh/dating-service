@@ -19,7 +19,7 @@ class PlisioCallbackController extends Controller
                 'url' => $request->fullUrl(),
                 'ip' => $request->ip(),
                 'headers' => $request->headers->all(),
-                'body' => $request->all(),
+                'body' => $request->except(['qr_code',]),
             ]);
             
             $client = new PlisioClient(env('PLISIO_SECRET_KEY'));
@@ -38,7 +38,7 @@ class PlisioCallbackController extends Controller
                 'url' => $request->fullUrl(),
                 'ip' => $request->ip(),
                 'headers' => $request->headers->all(),
-                'body' => $request->all(),
+                'body' => $request->except(['qr_code',]),
             ]);
         }
     }

@@ -22,7 +22,7 @@ class PlisioCallbackController extends Controller
                 'body' => $request->except(['qr_code',]),
             ]);
             
-            $client = new PlisioClient(env('PLISIO_SECRET_KEY'));
+            $client = new PlisioClient(config('services.plisio.secret'));
 
             if (! $client->verifyData($data = $request->all())) {
                 throw new InvoiceUnverifyResponseException();

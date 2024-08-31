@@ -33,6 +33,23 @@ return [
 
     'recaptcha' => [
         'score' => 0.5,
+        'key' => env('RECAPTCHA_SITE_KEY'),
+        'secret' => env('RECAPTCHA_SECRET_KEY'),
+    ],
+
+    'plisio' => [
+        'secret' => env('PLISIO_SECRET_KEY'),
+        'currencies' => [
+            'BTC',
+            'ETH',
+            'USDT',
+            'USDT_TRX',
+            'USDC',
+            'DOGE',
+            'BNB',
+            'BCH',
+            'BUSD',
+        ],
     ],
 
 ];

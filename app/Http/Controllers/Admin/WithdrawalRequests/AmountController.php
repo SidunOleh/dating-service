@@ -13,7 +13,7 @@ class AmountController extends Controller
     public function __invoke(WithdrawalRequest $withdrawalRequest)
     {
         try {
-            $plisioClient = new PlisioClient(env('PLISIO_SECRET_KEY'));
+            $plisioClient = new PlisioClient(config('services.plisio.secret'));
 
             $rate = $plisioClient->rate('USD', $withdrawalRequest->concrete->currency);
 

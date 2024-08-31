@@ -26,7 +26,7 @@ class DepositRequest extends FormRequest
             'gateway' => 'required|in:plisio',
             'amount' => 'required|integer|in:2',
             
-            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('app.currencies')),
+            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
 
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];

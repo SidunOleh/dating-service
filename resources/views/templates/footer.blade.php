@@ -12,7 +12,7 @@
 </footer>
 
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
-<script data-src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" data-type="lazy"></script>
+<script data-src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.key') }}" data-type="lazy"></script>
 <script data-src="{{ asset('assets/js/bundle.js') }}" data-type="lazy"></script>
 
 <script>
@@ -22,7 +22,7 @@
     // recaptcha
     function getReCaptchaV3(action) {
         return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha
-            .execute("{{ env('RECAPTCHA_SITE_KEY') }}", {action,})
+            .execute("{{ config('services.recaptcha.key') }}", {action,})
             .then(resolve))
         )
     }

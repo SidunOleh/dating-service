@@ -26,7 +26,7 @@ class WithdrawSendRequest extends FormRequest
             'gateway' => 'required|in:plisio',
             'amount' => 'required|integer',
             
-            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('app.currencies')),
+            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
             'to' => 'required_if:gateway,plisio|string',
 
             'recaptcha' => ['required', new ReCaptchaV3(),],

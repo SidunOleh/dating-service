@@ -35,7 +35,7 @@ class UpdatePlisioWithdrawals extends Command
 
     public function update(Collection $withdrawals)
     {
-        $plisio = new PlisioClient(env('PLISIO_SECRET_KEY'));
+        $plisio = new PlisioClient(config('services.plisio.secret'));
 
         foreach ($withdrawals as $withdrawal) {
             try {

@@ -255,7 +255,7 @@ Route::post('/change-password', ChangePasswordController::class)
  */
 Route::get('logs', [LogViewerController::class, 'index'])
     ->middleware(['auth:sanctum',])
-    ->can('logs.read');
+    ->can('logs');
 
 /**
  * 404

@@ -64,6 +64,7 @@ jobs:
               find . -type f -exec chmod 644 {} \;
               php artisan migrate
               php artisan storage:link
+              php artisan optimize:clear
               php artisan event:cache
               php artisan route:cache
               php artisan view:cache

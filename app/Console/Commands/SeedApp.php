@@ -35,9 +35,16 @@ class SeedApp extends Command
             return $this->spawn($processes);
         }
 
+        $this->createCreators(100);
+
+        $this->createAds(30);
+    }
+
+    private function createCreators(int $count): void
+    {
         $images = Image::all();
 
-        for ($i=0; $i < 100; $i++) { 
+        for ($i=0; $i < $count; $i++) { 
             try {
                 Creator::factory()->create([
                     'photos' => $images->random(rand(1, 12))->pluck('id')->all(),
@@ -48,15 +55,24 @@ class SeedApp extends Command
                     'play_roulette' => true,
                     'profile_is_created' => true,
                 ]);
-            } catch (Exception) {}
-        }
+            } catch (Exception) {
 
-        for ($i=0; $i < 30; $i++) { 
+            }
+        }
+    }
+
+    private function createAds(int $count): void
+    {
+        $images = Image::all();
+
+        for ($i=0; $i < $count; $i++) { 
             try {
                 Ad::factory()->create([
                     'image_id' => $images->random()->id,
                 ]);
-            } catch (Exception) {}
+            } catch (Exception) {
+
+            }
         }
     }
 

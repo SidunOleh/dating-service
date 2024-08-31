@@ -3,20 +3,19 @@
 namespace App\Http\Controllers\Web\Webhooks;
 
 use App\Http\Controllers\Controller;
-use App\Models\PaymentGatewayWebhookLog;
 use App\Models\PlisioInvoice;
 use App\Services\PaymentGateways\Plisio\Api\Invoice\Exceptions\InvoiceUnverifyResponseException;
 use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PlisioCallbackController extends Controller
 {
     public function __invoke(Request $request)
     {
         try {
-            $webhookLog = PaymentGatewayWebhookLog::create([
-                'gateway' => 'plisio',
+            Log::info('plisio webhook', [
                 'url' => $request->fullUrl(),
                 'ip' => $request->ip(),
                 'headers' => $request->headers->all(),
@@ -35,11 +34,11 @@ class PlisioCallbackController extends Controller
                 $invoice->webhookCallback($data);
             }
         } catch (Exception $e) {
-            $webhookLog->update([
-                'code' => $e->getCode(),
-                'message' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
+            Log::error($e, [
+                'url' => $request->fullUrl(),
+                'ip' => $request->ip(),
+                'headers' => $request->headers->all(),
+                'body' => $request->all(),
             ]);
         }
     }

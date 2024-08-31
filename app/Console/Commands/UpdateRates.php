@@ -36,7 +36,7 @@ class UpdateRates extends Command
             try {
                 $rates[$currency] = $plisio->rate('USD', $currency);
             } catch (Exception $e) {
-                Log::error($e);
+                Log::error($e, ['currency' => $currency,]);
             }
         }
 

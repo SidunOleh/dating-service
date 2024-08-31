@@ -53,9 +53,7 @@ class UpdatePlisioWithdrawals extends Command
                     $withdrawal->transaction->creator->save();
                 }
             } catch (Exception $e) {
-                Log::error($e, [
-                    'plisio_withdrawal_id' => $withdrawal->id,
-                ]);
+                Log::error($e, ['plisio_withdrawal_id' => $withdrawal->id,]);
             }
         }
     }

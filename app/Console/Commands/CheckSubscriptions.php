@@ -47,9 +47,7 @@ class CheckSubscriptions extends Command
                     $subscription->creator->subscribe();
                 }
             } catch (Exception $e) {
-                Log::error($e, [
-                    'subscription_id' => $subscription->id,
-                ]);
+                Log::error($e, ['subscription_id' => $subscription->id,]);
             }
         }
     }

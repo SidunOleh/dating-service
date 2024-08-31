@@ -24,9 +24,7 @@ class DepositController extends Controller
 
             return response($transaction);
         } catch (Exception $e) {
-            Log::error($e, [
-                'creator_id' => Auth::guard('web')->id(),
-            ]);
+            Log::error($e, ['creator_id' => Auth::guard('web')->id(),]);
 
             return response(['message' => 'Bad request',], 400);
         }

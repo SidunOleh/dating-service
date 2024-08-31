@@ -45,6 +45,7 @@ use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
 use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
 use Illuminate\Support\Facades\Route;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -248,6 +249,13 @@ Route::post('/change-email/resend-code', ChangeEmailResendController::class)
 Route::post('/change-password', ChangePasswordController::class)
     ->middleware(['auth:web',])
     ->name('change-password.resend-code');
+
+/**
+ * Logs
+ */
+Route::get('logs', [LogViewerController::class, 'index'])
+    ->middleware(['auth:sanctum',])
+    ->can('logs.read');
 
 /**
  * 404

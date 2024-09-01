@@ -25,6 +25,7 @@ jobs:
           sed -i 's/MAIL_PORT=/MAIL_PORT=${{ secrets.MAIL_PORT }}/g' .env
           sed -i 's/MAIL_USERNAME=/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/g' .env
           sed -i 's/MAIL_PASSWORD=/MAIL_PASSWORD="${{ secrets.MAIL_PASSWORD }}"/g' .env
+          sed -i 's/MAIL_FROM_ADDRESS=/MAIL_FROM_ADDRESS="${{ secrets.MAIL_USERNAME }}"/g' .env
           sed -i 's/PLISIO_SECRET_KEY=/PLISIO_SECRET_KEY=${{ secrets.PLISIO_SECRET_KEY }}/g' .env
           sed -i 's/RECAPTCHA_SITE_KEY=/RECAPTCHA_SITE_KEY=${{ secrets.RECAPTCHA_SITE_KEY }}/g' .env
           sed -i 's/RECAPTCHA_SECRET_KEY=/RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}/g' .env

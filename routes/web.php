@@ -223,7 +223,7 @@ Route::post('/unsubscribe', UnsubscribeController::class)
 Route::post('/payments/deposit', DepositController::class)
     ->middleware(['auth:web',])
     ->name('payments.deposit');
-    Route::post('/payments/withdraw/send-code', WithdrawSendController::class)
+Route::post('/payments/withdraw/send-code', WithdrawSendController::class)
     ->middleware(['auth:web',])
     ->name('payments.withdraw.send-code');
 Route::post('/payments/withdraw/verify-code', WithdrawVerifyController::class)

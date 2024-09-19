@@ -23,7 +23,7 @@ class WithdrawalRequest extends Model
         'user_id',
     ];
 
-    protected $cast = [
+    protected $casts = [
         'amount' => 'float',
     ];
 

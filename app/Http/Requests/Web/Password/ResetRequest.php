@@ -29,7 +29,7 @@ class ResetRequest extends FormRequest
                 Password::min(8)->max(32),
             ],
             'token' => 'required|string',
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email|exists:creators,email',
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }

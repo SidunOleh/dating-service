@@ -49,7 +49,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           source: './'
-          target: '/var/www/date'
+          target: '/home/cherry21/public_html'
 
       - uses: appleboy/ssh-action@master
         with:
@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script: |
-              cd /var/www/date
+              cd /home/cherry21/public_html
               chown -R cherry21:cherry21 .
               find . -type d -exec chmod 755 {} \;
               chmod -R 775 storage bootstrap/cache

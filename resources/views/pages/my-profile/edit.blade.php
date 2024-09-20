@@ -233,7 +233,7 @@
                     ],
                     birthday: [
                         {
-                            message: 'Last name required',
+                            message: 'Birthday required',
                             fn: (val, data) => {
                                 if (
                                     ! data.id_photo && 
@@ -251,7 +251,7 @@
                         {
                             message: 'Date is invalid',
                             fn: (val, data) => {
-                                return ! isNaN(Date.parse(val))
+                                return ! val || ! isNaN(Date.parse(val))
                             },
                         },
                     ],

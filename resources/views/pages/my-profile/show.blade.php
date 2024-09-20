@@ -1,4 +1,4 @@
-@include('templates.header')
+@include('templates.header', ['title' => 'My post',])
 
 <section class="profile account">
     <div class="container">

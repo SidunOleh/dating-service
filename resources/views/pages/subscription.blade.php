@@ -1,4 +1,4 @@
-@include('templates.header')
+@include('templates.header', ['title' => 'Subscription',])
 
 <section class="subscribe">
     <div class="container">

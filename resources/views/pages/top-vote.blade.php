@@ -1,4 +1,4 @@
-@include('templates.header')
+@include('templates.header', ['title' => 'Top vote',])
 
 <div class="users vote">
     <div class="container">

@@ -1,4 +1,4 @@
-@include('templates.header')
+@include('templates.header', ['title' => 'Earn with us',])
 
 <script>
     DS.rates = {{ Js::from(cache('rates') ?? []) }}

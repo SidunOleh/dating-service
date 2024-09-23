@@ -5361,3 +5361,13 @@ select#gender {
 .subscribe-Btn.after {
     cursor: not-allowed !important;
 }
+
+.code-inputs input::-webkit-outer-spin-button,
+.code-inputs input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.code-inputs input[type=number] {
+    -moz-appearance: textfield;
+}

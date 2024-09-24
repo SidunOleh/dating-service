@@ -268,9 +268,12 @@
 
                 <FormItem label="Balance">
                     <Flex :gap="10">
-                        <Input v-model:value="data.balance"/>
+                        <Input 
+                            v-model:value="data.balance"
+                            :readonly="!can('creators.edit-balance')"/>
 
                         <Button
+                            v-if="can('creators.edit-balance')"
                             :loading="loading.balance" 
                             @click="confirmPopup(() => updateBalance(), 'Are you sure you want to change balance?')">
                             Update
@@ -329,6 +332,7 @@ import Transactions from './Transactions.vue'
 import DetailsModal from '../Transactions/DetailsModal.vue'
 import { confirmPopup, } from '../../helpers/popups'
 import creatorsApi from '../../api/creators'
+import can from '../../helpers/can'
 
 export default {
     components: {
@@ -380,6 +384,7 @@ export default {
     },      
     methods: {
         confirmPopup,
+        can,
         generatePassword() {
             this.data.password = Math.random().toString(36).substring(2)
         },

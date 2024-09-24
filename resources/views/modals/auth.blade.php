@@ -53,7 +53,7 @@ $isResetPage = request()->query('token') and request()->query('email');
             <input 
                 type="hidden" 
                 name="from" 
-                value="{{ request()->route()?->getName() == 'profile.page' ? $creator->id : '' }}">
+                value="{{ request()->route()?->getName() == 'profile.page' ? (isset($creator) ? $creator->id : '') : '' }}">
 
             <button type="submit" class="submit btn red" disabled>
                 Sign up
@@ -61,6 +61,7 @@ $isResetPage = request()->query('token') and request()->query('email');
         </form>
 
         <div class="text-error"></div>
+
         <p class="switch-to-login">
             Have an account? <span class="login-link">Log in</span>
         </p>
@@ -114,13 +115,13 @@ $isResetPage = request()->query('token') and request()->query('email');
                 Log in
             </button>
             
-            <p class="switch-to-signup">
-                Don’t have an account? <span class="signup-link">Sign up</span>
-            </p>
         </form>
 
         <div class="text-error"></div>
-    
+
+        <p class="switch-to-signup">
+            Don’t have an account? <span class="signup-link">Sign up</span>
+        </p>
     </div>
 
     <div class="resetPassword-card card">
@@ -155,9 +156,9 @@ $isResetPage = request()->query('token') and request()->query('email');
           Your password reset message has been successfully sent to your email:
         </p>
         <p class="mail">email@gmail.com</p>
-        <a class="btn red">
+        <div class="btn red">
             Close
-        </a>
+        </div>
     </div>
 
     <div class="addNew-pass-card card {{ $isResetPage ? 'active' : '' }}">
@@ -202,9 +203,9 @@ $isResetPage = request()->query('token') and request()->query('email');
         <p class="title">
             Your password has been successfully changed
         </p>
-        <a class="btn red login">
+        <div class="btn red login">
             Log in
-        </a>
+        </div>
     </div>
 
 </div>

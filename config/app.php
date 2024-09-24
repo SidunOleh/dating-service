@@ -185,16 +185,4 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
-    'currencies' => [
-        'BTC',
-        'ETH',
-        'USDT',
-        'USDT_TRX',
-        'USDC',
-        'DOGE',
-        'BNB',
-        'BCH',
-        'BUSD',
-    ],
-
 ];

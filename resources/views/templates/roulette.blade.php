@@ -1,4 +1,4 @@
-<a class="users-item battle">
+<div class="users-item battle">
     <div class="battle-container">
 
         <div class="loader">
@@ -49,4 +49,4 @@
 
         </div>
     </div>
-</a>
+</div>

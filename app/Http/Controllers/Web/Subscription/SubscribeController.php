@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Subscription;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class SubscribeController extends Controller
@@ -15,8 +16,12 @@ class SubscribeController extends Controller
             abort(400);
         }
 
-        $subscription = $creator->subscribe();
+        try {
+            $subscription = $creator->subscribe();
 
-        return response($subscription);
+            return response($subscription);
+        } catch (Exception $e) {
+            return response(['message' => $e->getMessage(),], 400);
+        }
     }
 }

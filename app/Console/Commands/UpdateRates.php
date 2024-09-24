@@ -28,15 +28,14 @@ class UpdateRates extends Command
      */
     public function handle()
     {
-        $plisio = new PlisioClient(env('PLISIO_SECRET_KEY'));
+        $plisio = new PlisioClient(config('services.plisio.secret'));
 
-        $currencies = config('app.currencies');
         $rates = [];
-        foreach ($currencies as $currency) {
+        foreach (config('services.plisio.currencies', []) as $currency) {
             try {
                 $rates[$currency] = $plisio->rate('USD', $currency);
             } catch (Exception $e) {
-                Log::error($e);
+                Log::error($e, ['currency' => $currency,]);
             }
         }
 

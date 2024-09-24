@@ -9,7 +9,7 @@ $step = 10;
     @if($current > 1)
     <div class="prev">
         <a href="{{ route($route, ['page' => $current - 1, ...request()->query(),]) }}">
-            <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
+            <img src="{{ asset('assets/img/prev.svg') }}" alt="" aria-label="Previous page"/>
         </a>
     </div>
     @endif
@@ -83,7 +83,7 @@ $step = 10;
     @if($total > $current)
     <div class="next">
         <a href="{{ route($route, ['page' => $current + 1, ...request()->query(),]) }}">
-            <img src="{{ asset('assets/img/next.svg') }}" alt="" />
+            <img src="{{ asset('assets/img/next.svg') }}" alt="" aria-label="Next page" />
         </a>
     </div>
     @endif

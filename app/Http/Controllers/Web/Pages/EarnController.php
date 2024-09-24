@@ -22,7 +22,6 @@ class EarnController extends Controller
             ->with('details')
             ->orderBy('created_at', 'DESC')
             ->get();
-
         $settings = Option::getSettings();
         
         return view('pages.earn', [

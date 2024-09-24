@@ -39,19 +39,29 @@ class ProcessImage implements ShouldQueue
     {
         $manager = new ImageManager(new Driver());
 
-        $manager->read($this->image->getPath())->toWebp($this->quality)->save($this->image->getPath());
+        $image = $manager->read($this->image->getPath());
+        $image->toWebp($this->quality)->save($this->image->getPath());
 
         if ($this->watermark) {
-            SpatieImage::load($this->image->getPath())->watermark(
-                storage_path('watermark.png'),
-                AlignPosition::Center,
-                width: 100,
-                widthUnit: Unit::Percent,
-                height: 100,
-                heightUnit: Unit::Percent,
-                fit: Fit::Stretch,
-                alpha: 10,
-            )->save();
+            // SpatieImage::load($this->image->getPath())->watermark(
+            //     storage_path('watermark.png'),
+            //     AlignPosition::Center,
+            //     width: 100,
+            //     widthUnit: Unit::Percent,
+            //     height: 100,
+            //     heightUnit: Unit::Percent,
+            //     fit: Fit::Stretch,
+            //     alpha: 10,
+            // )->save();
+
+            $image = $manager->read($this->image->getPath());
+
+            $watermark = $manager->read(storage_path('watermark.png'))->cover(
+                $image->width(),
+                $image->height()
+            );
+
+            $image->place($watermark, 'center', 0, 0, 20)->save($this->image->getPath());
         }
 
         $this->image->update(['processed' => true,]);

@@ -42,7 +42,7 @@ class CreateAdmin extends Command
         $role->syncPermissions($permission);
 
         $user = User::firstOrCreate([
-            'email' => env('MAIL_USERNAME'),
+            'email' => config('mail.mailers.smtp.username'),
         ], [
             'password' => Hash::make(
                 $password = Str::random(6),

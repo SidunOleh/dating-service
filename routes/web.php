@@ -45,6 +45,7 @@ use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
 use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
 use Illuminate\Support\Facades\Route;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,7 +97,7 @@ Route::post('/sign-in/resend-code', SignInResendCodeController::class)
 /**
  * Log out
  */
-Route::get('/logo-out', AuthLogOutController::class)
+Route::get('/log-out', AuthLogOutController::class)
     ->name('web.logout');
 
 /**
@@ -189,7 +190,7 @@ Route::prefix('/my-profile')
 /**
  * Images
  */
-Route::prefix('/images')->name('images.')->middleware(['auth:web',])->group(function () {
+Route::prefix('/images')->name('web-images.')->middleware(['auth:web',])->group(function () {
     Route::post('/upload', UploadController::class)
         ->name('upload');
     Route::delete('/{image}', DeleteController::class)
@@ -222,7 +223,7 @@ Route::post('/unsubscribe', UnsubscribeController::class)
 Route::post('/payments/deposit', DepositController::class)
     ->middleware(['auth:web',])
     ->name('payments.deposit');
-    Route::post('/payments/withdraw/send-code', WithdrawSendController::class)
+Route::post('/payments/withdraw/send-code', WithdrawSendController::class)
     ->middleware(['auth:web',])
     ->name('payments.withdraw.send-code');
 Route::post('/payments/withdraw/verify-code', WithdrawVerifyController::class)
@@ -248,6 +249,13 @@ Route::post('/change-email/resend-code', ChangeEmailResendController::class)
 Route::post('/change-password', ChangePasswordController::class)
     ->middleware(['auth:web',])
     ->name('change-password.resend-code');
+
+/**
+ * Logs
+ */
+Route::get('logs', [LogViewerController::class, 'index'])
+    ->middleware(['auth:sanctum',])
+    ->can('logs');
 
 /**
  * 404

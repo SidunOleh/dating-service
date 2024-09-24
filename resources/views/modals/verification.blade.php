@@ -7,12 +7,12 @@
         </p>
         
         <form class="code-inputs" autocomplete="off">
-            <input type="text" maxlength="1" />
-            <input type="text" maxlength="1" />
-            <input type="text" maxlength="1" />
-            <input type="text" maxlength="1" />
-            <input type="text" maxlength="1" />
-            <input type="text" maxlength="1" />
+            <input type="number" maxlength="1" />
+            <input type="number" maxlength="1" />
+            <input type="number" maxlength="1" />
+            <input type="number" maxlength="1" />
+            <input type="number" maxlength="1" />
+            <input type="number" maxlength="1" />
             <p class="error-text"></p>
         </form>
 

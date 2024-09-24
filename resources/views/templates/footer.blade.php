@@ -11,19 +11,23 @@
     </div>
 </footer>
 
-<script data-src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}" data-type="lazy"></script>
-<script>
-function getReCaptchaV3(action) {
-    return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha
-        .execute('{{ env('RECAPTCHA_SITE_KEY') }}', {action,})
-        .then(resolve))
-    )
-}
-</script>
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
-<script data-src="{{ asset('assets/js/bundle.js') }}" data-type="lazy"></script>
+<script data-src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.key') }}" data-type="lazy"></script>
+<script src="{{ asset('assets/js/bundle.js') }}"></script>
 
 <script>
+    // disable context menu
+    document.addEventListener('contextmenu', event => event.preventDefault())
+
+    // recaptcha
+    function getReCaptchaV3(action) {
+        return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha
+            .execute("{{ config('services.recaptcha.key') }}", {action,})
+            .then(resolve))
+        )
+    }
+
+    // lazy load
     const load = () => {
         document.querySelectorAll("script[data-type='lazy']").forEach(script => {
             script.setAttribute("src", script.getAttribute("data-src"))
@@ -41,6 +45,7 @@ function getReCaptchaV3(action) {
         once: true,
     }))
 </script>
+
 </body>
 
 </html>

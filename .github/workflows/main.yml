@@ -3,83 +3,72 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
 
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Setup Environment File
-        run: |
+      - run: |
           cp .env.example .env
-          sed -i 's/APP_NAME=Laravel/APP_NAME="Dating Service"/g' .env
-          sed -i 's|APP_URL=http://localhost|APP_URL=${{ secrets.APP_URL }}|g' .env
-          sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g' .env
-          sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g' .env
-          sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g' .env
-          sed -i 's/MAIL_HOST=mailpit/MAIL_HOST=${{ secrets.MAIL_HOST }}/g' .env
-          sed -i 's/MAIL_PORT=1025/MAIL_PORT=${{ secrets.MAIL_PORT }}/g' .env
-          sed -i 's/MAIL_USERNAME=null/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/g' .env
-          sed -i 's/MAIL_PASSWORD=null/MAIL_PASSWORD="${{ secrets.MAIL_PASSWORD }}"/g' .env
-          sed -i 's/MAIL_FROM_ADDRESS="hello@example.com"/MAIL_FROM_ADDRESS=${{ secrets.MAIL_USERNAME }}/g' .env
-          sed -i 's/GOOGLE_MAPS_KEY=/GOOGLE_MAPS_KEY=${{ secrets.GOOGLE_MAPS_KEY }}/g' .env
+          sed -i 's/DB_HOST=/DB_HOST=${{ secrets.DB_HOST }}/g' .env
+          sed -i 's/DB_PORT=/DB_PORT=${{ secrets.DB_PORT }}/g' .env
+          sed -i 's/DB_DATABASE=/DB_DATABASE=${{ secrets.DB_DATABASE }}/g' .env
+          sed -i 's/DB_USERNAME=/DB_USERNAME=${{ secrets.DB_USERNAME }}/g' .env
+          sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g' .env
+          sed -i 's/MAIL_HOST=/MAIL_HOST=${{ secrets.MAIL_HOST }}/g' .env
+          sed -i 's/MAIL_PORT=/MAIL_PORT=${{ secrets.MAIL_PORT }}/g' .env
+          sed -i 's/MAIL_USERNAME=/MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}/g' .env
+          sed -i 's/MAIL_PASSWORD=/MAIL_PASSWORD="${{ secrets.MAIL_PASSWORD }}"/g' .env
           sed -i 's/PLISIO_SECRET_KEY=/PLISIO_SECRET_KEY=${{ secrets.PLISIO_SECRET_KEY }}/g' .env
           sed -i 's/RECAPTCHA_SITE_KEY=/RECAPTCHA_SITE_KEY=${{ secrets.RECAPTCHA_SITE_KEY }}/g' .env
           sed -i 's/RECAPTCHA_SECRET_KEY=/RECAPTCHA_SECRET_KEY=${{ secrets.RECAPTCHA_SECRET_KEY }}/g' .env
-          sed -i 's/QUEUE_CONNECTION=sync/QUEUE_CONNECTION=${{ secrets.QUEUE_CONNECTION }}/g' .env
 
-      - name: Setup Laravel
-        run: |
-          php artisan config:clear
-          php artisan cache:clear
-          php artisan storage:link
+      - run: php artisan key:generate
 
-      - name: Permission setup
-        run: |
-          chmod -R 777 storage bootstrap/cache
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: '18'
 
-      - name: Install Node.js Dependencies
-        run: npm install
+      - run: |
+          npm install
+          npm run build
+          npm run bundle-js
+          rm -rf node_modules
 
-      - name: Build Vue.js
-        run: npm run build
-
-      - name: Bundle js
-        run: npm run bundle-js
-
-      - name: Clean Up
-        run: rm -rf node_modules
-
-      - name: copy file via ssh key
-        uses: appleboy/scp-action@v0.1.4
+      - uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
-          source: "./"
-          target: "/var/www/date"
+          source: './'
+          target: '/home/cherry21/public_html'
 
-      - name: Run laravel commands
-        uses: appleboy/ssh-action@master
+      - uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
-          script:
-            cd /var/www/date && php artisan cache:clear && php artisan config:clear && php artisan view:clear && php artisan storage:link && php artisan migrate
+          script: |
+              cd /home/cherry21/public_html
+              chown -R cherry21:cherry21 .
+              find . -type d -exec chmod 755 {} \;
+              chmod -R 775 storage bootstrap/cache
+              find . -type f -exec chmod 644 {} \;
+              php artisan migrate --force
+              php artisan storage:link
+              php artisan optimize:clear
+              php artisan config:cache
+              php artisan event:cache
+              php artisan route:cache
+              php artisan view:cache
+              php artisan plisio:rate
+              

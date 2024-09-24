@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_gateway_webhook_logs', function (Blueprint $table) {
+        Schema::create('templates', function (Blueprint $table) {
             $table->id();
-            $table->string('gateway');
-            $table->string('url');
-            $table->string('ip');
-            $table->json('headers');
-            $table->json('body');
-            $table->text('exception')->nullable();
+            $table->json('template');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_gateway_webhook_logs');
+        Schema::dropIfExists('templates');
     }
 };

@@ -5,14 +5,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="{{ env('APP_NAME') }}">
+    <meta name="description" content="{{ config('app.name') }}">
 
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ ($title ?? '') ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
+
+    <link rel="icon" type="image/svg" href="/favicon.svg">
 
     @if(in_array(Route::currentRouteName(), ['profile.page', 'my-profile.show',]))
-        @embedstyles('assets/css/fancybox.css')
+        @embedstyles(public_path('assets/css/fancybox.css'))
     @endif
-    @embedstyles('assets/css/main.css')
+
+    @embedstyles(public_path('assets/css/main.css'))
 </head>
 
 <body @class(['height' => Route::currentRouteName() == 'settings.page',])>
@@ -29,13 +32,13 @@
 
             <div class="header-body">
                 <div class="left">
-                    <a href="{{ route('home.index') }}" class="btn red">
+                    <a href="{{ route('home.index') }}" class="btn red" aria-label="Go to home">
                         <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
                     </a>
                 </div>
                 
                 <a href="{{ route('home.index') }}" class="logo">
-                    {{ env('APP_NAME') }}
+                    {{ config('app.name') }}
                 </a>
 
                 <div class="right">
@@ -206,12 +209,12 @@
             <div class="header-body">
                 <div class="left">
                     <a href="{{ route('home.index') }}" class="btn red">
-                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
+                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" aria-label="Go to home"/>
                     </a>
                 </div>
 
                 <a href="{{ route('home.index') }}" class="logo">
-                    {{ env('APP_NAME') }}
+                    {{ config('app.name') }}
                 </a>
                 
                 <div class="burger-menu red flex">

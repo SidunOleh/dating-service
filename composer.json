@@ -10,8 +10,10 @@
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^3.6",
         "laravel/framework": "^10.10",
+        "laravel/pulse": "^1.2",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "rap2hpoutre/laravel-log-viewer": "^2.4",
         "spatie/image": "^3.6",
         "spatie/laravel-permission": "^6.7",
         "staudenmeir/eloquent-json-relations": "^1.1"

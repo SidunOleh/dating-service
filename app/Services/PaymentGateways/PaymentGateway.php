@@ -25,7 +25,7 @@ abstract class PaymentGateway
     {
         switch ($gateway) {
             case 'plisio':
-                return new PlisioGateway(new PlisioClient(env('PLISIO_SECRET_KEY')));
+                return new PlisioGateway(new PlisioClient(config('services.plisio.secret')));
             default:
                 throw new PaymentGatewayNotFound();
         }

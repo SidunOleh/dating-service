@@ -35,7 +35,7 @@ class UpdatePlisioWithdrawals extends Command
 
     public function update(Collection $withdrawals)
     {
-        $plisio = new PlisioClient(env('PLISIO_SECRET_KEY'));
+        $plisio = new PlisioClient(config('services.plisio.secret'));
 
         foreach ($withdrawals as $withdrawal) {
             try {
@@ -47,10 +47,13 @@ class UpdatePlisioWithdrawals extends Command
                 $withdrawal->transaction->update([
                     'status' => $data['status'],
                 ]);
+
+                if ($data['status'] == 'error') {
+                    $withdrawal->transaction->creator->balance += $withdrawal->transaction->amount;
+                    $withdrawal->transaction->creator->save();
+                }
             } catch (Exception $e) {
-                Log::error($e, [
-                    'plisio_withdrawal_id' => $withdrawal->id,
-                ]);
+                Log::error($e, ['plisio_withdrawal_id' => $withdrawal->id,]);
             }
         }
     }

@@ -25,7 +25,7 @@ class WithdrawRequest extends FormRequest
             'gateway' => 'required|in:plisio',
             'amount' => 'required|integer',
             
-            'currency' => 'required_if:gateway,plisio|in:BTC',
+            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
             'to' => 'required_if:gateway,plisio|string',
         ];
     }

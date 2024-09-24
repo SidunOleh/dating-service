@@ -1,4 +1,4 @@
-@include('templates.header')
+@include('templates.header', ['title' => 'Settings',])
 
 <section class="settings">
     <div class="container">

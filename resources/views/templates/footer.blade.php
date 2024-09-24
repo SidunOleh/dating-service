@@ -11,9 +11,9 @@
     </div>
 </footer>
 
-<script src="https://{{ asset('assets/js/lazysizes.min.js') }}"></script>
+<script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
 <script data-src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.key') }}" data-type="lazy"></script>
-<script data-src="https://{{ asset('assets/js/bundle.js') }}" data-type="lazy"></script>
+<script src="{{ asset('assets/js/bundle.js') }}"></script>
 
 <script>
     // disable context menu

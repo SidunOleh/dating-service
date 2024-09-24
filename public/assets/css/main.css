@@ -58,16 +58,17 @@ body {
     padding-bottom: 56px;
     min-height: 100vh;
 }
+
 body:after {
     content: "";
     position: fixed;
-    background-image: url("../img/datingBack.svg");
+    background-image: url("/assets/img/datingBack.svg");
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: -1;
-  }
+}
 
 body.lock {
     overflow: hidden;
@@ -2304,7 +2305,7 @@ input {
     .profile .other-user-list .other-user-item {
         width: calc((100% - 12px) / 2);
     }
-    .profile .other-user-list .other-user-item:not(:nth-child(-n + 4)) {
+    .profile .other-user-list .other-user-item:not(:nth-child(-n+4)) {
         display: none;
     }
 }

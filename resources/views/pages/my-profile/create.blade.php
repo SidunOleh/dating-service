@@ -889,7 +889,6 @@
                             </div>
 
                             <div class="input-wrapper">
-                                <img src="/assets/img/select.svg" alt=""  class='select-img'/> 
                                 <label for="gender">
                                     Your gender:
                                 </label>

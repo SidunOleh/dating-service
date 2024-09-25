@@ -24,7 +24,7 @@ class DepositRequest extends FormRequest
     {
         return [
             'gateway' => 'required|in:plisio',
-            'amount' => 'required|integer|in:2',
+            'amount' => 'required|integer|in:20',
             
             'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
 

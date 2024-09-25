@@ -173,12 +173,12 @@
             Buying platform coins
         </p>
         <div class="repaymant-list">
-            <div class="repaymant-item red" data-amount="2">
+            <div class="repaymant-item red" data-amount="20">
                 <div class="coins">
-                    <img src="{{ asset('/assets/img/coins.svg' ) }}" alt="" /> 2
+                    <img src="{{ asset('/assets/img/coins.svg' ) }}" alt="" /> 20
                 </div>
                 <div class="cost">
-                    $2 USD
+                    $20 USD
                 </div>
             </div>
         </div>

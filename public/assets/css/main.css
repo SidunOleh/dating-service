@@ -295,6 +295,7 @@ input {
     width: -moz-fit-content;
     width: fit-content;
     color: #990106;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

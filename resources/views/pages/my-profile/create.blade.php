@@ -968,7 +968,7 @@
                                     type="button" 
                                     class="btn red" 
                                     @click="$('#photoInput').click()">
-                                    Add photo
+                                    Add photo 
                                 </button>
 
                                 <div id="photos">

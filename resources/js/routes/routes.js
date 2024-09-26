@@ -6,7 +6,7 @@ import { defineAsyncComponent, } from 'vue'
 import Loader from '../views/Loader.vue'
 
 const routes = [{
-    path: '/admin/login',
+    path: '/v54vc45xc54v5vc56cxv7657/login',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Auth/Login.vue'),
@@ -14,7 +14,7 @@ const routes = [{
     }),
     name: 'login',
 }, {
-    path: '/admin/forgot',
+    path: '/v54vc45xc54v5vc56cxv7657/forgot',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Auth/Forgot.vue'),
@@ -22,7 +22,7 @@ const routes = [{
     }),
     name: 'forgot',
 }, {
-    path: '/admin/reset',
+    path: '/v54vc45xc54v5vc56cxv7657/reset',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Auth/Reset.vue'),
@@ -30,7 +30,7 @@ const routes = [{
     }),
     name: 'reset',
 }, {
-    path: '/admin',
+    path: '/v54vc45xc54v5vc56cxv7657',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Dashboard.vue'),
@@ -42,7 +42,7 @@ const routes = [{
         menuKey: 'dashboard',
     },
 }, {
-    path: '/admin/users',
+    path: '/v54vc45xc54v5vc56cxv7657/users',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Users/Index.vue'),
@@ -55,7 +55,7 @@ const routes = [{
         menuKey: 'users',
     },
 }, {
-    path: '/admin/roles',
+    path: '/v54vc45xc54v5vc56cxv7657/roles',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Roles/Index.vue'),
@@ -68,7 +68,7 @@ const routes = [{
         menuKey: 'roles',
     },
 }, {
-    path: '/admin/permissions',
+    path: '/v54vc45xc54v5vc56cxv7657/permissions',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Permissions/Index.vue'),
@@ -81,7 +81,7 @@ const routes = [{
         menuKey: 'permissions',
     },
 }, {
-    path: '/admin/templates',
+    path: '/v54vc45xc54v5vc56cxv7657/templates',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Templates/Index.vue'),
@@ -94,7 +94,7 @@ const routes = [{
         menuKey: 'templates',
     },
 }, {
-    path: '/admin/templates/create',
+    path: '/v54vc45xc54v5vc56cxv7657/templates/create',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Templates/Create.vue'),
@@ -107,7 +107,7 @@ const routes = [{
         menuKey: 'templates',
     },
 }, {
-    path: '/admin/templates/edit/:id',
+    path: '/v54vc45xc54v5vc56cxv7657/templates/edit/:id',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Templates/Edit.vue'),
@@ -120,7 +120,7 @@ const routes = [{
         menuKey: 'templates',
     },
 }, {
-    path: '/admin/top-ads',
+    path: '/v54vc45xc54v5vc56cxv7657/top-ads',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/TopAds/Index.vue'),
@@ -133,7 +133,7 @@ const routes = [{
         menuKey: 'top-ads',
     },
 }, {
-    path: '/admin/block-ads',
+    path: '/v54vc45xc54v5vc56cxv7657/block-ads',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/BlockAds/Index.vue'),
@@ -146,7 +146,7 @@ const routes = [{
         menuKey: 'block-ads',
     },
 }, {
-    path: '/admin/popup-ads',
+    path: '/v54vc45xc54v5vc56cxv7657/popup-ads',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/PopupAds/Index.vue'),
@@ -159,7 +159,7 @@ const routes = [{
         menuKey: 'popup-ads',
     },
 }, {
-    path: '/admin/creators',
+    path: '/v54vc45xc54v5vc56cxv7657/creators',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Creators/Index.vue'),
@@ -172,7 +172,7 @@ const routes = [{
         menuKey: 'creators',
     },
 }, {
-    path: '/admin/creators/create',
+    path: '/v54vc45xc54v5vc56cxv7657/creators/create',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Creators/Create.vue'),
@@ -185,7 +185,7 @@ const routes = [{
         menuKey: 'creators',
     },
 }, {
-    path: '/admin/creators/edit/:id',
+    path: '/v54vc45xc54v5vc56cxv7657/creators/edit/:id',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Creators/Edit.vue'),
@@ -198,7 +198,7 @@ const routes = [{
         menuKey: 'creators',
     },
 }, {
-    path: '/admin/approved-creators/profile-requests',
+    path: '/v54vc45xc54v5vc56cxv7657/approved-creators/profile-requests',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/ProfileRequests/ApprovedCreators.vue'),
@@ -211,7 +211,7 @@ const routes = [{
         menuKey: 'approved-creators.profile-requests',
     },
 }, {
-    path: '/admin/not-approved-creators/profile-requests',
+    path: '/v54vc45xc54v5vc56cxv7657/not-approved-creators/profile-requests',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/ProfileRequests/NotApprovedCreators.vue'),
@@ -224,7 +224,7 @@ const routes = [{
         menuKey: 'not-approved-creators.profile-requests',
     },
 }, {
-    path: '/admin/not-approved-creators/profile-requests/:id',
+    path: '/v54vc45xc54v5vc56cxv7657/not-approved-creators/profile-requests/:id',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/ProfileRequests/Show.vue'),
@@ -237,7 +237,7 @@ const routes = [{
         menuKey: 'not-approved-creators.profile-requests',
     },
 }, {
-    path: '/admin/approved-creators/profile-requests/:id',
+    path: '/v54vc45xc54v5vc56cxv7657/approved-creators/profile-requests/:id',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/ProfileRequests/Show.vue'),
@@ -250,7 +250,7 @@ const routes = [{
         menuKey: 'approved-creators.profile-requests.show',
     },
 }, {
-    path: '/admin/transactions',
+    path: '/v54vc45xc54v5vc56cxv7657/transactions',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Transactions/Index.vue'),
@@ -263,7 +263,7 @@ const routes = [{
         menuKey: 'transactions',
     },
 }, {
-    path: '/admin/withdrawal-requests',
+    path: '/v54vc45xc54v5vc56cxv7657/withdrawal-requests',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/WithdrawalRequests/Index.vue'),
@@ -276,7 +276,7 @@ const routes = [{
         menuKey: 'withdrawal-requests',
     },
 }, {
-    path: '/admin/settings',
+    path: '/v54vc45xc54v5vc56cxv7657/settings',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Settings/Index.vue'),
@@ -289,7 +289,7 @@ const routes = [{
         menuKey: 'settings',
     },
 }, {
-    path: '/admin/content',
+    path: '/v54vc45xc54v5vc56cxv7657/content',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/Content/Index.vue'),
@@ -302,7 +302,7 @@ const routes = [{
         menuKey: 'content',
     },
 }, {
-    path: '/admin/:pathMatch(.*)*',
+    path: '/v54vc45xc54v5vc56cxv7657/:pathMatch(.*)*',
     component: defineAsyncComponent({
         loader: () =>
             import ('../views/NotFound.vue'),

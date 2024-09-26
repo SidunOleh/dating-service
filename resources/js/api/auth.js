@@ -5,7 +5,7 @@ const authApi = {
     async login(credentials) {
         await axios.get('/sanctum/csrf-cookie')
 
-        const res = await axios.post('/admin/login', credentials)
+        const res = await axios.post('/v54vc45xc54v5vc56cxv7657/login', credentials)
 
         return res.data
     },
@@ -14,7 +14,7 @@ const authApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/admin/logout')
+        const res = await axios.post('/v54vc45xc54v5vc56cxv7657/logout')
 
         return res.data
     },

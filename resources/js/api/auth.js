@@ -14,7 +14,7 @@ const authApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/logout')
+        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/logout')
 
         return res.data
     },

@@ -14,17 +14,17 @@ const authApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/logout')
+        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/logout')
 
         return res.data
     },
     async sendResetLink(email) {
-        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/send-reset-link', { email })
+        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/send-reset-link', { email })
 
         return res.data
     },
     async resetPassword(credentials) {
-        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/reset-password', credentials)
+        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/reset-password', credentials)
 
         return res.data
     },

@@ -24,7 +24,7 @@ const adsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/ads', data)
+        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/ads', data)
 
         return res.data
     },
@@ -33,7 +33,7 @@ const adsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.put(`/cLAhDKeUKrDErLAyUS21/ads/${id}`, data)
+        const res = await axios.put(`/api/cLAhDKeUKrDErLAyUS21/ads/${id}`, data)
 
         return res.data
     },

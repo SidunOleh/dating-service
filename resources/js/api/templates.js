@@ -6,7 +6,7 @@ const listTemplatesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get(`/cLAhDKeUKrDErLAyUS21/templates?page=${page}&per_page=${perpage}`)
+        const res = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/templates?page=${page}&per_page=${perpage}`)
 
         return res.data
     },
@@ -15,7 +15,7 @@ const listTemplatesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get(`/cLAhDKeUKrDErLAyUS21/templates/${id}`)
+        const res = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/templates/${id}`)
 
         return res.data
     },
@@ -24,7 +24,7 @@ const listTemplatesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.delete(`/cLAhDKeUKrDErLAyUS21/templates/${id}`)
+        const res = await axios.delete(`/api/cLAhDKeUKrDErLAyUS21/templates/${id}`)
 
         return res.data
     },
@@ -33,7 +33,7 @@ const listTemplatesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/templates', data)
+        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/templates', data)
 
         return res.data
     },
@@ -42,7 +42,7 @@ const listTemplatesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.put(`/cLAhDKeUKrDErLAyUS21/templates/${id}`, data)
+        const res = await axios.put(`/api/cLAhDKeUKrDErLAyUS21/templates/${id}`, data)
 
         return res.data
     },

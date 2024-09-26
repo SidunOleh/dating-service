@@ -18,7 +18,7 @@ const withdrawalRequestsApi = {
             order,
         })
 
-        const res = await axios.get(`/cLAhDKeUKrDErLAyUS21/withdrawal-requests?${query}`)
+        const res = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/withdrawal-requests?${query}`)
 
         return res.data
     },
@@ -27,7 +27,7 @@ const withdrawalRequestsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axiohs.get(`/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/amount`)
+        const res = await axiohs.get(`/api/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/amount`)
 
         return res.data
     },
@@ -36,7 +36,7 @@ const withdrawalRequestsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post(`/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/withdraw`)
+        const res = await axios.post(`/api/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/withdraw`)
 
         return res.data
     },
@@ -45,7 +45,7 @@ const withdrawalRequestsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post(`/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/reject`)
+        const res = await axios.post(`/api/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/reject`)
 
         return res.data
     },
@@ -54,7 +54,7 @@ const withdrawalRequestsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.delete(`/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}`)
+        const res = await axios.delete(`/api/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}`)
 
         return res.data
     },

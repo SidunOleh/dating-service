@@ -71,7 +71,7 @@ export default {
             try {
                 this.loading = true
                 await this.loginUser(this.credentials)
-                location.href = '/admin'
+                location.href = '/cLAhDKeUKrDErLAyUS21'
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
             } finally {

@@ -6,7 +6,7 @@ const rolesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get(`/api/roles?page=${page}&per_page=${perpage}`)
+        const res = await axios.get(`/cLAhDKeUKrDErLAyUS21/roles?page=${page}&per_page=${perpage}`)
 
         return res.data
     },
@@ -15,7 +15,7 @@ const rolesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.delete(`/api/roles/${id}`)
+        const res = await axios.delete(`/cLAhDKeUKrDErLAyUS21/roles/${id}`)
 
         return res.data
     },
@@ -24,7 +24,7 @@ const rolesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/api/roles', data)
+        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/roles', data)
 
         return res.data
     },
@@ -33,7 +33,7 @@ const rolesApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.put(`/api/roles/${id}`, data)
+        const res = await axios.put(`/cLAhDKeUKrDErLAyUS21/roles/${id}`, data)
 
         return res.data
     },

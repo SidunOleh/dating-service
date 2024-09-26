@@ -6,7 +6,7 @@ const settingsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get('/api/settings')
+        const res = await axios.get('/cLAhDKeUKrDErLAyUS21/settings')
 
         return res.data
     },
@@ -15,7 +15,7 @@ const settingsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/api/settings', data)
+        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/settings', data)
 
         return res.data
     },

@@ -6,7 +6,7 @@ const adsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get(`/api/ads?page=${page}&per_page=${perpage}&type=${type}`)
+        const res = await axios.get(`/cLAhDKeUKrDErLAyUS21/ads?page=${page}&per_page=${perpage}&type=${type}`)
 
         return res.data
     },
@@ -15,7 +15,7 @@ const adsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.delete(`/api/ads/${id}`)
+        const res = await axios.delete(`/cLAhDKeUKrDErLAyUS21/ads/${id}`)
 
         return res.data
     },
@@ -24,7 +24,7 @@ const adsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/api/ads', data)
+        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/ads', data)
 
         return res.data
     },
@@ -33,7 +33,7 @@ const adsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.put(`/api/ads/${id}`, data)
+        const res = await axios.put(`/cLAhDKeUKrDErLAyUS21/ads/${id}`, data)
 
         return res.data
     },

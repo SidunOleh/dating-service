@@ -20,7 +20,7 @@ const creatorsApi = {
             q,
         })
 
-        const res = await axios.get(`/api/creators?${query}`)
+        const res = await axios.get(`/cLAhDKeUKrDErLAyUS21/creators?${query}`)
 
         return res.data
     },
@@ -29,7 +29,7 @@ const creatorsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get(`/api/creators/${id}`)
+        const res = await axios.get(`/cLAhDKeUKrDErLAyUS21/creators/${id}`)
 
         return res.data
     },
@@ -38,7 +38,7 @@ const creatorsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.delete(`/api/creators/${id}`)
+        const res = await axios.delete(`/cLAhDKeUKrDErLAyUS21/creators/${id}`)
 
         return res.data
     },
@@ -47,7 +47,7 @@ const creatorsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/api/creators', data)
+        const res = await axios.post('/cLAhDKeUKrDErLAyUS21/creators', data)
 
         return res.data
     },
@@ -56,7 +56,7 @@ const creatorsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.put(`/api/creators/${id}`, data)
+        const res = await axios.put(`/cLAhDKeUKrDErLAyUS21/creators/${id}`, data)
 
         return res.data
     },
@@ -65,7 +65,7 @@ const creatorsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post(`/api/creators/${id}/balance`, { balance })
+        const res = await axios.post(`/cLAhDKeUKrDErLAyUS21/creators/${id}/balance`, { balance })
 
         return res.data
     },

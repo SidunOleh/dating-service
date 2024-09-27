@@ -1695,7 +1695,6 @@ input {
     position: absolute !;
     height: auto;
     padding: 24px;
-    display: flex;
     gap: 8px;
     border-radius: 8px ;
 }

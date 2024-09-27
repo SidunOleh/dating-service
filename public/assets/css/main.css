@@ -1744,6 +1744,7 @@ input {
     }
     .res-succes-send .title {
         font-size: 17px;
+        height: auto;
     }
 }
 

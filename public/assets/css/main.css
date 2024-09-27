@@ -1727,7 +1727,9 @@ input {
     flex-direction: column;
     padding: 16px;
 }
-
+.res-succes-send .btn{
+    margin-top: 8px;
+}
 @media screen and (max-width: 768px) {
     .popUp-wrapper .pass-succes {
         -webkit-box-pack: center;

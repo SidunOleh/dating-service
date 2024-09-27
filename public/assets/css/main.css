@@ -1737,7 +1737,6 @@ input {
     .res-succes-send {
         height: auto;
         position: absolute;
-        left: 50%;
         transform: translateX(-50%);
         border-radius: 8px ;
     }

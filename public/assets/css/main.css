@@ -1690,9 +1690,14 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    gap: 16px;
     padding: 16px;
     background: #525252;
+    position: absolute !;
+    height: auto;
+    padding: 24px;
+    display: flex;
+    gap: 8px;
+    border-radius: 8px ;
 }
 
 .popUp-wrapper .res-succes-send .title {
@@ -1735,7 +1740,7 @@ input {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        border-radius: 8px;
+        border-radius: 8px ;
     }
     .res-succes-send .title {
         font-size: 17px;
@@ -5531,3 +5536,4 @@ select#gender {
 .code-inputs input[type="number"] {
     -moz-appearance: textfield;
 }
+

@@ -7,11 +7,11 @@ $step = 10;
 <div class="pagination">
 
     @if($current > 1)
-    <div class="prev">
-        <a href="{{ route($route, ['page' => $current - 1, ...request()->query(),]) }}">
+    <a href="{{ route($route, ['page' => $current - 1, ...request()->query(),]) }}" class="prev">
+        <div>
             <img src="{{ asset('assets/img/prev.svg') }}" alt="" aria-label="Previous page"/>
-        </a>
-    </div>
+        </div>
+    </a>
     @endif
     
     <ul class="pagination-list">
@@ -81,11 +81,11 @@ $step = 10;
     </ul>
 
     @if($total > $current)
-    <div class="next">
-        <a href="{{ route($route, ['page' => $current + 1, ...request()->query(),]) }}">
+    <a href="{{ route($route, ['page' => $current + 1, ...request()->query(),]) }}" class="next">
+        <div>
             <img src="{{ asset('assets/img/next.svg') }}" alt="" aria-label="Next page" />
-        </a>
-    </div>
+        </div>
+    </a>
     @endif
 
 </div>

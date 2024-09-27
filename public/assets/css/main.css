@@ -1702,7 +1702,8 @@ input {
 }
 
 .popUp-wrapper .res-succes-send .title {
-    margin: 0;
+    height: auto;
+    margin-bottom: 8px;
 }
 
 .popUp-wrapper .res-succes-send .mail {
@@ -1746,7 +1747,6 @@ input {
     }
     .res-succes-send .title {
         font-size: 17px;
-        height: auto;
     }
 }
 

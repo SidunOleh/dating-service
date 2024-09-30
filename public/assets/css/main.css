@@ -2190,12 +2190,12 @@ input {
     justify-content: center;
 }
 @media screen and (max-width: 768px) {
-    .profile .left-side .head-porfile .img-card .likes .btn {
+    .users .user-image .likes .btn {
         width: 40px;
         height: 40px;
         font-size: 14px;
     }
-    .profile .left-side .head-porfile .img-card .likes .btn svg {
+    .users .user-image .likes .btn svg {
         width: 24px;
     }
 }

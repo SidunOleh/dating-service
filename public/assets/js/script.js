@@ -1055,6 +1055,13 @@ $(document).ready(function () {
         }
     });
 });
+$(document).ready(function () {
+    if ($("header .advertising-banner").length) {
+        $(".open-faq").css("top", "110px");
+    } else {
+        $(".open-faq").css("top", "70px");
+    }
+});
 $(document).on("click", ".sidebar-menu-item", function () {
     $(".sidebar").removeClass("open");
 });

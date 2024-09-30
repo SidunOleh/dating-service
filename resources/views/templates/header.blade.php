@@ -28,7 +28,7 @@
     <header class="header" id="header">
 
         <div class="header-wrapper">
-            @includeWhen(isset($topAd), 'templates.top-ad', ['ad' => $topAd ?? null,]) 
+            @includeWhen(isset($warning), 'templates.warning', ['warning' => $warning ?? null,]) 
 
             <div class="header-body">
                 <div class="left">

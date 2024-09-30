@@ -21,13 +21,25 @@ class Option extends Model
         return $option ? $option->value : $default;
     }
 
+    public static function updateSettings(array $new)
+    {
+        $settings = json_decode(self::getOption('settings', '[]'), true);
+        foreach ($new as $name => $value) {
+            $settings[$name] = $value;
+        }
+
+        self::firstWhere('name', 'settings')->update([
+            'value' => $settings,
+        ]);
+    }
+
     public static function getSettings(): array
     {
         $settings = json_decode(self::getOption('settings', '[]'), true);
 
         return [
-            'show_top_ad' => 
-                $settings['show_top_ad'] ?? false,
+            'show_top_warning' => 
+                $settings['show_top_warning'] ?? false,
             'clicks_between_popups' => 
                 $settings['clicks_between_popups'] ?? 10,
             'seconds_between_popups' => 

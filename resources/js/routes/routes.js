@@ -159,6 +159,19 @@ const routes = [{
         menuKey: 'popup-ads',
     },
 }, {
+    path: '/cLAhDKeUKrDErLAyUS21/warnings',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/Warnings/Index.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'warnings.index',
+    meta: {
+        access: 'private',
+        permission: 'warnings.view',
+        menuKey: 'warnings',
+    },
+}, {
     path: '/cLAhDKeUKrDErLAyUS21/creators',
     component: defineAsyncComponent({
         loader: () =>

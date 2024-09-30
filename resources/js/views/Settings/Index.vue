@@ -6,15 +6,22 @@
             v-model:activeKey="activeKey">
 
             <CollapsePanel 
-                header="Ad settings"
+                header="Warning settings"
                 :showArrow="false"
                 :key="1">
 
                 <FormItem
-                    label="Show top ad"
+                    label="Show top warning"
                     :required="true">
-                    <Switch v-model:checked="settings.show_top_ad"/>
+                    <Switch v-model:checked="settings.show_top_warning"/>
                 </FormItem>
+
+            </CollapsePanel>
+
+            <CollapsePanel 
+                header="Ad settings"
+                :showArrow="false"
+                :key="1">
 
                 <FormItem
                     label="Clicks between popus"
@@ -91,7 +98,7 @@ export default {
         return {
             activeKey: [1, 2,],
             settings: {
-                show_top_ad: false,
+                show_top_warning: false,
                 clicks_between_popups: null,
                 seconds_between_popups: null,
                 close_popup_seconds: null,

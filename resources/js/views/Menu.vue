@@ -71,11 +71,11 @@
                 Ads
             </template>
 
-            <MenuItem key="top-ads">
+            <!-- <MenuItem key="top-ads">
                 <router-link :to="{name: 'top-ads.index'}">
                     Top ads
                 </router-link>
-            </MenuItem>
+            </MenuItem> -->
 
             <MenuItem key="block-ads">
                 <router-link :to="{name: 'block-ads.index'}">
@@ -90,6 +90,17 @@
             </MenuItem>
 
         </SubMenu>
+
+        <MenuItem
+            v-if="can('warnings.view')" 
+            key="warnings">
+            <template #icon>
+                <WarningIcon />
+            </template>
+            <router-link :to="{name: 'warnings.index'}">
+                Warnings
+            </router-link>
+        </MenuItem>
 
         <SubMenu 
             v-if="can(['approved-creators.profile-requests.view', 'not-approved-creators.profile-requests.view',])"
@@ -178,6 +189,7 @@ import MoneyIcon from './icons/Money.vue'
 import WithdrawalIcon from './icons/Withdrawal.vue'
 import SettingsIcon from './icons/Settings.vue'
 import ContentIcon from './icons/Content.vue'
+import WarningIcon from './icons/Warning.vue'
 import can from '../helpers/can'
 
 export default {
@@ -186,7 +198,7 @@ export default {
         SubMenu, UserIcon, TemplateIcon,
         AdIcon, ProfileIcon, ApproveIcon,
         MoneyIcon, WithdrawalIcon, SettingsIcon,
-        ContentIcon,
+        ContentIcon, WarningIcon,
     },
     data() {
         return {

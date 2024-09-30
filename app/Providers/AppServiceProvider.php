@@ -6,6 +6,7 @@ use App\Models\Ad;
 use App\Models\Creator;
 use App\Models\Option;
 use App\Models\User;
+use App\Models\Warning;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Blade;
@@ -53,13 +54,13 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['pages.*', 'errors.*',], function (ViewView $view) {
             $settings = Option::getSettings();
 
-            if (! $settings['show_top_ad']) {
+            if (! $settings['show_top_warning']) {
                 return;
             }
 
-            $topAd = Ad::type('top')->inRandomOrder()->first();
+            $warning = Warning::inRandomOrder()->first();
 
-            $view->with('topAd', $topAd);
+            $view->with('warning', $warning);
         });
 
         Blade::directive('embedstyles', function ($expression) {

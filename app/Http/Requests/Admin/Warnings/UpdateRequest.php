@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Admin\Settings;
+namespace App\Http\Requests\Admin\Warnings;
 
+use App\Rules\LatinString;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -22,11 +23,12 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'show_top_warning' => 'required|boolean',
-            'clicks_between_popups' => 'required|integer|gte:1',
-            'seconds_between_popups' => 'required|integer|gte:1',
-            'close_popup_seconds' => 'required|integer|gte:1',
-            'referral_percent' => 'required|integer|between:0,100',
+            'text' => [
+                'required',
+                'string',
+                new LatinString,
+            ],
+            'link' => 'required|url',
         ];
     }
 }

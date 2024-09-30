@@ -890,9 +890,7 @@ $("#email-succes-changed .btn").click(() => {
 $(".open-faq").click(function() {
     $(".sidebar").toggleClass("open");
 });
-$(".sidebar-menu-item").click(function() {
-    $(".sidebar").removeClass("open");
-});
+
 $(document).ready(function() {
     $(".accordion-open").click(function() {
         $(this).closest(".accordion").toggleClass("active");

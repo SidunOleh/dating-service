@@ -120,11 +120,11 @@ img {
     }
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .container {
         padding: 0px 16px;
     }
-}
+} */
 
 .btn {
     padding: 11px 16px;

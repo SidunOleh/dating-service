@@ -1340,7 +1340,7 @@ input {
 }
 
 .popUp-wrapper {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgb(22 22 22 / 98%);
     position: fixed;
     top: 0;
     left: 0;
@@ -1698,7 +1698,7 @@ input {
     height: auto;
     padding: 24px;
     gap: 8px;
-    border-radius: 8px ;
+    border-radius: 8px;
 }
 
 .popUp-wrapper .res-succes-send .title {
@@ -1729,7 +1729,7 @@ input {
     flex-direction: column;
     padding: 16px;
 }
-.res-succes-send .btn{
+.res-succes-send .btn {
     margin-top: 8px;
 }
 @media screen and (max-width: 768px) {
@@ -1742,7 +1742,6 @@ input {
         height: auto;
         position: absolute;
         border-radius: 8px;
-
     }
     .res-succes-send .title {
         font-size: 17px;
@@ -2190,6 +2189,16 @@ input {
     -ms-flex-pack: center;
     justify-content: center;
 }
+@media screen and (max-width: 768px) {
+    .profile .left-side .head-porfile .img-card .likes .btn {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    .profile .left-side .head-porfile .img-card .likes .btn svg {
+        width: 24px;
+    }
+}
 
 .profile .left-side .head-porfile .img-card .likes .likes-count {
     color: #fbfbfb;
@@ -2271,7 +2280,6 @@ input {
     font-size: 15px;
     line-height: normal;
     word-break: break-all;
-    
 }
 
 .profile .user-photo-list {
@@ -5538,4 +5546,3 @@ select#gender {
 .code-inputs input[type="number"] {
     -moz-appearance: textfield;
 }
-

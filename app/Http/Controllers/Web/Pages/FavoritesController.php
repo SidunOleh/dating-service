@@ -12,9 +12,12 @@ class FavoritesController extends Controller
 {
     public function __invoke(int $page = 1)
     {
+        $filters = session('filters', []);
+        $filters['in_favorites'] = Auth::guard('web')->id();
+
         $template = Template::inRandomOrder()->firstOrFail();
         $template->setPage($page)
-            ->setFilters(['in_favorites' => Auth::guard('web')->id(),])
+            ->setFilters($filters)
             ->fillData();
 
         $popupAds = Ad::select('id', 'link', 'image_id')

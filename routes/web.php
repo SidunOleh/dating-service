@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
+use App\Http\Controllers\Web\Filters\ApplyController;
 use App\Http\Controllers\Web\Images\DeleteController;
 use App\Http\Controllers\Web\Pages\EarnController;
 use App\Http\Controllers\Web\Pages\FAQController;
@@ -145,6 +146,13 @@ Route::get('/settings', SettingsController::class)
     ->name('settings.page');
 Route::get('/faq', FAQController::class)
     ->name('faq.page');
+
+/**
+ * Filters
+ */
+Route::get('/apply-filters', ApplyController::class)
+    ->middleware(['auth:web',])
+    ->name('apply-filters');
 
 /**
  * Favorites

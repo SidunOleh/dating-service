@@ -45,7 +45,6 @@ class Creator extends Authenticatable
         'zip',
         'state',
         'city',
-        'street',
         'latitude',
         'longitude', 
         'first_name',
@@ -98,7 +97,6 @@ class Creator extends Authenticatable
         'zip',
         'state',
         'city',
-        'street',
         'latitude',
         'longitude',
     ];
@@ -211,7 +209,6 @@ class Creator extends Authenticatable
                 'zip' => $attributes['zip'],
                 'state' => $attributes['state'],
                 'city' => $attributes['city'],
-                'street' => $attributes['street'],
                 'latitude' => $attributes['latitude'],
                 'longitude' => $attributes['longitude'],
             ],
@@ -219,7 +216,6 @@ class Creator extends Authenticatable
                 'zip' => $value['zip'],
                 'state' => $value['state'],
                 'city' => $value['city'],
-                'street' => $value['street'],
                 'latitude' => $value['latitude'],
                 'longitude' => $value['longitude'],
             ],
@@ -387,7 +383,6 @@ class Creator extends Authenticatable
                 'zip',
                 'state', 
                 'city', 
-                'street',
                 'latitude', 
                 'longitude',
             ])) { 
@@ -397,8 +392,6 @@ class Creator extends Authenticatable
                     $data['state'];
                 $request['location']['value']['city'] = 
                     $data['city'];
-                $request['location']['value']['street'] =
-                    $data['street'];
                 $request['location']['value']['latitude'] = 
                     $data['latitude'];
                 $request['location']['value']['longitude'] =    
@@ -486,7 +479,6 @@ class Creator extends Authenticatable
             'zip',
             'state',
             'city',
-            'street',
             'first_name',
             'last_name',
         ], 'like', "%{$q}%");
@@ -507,7 +499,6 @@ class Creator extends Authenticatable
             'zip',
             'state',
             'city',
-            'street',
         ], 'like', "%{$q}%");
     }
 

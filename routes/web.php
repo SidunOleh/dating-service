@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
+use App\Http\Controllers\Admin\ZipCodes\ShowController as ZipCodesShowController;
 use App\Http\Controllers\Web\Images\UploadController;
 use App\Http\Controllers\Web\Ads\ClickController;
 use App\Http\Controllers\Web\Auth\LogOutController as AuthLogOutController;
@@ -153,6 +154,12 @@ Route::get('/faq', FAQController::class)
 Route::get('/apply-filters', ApplyController::class)
     ->middleware(['auth:web',])
     ->name('apply-filters');
+
+/**
+ * Zip
+ */
+Route::get('/zips/{zipCode:zip}', ZipCodesShowController::class)
+    ->name('zips.show.web');
 
 /**
  * Favorites

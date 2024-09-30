@@ -376,7 +376,6 @@ export default {
                 zip: this.data.zip,
                 state: this.data.state,
                 city: this.data.city,
-                street: this.data.street,
                 latitude: this.data.latitude,
                 longitude: this.data.longitude,
             }

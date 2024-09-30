@@ -1,12 +1,7 @@
 <template>
     
     <Flex :gap="5">        
-        <Input 
-            placeholder="Street and house number"
-            v-model:value="location.street"/>
-
         <Input    
-            style="width: 300px;"
             placeholder="Zip"
             v-model:value="location.zip"/>
 
@@ -36,7 +31,6 @@ export default {
                 zip: null,
                 state: '',
                 city: '',
-                street: '',
                 latitude: null,
                 longitude: null,
             },
@@ -45,10 +39,7 @@ export default {
     },
     methods: {
         async find() {
-            if (
-                !this.location.zip || 
-                !this.location.street
-            ) {
+            if (!this.location.zip) {
                 message.error('Fill all address fields.')
                 return
             }
@@ -56,28 +47,12 @@ export default {
             try {
                 this.loading = true
                 
-                const zip = await axios.get(`/api/zips/${this.location.zip}`)
+                const zip = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/zips/${this.location.zip}`)
 
                 this.location.city = zip.data.city
                 this.location.state = zip.data.state
-
-                const nominatim = await axios.get(`https://nominatim.openstreetmap.org/search?street=${this.location.street}&postalcode=${this.location.zip}&countrycodes=US&addressdetails=1&format=json`)
-                
-                nominatim.data = nominatim.data.filter(location => {
-                    if (! location.address.postcode) {
-                        return true
-                    }
-
-                    return location.address.postcode == this.location.zip
-                })
-                
-                if (! nominatim.data.length) {
-                    message.error('Not found location.')
-                    return
-                }
-
-                this.location.latitude = nominatim.data[0].lat
-                this.location.longitude = nominatim.data[0].lon
+                this.location.latitude = zip.data.latitude
+                this.location.longitude = zip.data.longitude
 
                 this.$emit('change', this.location)
             } catch(err) {

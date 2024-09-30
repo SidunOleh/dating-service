@@ -41,7 +41,6 @@ class CreatorResource extends JsonResource
             'zip' => $this->zip,
             'state' => $this->state,
             'city' => $this->city,
-            'street' => $this->street,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
 

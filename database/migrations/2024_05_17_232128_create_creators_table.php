@@ -43,7 +43,6 @@ return new class extends Migration
             $table->string('zip', 10)->nullable();
             $table->char('state', 2)->nullable();
             $table->string('city')->nullable();
-            $table->string('street')->nullable();
             $table->decimal('latitude', 9, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();     
             $table->index('latitude');       

@@ -136,7 +136,7 @@
                 </div>
                 
                 <div class="location-address">
-                    {{ "{$data['location']['value']['street']}, {$data['location']['value']['city']}, {$data['location']['value']['state']} {$data['location']['value']['zip']}" }}
+                    {{ "{$data['location']['value']['city']}, {$data['location']['value']['state']} {$data['location']['value']['zip']}" }}
                 </div>
 
                 @includeWhen(

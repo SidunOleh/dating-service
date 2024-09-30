@@ -98,7 +98,6 @@ class DoneRequest extends FormRequest
         $rules['location.value.zip'] = 'regex:/^[0-9]{5}$/|exists:zip_codes,zip|nullable';
         $rules['location.value.state'] = 'string|nullable';
         $rules['location.value.city'] = 'string|nullable';
-        $rules['location.value.street'] = 'string|nullable';
         $rules['location.value.latitude'] = 'between:-90,90|nullable';
         $rules['location.value.longitude'] = 'between:-180,180|nullable';
         $rules['location.status'] = 'in:approved,rejected';

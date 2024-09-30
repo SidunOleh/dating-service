@@ -4820,6 +4820,7 @@ input {
 
 .faq .main .open-faq {
     position: sticky;
+    top: 60px;
     margin-bottom: 20px;
     z-index: 10;
     background-color: #252528;

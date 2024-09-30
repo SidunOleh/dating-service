@@ -743,23 +743,6 @@
 
                     <div class="step-body">
                         <div class="form-group">
-
-                            <!-- <div class="input-wrapper">
-                                <label for="location">
-                                    Street and house number:*
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="street" 
-                                    placeholder="Street and house number" 
-                                    name="street"
-                                    onkeydown="return event.key != 'Enter'"
-                                    v-model="data.street"
-                                    @change="data.latitude = null; data.longitude = null" />
-                                <div v-if="errors.street" class="error-text">
-                                    {{ errors.street }}
-                                </div>
-                            </div> -->
                             
                             <div class="input-wrapper">
                                 <label for="location">

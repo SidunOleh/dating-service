@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('text', 512);
             $table->string('link', 1024);
+            $table->integer('clicks_count')->default(0);
             $table->timestamps();
         });
     }

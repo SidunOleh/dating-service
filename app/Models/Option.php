@@ -28,9 +28,10 @@ class Option extends Model
             $settings[$name] = $value;
         }
 
-        self::firstWhere('name', 'settings')->update([
-            'value' => $settings,
-        ]);
+        self::updateOrCreate(
+            ['name' => 'settings',], 
+            ['value' => json_encode($settings),]
+        );
     }
 
     public static function getSettings(): array

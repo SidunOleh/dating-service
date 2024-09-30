@@ -62,7 +62,7 @@
     @auth('web')
     <header class="header" id="header">
         
-        @includeWhen(isset($topAd), 'templates.top-ad', ['ad' => $topAd ?? null,]) 
+        @includeWhen(isset($warning), 'templates.warning', ['warning' => $warning ?? null,]) 
         
         <div class="header-wrapper">
 

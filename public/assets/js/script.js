@@ -269,6 +269,10 @@ $(".users-item.add").bind("auxclick click", function () {
     $.post(`/ads/${$(this).data("id")}/click`);
 });
 
+$(".warning").bind("auxclick click", function () {
+    $.post(`/warnings/${$(this).data("id")}/click`);
+});
+
 //__________________________Verification_________________________//
 
 const resendTimer = {

@@ -22,6 +22,10 @@
                 {{ record.link }}
             </template>
 
+            <template v-if="column.key === 'clicks_count'">
+                {{ record.clicks_count }}
+            </template>
+
             <Tooltip>
                 <template #title>
                     Edit
@@ -77,6 +81,10 @@ export default {
                 {
                     title: 'Link',
                     key: 'link',
+                },
+                {
+                    title: 'Clicks count',
+                    key: 'clicks_count',
                 },
                 {
                     key: 'edit',

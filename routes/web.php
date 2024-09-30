@@ -45,6 +45,7 @@ use App\Http\Controllers\Web\Settings\ChangeEmailVerifyController;
 use App\Http\Controllers\Web\Settings\ChangePasswordController;
 use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
+use App\Http\Controllers\Web\Warnings\ClickController as WarningsClickController;
 use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
 use Illuminate\Support\Facades\Route;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
@@ -178,6 +179,11 @@ Route::prefix('/favorites')
  * Ads
  */
 Route::post('/ads/{ad}/click', ClickController::class);
+
+/**
+ * Warnings
+ */
+Route::post('/warnings/{warning}/click', WarningsClickController::class);
 
 /**
  * Profile

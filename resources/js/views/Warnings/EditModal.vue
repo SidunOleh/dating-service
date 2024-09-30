@@ -10,10 +10,10 @@
                 label="Text"
                 :required="true">
                 <QuillEditor 
-                        style="min-height: 200px;"
-                        contentType="html"
-                        toolbar="full"
-                        v-model:content="data.text"></QuillEditor>
+                    style="min-height: 200px;"
+                    contentType="html"
+                    toolbar="full"
+                    v-model:content="data.text"></QuillEditor>
             </FormItem>
 
             <FormItem
@@ -22,6 +22,15 @@
                 <Input
                     placeholder="Enter link"
                     v-model:value="data.link"/>
+            </FormItem>
+
+            <FormItem
+                label="Clicks count"
+                :required="true">
+                <Input
+                    placeholder="Clicks count"
+                    :disabled="true"
+                    :value="data.clicks_count"/>
             </FormItem>
 
             <Button

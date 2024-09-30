@@ -19,6 +19,7 @@ class WarningCollection extends ResourceCollection
             $data[$i]['id'] = $ad->id;
             $data[$i]['text'] = $ad->text;
             $data[$i]['link'] = $ad->link;
+            $data[$i]['clicks_count'] = $ad->clicks_count;
         }
 
         $meta = [

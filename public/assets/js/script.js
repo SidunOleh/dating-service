@@ -887,6 +887,9 @@ $("#email-succes-changed .btn").click(() => {
 });
 
 //__________________________FAQ__________________________//
+$(".open-faq").click(function() {
+    $(".side-bar").toggleClass("open");
+});
 
 $(document).ready(function() {
     $(".accordion-open").click(function() {
@@ -924,9 +927,7 @@ $(document).ready(function() {
         showContent(next.attr("id"));
     });
 
-    $(".open-faq").click(function() {
-        $(".side-bar").toggleClass("open");
-    });
+    
     $(".faq-prev").click(function() {
         var current = $(".faq-content:visible");
         var prev = current.prev(".faq-content");

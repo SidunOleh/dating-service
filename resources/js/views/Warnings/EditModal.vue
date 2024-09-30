@@ -9,8 +9,11 @@
             <FormItem
                 label="Text"
                 :required="true">
-                <Input
-                    v-model:value="data.text"/>
+                <QuillEditor 
+                        style="min-height: 200px;"
+                        contentType="html"
+                        toolbar="full"
+                        v-model:content="data.text"></QuillEditor>
             </FormItem>
 
             <FormItem

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Admin\Warnings;
 
-use App\Rules\LatinString;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -26,7 +25,6 @@ class StoreRequest extends FormRequest
             'text' => [
                 'required',
                 'string',
-                new LatinString,
             ],
             'link' => 'required|url',
         ];

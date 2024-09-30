@@ -14,7 +14,8 @@
         <template #bodyCell="{column, record}">
 
             <template v-if="column.key == 'text'">
-                {{ record.text }}
+                <div v-html="record.text">
+                </div>
             </template>
 
             <template v-if="column.key === 'link'">

@@ -890,9 +890,6 @@ $("#email-succes-changed .btn").click(() => {
 $(".open-faq").click(function () {
     $(".sidebar").toggleClass("open");
 });
-$(".sidebar-menu-item").click(function () {
-    $(".sidebar").removeClass("open");
-});
 
 $(document).ready(function () {
     $(".accordion-open").click(function () {
@@ -1057,6 +1054,9 @@ $(document).ready(function () {
             }
         }
     });
+});
+$(document).on("click", ".sidebar-menu-item", function () {
+    $(".sidebar").removeClass("open");
 });
 
 //__________________________Transactions__________________________//

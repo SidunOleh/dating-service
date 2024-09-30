@@ -888,7 +888,7 @@ $("#email-succes-changed .btn").click(() => {
 
 //__________________________FAQ__________________________//
 $(".open-faq").click(function() {
-    $(".side-bar").toggleClass("open");
+    $(".sidebar").toggleClass("open");
 });
 
 $(document).ready(function() {

@@ -6,13 +6,13 @@
     DS.ads.settings = {{ Js::from($settings) }}
 </script>
 
-@guest('web')
+<!-- @guest('web')
 <div class="warning container">
     <div class="warning-message">
         Search by location and filtration is available after registration on the site
     </div>
 </div>
-@endguest
+@endguest -->
 
 <section class="users">
     <div class="container">

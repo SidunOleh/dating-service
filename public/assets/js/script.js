@@ -265,8 +265,12 @@ if (DS.ads?.data && DS.ads?.settings) {
     adPopup.ini();
 }
 
-$(".advertising-banner, .users-item.add").bind("auxclick click", function () {
+$(".users-item.add").bind("auxclick click", function () {
     $.post(`/ads/${$(this).data("id")}/click`);
+});
+
+$(".warning").bind("auxclick click", function () {
+    $.post(`/warnings/${$(this).data("id")}/click`);
 });
 
 //__________________________Verification_________________________//

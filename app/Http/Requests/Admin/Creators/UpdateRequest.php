@@ -58,10 +58,7 @@ class UpdateRequest extends FormRequest
             'onlyfans' => 'string|nullable',
             'profile_email' => 'email|nullable',
 
-            'street' => 'required|string',
             'zip' => 'required|regex:/^[0-9]{5}$/|exists:zip_codes,zip',
-            'latitude' => 'required|between:-90,90',
-            'longitude' => 'required|between:-180,180',
 
             'id_photo' => 'required_with:street_photo,verification_photo,first_name,last_name,birthday|exists:images,id|nullable',
             'street_photo' => 'required_with:id_photo,verification_photo,first_name,last_name,birthday|exists:images,id|nullable',

@@ -263,7 +263,6 @@ export default {
                 zip: null,
                 state: '',
                 city: '',
-                street: '',
                 latitude: null,
                 longitude: null,
                 first_name: '',

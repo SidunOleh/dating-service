@@ -39,6 +39,12 @@ use App\Http\Controllers\Admin\Users\StoreController;
 use App\Http\Controllers\Admin\Users\UpdateController;
 use App\Http\Controllers\Admin\Users\DeleteController;
 use App\Http\Controllers\Admin\Transactions\DeleteController as TransactionsDeleteController;
+use App\Http\Controllers\Admin\Warnings\DeleteController as WarningsDeleteController;
+use App\Http\Controllers\Admin\Warnings\IndexController as WarningsIndexController;
+use App\Http\Controllers\Admin\Warnings\ShowSettingsController;
+use App\Http\Controllers\Admin\Warnings\StoreController as WarningsStoreController;
+use App\Http\Controllers\Admin\Warnings\UpdateController as WarningsUpdateController;
+use App\Http\Controllers\Admin\Warnings\UpdateSettingsController;
 use App\Http\Controllers\Admin\WithdrawalRequests\AmountController;
 use App\Http\Controllers\Admin\WithdrawalRequests\DeleteController as WithdrawalRequestsDeleteController;
 use App\Http\Controllers\Admin\WithdrawalRequests\IndexController as WithdrawalRequestsIndexController;
@@ -143,6 +149,27 @@ Route::middleware(['auth:sanctum',])->group(function () {
         Route::delete('/{ad}', AdsDeleteController::class)  
             ->name('delete')
             ->can('ads.delete');
+    });
+
+    Route::prefix('/warnings')->name('warnings.')->group(function () {
+        Route::get('/', WarningsIndexController::class)
+            ->name('index')
+            ->can('warnings.view');
+        Route::post('/', WarningsStoreController::class)  
+            ->name('store')
+            ->can('warnings.create');
+        Route::put('/{warning}', WarningsUpdateController::class)  
+            ->name('update')
+            ->can('warnings.edit');
+        Route::delete('/{warning}', WarningsDeleteController::class)  
+            ->name('delete')
+            ->can('warnings.delete');
+        Route::get('/settings', ShowSettingsController::class)  
+            ->name('settings.show')
+            ->can('warnings.settings');
+        Route::post('/settings', UpdateSettingsController::class)  
+            ->name('settings.update')
+            ->can('warnings.settings');
     });
 
     Route::prefix('/creators')->name('creators.')->group(function () {

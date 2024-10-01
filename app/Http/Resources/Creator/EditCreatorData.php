@@ -23,7 +23,6 @@ class EditCreatorData extends JsonResource
             'onlyfans' => $this->onlyfans,
             'profile_email' => $this->profile_email,
 
-            'street' => $this->street,
             'zip' => $this->zip,
             'state' => $this->state,
             'city' => $this->city,

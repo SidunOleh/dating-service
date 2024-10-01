@@ -17,6 +17,8 @@ class StoreController extends Controller
         $zip = ZipCode::firstWhere('zip', $validated['zip']);
         $validated['state'] = $zip->state;
         $validated['city'] = $zip->city;
+        $validated['latitude'] = $zip->latitude;
+        $validated['longitude'] = $zip->longitude;
 
         $creator = Creator::create($validated);
 

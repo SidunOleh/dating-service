@@ -193,14 +193,8 @@
                     :class="data.location?.status">
                     
                     <Flex :gap="5">
-                        <Input 
-                            style="margin-bottom: 10px;"
-                            placeholder="Street"
-                            readonly
-                            :value="data.location ? data.location?.value?.street : data.creator?.street"/>
-
                         <Input
-                            style="margin-bottom: 10px; width: 300px;"
+                            style="margin-bottom: 10px;"
                             placeholder="Zip"
                             readonly
                             :value="data.location ? data.location?.value?.zip : data.creator?.zip"/>

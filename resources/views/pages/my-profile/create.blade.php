@@ -21,10 +21,7 @@
                     onlyfans: '',
                     profile_email: '',
 
-                    street: '',
                     zip: '',
-                    latitude: null,
-                    longitude: null,
                     
                     name: '',
                     age: null,
@@ -42,7 +39,7 @@
                 steps: [
                     [],
                     ['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',],
-                    ['zip', 'street', 'latitude', 'longitude',],
+                    ['zip',],
                     ['name', 'age', 'description',],
                     ['photos',],
                     ['id_photo', 'verification_photo', 'street_photo', 'first_name', 'last_name', 'birthday',],
@@ -78,12 +75,6 @@
                         },
                     ],
 
-                    street: [
-                        {
-                            message: 'Street required',
-                            fn: val => Boolean(val),
-                        },
-                    ],
                     zip: [
                         {
                             message: 'ZIP Code required',
@@ -92,18 +83,6 @@
                         {
                             message: 'ZIP Code invalid',
                             fn: val => Boolean(val.match(/^[0-9]{5}$/)), 
-                        },
-                    ],
-                    latitude: [
-                        {
-                            message: 'Latitude required',
-                            fn: val => Boolean(val),
-                        },
-                    ],
-                    longitude: [
-                        {
-                            message: 'Longitude required',
-                            fn: val => Boolean(val),
                         },
                     ],
                     
@@ -353,7 +332,7 @@
                 async search() {
                     this.location.loading = true
 
-                    const fields = ['street', 'zip',]
+                    const fields = ['zip',]
 
                     fields.forEach(field => delete this.errors[field])
 
@@ -361,35 +340,25 @@
                     fields.forEach(field => this.validate(field) || (valid = false))
                    
                     if (valid) {
-                        const location = await this.nomitamin(this.data.street, this.data.zip)
+                        const location = await this.getZip(this.data.zip)
 
                         if (location) {
-                            this.data.latitude = parseFloat(location.lat).toFixed(7)
-                            this.data.longitude = parseFloat(location.lon).toFixed(7)
+                            const latitude = parseFloat(location.latitude).toFixed(7)
+                            const longitude = parseFloat(location.longitude).toFixed(7)
 
-                            this.createMap(this.data.latitude, this.data.longitude)   
+                            this.createMap(latitude, longitude)   
                         } else {
-                            this.errors.street = 'Address Not Found'
+                            this.errors.zip = 'Zip Not Found'
                         }
                     }
 
                     this.location.loading = false
                 },
-                async nomitamin(street, zip) {
+                async getZip(zip) {
                     try {
-                        const params = new URLSearchParams({
-                            street: street,
-                            postalcode: zip,
-                            countrycodes: 'US',
-                            addressdetails: 1,
-                            format: 'json',
-                        })
+                        let res = await $.get(`/zips/${zip}`)
 
-                        let res = await $.get(`https://nominatim.openstreetmap.org/search?${params.toString()}`)
-
-                        res = res.filter(l => l.address.postcode == zip)
-
-                        return res[0]
+                        return res
                     } catch {
                         return false
                     }
@@ -774,23 +743,6 @@
 
                     <div class="step-body">
                         <div class="form-group">
-
-                            <div class="input-wrapper">
-                                <label for="location">
-                                    Street and house number:*
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="street" 
-                                    placeholder="Street and house number" 
-                                    name="street"
-                                    onkeydown="return event.key != 'Enter'"
-                                    v-model="data.street"
-                                    @change="data.latitude = null; data.longitude = null" />
-                                <div v-if="errors.street" class="error-text">
-                                    {{ errors.street }}
-                                </div>
-                            </div>
                             
                             <div class="input-wrapper">
                                 <label for="location">
@@ -802,21 +754,20 @@
                                     placeholder="ZIP" 
                                     name="zip"
                                     onkeydown="return event.key != 'Enter'"
-                                    v-model="data.zip"
-                                    @change="data.latitude = null; data.longitude = null" />
+                                    v-model="data.zip" />
                                 <div v-if="errors.zip" class="error-text">
                                     {{ errors.zip }}
                                 </div>
                             </div>
 
-                            <div v-show="data.latitude && data.longitude" id="location" style="height: 300px;"></div>
+                            <div v-show="location.map" id="location" style="height: 300px;"></div>
 
                         </div>
 
                         <div class="btn-group">
 
                             <button 
-                                v-if="! data.latitude && ! data.longitude" 
+                                v-if="! location.map" 
                                 class="btn red" 
                                 type="button" 
                                 id="search-location" 
@@ -826,7 +777,7 @@
                             </button>
 
                             <button 
-                                v-if="data.latitude && data.longitude" 
+                                v-if="location.map" 
                                 class="btn" 
                                 type="button" 
                                 id="research-location" 
@@ -836,7 +787,7 @@
                             </button>
 
                             <button 
-                                v-if="data.street && data.zip && data.latitude && data.longitude"
+                                v-if="location.map"
                                 class="btn red next-btn" 
                                 type="button" 
                                 id="nextBtn3" 

@@ -24,8 +24,10 @@ class UpdateController extends Controller
         $validated = $requets->validated();
 
         $zip = ZipCode::firstWhere('zip', $validated['zip']);
-        $validated['state'] = $zip['state'];
-        $validated['city'] = $zip['city'];
+        $validated['state'] = $zip->state;
+        $validated['city'] = $zip->city;
+        $validated['latitude'] = $zip->latitude;
+        $validated['longitude'] = $zip->longitude;
 
         $creator->saveNotApprovableProfileChanges($validated);
         $creator->createProfileRequest($validated);

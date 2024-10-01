@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
+use App\Http\Controllers\Admin\ZipCodes\ShowController as ZipCodesShowController;
 use App\Http\Controllers\Web\Images\UploadController;
 use App\Http\Controllers\Web\Ads\ClickController;
 use App\Http\Controllers\Web\Auth\LogOutController as AuthLogOutController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
+use App\Http\Controllers\Web\Filters\ApplyController;
 use App\Http\Controllers\Web\Images\DeleteController;
 use App\Http\Controllers\Web\Pages\EarnController;
 use App\Http\Controllers\Web\Pages\FAQController;
@@ -43,6 +45,7 @@ use App\Http\Controllers\Web\Settings\ChangeEmailVerifyController;
 use App\Http\Controllers\Web\Settings\ChangePasswordController;
 use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
+use App\Http\Controllers\Web\Warnings\ClickController as WarningsClickController;
 use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
 use Illuminate\Support\Facades\Route;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
@@ -147,6 +150,19 @@ Route::get('/faq', FAQController::class)
     ->name('faq.page');
 
 /**
+ * Filters
+ */
+Route::get('/apply-filters', ApplyController::class)
+    ->middleware(['auth:web',])
+    ->name('apply-filters');
+
+/**
+ * Zip
+ */
+Route::get('/zips/{zipCode:zip}', ZipCodesShowController::class)
+    ->name('zips.show.web');
+
+/**
  * Favorites
  */
 Route::prefix('/favorites')
@@ -163,6 +179,11 @@ Route::prefix('/favorites')
  * Ads
  */
 Route::post('/ads/{ad}/click', ClickController::class);
+
+/**
+ * Warnings
+ */
+Route::post('/warnings/{warning}/click', WarningsClickController::class);
 
 /**
  * Profile

@@ -13,8 +13,10 @@ $(".header-menu .close").click(function () {
     $("#header").toggleClass("open");
     $("html").removeClass("lock");
 });
-var headerHeight = $(".advertising-banner ").outerHeight();
-$(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
+if ($("header .advertising-banner").length) {
+    var headerHeight = $(".advertising-banner").outerHeight(); // Прибрано зайвий пробіл
+    $(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
+}
 
 //__________________________Cards__________________________//
 

@@ -5,11 +5,13 @@ Fancybox.bind("[data-fancybox]", {});
 $(".burger-menu").click(function () {
     $(".header-menu").toggleClass("open");
     $("#header").toggleClass("open");
+    $("html").addClass("lock");
 });
 
 $(".header-menu .close").click(function () {
     $(".header-menu").removeClass("open");
     $("#header").toggleClass("open");
+    $("html").removeClass("lock");
 });
 
 //__________________________Cards__________________________//

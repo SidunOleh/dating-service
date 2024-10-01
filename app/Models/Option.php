@@ -49,6 +49,8 @@ class Option extends Model
                  $settings['close_popup_seconds'] ?? 5,
             'referral_percent' => 
                 $settings['referral_percent'] ?? 0,
+            'repeat_time' => 
+                $settings['repeat_time'] ?? 5,
         ];
     }
 

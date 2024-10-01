@@ -5008,7 +5008,7 @@ input {
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
         justify-content: space-between;
-        margin-top: 24px;
+        margin-top: 16px;
     }
     .faq .faq-navigation .faq-next,
     .faq .faq-navigation .faq-prev {

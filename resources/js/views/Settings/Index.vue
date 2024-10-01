@@ -21,7 +21,7 @@
             <CollapsePanel 
                 header="Ad settings"
                 :showArrow="false"
-                :key="1">
+                :key="2">
 
                 <FormItem
                     label="Clicks between popus"
@@ -58,7 +58,7 @@
             <CollapsePanel 
                 header="Referral settings"
                 :showArrow="false"
-                :key="2">
+                :key="3">
 
                 <FormItem
                     label="Referral percent"
@@ -69,6 +69,23 @@
                         v-model:value="settings.referral_percent"
                         :min="0"
                         :max="100"/>
+                </FormItem>
+
+            </CollapsePanel>
+
+            <CollapsePanel 
+                header="Roulette settings"
+                :showArrow="false"
+                :key="4">
+
+                <FormItem
+                    label="Repeat time"
+                    :required="true">
+                    <InputNumber
+                        placeholder="Repeat time"
+                        style="width: 100%;"
+                        v-model:value="settings.repeat_time"
+                        :min="1"/>
                 </FormItem>
 
             </CollapsePanel>
@@ -96,13 +113,14 @@ export default {
     },
     data() {
         return {
-            activeKey: [1, 2,],
+            activeKey: [1, 2, 3, 4,],
             settings: {
                 show_top_warning: false,
                 clicks_between_popups: null,
                 seconds_between_popups: null,
                 close_popup_seconds: null,
                 referral_percent: null,
+                repeat_time: null,
             },
             editing: false,
         }

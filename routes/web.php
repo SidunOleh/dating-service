@@ -178,12 +178,14 @@ Route::prefix('/favorites')
 /**
  * Ads
  */
-Route::post('/ads/{ad}/click', ClickController::class);
+Route::post('/ads/{ad}/click', ClickController::class)
+    ->name('ads.click');
 
 /**
  * Warnings
  */
-Route::post('/warnings/{warning}/click', WarningsClickController::class);
+Route::post('/warnings/{warning}/click', WarningsClickController::class)
+    ->name('warnings.click');
 
 /**
  * Profile

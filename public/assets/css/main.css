@@ -490,7 +490,7 @@ input {
     right: -100%;
     border-left: 1px solid #616166;
     background: #252528;
-    padding: 24px 32px;
+    padding: 8px 32px;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     z-index: 10;

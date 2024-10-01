@@ -412,7 +412,7 @@ input {
 #header .burger-menu {
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -426,7 +426,7 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -536,7 +536,7 @@ input {
 .header-menu .close {
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -549,7 +549,7 @@ input {
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: #fff;
     font-size: 16px;
@@ -631,7 +631,7 @@ input {
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;
     background-color: #252528;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #525252;
     padding: 12px;
     width: 100%;
@@ -644,7 +644,7 @@ input {
 .header-menu .form-container .zip-distance-group input {
     padding: 12px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: #fff;
     font-size: 16px;
@@ -1442,7 +1442,7 @@ input {
 .popUp-wrapper .card .close {
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -1547,7 +1547,7 @@ input {
     color: white;
     padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     width: 100%;
     cursor: pointer;
 }
@@ -1595,7 +1595,7 @@ input {
 .popUp-wrapper .input-group input {
     width: 100%;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: #fff;
     font-weight: 400;
@@ -1703,7 +1703,7 @@ input {
     height: auto;
     padding: 24px;
     gap: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .popUp-wrapper .res-succes-send .title {
@@ -1746,7 +1746,7 @@ input {
     .res-succes-send {
         height: auto;
         position: absolute;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .res-succes-send .title {
         font-size: 17px;
@@ -1786,7 +1786,7 @@ input {
 .popUp-wrapper .submit {
     width: 100%;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -1931,7 +1931,7 @@ input {
 }
 
 .advertising-wrapper .advertising-popup {
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     width: 100%;
     max-width: 610px;
@@ -2021,7 +2021,7 @@ input {
     top: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 4px;
     background: rgba(57, 57, 62, 0.5);
     -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(25px);
@@ -2054,7 +2054,7 @@ input {
     top: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 4px;
     background: rgba(57, 57, 62, 0.5);
     -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(25px);
@@ -2104,7 +2104,7 @@ input {
 }
 
 .profile .left-side .head-porfile {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     overflow: hidden;
     position: relative;
@@ -2237,7 +2237,7 @@ input {
 }
 
 .profile .left-side .user-info-list {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 12px;
     display: -webkit-box;
@@ -2269,7 +2269,7 @@ input {
 
 .profile .left-side .user-location {
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
     height: 219px;
 }
 
@@ -2278,7 +2278,7 @@ input {
 }
 
 .profile .left-side .description {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 12px;
     color: #bebfc0;
@@ -2306,7 +2306,7 @@ input {
 }
 
 .profile .user-photo-list .user-photo-item {
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     display: block;
     position: relative;
@@ -2395,7 +2395,7 @@ input {
 
 .profile .other-user-list .other-user-item {
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #4c4c52;
     position: relative;
 }
@@ -2640,7 +2640,7 @@ input {
 }
 
 .profile.account .delete-wrapper .delete-popup {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 24px;
     max-width: 427px;
@@ -2684,7 +2684,7 @@ input {
     padding: 8px;
     color: #fbfbfb;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     margin-top: 12px;
 }
@@ -2938,7 +2938,7 @@ input {
 }
 
 .profile-filling .form-step {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 10px;
     display: -webkit-box;
@@ -3061,7 +3061,7 @@ input {
 .profile-filling .form-group textarea {
     min-height: 60px;
     resize: none;
-    border-radius: 8px;
+    border-radius: 4px;
     background-color: #4c4c52;
     border: 1px solid #8585858d;
     padding: 8px;
@@ -3143,7 +3143,7 @@ input {
 
 .profile-filling .map {
     height: 320px;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -3249,7 +3249,7 @@ input {
     height: 100%;
     max-height: 600px;
     min-height: 600px;
-    border-radius: 8px;
+    border-radius: 4px;
     -o-object-fit: contain;
     object-fit: contain;
     position: relative;
@@ -3280,7 +3280,7 @@ input {
     -ms-flex-pack: center;
     justify-content: center;
     padding-bottom: 3px;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .profile-filling .move-button {
@@ -3290,7 +3290,7 @@ input {
     right: 8px;
     width: 48px;
     height: 48px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -3395,7 +3395,7 @@ input {
 }
 
 .step-6 .custom-upload-btn {
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #fbfbfb;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -3418,7 +3418,7 @@ input {
 .step-6 .custom-remove-btn {
     padding: 12px 24px;
     background-color: transparent;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #fb7478;
     color: #fb7478;
     cursor: pointer;
@@ -3819,7 +3819,7 @@ input {
 
 .coins-wrapper .repaymant-item {
     width: calc((100% - 24px) / 2);
-    border-radius: 8px;
+    border-radius: 4px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -3890,7 +3890,7 @@ input {
 .deposit-type,
 .referral-out {
     width: calc((100% - 24px) / 3);
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -3997,7 +3997,7 @@ input {
     bottom: 80px;
     z-index: 1001;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: white;
     font-size: 16px;
@@ -4084,7 +4084,7 @@ input {
 }
 
 .deposit-wrapper .key span {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     padding: 8px;
 }
@@ -4343,7 +4343,7 @@ input {
 }
 
 .refferals .link-body .link {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     height: 39px;
     color: #fff;
@@ -4372,7 +4372,7 @@ input {
     bottom: 80px;
     z-index: 1001;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: white;
     font-size: 16px;
@@ -4530,7 +4530,7 @@ input {
 }
 
 .settings .settings-item {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 32px;
     width: 50%;
@@ -4597,7 +4597,7 @@ input {
 }
 
 .settings-wrapper .card {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     padding: 24px;
 }
@@ -4729,7 +4729,7 @@ input {
     color: #fff;
     font-size: 16px;
     position: relative;
-    border-radius: 8px;
+    border-radius: 4px;
     font-weight: 500;
 }
 
@@ -4752,7 +4752,7 @@ input {
     padding: 8px;
     margin-left: -8px;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 4px;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
@@ -4881,7 +4881,7 @@ input {
 
 .faq .search-wrapper .input-wrapper .search-input {
     padding: 8px 12px 8px 36px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     width: 100%;
     color: #fbfbfb;
@@ -4893,7 +4893,7 @@ input {
 }
 
 .faq .search-wrapper .result-wrapper {
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px 4px 4px;
     max-height: 300px;
     overflow: hidden;
     background: #525252;
@@ -4903,7 +4903,7 @@ input {
 }
 
 .faq .search-wrapper .search-result {
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px 4px 4px;
     max-height: 300px;
     overflow: auto;
 }
@@ -5004,7 +5004,7 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -5050,7 +5050,7 @@ input {
 }
 
 .unsubcribe-wrapper .unsubcribe-card {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     max-width: 350px;
     padding: 24px;
@@ -5100,7 +5100,7 @@ input {
 }
 
 .referral-out-wrapper .card {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     max-width: 350px;
     padding: 24px;
@@ -5132,7 +5132,7 @@ input {
 }
 
 .referral-out-wrapper .card input {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     width: 100%;
     padding: 8px;
@@ -5238,7 +5238,7 @@ input {
 }
 
 .referral-out-wrapper .error input {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #7d5050;
 }
 
@@ -5412,7 +5412,7 @@ input {
 }
 
 .delete-wrapper .delete-popup {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 24px;
     max-width: 427px;
@@ -5507,7 +5507,7 @@ select#gender {
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;
     background-color: #39393e;
-    border-radius: 5px;
+    border-radius: 4px;
     border: 1px solid #bebfc0;
     padding: 12px 16px;
     width: 100%;

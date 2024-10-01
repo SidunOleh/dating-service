@@ -1217,9 +1217,6 @@ input {
 }
 
 .battle-container .photo-battle .repeat .progress-ring__circle {
-    -webkit-transition: stroke-dasharray 6s linear;
-    transition: stroke-dasharray 6s linear;
-    stroke-dasharray: 0 213.6;
 }
 
 .battle-container .photo-container {

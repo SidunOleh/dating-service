@@ -666,6 +666,17 @@ $("#delete-popup #confirm-delete:not(.load)").click(function () {
 
 //__________________________Roulette_________________________//
 
+const repeatTime = DS.ads.settings.repeat_time + 1; // Додаємо 1 до значення repeat_time
+const circumference = 213.6; // Ваше обчислене значення для stroke-dasharray
+
+const $circle = $battle.find(".progress-ring__circle");
+
+// Встановлюємо змінні у стилі за допомогою JavaScript
+$circle.css({
+    transition: `stroke-dasharray ${repeatTime}s linear`, // Динамічний час анімації
+    strokeDasharray: `0 ${circumference}`, // Значення для stroke-dasharray
+});
+
 function initializeBattle($battle) {
     let nextPair = null;
 

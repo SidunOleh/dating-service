@@ -27,7 +27,7 @@ const withdrawalRequestsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axiohs.get(`/api/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/amount`)
+        const res = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/withdrawal-requests/${id}/amount`)
 
         return res.data
     },

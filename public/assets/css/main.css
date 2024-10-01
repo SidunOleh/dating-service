@@ -449,7 +449,7 @@ input {
 }
 
 .coins {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

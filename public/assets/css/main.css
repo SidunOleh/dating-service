@@ -293,6 +293,14 @@ input {
     -ms-flex-pack: center;
     justify-content: center;
     position: relative;
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(-29.63%, #ffe603),
+        to(#d80957)
+    );
+    background: linear-gradient(180deg, #ffe603 -29.63%, #d80957 100%);
 }
 
 #header .advertising-banner img {
@@ -312,11 +320,11 @@ input {
     font-weight: 700;
     padding: 4px 14px;
     border-radius: 5px;
-    background: rgba(217, 217, 217, 0.721);
+
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
-    color: #990106;
+    color: #ffffff;
     cursor: pointer;
 }
 
@@ -4983,7 +4991,7 @@ input {
     display: -ms-flexbox;
     display: flex;
     gap: 16px;
-    margin-top: 30px;
+    margin-top: 12px;
 }
 
 .faq .faq-navigation .faq-next,
@@ -5008,7 +5016,7 @@ input {
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
         justify-content: space-between;
-        margin-top: 16px;
+        margin-top: 12px;
     }
     .faq .faq-navigation .faq-next,
     .faq .faq-navigation .faq-prev {

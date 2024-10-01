@@ -730,10 +730,10 @@ function initializeBattle($battle) {
     $battle.find(".start_btn").click(function () {
         const $this = $(this);
         $this.closest(".startBattle").addClass("hidden");
-        startProgressAnimation($circle, DS.ads.settings.repeat_time);
+        startProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
         setTimeout(
             () => activateRepeatButton($this),
-            DS.ads.settings.repeat_time
+            DS.ads.settings.repeat_time * 1000 + 1500
         );
     });
 
@@ -769,10 +769,10 @@ function initializeBattle($battle) {
             $loader.removeClass("open");
         }, 1500);
 
-        restartProgressAnimation($circle, DS.ads.settings.repeat_time);
+        restartProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
         setTimeout(
             () => activateRepeatButton($this),
-            DS.ads.settings.repeat_time
+            DS.ads.settings.repeat_time * 1000
         );
     });
 

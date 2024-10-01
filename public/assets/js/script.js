@@ -13,6 +13,8 @@ $(".header-menu .close").click(function () {
     $("#header").toggleClass("open");
     $("html").removeClass("lock");
 });
+var headerHeight = $("header").outerHeight();
+$(".header-menu").css("height", headerHeight);
 
 //__________________________Cards__________________________//
 

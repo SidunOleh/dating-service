@@ -772,7 +772,7 @@ function initializeBattle($battle) {
         restartProgressAnimation($circle, DS.ads.settings.repeat_time);
         setTimeout(
             () => activateRepeatButton($this),
-            DS.ads.settings.repeat_time + 1500
+            DS.ads.settings.repeat_time
         );
     });
 

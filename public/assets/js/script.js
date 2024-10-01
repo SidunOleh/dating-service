@@ -733,7 +733,7 @@ function initializeBattle($battle) {
         startProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
         setTimeout(
             () => activateRepeatButton($this),
-            DS.ads.settings.repeat_time * 1000 + 1500
+            DS.ads.settings.repeat_time * 1000
         );
     });
 
@@ -772,7 +772,7 @@ function initializeBattle($battle) {
         restartProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
         setTimeout(
             () => activateRepeatButton($this),
-            DS.ads.settings.repeat_time * 1000
+            DS.ads.settings.repeat_time * 1000 + 1500
         );
     });
 

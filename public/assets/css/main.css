@@ -282,7 +282,7 @@ input {
 }
 
 #header .advertising-banner {
-    height: 48px;
+    height: 32px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -315,7 +315,7 @@ input {
 #header .advertising-banner p {
     text-align: center;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     padding: 4px 14px;

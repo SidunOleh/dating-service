@@ -5010,6 +5010,11 @@ input {
         justify-content: space-between;
         margin-top: 24px;
     }
+    .faq .faq-navigation .faq-next,
+    .faq .faq-navigation .faq-prev {
+        height: 40px;
+        width: 40px;
+    }
 }
 
 .unsubcribe-wrapper {

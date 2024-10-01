@@ -666,16 +666,6 @@ $("#delete-popup #confirm-delete:not(.load)").click(function () {
 
 //__________________________Roulette_________________________//
 
-const repeatTime = DS.ads.settings.repeat_time + 1;
-const circumference = 213.6;
-
-const $circle = $battle.find(".progress-ring__circle");
-
-$circle.css({
-    transition: `stroke-dasharray ${repeatTime}s linear`,
-    strokeDasharray: `0 ${circumference}`,
-});
-
 function initializeBattle($battle) {
     let nextPair = null;
 

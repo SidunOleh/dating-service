@@ -5,12 +5,18 @@ Fancybox.bind("[data-fancybox]", {});
 $(".burger-menu").click(function () {
     $(".header-menu").toggleClass("open");
     $("#header").toggleClass("open");
+    $("html").addClass("lock");
 });
 
 $(".header-menu .close").click(function () {
     $(".header-menu").removeClass("open");
     $("#header").toggleClass("open");
+    $("html").removeClass("lock");
 });
+if ($("header .advertising-banner").length) {
+    var headerHeight = $(".advertising-banner").outerHeight();
+    $(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
+}
 
 //__________________________Cards__________________________//
 
@@ -730,8 +736,11 @@ function initializeBattle($battle) {
     $battle.find(".start_btn").click(function () {
         const $this = $(this);
         $this.closest(".startBattle").addClass("hidden");
-        startProgressAnimation($circle, 5000);
-        setTimeout(() => activateRepeatButton($this), 5000);
+        startProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
+        setTimeout(
+            () => activateRepeatButton($this),
+            DS.ads.settings.repeat_time * 1000
+        );
     });
 
     $battle.on("click", ".photo", function () {
@@ -766,8 +775,11 @@ function initializeBattle($battle) {
             $loader.removeClass("open");
         }, 1500);
 
-        restartProgressAnimation($circle, 5000);
-        setTimeout(() => activateRepeatButton($this), 6500);
+        restartProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
+        setTimeout(
+            () => activateRepeatButton($this),
+            DS.ads.settings.repeat_time * 1000 + 1500
+        );
     });
 
     function startProgressAnimation($circle, duration) {

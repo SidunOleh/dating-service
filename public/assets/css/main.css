@@ -50,7 +50,7 @@ html {
     scroll-behavior: smooth;
 }
 
-html.no-scroll {
+html.lock {
     overflow: hidden;
 }
 
@@ -72,10 +72,6 @@ body:after {
     top: 0;
     left: 0;
     z-index: -1;
-}
-
-body.lock {
-    overflow: hidden;
 }
 
 ol,
@@ -128,7 +124,7 @@ img {
 
 .btn {
     padding: 11px 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #fbfbfb;
     font-size: 14px;
     text-align: center;
@@ -282,7 +278,7 @@ input {
 }
 
 #header .advertising-banner {
-    height: 48px;
+    height: 32px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -315,7 +311,7 @@ input {
 #header .advertising-banner p {
     text-align: center;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     padding: 4px 14px;
@@ -336,7 +332,7 @@ input {
 }
 
 #header .header-body {
-    padding: 8px 10px;
+    padding: 10px 10px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -353,7 +349,7 @@ input {
 
 @media screen and (max-width: 768px) {
     #header .header-body {
-        padding: 8px 16px;
+        padding: 10px 16px;
     }
 }
 
@@ -412,7 +408,7 @@ input {
 #header .burger-menu {
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -426,7 +422,7 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -453,7 +449,7 @@ input {
 }
 
 .coins {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -483,17 +479,20 @@ input {
 
 .header-menu {
     position: absolute;
-    height: 100vh;
+    height: calc(100vh - 93px);
     width: 100%;
     max-width: 432px;
     top: 0px;
     right: -100%;
     border-left: 1px solid #616166;
     background: #252528;
-    padding: 24px 32px;
+    padding: 8px 32px;
+    padding-bottom: 24px;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
 }
 
 .header-menu.open {
@@ -502,14 +501,14 @@ input {
 
 @media screen and (max-width: 1024px) {
     .header-menu {
-        padding: 24px;
         max-width: 350px;
     }
 }
 
 @media screen and (max-width: 768px) {
     .header-menu {
-        padding: 24px 16px;
+        padding: 10px 16px;
+        padding-bottom: 24px;
     }
 }
 
@@ -536,20 +535,20 @@ input {
 .header-menu .close {
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
 .header-menu .search-container {
     position: relative;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .header-menu .search-container .search-input {
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: #fff;
     font-size: 16px;
@@ -631,7 +630,7 @@ input {
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;
     background-color: #252528;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #525252;
     padding: 12px;
     width: 100%;
@@ -644,7 +643,7 @@ input {
 .header-menu .form-container .zip-distance-group input {
     padding: 12px;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: #fff;
     font-size: 16px;
@@ -653,7 +652,7 @@ input {
 }
 
 .header-menu .pages {
-    padding-top: 24px;
+    padding-top: 16px;
 }
 
 .header-menu .pages .pages-list {
@@ -696,7 +695,8 @@ input {
 .header-menu .log-out {
     width: 100%;
     max-width: 200px;
-    margin: 25px auto;
+    margin: 10px auto;
+    margin-top: auto;
 }
 
 .footer {
@@ -1217,9 +1217,6 @@ input {
 }
 
 .battle-container .photo-battle .repeat .progress-ring__circle {
-    -webkit-transition: stroke-dasharray 6s linear;
-    transition: stroke-dasharray 6s linear;
-    stroke-dasharray: 0 213.6;
 }
 
 .battle-container .photo-container {
@@ -1412,7 +1409,7 @@ input {
 
 @media screen and (max-width: 768px) {
     .popUp-wrapper.settings-popup .card {
-        border-radius: 8px;
+        border-radius: 4px;
         padding: 16px;
         height: auto;
         max-width: 424px;
@@ -1445,7 +1442,7 @@ input {
 .popUp-wrapper .card .close {
     width: 40px;
     height: 40px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -1522,7 +1519,7 @@ input {
 }
 
 .popUp-wrapper .resetPassword-card {
-    border-radius: 8px !important;
+    border-radius: 4px !important;
     padding-bottom: 16px;
 }
 
@@ -1550,7 +1547,7 @@ input {
     color: white;
     padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     width: 100%;
     cursor: pointer;
 }
@@ -1598,7 +1595,7 @@ input {
 .popUp-wrapper .input-group input {
     width: 100%;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: #fff;
     font-weight: 400;
@@ -1706,7 +1703,7 @@ input {
     height: auto;
     padding: 24px;
     gap: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .popUp-wrapper .res-succes-send .title {
@@ -1749,7 +1746,7 @@ input {
     .res-succes-send {
         height: auto;
         position: absolute;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .res-succes-send .title {
         font-size: 17px;
@@ -1789,7 +1786,7 @@ input {
 .popUp-wrapper .submit {
     width: 100%;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -1934,7 +1931,7 @@ input {
 }
 
 .advertising-wrapper .advertising-popup {
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     width: 100%;
     max-width: 610px;
@@ -2024,7 +2021,7 @@ input {
     top: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 4px;
     background: rgba(57, 57, 62, 0.5);
     -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(25px);
@@ -2057,7 +2054,7 @@ input {
     top: 0;
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 4px;
     background: rgba(57, 57, 62, 0.5);
     -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(25px);
@@ -2107,7 +2104,7 @@ input {
 }
 
 .profile .left-side .head-porfile {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     overflow: hidden;
     position: relative;
@@ -2240,7 +2237,7 @@ input {
 }
 
 .profile .left-side .user-info-list {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 12px;
     display: -webkit-box;
@@ -2272,7 +2269,7 @@ input {
 
 .profile .left-side .user-location {
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
     height: 219px;
 }
 
@@ -2281,7 +2278,7 @@ input {
 }
 
 .profile .left-side .description {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 12px;
     color: #bebfc0;
@@ -2309,7 +2306,7 @@ input {
 }
 
 .profile .user-photo-list .user-photo-item {
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
     display: block;
     position: relative;
@@ -2398,7 +2395,7 @@ input {
 
 .profile .other-user-list .other-user-item {
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #4c4c52;
     position: relative;
 }
@@ -2643,7 +2640,7 @@ input {
 }
 
 .profile.account .delete-wrapper .delete-popup {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 24px;
     max-width: 427px;
@@ -2687,7 +2684,7 @@ input {
     padding: 8px;
     color: #fbfbfb;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     margin-top: 12px;
 }
@@ -2941,7 +2938,7 @@ input {
 }
 
 .profile-filling .form-step {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 10px;
     display: -webkit-box;
@@ -3064,7 +3061,7 @@ input {
 .profile-filling .form-group textarea {
     min-height: 60px;
     resize: none;
-    border-radius: 8px;
+    border-radius: 4px;
     background-color: #4c4c52;
     border: 1px solid #8585858d;
     padding: 8px;
@@ -3146,7 +3143,7 @@ input {
 
 .profile-filling .map {
     height: 320px;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -3252,7 +3249,7 @@ input {
     height: 100%;
     max-height: 600px;
     min-height: 600px;
-    border-radius: 8px;
+    border-radius: 4px;
     -o-object-fit: contain;
     object-fit: contain;
     position: relative;
@@ -3283,7 +3280,7 @@ input {
     -ms-flex-pack: center;
     justify-content: center;
     padding-bottom: 3px;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .profile-filling .move-button {
@@ -3293,7 +3290,7 @@ input {
     right: 8px;
     width: 48px;
     height: 48px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -3398,7 +3395,7 @@ input {
 }
 
 .step-6 .custom-upload-btn {
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #fbfbfb;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -3421,7 +3418,7 @@ input {
 .step-6 .custom-remove-btn {
     padding: 12px 24px;
     background-color: transparent;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #fb7478;
     color: #fb7478;
     cursor: pointer;
@@ -3822,7 +3819,7 @@ input {
 
 .coins-wrapper .repaymant-item {
     width: calc((100% - 24px) / 2);
-    border-radius: 8px;
+    border-radius: 4px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -3893,7 +3890,7 @@ input {
 .deposit-type,
 .referral-out {
     width: calc((100% - 24px) / 3);
-    border-radius: 8px;
+    border-radius: 4px;
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
@@ -4000,7 +3997,7 @@ input {
     bottom: 80px;
     z-index: 1001;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: white;
     font-size: 16px;
@@ -4087,7 +4084,7 @@ input {
 }
 
 .deposit-wrapper .key span {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     padding: 8px;
 }
@@ -4346,7 +4343,7 @@ input {
 }
 
 .refferals .link-body .link {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     height: 39px;
     color: #fff;
@@ -4375,7 +4372,7 @@ input {
     bottom: 80px;
     z-index: 1001;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     color: white;
     font-size: 16px;
@@ -4533,7 +4530,7 @@ input {
 }
 
 .settings .settings-item {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 32px;
     width: 50%;
@@ -4600,7 +4597,7 @@ input {
 }
 
 .settings-wrapper .card {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     padding: 24px;
 }
@@ -4732,7 +4729,7 @@ input {
     color: #fff;
     font-size: 16px;
     position: relative;
-    border-radius: 8px;
+    border-radius: 4px;
     font-weight: 500;
 }
 
@@ -4755,7 +4752,7 @@ input {
     padding: 8px;
     margin-left: -8px;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 4px;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
 }
@@ -4884,7 +4881,7 @@ input {
 
 .faq .search-wrapper .input-wrapper .search-input {
     padding: 8px 12px 8px 36px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     width: 100%;
     color: #fbfbfb;
@@ -4896,7 +4893,7 @@ input {
 }
 
 .faq .search-wrapper .result-wrapper {
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px 4px 4px;
     max-height: 300px;
     overflow: hidden;
     background: #525252;
@@ -4906,7 +4903,7 @@ input {
 }
 
 .faq .search-wrapper .search-result {
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px 4px 4px;
     max-height: 300px;
     overflow: auto;
 }
@@ -5007,7 +5004,7 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -5053,7 +5050,7 @@ input {
 }
 
 .unsubcribe-wrapper .unsubcribe-card {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     max-width: 350px;
     padding: 24px;
@@ -5103,7 +5100,7 @@ input {
 }
 
 .referral-out-wrapper .card {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     max-width: 350px;
     padding: 24px;
@@ -5135,7 +5132,7 @@ input {
 }
 
 .referral-out-wrapper .card input {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #525252;
     width: 100%;
     padding: 8px;
@@ -5241,7 +5238,7 @@ input {
 }
 
 .referral-out-wrapper .error input {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #7d5050;
 }
 
@@ -5415,7 +5412,7 @@ input {
 }
 
 .delete-wrapper .delete-popup {
-    border-radius: 8px;
+    border-radius: 4px;
     background: #39393e;
     padding: 24px;
     max-width: 427px;
@@ -5510,7 +5507,7 @@ select#gender {
     background-position: right 0.3rem top 50%;
     background-size: 0.99rem auto;
     background-color: #39393e;
-    border-radius: 5px;
+    border-radius: 4px;
     border: 1px solid #bebfc0;
     padding: 12px 16px;
     width: 100%;

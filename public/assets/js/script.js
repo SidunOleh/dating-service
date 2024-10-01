@@ -13,8 +13,8 @@ $(".header-menu .close").click(function () {
     $("#header").toggleClass("open");
     $("html").removeClass("lock");
 });
-var headerHeight = $("header").outerHeight();
-$(".header-menu").css("height", headerHeight);
+var headerHeight = $(".advertising-banner ").outerHeight();
+$(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
 
 //__________________________Cards__________________________//
 

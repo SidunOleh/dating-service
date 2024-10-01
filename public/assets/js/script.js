@@ -14,7 +14,7 @@ $(".header-menu .close").click(function () {
     $("html").removeClass("lock");
 });
 if ($("header .advertising-banner").length) {
-    var headerHeight = $(".advertising-banner").outerHeight(); // Прибрано зайвий пробіл
+    var headerHeight = $(".advertising-banner").outerHeight();
     $(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
 }
 

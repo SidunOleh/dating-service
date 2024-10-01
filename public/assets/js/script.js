@@ -730,8 +730,11 @@ function initializeBattle($battle) {
     $battle.find(".start_btn").click(function () {
         const $this = $(this);
         $this.closest(".startBattle").addClass("hidden");
-        startProgressAnimation($circle, 5000);
-        setTimeout(() => activateRepeatButton($this), 5000);
+        startProgressAnimation($circle, DS.ads.settings.repeat_time);
+        setTimeout(
+            () => activateRepeatButton($this),
+            DS.ads.settings.repeat_time
+        );
     });
 
     $battle.on("click", ".photo", function () {
@@ -766,8 +769,11 @@ function initializeBattle($battle) {
             $loader.removeClass("open");
         }, 1500);
 
-        restartProgressAnimation($circle, 5000);
-        setTimeout(() => activateRepeatButton($this), 6500);
+        restartProgressAnimation($circle, DS.ads.settings.repeat_time);
+        setTimeout(
+            () => activateRepeatButton($this),
+            DS.ads.settings.repeat_time + 1500
+        );
     });
 
     function startProgressAnimation($circle, duration) {

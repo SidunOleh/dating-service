@@ -128,7 +128,7 @@ img {
 
 .btn {
     padding: 11px 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #fbfbfb;
     font-size: 14px;
     text-align: center;
@@ -1409,7 +1409,7 @@ input {
 
 @media screen and (max-width: 768px) {
     .popUp-wrapper.settings-popup .card {
-        border-radius: 8px;
+        border-radius: 4px;
         padding: 16px;
         height: auto;
         max-width: 424px;
@@ -1519,7 +1519,7 @@ input {
 }
 
 .popUp-wrapper .resetPassword-card {
-    border-radius: 8px !important;
+    border-radius: 4px !important;
     padding-bottom: 16px;
 }
 

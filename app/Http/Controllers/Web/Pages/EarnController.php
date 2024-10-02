@@ -17,17 +17,11 @@ class EarnController extends Controller
             ->with('referee')
             ->orderBy('created_at', 'DESC')
             ->get();
-        $transactions = $creator
-            ->transactions()
-            ->with('details')
-            ->orderBy('created_at', 'DESC')
-            ->get();
         $settings = Option::getSettings();
         
         return view('pages.earn', [
             'creator' => $creator,
             'referrals' => $referrals,
-            'transactions' => $transactions,
             'settings' => $settings,
         ]);
     }

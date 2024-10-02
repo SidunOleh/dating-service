@@ -216,7 +216,7 @@
 </div>
 
 @include('templates.transactions', [
-    'transactions' => $transactions,
+    'transactions' => $creator->getTransactionList(),
 ])
 
 @include('templates.footer')

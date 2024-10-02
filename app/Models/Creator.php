@@ -756,4 +756,76 @@ class Creator extends Authenticatable
 
         return $count < Upload::MAX;
     }
+
+    public function getTransactionList(): array
+    {
+        $transactions = $this->transactions()
+            ->with('details')
+            ->get();
+        $list = $transactions->filter(function (Transaction $transaction) {
+            if ($transaction->details instanceof PlisioInvoice) {
+                return $transaction->details->received > 0;
+            } else {
+                return true;
+            }
+        });
+
+        $withdrawalRequests = $this->withdrawalRequests()
+            ->where('status', 'pending')
+            ->with('concrete')
+            ->get();
+        foreach ($withdrawalRequests as $withdrawalRequest) {
+            $list->push($withdrawalRequest);
+        }
+
+        $list = $list->sortByDesc('created_at');
+
+        $currencies = [
+            'BTC' => 'Bitcoin',
+            'ETH' => 'Ethereum',
+            'USDT' => 'Tether ERC-20',
+            'USDT_TRX' => 'Tether TRC-20',
+            'USDC' => 'USDC ERC-20',
+            'DOGE' => 'Dogecoin',
+            'BNB' => 'BNB Chain',
+            'BCH' => 'Bitcoin Cash',
+            'BUSD' => 'BUSD (BEP-20)',
+        ];
+        $formattedList = [];
+        foreach ($list as $item) {
+            if (
+                $item instanceof Transaction and 
+                $item->details instanceof PlisioInvoice
+            ) {
+                $formattedItem['type'] = 'IN';
+                $formattedItem['amount'] = $item->details->received;
+                $formattedItem['currency'] = $currencies[$item->details->currency];
+            } elseif (
+                $item instanceof Transaction and 
+                $item->details instanceof PlisioWithdrawal
+            ) {
+                $formattedItem['type'] = 'OUT';
+                $formattedItem['amount'] = $item->details->amount;
+                $formattedItem['currency'] = $currencies[$item->details->currency];
+            } elseif (
+                $item instanceof WithdrawalRequest and 
+                $item->concrete instanceof PlisioWithdrawalRequest
+            ) {
+                $formattedItem['type'] = 'WITHDRAWAL REQUEST';
+                $formattedItem['amount'] = $item->amount;
+                $formattedItem['currency'] = 'Crystal';
+            }
+
+            $formattedItem['date'] = $item->created_at->format('d.m.Y');
+
+            $formattedList[] = $formattedItem;
+        }
+
+        return $formattedList;
+    }
+
+    public function withdrawalRequests(): HasMany
+    {
+        return $this->hasMany(WithdrawalRequest::class);
+    }
 }

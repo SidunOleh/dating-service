@@ -2209,7 +2209,7 @@ input {
         font-size: 14px;
     }
     .users .user-image .likes .btn svg {
-        width: 24px;
+        width: 20px !important;
     }
 }
 

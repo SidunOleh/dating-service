@@ -2546,7 +2546,7 @@ input {
 }
 
 .profile.account .left-side {
-    gap: 24px;
+    gap: 16px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -2572,7 +2572,7 @@ input {
 }
 
 .profile.account .left-card {
-    border-radius: 16px;
+    border-radius: 4px;
     background: #39393e;
     padding: 24px;
     width: 100%;

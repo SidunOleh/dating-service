@@ -166,7 +166,7 @@
     </div>
 </div>
 
-<div class="coins-wrapper">
+<!-- <div class="coins-wrapper">
     <div class="coins-popup">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="title">
@@ -183,7 +183,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="deposit-wrapper">
     <div class="deposit-popup">

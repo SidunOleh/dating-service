@@ -117,8 +117,8 @@ $.ajaxSetup({
 
 //__________________________Loader_________________________//
 
-function addLoader(selector) {
-    $(selector).append('<div class="loading"></div>');
+function addLoader(selector, borderRadius) {
+    $(selector).append(`<div class="loading" style="border-radius: ${borderRadius}"></div>`);
 }
 
 function removeLoader(selector) {
@@ -1149,26 +1149,17 @@ $(".unsubcribe-wrapper .btn").on("click", () => {
 
 const deposit = {
     currency: null,
-    amount: null,
 };
 
 // curency
-$(".deposit-type").on("click", function () {
+$(".deposit-type").on("click", async function () {
     deposit.currency = $(this).data("currency");
 
-    $(".coins-wrapper").addClass("active");
-});
-
-// amount
-$(".repaymant-item").on("click", async function () {
-    addLoader(".coins-popup");
-
-    deposit.amount = $(this).data("amount");
+    addLoader(`[data-currency=${deposit.currency}]`, "4px");
 
     $.post("/payments/deposit", {
         gateway: "plisio",
         currency: deposit.currency,
-        amount: deposit.amount,
         recaptcha: await getReCaptchaV3("deposit"),
     })
         .done((res) => {
@@ -1183,7 +1174,7 @@ $(".repaymant-item").on("click", async function () {
             $(".deposit-wrapper").addClass("active");
         })
         .always(() => {
-            removeLoader(".coins-popup");
+            removeLoader(`[data-currency=${deposit.currency}]`);
         });
 });
 

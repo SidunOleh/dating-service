@@ -3943,9 +3943,6 @@ input {
 
 .deposit-type:hover,
 .referral-out:hover {
-    -webkit-transform: translateY(-5px);
-    transform: translateY(-5px);
-    outline: 1px solid #fff;
 }
 
 .open-transaction {

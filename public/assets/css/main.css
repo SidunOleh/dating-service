@@ -2141,7 +2141,7 @@ input {
     -webkit-transform: rotate(-9.647deg);
     transform: rotate(-9.647deg);
     color: #b12828;
-    top: 380px;
+    top: 390px;
     right: 8px;
 }
 
@@ -2157,7 +2157,7 @@ input {
 
 .profile .left-side .head-porfile .img-card img:not(.likes img) {
     width: 100%;
-    height: 427px;
+    height: 435px;
     -o-object-fit: cover;
     object-fit: cover;
 }

@@ -118,7 +118,9 @@ $.ajaxSetup({
 //__________________________Loader_________________________//
 
 function addLoader(selector, borderRadius) {
-    $(selector).append(`<div class="loading" style="border-radius: ${borderRadius}"></div>`);
+    $(selector).append(
+        `<div class="loading" style="border-radius: ${borderRadius}"></div>`
+    );
 }
 
 function removeLoader(selector) {
@@ -1259,7 +1261,7 @@ $(".withdrawn-amount .next").on("click", () => {
 
     if (!withdraw.amount) {
         $(".amount-input").addClass("error");
-        $(".amount-input").find(".error-text").text("Amount is required");
+        $(".amount-input").find(".error-text").text("Not enough Coins");
         valid = false;
     }
 
@@ -1267,7 +1269,7 @@ $(".withdrawn-amount .next").on("click", () => {
 
     if (withdraw.amount > max) {
         $(".amount-input").addClass("error");
-        $(".amount-input").find(".error-text").text("Not enough amount");
+        $(".amount-input").find(".error-text").text("Not enough Coins");
         valid = false;
     }
 

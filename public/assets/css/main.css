@@ -2235,13 +2235,13 @@ input {
 
 .profile .left-side .head-porfile .name {
     color: var(--white, #fbfbfb);
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
 }
 
 .profile .left-side .head-porfile .city {
     color: var(--light-gray, #bebfc0);
-    font-size: 16px;
+    font-size: 14px;
     line-height: normal;
 }
 

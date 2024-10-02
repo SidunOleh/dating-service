@@ -9,7 +9,7 @@
         <div class="refferals-card">
             
             <div class="top">
-                <div class="open-transaction">Transaction list</div>
+                <div class="open-transaction">Transaction list: delay up to 1 hour</div>
                 <div class="coins">
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
                     <span>{{ $creator->balance }}</span>

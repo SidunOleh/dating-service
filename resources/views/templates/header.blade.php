@@ -37,9 +37,9 @@
                     </a>
                 </div>
                 
-                <a href="{{ route('home.index') }}" class="logo">
+                <p class="logo">
                     {{ config('app.name') }}
-                </a>
+                </p>
 
                 <div class="right">
                     <div class="btn red login">

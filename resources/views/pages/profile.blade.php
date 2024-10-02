@@ -49,6 +49,12 @@
                     <p class="info">{{ $creator->telegram }}</p>
                 </div>
                 @endif
+                @if($creator->whatsapp)
+                <div class="user-info-item">
+                    <span class="type"><img src="/assets/img/whatsapp" alt="" /> Whatsapp:</span>
+                    <p class="info">{{ $creator->whatsapp }}</p>
+                </div>
+                @endif
                 @if($creator->snapchat)
                 <div class="user-info-item">
                     <span class="type"><img src="/assets/img/snapchat.svg" alt="" /> Snapchat:</span>

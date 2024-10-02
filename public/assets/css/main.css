@@ -1410,7 +1410,7 @@ input {
 }
 
 .popUp-wrapper.settings-popup .card input {
-    background: #39393e;
+    background: #525252;
 }
 
 @media screen and (max-width: 768px) {

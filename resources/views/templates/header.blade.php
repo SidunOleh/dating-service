@@ -213,9 +213,9 @@
                     </a>
                 </div>
 
-                <a href="{{ route('home.index') }}" class="logo">
+                <p class="logo">
                     {{ config('app.name') }}
-                </a>
+                </p>
                 
                 <div class="burger-menu red flex">
                     <img src="{{ asset('assets/img/burger.svg') }}" alt="" />

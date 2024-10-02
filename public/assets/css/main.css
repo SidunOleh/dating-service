@@ -697,6 +697,11 @@ input {
     margin: 10px auto;
     margin-top: auto;
 }
+@media screen and (max-width: 768px) {
+    .header-menu .log-out {
+        margin: 80px auto;
+    }
+}
 
 .footer {
     position: absolute;

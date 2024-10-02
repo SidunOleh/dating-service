@@ -2013,7 +2013,7 @@ input {
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
-        gap: 24px;
+        gap: 16px;
     }
 }
 

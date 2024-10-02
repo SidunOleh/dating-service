@@ -4662,7 +4662,7 @@ input {
     overflow: auto;
     border-right: 1px solid #4e4e4e;
     position: sticky;
-    top: 130px;
+    top: 123px;
     width: 25%;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;

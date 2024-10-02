@@ -2004,7 +2004,7 @@ input {
     display: -ms-flexbox;
     display: flex;
     gap: 16px;
-    max-width: 1100px;
+    max-width: 980px;
 }
 
 @media screen and (max-width: 768px) {
@@ -2092,7 +2092,7 @@ input {
 }
 
 .profile .left-side {
-    width: 44%;
+    width: 33%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2297,7 +2297,7 @@ input {
 }
 
 .profile .user-photo-list {
-    width: 44%;
+    width: 50%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2379,7 +2379,7 @@ input {
 }
 
 .profile .other-user-list {
-    width: 12%;
+    width: 14%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2388,10 +2388,12 @@ input {
     -ms-flex-direction: column;
     flex-direction: column;
     gap: 16px;
+    margin-left: 20px;
 }
 
 @media screen and (max-width: 768px) {
     .profile .other-user-list {
+        margin: 0;
         width: 100%;
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;

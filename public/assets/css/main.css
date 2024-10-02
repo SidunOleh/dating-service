@@ -2004,7 +2004,7 @@ input {
     display: -ms-flexbox;
     display: flex;
     gap: 16px;
-    max-width: 980px;
+    max-width: 1050px;
 }
 
 @media screen and (max-width: 768px) {

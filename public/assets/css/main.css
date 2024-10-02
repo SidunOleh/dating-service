@@ -1393,6 +1393,7 @@ input {
     right: 5px !important;
     top: 5px !important;
     cursor: pointer;
+    z-index: 10;
 }
 
 @media screen and (max-width: 768px) {

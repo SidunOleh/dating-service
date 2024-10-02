@@ -3954,6 +3954,14 @@ input {
 
 .deposit-type:hover,
 .referral-out:hover {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#b00107),
+        to(#ea020b)
+    );
+    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
 }
 
 .open-transaction {

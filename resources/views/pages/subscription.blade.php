@@ -11,11 +11,7 @@
                 <div class="coins">
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
                     <span>{{ $creator->balance }}</span>
-                    <div class="add-coins flex red">
-                        <a href="{{ route('subscription.page') }}#deposit">
-                            <img src="{{ asset('/assets/img/plus.svg') }}" alt="" />
-                        </a>
-                    </div>
+
                 </div>
             </div>
 

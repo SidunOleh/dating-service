@@ -5005,6 +5005,7 @@ input {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    justify-content: flex-end;
     gap: 16px;
     margin-top: 12px;
 }

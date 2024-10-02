@@ -37,12 +37,6 @@
                     <p class="info">{{ $creator->phone }}</p>
                 </div>
                 @endif
-                @if($creator->instagram)
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/mdi_instagram.svg" alt="" /> Instagram:</span>
-                    <p class="info">{{ $creator->instagram }}</p>
-                </div>
-                @endif
                 @if($creator->telegram)
                 <div class="user-info-item">
                     <span class="type"><img src="/assets/img/ic_outline-telegram.svg" alt="" /> Telegram:</span>
@@ -59,6 +53,12 @@
                 <div class="user-info-item">
                     <span class="type"><img src="/assets/img/snapchat.svg" alt="" /> Snapchat:</span>
                     <p class="info">{{ $creator->snapchat }}</p>
+                </div>
+                @endif
+                @if($creator->instagram)
+                <div class="user-info-item">
+                    <span class="type"><img src="/assets/img/mdi_instagram.svg" alt="" /> Instagram:</span>
+                    <p class="info">{{ $creator->instagram }}</p>
                 </div>
                 @endif
                 @if($creator->onlyfans)

@@ -2147,7 +2147,7 @@ input {
 
 @media screen and (max-width: 1024px) {
     .profile .left-side .head-porfile.verified:before {
-        top: 300px;
+        top: 350px;
     }
 }
 
@@ -2170,7 +2170,7 @@ input {
 
 @media screen and (max-width: 768px) {
     .profile .left-side .head-porfile .img-card img:not(.likes img) {
-        height: 339px;
+        height: 400px;
     }
 }
 
@@ -2267,6 +2267,7 @@ input {
     display: flex;
     gap: 4px;
     font-size: 14px;
+    color: #fff;
 }
 
 .profile .left-side .user-info-list .type {

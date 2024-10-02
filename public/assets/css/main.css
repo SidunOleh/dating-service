@@ -4052,7 +4052,7 @@ input {
     background: #39393e;
     padding: 24px;
     width: 100%;
-    max-width: 343px;
+    max-width: fit-content;
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -4115,6 +4115,7 @@ input {
     border-radius: 4px;
     background: #525252;
     padding: 8px;
+    font-size: 14px;
 }
 
 .deposit-wrapper .copy {
@@ -5560,7 +5561,6 @@ select#gender {
 }
 
 .key .title {
-    max-width: 240px;
     overflow: hidden;
     text-overflow: ellipsis;
 }

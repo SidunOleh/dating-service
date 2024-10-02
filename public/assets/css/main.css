@@ -4876,7 +4876,7 @@ input {
 
 .faq .search-wrapper {
     width: 100%;
-    max-width: 793px;
+    max-width: 100%;
     position: relative;
 }
 

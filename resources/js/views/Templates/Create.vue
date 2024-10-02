@@ -1,13 +1,16 @@
 <template>
 
     <Flex
+        :align="'center'"
         style="margin-bottom: 10px;" 
         :gap="10">
         <div>
             Total: {{ profilesCount + roulettesCount + adsCount }}
         </div>
         <div>
-            Profiles: {{ profilesCount }}
+            <TypographyText type="danger">
+                Profiles: {{ profilesCount }}
+            </TypographyText>
         </div>
         <div>
             Roulettes: {{ roulettesCount }}
@@ -87,7 +90,7 @@
 </template>
 
 <script>
-import { message, Flex, Button, } from 'ant-design-vue'
+import { message, Flex, Button, TypographyText, } from 'ant-design-vue'
 import DeleteIcon from '../icons/Delete.vue'
 import { confirmPopup, } from '../../helpers/popups'
 import templatesApi from '../../api/templates'
@@ -95,6 +98,7 @@ import templatesApi from '../../api/templates'
 export default {
     components: {
         Flex, Button, DeleteIcon,
+        TypographyText,
     }, 
     data() {
         return {

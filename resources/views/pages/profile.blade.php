@@ -28,6 +28,9 @@
             </div>
 
             <div class="user-info-list">
+                <p class="info-title">
+                    Сontact information
+                </p>
                 @if($creator->phone)
                 <div class="user-info-item">
                     <span class="type">Phone:</span>
@@ -71,6 +74,9 @@
             </div>
             
             <div class="description">
+                <p class="info-title">
+                    Your descrittion
+                </p>
                 {{ $creator->description }}
             </div>
         </div>

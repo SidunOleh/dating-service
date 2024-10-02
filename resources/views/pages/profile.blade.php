@@ -51,7 +51,7 @@
                 @endif
                 @if($creator->whatsapp)
                 <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/whatsapp" alt="" /> Whatsapp:</span>
+                    <span class="type"><img src="/assets/img/whatsapp.svg" alt="" /> Whatsapp:</span>
                     <p class="info">{{ $creator->whatsapp }}</p>
                 </div>
                 @endif

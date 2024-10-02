@@ -2291,7 +2291,7 @@ input {
     background: #39393e;
     padding: 12px;
     color: #bebfc0;
-    font-size: 15px;
+    font-size: 14px;
     line-height: normal;
     word-break: break-all;
 }
@@ -2525,13 +2525,13 @@ input {
 
 .profile .other-user-list .card .name {
     color: var(--white, #fbfbfb);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
 }
 
 .profile .other-user-list .card .city {
     color: var(--light-gray, #bebfc0);
-    font-size: 10px;
+    font-size: 12px;
     line-height: normal;
     max-width: 100%;
     white-space: nowrap;

@@ -1383,7 +1383,7 @@ input {
 .popUp-wrapper.settings-popup {
     background: rgba(22, 21, 21, 0.51);
     z-index: 1000;
-    padding: 16px 0;
+    padding: 0 16px;
 }
 
 .popUp-wrapper.settings-popup .card .close {

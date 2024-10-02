@@ -2264,7 +2264,7 @@ input {
     display: -ms-flexbox;
     display: flex;
     gap: 4px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .profile .left-side .user-info-list .type {

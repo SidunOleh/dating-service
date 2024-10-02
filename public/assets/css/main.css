@@ -1406,7 +1406,7 @@ input {
 
 .popUp-wrapper.settings-popup .card {
     padding: 24px;
-    background: #525252;
+    background: #39393e;
 }
 
 .popUp-wrapper.settings-popup .card input {
@@ -1480,6 +1480,7 @@ input {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin-top: 16px;
 }
 
 .popUp-wrapper .card .close:hover {

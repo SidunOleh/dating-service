@@ -4632,9 +4632,9 @@ input {
 }
 
 .faq .sidebar {
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
+    max-height: 100vh;
+    overflow: auto;
+    border-right: 1px solid #4e4e4e;
     position: sticky;
     top: 130px;
     width: 25%;

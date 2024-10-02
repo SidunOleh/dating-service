@@ -11,15 +11,8 @@ class SubscriptionController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
-        $transactions = $creator
-            ->transactions()
-            ->with('details')
-            ->orderBy('created_at', 'DESC')
-            ->get();
-
         return view('pages.subscription', [
             'creator' => $creator,
-            'transactions' => $transactions,
         ]);
     }
 }

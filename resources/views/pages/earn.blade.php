@@ -259,7 +259,7 @@
 </div>
 
 @include('templates.transactions', [
-    'transactions' => $transactions,
+    'transactions' => $creator->getTransactionList(),
 ])
 
 @include('modals.verification')

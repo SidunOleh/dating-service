@@ -1585,6 +1585,7 @@ input {
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
+    width: fit-content;
 }
 
 .popUp-wrapper .input-group .error-text {

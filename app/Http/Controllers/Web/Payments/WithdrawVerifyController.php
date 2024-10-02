@@ -22,7 +22,7 @@ class WithdrawVerifyController extends Controller
             $creator = Auth::guard('web')->user();
 
             if (! $creator->hasEnoughMoney($data['amount'])) {
-                return response(['message' => 'Not enough money on balance.',], 400);
+                return response(['message' => 'Not enough Coins on Balance',], 400);
             }
     
             WithdrawalRequest::createRequest($data);

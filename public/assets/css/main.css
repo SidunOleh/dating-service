@@ -2463,7 +2463,7 @@ input {
 
 .profile .other-user-list .other-user-item img:not(.likes img) {
     width: 100%;
-    height: 113.5px;
+    height: 108px;
     -o-object-fit: cover;
     object-fit: cover;
 }

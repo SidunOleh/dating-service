@@ -2258,7 +2258,9 @@ input {
     flex-direction: column;
     gap: 12px;
 }
-
+.profile .left-side .user-info-list a {
+    color: #fff;
+}
 .profile .left-side .user-info-list .user-info-item {
     display: -webkit-box;
     display: -ms-flexbox;

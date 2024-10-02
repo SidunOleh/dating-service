@@ -4150,7 +4150,7 @@ input {
     background: #39393e;
     padding: 24px;
     width: 100%;
-    max-width: 860px;
+    max-width: 1000px;
 }
 
 @media screen and (max-width: 768px) {

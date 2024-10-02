@@ -4252,7 +4252,7 @@ input {
 
 @media screen and (max-width: 768px) {
     .transaction-wrapper .transaction-item td {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 

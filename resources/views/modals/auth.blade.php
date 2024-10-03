@@ -65,7 +65,6 @@ $isResetPage = request()->query('token') and request()->query('email');
                 <div type="button" class="show-password">
                     <img src="{{ asset('assets/img/mdi_eye-outline.svg') }}" alt="" />
                 </div>
-    
             </div>
             <input 
                 type="hidden" 

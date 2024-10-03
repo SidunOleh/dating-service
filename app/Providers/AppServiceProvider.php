@@ -11,6 +11,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\View\View as ViewView;
@@ -66,6 +67,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('embedstyles', function ($expression) {
             return "<style><?php echo minify_css(file_get_contents({$expression})); ?></style>";
         });
+
+        if (config('app.env') == 'production') {
+            URL::forceScheme('https');
+        }
 
         // DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);
     }

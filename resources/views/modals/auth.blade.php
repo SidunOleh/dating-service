@@ -49,7 +49,26 @@ $isResetPage = request()->query('token') and request()->query('email');
                     Use 8-32 characters for your password
                 </p>
             </div>
-
+            <div class="input-group">
+                <label for="password">
+                    Confirm password
+                </label>
+                <input 
+                    type="password" 
+                    id="confirm_password" 
+                    name="confirm_password" 
+                    placeholder="Password" 
+                    required />
+                <div class="error-text">
+                    Passwords do not match
+                </div>
+                <div type="button" class="show-password">
+                    <img src="{{ asset('assets/img/mdi_eye-outline.svg') }}" alt="" />
+                </div>
+                <p class="passRule">
+                    Use 8-32 characters for your password
+                </p>
+            </div>
             <input 
                 type="hidden" 
                 name="from" 

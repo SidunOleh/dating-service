@@ -9,6 +9,11 @@
             Here is More
         </a>
     </div>
+    <div class="footer-bottom">
+        <p>Based Dominican Republic.</p>
+        <p>USC 2257 / 21+ Only!</p>
+        <p>© 2024 Cherry21.com</p>
+    </div>
 </footer>
 
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>

@@ -739,6 +739,12 @@ input {
     text-decoration: underline;
 }
 
+.footer .footer-bottom {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px;
+}
 .users {
     padding: 40px 0;
 }

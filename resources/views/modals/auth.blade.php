@@ -56,7 +56,7 @@ $isResetPage = request()->query('token') and request()->query('email');
                 <input 
                     type="password" 
                     id="confirm_password" 
-                    name="confirm_password" 
+                    name="password_confirmation" 
                     placeholder="Password" 
                     required />
                 <div class="error-text">

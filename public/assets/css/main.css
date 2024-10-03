@@ -1362,6 +1362,9 @@ input {
     justify-content: center;
     display: none;
 }
+.popUp-wrapper.authPopup {
+    z-index: 1000;
+}
 
 .popUp-wrapper.active {
     display: -webkit-box;

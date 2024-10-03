@@ -16,6 +16,7 @@ $(".header-menu .close").click(function () {
 if ($("header .advertising-banner").length) {
     var headerHeight = $(".advertising-banner").outerHeight();
     $(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
+    $(".authPopup").css("top", `${headerHeight}px`);
 }
 $(".closePage").on("click", function () {
     window.close();
@@ -62,11 +63,7 @@ function togglePopup(cardName, show) {
     $popupWrapper.toggleClass("active", show);
 
     $("html").toggleClass("no-scroll", show);
-
-    // Перевіряємо, чи попап має клас 'authPopup'
     const isAuthPopup = $popupWrapper.hasClass("authPopup");
-
-    // Ховаємо хедер тільки якщо не authPopup і ширина менша за 768
     if (!isAuthPopup) {
         $header.toggleClass("hidden", show && $(window).width() < 768);
     }

@@ -1,5 +1,10 @@
 @include('templates.header', ['title' => 'Top vote',])
 
+<script>
+    DS.ads = {}
+    DS.ads.settings = {{ Js::from($settings) }}
+</script>
+
 <div class="users vote">
     <div class="container">
         <div class="users-list">

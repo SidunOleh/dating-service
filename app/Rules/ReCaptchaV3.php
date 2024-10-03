@@ -29,6 +29,10 @@ class ReCaptchaV3 implements ValidationRule
 
         $data = $response->json();
 
+        if (! $data['success'] and $data['error-codes'][0] == 'browser-error') {
+            return;
+        }
+
         if (! $data['success'] or $data['score'] < config('services.recaptcha.score')) {
             $fail('ReCaptchaV3 error.');
         }

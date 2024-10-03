@@ -65,9 +65,7 @@ $isResetPage = request()->query('token') and request()->query('email');
                 <div type="button" class="show-password">
                     <img src="{{ asset('assets/img/mdi_eye-outline.svg') }}" alt="" />
                 </div>
-                <p class="passRule">
-                    Use 8-32 characters for your password
-                </p>
+    
             </div>
             <input 
                 type="hidden" 

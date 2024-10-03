@@ -717,7 +717,7 @@ input {
     -ms-flex-pack: center;
     justify-content: center;
     gap: 56px;
-    padding: 16px;
+    padding: 20px 24px 8px 24px;
 }
 
 .footer .footer-link {
@@ -743,7 +743,7 @@ input {
     display: flex;
     justify-content: center;
     gap: 24px;
-    padding: 24px;
+    padding: 16px 24px 24px 24px;
 }
 .footer .footer-bottom p {
     color: var(--light-gray, #bebfc0);

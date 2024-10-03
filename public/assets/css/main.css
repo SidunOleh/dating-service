@@ -694,13 +694,10 @@ input {
 .header-menu .log-out {
     width: 100%;
     max-width: 200px;
-    margin: 10px auto;
-    margin-top: auto;
+    margin: 24px auto;
 }
 @media screen and (max-width: 768px) {
     .header-menu .log-out {
-        margin-bottom: 85px;
-        margin-top: auto;
     }
 }
 

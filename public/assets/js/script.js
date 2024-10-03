@@ -17,7 +17,9 @@ if ($("header .advertising-banner").length) {
     var headerHeight = $(".advertising-banner").outerHeight();
     $(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
 }
-
+$(".closePage").on("click", function () {
+    window.close();
+});
 //__________________________Cards__________________________//
 
 $(".user-image .arrow").on("click", function (e) {

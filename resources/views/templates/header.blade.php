@@ -213,6 +213,9 @@
                     <a href="{{ route('home.index') }}" class="btn red">
                         <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" aria-label="Go to home"/>
                     </a>
+                    <div class="btn red closePage">
+                        <img src="{{ asset('assets/img/close.svg') }}" alt="" />
+                    </div>
                 </div>
 
                 <p class="logo">

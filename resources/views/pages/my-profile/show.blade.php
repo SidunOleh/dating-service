@@ -57,7 +57,7 @@
 
                 @if($data['phone']['value'])
                 <div class="user-info-item">
-                    <span class="type">Phone:</span>
+                    <span class="type"><img src="/assets/img/phone.svg" alt="" /> Phone:</span>
                     <p class="info">
                         {{ $data['phone']['value'] }}
                     </p>
@@ -66,7 +66,7 @@
 
                 @if($data['telegram']['value'])
                 <div class="user-info-item">
-                    <span class="type">Telegram:</span>
+                    <span class="type"><img src="/assets/img/ic_outline-telegram.svg" alt="" /> Telegram:</span>
                     <p class="info">
                         {{ $data['telegram']['value'] }}
                     </p>
@@ -75,7 +75,7 @@
 
                 @if($data['whatsapp']['value'])
                 <div class="user-info-item">
-                    <span class="type">Whatsapp:</span>
+                    <span class="type"><img src="/assets/img/whatsapp.svg" alt="" /> Whatsapp:</span>
                     <p class="info">
                         {{ $data['whatsapp']['value'] }}
                     </p>
@@ -84,7 +84,7 @@
 
                 @if($data['instagram']['value'])
                 <div class="user-info-item">
-                    <span class="type">Instagram:</span>
+                    <span class="type"><img src="/assets/img/mdi_instagram.svg" alt="" /> Instagram:</span>
                     <p class="info">
                         {{ $data['instagram']['value'] }}
                     </p>
@@ -93,7 +93,7 @@
 
                 @if($data['snapchat']['value'])
                 <div class="user-info-item">
-                    <span class="type">Snapchat:</span>
+                    <span class="type"><img src="/assets/img/snapchat.svg" alt="" /> Snapchat:</span>
                     <p class="info">
                         {{ $data['snapchat']['value'] }}
                     </p>
@@ -102,7 +102,7 @@
 
                 @if($data['onlyfans']['value'])
                 <div class="user-info-item">
-                    <span class="type">OnlyFans:</span>
+                    <span class="type"><img src="/assets/img/onlyfans.svg" alt="" /> OnlyFans:</span>
                     <p class="info">
                         {{ $data['onlyfans']['value'] }}
                     </p>
@@ -111,7 +111,7 @@
 
                 @if($data['profile_email']['value'])
                 <div class="user-info-item">
-                    <span class="type">Email:</span>
+                    <span class="type"><img src="/assets/img/mail.svg" alt="" /> Email:</span>
                     <p class="info">
                         {{ $data['profile_email']['value'] }}
                     </p>

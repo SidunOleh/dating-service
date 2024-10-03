@@ -31,12 +31,15 @@
 
             <div class="header-body">
                 <div class="left">
+                    @if(Route::currentRouteName() == 'profile.page')
+                    <div class="btn red closePage">
+                        <img src="{{ asset('assets/img/close.svg') }}" alt="" />
+                    </div>
+                    @else
                     <a href="{{ route('home.index') }}" class="btn red" aria-label="Go to home">
                         <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
                     </a>
-                    <!-- <div class="btn red closePage">
-                        <img src="{{ asset('assets/img/close.svg') }}" alt="" />
-                    </div> -->
+                    @endif
                 </div>
                 
                 <p class="logo">
@@ -210,12 +213,15 @@
 
             <div class="header-body">
                 <div class="left">
-                    <a href="{{ route('home.index') }}" class="btn red">
-                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" aria-label="Go to home"/>
-                    </a>
-                    <!-- <div class="btn red closePage">
+                    @if(Route::currentRouteName() == 'profile.page')
+                    <div class="btn red closePage">
                         <img src="{{ asset('assets/img/close.svg') }}" alt="" />
-                    </div> -->
+                    </div>
+                    @else
+                    <a href="{{ route('home.index') }}" class="btn red" aria-label="Go to home">
+                        <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
+                    </a>
+                    @endif
                 </div>
 
                 <p class="logo">

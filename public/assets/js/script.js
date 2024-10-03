@@ -1107,7 +1107,7 @@ $(".transaction-wrapper .close").click(() => {
 //__________________________Subscribe__________________________//
 
 $(document).on("click", ".subscribe-Btn:not(.after,.loading)", () => {
-    addLoader(".subscribe-Btn");
+    addLoader(".subscribe-Btn", "6px");
 
     $(".subscribe-Btn").addClass("loading");
     $(".subscribe-card .text-error").removeClass("show");
@@ -1139,7 +1139,7 @@ $(".unsubcribe-wrapper .close").on("click", () => {
 $(".unsubcribe-wrapper .btn").on("click", () => {
     $(".unsubcribe-wrapper").removeClass("active");
 
-    addLoader(".un-subscribe-Btn");
+    addLoader(".un-subscribe-Btn", "6px");
 
     $(".subscribe-card .text-error").removeClass("show");
 

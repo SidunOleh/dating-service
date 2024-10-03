@@ -813,7 +813,7 @@ class Creator extends Authenticatable
             ) {
                 $formattedItem['type'] = 'WITHDRAWAL REQUEST';
                 $formattedItem['amount'] = $item->amount;
-                $formattedItem['currency'] = 'Crystal';
+                $formattedItem['currency'] = 'Coin';
             }
 
             $formattedItem['date'] = $item->created_at->format('d.m.Y');

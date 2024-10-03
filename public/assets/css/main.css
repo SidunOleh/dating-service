@@ -745,6 +745,26 @@ input {
     gap: 24px;
     padding: 24px;
 }
+.footer .footer-bottom p {
+    color: var(--light-gray, #bebfc0);
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+@media screen and (max-width: 1024px) {
+    .footer .footer-bottom {
+        justify-content: space-between;
+    }
+}
+@media screen and (max-width: 768px) {
+    .footer .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+}
 .users {
     padding: 40px 0;
 }

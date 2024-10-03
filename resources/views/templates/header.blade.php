@@ -26,7 +26,6 @@
 
     @guest('web')
     <header class="header" id="header">
-
         <div class="header-wrapper">
             @includeWhen(isset($warning), 'templates.warning', ['warning' => $warning ?? null,]) 
 
@@ -35,6 +34,9 @@
                     <a href="{{ route('home.index') }}" class="btn red" aria-label="Go to home">
                         <img src="{{ asset('assets/img/tabler_cherry-filled.svg') }}" alt="" />
                     </a>
+                    <div class="btn red closePage">
+                        <img src="{{ asset('assets/img/close.svg') }}" alt="" />
+                    </div>
                 </div>
                 
                 <p class="logo">

@@ -63,7 +63,13 @@ function togglePopup(cardName, show) {
 
     $("html").toggleClass("no-scroll", show);
 
-    $header.toggleClass("hidden", show && $(window).width() < 768);
+    // Перевіряємо, чи попап має клас 'authPopup'
+    const isAuthPopup = $popupWrapper.hasClass("authPopup");
+
+    // Ховаємо хедер тільки якщо не authPopup і ширина менша за 768
+    if (!isAuthPopup) {
+        $header.toggleClass("hidden", show && $(window).width() < 768);
+    }
 
     Object.values($cards).forEach(($c) => $c.removeClass("active"));
 

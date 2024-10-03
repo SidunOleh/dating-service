@@ -2,7 +2,7 @@
 $isResetPage = request()->query('token') and request()->query('email');
 @endphp 
 
-<div class="popUp-wrapper {{ $isResetPage ? 'active' : '' }}">
+<div class="popUp-wrapper  {{ $isResetPage ? 'active' : '' }}   authPopup">
 
     <div class="signUP-card card">
         <div class="close">

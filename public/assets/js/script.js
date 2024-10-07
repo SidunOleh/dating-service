@@ -1226,6 +1226,7 @@ $(".referral-out").on("click", function() {
         $(this).find("img").attr("src")
     );
     $(".crypto-address .crypto-name span").text(withdraw.currency);
+    $(".crypto-address .crypto-rate span").text(DS.rates[withdraw.currency]);
     $(".referral-out-wrapper").addClass("active");
     $(".referral-out-wrapper .card").removeClass("active");
     $(".crypto-address").addClass("active");

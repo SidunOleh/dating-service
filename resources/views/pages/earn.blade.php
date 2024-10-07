@@ -195,13 +195,21 @@
             </div>
             <p class="error-text"></p>
         </div>
+        <div class="amount-input">
+            <img src="{{ asset('/assets/img/coins.svg') }}" alt="" class="input-label" />
+            <input id="amount" type="number" placeholder="Enter the amount" min="0" max="{{ $creator->balance }}" />
+            <p class="error-text"></p>
+        </div>
+        <div class="crypto-rate">
+            <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />1 = <span></span>
+        </div>
         <div class="referral-out-navigation">
             <div class="back btn white">Back</div>
             <div class="next btn red">Next</div>
         </div>
     </div>
 
-    <div class="withdrawn-amount card">
+    <!-- <div class="withdrawn-amount card">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="title">
             Specify the amount to be withdrawn
@@ -221,7 +229,7 @@
             <div class="back btn white">Back</div>
             <div class="next btn red">Next</div>
         </div>
-    </div>
+    </div> -->
 
     <div class="withdrawn-details card">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />

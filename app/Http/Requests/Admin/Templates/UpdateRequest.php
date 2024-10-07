@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Templates;
 
+use App\Rules\ProfileBlocksCount;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -22,7 +23,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'template' => 'required|array',
+            'template' => ['required', 'array', new ProfileBlocksCount,],
             'template.*' => 'string',
         ];
     }

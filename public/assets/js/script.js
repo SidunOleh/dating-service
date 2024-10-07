@@ -63,13 +63,9 @@ function togglePopup(cardName, show) {
     $popupWrapper.toggleClass("active", show);
 
     $("html").toggleClass("no-scroll", show);
-<<<<<<< Updated upstream
-    const isAuthPopup = $popupWrapper.hasClass("authPopup");
-=======
 
     const isAuthPopup = $popupWrapper.hasClass("authPopup");
 
->>>>>>> Stashed changes
     if (!isAuthPopup) {
         $header.toggleClass("hidden", show && $(window).width() < 768);
     }

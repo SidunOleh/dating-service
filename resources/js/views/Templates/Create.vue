@@ -9,7 +9,7 @@
         </div>
         <div>
             <TypographyText type="danger">
-                Profiles: {{ profilesCount }}
+                Profiles: {{ profilesCount }} (same on each templates)
             </TypographyText>
         </div>
         <div>

@@ -191,7 +191,7 @@
         <div class="crypto-address-input">
             <div>
                 <input type="text" placeholder="Enter address" id="cryptoAddress" />
-                <img src="{{ asset('/assets/img/paste.svg') }}" alt="" class="paste" id="pasteButton" />
+                <p class="paste" id="pasteButton">Paste</p>
             </div>
             <p class="error-text"></p>
         </div>

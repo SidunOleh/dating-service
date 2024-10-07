@@ -31,6 +31,7 @@ import { Modal, Flex, Button, message, } from 'ant-design-vue'
 import { confirmPopup, } from '../../helpers/popups'
 import withdrawalRequestsApi from '../../api/withdrawal-requests'
 import PlisioRequest from './PlisioRequest.vue'
+import { h, } from 'vue'
 
 export default {
     props: [
@@ -55,7 +56,18 @@ export default {
             try {
                 this.loading.withdraw = true
                 const res = await withdrawalRequestsApi.amount(this.record.id)
-                confirmPopup(this.withdraw, `Withdraw ${res.amount} ${this.record.concrete.currency}(${this.record.amount} USD) to ${this.record.concrete.to}?`)
+                const vnode = h('div', [
+                    'Withdraw:',
+                    h('br'),
+                    res.amount,
+                    h('br'),
+                    this.record.concrete.currency,
+                    h('br'),
+                    h('span', {style:{color: 'red'}}, `(${this.record.amount} USD)`),
+                    h('br'),
+                    this.record.concrete.to,
+                ])
+                confirmPopup(this.withdraw, vnode)
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
             } finally {

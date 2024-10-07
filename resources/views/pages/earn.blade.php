@@ -190,14 +190,22 @@
         </p>
         <div class="crypto-address-input">
             <div>
-                <input type="text" placeholder="Enter address" id="cryptoAddress" />
+                <input 
+                    type="text" 
+                    placeholder="Enter address" 
+                    id="cryptoAddress" />
                 <p class="paste" id="pasteButton">Paste</p>
             </div>
             <p class="error-text"></p>
         </div>
         <div class="amount-input">
             <img src="{{ asset('/assets/img/coins.svg') }}" alt="" class="input-label" />
-            <input id="amount" type="number" placeholder="Enter the amount" min="0" max="{{ $creator->balance }}" />
+            <input 
+                id="amount" 
+                type="number" 
+                placeholder="Enter the amount" 
+                min="1" 
+                max="{{ $creator->balance }}" />
             <p class="error-text"></p>
         </div>
         <div class="crypto-rate">
@@ -208,8 +216,6 @@
             <div class="next btn red">Next</div>
         </div>
     </div>
-
-    
 
     <div class="withdrawn-details card">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />

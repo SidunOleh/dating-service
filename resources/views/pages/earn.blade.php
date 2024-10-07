@@ -188,13 +188,13 @@
         <p class="title crypto-name">
             Сrypto network <span></span>
         </p>
-        <div class="crypto-address-input">
+        <!-- <div class="crypto-address-input">
             <div>
                 <input type="text" placeholder="Enter address" id="cryptoAddress" />
                 <p class="paste" id="pasteButton">Paste</p>
             </div>
             <p class="error-text"></p>
-        </div>
+        </div> -->
         <div class="amount-input">
             <img src="{{ asset('/assets/img/coins.svg') }}" alt="" class="input-label" />
             <input id="amount" type="number" placeholder="Enter the amount" min="0" max="{{ $creator->balance }}" />

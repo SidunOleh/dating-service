@@ -205,7 +205,7 @@
                 type="number" 
                 placeholder="Enter the amount" 
                 min="1" 
-                max="{{ $creator->balance }}" />
+                max="1000" />
             <p class="max-amount">Max</p>
             <p class="error-text"></p>
         </div>

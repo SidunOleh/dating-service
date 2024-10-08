@@ -1386,3 +1386,9 @@ $(document).ready(function () {
         togglePasteButton();
     });
 });
+$(document).ready(function () {
+    $(".max-amount").on("click", function () {
+        var maxAmount = $("#amount").attr("max");
+        $("#amount").val(maxAmount);
+    });
+});

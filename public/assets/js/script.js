@@ -1388,7 +1388,5 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $(".max-amount").on("click", function () {
-        console.error("Max amount is not defined");
-    });
+    error("Max amount is not defined");
 });

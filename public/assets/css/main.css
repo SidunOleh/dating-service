@@ -5392,6 +5392,8 @@ input {
     padding-left: 35px;
     color: #fc8f1b;
     height: 40px;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .referral-out-wrapper .amount-input .input-label {

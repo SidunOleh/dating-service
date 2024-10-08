@@ -238,3 +238,11 @@
 
     </header>
     @endauth
+
+    <div class="popUp-wrapper isAdult">
+        <div class="card isAdult-card">
+            <p class="title">
+                This is an adult online dating site!
+            </p>
+        </div>
+    </div>

@@ -1188,6 +1188,8 @@ $(".deposit-type").on("click", async function () {
 
     addLoader(`[data-currency=${deposit.currency}]`, "4px");
 
+    $(".deposit-popup .crypto-name span").text(deposit.currency);
+
     $.post("/payments/deposit", {
         gateway: "plisio",
         currency: deposit.currency,

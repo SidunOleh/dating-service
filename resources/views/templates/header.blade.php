@@ -239,7 +239,7 @@
     </header>
     @endauth
 
-    <div class="isAdult-wrapper">
+    <div class="isAdult-wrapper" id="isAdult-wrapper">
         <div class="card isAdult-card">
             <p class="title">
                 This is an adult online dating site!

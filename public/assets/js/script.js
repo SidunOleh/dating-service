@@ -1389,6 +1389,6 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $(".max-amount").on("click", function () {
-        $(this).css("dispaly", "none");
+        $(this).css("display", "none");
     });
 });

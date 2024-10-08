@@ -5407,13 +5407,6 @@ input {
     padding-left: 35px;
     color: #fc8f1b;
     height: 40px;
-    -webkit-appearance: none;
-    appearance: none;
-}
-.amount-input input::-webkit-outer-spin-button,
-.amount-input input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
 
 .referral-out-wrapper .amount-input .input-label {

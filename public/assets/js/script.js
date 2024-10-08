@@ -1389,18 +1389,10 @@ $(document).ready(function () {
 $(document).ready(function () {
     // Обробник події для натискання на max-amount
     $(".max-amount").on("click", function () {
+        // Отримуємо максимальне значення з атрибута max інпуту
         var maxAmount = $("#amount").attr("max");
+
+        // Встановлюємо максимальне значення у поле вводу
         $("#amount").val(maxAmount);
-    });
-
-    // Обробник події для зміни значення
-    $("#amount").on("input", function () {
-        var maxAmount = parseFloat($(this).attr("max"));
-        var currentValue = parseFloat($(this).val());
-
-        // Якщо значення більше максимального, встановлюємо максимум
-        if (currentValue > maxAmount) {
-            $(this).val(maxAmount);
-        }
     });
 });

@@ -1395,6 +1395,7 @@ input {
 
 .isAdult-wrapper {
     background: rgb(22 22 22 / 98%);
+    padding: 16px;
     position: fixed;
     top: 0;
     left: 0;

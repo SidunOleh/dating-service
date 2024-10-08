@@ -5348,7 +5348,8 @@ input {
 .referral-out-wrapper .max-amount {
     top: 11px;
 }
-.referral-out-wrapper .paste:hover {
+.referral-out-wrapper .paste:hover,
+.referral-out-wrapper .max-amount {
     opacity: 0.7;
 }
 

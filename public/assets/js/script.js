@@ -33,15 +33,10 @@ $(document).ready(function () {
     });
 });
 $(".max-amount").click(function () {
-    // Отримуємо максимальне значення з атрибута max інпуту
     var maxAmount = $("#amount").attr("max");
-
-    // Перевіряємо, чи maxAmount не є undefined
     if (maxAmount) {
-        // Встановлюємо максимальне значення у поле вводу
         $("#amount").val(maxAmount);
     } else {
-        // Виводимо помилку в консоль
         console.error("Max amount is not defined");
     }
 });

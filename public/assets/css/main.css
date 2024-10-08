@@ -5408,6 +5408,11 @@ input {
     color: #fc8f1b;
     height: 40px;
 }
+.amount-input input::-webkit-outer-spin-button,
+.amount-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .referral-out-wrapper .amount-input .input-label {
     position: absolute;

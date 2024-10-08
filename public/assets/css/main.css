@@ -1418,6 +1418,7 @@ input {
     max-width: 424px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 24px;
 }
 .isAdult-wrapper .card .title {

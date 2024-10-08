@@ -1366,8 +1366,23 @@ $(".copy-link").on("click", () => {
     $(".link-body .message").show().delay(2000).fadeOut();
 });
 
-$("#pasteButton").on("click", function () {
-    navigator.clipboard.readText().then((text) => {
-        $("#cryptoAddress").val(text);
+$(document).ready(function () {
+    function togglePasteButton() {
+        if ($("#cryptoAddress").val().trim() !== "") {
+            $("#pasteButton").hide();
+        } else {
+            $("#pasteButton").show();
+        }
+    }
+    togglePasteButton();
+
+    $("#pasteButton").on("click", function () {
+        navigator.clipboard.readText().then((text) => {
+            $("#cryptoAddress").val(text);
+            togglePasteButton();
+        });
+    });
+    $("#cryptoAddress").on("input", function () {
+        togglePasteButton();
     });
 });

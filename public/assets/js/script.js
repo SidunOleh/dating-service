@@ -1388,5 +1388,5 @@ $(document).ready(function () {
 });
 
 $(".max-amount").on("click", function () {
-    $(this).css("display", "none");
+    $(this).hide();
 });

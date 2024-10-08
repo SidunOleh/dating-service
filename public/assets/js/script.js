@@ -32,7 +32,7 @@ $(document).ready(function () {
         $("#isAdult-wrapper").css("display", "none");
     });
 });
-$(".max-amount").on("click", function () {
+$(".max-amount").click(function () {
     $(this).hide();
 });
 

@@ -181,12 +181,12 @@
 
     <div class="crypto-address card active">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
-        <p class="title">
-            Enter your crypto address
+        <p class="title red">
+            Delay up to 1 hour
         </p>
-        <img src="" alt="" class="network-icon" />
+       
         <p class="title crypto-name">
-            Сrypto network <span></span>
+            <img src="" alt="" class="network-icon" />  <span></span>
         </p>
         <div class="crypto-address-input">
             <div>

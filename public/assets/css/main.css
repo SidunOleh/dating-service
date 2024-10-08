@@ -5315,11 +5315,15 @@ input {
 
 .referral-out-wrapper .crypto-name {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-weight: 600;
 }
 
 .referral-out-wrapper .network-icon {
     width: 24px;
-    margin: 0 auto;
 }
 
 .referral-out-wrapper .crypto-address-input div {

@@ -4158,7 +4158,7 @@ input {
     cursor: pointer;
 }
 
-.deposit-wrapper .title {
+.deposit-wrapper .title:not(.key .title) {
     background: var(
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)

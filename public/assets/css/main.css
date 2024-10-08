@@ -5323,7 +5323,8 @@ input {
     position: relative;
 }
 
-.referral-out-wrapper .paste {
+.referral-out-wrapper .paste,
+.referral-out-wrapper .max-amount {
     cursor: pointer;
     position: absolute;
     right: 12px;

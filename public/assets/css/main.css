@@ -1440,6 +1440,7 @@ input {
 .isAdult-wrapper .card .buttons {
     display: flex;
     gap: 16px;
+    width: 100%;
 }
 .isAdult-wrapper .card .buttons .btn {
     width: 50%;

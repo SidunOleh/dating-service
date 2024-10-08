@@ -5313,7 +5313,8 @@ input {
     -webkit-text-fill-color: transparent;
 }
 
-.referral-out-wrapper .crypto-name {
+.referral-out-wrapper .crypto-name,
+.deposit-wrapper .crypto-name {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -5322,7 +5323,8 @@ input {
     font-weight: 600;
 }
 
-.referral-out-wrapper .network-icon {
+.referral-out-wrapper .network-icon,
+.deposit-wrapper .network-icon {
     width: 24px;
 }
 

@@ -1387,8 +1387,6 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    $(".max-amount").on("click", function () {
-        $(this).css("display", "none");
-    });
+$(".max-amount").on("click", function () {
+    $(this).css("display", "none");
 });

@@ -32,6 +32,10 @@ $(document).ready(function () {
         $("#isAdult-wrapper").css("display", "none");
     });
 });
+$(".max-amount").on("click", function () {
+    $(this).hide();
+});
+
 //__________________________Cards__________________________//
 
 $(".user-image .arrow").on("click", function (e) {
@@ -1385,8 +1389,4 @@ $(document).ready(function () {
     $("#cryptoAddress").on("input", function () {
         togglePasteButton();
     });
-});
-
-$(".max-amount").on("click", function () {
-    $(this).hide();
 });

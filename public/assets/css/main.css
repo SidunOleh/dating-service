@@ -1416,6 +1416,24 @@ input {
     width: 100%;
     position: relative;
     max-width: 424px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.isAdult-wrapper .card .title {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.isAdult-wrapper .card .buttons {
+    display: flex;
+    gap: 16px;
+}
+.isAdult-wrapper .card .buttons .btn {
+    width: 50%;
 }
 .popUp-wrapper.authPopup {
     z-index: 1000;

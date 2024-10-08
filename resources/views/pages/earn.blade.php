@@ -185,7 +185,7 @@
             Delay up to 1 hour
         </p>
        
-        <p class="title crypto-name">
+        <p class="crypto-name">
             <img src="" alt="" class="network-icon" />  <span></span>
         </p>
         <div class="crypto-address-input">

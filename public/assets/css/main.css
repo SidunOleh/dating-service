@@ -5313,6 +5313,10 @@ input {
     -webkit-text-fill-color: transparent;
 }
 
+.referral-out-wrapper .crypto-name {
+    display: flex;
+}
+
 .referral-out-wrapper .network-icon {
     width: 24px;
     margin: 0 auto;

@@ -5574,13 +5574,7 @@ input {
 }
 
 .delete-wrapper .title {
-    background: var(
-        --Linear,
-        linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fbfbfb;
     text-align: center;
     font-size: 20px;
     font-weight: 600;

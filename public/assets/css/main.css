@@ -5349,7 +5349,7 @@ input {
     top: 11px;
 }
 .referral-out-wrapper .paste:hover,
-.referral-out-wrapper .max-amount {
+.referral-out-wrapper .max-amount:hover {
     opacity: 0.7;
 }
 

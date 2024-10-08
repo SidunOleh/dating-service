@@ -1388,17 +1388,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    // Обробник події для натискання на max-amount
     $(".max-amount").on("click", function () {
-        // Отримуємо максимальне значення з атрибута max інпуту
-        var maxAmount = $("#amount").attr("max");
-
-        // Перевіряємо, чи maxAmount не є undefined
-        if (maxAmount) {
-            // Встановлюємо максимальне значення у поле вводу
-            $("#amount").val(maxAmount);
-        } else {
-            console.error("Max amount is not defined");
-        }
+        console.error("Max amount is not defined");
     });
 });

@@ -198,9 +198,6 @@
             <img src="" alt="" />
         </div>
         <div class="deposit-info">
-            <div class="network title">
-                Сrypto network: <span class="type"></span>
-            </div>
             <div class="course">Current course: <span></span></div>
         </div>
 

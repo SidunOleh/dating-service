@@ -189,7 +189,10 @@
     <div class="deposit-popup">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="title">
-            Deposit takes up to 5 minutes. <br />You can check transactions list
+            Delay up to 1 hour
+        </p>
+        <p class="crypto-name">
+            <img src="" alt="" class="network-icon" />  <span></span>
         </p>
         <div class="qr-code">
             <img src="" alt="" />

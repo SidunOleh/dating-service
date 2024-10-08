@@ -5262,15 +5262,7 @@ input {
     font-size: 16px;
     color: #fff;
 }
-.referral-out-wrapper .card .title {
-    background: var(
-        --Linear,
-        linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+
 .referral-out-wrapper .card input::-webkit-input-placeholder {
     color: #bebfc0;
     font-size: 16px;
@@ -5312,6 +5304,13 @@ input {
     text-align: center;
     font-size: 16px;
     font-weight: 600;
+    background: var(
+        --Linear,
+        linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .referral-out-wrapper .network-icon {

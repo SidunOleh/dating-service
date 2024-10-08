@@ -1188,12 +1188,6 @@ $(".deposit-type").on("click", async function () {
 
     addLoader(`[data-currency=${deposit.currency}]`, "4px");
 
-    $(".deposit-popup .network-icon").attr(
-        "src",
-        $(this).find("img").attr("src")
-    );
-    $(".deposit-popup .crypto-name span").text(deposit.currency);
-
     $.post("/payments/deposit", {
         gateway: "plisio",
         currency: deposit.currency,
@@ -1201,7 +1195,11 @@ $(".deposit-type").on("click", async function () {
     })
         .done((res) => {
             $(".coins-wrapper").removeClass("active");
-
+            $(".deposit-popup .network-icon").attr(
+                "src",
+                $(this).find("img").attr("src")
+            );
+            $(".deposit-popup .crypto-name span").text(deposit.currency);
             $(".qr-code img").attr("src", res.details.qr_code);
             $(".network .type").text(res.details.currency);
             $(".course span").text(

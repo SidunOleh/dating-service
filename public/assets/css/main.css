@@ -5327,6 +5327,8 @@ input {
     cursor: pointer;
     position: absolute;
     right: 12px;
+    color: #fff;
+    font-size: 14px;
 }
 
 .referral-out-wrapper .paste:hover {

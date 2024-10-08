@@ -1188,7 +1188,7 @@ $(".deposit-type").on("click", async function () {
 
     addLoader(`[data-currency=${deposit.currency}]`, "4px");
 
-    $(".deposit-popup .crypto-address .network-icon").attr(
+    $(".deposit-popup .network-icon").attr(
         "src",
         $(this).find("img").attr("src")
     );

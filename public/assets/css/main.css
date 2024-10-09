@@ -1561,7 +1561,7 @@ input {
     top: 16px;
     cursor: pointer;
 }
-.popUp-wrapper.authPopup .popUp-wrapper .card .close {
+.popUp-wrapper.authPopup .card .close {
     top: 10px;
 }
 .card .close .add-new-pass {

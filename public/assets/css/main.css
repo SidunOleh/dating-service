@@ -1456,10 +1456,10 @@ input {
         display: flex !important;
         transition: all 0.2s ease;
         background-color: #00000000;
-        right: -100%;
+        left: 100%;
     }
     .popUp-wrapper.authPopup.active {
-        right: 0;
+        left: 0;
         background: rgb(22 22 22 / 98%);
     }
 }

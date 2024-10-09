@@ -530,7 +530,7 @@
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                     }).done(() => {
-                        location.href = '/my-profile'
+                        location.href = '/'
                     }).fail(jqXHR => {
                         if (jqXHR.status == 422) {
                             this.errors = {}

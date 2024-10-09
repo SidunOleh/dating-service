@@ -170,7 +170,7 @@
         {{ $creator->longitude + 0.001 }},
     ]
 
-    const map = L.map('map').setView(latlng, 15)
+    const map = L.map('map').setView(latlng, 20)
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
 

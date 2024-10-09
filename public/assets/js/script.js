@@ -1399,3 +1399,16 @@ $(document).ready(function () {
         togglePasteButton();
     });
 });
+
+$(document).ready(function () {
+    $("#description").on("input", function () {
+        var descriptionLength = $(this).val().length;
+        $(".counter").text(descriptionLength);
+
+        if (descriptionLength <= 250) {
+            $(".counter").css("color", "red");
+        } else {
+            $(".counter").css("color", "white");
+        }
+    });
+});

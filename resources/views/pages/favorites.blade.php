@@ -39,7 +39,7 @@
             <section class="noResults">
                 <div class="container">
                     <div class="title">
-                        WoW, I didn't find anything!:(
+                        WoW, I didn't find anything! :(
                     </div>
                     <p class="text">
                         Have you tried changing filters to get better results?

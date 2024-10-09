@@ -5514,7 +5514,7 @@ input {
 }
 
 #map {
-    height: 219px;
+    height: 100%;
     z-index: 0;
 }
 

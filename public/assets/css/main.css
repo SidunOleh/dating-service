@@ -1530,15 +1530,7 @@ input {
 .popUp-wrapper .card.active {
     display: block;
 }
-@media screen and (max-width: 768px) {
-    .authPopup .card {
-        transition: all 0.2s linear;
-        right: -100%;
-    }
-    .authPopup .card.card.active {
-        right: 0;
-    }
-}
+
 .popUp-wrapper .card .close {
     width: 40px;
     height: 40px;
@@ -2388,6 +2380,7 @@ input {
     overflow: hidden;
     border-radius: 4px;
     height: 350px;
+    min-height: 350px;
 }
 
 #location {

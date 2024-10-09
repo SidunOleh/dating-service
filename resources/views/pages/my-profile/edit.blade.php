@@ -837,7 +837,8 @@
                                     id="description" 
                                     name="description" 
                                     placeholder="Description" 
-                                    maxlength="150"
+                                    maxlength="500"
+                                    minlength="250"
                                     v-model="data.description"
                                     @focusout="validate('description')">
                                 </textarea>

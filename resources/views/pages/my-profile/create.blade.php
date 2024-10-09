@@ -124,8 +124,8 @@
                             fn: val => Boolean(val),
                         },
                         {
-                            message: 'Must be 50-150 words',
-                            fn: val => val.length >= 50 && val.length <= 150
+                            message: 'Must be 250-500 words',
+                            fn: val => val.length >= 250 && val.length <= 500
                         },
                     ],
 

@@ -116,7 +116,7 @@
                         v-model:value="data.description"
                         show-count
                         :minlength="50"
-                        :maxlength="150"
+                        :maxlength="250"
                         :rows="5"/>
                 </FormItem>
 

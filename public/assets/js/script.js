@@ -25,11 +25,13 @@ $(".closePage").on("click", function () {
 $(document).ready(function () {
     if (!localStorage.getItem("isAdult")) {
         $("#isAdult-wrapper").css("display", "flex");
+        $("html").addClass("lock");
     }
     $("#adult").on("click", function (e) {
         e.preventDefault();
         localStorage.setItem("isAdult", true);
         $("#isAdult-wrapper").css("display", "none");
+        $("html").removeClass("lock");
     });
 });
 $(".max-amount").click(function () {

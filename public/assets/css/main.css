@@ -2372,7 +2372,7 @@ input {
 .profile .left-side .user-location {
     overflow: hidden;
     border-radius: 4px;
-    height: 219px;
+    height: 350px;
 }
 
 #location {
@@ -2781,7 +2781,7 @@ input {
 }
 
 .profile.account .user-location iframe {
-    height: 250px;
+    height: 350px;
 }
 
 .profile.account .location-address {

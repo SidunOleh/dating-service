@@ -115,7 +115,6 @@
                         placeholder="Enter description"
                         v-model:value="data.description"
                         show-count
-                        :minlength="250"
                         :maxlength="500"
                         :rows="5"/>
                 </FormItem>

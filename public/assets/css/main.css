@@ -1451,6 +1451,19 @@ input {
     z-index: 1000;
 }
 
+@media screen and (max-width: 768px) {
+    .popUp-wrapper.authPopup {
+        display: flex !important;
+        transition: all 0.2s ease;
+        background-color: #00000000;
+        right: -100%;
+    }
+    .popUp-wrapper.authPopup.active {
+        right: 0;
+        background: rgb(22 22 22 / 98%);
+    }
+}
+
 .popUp-wrapper.active {
     display: -webkit-box;
     display: -ms-flexbox;

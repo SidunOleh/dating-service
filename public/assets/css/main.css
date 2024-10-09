@@ -2781,9 +2781,6 @@ input {
 }
 
 .profile.account .user-location {
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
     overflow: hidden;
 }
 

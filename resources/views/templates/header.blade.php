@@ -204,11 +204,11 @@
                     </div>
                 </div>
 
-                <div class="log-out btn red">
-                    <a href="{{ route('web.logout') }}">
-                        Log out
-                    </a>   
-                </div>
+               
+                <a class="log-out btn red" href="{{ route('web.logout') }}">
+                    Log out
+                </a>   
+                
 
             </div>
 
@@ -238,3 +238,16 @@
 
     </header>
     @endauth
+
+    <div class="isAdult-wrapper" id="isAdult-wrapper">
+        <div class="card isAdult-card">
+            <p class="title">
+                This is an adult online dating site!
+            </p>
+            <p class="text">This website contains age-restricted materials including nudity and explicit depictions of sexual activity. By entering, you affirm that you are at least 21 years of age</p>
+            <div class="buttons">
+                <a href="https://www.google.com" class="btn">I am under 21</a>
+                <a href="" class="btn red" id="adult">I am 21+</a>
+            </div>
+        </div>
+    </div>

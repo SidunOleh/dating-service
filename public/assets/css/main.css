@@ -1392,6 +1392,60 @@ input {
     justify-content: center;
     display: none;
 }
+
+.isAdult-wrapper {
+    background: rgb(22 22 22 / 98%);
+    padding: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: none;
+}
+.isAdult-wrapper .card {
+    border-radius: 12px;
+    background: #39393e;
+    padding: 32px 16px;
+    width: 100%;
+    position: relative;
+    max-width: 424px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+.isAdult-wrapper .card .title {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.isAdult-wrapper .card .text {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.isAdult-wrapper .card .buttons {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+.isAdult-wrapper .card .buttons .btn {
+    width: 50%;
+}
 .popUp-wrapper.authPopup {
     z-index: 1000;
 }
@@ -1461,7 +1515,9 @@ input {
     max-width: 424px;
     display: none;
 }
-
+.popUp-wrapper.authPopup .card {
+    padding: 10px 16px 48px;
+}
 @media screen and (max-width: 768px) {
     .popUp-wrapper .card {
         height: 100%;
@@ -1474,7 +1530,15 @@ input {
 .popUp-wrapper .card.active {
     display: block;
 }
-
+@media screen and (max-width: 768px) {
+    .authPopup .card {
+        transition: all 0.2s linear;
+        right: -100%;
+    }
+    .authPopup .card.card.active {
+        right: 0;
+    }
+}
 .popUp-wrapper .card .close {
     width: 40px;
     height: 40px;
@@ -1497,8 +1561,13 @@ input {
     top: 16px;
     cursor: pointer;
 }
+@media screen and (max-width: 768px) {
+    .popUp-wrapper.authPopup .card .close {
+        top: 10px;
+    }
+}
 
-.add-new-pass {
+.card .close .add-new-pass {
     padding-top: 40px;
 }
 
@@ -2318,7 +2387,7 @@ input {
 .profile .left-side .user-location {
     overflow: hidden;
     border-radius: 4px;
-    height: 219px;
+    height: 350px;
 }
 
 #location {
@@ -2727,7 +2796,7 @@ input {
 }
 
 .profile.account .user-location iframe {
-    height: 250px;
+    height: 350px;
 }
 
 .profile.account .location-address {
@@ -2916,7 +2985,7 @@ input {
 }
 
 .profile-filling .left-card {
-    border-radius: 16px;
+    border-radius: 4px;
     background: #39393e;
     padding: 24px;
     width: 38%;
@@ -3109,7 +3178,7 @@ input {
 }
 
 .profile-filling .form-group textarea {
-    min-height: 60px;
+    min-height: 120px;
     resize: none;
     border-radius: 4px;
     background-color: #4c4c52;
@@ -3118,6 +3187,11 @@ input {
     font-family: Inter;
     font-size: 16px;
     color: var(--white, #fbfbfb);
+}
+@media screen and (max-width: 768px) {
+    .profile-filling .form-group textarea {
+        min-height: 180px;
+    }
 }
 
 .profile-filling .form-group input::-webkit-input-placeholder,
@@ -3167,6 +3241,12 @@ input {
     color: #dedfe1;
     font-size: 13px;
     margin-top: 8px;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+}
+.profile-filling .form-group .characterCount {
+    white-space: nowrap;
 }
 
 .profile-filling .btn-group {
@@ -3396,6 +3476,10 @@ input {
 
 .profile-filling .request .text {
     font-size: 14px;
+}
+
+.step-6.active {
+    box-shadow: 0px 0px 11px 1px rgb(255 49 49);
 }
 
 .step-6 ol li {
@@ -4028,7 +4112,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 999;
     background: rgb(22 22 22 / 98%);
     padding: 16px;
     display: -webkit-box;
@@ -4104,14 +4188,25 @@ input {
     cursor: pointer;
 }
 
-.deposit-wrapper .title {
-    color: var(--white, #fbfbfb);
+.deposit-wrapper .title:not(.key .title) {
+    background: var(
+        --Linear,
+        linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-align: center;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
 }
-
+.deposit-wrapper .key .title {
+    color: #fbfbfb;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+}
 .deposit-wrapper .deposit-info {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -5247,15 +5342,31 @@ input {
 }
 
 .referral-out-wrapper .title {
-    color: #fbfbfb;
     text-align: center;
     font-size: 16px;
     font-weight: 600;
+    background: var(
+        --Linear,
+        linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.referral-out-wrapper .network-icon {
-    width: 56px;
-    margin: 0 auto;
+.referral-out-wrapper .crypto-name,
+.deposit-wrapper .crypto-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.referral-out-wrapper .network-icon,
+.deposit-wrapper .network-icon {
+    width: 24px;
 }
 
 .referral-out-wrapper .crypto-address-input div {
@@ -5268,14 +5379,22 @@ input {
     align-items: center;
     position: relative;
 }
-
-.referral-out-wrapper .paste {
+.referral-out-wrapper .crypto-address-input input {
+    height: 40px;
+}
+.referral-out-wrapper .paste,
+.referral-out-wrapper .max-amount {
     cursor: pointer;
     position: absolute;
     right: 12px;
+    color: #fff;
+    font-size: 14px;
 }
-
-.referral-out-wrapper .paste:hover {
+.referral-out-wrapper .max-amount {
+    top: 11px;
+}
+.referral-out-wrapper .paste:hover,
+.referral-out-wrapper .max-amount:hover {
     opacity: 0.7;
 }
 
@@ -5333,6 +5452,11 @@ input {
     padding-left: 35px;
     color: #fc8f1b;
     height: 40px;
+}
+.amount-input input::-webkit-outer-spin-button,
+.amount-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .referral-out-wrapper .amount-input .input-label {
@@ -5405,7 +5529,7 @@ input {
 }
 
 #map {
-    height: 219px;
+    height: 100%;
     z-index: 0;
 }
 

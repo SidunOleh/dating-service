@@ -124,8 +124,8 @@
                             fn: val => Boolean(val),
                         },
                         {
-                            message: 'Must be 50-150 words',
-                            fn: val => val.length >= 50 && val.length <= 150
+                            message: 'Must be 250-500 words',
+                            fn: val => val.length >= 250 && val.length <= 500
                         },
                     ],
 
@@ -867,11 +867,13 @@
                                     id="description" 
                                     name="description" 
                                     placeholder="Description" 
-                                    maxlength="150"
+                                    maxlength="500"
+                                    minlength="250"
                                     v-model="data.description"></textarea>
-                                <p class="rule">
-                                    No more than 150 characters
-                                </p>
+                                <div class="rule">
+                                    <p>At least 250 characters, no more than 500 characters</p>
+                                    <p class="characterCount"><span class="counter">0</span> / 500</p>
+                                </div>
                                 <div v-if="errors.description" class="error-text">
                                     {{ errors.description }}
                                 </div>

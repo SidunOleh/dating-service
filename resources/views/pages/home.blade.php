@@ -47,10 +47,10 @@
             <section class="noResults">
                 <div class="container">
                     <div class="title">
-                        No search results found!
+                        WoW, I didn't find anything! :(
                     </div>
                     <p class="text">
-                        Please try configuring the filters again
+                    Have you tried changing filters to get better results?
                     </p>
                     <img src="{{ asset('/assets/img/noRes.svg') }}" alt="" />
                 </div>

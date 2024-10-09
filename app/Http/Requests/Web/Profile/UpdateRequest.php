@@ -74,8 +74,8 @@ class UpdateRequest extends FormRequest
             'age.min' => 'Must be 18+',
             'age.max' => 'Maximum age 100',
             'description.required' => 'Description required',
-            'description.min' => 'Must be 50-150 words',
-            'description.max' => 'Must be 50-150 words',
+            'description.min' => 'Must be 250-500 words',
+            'description.max' => 'Must be 250-500 words',
             
             'photos.required' => 'Photos required',
 

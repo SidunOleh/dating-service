@@ -136,7 +136,7 @@
         <div class="other-user-list">
             @foreach($recommends as $recommend)
             <a 
-                target="_blank" 
+               
                 href="{{ route('profile.page', ['creator' => $recommend->id,]) }}" 
                 @class(['other-user-item', 'verified' => $recommend->is_verified,])>
                 <div class="img-card">

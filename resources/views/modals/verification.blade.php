@@ -1,7 +1,7 @@
 <div class="verification-wrapper">
     <div class="verification-container">
         <p class="title">
-            Please enter the code, we sent it to your email:
+            I sent the code, please check your Email:
         </p>
         <p class="email">
         </p>

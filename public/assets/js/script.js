@@ -1408,7 +1408,7 @@ $(document).ready(function () {
         if (descriptionLength <= 250) {
             $(".counter").css("color", "red");
         } else {
-            $(".counter").css("color", "white");
+            $(".counter").css("color", "#dedfe1");
         }
     });
 });

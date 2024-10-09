@@ -204,11 +204,11 @@
                     </div>
                 </div>
 
-                <div class="log-out btn red">
-                    <a href="{{ route('web.logout') }}">
-                        Log out
-                    </a>   
-                </div>
+               
+                <a class="log-out btn red" href="{{ route('web.logout') }}">
+                    Log out
+                </a>   
+                
 
             </div>
 

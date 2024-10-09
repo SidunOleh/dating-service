@@ -3163,7 +3163,7 @@ input {
 }
 
 .profile-filling .form-group textarea {
-    min-height: 60px;
+    min-height: 120px;
     resize: none;
     border-radius: 4px;
     background-color: #4c4c52;
@@ -3172,6 +3172,11 @@ input {
     font-family: Inter;
     font-size: 16px;
     color: var(--white, #fbfbfb);
+}
+@media screen and (max-width: 768px) {
+    .profile-filling .form-group textarea {
+        min-height: 180px;
+    }
 }
 
 .profile-filling .form-group input::-webkit-input-placeholder,
@@ -3222,7 +3227,11 @@ input {
     font-size: 13px;
     margin-top: 8px;
     display: flex;
+    gap: 24px;
     justify-content: space-between;
+}
+.profile-filling .form-group .characterCount {
+    white-space: nowrap;
 }
 
 .profile-filling .btn-group {

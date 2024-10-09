@@ -871,7 +871,7 @@
                                     v-model="data.description"></textarea>
                                 <div class="rule">
                                     <p>No more than 150 characters</p>
-                                    <p class="characterCount"><span></span>/ 500</p>
+                                    <p class="characterCount"><span class="">0</span> / 500</p>
                                 </div>
                                 <div v-if="errors.description" class="error-text">
                                     {{ errors.description }}

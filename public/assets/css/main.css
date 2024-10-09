@@ -3221,6 +3221,8 @@ input {
     color: #dedfe1;
     font-size: 13px;
     margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .profile-filling .btn-group {

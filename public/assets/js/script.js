@@ -934,6 +934,7 @@ $("#email-succes-changed .btn").click(() => {
 //__________________________FAQ__________________________//
 $(".open-faq").click(function () {
     $(".sidebar").toggleClass("open");
+    $("html").addClass("lock");
 });
 
 $(document).ready(function () {
@@ -1111,6 +1112,7 @@ $(document).ready(function () {
 });
 $(document).on("click", ".sidebar-menu-item", function () {
     $(".sidebar").removeClass("open");
+    $("html").removeClass("lock");
 });
 
 //__________________________Transactions__________________________//

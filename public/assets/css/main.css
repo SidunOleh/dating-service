@@ -1515,7 +1515,9 @@ input {
     max-width: 424px;
     display: none;
 }
-
+.popUp-wrapper.authPopup .card {
+    padding: 11px 16px 48px;
+}
 @media screen and (max-width: 768px) {
     .popUp-wrapper .card {
         height: 100%;
@@ -1528,8 +1530,16 @@ input {
 .popUp-wrapper .card.active {
     display: block;
 }
-
-.popUp-wrapper .card .close {
+@media screen and (max-width: 768px) {
+    .authPopup .card {
+        transition: all 0.2s linear;
+        right: -100%;
+    }
+    .authPopup .card.card.active {
+        right: 0;
+    }
+}
+.authPopup .unsubcribe-card .popUp-wrapper .card .close {
     width: 40px;
     height: 40px;
     border-radius: 4px;

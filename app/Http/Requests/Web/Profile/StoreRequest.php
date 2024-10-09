@@ -36,7 +36,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|min:2|max:8',
             'age' => 'required|integer|between:18,100',
             'gender' => 'in:Man,Woman,LGBTQIA+|nullable',
-            'description' => 'required|string|min:50|max:150',
+            'description' => 'required|string|min:250|max:500',
 
             'photos' => 'required|array|min:1|max:12',
             'photos.*' => 'exists:images,id',

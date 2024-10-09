@@ -23,7 +23,7 @@ class CreatorFactory extends Factory
             'age' => rand(18, 100),
             'gender' => ['Man', 'Woman', 'LGBTQIA+'][rand(0, 2)],
             'phone' => fake()->phoneNumber(),
-            'description' => fake()->text(150),
+            'description' => fake()->text(500),
             'zip' => rand(501, 99950),
             'state' => fake()->stateAbbr(),
             'city' => fake()->city(),

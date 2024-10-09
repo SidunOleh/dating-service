@@ -35,7 +35,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|min:2|max:8',
             'age' => 'required|integer|between:18,100',
             'gender' => 'in:Man,Woman,LGBTQIA+|nullable',
-            'description' => 'required|string|min:50|max:150',
+            'description' => 'required|string|min:250|max:500',
             
             'phone' => 'required_without_all:telegram,whatsapp|string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
             'telegram' => 'required_without_all:phone,whatsapp|string|nullable',

@@ -1516,7 +1516,7 @@ input {
     display: none;
 }
 .popUp-wrapper.authPopup .card {
-    padding: 10ßpx 16px 48px;
+    padding: 10px 16px 48px;
 }
 @media screen and (max-width: 768px) {
     .popUp-wrapper .card {
@@ -1561,8 +1561,10 @@ input {
     top: 16px;
     cursor: pointer;
 }
-
-.add-new-pass {
+.popUp-wrapper.authPopup .popUp-wrapper .card .close {
+    top: 10px;
+}
+.card .close .add-new-pass {
     padding-top: 40px;
 }
 

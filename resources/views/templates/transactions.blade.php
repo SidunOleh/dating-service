@@ -1,7 +1,7 @@
 <div class="transaction-wrapper">
     <div class="transaction-popup">
         <div class="top">
-            <div class="title">Transaction list: delay up to 1 hour</div>
+            <div class="title">Transaction list: <span>(delay up to 1 hour)</span></div>
             <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         </div>
         <div class="transactions">

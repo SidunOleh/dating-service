@@ -797,7 +797,7 @@ input {
     .footer .footer-bottom {
         flex-direction: column;
         align-items: center;
-        gap: 16px;
+        gap: 8px;
     }
 }
 
@@ -4373,7 +4373,15 @@ input {
     font-size: 20px;
     font-weight: 500;
 }
-
+.transaction-wrapper .title span {
+    background: var(
+        --Linear,
+        linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .transaction-wrapper .close {
     cursor: pointer;
 }

@@ -1550,9 +1550,12 @@ input {
     display: none;
 }
 .popUp-wrapper.authPopup .card {
-    padding: 10px 16px 48px;
+    padding: 23px 16px 23px;
 }
 @media screen and (max-width: 768px) {
+    .popUp-wrapper.authPopup .card {
+        padding: 10px 16px 23px;
+    }
     .popUp-wrapper .card {
         height: 100%;
         z-index: 100000;

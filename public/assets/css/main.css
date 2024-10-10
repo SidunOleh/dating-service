@@ -1109,7 +1109,11 @@ input {
     text-overflow: ellipsis;
     word-break: break-all;
 }
-
+@media screen and (max-width: 768px) {
+    .users .about {
+        -webkit-line-clamp: 3;
+    }
+}
 .battle-container {
     height: 100%;
     position: relative;

@@ -17,7 +17,7 @@ if ($("header .advertising-banner").length) {
     var headerHeight = $(".advertising-banner").outerHeight();
     $(".header-menu").css("height", `calc(100vh - ${headerHeight}px)`);
     $(".authPopup").css("top", `${headerHeight}px`);
-    $(".erification-wrapper").css("top", `${headerHeight}px`);
+    $(".verification-wrapper").css("top", `${headerHeight}px`);
 }
 $(".closePage").on("click", function () {
     window.close();

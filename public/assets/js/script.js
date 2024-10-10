@@ -1207,7 +1207,7 @@ $(".deposit-type").on("click", async function() {
             $(".qr-code img").attr("src", res.details.qr_code);
             $(".network .type").text(res.details.currency);
             $(".deposit-wrapper .crypto-rate span").text(
-                `1 USD - ${res.details.source_rate} ${$(this).data('network')}`
+                `${res.details.source_rate} ${$(this).data('network')}`
             );
             $(".key .title").text(res.details.wallet_hash);
             $(".deposit-wrapper").addClass("active");

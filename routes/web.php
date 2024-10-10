@@ -129,7 +129,6 @@ Route::get('/profile/{creator}', ProfileController::class)
     ->where('page', '[0-9]+')
     ->name('profile.page');
 Route::get('/top-vote', TopVoteController::class)
-    ->middleware(['auth:web',])
     ->name('top-vote.page');
 Route::get('/favorites', FavoritesController::class)
     ->middleware(['auth:web',])

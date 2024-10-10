@@ -275,7 +275,7 @@ input {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
     overflow: hidden;
-    border-bottom: 1px solid #5f5f5f;
+    border-bottom: 1px solid #525252;
 }
 
 #header.hidden {

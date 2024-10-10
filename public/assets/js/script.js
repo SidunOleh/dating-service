@@ -349,7 +349,7 @@ function openVerifyPopup(action, verifyUrl, resendUrl, email) {
     verifyPopup.find(".email").text(email);
 
     verifyPopup.addClass("active");
-
+    $("html").addClass("lock");
     resendTimer.start(60);
 }
 
@@ -420,7 +420,7 @@ $(".verification-wrapper input").on("input paste", async () => {
     $.post(verifyUrl, data)
         .done(() => {
             $(".verification-wrapper").removeClass("active");
-
+            $("html").removeClass("lock");
             $(document).trigger(`${action}-verified`);
         })
         .fail((err) => {

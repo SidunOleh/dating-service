@@ -1207,7 +1207,7 @@ $(".deposit-type").on("click", async function() {
             $(".qr-code img").attr("src", res.details.qr_code);
             $(".network .type").text(res.details.currency);
             $(".course span").text(
-                `1 USD - ${res.details.source_rate} ${res.details.currency}`
+                `1 USD - ${res.details.source_rate} ${$(this).data('network')}`
             );
             $(".key .title").text(res.details.wallet_hash);
             $(".deposit-wrapper").addClass("active");
@@ -1254,7 +1254,7 @@ $(".referral-out").on("click", function() {
         $(this).find("img").attr("src")
     );
     $(".crypto-address .crypto-name span").text(withdraw.currency);
-    $(".crypto-address .crypto-rate span").text(DS.rates[withdraw.currency]);
+    $(".crypto-address .crypto-rate span").text(`${DS.rates[withdraw.currency]} ${$(this).data('network')}`);
     $(".referral-out-wrapper").addClass("active");
     $(".referral-out-wrapper .card").removeClass("active");
     $(".crypto-address").addClass("active");

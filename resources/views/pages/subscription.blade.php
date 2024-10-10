@@ -83,63 +83,63 @@
                 </a>
                 <div class="deposit-types">
                     
-                    <div class="deposit-type" data-currency="BTC">
+                    <div class="deposit-type" data-currency="BTC" data-network="BTC(BTC)">
                         <img src="{{ asset('/assets/img/btc.svg') }}" alt="" /> 
                         <p class="name">Bitcoin</p>
                         <p class="abbr">
                             BTC
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="ETH">
+                    <div class="deposit-type" data-currency="ETH" data-network="ETH(ETH)">
                         <img src="{{ asset('/assets/img/eth.svg') }}" alt="" /> 
                         <p class="name">Ethereum</p>
                         <p class="abbr">
                             ETH
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="USDT">
+                    <div class="deposit-type" data-currency="USDT" data-network="USDT(ERC-20)">
                         <img src="{{ asset('/assets/img/usdt.svg') }}" alt="" /> 
                         <p class="name">Tether ERC-20</p>
                         <p class="abbr">
                             USDT
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="USDT_TRX">
+                    <div class="deposit-type" data-currency="USDT_TRX" data-network="USDT(TRC-20)">
                         <img src="{{ asset('/assets/img/usdt-trx.svg') }}" alt="" /> 
                         <p class="name">Tether TRC-20</p>
                         <p class="abbr">
                             USDT_TRX
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="USDC">
+                    <div class="deposit-type" data-currency="USDC" data-network="USDC(ERC-20)">
                         <img src="{{ asset('/assets/img/usdc.svg') }}" alt="" /> 
                         <p class="name">USDC ERC-20</p>
                         <p class="abbr">
                             USDC
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="DOGE">
+                    <div class="deposit-type" data-currency="DOGE" data-network="DOGE(DOGE)">
                         <img src="{{ asset('/assets/img/doge.svg') }}" alt="" /> 
                         <p class="name">Dogecoln</p>
                         <p class="abbr">
                             DOGE
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="BNB">
+                    <div class="deposit-type" data-currency="BNB" data-network="BNB(BNB)">
                         <img src="{{ asset('/assets/img/bnb.svg') }}" alt="" /> 
                         <p class="name">BNB Chain</p>
                         <p class="abbr">
                             BNB
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="BCH">
+                    <div class="deposit-type" data-currency="BCH" data-network="BCH(BCH)">
                         <img src="{{ asset('/assets/img/bch.svg') }}" alt="" /> 
                         <p class="name">Bitcoin Cash</p>
                         <p class="abbr">
                             BCH
                         </p>
                     </div>
-                    <div class="deposit-type" data-currency="BUSD">
+                    <div class="deposit-type" data-currency="BUSD" data-network="BUSD(BEP-20)">
                         <img src="{{ asset('/assets/img/busd.svg') }}" alt="" /> 
                         <p class="name">BUSD (BEP-20)</p>
                         <p class="abbr">

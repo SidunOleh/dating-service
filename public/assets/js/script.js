@@ -312,6 +312,10 @@ $(".warning").bind("auxclick click", function() {
 
 //__________________________Verification_________________________//
 
+$(".verification-container .close").click(function(){
+    $(".verification-container").removeClass("active")
+})
+
 const resendTimer = {
     secs: 0,
     interval: null,

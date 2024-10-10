@@ -1973,6 +1973,13 @@ input {
     position: relative;
 }
 
+.verification-wrapper .verification-container .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
 .verification-wrapper .verification-container .title {
     color: #fbfbfb;
     text-align: center;

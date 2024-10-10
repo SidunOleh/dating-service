@@ -1883,10 +1883,20 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    padding: 16px 16px 24px;
+    padding: 16px 24px;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+}
+@media screen and (max-width: 768px) {
+    .popUp-wrapper .addNew-pass-card {
+        height: fit-content !important;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+    }
 }
 
 .popUp-wrapper .pass-succes {

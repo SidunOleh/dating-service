@@ -149,10 +149,8 @@ img {
     }
 }
 
-@media screen and (max-width: 1024px) {
-    .btn:active {
-        color: #d33131;
-    }
+.btn:active {
+    color: #d33131;
 }
 
 .btn.red {
@@ -163,17 +161,15 @@ img {
     );
 }
 
-@media screen and (max-width: 1024px) {
-    .btn.red:active {
-        background: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            from(#b00107),
-            to(#ea020b)
-        );
-        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
-    }
+.btn.red:active {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#b00107),
+        to(#ea020b)
+    );
+    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
 }
 
 @media screen and (min-width: 1023px) {
@@ -458,8 +454,7 @@ input {
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
     );
 }
-
-#header .header-burger:hover {
+#header .header-burger:active {
     background: -webkit-gradient(
         linear,
         left top,
@@ -468,6 +463,18 @@ input {
         to(#ea020b)
     );
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+@media screen and (min-width: 1023px) {
+    #header .header-burger:hover {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(#b00107),
+            to(#ea020b)
+        );
+        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+    }
 }
 
 @media screen and (max-width: 768px) {

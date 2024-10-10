@@ -1963,13 +1963,14 @@ input {
 }
 
 .verification-wrapper .verification-container {
-    border-radius: 16px;
+    border-radius: 12px;
     background: #39393e;
     color: #fff;
     padding: 24px 16px;
     text-align: center;
     width: 100%;
     max-width: 424px;
+    position: relative;
 }
 
 .verification-wrapper .verification-container .title {

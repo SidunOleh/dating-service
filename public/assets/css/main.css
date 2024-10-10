@@ -149,10 +149,8 @@ img {
     }
 }
 
-@media screen and (max-width: 1024px) {
-    .btn:active {
-        color: #d33131;
-    }
+.btn:active {
+    color: #d33131;
 }
 
 .btn.red {
@@ -163,17 +161,15 @@ img {
     );
 }
 
-@media screen and (max-width: 1024px) {
-    .btn.red:active {
-        background: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            from(#b00107),
-            to(#ea020b)
-        );
-        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
-    }
+.btn.red:active {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#b00107),
+        to(#ea020b)
+    );
+    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
 }
 
 @media screen and (min-width: 1023px) {
@@ -458,8 +454,7 @@ input {
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
     );
 }
-
-#header .header-burger:hover {
+#header .header-burger:active {
     background: -webkit-gradient(
         linear,
         left top,
@@ -468,6 +463,18 @@ input {
         to(#ea020b)
     );
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+@media screen and (min-width: 1023px) {
+    #header .header-burger:hover {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(#b00107),
+            to(#ea020b)
+        );
+        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -1102,7 +1109,11 @@ input {
     text-overflow: ellipsis;
     word-break: break-all;
 }
-
+@media screen and (max-width: 768px) {
+    .users .about {
+        -webkit-line-clamp: 3;
+    }
+}
 .battle-container {
     height: 100%;
     position: relative;
@@ -1447,7 +1458,7 @@ input {
 .isAdult-wrapper .card {
     border-radius: 12px;
     background: #39393e;
-    padding: 32px 16px;
+    padding: 24px 16px;
     width: 100%;
     position: relative;
     max-width: 424px;
@@ -1484,7 +1495,10 @@ input {
 .isAdult-wrapper .card .buttons .btn {
     width: 50%;
 }
-
+.isAdult-wrapper .card .buttons .btn:first-child {
+    background-color: #45454b;
+    color: #fbfbfb;
+}
 .popUp-wrapper.authPopup {
     z-index: 1000;
 }
@@ -1661,7 +1675,6 @@ input {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    height: 40px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1678,7 +1691,9 @@ input {
     border-radius: 4px !important;
     padding-bottom: 16px;
 }
-
+.popUp-wrapper .resetPassword-card .title {
+    margin-bottom: 16px;
+}
 .popUp-wrapper .resetPassword-card .close {
     background: transparent !important;
     width: 30px !important;
@@ -1861,6 +1876,7 @@ input {
     padding: 24px;
     gap: 8px;
     border-radius: 4px;
+    padding: 20px 16px !important;
 }
 
 .popUp-wrapper .res-succes-send .title {
@@ -1878,10 +1894,30 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    padding: 16px 16px 24px;
+    padding: 16px 24px !important;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+}
+.popUp-wrapper .addNew-pass-card .close {
+    background: transparent;
+    width: fit-content;
+    height: fit-content;
+}
+@media screen and (max-width: 768px) {
+    .popUp-wrapper .addNew-pass-card {
+        height: fit-content !important;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+        padding: 16px 24px !important;
+    }
+    .popUp-wrapper .addNew-pass-card .close {
+        top: 10px;
+        right: 10px;
+    }
 }
 
 .popUp-wrapper .pass-succes {
@@ -1890,6 +1926,8 @@ input {
     -ms-flex-direction: column;
     flex-direction: column;
     padding: 16px;
+    border-radius: 12px;
+    padding: 24px 16px;
 }
 
 .res-succes-send .btn {
@@ -1963,7 +2001,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 1000;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2077,7 +2115,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 1000;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -4297,9 +4335,19 @@ input {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: center;
 }
-
+.deposit-wrapper .key .btn {
+    width: 100%;
+    max-width: 200px;
+}
+@media screen and (max-width: 768px) {
+    .deposit-wrapper .key .btn {
+        max-width: 100%;
+    }
+}
 .deposit-wrapper .key span {
     border-radius: 4px;
     background: #525252;
@@ -4310,6 +4358,9 @@ input {
 @media screen and (max-width: 1024px) {
     .deposit-wrapper .key span {
         font-size: 12px;
+    }
+    .deposit-popup {
+        padding: 16px;
     }
 }
 
@@ -5354,7 +5405,7 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
     width: 100%;
     max-width: 430px;
     display: none;

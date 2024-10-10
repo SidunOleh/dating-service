@@ -1903,6 +1903,10 @@ input {
         border-radius: 12px;
         padding: 16px 24px !important;
     }
+    .popUp-wrapper .addNew-pass-card .close {
+        top: 10px;
+        right: 10px;
+    }
 }
 
 .popUp-wrapper .pass-succes {

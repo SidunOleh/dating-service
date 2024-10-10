@@ -23,6 +23,12 @@ $(".closePage").on("click", function () {
     window.close();
 });
 
+if ($(".popUp-wrapper").hasClass("active")) {
+    $("html").addClass("lock");
+} else {
+    $("html").removeClass("lock");
+}
+
 $(document).ready(function () {
     if (!localStorage.getItem("isAdult")) {
         $("#isAdult-wrapper").css("display", "flex");

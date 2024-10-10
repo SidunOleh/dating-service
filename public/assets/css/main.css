@@ -1905,6 +1905,8 @@ input {
     -ms-flex-direction: column;
     flex-direction: column;
     padding: 16px;
+    border-radius: 12px;
+    padding: 24px 16px;
 }
 
 .res-succes-send .btn {

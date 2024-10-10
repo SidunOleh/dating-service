@@ -3904,6 +3904,7 @@ input {
     margin: 0 auto;
     color: var(--white, #fbfbfb);
     font-size: 14px;
+    padding-left: 16px;
 }
 
 .subscribe .title {

@@ -313,7 +313,7 @@ $(".warning").bind("auxclick click", function() {
 //__________________________Verification_________________________//
 
 $(".verification-container .close").click(function(){
-    $(".verification-container").removeClass("active")
+    $(".verification-wrapper").removeClass("active")
 })
 
 const resendTimer = {

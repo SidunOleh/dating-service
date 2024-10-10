@@ -977,7 +977,7 @@ $(document).ready(function () {
             next = $(".faq-content").first();
         }
         showContent(next.attr("id"));
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $(window).scrollTop(0);
     });
 
     $(".faq-prev").click(function () {
@@ -987,7 +987,7 @@ $(document).ready(function () {
             prev = $(".faq-content").last();
         }
         showContent(prev.attr("id"));
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $(window).scrollTop(0);
     });
 
     function showContent(targetId) {

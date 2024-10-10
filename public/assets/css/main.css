@@ -4573,7 +4573,11 @@ input {
     gap: 8px;
     margin-bottom: 16px;
 }
-
+@media screen and (max-width: 390px) {
+    .refferals .link-body {
+        flex-direction: column;
+    }
+}
 .refferals .link-body .link {
     border-radius: 4px;
     background: #525252;

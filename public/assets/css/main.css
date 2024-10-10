@@ -1447,7 +1447,7 @@ input {
 .isAdult-wrapper .card {
     border-radius: 12px;
     background: #39393e;
-    padding: 32px 16px;
+    padding: 24px 16px;
     width: 100%;
     position: relative;
     max-width: 424px;
@@ -1484,7 +1484,10 @@ input {
 .isAdult-wrapper .card .buttons .btn {
     width: 50%;
 }
-
+.isAdult-wrapper .card .buttons .btn:first-child {
+    background-color: #45454b;
+    color: #fbfbfb;
+}
 .popUp-wrapper.authPopup {
     z-index: 1000;
 }

@@ -203,7 +203,7 @@
 
         <div class="key">
             <span class="title"></span>
-            <p class="copy btn red">Copy</p>
+            <img src="{{ asset('/assets/img/copy.svg') }}" alt="" class="copy" />
         </div>
     </div>
 

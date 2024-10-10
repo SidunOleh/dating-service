@@ -197,8 +197,8 @@
         <div class="qr-code">
             <img src="" alt="" />
         </div>
-        <div class="deposit-info">
-            <div class="course">Current course: <span></span></div>
+        <div class="crypto-rate">
+            <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />1 = <span></span>
         </div>
 
         <div class="key">

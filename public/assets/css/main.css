@@ -4324,6 +4324,9 @@ input {
     .deposit-wrapper .key span {
         font-size: 12px;
     }
+    .deposit-popup {
+        padding: 16px;
+    }
 }
 
 .deposit-wrapper .copy {

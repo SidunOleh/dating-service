@@ -38,7 +38,7 @@ const warningsApi = {
         return res.data
     },
     async showSettings() {
-        if (!can('warnings.settings')) {
+        if (!can('warnings.settings.show')) {
             throw new Error('Forbidden.')
         }
 
@@ -47,7 +47,7 @@ const warningsApi = {
         return res.data
     },
     async editSettings(settings) {
-        if (!can('warnings.settings')) {
+        if (!can('warnings.settings.update')) {
             throw new Error('Forbidden.')
         }
 

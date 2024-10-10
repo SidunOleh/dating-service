@@ -28,6 +28,11 @@ if ($(".popUp-wrapper").hasClass("active")) {
 } else {
     $("html").removeClass("lock");
 }
+if ($(".advertising-wrapper").hasClass("show")) {
+    $("html").addClass("lock");
+} else {
+    $("html").removeClass("lock");
+}
 
 $(document).ready(function () {
     if (!localStorage.getItem("isAdult")) {

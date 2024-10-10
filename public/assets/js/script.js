@@ -1203,11 +1203,11 @@ $(".deposit-type").on("click", async function() {
                 "src",
                 $(this).find("img").attr("src")
             );
-            $(".deposit-popup .crypto-name span").text(deposit.currency);
+            $(".deposit-popup .crypto-name span").text($(this).data('network'));
             $(".qr-code img").attr("src", res.details.qr_code);
             $(".network .type").text(res.details.currency);
             $(".deposit-wrapper .crypto-rate span").text(
-                `${res.details.source_rate} ${$(this).data('network')}`
+                `${res.details.source_rate} ${deposit.currency}`
             );
             $(".key .title").text(res.details.wallet_hash);
             $(".deposit-wrapper").addClass("active");
@@ -1253,8 +1253,8 @@ $(".referral-out").on("click", function() {
         "src",
         $(this).find("img").attr("src")
     );
-    $(".crypto-address .crypto-name span").text(withdraw.currency);
-    $(".crypto-address .crypto-rate span").text(`${DS.rates[withdraw.currency]} ${$(this).data('network')}`);
+    $(".crypto-address .crypto-name span").text($(this).data('network'));
+    $(".crypto-address .crypto-rate span").text(`${DS.rates[withdraw.currency]} ${withdraw.currency}`);
     $(".referral-out-wrapper").addClass("active");
     $(".referral-out-wrapper .card").removeClass("active");
     $(".crypto-address").addClass("active");

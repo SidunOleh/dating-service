@@ -275,6 +275,7 @@ input {
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;
     overflow: hidden;
+    border-bottom: 1px solid #525252;
 }
 
 #header.hidden {
@@ -1069,6 +1070,7 @@ input {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: break-all;
 }
 
 .battle-container {

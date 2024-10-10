@@ -166,10 +166,10 @@ Route::middleware(['auth:sanctum',])->group(function () {
             ->can('warnings.delete');
         Route::get('/settings', ShowSettingsController::class)  
             ->name('settings.show')
-            ->can('warnings.settings');
+            ->can('warnings.settings.show');
         Route::post('/settings', UpdateSettingsController::class)  
             ->name('settings.update')
-            ->can('warnings.settings');
+            ->can('warnings.settings.update');
     });
 
     Route::prefix('/creators')->name('creators.')->group(function () {

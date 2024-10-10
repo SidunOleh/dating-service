@@ -1673,14 +1673,16 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .popUp-wrapper .resetPassword-card {
     border-radius: 4px !important;
     padding-bottom: 16px;
 }
-
+.popUp-wrapper .resetPassword-card .title {
+    margin-bottom: 16px;
+}
 .popUp-wrapper .resetPassword-card .close {
     background: transparent !important;
     width: 30px !important;

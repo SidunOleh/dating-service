@@ -1664,7 +1664,6 @@ input {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    height: 40px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1674,7 +1673,7 @@ input {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .popUp-wrapper .resetPassword-card {

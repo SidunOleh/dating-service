@@ -5370,7 +5370,7 @@ input {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
     width: 100%;
     max-width: 430px;
     display: none;

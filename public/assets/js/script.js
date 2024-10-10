@@ -1389,7 +1389,7 @@ $(".copy-link").on("click", () => {
 
 $(document).ready(function() {
     function togglePasteButton() {
-        if ($("#cryptoAddress").val().trim() !== "") {
+        if ($("#cryptoAddress").val()?.trim() !== "") {
             $("#pasteButton").hide();
         } else {
             $("#pasteButton").show();

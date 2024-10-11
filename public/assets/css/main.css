@@ -143,16 +143,6 @@ img {
     cursor: pointer;
 }
 
-@media screen and (min-width: 1023px) {
-    .btn:hover {
-        color: #d33131;
-    }
-}
-
-.btn:active {
-    color: #d33131;
-}
-
 .btn.red {
     color: #fff;
     background: var(
@@ -161,27 +151,22 @@ img {
     );
 }
 
-.btn.red:active {
-    background: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        from(#b00107),
-        to(#ea020b)
-    );
-    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
-}
+@media (hover: none) {
+    .btn:hover {
+        color: #d33131;
+    }
+    .btn:active {
+        color: #d33131;
+    }
 
-@media screen and (min-width: 1023px) {
-    .btn.red:hover {
-        background: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            from(#b00107),
-            to(#ea020b)
-        );
+    .btn.red:active {
         background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+    }
+    .btn.red:hover {
+        background: var(
+            --Linear,
+            linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
+        );
     }
 }
 
@@ -413,7 +398,9 @@ input {
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
 }
-
+#header .logo span {
+    color: rgb(160, 17, 17) !important;
+}
 #header .right {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -5483,7 +5470,12 @@ input {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
+.referral-out-wrapper .card:last-child .title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fbfbfb;
+}
 .referral-out-wrapper .crypto-name,
 .deposit-wrapper .crypto-name {
     display: flex;

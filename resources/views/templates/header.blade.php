@@ -44,7 +44,7 @@
                 </div>
                 
                 <p class="logo">
-                    {{ config('app.name') }}
+                   Cherry<span>,21</span>
                 </p>
 
                 <div class="right">
@@ -226,7 +226,7 @@
                 </div>
 
                 <p class="logo">
-                    {{ config('app.name') }}
+                   Cherry<span>,21</span>
                 </p>
                 
                 <div class="burger-menu red flex">

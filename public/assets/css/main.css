@@ -2383,7 +2383,9 @@ input {
     align-items: center;
     gap: 8px;
 }
-
+.profile #map {
+    height: 100% !important;
+}
 .profile .left-side .head-porfile .img-card .likes .btn {
     padding: 0;
     width: 24px;
@@ -5663,10 +5665,12 @@ input {
 }
 
 #map {
-    height: 85%;
+    height: 100%;
     z-index: 0;
 }
-
+.profile.account #map {
+    height: 85% !important;
+}
 .advertising-wrapper.show {
     display: -webkit-box !important;
     display: -ms-flexbox !important;

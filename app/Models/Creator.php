@@ -766,7 +766,7 @@ class Creator extends Authenticatable
             if ($transaction->details instanceof PlisioInvoice) {
                 return $transaction->details->received > 0;
             } elseif ($transaction->details instanceof PlisioWithdrawal)  {
-                return $transaction->details->status != 'error';
+                return ! in_array($transaction->details->status, ['error', 'pending',]);
             } else {
                 return true;
             }

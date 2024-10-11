@@ -5483,7 +5483,12 @@ input {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
+.referral-out-wrapper .card:last-child .title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fbfbfb;
+}
 .referral-out-wrapper .crypto-name,
 .deposit-wrapper .crypto-name {
     display: flex;

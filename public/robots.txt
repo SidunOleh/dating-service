@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /cLAhDKeUKrDErLAyUS21/*
+Disallow: /cLAhDKeUKrDErLAyUS21

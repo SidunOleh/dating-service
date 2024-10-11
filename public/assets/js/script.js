@@ -22,6 +22,7 @@ if ($("header .advertising-banner").length) {
     $(".deposit-wrapper").css("top", `${headerHeight}px`);
     $(".referral-out-wrapper").css("top", `${headerHeight}px`);
     $(".popUp-wrapper").css("top", `${headerHeight}px`);
+    $(".transaction-wrapper").css("top", `${headerHeight}px`);
 } else {
     $(".header-menu").css("height", `100vh`);
 }

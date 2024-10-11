@@ -40,6 +40,7 @@ class ProcessImage implements ShouldQueue
         $manager = new ImageManager(new Driver());
 
         $image = $manager->read($this->image->getPath());
+        
         $image->toWebp($this->quality)->save($this->image->getPath());
 
         if ($this->watermark) {
@@ -54,14 +55,23 @@ class ProcessImage implements ShouldQueue
             //     alpha: 10,
             // )->save();
 
-            $image = $manager->read($this->image->getPath());
+            // $image = $manager->read($this->image->getPath());
 
-            $watermark = $manager->read(storage_path('watermark.png'))->cover(
-                $image->width(),
-                $image->height()
-            );
+            // $watermark = $manager->read(storage_path('watermark.png'))->cover(
+            //     $image->width(),
+            //     $image->height()
+            // );
 
-            $image->place($watermark, 'center', 0, 0, 100)->save($this->image->getPath());
+            // $image->place($watermark, 'center', 0, 0, 100)->save($this->image->getPath());
+
+            SpatieImage::load($this->image->getPath())->text(
+                'Cherry21.com', 
+                fontSize: 20, 
+                color: 'rgba(150, 152, 158, 0.8)',
+                x: $image->width() - 140, 
+                y: $image->height() - 10,
+                fontPath: storage_path('Poppins-Regular.ttf'),
+            )->save();
         }
 
         $this->image->update(['processed' => true,]);

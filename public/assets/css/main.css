@@ -414,7 +414,7 @@ input {
     transition: all 0.3s linear;
 }
 #header .logo span {
-    color: var(rgb(160, 17, 17)) !important;
+    color: rgb(160, 17, 17) !important;
 }
 #header .right {
     display: -webkit-box;

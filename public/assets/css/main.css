@@ -5412,9 +5412,7 @@ input {
     max-width: 430px;
     display: none;
 }
-.withdrawn-final .title {
-    color: #fbfbfb;
-}
+
 @media screen and (max-width: 768px) {
     .referral-out-wrapper .card {
         padding: 16px;
@@ -5473,7 +5471,7 @@ input {
     cursor: pointer;
 }
 
-.referral-out-wrapper .title {
+.referral-out-wrapper .card:not(:last-child) .title {
     text-align: center;
     font-size: 16px;
     font-weight: 600;

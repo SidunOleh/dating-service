@@ -64,14 +64,14 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 /**
  * Admin panel
  */
-Route::view('/cLAhDKeUKrDErLAyUS21/{any?}', 'admin-panel')
+Route::view('/u0puffeto4nh7SlHzFn8/{any?}', 'admin-panel')
     ->where('any', '.*')
     ->name('admin-panel');
 
-Route::post('/cLAhDKeUKrDErLAyUS21/login', LoginController::class)
+Route::post('/u0puffeto4nh7SlHzFn8/login', LoginController::class)
     ->middleware(['throttle:5,1',])
     ->name('admin-panel.login');
-Route::post('/cLAhDKeUKrDErLAyUS21/logout', LogoutController::class)
+Route::post('/u0puffeto4nh7SlHzFn8/logout', LogoutController::class)
     ->middleware(['auth:admin',])
     ->name('admin-panel.logout');
 

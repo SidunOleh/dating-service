@@ -12,7 +12,7 @@ const imagesApi = {
         data.append('watermark', watermark ? 1 : 0)
         data.append('quality', quality ?? 0)
 
-        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/images/upload', data)
+        const res = await axios.post('/api/u0puffeto4nh7SlHzFn8/images/upload', data)
 
         return res.data
     },

@@ -20,7 +20,7 @@ const profilRequestsApi = {
             order,
         })
 
-        const res = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/profile-requests?${query}`)
+        const res = await axios.get(`/api/u0puffeto4nh7SlHzFn8/profile-requests?${query}`)
 
         return res.data
     },
@@ -29,7 +29,7 @@ const profilRequestsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/profile-requests/${id}`)
+        const res = await axios.get(`/api/u0puffeto4nh7SlHzFn8/profile-requests/${id}`)
 
         return res.data
     },
@@ -38,7 +38,7 @@ const profilRequestsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.put(`/api/cLAhDKeUKrDErLAyUS21/profile-requests/${id}`, data)
+        const res = await axios.put(`/api/u0puffeto4nh7SlHzFn8/profile-requests/${id}`, data)
 
         return res.data
     },

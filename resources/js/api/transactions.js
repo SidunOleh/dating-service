@@ -18,7 +18,7 @@ const transactionsApi = {
             order,
         })
 
-        const res = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/transactions?${query}`)
+        const res = await axios.get(`/api/u0puffeto4nh7SlHzFn8/transactions?${query}`)
 
         return res.data
     },
@@ -27,7 +27,7 @@ const transactionsApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.delete(`/api/cLAhDKeUKrDErLAyUS21/transactions/${id}`)
+        const res = await axios.delete(`/api/u0puffeto4nh7SlHzFn8/transactions/${id}`)
 
         return res.data
     },

@@ -6,7 +6,7 @@ const contentApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.get('/api/cLAhDKeUKrDErLAyUS21/content')
+        const res = await axios.get('/api/u0puffeto4nh7SlHzFn8/content')
 
         return res.data
     },
@@ -15,7 +15,7 @@ const contentApi = {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post('/api/cLAhDKeUKrDErLAyUS21/content', data)
+        const res = await axios.post('/api/u0puffeto4nh7SlHzFn8/content', data)
 
         return res.data
     },

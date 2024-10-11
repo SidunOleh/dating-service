@@ -47,7 +47,7 @@ export default {
             try {
                 this.loading = true
                 
-                const zip = await axios.get(`/api/cLAhDKeUKrDErLAyUS21/zips/${this.location.zip}`)
+                const zip = await axios.get(`/api/u0puffeto4nh7SlHzFn8/zips/${this.location.zip}`)
 
                 this.location.city = zip.data.city
                 this.location.state = zip.data.state

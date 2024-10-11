@@ -5665,10 +5665,12 @@ input {
 }
 
 #map {
-    height: 85%;
+    height: 100%;
     z-index: 0;
 }
-
+.profile.account #map {
+    height: 85% !important;
+}
 .advertising-wrapper.show {
     display: -webkit-box !important;
     display: -ms-flexbox !important;

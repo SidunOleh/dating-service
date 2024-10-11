@@ -5412,7 +5412,9 @@ input {
     max-width: 430px;
     display: none;
 }
-
+.withdrawn-final .title {
+    color: #fbfbfb;
+}
 @media screen and (max-width: 768px) {
     .referral-out-wrapper .card {
         padding: 16px;

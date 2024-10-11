@@ -64,14 +64,14 @@ class ProcessImage implements ShouldQueue
 
             // $image->place($watermark, 'center', 0, 0, 100)->save($this->image->getPath());
 
-            SpatieImage::load($this->image->getPath())->text(
-                'Cherry21.com', 
-                fontSize: 20, 
-                color: 'rgba(150, 152, 158, 0.8)',
-                x: $image->width() - 140, 
-                y: $image->height() - 10,
-                fontPath: storage_path('Poppins-Regular.ttf'),
-            )->save();
+            // SpatieImage::load($this->image->getPath())->text(
+            //     'Cherry21.com', 
+            //     fontSize: 20, 
+            //     color: 'rgba(150, 152, 158, 0.8)',
+            //     x: $image->width() - 140, 
+            //     y: $image->height() - 10,
+            //     fontPath: storage_path('Poppins-Regular.ttf'),
+            // )->save();
         }
 
         $this->image->update(['processed' => true,]);

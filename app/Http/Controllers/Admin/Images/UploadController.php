@@ -19,7 +19,7 @@ class UploadController extends Controller
         $image = Image::saveUploadedFile($uploaded);
 
         if ($process) {
-            ProcessImage::dispatch($image, $quality, $watermark);
+            ProcessImage::dispatch($image, $quality, $watermark)->delay(now()->addMinutes(1));
         } else {
             $image->update(['processed' => true,]);
         }

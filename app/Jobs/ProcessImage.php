@@ -16,7 +16,7 @@ use Spatie\Image\Enums\Fit;
 use Spatie\Image\Enums\Unit;
 
 
-class ProcessImage implements ShouldQueue
+class ProcessImage
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

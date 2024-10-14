@@ -920,6 +920,14 @@ input {
     box-shadow: 0px 4px 20px 0px rgba(211, 49, 49, 0.44);
 }
 
+@media (hover: none) {
+    .users .users-item.battle:hover {
+        border: 0.1px solid #d33131;
+        -webkit-box-shadow: 0px 4px 45px 0px rgb(211 49 49 / 78%);
+        box-shadow: 0px 4px 45px 0px rgb(211 49 49 / 78%);
+    }
+}
+
 .users .user-image {
     position: relative;
 }

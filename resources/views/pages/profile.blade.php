@@ -124,9 +124,7 @@
                         @endif
                     </div>
                     <img
-                        src="{{ asset('assets/img/placeholder.png') }}" 
-                        data-src="{{ asset("assets/img/blur/{$img}") }}" 
-                        class="lazyload"
+                        src="{{ asset("assets/img/blur/{$img}") }}" 
                         alt="" />
                 </div>
             @endforeach

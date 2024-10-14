@@ -19,6 +19,8 @@
             <p class="error-text"></p>
         </form>
 
+        <input type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" pattern="\d{6}">
+
         <p class="again">
             Send code again <span id="countdown">01:00</span>
         </p>

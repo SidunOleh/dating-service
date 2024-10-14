@@ -918,6 +918,7 @@ input {
     border: 0.1px solid #d33131;
     -webkit-box-shadow: 0px 4px 20px 0px rgba(211, 49, 49, 0.44);
     box-shadow: 0px 4px 20px 0px rgba(211, 49, 49, 0.44);
+    transition: all 0.2s ease;
 }
 
 @media (hover: none) {

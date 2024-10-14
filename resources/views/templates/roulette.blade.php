@@ -31,9 +31,7 @@
                     data-src="{{ $pair[0]->gallery->random()->url }}" 
                     class="lazyload" 
                     alt="image" />
-                <div class="info">
-                    {{ mb_strlen($pair[0]->name) > 5 ? mb_substr($pair[0]->name, 0, 5) . '...' : $pair[0]->name }}, {{ $pair[0]->age }}
-                </div>
+                
             </div>
             
             <div class="photo-container photo" id="photo2" data-id="{{ $pair[1]->id }}">
@@ -42,9 +40,7 @@
                     data-src="{{ $pair[1]->gallery->random()->url }}" 
                     class="lazyload" 
                     alt="image" />
-                <div class="info">
-                    {{ mb_strlen($pair[1]->name) > 5 ? mb_substr($pair[1]->name, 0, 5) . '...' : $pair[1]->name }}, {{ $pair[1]->age }}
-                </div>
+                
             </div>
 
         </div>

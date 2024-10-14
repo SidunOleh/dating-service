@@ -32,7 +32,7 @@
                     class="lazyload" 
                     alt="image" />
                 <div class="info">
-                    {{ mb_strlen($pair[0]->name) > 5 ? mb_substr($pair[0]->name, 0, 5) . '...' : $pair[0]->name }}, {{ $pair[0]->age }}
+                    {{ $pair[0]->city }}, {{ $pair[0]->state }}
                 </div>
             </div>
             
@@ -43,7 +43,7 @@
                     class="lazyload" 
                     alt="image" />
                 <div class="info">
-                    {{ mb_strlen($pair[1]->name) > 5 ? mb_substr($pair[1]->name, 0, 5) . '...' : $pair[1]->name }}, {{ $pair[1]->age }}
+                    {{ $pair[0]->city }}, {{ $pair[0]->state }}
                 </div>
             </div>
 

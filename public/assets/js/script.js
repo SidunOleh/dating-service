@@ -860,7 +860,7 @@ function initializeBattle($battle) {
         $selectedPhoto.addClass("selected").removeClass("blurred");
         $blurredPhoto.addClass("blurred").removeClass("selected");
 
-        $selectedPhoto.find(".info").text("Click to open profile");
+        // $selectedPhoto.find(".info").text("Click to open profile");
     }
 }
 

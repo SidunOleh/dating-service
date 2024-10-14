@@ -397,7 +397,7 @@ $(".code-inputs input").each((index, input) => {
         });
 });
 
-$(".code-inputs input").on("input paste change", (e) => {
+$(".code-inputs input").on("paste", (e) => {
     e.preventDefault();
 
     const inputs = $(".code-inputs input");
@@ -411,7 +411,7 @@ $(".code-inputs input").on("input paste change", (e) => {
     );
 });
 
-$(".verification-wrapper input").on("input paste change", async () => {
+$(".verification-wrapper input").on("input paste", async () => {
     const code = [];
 
     $(".code-inputs input").each(

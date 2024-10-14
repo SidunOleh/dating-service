@@ -62,11 +62,6 @@ $(".max-amount").click(function () {
     }
 });
 
-const input = document.querySelector("[autocomplete=one-time-code");
-input.addEventListener("input", () =>
-    input.style.setProperty("--_otp-digit", input.selectionStart)
-);
-
 //__________________________Cards__________________________//
 
 $(".user-image .arrow").on("click", function (e) {

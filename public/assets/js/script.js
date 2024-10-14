@@ -759,11 +759,7 @@ function initializeBattle($battle) {
             <div class="photo-container photo" data-id="${creator.id}">
                 <img src="${creator.gallery[0].url}">
                 <div class="info">
-                    ${
-                        creator.name.length > 5
-                            ? creator.name.substr(0, 5) + "..."
-                            : creator.name
-                    }, ${creator.age}
+                    ${creator.city}, ${creator.state}
                 </div>
             </div>`;
         };

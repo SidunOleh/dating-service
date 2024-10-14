@@ -1348,8 +1348,8 @@ input {
 }
 
 .battle-container .photo-container.blurred {
-    -webkit-filter: blur(10px);
-    filter: blur(10px);
+    -webkit-filter: blur(100px);
+    filter: blur(100px);
     width: 15%;
 }
 

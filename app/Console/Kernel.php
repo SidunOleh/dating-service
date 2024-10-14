@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('subscriptions:check')->hourly();
         $schedule->command('plisio:rate')->hourly();
-        $schedule->command('plisio:update-withdrawals')->everyFiveMinutes();
+        $schedule->command('plisio:update-withdrawals')->everyMinute();
     }
 
     /**

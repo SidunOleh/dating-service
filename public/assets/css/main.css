@@ -1346,10 +1346,15 @@ input {
     font-weight: 700;
 }
 
-.battle-container .photo-container:last-child .info {
+.battle-container .photo:last-child .info {
     top: 50%;
     right: 85%;
     transform: rotate(-90deg);
+}
+.battle-container .photo:first-child .info {
+    top: 50%;
+    left: 85%;
+    transform: rotate(90deg);
 }
 
 .battle-container .photo-container.blurred {

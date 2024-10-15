@@ -1230,6 +1230,7 @@ input {
 
 .battle-container .loader .loader-L::after,
 .battle-container .loader .loader-R::after {
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;

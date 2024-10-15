@@ -371,69 +371,45 @@ function openVerifyPopup(action, verifyUrl, resendUrl, email) {
     resendTimer.start(60);
 }
 
-// $(".code-inputs input").each((index, input) => {
-//     $(input)
-//         .on("input", function () {
-//             if (isNaN(this.value)) {
-//                 this.value = "";
-//                 return;
-//             }
+$(".code-inputs input").each((index, input) => {
+    $(input)
+        .on("input", function () {
+            if (isNaN(this.value)) {
+                this.value = "";
+                return;
+            }
 
-//             if (
-//                 this.value.length === 1 &&
-//                 index < $(".code-inputs input").length - 1
-//             ) {
-//                 $(".code-inputs input")
-//                     .eq(index + 1)
-//                     .focus();
-//             }
-//         })
-//         .on("keydown", function (e) {
-//             if (e.key === "Backspace" && index > 0 && this.value === "") {
-//                 $(".code-inputs input")
-//                     .eq(index - 1)
-//                     .focus();
-//             }
-//         });
-// });
+            if (
+                this.value.length === 1 &&
+                index < $(".code-inputs input").length - 1
+            ) {
+                $(".code-inputs input")
+                    .eq(index + 1)
+                    .focus();
+            }
+        })
+        .on("keydown", function (e) {
+            if (e.key === "Backspace" && index > 0 && this.value === "") {
+                $(".code-inputs input")
+                    .eq(index - 1)
+                    .focus();
+            }
+        });
+});
 
-const inputElements = [...document.querySelectorAll('.code-inputs input')]
+$(".code-inputs input").on("paste", (e) => {
+    e.preventDefault();
 
-inputElements.forEach((ele,index)=>{
-  ele.addEventListener('keydown',(e)=>{
-    if(e.keyCode === 8 && e.target.value==='') inputElements[Math.max(0,index-1)].focus()
-  })
-  ele.addEventListener('input',(e)=>{
-    const [first,...rest] = e.target.value
-    e.target.value = first ?? ''
-    const lastInputBox = index===inputElements.length-1
-    const didInsertContent = first!==undefined
-    if(didInsertContent && !lastInputBox) {
-      inputElements[index+1].focus()
-      inputElements[index+1].value = rest.join('')
-     inputElements[index+1].dispatchEvent(new Event('input'))
-    }
-  })
-})
+    const inputs = $(".code-inputs input");
 
-// $(".code-inputs input").on("paste", (e) => {
-//     e.preventDefault();
+    let code = (e.originalEvent.clipboardData || window.clipboardData).getData(
+        "text"
+    );
 
-//     const inputs = $(".code-inputs input");
-
-//     let code = (e.originalEvent.clipboardData || window.clipboardData).getData(
-//         "text"
-//     );
-    // const data = e.originalEvent.data;
-
-    // if (!data?.length < 2) {
-    //     return;
-    // }
-
-//     code.split("").forEach(
-//         (number, i) => !isNaN(number) && $(inputs[i]).val(number)
-//     );
-// });
+    code.split("").forEach(
+        (number, i) => !isNaN(number) && $(inputs[i]).val(number)
+    );
+});
 
 $(".verification-wrapper input").on("input paste", async () => {
     const code = [];
@@ -847,12 +823,12 @@ function initializeBattle($battle) {
 
         setTimeout(() => {
             $loader.removeClass("open");
-        }, 750);
+        }, 1500);
 
         restartProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
         setTimeout(
             () => activateRepeatButton($this),
-            DS.ads.settings.repeat_time * 1000 + 750
+            DS.ads.settings.repeat_time * 1000 + 1500
         );
     });
 
@@ -873,7 +849,7 @@ function initializeBattle($battle) {
 
         setTimeout(() => {
             startProgressAnimation($circle, duration);
-        }, 750);
+        }, 1500);
     }
 
     function activateRepeatButton($button) {

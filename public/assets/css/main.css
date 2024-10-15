@@ -1336,7 +1336,7 @@ input {
     object-fit: cover;
 }
 
-.battle-container .photo-container .info {
+.info {
     position: absolute;
     color: white;
     font-family: Inter;
@@ -1346,13 +1346,13 @@ input {
     font-weight: 700;
 }
 
-.battle-container #photo2 .info {
+.battle-container .photo-container:last-child .info {
     top: 50%;
     right: 84%;
     transform: rotate(-90deg);
 }
 
-.battle-container #photo1 .info {
+.battle-container .photo-container:first-child .info {
     top: 50%;
     left: 84%;
     transform: rotate(90deg);

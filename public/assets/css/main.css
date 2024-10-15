@@ -1321,7 +1321,6 @@ input {
 .battle-container .photo-container {
     width: 50%;
     position: relative;
-    overflow: hidden;
     -webkit-transition: width 0.5s ease, -webkit-filter 0.5s ease;
     transition: width 0.5s ease, -webkit-filter 0.5s ease;
     transition: width 0.5s ease, filter 0.5s ease;

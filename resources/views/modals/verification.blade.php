@@ -10,12 +10,12 @@
         </p>
         
         <form class="code-inputs" autocomplete="off">
-            <input type="tel" maxlength="1" pattern="[0-9]" />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
+            <input />
+            <input />
+            <input />
+            <input />
+            <input />
+            <input />
             <p class="error-text"></p>
         </form>
 

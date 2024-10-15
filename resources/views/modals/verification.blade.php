@@ -9,13 +9,13 @@
         <p class="email">
         </p>
         
-        <form class="code-inputs" autocomplete="off">
-            <input type="tel" maxlength="1" pattern="[0-9]" />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
-            <input type="tel" maxlength="1" pattern="[0-9]"  />
+        <form class="code-inputs">
+            <input autocomplete="off"/>
+            <input autocomplete="off"/>
+            <input autocomplete="off"/>
+            <input autocomplete="off"/>
+            <input autocomplete="off"/>
+            <input autocomplete="off"/>
             <p class="error-text"></p>
         </form>
 

@@ -371,47 +371,75 @@ function openVerifyPopup(action, verifyUrl, resendUrl, email) {
     resendTimer.start(60);
 }
 
-$(".code-inputs input").each((index, input) => {
-    $(input)
-        .on("input", function () {
-            if (isNaN(this.value)) {
-                this.value = "";
-                return;
-            }
+// $(".code-inputs input").each((index, input) => {
+//     $(input)
+//         .on("input", function () {
+//             if (isNaN(this.value)) {
+//                 this.value = "";
+//                 return;
+//             }
 
-            if (
-                this.value.length === 1 &&
-                index < $(".code-inputs input").length - 1
-            ) {
-                $(".code-inputs input")
-                    .eq(index + 1)
-                    .focus();
-            }
-        })
-        .on("keydown", function (e) {
-            if (e.key === "Backspace" && index > 0 && this.value === "") {
-                $(".code-inputs input")
-                    .eq(index - 1)
-                    .focus();
-            }
-        });
-});
+//             if (
+//                 this.value.length === 1 &&
+//                 index < $(".code-inputs input").length - 1
+//             ) {
+//                 $(".code-inputs input")
+//                     .eq(index + 1)
+//                     .focus();
+//             }
+//         })
+//         .on("keydown", function (e) {
+//             if (e.key === "Backspace" && index > 0 && this.value === "") {
+//                 $(".code-inputs input")
+//                     .eq(index - 1)
+//                     .focus();
+//             }
+//         });
+// });
 
-$(".code-inputs input").on("paste", (e) => {
-    e.preventDefault();
+// $(".code-inputs input").on("paste", (e) => {
+//     e.preventDefault();
 
-    const inputs = $(".code-inputs input");
+//     const inputs = $(".code-inputs input");
 
-    let code = (e.originalEvent.clipboardData || window.clipboardData).getData(
-        "text"
-    );
+//     let code = (e.originalEvent.clipboardData || window.clipboardData).getData(
+//         "text"
+//     );
 
-    code.split("").forEach(
-        (number, i) => !isNaN(number) && $(inputs[i]).val(number)
-    );
-});
+//     code.split("").forEach(
+//         (number, i) => !isNaN(number) && $(inputs[i]).val(number)
+//     );
+// });
 
-$(".verification-wrapper input").on("input paste", async () => {
+const codeInputs = [...document.querySelectorAll('.code-inputs input')]
+
+codeInputs.forEach((codeInput, i)=>{
+    codeInput.addEventListener('keydown', e => {
+        if(
+            e.keyCode === 8 && 
+            e.target.value === ''
+        ) {
+            codeInputs[Math.max(0,i-1)].focus()
+        }
+    })
+
+  codeInput.addEventListener('input', e => {
+        const [first, ...rest] = e.target.value
+
+        e.target.value = first ?? ''
+        
+        if (
+            first !== undefined && 
+            i !== codeInputs.length-1
+        ) {
+            codeInputs[i+1].focus()
+            codeInputs[i+1].value = rest.join('')
+            codeInputs[i+1].dispatchEvent(new Event('input'))
+        }
+    })
+})
+
+$(".verification-wrapper input:last").on("input paste", async () => {
     const code = [];
 
     $(".code-inputs input").each(

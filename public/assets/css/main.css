@@ -1382,8 +1382,23 @@ input {
 
 .battle-container .photo-container.selected {
     width: 85%;
+    animation: flash 0.5s ease-in-out;
+    animation-iteration-count: 1;
 }
-
+@keyframes flash {
+    0% {
+        opacity: 1;
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        opacity: 0.5;
+        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+    }
+}
 .pagination {
     display: -webkit-box;
     display: -ms-flexbox;

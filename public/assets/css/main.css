@@ -5714,7 +5714,6 @@ input {
     animation-name: loading;
     animation-duration: 1s;
     animation-iteration-count: infinite;
-    border-radius: 16px;
 }
 
 @keyframes loading {

@@ -1321,6 +1321,7 @@ input {
 .battle-container .photo-container {
     width: 50%;
     position: relative;
+    overflow: hidden;
     -webkit-transition: width 0.5s ease, -webkit-filter 0.5s ease;
     transition: width 0.5s ease, -webkit-filter 0.5s ease;
     transition: width 0.5s ease, filter 0.5s ease;
@@ -1336,16 +1337,20 @@ input {
     object-fit: cover;
 }
 
-.battle-container .photo .info {
-    left: 10px;
-    top: 10px;
+.battle-container .photo-container .info {
     position: absolute;
+    top: 8px;
+    left: 8px;
     color: white;
     font-family: Inter;
     font-size: 20px;
     border-radius: 5px;
     white-space: nowrap;
     font-weight: 700;
+    display: none;
+}
+.battle-container .photo-container.selected .info {
+    display: block;
 }
 
 .battle-container .photo-container.blurred {

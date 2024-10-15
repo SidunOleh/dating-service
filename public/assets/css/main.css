@@ -1383,7 +1383,7 @@ input {
     position: absolute;
     top: 0;
     left: 0;
-    animation: flash 0.55s ease-in-out;
+    animation: flash 0.05s ease-in-out;
     animation-iteration-count: 1;
 }
 @keyframes flash {

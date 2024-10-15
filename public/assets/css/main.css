@@ -1351,7 +1351,7 @@ input {
     right: 85%;
     transform: rotate(-90deg);
 }
-.battle-container .photo-container:first-of-type .info,
+.battle-container .photo-container:first-child .info,
 .battle-container #photo1 .info {
     top: 50%;
     left: 84%;

@@ -721,7 +721,7 @@ class Creator extends Authenticatable
     public static function roulettePair(): Collection
     {
         $pair = self::with('gallery')
-            ->select('id', 'name', 'age', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photos'),)
+            ->select('id', 'city', 'state', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photos'),)
             ->showOnSite()
             ->playRoulette()
             ->inRandomOrder()

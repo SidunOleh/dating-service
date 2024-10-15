@@ -8,9 +8,7 @@
             <div @class(['head-porfile', 'verified' => $creator->is_verified,])>
                 <div class="img-card">
                     <img
-                        src="{{ asset('assets/img/placeholder.png') }}"  
-                        data-src="{{ $creator->gallery->first()->getUrl() }}" 
-                        class="lazyload"
+                        src="{{ $creator->gallery->first()->getUrl() }}" 
                         alt="" />
 
                     @auth('web')
@@ -101,9 +99,7 @@
             @foreach($imgs as $img)
                 <a href="{{ $img->getUrl() }}" data-fancybox="user-photos" class="user-photo-item">
                     <img 
-                        src="{{ asset('assets/img/placeholder.png') }}" 
-                        data-src="{{ $img->getUrl() }}" 
-                        class="lazyload" 
+                        src="{{ $img->getUrl() }}" 
                         alt="" />
                 </a>
             @endforeach
@@ -124,9 +120,7 @@
                         @endif
                     </div>
                     <img
-                        src="{{ asset('assets/img/placeholder.png') }}" 
-                        data-src="{{ asset("assets/img/blur/{$img}") }}" 
-                        class="lazyload"
+                        src="{{ asset("assets/img/blur/{$img}") }}" 
                         alt="" />
                 </div>
             @endforeach
@@ -141,9 +135,7 @@
                 @class(['other-user-item', 'verified' => $recommend->is_verified,])>
                 <div class="img-card">
                     <img
-                        src="{{ asset('assets/img/placeholder.png') }}" 
-                        data-src="{{ $recommend->gallery->first()->getUrl() }}"
-                        class="lazyload"
+                        src="{{ $recommend->gallery->first()->getUrl() }}"
                         alt="" />
                 </div>
                 

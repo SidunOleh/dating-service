@@ -397,7 +397,7 @@ $(".code-inputs input").each((index, input) => {
         });
 });
 
-$(".code-inputs input").on("input paste change", (e) => {
+$(".code-inputs input").on("paste", (e) => {
     e.preventDefault();
 
     const inputs = $(".code-inputs input");
@@ -411,7 +411,7 @@ $(".code-inputs input").on("input paste change", (e) => {
     );
 });
 
-$(".verification-wrapper input").on("input paste change", async () => {
+$(".verification-wrapper input").on("input paste", async () => {
     const code = [];
 
     $(".code-inputs input").each(
@@ -759,11 +759,7 @@ function initializeBattle($battle) {
             <div class="photo-container photo" data-id="${creator.id}">
                 <img src="${creator.gallery[0].url}">
                 <div class="info">
-                    ${
-                        creator.name.length > 5
-                            ? creator.name.substr(0, 5) + "..."
-                            : creator.name
-                    }, ${creator.age}
+                    ${creator.city}, ${creator.state}
                 </div>
             </div>`;
         };
@@ -864,7 +860,7 @@ function initializeBattle($battle) {
         $selectedPhoto.addClass("selected").removeClass("blurred");
         $blurredPhoto.addClass("blurred").removeClass("selected");
 
-        $selectedPhoto.find(".info").text("Click to open profile");
+        // $selectedPhoto.find(".info").text("Click to open profile");
     }
 }
 

@@ -1347,13 +1347,13 @@ input {
     font-weight: 700;
 }
 
-.battle-container .photo-container:first-child .info {
+.battle-container #photo1 .info {
     top: 50%;
     right: 84%;
     transform: rotate(-90deg);
 }
 
-.battle-container .photo-container:last-child .info {
+.battle-container #photo2 .info {
     top: 50%;
     left: 84%;
     transform: rotate(90deg);

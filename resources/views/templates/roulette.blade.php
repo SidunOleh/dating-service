@@ -2,8 +2,8 @@
     <div class="battle-container">
 
         <div class="loader">
-            <div class="loader-L"></div>
-            <div class="loader-R"></div>
+            <div class="loader-L"><img src="{{ asset('assets/img/loader-l.jpg') }}" alt=""></div>
+            <div class="loader-R"><img src="{{ asset('assets/img/loader-r.jpg') }}" alt=""></div>
         </div>
         
         <div class="startBattle">

@@ -19,8 +19,6 @@
             <p class="error-text"></p>
         </form>
 
-        
-
         <p class="again">
             Send code again <span id="countdown">01:00</span>
         </p>

@@ -421,9 +421,17 @@ inputElements.forEach((ele,index)=>{
 
 //     const inputs = $(".code-inputs input");
 
+<<<<<<< HEAD
 //     let code = (e.originalEvent.clipboardData || window.clipboardData).getData(
 //         "text"
 //     );
+=======
+    const data = e.originalEvent.data;
+
+    if (!data?.length < 2) {
+        return;
+    }
+>>>>>>> f3f755189e7c269fb401ffe08e1891e7307fffc5
 
 //     code.split("").forEach(
 //         (number, i) => !isNaN(number) && $(inputs[i]).val(number)
@@ -842,12 +850,12 @@ function initializeBattle($battle) {
 
         setTimeout(() => {
             $loader.removeClass("open");
-        }, 1500);
+        }, 750);
 
         restartProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
         setTimeout(
             () => activateRepeatButton($this),
-            DS.ads.settings.repeat_time * 1000 + 1500
+            DS.ads.settings.repeat_time * 1000 + 750
         );
     });
 
@@ -868,7 +876,7 @@ function initializeBattle($battle) {
 
         setTimeout(() => {
             startProgressAnimation($circle, duration);
-        }, 1500);
+        }, 750);
     }
 
     function activateRepeatButton($button) {

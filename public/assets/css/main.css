@@ -1347,10 +1347,11 @@ input {
     border-radius: 5px;
     white-space: nowrap;
     font-weight: 700;
-    display: none;
+    opacity: 0;
+    transition: opacity 2s linear;
 }
 .battle-container .photo-container.selected .info {
-    display: block;
+    opacity: 1;
 }
 
 .battle-container .photo-container.blurred {

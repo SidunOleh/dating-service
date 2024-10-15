@@ -1383,7 +1383,7 @@ input {
     position: absolute;
     top: 0;
     left: 0;
-    animation: flash 0.3s ease-in-out;
+    animation: flash 0.05s ease-in-out;
     animation-iteration-count: 1;
 }
 @keyframes flash {
@@ -5714,7 +5714,6 @@ input {
     animation-name: loading;
     animation-duration: 1s;
     animation-iteration-count: infinite;
-    border-radius: 16px;
 }
 
 @keyframes loading {

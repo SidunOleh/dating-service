@@ -421,17 +421,14 @@ inputElements.forEach((ele,index)=>{
 
 //     const inputs = $(".code-inputs input");
 
-<<<<<<< HEAD
 //     let code = (e.originalEvent.clipboardData || window.clipboardData).getData(
 //         "text"
 //     );
-=======
-    const data = e.originalEvent.data;
+    // const data = e.originalEvent.data;
 
-    if (!data?.length < 2) {
-        return;
-    }
->>>>>>> f3f755189e7c269fb401ffe08e1891e7307fffc5
+    // if (!data?.length < 2) {
+    //     return;
+    // }
 
 //     code.split("").forEach(
 //         (number, i) => !isNaN(number) && $(inputs[i]).val(number)

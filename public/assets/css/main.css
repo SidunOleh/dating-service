@@ -1344,19 +1344,17 @@ input {
     border-radius: 5px;
     white-space: nowrap;
     font-weight: 700;
-}
-
-.battle-container .photo-container:last-child .info {
-    top: 50%;
-    right: 85%;
-    transform: rotate(-90deg);
-}
-.battle-container .photo-container:first-child .info,
-.battle-container #photo1 .info {
     top: 50%;
     left: 84%;
     transform: rotate(90deg);
 }
+
+.battle-container .photo-container:last-child .info {
+    top: 50% !important;
+    right: 85% !important;
+    transform: rotate(-90deg) !important;
+}
+
 .battle-container .photo-container.blurred {
     -webkit-filter: blur(100px);
     filter: blur(100px);

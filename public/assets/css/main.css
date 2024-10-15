@@ -150,18 +150,19 @@ img {
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
     );
 }
+.btn:active {
+    color: #d33131;
+}
 
-@media (hover: none) {
+.btn.red:active {
+    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+
+@media screen and (min-width: 1024px) {
     .btn:hover {
         color: #d33131;
     }
-    .btn:active {
-        color: #d33131;
-    }
 
-    .btn.red:active {
-        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
-    }
     .btn.red:hover {
         background: var(
             --Linear,

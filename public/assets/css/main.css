@@ -1350,9 +1350,9 @@ input {
 }
 
 .battle-container .photo-container:last-child .info {
-    top: 50% !important;
-    right: 85% !important;
-    transform: rotate(-90deg) !important;
+    top: 50% ;
+    right: 85% ;
+    transform: rotate(-90deg);
 }
 
 .battle-container .photo-container.blurred {

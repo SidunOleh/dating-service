@@ -1344,14 +1344,11 @@ input {
     border-radius: 5px;
     white-space: nowrap;
     font-weight: 700;
-    top: 50%;
-    left: 84%;
-    transform: rotate(90deg);
 }
 
 .battle-container .photo-container:last-child .info {
-    top: 50% ;
-    right: 85% ;
+    top: 50%;
+    right: 85%;
     transform: rotate(-90deg);
 }
 

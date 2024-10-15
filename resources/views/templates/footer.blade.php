@@ -22,7 +22,7 @@
 
 <script>
     // disable context menu
-    document.addEventListener('contextmenu', event => event.preventDefault())
+    // document.addEventListener('contextmenu', event => event.preventDefault())
 
     // recaptcha
     function getReCaptchaV3(action) {

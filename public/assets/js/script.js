@@ -411,6 +411,20 @@ $(".code-inputs input").on("paste", (e) => {
     );
 });
 
+$(".code-inputs input").on("input", (e) => {
+    e.preventDefault();
+
+    const data = e.originalEvent.data
+    
+    if (! data?.length < 2) {
+        return
+    }
+
+    $(".code-inputs input").each(
+        (i, input) => input.value && (input.value = data[i])
+    );
+});
+
 $(".verification-wrapper input").on("input paste", async () => {
     const code = [];
 

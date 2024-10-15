@@ -1339,8 +1339,6 @@ input {
 
 .battle-container .photo-container .info {
     position: absolute;
-    top: 8px;
-    left: 8px;
     color: white;
     font-family: Inter;
     font-size: 20px;
@@ -1349,6 +1347,17 @@ input {
     font-weight: 700;
 }
 
+.battle-container .photo-container:first-child .info {
+    top: 50%;
+    right: 84%;
+    transform: rotate(-90deg);
+}
+
+.battle-container .photo-container:last-child .info {
+    top: 50%;
+    left: 84%;
+    transform: rotate(90deg);
+}
 .battle-container .photo-container.blurred {
     -webkit-filter: blur(100px);
     filter: blur(100px);

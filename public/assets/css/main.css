@@ -162,12 +162,16 @@ img {
     .btn:hover {
         color: #d33131;
     }
-
-    .btn.red:hover {
-        background: var(
-            --Linear,
-            linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
+    .red:hover {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(#b00107),
+            to(#ea020b)
         );
+        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+        color: #fff;
     }
 }
 
@@ -197,19 +201,6 @@ input {
         --Linear,
         linear-gradient(180deg, #7a0004 0%, #ba0007 100%)
     );
-}
-
-@media (hover: none) {
-    .red:hover {
-        background: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            from(#b00107),
-            to(#ea020b)
-        );
-        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
-    }
 }
 
 .flex {

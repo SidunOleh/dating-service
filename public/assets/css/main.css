@@ -1350,7 +1350,7 @@ input {
     white-space: nowrap;
     font-weight: 700;
     opacity: 0;
-    transition: opacity 2s linear;
+    transition: opacity 0.5s linear;
 }
 .battle-container .photo-container.selected .info {
     opacity: 1;

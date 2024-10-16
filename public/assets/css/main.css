@@ -1379,7 +1379,7 @@ input {
     background-color: #252528;
     top: 50%;
     transform: translateY(-50%) rotate(180deg);
-    left: 0px;
+    left: -1px;
     height: 100%;
     text-align: center;
 }
@@ -1488,8 +1488,8 @@ input {
     justify-content: center;
 }
 
-.pagination .next:hover,
-.pagination .prev:hover {
+.pagination .next:active,
+.pagination .prev:active {
     background: -webkit-gradient(
         linear,
         left top,
@@ -1498,6 +1498,20 @@ input {
         to(#ea020b)
     );
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+
+@media screen and (min-width: 1024px) {
+    .pagination .next:hover,
+    .pagination .prev:hover {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(#b00107),
+            to(#ea020b)
+        );
+        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+    }
 }
 
 .popUp-wrapper {
@@ -1725,8 +1739,7 @@ input {
     line-height: normal;
     margin-top: 16px;
 }
-
-.popUp-wrapper .card .close:hover {
+.popUp-wrapper .card .close:active {
     background: -webkit-gradient(
         linear,
         left top,
@@ -1735,6 +1748,19 @@ input {
         to(#ea020b)
     );
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+
+@media screen and (min-width: 1024px) {
+    .popUp-wrapper .card .close:hover {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(#b00107),
+            to(#ea020b)
+        );
+        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+    }
 }
 
 .popUp-wrapper .card form {
@@ -3619,8 +3645,7 @@ input {
 .profile-filling .move-button.move-down {
     top: 68px;
 }
-
-.profile-filling .move-button:hover {
+.profile-filling .move-button:active {
     background: -webkit-gradient(
         linear,
         left top,
@@ -3629,6 +3654,18 @@ input {
         to(#ea020b)
     );
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+@media screen and (min-width: 1024px) {
+    .profile-filling .move-button:hover {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(#b00107),
+            to(#ea020b)
+        );
+        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+    }
 }
 
 .profile-filling .text {
@@ -4249,8 +4286,8 @@ input {
     cursor: pointer;
 }
 
-.deposit-type:hover,
-.referral-out:hover {
+.deposit-type:active,
+.referral-out:active {
     background: -webkit-gradient(
         linear,
         left top,
@@ -4259,6 +4296,19 @@ input {
         to(#ea020b)
     );
     background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+@media screen and (min-width: 1024px) {
+    .deposit-type:hover,
+    .referral-out:hover {
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            from(#b00107),
+            to(#ea020b)
+        );
+        background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+    }
 }
 
 .open-transaction {

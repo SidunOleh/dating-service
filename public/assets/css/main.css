@@ -2587,6 +2587,8 @@ input {
 .profile .left-side .user-info-list .info {
     color: #fbfbfb !important;
     font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .profile .left-side .user-location {

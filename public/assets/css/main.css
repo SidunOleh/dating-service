@@ -1349,6 +1349,7 @@ input {
 }
 
 .battle-container .photo-container .info {
+    position: absolute;
     color: white;
     font-family: Inter;
     font-size: 20px;

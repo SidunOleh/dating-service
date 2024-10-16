@@ -1376,7 +1376,7 @@ input {
     background-color: #252528;
     top: 50%;
     transform: translateY(-50%) rotate(180deg);
-    right: 0px;
+    left: 0px;
     height: 100%;
     text-align: center;
 }

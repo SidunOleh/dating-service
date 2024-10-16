@@ -1363,13 +1363,13 @@ input {
     opacity: 1;
 }
 
-.battle-container .photo:first {
+.battle-container .photo:first .info {
     transform: rotate(90deg);
     top: 50%;
     left: 100%;
 }
 
-.battle-container .photo:last-child {
+.battle-container .photo:last-child .info {
     transform: rotate(-90deg);
     top: 50%;
     right: 100%;

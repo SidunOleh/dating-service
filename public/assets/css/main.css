@@ -1362,14 +1362,22 @@ input {
 
 .battle-container .info.right {
     writing-mode: vertical-rl;
+    background-color: #252528;
     top: 50%;
+    transform: translateY(-50%);
     right: 0px;
+    height: 100%;
+    text-align: center;
 }
 
 .battle-container .info.left {
     writing-mode: vertical-lr;
+    background-color: #252528;
     top: 50%;
+    transform: translateY(-50%);
     left: 0px;
+    height: 100%;
+    text-align: center;
 }
 
 .battle-container .photo-container.blurred {

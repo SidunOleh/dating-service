@@ -1365,13 +1365,13 @@ input {
 .battle-container .photo:first .info {
     transform: rotate(90deg);
     top: 50%;
-    left: 100%;
+    left: 85%;
 }
 
 .battle-container .photo:last-child .info {
     transform: rotate(-90deg);
     top: 50%;
-    right: 100%;
+    right: 85%;
 }
 
 .battle-container .photo-container.blurred {

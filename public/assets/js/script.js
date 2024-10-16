@@ -791,6 +791,10 @@ function initializeBattle($battle) {
 
         $battle.find(".photo:first").replaceWith(html(nextPair[0]));
         $battle.find(".photo:last").replaceWith(html(nextPair[1]));
+
+        // Призначаємо класи після заміни
+        $battle.find(".photo:first .info").addClass("right");
+        $battle.find(".photo:last .info").addClass("left");
     }
 
     function vote(id) {

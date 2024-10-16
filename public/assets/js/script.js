@@ -752,7 +752,7 @@ function initializeBattle($battle) {
     let nextPair = null;
 
     $battle.find(".photo:first .info").addClass("right");
-    $battle.find(".photo:last.info").addClass("left");
+    $battle.find(".photo:last .info").addClass("left");
 
     function getNextPair() {
         $.get("/roulette/get-pair").then((res) => {

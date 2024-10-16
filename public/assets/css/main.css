@@ -1361,13 +1361,13 @@ input {
 }
 
 .battle-container .info.right {
-    transform: rotate(90deg);
+    writing-mode: vertical-rl;
     top: 50%;
     right: 0px;
 }
 
 .battle-container .info.left {
-    transform: rotate(-90deg);
+    writing-mode: vertical-lr;
     top: 50%;
     left: 0px;
 }

@@ -411,33 +411,27 @@ function openVerifyPopup(action, verifyUrl, resendUrl, email) {
 //     );
 // });
 
-const codeInputs = [...document.querySelectorAll('.code-inputs input')]
+const codeInputs = [...document.querySelectorAll(".code-inputs input")];
 
-codeInputs.forEach((codeInput, i)=>{
-    codeInput.addEventListener('keydown', e => {
-        if(
-            e.keyCode === 8 && 
-            e.target.value === ''
-        ) {
-            codeInputs[Math.max(0,i-1)].focus()
+codeInputs.forEach((codeInput, i) => {
+    codeInput.addEventListener("keydown", (e) => {
+        if (e.keyCode === 8 && e.target.value === "") {
+            codeInputs[Math.max(0, i - 1)].focus();
         }
-    })
+    });
 
-  codeInput.addEventListener('input', e => {
-        const [first, ...rest] = e.target.value
+    codeInput.addEventListener("input", (e) => {
+        const [first, ...rest] = e.target.value;
 
-        e.target.value = first ?? ''
-        
-        if (
-            first !== undefined && 
-            i !== codeInputs.length-1
-        ) {
-            codeInputs[i+1].focus()
-            codeInputs[i+1].value = rest.join('')
-            codeInputs[i+1].dispatchEvent(new Event('input'))
+        e.target.value = first ?? "";
+
+        if (first !== undefined && i !== codeInputs.length - 1) {
+            codeInputs[i + 1].focus();
+            codeInputs[i + 1].value = rest.join("");
+            codeInputs[i + 1].dispatchEvent(new Event("input"));
         }
-    })
-})
+    });
+});
 
 $(".verification-wrapper input:last").on("input paste", async () => {
     const code = [];
@@ -756,6 +750,9 @@ $("#delete-popup #confirm-delete:not(.load)").click(function () {
 
 function initializeBattle($battle) {
     let nextPair = null;
+
+    $battle.find(".photo:first .info").addClass("right");
+    $battle.find(".photo:last.info").addClass("left");
 
     function getNextPair() {
         $.get("/roulette/get-pair").then((res) => {

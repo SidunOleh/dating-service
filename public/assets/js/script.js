@@ -751,9 +751,6 @@ $("#delete-popup #confirm-delete:not(.load)").click(function () {
 function initializeBattle($battle) {
     let nextPair = null;
 
-    $battle.find(".photo:first .info").addClass("right");
-    $battle.find(".photo:last .info").addClass("left");
-
     function getNextPair() {
         $.get("/roulette/get-pair").then((res) => {
             if (!res.pair) {

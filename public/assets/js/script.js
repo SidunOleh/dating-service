@@ -1152,15 +1152,6 @@ $(document).ready(function () {
         }
     });
 });
-$(document).ready(function () {
-    if ($("header .advertising-banner").length) {
-        $(".open-faq").css("top", "93px");
-        $(".sidebar.open").css("top", "93px");
-    } else {
-        $(".open-faq").css("top", "60px");
-        $(".sidebar.open").css("top", "60px");
-    }
-});
 $(document).on("click", ".sidebar-menu-item", function () {
     $(".sidebar").removeClass("open");
     $("html").removeClass("lock");

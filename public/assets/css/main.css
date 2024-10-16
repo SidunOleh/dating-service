@@ -1362,7 +1362,7 @@ input {
     opacity: 1;
 }
 
-.battle-container .photo:first .info {
+.battle-container .photo:first-child .info {
     transform: rotate(90deg);
     top: 50%;
     left: 85%;

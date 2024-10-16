@@ -1362,13 +1362,13 @@ input {
     opacity: 1;
 }
 
-.battle-container .photo:first-child .info {
+.battle-container .info.right {
     transform: rotate(90deg);
     top: 50%;
     right: -75px;
 }
 
-.battle-container .photo:last-child .info {
+.battle-container .info.left {
     transform: rotate(-90deg);
     top: 50%;
     left: -75px;

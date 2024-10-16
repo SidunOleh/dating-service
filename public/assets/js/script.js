@@ -23,8 +23,10 @@ if ($("header .advertising-banner").length) {
     $(".referral-out-wrapper").css("top", `${headerHeight}px`);
     $(".popUp-wrapper").css("top", `${headerHeight}px`);
     $(".transaction-wrapper").css("top", `${headerHeight}px`);
+    $(".open-faq").css("top", `calc(72px + ${headerHeight}px)`);
 } else {
     $(".header-menu").css("height", `100vh`);
+    $(".open-faq").css("top", `72px`);
 }
 $(".closePage").on("click", function () {
     window.close();

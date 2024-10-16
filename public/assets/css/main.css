@@ -1355,6 +1355,7 @@ input {
     white-space: nowrap;
     font-weight: 700;
     display: none;
+    padding: 8px;
 }
 .battle-container .photo-container.selected .info {
     display: block;

@@ -1363,24 +1363,23 @@ input {
 .battle-container .info.right {
     transform: rotate(90deg);
     top: 50%;
-    right: -75px;
+    right: 0px;
 }
 
 .battle-container .info.left {
     transform: rotate(-90deg);
     top: 50%;
-    left: -75px;
+    left: 0px;
 }
 
 .battle-container .photo-container.blurred {
     -webkit-filter: blur(100px);
     filter: blur(100px);
-    width: 15%;
+    width: 0%;
 }
 
 .battle-container .photo-container.selected {
-    width: 85%;
-
+    width: 100%;
     position: relative;
 }
 .battle-container .photo-container.selected::after {

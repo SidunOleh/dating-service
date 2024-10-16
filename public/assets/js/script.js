@@ -24,9 +24,11 @@ if ($("header .advertising-banner").length) {
     $(".popUp-wrapper").css("top", `${headerHeight}px`);
     $(".transaction-wrapper").css("top", `${headerHeight}px`);
     $(".open-faq").css("top", "104px");
+    $(".sidebar").css("top", "93px");
 } else {
     $(".header-menu").css("height", `100vh`);
     $(".open-faq").css("top", `72px`);
+    $(".sidebar").css("top", "60px");
 }
 $(".closePage").on("click", function () {
     window.close();

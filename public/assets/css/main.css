@@ -1352,14 +1352,12 @@ input {
     color: white;
     font-family: Inter;
     font-size: 20px;
-    border-radius: 5px;
     white-space: nowrap;
     font-weight: 700;
-    opacity: 0;
-    transition: opacity 0.5s linear;
+    display: none;
 }
 .battle-container .photo-container.selected .info {
-    opacity: 1;
+    display: block;
 }
 
 .battle-container .info.right {

@@ -3380,6 +3380,8 @@ input {
     color: var(--white, #fbfbfb);
     font-family: Inter;
     font-size: 16px;
+    border-radius: none !important;
+    box-shadow: none !important;
 }
 
 .profile-filling .form-group textarea {

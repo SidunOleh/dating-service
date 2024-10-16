@@ -1368,6 +1368,12 @@ input {
     left: 100%;
 }
 
+.battle-container .photo:last-child {
+    transform: rotate(-90deg);
+    top: 50%;
+    right: 100%;
+}
+
 .battle-container .photo-container.blurred {
     -webkit-filter: blur(100px);
     filter: blur(100px);

@@ -397,14 +397,6 @@ codeInputs.forEach((codeInput, i) => {
             codeInputs[i + 1].value = rest.join('')
             codeInputs[i + 1].dispatchEvent(new Event('input'))
         }
-
-        e.target.value = first ?? "";
-
-        if (first !== undefined && i !== codeInputs.length - 1) {
-            codeInputs[i + 1].focus();
-            codeInputs[i + 1].value = rest.join("");
-            codeInputs[i + 1].dispatchEvent(new Event("input"));
-        }
     });
 });
 

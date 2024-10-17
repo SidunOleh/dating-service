@@ -5995,6 +5995,7 @@ input {
     animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
+    border-radius: 12px;
 }
 
 @-webkit-keyframes loading {

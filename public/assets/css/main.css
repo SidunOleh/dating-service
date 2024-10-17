@@ -4592,6 +4592,12 @@ input {
     align-items: center;
 }
 
+.deposit-wrapper .deposit-popup .qr-code {
+    max-width: 70%;
+    padding: 10px;
+    background-color: #fff;
+}
+
 .deposit-wrapper .close {
     position: absolute;
     top: 8px;
@@ -5989,6 +5995,7 @@ input {
     animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
+    border-radius: 12px;
 }
 
 @-webkit-keyframes loading {

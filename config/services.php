@@ -56,7 +56,7 @@ return [
         'platform_id' => env('PASSIMPAY_PLATFORM_ID'),
         'secret_key' => env('PASSIMPAY_SECRET_KEY'),
         'currencies' => [
-            10, 20, 70, 71, 100, 40, 130, 50
+            10, 20, 70, 71, 100, 40, 130, 50, 232,
         ],
     ],
 

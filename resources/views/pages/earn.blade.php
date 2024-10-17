@@ -153,17 +153,17 @@
                             BCH
                         </p>
                     </div>
-                    <!-- <div 
+                    <div 
                         class="referral-out" 
-                        data-payment_id=""
-                        data-currency="BUSD" 
-                        data-network="BUSD (BEP-20)">
-                        <img src="{{ asset('/assets/img/busd.svg') }}" alt="" /> 
-                        <p class="name">BUSD (BEP-20)</p>
+                        data-payment_id="232"
+                        data-currency="SOL" 
+                        data-network="SOL (BEP20)">
+                        <img src="{{ asset('/assets/img/bch.svg') }}" alt="" /> 
+                        <p class="name">Solana</p>
                         <p class="abbr">
-                            BUSD
+                            SOL
                         </p>
-                    </div> -->
+                    </div>
 
                 </div>
             </div>

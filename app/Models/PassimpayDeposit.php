@@ -38,6 +38,7 @@ class PassimpayDeposit extends Model
                 40 => 'DOGE (DOGE)',
                 130 => 'BNB (BNB)',
                 50 => 'BCH (BCH)',
+                232 => 'SOL (BEP29)',
             ][$this->payment_id],
         );
     }

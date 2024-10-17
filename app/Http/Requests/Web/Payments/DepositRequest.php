@@ -23,9 +23,11 @@ class DepositRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gateway' => 'required|in:plisio',
+            'gateway' => 'required|in:crypto',
             
-            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
+            // 'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
+
+            'payment_id' => 'required_if:gateway,crypto|in:'.implode(',', config('services.passimpay.currencies')),
 
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];

@@ -4,6 +4,8 @@ namespace App\Services\PaymentGateways;
 
 use App\Models\Creator;
 use App\Models\Transaction;
+use App\Services\PaymentGateways\Passimpay\PassimpayApi;
+use App\Services\PaymentGateways\Passimpay\PassimpayGateway;
 use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
 use App\Services\PaymentGateways\Plisio\PlisioGateway;
 
@@ -25,7 +27,14 @@ abstract class PaymentGateway
     {
         switch ($gateway) {
             case 'plisio':
-                return new PlisioGateway(new PlisioClient(config('services.plisio.secret')));
+                return new PlisioGateway(new PlisioClient(
+                    config('services.plisio.secret')
+                ));
+            case 'crypto':
+                return new PassimpayGateway(new PassimpayApi(
+                    config('services.passimpay.platform_id'),
+                    config('services.passimpay.secret_key')
+                ));
             default:
                 throw new PaymentGatewayNotFound();
         }

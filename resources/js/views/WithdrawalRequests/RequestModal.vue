@@ -8,6 +8,10 @@
             v-if="record.gateway == 'plisio'"
             :record="record"/>
 
+        <PassimpayRequest
+            v-if="record.gateway == 'crypto'"
+            :record="record"/>
+
         <Flex :gap="10">
             <Button 
                 :loading="loading.withdraw"
@@ -31,6 +35,7 @@ import { Modal, Flex, Button, message, } from 'ant-design-vue'
 import { confirmPopup, } from '../../helpers/popups'
 import withdrawalRequestsApi from '../../api/withdrawal-requests'
 import PlisioRequest from './PlisioRequest.vue'
+import PassimpayRequest from './PassimpayRequest.vue'
 import { h, } from 'vue'
 
 export default {
@@ -40,7 +45,7 @@ export default {
     ],
     components: {
         Modal, PlisioRequest, Flex, 
-        Button,
+        Button, PassimpayRequest,
     },
     data() {
         return {
@@ -65,7 +70,7 @@ export default {
                     h('br'),
                     h('span', {style:{color: 'red'}}, `(${this.record.amount} USD)`),
                     h('br'),
-                    this.record.concrete.to,
+                    this.record.concrete.address_to,
                 ])
                 confirmPopup(this.withdraw, vnode)
             } catch (err) {

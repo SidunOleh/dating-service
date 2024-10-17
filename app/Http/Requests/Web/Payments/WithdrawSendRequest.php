@@ -23,11 +23,14 @@ class WithdrawSendRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gateway' => 'required|in:plisio',
+            'gateway' => 'required|in:crypto',
             'amount' => 'required|integer',
             
-            'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
-            'to' => 'required_if:gateway,plisio|string',
+            // 'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
+            // 'to' => 'required_if:gateway,plisio|string',
+
+            'payment_id' => 'required_if:gateway,crypto|in:'.implode(',', config('services.passimpay.currencies')),
+            'address_to' => 'required_if:gateway,crypto|string',
 
             'recaptcha' => ['required', new ReCaptchaV3(),],
         ];

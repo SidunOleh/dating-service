@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\WithdrawalRequests;
 
 use App\Http\Controllers\Controller;
 use App\Models\WithdrawalRequest;
-use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
+use App\Services\PaymentGateways\PaymentGateway;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -13,11 +13,12 @@ class AmountController extends Controller
     public function __invoke(WithdrawalRequest $withdrawalRequest)
     {
         try {
-            $plisioClient = new PlisioClient(config('services.plisio.secret'));
+            $passimpay = PaymentGateway::create('crypto');
 
-            $rate = $plisioClient->rate('USD', $withdrawalRequest->concrete->currency);
-
-            $amount = $rate * $withdrawalRequest->amount;
+            $amount = $passimpay->convertFromUSD(
+                $withdrawalRequest->amount,
+                $withdrawalRequest->concrete->payment_id
+            );
 
             return response(['amount' => $amount,]);
         } catch (Exception $e) {

@@ -12,6 +12,14 @@
             v-if="record.gateway == 'plisio' && record.type == 'withdrawal'"
             :record="record"/>
 
+        <PassimpayDeposit
+            v-if="record.gateway == 'crypto' && record.type == 'deposit'"
+            :record="record"/>
+
+        <PassimpayWithdrawal
+            v-if="record.gateway == 'crypto' && record.type == 'withdrawal'"
+            :record="record"/>
+
     </Modal>
 </template>
 
@@ -19,6 +27,8 @@
 import { Modal, } from 'ant-design-vue'
 import PlisioInvoice from './PlisioInvoice.vue'
 import PlisioWithdrawal from './PlisioWithdrawal.vue'
+import PassimpayDeposit from './PassimpayDeposit.vue'
+import PassimpayWithdrawal from './PassimpayWithdrawal.vue'
 
 export default {
     props: [
@@ -26,7 +36,8 @@ export default {
         'record',
     ],
     components: {
-        Modal, PlisioInvoice, PlisioWithdrawal,
+        Modal, PlisioInvoice, PlisioWithdrawal, 
+        PassimpayDeposit, PassimpayWithdrawal,
     },
 }
 </script>

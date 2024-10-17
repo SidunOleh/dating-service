@@ -68,6 +68,12 @@ class WithdrawalRequest extends Model
                     'currency' => $data['currency'],
                 ]);
             break;
+            case 'crypto':
+                $request = PassimpayWithdrawalRequest::create([
+                    'address_to' => $data['address_to'],
+                    'payment_id' => $data['payment_id'],
+                ]);
+            break;
             default:
                 throw new Exception("Not found gateway {$data['gateway']}.");
         }

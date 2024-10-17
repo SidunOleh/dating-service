@@ -13,8 +13,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('subscriptions:check')->hourly();
-        $schedule->command('plisio:rate')->hourly();
-        $schedule->command('plisio:update-withdrawals')->everyMinute();
+        // $schedule->command('plisio:rate')->hourly();
+        // $schedule->command('plisio:update-withdrawals')->everyMinute();
+        $schedule->command('passimpay:rates')->everyMinute();
+        $schedule->command('passimpay:update-withdrawals')->everyMinute();
     }
 
     /**

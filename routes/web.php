@@ -46,6 +46,7 @@ use App\Http\Controllers\Web\Settings\ChangePasswordController;
 use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
 use App\Http\Controllers\Web\Warnings\ClickController as WarningsClickController;
+use App\Http\Controllers\Web\Webhooks\PassimpayCallbackController;
 use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
 use Illuminate\Support\Facades\Route;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
@@ -114,7 +115,8 @@ Route::post('/password/reset', ResetController::class)
 /**
  * Webhooks
  */
-Route::post('/plisio/callback', PlisioCallbackController::class);
+// Route::post('/plisio/callback', PlisioCallbackController::class);
+Route::post('/passimpay/callback', PassimpayCallbackController::class);
 
 /**
  * Pages

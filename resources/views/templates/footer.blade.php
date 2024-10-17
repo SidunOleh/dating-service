@@ -16,8 +16,14 @@
     </div>
 </footer>
 
+
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
 <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.key') }}"></script>
+
+@if(Route::currentRouteName() == 'subscription.page')
+<script src="{{ asset('assets/js/qrcode.min.js') }}"></script>
+@endif
+
 <script src="{{ asset('assets/js/bundle.js') }}"></script>
 
 <script>

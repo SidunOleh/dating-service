@@ -763,12 +763,12 @@ class Creator extends Authenticatable
             ->with('details')
             ->get();
         $list = $transactions->filter(function (Transaction $transaction) {
-            if ($transaction->details instanceof PlisioInvoice) {
-                return $transaction->details->received > 0;
-            } elseif ($transaction->details instanceof PlisioWithdrawal)  {
-                return in_array($transaction->details->status, ['completed', 'pending',]);
+            if ($transaction->details instanceof PassimpayDeposit) {
+                return $transaction->amount > 0;
+            } elseif ($transaction->details instanceof PassimpayWithdrawal)  {
+                return in_array($transaction->status, ['success', 'pending',]);
             } else {
-                return true;
+                return false;
             }
         });
 
@@ -782,40 +782,31 @@ class Creator extends Authenticatable
 
         $list = $list->sortByDesc('created_at');
 
-        $currencies = [
-            'BTC' => 'Bitcoin',
-            'ETH' => 'Ethereum',
-            'USDT' => 'Tether ERC-20',
-            'USDT_TRX' => 'Tether TRC-20',
-            'USDC' => 'USDC ERC-20',
-            'DOGE' => 'Dogecoin',
-            'BNB' => 'BNB Chain',
-            'BCH' => 'Bitcoin Cash',
-            'BUSD' => 'BUSD (BEP-20)',
-        ];
         $formattedList = [];
         foreach ($list as $item) {
             if (
                 $item instanceof Transaction and 
-                $item->details instanceof PlisioInvoice
+                $item->details instanceof PassimpayDeposit
             ) {
                 $formattedItem['type'] = 'IN';
-                $formattedItem['amount'] = $item->details->received;
-                $formattedItem['currency'] = $currencies[$item->details->currency];
+                $formattedItem['amount'] = $item->details->amount;
+                $formattedItem['currency'] = $item->details->currency;
             } elseif (
                 $item instanceof Transaction and 
-                $item->details instanceof PlisioWithdrawal
+                $item->details instanceof PassimpayWithdrawal
             ) {
-                $formattedItem['type'] = $item->details->status == 'completed' ? 'OUT' : 'OUT(pending)';
+                $formattedItem['type'] = $item->details->status == 'success' ? 'OUT' : 'OUT(pending)';
                 $formattedItem['amount'] = $item->details->amount;
-                $formattedItem['currency'] = $currencies[$item->details->currency];
+                $formattedItem['currency'] = $item->details->currency;
             } elseif (
                 $item instanceof WithdrawalRequest and 
-                $item->concrete instanceof PlisioWithdrawalRequest
+                $item->concrete instanceof PassimpayWithdrawalRequest
             ) {
                 $formattedItem['type'] = 'WITHDRAWAL REQUEST';
                 $formattedItem['amount'] = $item->amount;
                 $formattedItem['currency'] = 'Coin';
+            } else {
+                continue;
             }
 
             $formattedItem['date'] = $item->created_at->format('d.m.Y');

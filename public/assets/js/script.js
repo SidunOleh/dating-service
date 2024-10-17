@@ -2,13 +2,13 @@ Fancybox.bind("[data-fancybox]", {});
 
 //__________________________Header__________________________//
 
-$(".burger-menu").click(function () {
+$(".burger-menu").click(function() {
     $(".header-menu").toggleClass("open");
     $("#header").toggleClass("open");
     $("html").addClass("lock");
 });
 
-$(".header-menu .close").click(function () {
+$(".header-menu .close").click(function() {
     $(".header-menu").removeClass("open");
     $("#header").toggleClass("open");
     $("html").removeClass("lock");
@@ -30,7 +30,7 @@ if ($("header .advertising-banner").length) {
     $(".open-faq").css("top", `72px`);
     $(".sidebar").css("top", "60px");
 }
-$(".closePage").on("click", function () {
+$(".closePage").on("click", function() {
     window.close();
 });
 
@@ -45,19 +45,19 @@ if ($(".advertising-wrapper").hasClass("show")) {
     $("html").removeClass("lock");
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     if (!localStorage.getItem("isAdult")) {
         $("#isAdult-wrapper").css("display", "flex");
         $("html").addClass("lock");
     }
-    $("#adult").on("click", function (e) {
+    $("#adult").on("click", function(e) {
         e.preventDefault();
         localStorage.setItem("isAdult", true);
         $("#isAdult-wrapper").css("display", "none");
         $("html").removeClass("lock");
     });
 });
-$(".max-amount").click(function () {
+$(".max-amount").click(function() {
     var maxAmount = $("#amount").attr("max");
     if (maxAmount) {
         $("#amount").val(maxAmount);
@@ -68,14 +68,14 @@ $(".max-amount").click(function () {
 
 //__________________________Cards__________________________//
 
-$(".user-image .arrow").on("click", function (e) {
+$(".user-image .arrow").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
 });
 
 //__________________________Sliders__________________________//
 
-$(".img-slider").each(function () {
+$(".img-slider").each(function() {
     var $slider = $(this);
     var $parent = $slider.closest(".user-image");
 
@@ -128,7 +128,7 @@ $(".login-link").on("click", () => togglePopup("logIn", true));
 $(".reset-pass").on("click", () => togglePopup("resetPassword", true));
 $(".close").on("click", () => togglePopup("", false));
 
-$(".show-password").on("click", function () {
+$(".show-password").on("click", function() {
     const $passwordInput = $(this).closest(".input-group").find("input");
     const isPassword = $passwordInput.attr("type") === "password";
     $passwordInput.attr("type", isPassword ? "text" : "password");
@@ -152,7 +152,7 @@ function enableSubmitButton($form) {
 }
 
 $(".signUP-card form, .logIN-card form, .resetPassword-card form").each(
-    function () {
+    function() {
         enableSubmitButton($(this));
     }
 );
@@ -285,7 +285,7 @@ if (DS.ads?.data && DS.ads?.settings) {
                 this.clicksCount += 1;
             });
 
-            $(".advertising-link").bind("auxclick click", function () {
+            $(".advertising-link").bind("auxclick click", function() {
                 $.post(`/ads/${$(this).data("id")}/click`);
             });
 
@@ -325,17 +325,17 @@ if (DS.ads?.data && DS.ads?.settings) {
     adPopup.ini();
 }
 
-$(".users-item.add").bind("auxclick click", function () {
+$(".users-item.add").bind("auxclick click", function() {
     $.post(`/ads/${$(this).data("id")}/click`);
 });
 
-$(".warning").bind("auxclick click", function () {
+$(".warning").bind("auxclick click", function() {
     $.post(`/warnings/${$(this).data("id")}/click`);
 });
 
 //__________________________Verification_________________________//
 
-$(".verification-container .close").click(function () {
+$(".verification-container .close").click(function() {
     $(".verification-wrapper").removeClass("active");
 });
 
@@ -375,46 +375,6 @@ function openVerifyPopup(action, verifyUrl, resendUrl, email) {
     resendTimer.start(60);
 }
 
-// $(".code-inputs input").each((index, input) => {
-//     $(input)
-//         .on("input", function () {
-//             if (isNaN(this.value)) {
-//                 this.value = "";
-//                 return;
-//             }
-
-//             if (
-//                 this.value.length === 1 &&
-//                 index < $(".code-inputs input").length - 1
-//             ) {
-//                 $(".code-inputs input")
-//                     .eq(index + 1)
-//                     .focus();
-//             }
-//         })
-//         .on("keydown", function (e) {
-//             if (e.key === "Backspace" && index > 0 && this.value === "") {
-//                 $(".code-inputs input")
-//                     .eq(index - 1)
-//                     .focus();
-//             }
-//         });
-// });
-
-// $(".code-inputs input").on("paste", (e) => {
-//     e.preventDefault();
-
-//     const inputs = $(".code-inputs input");
-
-//     let code = (e.originalEvent.clipboardData || window.clipboardData).getData(
-//         "text"
-//     );
-
-//     code.split("").forEach(
-//         (number, i) => !isNaN(number) && $(inputs[i]).val(number)
-//     );
-// });
-
 const codeInputs = [...document.querySelectorAll(".code-inputs input")];
 
 codeInputs.forEach((codeInput, i) => {
@@ -424,20 +384,23 @@ codeInputs.forEach((codeInput, i) => {
         }
     });
 
-    codeInput.addEventListener("input", (e) => {
-        const [first, ...rest] = e.target.value;
+    codeInput.addEventListener('input', e => {
+        const [first, ...rest] = e.target.value
 
-        e.target.value = first ?? "";
+        e.target.value = first ?? ''
 
-        if (first !== undefined && i !== codeInputs.length - 1) {
-            codeInputs[i + 1].focus();
-            codeInputs[i + 1].value = rest.join("");
-            codeInputs[i + 1].dispatchEvent(new Event("input"));
+        if (
+            first !== undefined &&
+            i !== codeInputs.length - 1
+        ) {
+            codeInputs[i + 1].focus()
+            codeInputs[i + 1].value = rest.join('')
+            codeInputs[i + 1].dispatchEvent(new Event('input'))
         }
     });
 });
 
-$(".verification-wrapper input:last").on("input paste", async () => {
+$(".verification-wrapper input:last").on("input paste", async() => {
     const code = [];
 
     $(".code-inputs input").each(
@@ -476,7 +439,7 @@ $(".verification-wrapper input:last").on("input paste", async () => {
         });
 });
 
-$(".verification-wrapper .again").on("click", async () => {
+$(".verification-wrapper .again").on("click", async() => {
     if (resendTimer.secs > 0) {
         return;
     }
@@ -537,7 +500,7 @@ function resetErrors(form) {
 
 //__________________________Sign Up_________________________//
 
-$("#sign-up").submit(async function (e) {
+$("#sign-up").submit(async function(e) {
     e.preventDefault();
 
     addLoader(".signUP-card");
@@ -574,7 +537,7 @@ $(document).on("sign_up-verified", () => {
 
 //__________________________Sign In_________________________//
 
-$("#sign-in").submit(async function (e) {
+$("#sign-in").submit(async function(e) {
     e.preventDefault();
 
     addLoader(".logIN-card");
@@ -611,7 +574,7 @@ $(document).on("sign_in-verified", () => {
 
 //__________________________Forgot Password_________________________//
 
-$("#forgot-password").submit(async function (e) {
+$("#forgot-password").submit(async function(e) {
     e.preventDefault();
 
     addLoader(".resetPassword-card");
@@ -648,7 +611,7 @@ $(".res-succes-send .btn").click(() => {
 
 //__________________________Reset password_________________________//
 
-$("#new-password-form").submit(async function (e) {
+$("#new-password-form").submit(async function(e) {
     e.preventDefault();
 
     addLoader(".addNew-pass-card");
@@ -678,7 +641,7 @@ $("#new-password-form").submit(async function (e) {
 
 //__________________________Favorites_________________________//
 
-$(".likes").on("click", ".btn", function (e) {
+$(".likes").on("click", ".btn", function(e) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -702,7 +665,7 @@ $(".likes").on("click", ".btn", function (e) {
 
 //__________________________Filters_________________________//
 
-$("#filters-form").submit(function () {
+$("#filters-form").submit(function() {
     $(this)
         .find("input[name]")
         .filter((i, input) => !input.value)
@@ -711,7 +674,7 @@ $("#filters-form").submit(function () {
 
 //__________________________Change options_________________________//
 
-$("#vote-battle, #account-visibility").bind("change", function () {
+$("#vote-battle, #account-visibility").bind("change", function() {
     const name = $(this).attr("name");
     const value = $(this).prop("checked");
 
@@ -733,13 +696,13 @@ $("#delete-popup #close-popup-btn").click(() => {
     $("#delete-popup").removeClass("active");
 });
 
-$("#delete-popup #confirm-delete:not(.load)").click(function () {
+$("#delete-popup #confirm-delete:not(.load)").click(function() {
     $(this).addClass("load");
 
     $.ajax({
-        type: "DELETE",
-        url: "/my-profile",
-    })
+            type: "DELETE",
+            url: "/my-profile",
+        })
         .then(() => {
             location.href = "/my-profile/create";
         })
@@ -813,7 +776,7 @@ function initializeBattle($battle) {
 
     let hasSelected = false;
 
-    $battle.find(".start_btn").click(function () {
+    $battle.find(".start_btn").click(function() {
         const $this = $(this);
         $this.closest(".startBattle").addClass("hidden");
         startProgressAnimation($circle, DS.ads.settings.repeat_time * 1000);
@@ -823,7 +786,7 @@ function initializeBattle($battle) {
         );
     });
 
-    $battle.on("click", ".photo", function () {
+    $battle.on("click", ".photo", function() {
         const $selectedPhoto = $(this);
 
         if ($selectedPhoto.hasClass("selected")) {
@@ -838,7 +801,7 @@ function initializeBattle($battle) {
         }
     });
 
-    $battle.on("click", ".repeat.active", function () {
+    $battle.on("click", ".repeat.active", function() {
         setTimeout(() => {
             renderNextPair();
             hasSelected = false;
@@ -894,13 +857,13 @@ function initializeBattle($battle) {
     }
 }
 
-$(".battle").each(function () {
+$(".battle").each(function() {
     initializeBattle($(this));
 });
 
 //__________________________New email_________________________//
 
-$("#change-email-form").submit(async function (e) {
+$("#change-email-form").submit(async function(e) {
     e.preventDefault();
 
     addLoader(".enter-new-email");
@@ -947,7 +910,7 @@ $("#pass-succes-changed .btn").click(() => {
 
 //__________________________New password_________________________//
 
-$("#change-password-form").submit(async function (e) {
+$("#change-password-form").submit(async function(e) {
     e.preventDefault();
 
     addLoader(".add-new-pass");
@@ -983,31 +946,31 @@ $("#email-succes-changed .btn").click(() => {
 });
 
 //__________________________FAQ__________________________//
-$(".open-faq").click(function () {
+$(".open-faq").click(function() {
     $(".sidebar").toggleClass("open");
     $("html").addClass("lock");
 });
 
-$(document).ready(function () {
-    $(".accordion-open").click(function () {
+$(document).ready(function() {
+    $(".accordion-open").click(function() {
         $(this).closest(".accordion").toggleClass("active");
         var panel = $(this).next(".accordion-pannel");
         panel.slideToggle();
     });
-    $(".accordion-item").click(function () {
+    $(".accordion-item").click(function() {
         $(".accordion-item").removeClass("open");
         $(".sidebar-menu-item").removeClass("open");
         $(this).addClass("open");
         $(this).closest(".accordion").addClass("open");
     });
-    $(".sidebar-menu-item").click(function () {
+    $(".sidebar-menu-item").click(function() {
         if (!$(this).hasClass("accordion")) {
             $(".accordion-item").removeClass("open");
             $(".sidebar-menu-item").removeClass("open");
             $(this).addClass("open");
         }
     });
-    $("[data-target]").click(function (event) {
+    $("[data-target]").click(function(event) {
         event.preventDefault();
         var targetId = $(this).data("target");
         $(".faq-content").hide();
@@ -1015,7 +978,7 @@ $(document).ready(function () {
         updateMenuClasses(targetId);
     });
 
-    $(".faq-next").click(function () {
+    $(".faq-next").click(function() {
         var current = $(".faq-content:visible");
         var next = current.next(".faq-content");
         if (next.length === 0) {
@@ -1025,7 +988,7 @@ $(document).ready(function () {
         $(window).scrollTop(0);
     });
 
-    $(".faq-prev").click(function () {
+    $(".faq-prev").click(function() {
         var current = $(".faq-content:visible");
         var prev = current.prev(".faq-content");
         if (prev.length === 0) {
@@ -1057,14 +1020,14 @@ $(document).ready(function () {
         }
     }
 });
-$(document).ready(function () {
-    $(".search-input").on("input", function () {
+$(document).ready(function() {
+    $(".search-input").on("input", function() {
         var query = $(this).val().toLowerCase().trim();
         var $searchResult = $(".search-result");
         $searchResult.empty();
 
         if (query) {
-            $(".faq-content").each(function () {
+            $(".faq-content").each(function() {
                 var $this = $(this);
                 var content = $this.text();
                 var contentLower = content.toLowerCase();
@@ -1084,7 +1047,7 @@ $(document).ready(function () {
 
                     var highlightedSnippet = snippet.replace(
                         new RegExp(query, "gi"),
-                        function (match) {
+                        function(match) {
                             return (
                                 "<span class='highlight'>" + match + "</span>"
                             );
@@ -1097,13 +1060,13 @@ $(document).ready(function () {
                     });
                 }
 
-                results.forEach(function (result) {
+                results.forEach(function(result) {
                     $searchResult.append(
                         '<div class="result-item" data-target="' +
-                            result.id +
-                            '">' +
-                            result.snippet +
-                            "...</div>"
+                        result.id +
+                        '">' +
+                        result.snippet +
+                        "...</div>"
                     );
                 });
             });
@@ -1113,17 +1076,17 @@ $(document).ready(function () {
             $searchResult.hide();
         }
     });
-    $(document).on("click", function (event) {
+    $(document).on("click", function(event) {
         if (!$(event.target).closest(".search-wrapper").length) {
             $(".search-result").hide();
         }
     });
 
-    $(".search-wrapper").on("click", function (event) {
+    $(".search-wrapper").on("click", function(event) {
         event.stopPropagation();
     });
 
-    $(".search-result").on("click", ".result-item", function () {
+    $(".search-result").on("click", ".result-item", function() {
         var targetId = $(this).data("target");
 
         $(".faq-content").hide();
@@ -1154,6 +1117,17 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function() {
+    if ($("header .advertising-banner").length) {
+        $(".open-faq").css("top", "93px");
+        $(".sidebar.open").css("top", "93px");
+    } else {
+        $(".open-faq").css("top", "60px");
+        $(".sidebar.open").css("top", "60px");
+    }
+});
+
 $(document).on("click", ".sidebar-menu-item", function () {
     $(".sidebar").removeClass("open");
     $("html").removeClass("lock");
@@ -1225,20 +1199,26 @@ $(".unsubcribe-wrapper .btn").on("click", () => {
 //__________________________Deposit__________________________//
 
 const deposit = {
-    currency: null,
+    payment_id: null,
 };
 
-// curency
-$(".deposit-type").on("click", async function () {
-    deposit.currency = $(this).data("currency");
+let depositQR = null 
 
-    addLoader(`[data-currency=${deposit.currency}]`, "4px");
+if (document.getElementById("deposit-qr")) {
+    depositQR = new QRCode(document.getElementById("deposit-qr"), '')
+}
+
+// curency
+$(".deposit-type").on("click", async function() {
+    deposit.payment_id = $(this).data("payment_id");
+
+    addLoader(`[data-payment_id=${deposit.payment_id}]`, "4px");
 
     $.post("/payments/deposit", {
-        gateway: "plisio",
-        currency: deposit.currency,
-        recaptcha: await getReCaptchaV3("deposit"),
-    })
+            gateway: "crypto",
+            payment_id: deposit.payment_id,
+            recaptcha: await getReCaptchaV3("deposit"),
+        })
         .done((res) => {
             $(".coins-wrapper").removeClass("active");
             $(".deposit-popup .network-icon").attr(
@@ -1246,16 +1226,19 @@ $(".deposit-type").on("click", async function () {
                 $(this).find("img").attr("src")
             );
             $(".deposit-popup .crypto-name span").text($(this).data("network"));
-            $(".qr-code img").attr("src", res.details.qr_code);
-            $(".network .type").text(res.details.currency);
+
+            depositQR.clear()
+            depositQR.makeCode(res.details.address_to)
+
+            $(".network .type").text($(this).data("currency"));
             $(".deposit-wrapper .crypto-rate span").text(
-                `${res.details.source_rate} ${deposit.currency}`
+                `${1 / DS.rates[deposit.payment_id]} ${$(this).data("currency")}`
             );
-            $(".key .title").text(res.details.wallet_hash);
+            $(".key .title").text(res.details.address_to);
             $(".deposit-wrapper").addClass("active");
         })
         .always(() => {
-            removeLoader(`[data-currency=${deposit.currency}]`);
+            removeLoader(`[data-payment_id=${deposit.payment_id}]`);
         });
 });
 
@@ -1282,14 +1265,14 @@ $(".deposit-wrapper .close").click(() => {
 //__________________________Withdraw__________________________//
 
 const withdraw = {
-    currency: null,
-    to: null,
+    payment_id: null,
+    address_to: null,
     amount: null,
 };
 
 // currency
-$(".referral-out").on("click", function () {
-    withdraw.currency = $(this).data("currency");
+$(".referral-out").on("click", function() {
+    withdraw.payment_id = $(this).data("payment_id");
 
     $(".crypto-address .network-icon").attr(
         "src",
@@ -1297,7 +1280,7 @@ $(".referral-out").on("click", function () {
     );
     $(".crypto-address .crypto-name span").text($(this).data("network"));
     $(".crypto-address .crypto-rate span").text(
-        `${DS.rates[withdraw.currency]} ${withdraw.currency}`
+        `${1 / DS.rates[withdraw.payment_id]} ${$(this).data("currency")}`
     );
     $(".referral-out-wrapper").addClass("active");
     $(".referral-out-wrapper .card").removeClass("active");
@@ -1305,8 +1288,8 @@ $(".referral-out").on("click", function () {
 });
 
 // to, amount
-$(".crypto-address .next").on("click", () => {
-    withdraw.to = $("#cryptoAddress").val();
+$(".crypto-address .next").on("click", async () => {
+    withdraw.address_to = $("#cryptoAddress").val();
     withdraw.amount = parseInt($("#amount").val());
 
     $(".crypto-address-input").removeClass("error");
@@ -1314,7 +1297,7 @@ $(".crypto-address .next").on("click", () => {
 
     let valid = true;
 
-    if (!withdraw.to) {
+    if (!withdraw.address_to) {
         $(".crypto-address-input").addClass("error");
         $(".crypto-address-input")
             .find(".error-text")
@@ -1340,30 +1323,16 @@ $(".crypto-address .next").on("click", () => {
         return;
     }
 
-    $(".crypto-address").removeClass("active");
-
-    $(".withdrawn-details .to").text(withdraw.to);
-    $(".withdrawn-details .currency").text(withdraw.currency);
-    $(".withdrawn-details .amount").text(
-        `${withdraw.amount} USD - ${
-            withdraw.amount * DS.rates[withdraw.currency]
-        } ${withdraw.currency}`
-    );
-    $(".withdrawn-details").addClass("active");
-});
-
-// details
-$(".withdrawn-details .next").on("click", async () => {
-    addLoader(".withdrawn-details");
+    addLoader(".crypto-address");
 
     $.post("/payments/withdraw/send-code", {
-        ...withdraw,
-        gateway: "plisio",
-        recaptcha: await getReCaptchaV3("withdraw"),
-    })
+            ...withdraw,
+            gateway: "crypto",
+            recaptcha: await getReCaptchaV3("withdraw"),
+        })
         .done(() => {
             $(".referral-out-wrapper").removeClass("active");
-            $(".withdrawn-details").removeClass("active");
+            $(".crypto-address").removeClass("active");
 
             openVerifyPopup(
                 "withdraw",
@@ -1373,7 +1342,7 @@ $(".withdrawn-details .next").on("click", async () => {
             );
         })
         .always(() => {
-            removeLoader(".withdrawn-details");
+            removeLoader(".crypto-address");
         });
 });
 
@@ -1382,11 +1351,11 @@ $(document).on("withdraw-verified", () => {
     $(".withdrawn-final").addClass("active");
 });
 
-$(".withdrawn-final .btn").on("click", async () => {
+$(".withdrawn-final .btn").on("click", async() => {
     $(".referral-out-wrapper").removeClass("active");
 });
 
-$(".referral-out-wrapper .back").on("click", function () {
+$(".referral-out-wrapper .back").on("click", function() {
     const card = $(this).closest(".card");
 
     card.removeClass("active");
@@ -1427,7 +1396,7 @@ $(".copy-link").on("click", () => {
     $(".link-body .message").show().delay(2000).fadeOut();
 });
 
-$(document).ready(function () {
+$(document).ready(function() {
     function togglePasteButton() {
         if ($("#cryptoAddress").val()?.trim() !== "") {
             $("#pasteButton").hide();
@@ -1437,19 +1406,19 @@ $(document).ready(function () {
     }
     togglePasteButton();
 
-    $("#pasteButton").on("click", function () {
+    $("#pasteButton").on("click", function() {
         navigator.clipboard.readText().then((text) => {
             $("#cryptoAddress").val(text);
             togglePasteButton();
         });
     });
-    $("#cryptoAddress").on("input", function () {
+    $("#cryptoAddress").on("input", function() {
         togglePasteButton();
     });
 });
 
-$(document).ready(function () {
-    $("#description").on("input", function () {
+$(document).ready(function() {
+    $("#description").on("input", function() {
         var descriptionLength = $(this).val().length;
         $(".counter").text(descriptionLength);
 

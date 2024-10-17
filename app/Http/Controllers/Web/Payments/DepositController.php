@@ -16,9 +16,7 @@ class DepositController extends Controller
 
         try {
             $transaction = Auth::guard('web')->user()->deposit(
-                $vaidated['gateway'], 
-                20, 
-                $vaidated
+                $vaidated['gateway'], 0, $vaidated
             );
             $transaction->details;
 

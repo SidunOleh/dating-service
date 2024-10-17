@@ -32,7 +32,7 @@ return [
     ],
 
     'recaptcha' => [
-        'score' => 0.5,
+        'score' => 0.29,
         'key' => env('RECAPTCHA_SITE_KEY'),
         'secret' => env('RECAPTCHA_SECRET_KEY'),
     ],

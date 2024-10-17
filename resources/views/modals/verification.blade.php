@@ -10,12 +10,12 @@
         </p>
         
         <form class="code-inputs">
-            <input autocomplete="off"/>
-            <input autocomplete="off"/>
-            <input autocomplete="off"/>
-            <input autocomplete="off"/>
-            <input autocomplete="off"/>
-            <input autocomplete="off"/>
+            <input type="number" autocomplete="off"/>
+            <input type="number" autocomplete="off"/>
+            <input type="number" autocomplete="off"/>
+            <input type="number" autocomplete="off"/>
+            <input type="number" autocomplete="off"/>
+            <input type="number" autocomplete="off"/>
             <p class="error-text"></p>
         </form>
 

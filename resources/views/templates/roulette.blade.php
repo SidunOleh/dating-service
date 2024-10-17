@@ -31,7 +31,7 @@
                     data-src="{{ $pair[0]->gallery->random()->url }}" 
                     class="lazyload" 
                     alt="image" />
-                <div class="info">
+                <div class="info right">
                     {{ $pair[0]->city }}, {{ $pair[0]->state }}
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     data-src="{{ $pair[1]->gallery->random()->url }}" 
                     class="lazyload" 
                     alt="image" />
-                <div class="info">
+                <div class="info left">
                     {{ $pair[0]->city }}, {{ $pair[0]->state }}
                 </div>
             </div>

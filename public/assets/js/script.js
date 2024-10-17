@@ -23,8 +23,12 @@ if ($("header .advertising-banner").length) {
     $(".referral-out-wrapper").css("top", `${headerHeight}px`);
     $(".popUp-wrapper").css("top", `${headerHeight}px`);
     $(".transaction-wrapper").css("top", `${headerHeight}px`);
+    $(".open-faq").css("top", "104px");
+    $(".sidebar").css("top", "93px");
 } else {
     $(".header-menu").css("height", `100vh`);
+    $(".open-faq").css("top", `72px`);
+    $(".sidebar").css("top", "60px");
 }
 $(".closePage").on("click", function() {
     window.close();
@@ -371,17 +375,14 @@ function openVerifyPopup(action, verifyUrl, resendUrl, email) {
     resendTimer.start(60);
 }
 
-const codeInputs = [...document.querySelectorAll('.code-inputs input')]
+const codeInputs = [...document.querySelectorAll(".code-inputs input")];
 
 codeInputs.forEach((codeInput, i) => {
-    codeInput.addEventListener('keydown', e => {
-        if (
-            e.keyCode === 8 &&
-            e.target.value === ''
-        ) {
-            codeInputs[Math.max(0, i - 1)].focus()
+    codeInput.addEventListener("keydown", (e) => {
+        if (e.keyCode === 8 && e.target.value === "") {
+            codeInputs[Math.max(0, i - 1)].focus();
         }
-    })
+    });
 
     codeInput.addEventListener('input', e => {
         const [first, ...rest] = e.target.value
@@ -396,8 +397,16 @@ codeInputs.forEach((codeInput, i) => {
             codeInputs[i + 1].value = rest.join('')
             codeInputs[i + 1].dispatchEvent(new Event('input'))
         }
-    })
-})
+
+        e.target.value = first ?? "";
+
+        if (first !== undefined && i !== codeInputs.length - 1) {
+            codeInputs[i + 1].focus();
+            codeInputs[i + 1].value = rest.join("");
+            codeInputs[i + 1].dispatchEvent(new Event("input"));
+        }
+    });
+});
 
 $(".verification-wrapper input:last").on("input paste", async() => {
     const code = [];
@@ -754,6 +763,10 @@ function initializeBattle($battle) {
 
         $battle.find(".photo:first").replaceWith(html(nextPair[0]));
         $battle.find(".photo:last").replaceWith(html(nextPair[1]));
+
+        // Призначаємо класи після заміни
+        $battle.find(".photo:first .info").addClass("right");
+        $battle.find(".photo:last .info").addClass("left");
     }
 
     function vote(id) {
@@ -1112,6 +1125,7 @@ $(document).ready(function() {
         }
     });
 });
+
 $(document).ready(function() {
     if ($("header .advertising-banner").length) {
         $(".open-faq").css("top", "93px");
@@ -1121,7 +1135,8 @@ $(document).ready(function() {
         $(".sidebar.open").css("top", "60px");
     }
 });
-$(document).on("click", ".sidebar-menu-item", function() {
+
+$(document).on("click", ".sidebar-menu-item", function () {
     $(".sidebar").removeClass("open");
     $("html").removeClass("lock");
 });

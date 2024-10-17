@@ -176,7 +176,7 @@
                         </p>
                     </div>
                     <div 
-                        class="referral-out" 
+                        class="deposit-type" 
                         data-payment_id="232"
                         data-currency="SOL" 
                         data-network="SOL (BEP20)">

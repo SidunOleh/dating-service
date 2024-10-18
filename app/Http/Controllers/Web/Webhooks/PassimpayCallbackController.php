@@ -31,6 +31,9 @@ class PassimpayCallbackController extends Controller
             
             sort($body);
 
+            $json = file_get_contents('php://input');
+$body = json_decode($json, true);
+
             $signature = $passimpayApi->signature($body);
 
             Log::info('passimpay', [

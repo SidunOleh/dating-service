@@ -62,10 +62,10 @@ class PassimpayGateway extends PaymentGateway
         );
 
         $withdrawal = PassimpayWithdrawal::create([
-            'payment_id' => $response['payment_id'],
-            'address_to' => $response['address_to'],
+            'payment_id' => $response['paymentId'],
+            'address_to' => $response['addressTo'],
             'amount' => $response['amount'],
-            'transaction_id' => $response['transaction_id'],
+            'transaction_id' => $response['transactionId'],
         ]);
 
         $transaction = $withdrawal->transaction()->create([

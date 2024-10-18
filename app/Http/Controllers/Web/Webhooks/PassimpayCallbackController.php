@@ -29,7 +29,7 @@ class PassimpayCallbackController extends Controller
 
             $body = $request->all();
             
-            sort($body);
+            ksort($body);
 
             $signature = $passimpayApi->signature($body);
 

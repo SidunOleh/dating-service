@@ -26,13 +26,16 @@ class PassimpayCallbackController extends Controller
                 config('services.passimpay.platform_id'),
                 config('services.passimpay.secret_key')
             );
+            
+            $body = $request->all();
+            $body['amount'] = "5.00";
 
-            $signature = $passimpayApi->signature($request->all());
+            $signature = $passimpayApi->signature($body);
 
             Log::info('passimpay', [
                 'signature' => $signature,
                 'header' => $request->header('x-signature'),
-                'body' => $request->all(),
+                'body' => $body,
             ]);
 
             if ($signature != $request->header('x-signature')) {

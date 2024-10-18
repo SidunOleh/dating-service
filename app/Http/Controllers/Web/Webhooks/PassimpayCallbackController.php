@@ -35,6 +35,12 @@ class PassimpayCallbackController extends Controller
                 'platform_id' => config('services.passimpay.platform_id'),
                 'secret_key' => config('services.passimpay.secret_key'),
                 'data' => $request->all(),
+                'signature-cc' => $passimpayApi->signature([
+                    'orderId' => $request->orderId,
+                    'paymentId' => $request->paymentId,
+                    'amount' => $request->amount,
+                    'platformId' => $request->platformId,
+                ]),
             ]);
 
             if ($signature != $request->header('x-signature')) {

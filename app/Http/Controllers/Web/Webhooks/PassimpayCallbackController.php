@@ -28,8 +28,7 @@ class PassimpayCallbackController extends Controller
             );
             
             $body = $request->all();
-            $body['amount'] = "5.00";
-
+            
             $signature = $passimpayApi->signature($body);
 
             Log::info('passimpay', [

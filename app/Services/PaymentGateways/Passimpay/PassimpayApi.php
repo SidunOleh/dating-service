@@ -4,6 +4,7 @@ namespace App\Services\PaymentGateways\Passimpay;
 
 use Exception;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class PassimpayApi
 {
@@ -88,6 +89,8 @@ class PassimpayApi
         $response = Http::withHeaders([
             'x-signature' => $signature,
         ])->withBody(json_encode($data), 'application/json')->post($url);
+
+        Log::info('passimpay', $response->json());
 
         return $response->json();
     }

@@ -29,6 +29,11 @@ class PassimpayCallbackController extends Controller
 
             $signature = $passimpayApi->signature($request->all());
 
+            Log::info('passimpay', [
+                'signature' => $signature,
+                'header' => $request->header('x-signature'),
+            ]);
+
             if ($signature != $request->header('x-signature')) {
                 throw new Exception('Passimpay signature error.');
             }
@@ -61,6 +66,8 @@ class PassimpayCallbackController extends Controller
                 'headers' => $request->headers->all(),
                 'body' => $request->all(),
             ]);
+
+            return response($e->getMessage(), 500);
         }
     }
 }

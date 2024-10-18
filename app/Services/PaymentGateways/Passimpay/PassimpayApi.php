@@ -86,11 +86,13 @@ class PassimpayApi
 
         $signature = $this->signature($data);
 
+        Log::info('passimpay-req', $data);
+
         $response = Http::withHeaders([
             'x-signature' => $signature,
         ])->withBody(json_encode($data), 'application/json')->post($url);
 
-        Log::info('passimpay', $response->json());
+        Log::info('passimpay-res', [$response->json(), $response->getBody()->getContents()]);
 
         return $response->json();
     }

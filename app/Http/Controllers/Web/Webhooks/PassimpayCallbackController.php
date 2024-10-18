@@ -62,7 +62,7 @@ class PassimpayCallbackController extends Controller
                 'body' => $request->all(),
             ]);
 
-            return response($e->getMessage(), 500);
+            return response('Error', 500);
         }
     }
 }

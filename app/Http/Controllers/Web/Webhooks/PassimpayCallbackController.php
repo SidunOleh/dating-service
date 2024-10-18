@@ -32,6 +32,8 @@ class PassimpayCallbackController extends Controller
             Log::info('passimpay', [
                 'signature' => $signature,
                 'header' => $request->header('x-signature'),
+                'platform_id' => config('services.passimpay.platform_id'),
+                'secret_key' => config('services.passimpay.secret_key'),
             ]);
 
             if ($signature != $request->header('x-signature')) {

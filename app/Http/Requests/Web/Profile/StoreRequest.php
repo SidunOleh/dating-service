@@ -71,7 +71,7 @@ class StoreRequest extends FormRequest
             'name.max' => 'Up to 8 letters',
             'age.required' => 'Age required',
             'age.integer' => 'Inalid age',
-            'age.min' => 'Must be 18+',
+            'age.min' => 'Must be 21+',
             'age.max' => 'Maximum age 100',
             'description.required' => 'Description required',
             'description.min' => 'Must be 250-500 words',

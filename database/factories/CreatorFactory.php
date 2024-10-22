@@ -20,7 +20,7 @@ class CreatorFactory extends Factory
             'email' => fake()->email(),
             'password' => 'secret',
             'name' => fake()->name(),
-            'age' => rand(18, 100),
+            'age' => rand(21, 100),
             'gender' => ['Man', 'Woman', 'LGBTQIA+'][rand(0, 2)],
             'phone' => fake()->phoneNumber(),
             'description' => fake()->text(500),

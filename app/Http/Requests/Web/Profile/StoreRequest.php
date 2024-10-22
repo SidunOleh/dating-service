@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
             'zip' => 'required|regex:/^[0-9]{5}$/|exists:zip_codes,zip',
 
             'name' => 'required|string|min:2|max:8',
-            'age' => 'required|integer|between:18,100',
+            'age' => 'required|integer|between:21,100',
             'gender' => 'in:Man,Woman,LGBTQIA+|nullable',
             'description' => 'required|string|min:250|max:500',
 

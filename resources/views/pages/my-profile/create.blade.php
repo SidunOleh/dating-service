@@ -110,8 +110,8 @@
                             fn: val => ! isNaN(val),
                         },
                         {
-                            message: 'Must be 18+',
-                            fn: val => val >= 18,
+                            message: 'Must be 21+',
+                            fn: val => val >= 21,
                         },
                         {
                             message: 'Maximum age 100',

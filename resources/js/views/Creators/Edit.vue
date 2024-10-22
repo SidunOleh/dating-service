@@ -97,7 +97,7 @@
                         style="width: 100%;"
                         placeholder="Enter age"
                         v-model:value="data.age"
-                        :min="18"
+                        :min="21"
                         :max="100"/>
                 </FormItem>
 

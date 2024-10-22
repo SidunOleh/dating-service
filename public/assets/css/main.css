@@ -3412,7 +3412,9 @@ input {
     gap: 12px;
     position: relative;
 }
-
+.profile-filling .form-step .btn {
+    width: 120px;
+}
 .profile-filling .form-step.active .step-body {
     display: block;
 }
@@ -3973,7 +3975,6 @@ input {
 }
 
 .step-6 #skip {
-    width: 128px;
     color: #000;
 }
 

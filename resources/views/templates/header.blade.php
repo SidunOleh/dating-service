@@ -8,7 +8,7 @@
     <meta name="description" content="{{ config('app.name') }}">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-    <title>{{ ($title ?? '') ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
+    <title>{{ ($title ?? '') ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
 
     <link rel="icon" type="image/svg" href="/favicon.svg">
 

@@ -158,7 +158,7 @@
                         data-payment_id="232"
                         data-currency="SOL" 
                         data-network="SOL (BEP20)">
-                        <img src="{{ asset('/assets/img/bch.svg') }}" alt="" /> 
+                        <img src="{{ asset('/assets/img/solana.svg') }}" alt="" /> 
                         <p class="name">Solana</p>
                         <p class="abbr">
                             SOL

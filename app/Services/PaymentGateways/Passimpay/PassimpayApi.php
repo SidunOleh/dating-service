@@ -97,7 +97,7 @@ class PassimpayApi
     {
         $signature = hash_hmac(
             'sha256', 
-            $this->platformId .";". json_encode($data) .";". $this->secretKey, 
+            $this->platformId . ';' . json_encode($data) . ';' . $this->secretKey, 
             $this->secretKey
         );
 

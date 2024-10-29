@@ -67,7 +67,7 @@
             <a href="{{ route('faq.page') }}" class="btn red earn">
                 How to Earn (Tips & Tricks)
             </a>
-            <p class="subtitle">Maximize your earnings with our easy-to-follow tips and strategies.</p>
+            <p class="subtitle" style="margin-bottom: 32px">Maximize your earnings with our easy-to-follow tips and strategies.</p>
             <div class="deposit">
                 <p class="title">Withdraw</p>
                 <div class="deposit-types">

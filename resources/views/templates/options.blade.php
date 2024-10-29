@@ -5,13 +5,13 @@
 
     <div class="statistic-list">
         <div class="statistic-item">
-            <span>Day:</span> {{ $creator->visitsCount('day') }}
+            <span>Daily:</span> {{ $creator->visitsCount('day') }}
         </div>
         <div class="statistic-item">
-            <span>Week:</span> {{ $creator->visitsCount('week') }}
+            <span>Weekly:</span> {{ $creator->visitsCount('week') }}
         </div>
         <div class="statistic-item">
-            <span>Month:</span> {{ $creator->visitsCount('month') }}
+            <span>Monthly:</span> {{ $creator->visitsCount('month') }}
         </div>
         <div class="statistic-item">
             <span>All time:</span> {{ $creator->visitsCount() }}

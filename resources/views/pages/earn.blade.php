@@ -27,7 +27,7 @@
                 <p class="subtitle">Track your earnings and activity through real-time referral stats:</p>
                 <div class="statistic-list">
                     <div class="statistic-item">
-                        <span>Dayly:</span> {{ $creator->referralsCount('day') }}
+                        <span>Daily:</span> {{ $creator->referralsCount('day') }}
                     </div>
                     <div class="statistic-item">
                         <span>Weekly:</span> {{ $creator->referralsCount('week') }}

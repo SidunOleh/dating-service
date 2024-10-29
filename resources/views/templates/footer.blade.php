@@ -2,11 +2,11 @@
     <div class="footer-container">
         <a href="{{ route('faq.page') }}" class="footer-link">
             <img src="{{ asset('assets/img/help.svg') }}" alt="question mark" />
-            Here is info
+            Help Me, Cherry!
         </a>
-        <a href="{{ route('faq.page') }}" class="footer-link">
+        <a href="https://t.me/cherry21com" class="footer-link">
             <img src="{{ asset('assets/img/more.svg') }}" alt="plane"/>
-            Here is More
+            Cherry'gram
         </a>
     </div>
     <div class="footer-bottom">

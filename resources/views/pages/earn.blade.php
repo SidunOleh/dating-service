@@ -43,13 +43,17 @@
 
             <div class="sub-link">
                 <div class="title">
-                    You receive <span>{{ $settings['referral_percent'] }}%</span> for each client who subscribies using your link
+                    You earn <span>{{ $settings['referral_percent'] }}%</span> for every new subscriber who signs up using your referral link.
                 </div>
+                <div class="title">
+                    Your Personal Cherry Link
+                </div>
+                <p class="subtitle">Share your personal referral link with friends, fans, and followers!</p>
                 <div class="link-body">
                     <p class="link">
                         {{ route('home.index', ['ref' => $creator->referral_code,]) }}
                     </p>
-                    <div class="btn red copy-link">Copy</div>
+                    <div class="btn red copy-link">Copy Link</div>
                     <div class="message">
                         <div>
                             Link copied 

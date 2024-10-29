@@ -809,7 +809,7 @@ class Creator extends Authenticatable
                 continue;
             }
 
-            $formattedItem['date'] = $item->created_at->format('d.m.Y');
+            $formattedItem['date'] = $item->created_at->format('M d, Y');
 
             $formattedList[] = $formattedItem;
         }

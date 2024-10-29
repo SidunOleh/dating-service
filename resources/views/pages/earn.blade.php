@@ -174,7 +174,7 @@
                 <table class="referal-table">
                     <thead>
                         <tr>
-                            <th>#Date</th>
+                            <th>Date</th>
                             <th>Email</th>
                             <th>Subscription</th>
                         </tr>
@@ -184,7 +184,7 @@
                         @foreach($referrals as $i => $referral)
                             <tr @class(['referal-item', 'none' => $i > 9,])>
                                 <td class="date">
-                                    {{ $referral->created_at->format('d.m.Y') }}
+                                    {{ $referral->created_at->format('M d, Y') }}
                                 </td>
                                 <td class="email">
                                     <span>

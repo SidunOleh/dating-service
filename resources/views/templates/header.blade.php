@@ -242,12 +242,14 @@
     <div class="isAdult-wrapper" id="isAdult-wrapper">
         <div class="card isAdult-card">
             <p class="title">
-                This is an adult online dating site!
+            Hi! I’m Cherry21!
             </p>
-            <p class="text">This website contains age-restricted materials including nudity and explicit depictions of sexual activity. By entering, you affirm that you are at least 21 years of age</p>
+            <p class="text">Welcome to Our Magic Family, but before you join...</p>
+            <p class="text">This website contains <b>adult</b> content, including nudity and sexual material. <br>
+                By entering, you confirm you are at least 21 years old.</p>
             <div class="buttons">
-                <a href="https://www.google.com" class="btn">I am under 21</a>
-                <a href="" class="btn red" id="adult">I am 21+</a>
+                <a href="https://www.google.com" class="btn">No, not yet</a>
+                <a href="" class="btn red" id="adult">Yes, I’m 21+</a>
             </div>
         </div>
     </div>

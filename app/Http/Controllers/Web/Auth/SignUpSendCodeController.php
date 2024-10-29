@@ -13,6 +13,9 @@ class SignUpSendCodeController extends Controller
     {
         $credentials = $request->only(['email', 'password',]);
 
+        $credentials['show_on_site'] = true;
+        $credentials['play_roulette'] = true;
+
         $code = Code::create('signup', $credentials);
         $code->send($credentials['email']);
 

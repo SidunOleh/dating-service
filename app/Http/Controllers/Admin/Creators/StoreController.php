@@ -13,6 +13,8 @@ class StoreController extends Controller
     {
         $validated = $request->validated();
         $validated['created_by_admin'] = true;
+        $validated['show_on_site'] = true;
+        $validated['play_roulette'] = true;
 
         $zip = ZipCode::firstWhere('zip', $validated['zip']);
         $validated['state'] = $zip->state;

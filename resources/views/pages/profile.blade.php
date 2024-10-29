@@ -27,7 +27,7 @@
 
             <div class="user-info-list">
                 <p class="info-title">
-                    My Contacts
+                    Get in Touch
                 </p>
                 @if($creator->phone)
                 <div class="user-info-item">
@@ -79,7 +79,7 @@
             
             <div class="description">
                 <p class="info-title">
-                    I want to tell you that
+                 My Story
                 </p>
                 {{ $creator->description }}
             </div>

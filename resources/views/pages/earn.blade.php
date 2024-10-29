@@ -39,12 +39,13 @@
                         <span>All time:</span> {{ $creator->referralsCount() }}
                     </div>
                 </div>
-            </div>
-
-            <div class="sub-link">
                 <div class="title per">
                     You earn <span>{{ $settings['referral_percent'] }}%</span> for every new subscriber who signs up using your referral link.
                 </div>
+            </div>
+
+            <div class="sub-link">
+                
                 <div class="title" style="margin-bottom: 8px;">
                     Your Personal Cherry Link
                 </div>

@@ -877,16 +877,16 @@ $("#change-email-form").submit(async function(e) {
 
     $.post("/change-email/send-code", data)
         .done(() => {
-            form[0].reset();
-
             togglePopup("newEmail", false);
 
             openVerifyPopup(
                 "change_email",
                 "/change-email/verify-code",
                 "/change-email/resend-code",
-                $(".current.email").text()
+                $(this).find("[name=new_email]").val()
             );
+
+            form[0].reset();
         })
         .fail((xhr) => {
             handleFail(form, xhr);

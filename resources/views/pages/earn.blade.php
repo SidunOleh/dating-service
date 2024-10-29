@@ -45,7 +45,7 @@
                 <div class="title">
                     You earn <span>{{ $settings['referral_percent'] }}%</span> for every new subscriber who signs up using your referral link.
                 </div>
-                <div class="title">
+                <div class="title" style="margin-bottom: 8px;">
                     Your Personal Cherry Link
                 </div>
                 <p class="subtitle">Share your personal referral link with friends, fans, and followers!</p>
@@ -64,9 +64,9 @@
             </div>
 
             <a href="{{ route('faq.page') }}" class="btn red earn">
-                How to earn, Tips
+                How to Earn (Tips & Tricks)
             </a>
-
+            <p class="subtitle">Maximize your earnings with our easy-to-follow tips and strategies.</p>
             <div class="deposit">
                 <p class="title">Withdraw</p>
                 <div class="deposit-types">

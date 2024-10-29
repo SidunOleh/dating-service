@@ -974,7 +974,7 @@
                                 </button>
 
                                 <button 
-                                    v-if="data.photos.length >= 1" 
+                                    v-if="data.photos.filter(photo => photo.status != 'loading').length >= 1" 
                                     class="btn red next-btn" 
                                     type="button" 
                                     id="nextBtn5" 

@@ -4928,6 +4928,8 @@ input {
 }
 .refferals .title.per {
     font-weight: 400 !important;
+    margin-top: 12px;
+    max-width: 330px;
 }
 .refferals .sub-link .title {
     max-width: 330px;
@@ -4936,9 +4938,10 @@ input {
     line-height: 151%;
 }
 
-.refferals .sub-link .title span {
+.refferals .title.per span {
     padding: 4px 8px;
     border-radius: 4px;
+
     background: -webkit-gradient(
         linear,
         left top,

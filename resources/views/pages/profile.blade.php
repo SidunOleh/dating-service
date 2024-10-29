@@ -11,13 +11,13 @@
                         src="{{ $creator->gallery->first()->getUrl() }}" 
                         alt="" />
 
-                    @auth('web')
+                    @if(auth('web')->check() and auth('web')->id() != $creator->id)
                         @include('templates.favorite', [
                             'id' => $creator->id, 
                             'count' => $creator->inFavorites()->count(),
                             'active' => auth('web')->user()->favorites->contains($creator->id),
                         ])
-                    @endauth
+                    @endif
                 </div>
                 <div class="userMain">
                     <p class="name">{{ $creator->name }}, {{ $creator->age }}</p>

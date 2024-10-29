@@ -25,12 +25,6 @@
 
                 <div class="img-card">
                     <img src="{{ $creator->gallery->count() ? $creator->gallery[0]->getUrl() : $request->gallery[0]->getUrl() }}" alt="" />
-
-                    @include('templates.favorite', [
-                        'id' => $creator->id, 
-                        'count' => $creator->inFavorites()->count(),
-                        'active' => $creator->hasInFavorites($creator->id),
-                    ])
                 </div>
 
                 <div class="userMain">

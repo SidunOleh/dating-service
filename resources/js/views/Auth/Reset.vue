@@ -29,7 +29,7 @@
             <Button
                 :loading="loading"
                 @click="reset">
-                Rest password
+                Reset password
             </Button>
             
         </Form>

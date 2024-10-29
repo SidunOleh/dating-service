@@ -30,13 +30,13 @@
             </div>
         </div>
 
-        @auth('web')
+        @if(auth('web')->check() and auth('web')->id() != $creator->id)
             @include('templates.favorite', [
                 'id' => $creator->id, 
                 'count' => $creator->in_favorites_count,
                 'active' => auth('web')->user()->favorites->contains($creator->id),
             ])
-        @endauth
+        @endif
 
     </div>
 

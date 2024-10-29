@@ -53,7 +53,7 @@
                     <p class="link">
                         {{ route('home.index', ['ref' => $creator->referral_code,]) }}
                     </p>
-                    <div class="btn red copy-link">Copy Link</div>
+                    <div class="btn red copy-link" style="white-space: nowrap;">Copy Link</div>
                     <div class="message">
                         <div>
                             Link copied 

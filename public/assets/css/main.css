@@ -5029,6 +5029,7 @@ input {
 
 .refferals .btn {
     display: block;
+    white-space: nowrap;
 }
 
 .refferals .deposit {

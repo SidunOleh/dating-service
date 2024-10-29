@@ -353,7 +353,6 @@
                     const data = new FormData()
                     data.append('img', img)
                     data.append('watermark', watermark ? 1 : 0)
-                    data.append('recaptcha', await getReCaptchaV3('upload_image'))
                     
                     return $.ajax({
                         type: 'POST',
@@ -474,8 +473,6 @@
                         
                         data.birthday = `${birthday.substring(4, 8)}-${birthday.substring(0, 2)}-${birthday.substring(2, 4)}`
                     }
-
-                    data.recaptcha = await getReCaptchaV3('edit_profile')
                     
                     return data
                 },

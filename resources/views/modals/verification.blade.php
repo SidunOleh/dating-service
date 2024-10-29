@@ -4,7 +4,7 @@
             <img src="{{ asset('/assets/img/close.svg') }}" alt="">
         </div>
         <p class="title">
-            I sent the code, please check <br> your Email:
+            The code is on its way! <br> Be sure to check your spam folder.
         </p>
         <p class="email">
         </p>

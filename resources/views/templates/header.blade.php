@@ -135,7 +135,7 @@
                             <div class="form-group">
                                 <select id="distance" name="miles">
                                     <option value="" selected>
-                                        All miles
+                                        Nationwide
                                     </option>
                                     @foreach([10, 50, 100,] as $miles)
                                         <option value="{{ $miles }}" @selected(session('filters.miles') == $miles)>
@@ -148,9 +148,9 @@
                             <div class="form-group">
                                 <select id="category" name="gender">
                                     <option selected value="">
-                                        All
+                                        All Genders
                                     </option>
-                                    @foreach(['Man', 'Woman', 'LGBTQIA+',] as $gender)
+                                    @foreach(['Man', 'Woman', 'LGBTQ+',] as $gender)
                                         <option value="{{ $gender }}" @selected(session('filters.gender') == $gender)>
                                             {{ $gender }}
                                         </option>

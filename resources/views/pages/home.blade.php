@@ -50,7 +50,7 @@
                         WoW, I didn't find anything! :(
                     </div>
                     <p class="text">
-                    Have you tried changing filters to get better results?
+                        Have you tried adjusting the filters for better results?
                     </p>
                     <img src="{{ asset('/assets/img/noRes.svg') }}" alt="" />
                 </div>

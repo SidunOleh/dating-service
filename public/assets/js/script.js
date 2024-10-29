@@ -898,6 +898,8 @@ $("#change-email-form").submit(async function(e) {
 
 $(document).on("change_email-verified", () => {
     togglePopup("emailSuccesChanged", true);
+
+    location.reload()
 });
 
 $(".reset-btn.email").click(() => {

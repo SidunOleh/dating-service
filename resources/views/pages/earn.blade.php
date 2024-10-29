@@ -22,7 +22,9 @@
             </div>
 
             <div class="statistic">
-                <div class="title">Referral statistis</div>
+                <p>Earn with Cherry!</p>
+                <div class="title">Your Referral Stats</div>
+                <p>Track your earnings and activity through real-time referral stats:</p>
                 <div class="statistic-list">
                     <div class="statistic-item">
                         <span>Day:</span> {{ $creator->referralsCount('day') }}

@@ -10,8 +10,8 @@
         </a>
     </div>
     <div class="footer-bottom">
-        <p>Based Dominican Republic.</p>
-        <p>USC 2257 / 21+ Only!</p>
+        <p>Born in DR, Made for Us.</p>
+        <p>21+ Only!</p>
         <p>© {{ date('Y') }} Cherry21.com</p>
     </div>
 </footer>

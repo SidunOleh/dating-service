@@ -242,10 +242,10 @@
     <div class="isAdult-wrapper" id="isAdult-wrapper">
         <div class="card isAdult-card">
             <p class="title">
-            Hi! I’m Cherry21!
+                <em>Hi! I’m Cherry21!</em>
             </p>
-            <p class="text">Welcome to Our Magic Family, but before you join...</p>
-            <p class="text">This website contains <b>adult</b> content, including nudity and sexual material. <br>
+            <p class="text"><em>Welcome to Our Magic Family, but before you join...</em></p>
+            <p class="text">This website contains <b>adult</b> content, including nudity and sexual material.
                 By entering, you confirm you are at least 21 years old.</p>
             <div class="buttons">
                 <a href="https://www.google.com" class="btn">No, not yet</a>

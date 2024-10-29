@@ -420,9 +420,7 @@ $(".verification-wrapper input:last").on("input paste", async() => {
     const action = $(".verification-wrapper").data("action");
     const verifyUrl = $(".verification-wrapper").data("verify_url");
 
-    const data = `code=${code.join("")}&recaptcha=${await getReCaptchaV3(
-        action
-    )}`;
+    const data = `code=${code.join("")}`;
 
     $.post(verifyUrl, data)
         .done(() => {
@@ -452,12 +450,9 @@ $(".verification-wrapper .again").on("click", async() => {
     codeForm.removeClass("error");
     codeForm.find(".error-text").text("");
 
-    const action = $(".verification-wrapper").data("action");
     const resendUrl = $(".verification-wrapper").data("resend_url");
 
-    const data = `recaptcha=${await getReCaptchaV3(action)}`;
-
-    $.post(resendUrl, data)
+    $.post(resendUrl)
         .done(() => {
             resendTimer.start(60);
         })
@@ -509,8 +504,7 @@ $("#sign-up").submit(async function(e) {
 
     resetErrors(form);
 
-    const data =
-        form.serialize() + `&recaptcha=${await getReCaptchaV3("signin")}`;
+    const data = form.serialize();
 
     $.post("/sign-up/send-code", data)
         .done(() => {
@@ -546,8 +540,7 @@ $("#sign-in").submit(async function(e) {
 
     resetErrors(form);
 
-    const data =
-        form.serialize() + `&recaptcha=${await getReCaptchaV3("signin")}`;
+    const data = form.serialize();
 
     $.post("/sign-in/send-code", data)
         .done(() => {
@@ -583,8 +576,7 @@ $("#forgot-password").submit(async function(e) {
 
     resetErrors(form);
 
-    const data =
-        form.serialize() + `&recaptcha=${await getReCaptchaV3("forgot")}`;
+    const data = form.serialize();
 
     $.post("/password/forgot", data)
         .done(() => {
@@ -620,8 +612,7 @@ $("#new-password-form").submit(async function(e) {
 
     resetErrors(form);
 
-    const data =
-        form.serialize() + `&recaptcha=${await getReCaptchaV3("forgot")}`;
+    const data = form.serialize();
 
     $.post("/password/reset", data)
         .done(() => {
@@ -872,8 +863,7 @@ $("#change-email-form").submit(async function(e) {
 
     resetErrors(form);
 
-    const data =
-        form.serialize() + `&recaptcha=${await getReCaptchaV3("change_email")}`;
+    const data = form.serialize();
 
     $.post("/change-email/send-code", data)
         .done(() => {
@@ -921,9 +911,7 @@ $("#change-password-form").submit(async function(e) {
 
     resetErrors(form);
 
-    const data =
-        form.serialize() +
-        `&recaptcha=${await getReCaptchaV3("change_password")}`;
+    const data = form.serialize();
 
     $.post("/change-password", data)
         .done(() => {
@@ -1219,7 +1207,6 @@ $(".deposit-type").on("click", async function() {
     $.post("/payments/deposit", {
             gateway: "crypto",
             payment_id: deposit.payment_id,
-            recaptcha: await getReCaptchaV3("deposit"),
         })
         .done((res) => {
             $(".coins-wrapper").removeClass("active");
@@ -1330,7 +1317,6 @@ $(".crypto-address .next").on("click", async () => {
     $.post("/payments/withdraw/send-code", {
             ...withdraw,
             gateway: "crypto",
-            recaptcha: await getReCaptchaV3("withdraw"),
         })
         .done(() => {
             $(".referral-out-wrapper").removeClass("active");

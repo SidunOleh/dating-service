@@ -24,7 +24,6 @@ class ForgotRequest extends FormRequest
     {
         return [
             'email' => 'required|email|exists:creators,email',
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

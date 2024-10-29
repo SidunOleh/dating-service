@@ -29,7 +29,6 @@ class ChangePasswordRequest extends FormRequest
                 'required', 
                 Password::min(8)->max(32),
             ],
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

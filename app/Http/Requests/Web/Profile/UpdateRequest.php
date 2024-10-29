@@ -47,8 +47,6 @@ class UpdateRequest extends FormRequest
             'first_name' => 'required_with:id_photo,street_photo,verification_photo,last_name,birthday|string|min:2|nullable',
             'last_name' => 'required_with:id_photo,street_photo,verification_photo,first_name,birthday|string|min:2|nullable',
             'birthday' => 'required_with:id_photo,street_photo,verification_photo,first_name,last_name|date_format:Y-m-d|nullable',
-
-            'recaptcha' => [new ReCaptchaV3()],
         ];
     }
 

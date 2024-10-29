@@ -26,7 +26,6 @@ class SignUpSendCodeRequest extends FormRequest
             'email' => 'required|email|unique:creators,email',
             'password' => 'required|string|min:8|max:32|confirmed',
             'from' => 'integer|exists:creators,id|nullable',
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

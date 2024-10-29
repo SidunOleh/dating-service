@@ -25,7 +25,6 @@ class SignInSendCodeRequest extends FormRequest
         return [
             'email' => 'required|email',
             'password' => 'required|string',
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

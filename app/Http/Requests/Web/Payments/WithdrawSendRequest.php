@@ -31,8 +31,6 @@ class WithdrawSendRequest extends FormRequest
 
             'payment_id' => 'required_if:gateway,crypto|in:'.implode(',', config('services.passimpay.currencies')),
             'address_to' => 'required_if:gateway,crypto|string',
-
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

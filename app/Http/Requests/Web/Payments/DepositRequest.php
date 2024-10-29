@@ -28,8 +28,6 @@ class DepositRequest extends FormRequest
             // 'currency' => 'required_if:gateway,plisio|in:'.implode(',', config('services.plisio.currencies')),
 
             'payment_id' => 'required_if:gateway,crypto|in:'.implode(',', config('services.passimpay.currencies')),
-
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

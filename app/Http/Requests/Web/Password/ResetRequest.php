@@ -30,7 +30,6 @@ class ResetRequest extends FormRequest
             ],
             'token' => 'required|string',
             'email' => 'required|email|exists:creators,email',
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

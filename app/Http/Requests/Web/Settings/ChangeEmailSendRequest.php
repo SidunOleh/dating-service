@@ -25,7 +25,6 @@ class ChangeEmailSendRequest extends FormRequest
         return [
             'new_email' => 'required|email|unique:creators,email',
             'password' => 'required|current_password:web',
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

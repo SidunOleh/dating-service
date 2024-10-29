@@ -23,7 +23,7 @@ class SignUpResendCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recaptcha' => ['required', new ReCaptchaV3(),],
+            
         ];
     }
 }

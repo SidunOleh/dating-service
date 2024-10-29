@@ -23,7 +23,7 @@ class ChangeEmailVerifyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recaptcha' => ['required', new ReCaptchaV3(),],
+            'code' => 'required|integer|min:100000|max:999999',
         ];
     }
 }

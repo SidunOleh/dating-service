@@ -24,7 +24,6 @@ class SignUpVerifyCodeRequest extends FormRequest
     {
         return [
             'code' => 'required|integer|min:100000|max:999999',
-            'recaptcha' => ['required', new ReCaptchaV3(),],
         ];
     }
 }

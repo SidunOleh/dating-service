@@ -161,7 +161,7 @@
                         </div>
 
                         <button type="submit" class="btn red">
-                            Show matches
+                            Show Results
                         </button>
 
                     </form>

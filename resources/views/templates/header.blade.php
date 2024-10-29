@@ -172,27 +172,27 @@
                     <div class="pages-list">
 
                         <a href="{{ route('subscription.page') }}" class="pages-item red">
-                            <p class="name">Subscription</p>
+                            <p class="name">My Subscription</p>
                             <img src="{{ asset('assets/img/sub.svg') }}" alt="" class="icon" />
                         </a>
                         
                         <a href="{{ route('earn.page') }}" class="pages-item red">
-                            <p class="name">Earn with us</p>
+                            <p class="name">Earn with Cherry!</p>
                             <img src="{{ asset('assets/img/earn.svg') }}" alt="" class="icon" />
                         </a>
                         
                         <a href="{{ route('top-vote.page') }}" class="pages-item red">
-                            <p class="name">Top vote</p>
+                            <p class="name">Top Votes</p>
                             <img src="{{ asset('assets/img/top.svg') }}" alt="" class="icon" />
                         </a>
                         
                         <a href="{{ route('my-profile.show') }}" class="pages-item red">
-                            <p class="name">My post</p>
+                            <p class="name">My Post</p>
                             <img src="{{ asset('assets/img/post.svg') }}" alt="" class="icon" />
                         </a>
                         
                         <a href="{{ route('favorites.index') }}" class="pages-item red">
-                            <p class="name">Favorites</p>
+                            <p class="name">My Favorites</p>
                             <img src="{{ asset('assets/img/favorite.svg') }}" alt="" class="icon" />
                         </a>
                         
@@ -206,7 +206,7 @@
 
                
                 <a class="log-out btn red" href="{{ route('web.logout') }}">
-                    Log out
+                    Log Out
                 </a>   
                 
 

@@ -10,6 +10,34 @@
                 align="center"
                 :gap="10">
 
+                <Flex 
+                    :vertical="true"
+                    :gap="5">   
+                    <Tooltip>
+                        <template #title>
+                            Up
+                        </template>
+            
+                        <div 
+                            style="cursor: pointer; font-size: 20px;"
+                            @click="moveUp(list, i)">
+                            ↑
+                        </div>
+                    </Tooltip>     
+
+                    <Tooltip placement="bottom">
+                        <template #title>
+                            Down
+                        </template>
+            
+                        <div 
+                            style="cursor: pointer; font-size: 20px;"
+                            @click="moveDown(list, i)">
+                            ↓
+                        </div>
+                    </Tooltip>     
+                </Flex>
+
                 <Flex
                     style="flex-grow: 1;" 
                     :vertical="true">
@@ -100,6 +128,24 @@ export default {
                     }
                 }
             })
+        },
+        moveUp(list, i) {
+            if (i == 0) {
+                return
+            }
+
+            const el = list[i]
+            list[i] = list[i-1]
+            list[i-1] = el
+        },
+        moveDown(list, i) {
+            if (list.length-1 == i) {
+                return
+            }
+
+            const el = list[i]
+            list[i] = list[i+1]
+            list[i+1] = el
         },
     }
 }

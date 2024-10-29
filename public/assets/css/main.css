@@ -4928,6 +4928,7 @@ input {
 }
 .refferals .title.per {
     font-weight: 400 !important;
+    margin: 0 auto;
     margin-top: 12px;
     max-width: 330px;
 }

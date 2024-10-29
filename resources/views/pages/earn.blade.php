@@ -42,7 +42,7 @@
             </div>
 
             <div class="sub-link">
-                <div class="subtitle">
+                <div class="title per">
                     You earn <span>{{ $settings['referral_percent'] }}%</span> for every new subscriber who signs up using your referral link.
                 </div>
                 <div class="title" style="margin-bottom: 8px;">

@@ -4926,7 +4926,9 @@ input {
     font-weight: 600;
     margin-bottom: 12px;
 }
-
+.refferals .title.per {
+    font-weight: 400 !important;
+}
 .refferals .sub-link .title {
     max-width: 330px;
     margin: 0 auto;

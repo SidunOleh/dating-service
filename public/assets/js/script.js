@@ -1253,17 +1253,15 @@ const withdraw = {
 // currency
 $(".referral-out").on("click", function () {
     withdraw.payment_id = $(this).data("payment_id");
-
+    var fullText = $(this).find(".name").text().trim();
+    var shortText = $(this).find(".abbr").text().trim();
     $(".crypto-address .network-icon").attr(
         "src",
         $(this).find("img").attr("src")
     );
-    $(".crypto-address .crypto-name .full").text(
-        $(this).find(".name").text().trim()
-    );
-    $(".crypto-address .crypto-name .short").text(
-        $(this).find(".abbr").text().trim()
-    );
+    $(".crypto-address .crypto-name .full").text(fullText);
+    $(".crypto-address .crypto-name .short").text(shortText);
+
     $(".crypto-address .crypto-rate span").text(
         `${1 / DS.rates[withdraw.payment_id]} ${$(this).data("currency")}`
     );

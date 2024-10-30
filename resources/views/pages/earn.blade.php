@@ -69,7 +69,8 @@
             </a>
             <p class="subtitle" style="margin-bottom: 32px">Maximize your earnings with our easy-to-follow tips and strategies.</p>
             <div class="deposit">
-                <p class="title">Withdraw</p>
+                <p class="title">Withdrawal Options</p>
+                <p class="subtitle">Withdraw your earnings directly to your crypto wallet using any of our supported options:</p>
                 <div class="deposit-types">
 
                     <div 

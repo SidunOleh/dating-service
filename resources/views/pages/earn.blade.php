@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <a href="{{ route('faq.page', ['target' => 'usc-2257']) }}" class="btn red earn">
+            <a href="{{ route('faq.page', ['target' => 'contacts']) }}" class="btn red earn">
                 How to Earn (Tips & Tricks)
             </a>
             <p class="subtitle" style="margin-bottom: 32px">Maximize your earnings with our easy-to-follow tips and strategies.</p>

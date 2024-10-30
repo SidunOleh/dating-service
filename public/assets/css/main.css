@@ -4233,7 +4233,7 @@ input {
 }
 
 .subscribe .terms ol {
-    list-style: decimal;
+    list-style: none;
     text-align: center;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -4241,7 +4241,6 @@ input {
     margin: 0 auto;
     color: var(--white, #fbfbfb);
     font-size: 14px;
-    padding-left: 16px;
 }
 
 .subscribe .title {

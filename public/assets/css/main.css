@@ -4930,7 +4930,7 @@ input {
     font-weight: 400 !important;
     margin: 0 auto;
     margin-top: 12px;
-    max-width: 330px;
+    max-width: 460px;
 }
 .refferals .sub-link .title {
     max-width: 330px;
@@ -5329,7 +5329,7 @@ input {
     -ms-flex-direction: column;
     flex-direction: column;
     gap: 12px;
-    max-width: 250px;
+    max-width: 280px;
     max-height: 70vh;
     overflow: auto;
     padding-right: 10px;

@@ -64,12 +64,13 @@
                 </div>
             </div>
 
-            <a href="{{ route('faq.page') }}" class="btn red earn">
+            <a href="{{ route('faq.page', ['target' => 'tip1']) }}" class="btn red earn">
                 How to Earn (Tips & Tricks)
             </a>
             <p class="subtitle" style="margin-bottom: 32px">Maximize your earnings with our easy-to-follow tips and strategies.</p>
             <div class="deposit">
-                <p class="title">Withdraw</p>
+                <p class="title">Withdrawal Options</p>
+                <p class="subtitle">Withdraw your earnings directly to your crypto wallet using any of our supported options:</p>
                 <div class="deposit-types">
 
                     <div 
@@ -102,7 +103,7 @@
                         <img src="{{ asset('/assets/img/usdt.svg') }}" alt="" /> 
                         <p class="name">Tether ERC-20</p>
                         <p class="abbr">
-                            USDT
+                            USDT (Coinbase)
                         </p>
                     </div>
                     <div 
@@ -113,7 +114,7 @@
                         <img src="{{ asset('/assets/img/usdt-trx.svg') }}" alt="" /> 
                         <p class="name">Tether TRC-20</p>
                         <p class="abbr">
-                            USDT
+                            USDT (Coinbase)
                         </p>
                     </div>
                     <div 
@@ -146,7 +147,7 @@
                         <img src="{{ asset('/assets/img/bnb.svg') }}" alt="" /> 
                         <p class="name">BNB Chain</p>
                         <p class="abbr">
-                            BNB
+                            BNB (Binance)
                         </p>
                     </div>
                     <div 
@@ -176,7 +177,8 @@
             </div>
 
             <div class="referal">
-                <p class="title">Referral list</p>
+                <p class="title">Your Referral List</p>
+                <p class="subtitle">View all the users who subscribed through your referral link.</p>
 
                 <table class="referal-table">
                     <thead>

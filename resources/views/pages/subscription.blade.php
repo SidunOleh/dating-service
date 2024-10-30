@@ -161,7 +161,7 @@
                         <img src="{{ asset('/assets/img/bnb.svg') }}" alt="" /> 
                         <p class="name">BNB Chain</p>
                         <p class="abbr">
-                            BNB
+                            BNB (Binance)
                         </p>
                     </div>
                     <div 

@@ -66,11 +66,9 @@
                     Subscription terms and conditions
                 </div>
                 <ol>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
+                    <li>Monthly Subscription: Your subscription is valid for one month and cannot be canceled early. No refunds will be issued.</li>
+                    <li>Access Exclusive Content: Enjoy special content available only to subscribers.</li>
+                    <li>Auto-Renewal: Your subscription will renew automatically unless you unsubscribe or your balance is low.</li>
                 </ol>
             </div>
 

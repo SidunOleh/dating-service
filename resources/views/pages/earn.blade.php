@@ -257,6 +257,7 @@
         <div class="crypto-rate">
             <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />1 = <span></span>
         </div>
+        <p class="subtitle">Network fees apply at the user's expense</p>
         <div class="referral-out-navigation">
             <div class="back btn white">Back</div>
             <div class="next btn red">Next</div>

@@ -1264,6 +1264,7 @@ $(".referral-out").on("click", function () {
     );
     $(".referral-out-wrapper").addClass("active");
     $(".referral-out-wrapper .card").removeClass("active");
+    $("html").addClass("lock");
     $(".crypto-address").addClass("active");
 });
 

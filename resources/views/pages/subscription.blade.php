@@ -63,7 +63,7 @@
             
             <div class="terms">
                 <div class="title">
-                    Subscription terms and conditions
+                    Cherry21 Subscription Details
                 </div>
                 <ol>
                     <li>Monthly Subscription: Your subscription is valid for one month and cannot be canceled early. No refunds will be issued.</li>
@@ -74,11 +74,11 @@
 
             <div class="deposit" id="deposit">
                 <p class="title">
-                    Deposit methods
+                    Deposit Methods
                 </p>
                 <div class="cost">
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
-                    1 = 1 USD
+                    1 = 1 USDT
                 </div>
                 <a class="duposit-rules">
                     Deposit rules

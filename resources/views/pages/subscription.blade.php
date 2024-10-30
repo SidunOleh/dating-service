@@ -66,9 +66,9 @@
                     Cherry21 Subscription Details
                 </div>
                 <ol>
-                    <li>Monthly Subscription: Your subscription is valid for one month and cannot be canceled early. No refunds will be issued.</li>
-                    <li>Access Exclusive Content: Enjoy special content available only to subscribers.</li>
-                    <li>Auto-Renewal: Your subscription will renew automatically unless you unsubscribe or your balance is low.</li>
+                    <li><b>Monthly Subscription:</b> Your subscription is valid for one month and cannot be canceled early. No refunds will be issued.</li>
+                    <li><b>Access Exclusive Content:</b>  Enjoy special content available only to subscribers.</li>
+                    <li><b> Auto-Renewal:</b> Your subscription will renew automatically unless you unsubscribe or your balance is low.</li>
                 </ol>
             </div>
 

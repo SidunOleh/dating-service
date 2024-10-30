@@ -4242,6 +4242,9 @@ input {
     color: var(--white, #fbfbfb);
     font-size: 14px;
 }
+.subscribe .terms ol li {
+    line-height: 145%;
+}
 
 .subscribe .title {
     text-align: center;

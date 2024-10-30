@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPassword;
 use App\Services\PaymentGateways\PaymentGateway;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -820,5 +821,12 @@ class Creator extends Authenticatable
     public function withdrawalRequests(): HasMany
     {
         return $this->hasMany(WithdrawalRequest::class);
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = url('/') . "?token={$token}&email={$this->email}";
+    
+        $this->notify(new ResetPassword($url));
     }
 }

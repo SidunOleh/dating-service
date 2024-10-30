@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Events\CreatorInactivated;
 use App\Events\CreatorSubscribed;
+use App\Events\ProfileApproved;
 use App\Events\UserCreated;
 use App\Events\WithdrawRequestRejected;
 use App\Events\WithdrawRequestSuccess;
 use App\Listeners\PayPercentReferrer;
+use App\Listeners\SendEmailProfileApproved;
 use App\Listeners\SendEmailToInactivatedCreator;
 use App\Listeners\SendEmailWithCredentialsToNewUser;
 use App\Listeners\WithdrawRequestRejectedSendMail;
@@ -41,6 +43,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         WithdrawRequestRejected::class => [
             WithdrawRequestRejectedSendMail::class,
+        ],
+        ProfileApproved::class => [
+            SendEmailProfileApproved::class,
         ],
     ];
 

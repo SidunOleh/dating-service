@@ -36,11 +36,11 @@ class VerificationCode extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
+                    ->subject('Cherry21 Verification Code')
                     ->line(new HtmlString("<div style=\"text-align: center;\">Verification code:</div>"))
                     ->line(new HtmlString("<div style=\"text-align: center; font-size: 50px; color: #000;\">{$this->code}</div>"))
-                    ->action('Go to site', url('/'))
-                    ->line('This code will expire in 10 minutes.')
-                    ->line('Thank you for using our application!');
+                    ->action('Go to Site', url('/'))
+                    ->line(new HtmlString("<div style=\"text-align: center;\">This code will expire in <b>10 minutes</b>.</div>"));
     }
 
     /**

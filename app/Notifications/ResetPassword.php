@@ -2,13 +2,13 @@
 
 namespace App\Notifications;
 
-use App\Models\WithdrawalRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
-class WithdrawRequestSuccess extends Notification
+class ResetPassword extends Notification
 {
     use Queueable;
 
@@ -16,7 +16,7 @@ class WithdrawRequestSuccess extends Notification
      * Create a new notification instance.
      */
     public function __construct(
-        private WithdrawalRequest $withdrawalRequest
+        public string $url
     )
     {
         //
@@ -38,8 +38,11 @@ class WithdrawRequestSuccess extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Your withdraw request was successfully finished.')
-            ->action('Go to Site', url('/'));
+                    ->subject('Cherry21 Reset Password ')
+                    ->line(new HtmlString("<div style=\"text-align: center;\">You’re receiving this email because we got a request to reset your password.</div>"))
+                    ->line(new HtmlString("<div style=\"text-align: center;\">Click the link below to reset your password.</div>"))
+                    ->action('Reset Password', $this->url)
+                    ->line(new HtmlString("<div style=\"text-align: center;\">This link will expire in <b>60 minutes</b>.</div>"));
     }
 
     /**

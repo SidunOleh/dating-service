@@ -39,8 +39,7 @@ class Inactivation extends Notification
     {
         return (new MailMessage)
             ->line("Your {$this->creator->email} account was banned.")
-            ->action('Go to site', url('/'))
-            ->line('Thank you for using our application!');
+            ->action('Go to Site', url('/'));
     }
 
     /**

@@ -1348,6 +1348,7 @@ $(".referral-out-wrapper .back").on("click", function () {
 
 $(".referral-out-wrapper .close").on("click", () => {
     $(".referral-out-wrapper").removeClass("active");
+    $("html").removeClass("lock");
 });
 
 $(".load-more img").on("click", () => {

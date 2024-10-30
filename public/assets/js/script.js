@@ -343,6 +343,10 @@ const resendTimer = {
     secs: 0,
     interval: null,
     start(secs) {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+
         this.secs = secs;
 
         this.interval = setInterval(() => {

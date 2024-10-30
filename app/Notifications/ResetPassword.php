@@ -8,14 +8,16 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 
-class VerificationCode extends Notification
+class ResetPassword extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(private int $code)
+    public function __construct(
+        public string $url
+    )
     {
         //
     }
@@ -36,11 +38,11 @@ class VerificationCode extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Cherry21 Verification Code')
-                    ->line(new HtmlString("<div style=\"text-align: center;\">Verification code:</div>"))
-                    ->line(new HtmlString("<div style=\"text-align: center; font-size: 50px; color: #000;\">{$this->code}</div>"))
-                    ->action('Go to site', url('/'))
-                    ->line(new HtmlString("<div style=\"text-align: center;\">This code will expire in <b>10 minutes</b>.</div>"));
+                    ->subject('Cherry21 Reset Password ')
+                    ->line(new HtmlString("<div style=\"text-align: center;\">You’re receiving this email because we got a request to reset your password.</div>"))
+                    ->line(new HtmlString("<div style=\"text-align: center;\">Click the link below to reset your password.</div>"))
+                    ->action('Reset Password', $this->url)
+                    ->line(new HtmlString("<div style=\"text-align: center;\">This link will expire in <b>60 minutes</b>.</div>"));
     }
 
     /**

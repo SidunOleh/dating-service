@@ -8,14 +8,14 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\HtmlString;
 
-class VerificationCode extends Notification
+class ProfileApproved extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(private int $code)
+    public function __construct()
     {
         //
     }
@@ -36,11 +36,12 @@ class VerificationCode extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Cherry21 Verification Code')
-                    ->line(new HtmlString("<div style=\"text-align: center;\">Verification code:</div>"))
-                    ->line(new HtmlString("<div style=\"text-align: center; font-size: 50px; color: #000;\">{$this->code}</div>"))
-                    ->action('Go to site', url('/'))
-                    ->line(new HtmlString("<div style=\"text-align: center;\">This code will expire in <b>10 minutes</b>.</div>"));
+            ->subject('Cherry21 You are Online')
+            ->line(new HtmlString("<div style=\"text-align: center;\">Hi there,</div>"))
+            ->line(new HtmlString("<div style=\"text-align: center;\">Congratulations!</div>"))
+            ->line(new HtmlString("<div style=\"text-align: center;\">Your profile has been approved, and you are Online.</div>"))
+            ->action('Go to site', url('/'))
+            ->line(new HtmlString("<div style=\"text-align: center;\">This code will expire in <b>10 minutes</b>.</div>"));
     }
 
     /**

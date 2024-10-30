@@ -44,6 +44,11 @@ if ($(".advertising-wrapper").hasClass("show")) {
 } else {
     $("html").removeClass("lock");
 }
+if ($(".referral-out-wrapper").hasClass("active")) {
+    $("html").addClass("lock");
+} else {
+    $("html").removeClass("lock");
+}
 
 $(document).ready(function () {
     if (!localStorage.getItem("isAdult")) {

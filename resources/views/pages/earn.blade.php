@@ -177,7 +177,8 @@
             </div>
 
             <div class="referal">
-                <p class="title">Referral list</p>
+                <p class="title">Your Referral List</p>
+                <p class="subtitle">View all the users who subscribed through your referral link.</p>
 
                 <table class="referal-table">
                     <thead>

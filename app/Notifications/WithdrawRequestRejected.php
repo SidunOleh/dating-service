@@ -39,8 +39,7 @@ class WithdrawRequestRejected extends Notification
     {
         return (new MailMessage)
             ->line('Your withdraw request was rejected.')
-            ->action('Go to Site', url('/'))
-            ->line('Thank you for using our application!');
+            ->action('Go to Site', url('/'));
     }
 
     /**

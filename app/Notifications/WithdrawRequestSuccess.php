@@ -39,8 +39,7 @@ class WithdrawRequestSuccess extends Notification
     {
         return (new MailMessage)
             ->line('Your withdraw request was successfully finished.')
-            ->action('Go to Site', url('/'))
-            ->line('Thank you for using our application!');
+            ->action('Go to Site', url('/'));
     }
 
     /**

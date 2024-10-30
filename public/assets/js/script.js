@@ -1261,7 +1261,6 @@ $(".referral-out").on("click", function () {
     );
     $(".crypto-address .crypto-name .full").text(fullText);
     $(".crypto-address .crypto-name .short").text(shortText);
-
     $(".crypto-address .crypto-rate span").text(
         `${1 / DS.rates[withdraw.payment_id]} ${$(this).data("currency")}`
     );

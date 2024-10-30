@@ -235,7 +235,6 @@
             <div>
                 <p class="full"></p>
                 <p class="short"></p>
-
             </div>
         </p>
         <div class="crypto-address-input">

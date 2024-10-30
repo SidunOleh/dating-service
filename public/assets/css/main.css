@@ -5737,6 +5737,11 @@ input {
     justify-content: center;
     display: none;
 }
+.referral-out-wrapper .subtitle {
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+}
 
 .referral-out-wrapper.active {
     display: -webkit-box;

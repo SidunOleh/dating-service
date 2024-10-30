@@ -1258,7 +1258,12 @@ $(".referral-out").on("click", function () {
         "src",
         $(this).find("img").attr("src")
     );
-    $(".crypto-address .crypto-name span").text($(this).data("network"));
+    $(".crypto-address .crypto-name .full").text(
+        $(this).find(".name").text().trim()
+    );
+    $(".crypto-address .crypto-name .short").text(
+        $(this).find(".abbr").text().trim()
+    );
     $(".crypto-address .crypto-rate span").text(
         `${1 / DS.rates[withdraw.payment_id]} ${$(this).data("currency")}`
     );

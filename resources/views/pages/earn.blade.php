@@ -231,7 +231,12 @@
         </p>
        
         <p class="crypto-name">
-            <img src="" alt="" class="network-icon" />  <span></span>
+            <img src="" alt="" class="network-icon" />  
+            <div>
+                <p class="full"></p>
+                <p class="short"></p>
+
+            </div>
         </p>
         <div class="crypto-address-input">
             <div>

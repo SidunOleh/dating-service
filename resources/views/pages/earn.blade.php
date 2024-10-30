@@ -230,13 +230,13 @@
             Up to 1-hour delay
         </p>
        
-        <p class="crypto-name">
+        <div class="crypto-name">
             <img src="" alt="" class="network-icon" />  
             <div>
                 <p class="full"></p>
                 <p class="short"></p>
             </div>
-        </p>
+        </div>
         <div class="crypto-address-input">
             <div>
                 <input 

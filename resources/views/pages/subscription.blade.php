@@ -229,7 +229,7 @@
     <div class="deposit-popup">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="title">
-            Delay up to 1 hour
+            Up to 1-hour delay
         </p>
         <p class="crypto-name">
             <img src="" alt="" class="network-icon" />  <span></span>

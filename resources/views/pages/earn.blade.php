@@ -227,7 +227,7 @@
     <div class="crypto-address card active">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="title red">
-            Delay up to 1 hour
+            Up to 1-hour delay
         </p>
        
         <p class="crypto-name">

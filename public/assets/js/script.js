@@ -934,7 +934,6 @@ $("#email-succes-changed .btn").click(() => {
 
 //__________________________FAQ__________________________//
 $(document).ready(function () {
-    // Перевірка наявності параметра target у URL при завантаженні сторінки
     function openTargetFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
         const targetId = urlParams.get("target");
@@ -942,8 +941,6 @@ $(document).ready(function () {
             showContent(targetId);
         }
     }
-
-    // Існуючий код для відкриття FAQ та меню
     $(".open-faq").click(function () {
         $(".sidebar").toggleClass("open");
         $("html").addClass("lock");
@@ -975,8 +972,6 @@ $(document).ready(function () {
         var targetId = $(this).data("target");
         showContent(targetId);
     });
-
-    // Функції для навігації по FAQ
     $(".faq-next").click(function () {
         var current = $(".faq-content:visible");
         var next = current.next(".faq-content");
@@ -1018,8 +1013,6 @@ $(document).ready(function () {
             $(".accordion-pannel").slideUp();
         }
     }
-
-    // Пошук по FAQ-контенту
     $(".search-input").on("input", function () {
         var query = $(this).val().toLowerCase().trim();
         var $searchResult = $(".search-result");
@@ -1092,7 +1085,6 @@ $(document).ready(function () {
         $(".search-result").hide();
     });
 
-    // Виклик функції відкриття елемента з URL при завантаженні сторінки
     openTargetFromURL();
 });
 

@@ -114,7 +114,7 @@
                         <img src="{{ asset('/assets/img/usdt-trx.svg') }}" alt="" /> 
                         <p class="name">Tether TRC-20</p>
                         <p class="abbr">
-                            USDT
+                            USDT (Coinbase)
                         </p>
                     </div>
                     <div 

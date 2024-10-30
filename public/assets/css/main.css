@@ -4245,6 +4245,9 @@ input {
 .subscribe .terms ol li {
     line-height: 145%;
 }
+.subscribe .terms ol li b {
+    font-size: 15px;
+}
 
 .subscribe .title {
     text-align: center;

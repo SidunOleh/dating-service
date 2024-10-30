@@ -4603,7 +4603,9 @@ input {
     padding: 10px;
     background-color: #fff;
 }
-
+.deposit-wrapper .deposit-popup .qr-code img {
+    width: 100%;
+}
 .deposit-wrapper .close {
     position: absolute;
     top: 8px;

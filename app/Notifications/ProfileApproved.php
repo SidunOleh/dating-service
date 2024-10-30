@@ -40,8 +40,7 @@ class ProfileApproved extends Notification
             ->line(new HtmlString("<div style=\"text-align: center;\">Hi there,</div>"))
             ->line(new HtmlString("<div style=\"text-align: center;\">Congratulations!</div>"))
             ->line(new HtmlString("<div style=\"text-align: center;\">Your profile has been approved, and you are Online.</div>"))
-            ->action('Go to site', url('/'))
-            ->line(new HtmlString("<div style=\"text-align: center;\">This code will expire in <b>10 minutes</b>.</div>"));
+            ->action('Go to Site', url('/'));
     }
 
     /**

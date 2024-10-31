@@ -44,7 +44,7 @@
         </div>
 
         <div class="toggle-group">
-            <label for="account-visibility">Account visibility</label>
+            <label for="account-visibility">Public Profile</label>
             <div class="toggle-body">
                 <span>Disabled</span>
                 <label class="toggle">

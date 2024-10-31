@@ -557,13 +557,13 @@
                 <!-- Step 1 -->
                 <div class="form-step active" data-step="0">
                     <div class="step-head">
-                        <h2><span>1</span>Platform rules</h2>
+                        <h2><span>1</span>Hey there, it’s <b>Cherry21.</b></h2>
                     </div>
 
                     <div class="step-body">
                         <div class="form-group rules">
                             <p class="title">
-                                Community rules and prohibitions
+                                Welcome to <b>Our Magic Family!</b> 
                             </p>
                             <p>
                                 Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile.

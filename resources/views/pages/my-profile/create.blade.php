@@ -566,8 +566,10 @@
                                 Welcome to <b>Our Magic Family!</b> 
                             </p>
                             <p>
-                                Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile.
+                                I see you’re ready to create your profile! Before we get started, let’s go over a few simple rules.
+                                It’s all about being <b>friendly</b>  and showing <b>off your unique magic!</b> 
                             </p>
+                            <p><b>Age Requirement:</b> Only users aged <b>21+</b> are allowed.</p>
                             <ul>
                                 <li>
                                     1. Our platform is cool and safe. Fill out your profile.

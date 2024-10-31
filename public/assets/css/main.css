@@ -4150,6 +4150,7 @@ input {
     font-weight: 700;
     border-radius: 6px;
     overflow: hidden;
+    margin-bottom: 32px;
 }
 
 .subscribe .subscribe-Btn img,

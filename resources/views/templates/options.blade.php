@@ -38,13 +38,13 @@
         </div>
 
         <div class="info-text">
-            <a href="{{ route('faq.page'), ['target' => 'what-is-vote-battle'])  }}">
+            <a href="{{ route('faq.page') }}">
                 What is Vote Battle?
             </a>
         </div>
 
         <div class="toggle-group">
-            <label for="account-visibility">Public Profile</label>
+            <label for="account-visibility">Account visibility</label>
             <div class="toggle-body">
                 <span>Disabled</span>
                 <label class="toggle">

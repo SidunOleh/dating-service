@@ -80,8 +80,8 @@
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
                     1 = 1 USDT
                 </div>
-                <a class="duposit-rules">
-                    Deposit rules
+                <a href="{{ route('faq.page', ['target' => 'how-to-deposit']) }}" class="duposit-rules">
+                    How to Deposit
                 </a>
                 <div class="deposit-types">
                     

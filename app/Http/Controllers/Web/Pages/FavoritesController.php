@@ -12,7 +12,7 @@ class FavoritesController extends Controller
 {
     public function __invoke(int $page = 1)
     {
-        $filters = session('filters', []);
+        // $filters = session('filters', []);
         $filters['in_favorites'] = Auth::guard('web')->id();
 
         $template = Template::inRandomOrder()->firstOrFail();

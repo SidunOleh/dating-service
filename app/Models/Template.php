@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Template extends Model
@@ -80,6 +81,7 @@ class Template extends Model
             ->get();
         $roulettes = Creator::with('gallery')
             ->select('id', 'city', 'state', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photos'),)
+            ->where('id', '!=', Auth::guard('web')?->id())
             ->showOnSite()
             ->playRoulette()
             ->inRandomOrder()

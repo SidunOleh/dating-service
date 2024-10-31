@@ -51,6 +51,8 @@ class Option extends Model
                 $settings['referral_percent'] ?? 0,
             'repeat_time' => 
                 $settings['repeat_time'] ?? 5,
+            'subscription_price' => 
+                $settings['subscription_price'] ?? 0,
         ];
     }
 

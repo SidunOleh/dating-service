@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
             'close_popup_seconds' => 'required|integer|gte:1',
             'referral_percent' => 'required|integer|between:0,100',
             'repeat_time' => 'required|integer|gte:1',
+            'subscription_price' => 'required|integer|gte:0',
         ];
     }
 }

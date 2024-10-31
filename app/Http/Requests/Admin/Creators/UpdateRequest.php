@@ -42,30 +42,30 @@ class UpdateRequest extends FormRequest
                 Password::min(8)->max(32),
             ],
 
-            'photos' => 'required|array|min:1|max:12',
+            'photos' => 'array|max:12|nullable',
             'photos.*' => 'exists:images,id',
 
-            'name' => 'required|string|min:2|max:8',
-            'age' => 'required|integer|between:21,100',
+            'name' => 'string|min:2|max:8|nullable',
+            'age' => 'integer|between:21,100|nullable',
             'gender' => 'in:Man,Woman,LGBTQIA+|nullable',
-            'description' => 'required|string|min:250|max:500',
+            'description' => 'string|min:250|max:500|nullable',
             
-            'phone' => 'required_without_all:telegram,whatsapp|string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
-            'telegram' => 'required_without_all:phone,whatsapp|string|nullable',
-            'whatsapp' => 'required_without_all:phone,telegram|string|nullable',
+            'phone' => 'string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
+            'telegram' => 'string|nullable',
+            'whatsapp' => 'string|nullable',
             'snapchat' => 'string|nullable',
             'instagram' => 'string|nullable',
             'onlyfans' => 'string|nullable',
             'profile_email' => 'email|nullable',
 
-            'zip' => 'required|regex:/^[0-9]{5}$/|exists:zip_codes,zip',
+            'zip' => 'regex:/^[0-9]{5}$/|exists:zip_codes,zip|nullable',
 
-            'id_photo' => 'required_with:street_photo,verification_photo,first_name,last_name,birthday|exists:images,id|nullable',
-            'street_photo' => 'required_with:id_photo,verification_photo,first_name,last_name,birthday|exists:images,id|nullable',
-            'verification_photo' => 'required_with:id_photo,street_photo,first_name,last_name,birthday|exists:images,id|nullable',
-            'first_name' => 'required_with:id_photo,street_photo,verification_photo,last_name,birthday|string|min:2|nullable',
-            'last_name' => 'required_with:id_photo,street_photo,verification_photo,first_name,birthday|string|min:2|nullable',
-            'birthday' => 'required_with:id_photo,street_photo,verification_photo,first_name,last_name|date_format:Y-m-d|nullable',
+            'id_photo' => 'exists:images,id|nullable',
+            'street_photo' => 'exists:images,id|nullable',
+            'verification_photo' => 'exists:images,id|nullable',
+            'first_name' => 'string|min:2|nullable',
+            'last_name' => 'string|min:2|nullable',
+            'birthday' => 'date_format:Y-m-d|nullable',
         ];
     }
 }

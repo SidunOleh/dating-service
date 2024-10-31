@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Option;
 use App\Models\Subscription;
 use Exception;
 use Illuminate\Console\Command;
@@ -36,13 +37,15 @@ class CheckSubscriptions extends Command
 
     public function check(Collection $subscriptions): void
     {
+        $settings = Option::getSettings();
+
         foreach ($subscriptions as $subscription) {
             try {
                 $subscription->inactivate();
 
                 if (
                     ! $subscription->unsubscribed and 
-                    $subscription->creator->hasEnoughMoney(Subscription::PRICE)
+                    $subscription->creator->hasEnoughMoney($settings['subscription_price'])
                 ) {
                     $subscription->creator->subscribe();
                 }

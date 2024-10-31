@@ -90,6 +90,23 @@
 
             </CollapsePanel>
 
+            <CollapsePanel 
+                header="Subscription settings"
+                :showArrow="false"
+                :key="4">
+
+                <FormItem
+                    label="Subscription price"
+                    :required="true">
+                    <InputNumber
+                        placeholder="Subscription price"
+                        style="width: 100%;"
+                        v-model:value="settings.subscription_price"
+                        :min="0"/>
+                </FormItem>
+
+            </CollapsePanel>
+
         </Collapse>
 
         <Button
@@ -121,6 +138,7 @@ export default {
                 close_popup_seconds: null,
                 referral_percent: null,
                 repeat_time: null,
+                subscription_price: null,
             },
             editing: false,
         }

@@ -44,7 +44,7 @@
                 <img src="{{ asset('assets/img/chery.svg') }}" alt="" />
                 <div class="loader"><img src="./img/btn-loader.svg" alt="" /></div>
                 <div class="sub-cost">
-                    1-Month Subscription
+                    1-Month Subscription:
                     <span>
                         <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
                         {{ $price }}

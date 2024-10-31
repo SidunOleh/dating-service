@@ -44,7 +44,7 @@
                 <img src="{{ asset('assets/img/chery.svg') }}" alt="" />
                 <div class="loader"><img src="./img/btn-loader.svg" alt="" /></div>
                 <div class="sub-cost">
-                    Subscription for 1 month:
+                    1-Month Subscription
                     <span>
                         <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
                         {{ $price }}
@@ -63,24 +63,22 @@
             
             <div class="terms">
                 <div class="title">
-                    Subscription terms and conditions
+                    Cherry21 Subscription Details
                 </div>
                 <ol>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
-                    <li>Subscription is paid and costs a lot of money</li>
+                    <li><b>Monthly Subscription:</b> Your subscription is valid for one month and cannot be canceled early. No refunds will be issued.</li>
+                    <li><b>Access Exclusive Content:</b>  Enjoy special content available only to subscribers.</li>
+                    <li><b> Auto-Renewal:</b> Your subscription will renew automatically unless you unsubscribe or your balance is low.</li>
                 </ol>
             </div>
 
             <div class="deposit" id="deposit">
                 <p class="title">
-                    Deposit methods
+                    Deposit Methods
                 </p>
                 <div class="cost">
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
-                    1 = 1 USD
+                    1 = 1 USDT
                 </div>
                 <a class="duposit-rules">
                     Deposit rules
@@ -117,7 +115,7 @@
                         <img src="{{ asset('/assets/img/usdt.svg') }}" alt="" /> 
                         <p class="name">Tether ERC-20</p>
                         <p class="abbr">
-                            USDT
+                            USDT (Coinbase)
                         </p>
                     </div>
                     <div 
@@ -229,7 +227,7 @@
     <div class="deposit-popup">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="title">
-            Delay up to 1 hour
+            Up to 1-hour delay
         </p>
         <p class="crypto-name">
             <img src="" alt="" class="network-icon" />  <span></span>

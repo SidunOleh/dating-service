@@ -45,7 +45,7 @@ class WithdrawalRequest extends Model
     public function withdraw(): Transaction
     {
         if (! $this->creator->hasEnoughMoney($this->amount)) {
-            throw new Exception('Not enough Coins on Balance');
+            throw new Exception('Your balance is too low!');
         }
 
         $transaction = $this->concrete->withdraw();

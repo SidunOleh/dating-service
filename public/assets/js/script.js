@@ -44,6 +44,11 @@ if ($(".advertising-wrapper").hasClass("show")) {
 } else {
     $("html").removeClass("lock");
 }
+if ($(".referral-out-wrapper").hasClass("active")) {
+    $("html").addClass("lock");
+} else {
+    $("html").removeClass("lock");
+}
 
 $(document).ready(function () {
     if (!localStorage.getItem("isAdult")) {
@@ -1248,17 +1253,20 @@ const withdraw = {
 // currency
 $(".referral-out").on("click", function () {
     withdraw.payment_id = $(this).data("payment_id");
-
+    var fullText = $(this).find(".name").text().trim();
+    var shortText = $(this).find(".abbr").text().trim();
     $(".crypto-address .network-icon").attr(
         "src",
         $(this).find("img").attr("src")
     );
-    $(".crypto-address .crypto-name span").text($(this).data("network"));
+    $(".crypto-address .crypto-name .full").text(fullText);
+    $(".crypto-address .crypto-name .short").text(shortText);
     $(".crypto-address .crypto-rate span").text(
         `${1 / DS.rates[withdraw.payment_id]} ${$(this).data("currency")}`
     );
     $(".referral-out-wrapper").addClass("active");
     $(".referral-out-wrapper .card").removeClass("active");
+    $("html").addClass("lock");
     $(".crypto-address").addClass("active");
 });
 
@@ -1342,6 +1350,7 @@ $(".referral-out-wrapper .back").on("click", function () {
 
 $(".referral-out-wrapper .close").on("click", () => {
     $(".referral-out-wrapper").removeClass("active");
+    $("html").removeClass("lock");
 });
 
 $(".load-more img").on("click", () => {

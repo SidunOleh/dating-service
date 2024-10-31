@@ -4233,7 +4233,7 @@ input {
 }
 
 .subscribe .terms ol {
-    list-style: decimal;
+    list-style: none;
     text-align: center;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -4241,7 +4241,12 @@ input {
     margin: 0 auto;
     color: var(--white, #fbfbfb);
     font-size: 14px;
-    padding-left: 16px;
+}
+.subscribe .terms ol li {
+    line-height: 145%;
+}
+.subscribe .terms ol li b {
+    font-size: 15px;
 }
 
 .subscribe .title {
@@ -4603,7 +4608,9 @@ input {
     padding: 10px;
     background-color: #fff;
 }
-
+.deposit-wrapper .deposit-popup .qr-code img {
+    width: 100%;
+}
 .deposit-wrapper .close {
     position: absolute;
     top: 8px;
@@ -5737,6 +5744,11 @@ input {
     justify-content: center;
     display: none;
 }
+.referral-out-wrapper .subtitle {
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+}
 
 .referral-out-wrapper.active {
     display: -webkit-box;
@@ -5854,6 +5866,7 @@ input {
     gap: 8px;
     color: #fff;
     font-weight: 600;
+    text-align: center;
 }
 
 .referral-out-wrapper .network-icon,

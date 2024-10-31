@@ -114,7 +114,7 @@
                         <img src="{{ asset('/assets/img/usdt-trx.svg') }}" alt="" /> 
                         <p class="name">Tether TRC-20</p>
                         <p class="abbr">
-                            USDT (Coinbase)
+                            USDT
                         </p>
                     </div>
                     <div 
@@ -227,12 +227,16 @@
     <div class="crypto-address card active">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="title red">
-            Delay up to 1 hour
+            Up to 1-hour delay
         </p>
        
-        <p class="crypto-name">
-            <img src="" alt="" class="network-icon" />  <span></span>
-        </p>
+        <div class="crypto-name">
+            <img src="" alt="" class="network-icon" />  
+            <div>
+                <p class="full"></p>
+                <p class="short"></p>
+            </div>
+        </div>
         <div class="crypto-address-input">
             <div>
                 <input 
@@ -257,6 +261,7 @@
         <div class="crypto-rate">
             <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />1 = <span></span>
         </div>
+        <p class="subtitle">Network fees apply at the user's expense</p>
         <div class="referral-out-navigation">
             <div class="back btn white">Back</div>
             <div class="next btn red">Next</div>

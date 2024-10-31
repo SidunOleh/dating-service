@@ -44,7 +44,7 @@
                 <img src="{{ asset('assets/img/chery.svg') }}" alt="" />
                 <div class="loader"><img src="./img/btn-loader.svg" alt="" /></div>
                 <div class="sub-cost">
-                    1-Month Subscription
+                    1-Month Subscription:
                     <span>
                         <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
                         {{ $price }}
@@ -80,8 +80,8 @@
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
                     1 = 1 USDT
                 </div>
-                <a class="duposit-rules">
-                    Deposit rules
+                <a href="{{ route('faq.page', ['target' => 'how-to-deposit']) }}" class="duposit-rules">
+                    How to Deposit
                 </a>
                 <div class="deposit-types">
                     

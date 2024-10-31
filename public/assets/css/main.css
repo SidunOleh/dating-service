@@ -4150,6 +4150,7 @@ input {
     font-weight: 700;
     border-radius: 6px;
     overflow: hidden;
+    margin-bottom: 32px;
 }
 
 .subscribe .subscribe-Btn img,
@@ -4258,7 +4259,9 @@ input {
     color: #fbfbfb;
     margin: 16px 0;
 }
-
+.subscribe .deposit {
+    margin-top: 32px;
+}
 .subscribe .duposit-rules {
     text-align: center;
     font-size: 15px;
@@ -5865,13 +5868,13 @@ input {
     align-items: center;
     gap: 8px;
     color: #fff;
-    font-weight: 600;
+    font-weight: 400;
     text-align: center;
 }
 
 .referral-out-wrapper .network-icon,
 .deposit-wrapper .network-icon {
-    width: 24px;
+    width: 32px;
 }
 
 .referral-out-wrapper .crypto-address-input div {

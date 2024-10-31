@@ -1,6 +1,6 @@
 <div class="left-card">
     <div class="title">
-        Visit statistis
+        Your Post Stats
     </div>
 
     <div class="statistic-list">
@@ -21,7 +21,7 @@
     <div class="toggle-container">
         <div class="toggle-group">
             <label for="vote-battle">
-                Vote battle
+                Vote Battle
             </label>
             <div class="toggle-body">
                 <span>Disabled</span>
@@ -38,13 +38,13 @@
         </div>
 
         <div class="info-text">
-            <a href="{{ route('faq.page') }}">
-                What is it Roulette?
+            <a href="{{ route('faq.page', ['target' => 'what-is-vote-battle']) }}">
+                What is Vote Battle?
             </a>
         </div>
 
         <div class="toggle-group">
-            <label for="account-visibility">Account visibility</label>
+            <label for="account-visibility">Public Profile</label>
             <div class="toggle-body">
                 <span>Disabled</span>
                 <label class="toggle">

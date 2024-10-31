@@ -557,29 +557,34 @@
                 <!-- Step 1 -->
                 <div class="form-step active" data-step="0">
                     <div class="step-head">
-                        <h2><span>1</span>Platform rules</h2>
+                        <h2><span>1</span>Hey there, it’s <b>Cherry21.</b></h2>
                     </div>
 
                     <div class="step-body">
                         <div class="form-group rules">
                             <p class="title">
-                                Community rules and prohibitions
+                                Welcome to <b>Our Magic Family!</b> 
                             </p>
                             <p>
-                                Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile.
+                                I see you’re ready to create your profile! Before we get started, let’s go over a few simple rules.
+                                It’s all about being <b>friendly</b>  and showing <b>off your unique magic!</b> 
                             </p>
+                            <p><b>Age Requirement:</b> Only users aged <b>21+</b> are allowed.</p>
                             <ul>
                                 <li>
-                                    1. Our platform is cool and safe. Fill out your profile.
+                                    <b>Verification Requirement:</b> If you include nudity in your content, your account must be verified.
                                 </li>
                                 <li>
-                                    2. Our platform is cool and safe. Fill out your profile.
+                                    <b>Personal Content Only:</b> Upload only your own content and respect others uniqueness.
                                 </li>
                                 <li>
-                                    3. Our platform is cool and safe. Fill out your profile.
+                                    <b>Photo Guidelines:</b> Not Allowed any text or graphical elements on images.
                                 </li>
                                 <li>
-                                    4. Our platform is cool and safe. Fill out your profile.
+                                    <b> Text Guidelines:</b> Not Allowed any prices, coded words like "BBJ" or "BBC," or harassment.
+                                </li>
+                                <li>
+                                    <b>Account Deletion:</b> The Cherry21 team reserves the right to delete any account without explanation.
                                 </li>
                             </ul>
                         </div>

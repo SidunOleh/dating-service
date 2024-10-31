@@ -38,7 +38,7 @@
         </div>
 
         <div class="info-text">
-            <a href="{{ route('faq.page', ['target' => 'tip1']) }}">
+            <a href="{{ route('faq.page', ['target' => 'what-is-vote-battle']) }}">
                 What is Vote Battle?
             </a>
         </div>

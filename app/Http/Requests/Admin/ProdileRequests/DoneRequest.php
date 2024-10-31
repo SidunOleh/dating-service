@@ -57,7 +57,7 @@ class DoneRequest extends FormRequest
         $rules['name.status'] = 'in:approved,rejected';
         $rules['name.comment'] = 'string|nullable';
         $rules['age'] = 'array|nullable';
-        $rules['age.value'] = 'integer|min:18|max:100|nullable';
+        $rules['age.value'] = 'integer|min:21|max:100|nullable';
         $rules['age.status'] = 'in:approved,rejected';
         $rules['age.comment'] = 'string|nullable';
         $rules['gender'] = 'array|nullable';

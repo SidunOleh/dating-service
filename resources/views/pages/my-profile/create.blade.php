@@ -572,16 +572,19 @@
                             <p><b>Age Requirement:</b> Only users aged <b>21+</b> are allowed.</p>
                             <ul>
                                 <li>
-                                    1. Our platform is cool and safe. Fill out your profile.
+                                    <b>Verification Requirement:</b> If you include nudity in your content, your account must be verified.
                                 </li>
                                 <li>
-                                    2. Our platform is cool and safe. Fill out your profile.
+                                    <b>Personal Content Only:</b> Upload only your own content and respect others uniqueness.
                                 </li>
                                 <li>
-                                    3. Our platform is cool and safe. Fill out your profile.
+                                    <b>Photo Guidelines:</b> Not Allowed any text or graphical elements on images.
                                 </li>
                                 <li>
-                                    4. Our platform is cool and safe. Fill out your profile.
+                                    <b> Text Guidelines:</b> Not Allowed any prices, coded words like "BBJ" or "BBC," or harassment.
+                                </li>
+                                <li>
+                                    <b>Account Deletion:</b> The Cherry21 team reserves the right to delete any account without explanation.
                                 </li>
                             </ul>
                         </div>

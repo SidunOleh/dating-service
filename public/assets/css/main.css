@@ -5871,10 +5871,13 @@ input {
     font-weight: 600;
     text-align: center;
 }
+.referral-out-wrapper .crypto-name {
+    font-weight: 400;
+}
 
 .referral-out-wrapper .network-icon,
 .deposit-wrapper .network-icon {
-    width: 24px;
+    width: 32px;
 }
 
 .referral-out-wrapper .crypto-address-input div {

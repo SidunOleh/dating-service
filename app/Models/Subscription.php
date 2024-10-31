@@ -26,8 +26,6 @@ class Subscription extends Model
         'unsubscribed' => 'boolean',
     ];
 
-    public const PRICE = 5;
-
     public const MONTHS = 1;
 
     public function creator(): BelongsTo
@@ -37,7 +35,9 @@ class Subscription extends Model
 
     public static function subscribe(Creator $creator): self
     {
-        if (! $creator->debitMoney(self::PRICE)) {
+        $settings = Option::getSettings();
+
+        if (! $creator->debitMoney($settings['subscription_price'])) {
             throw new Exception('Not enough Coins on Balance');
         }
 

@@ -47,7 +47,7 @@
                     Subscription for 1 month:
                     <span>
                         <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
-                        {{ App\Models\Subscription::PRICE }}
+                        {{ $price }}
                     </span>
                 </div>
             </div>

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Cache;
 use Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
 use Staudenmeir\EloquentJsonRelations\Relations\BelongsToJson;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Creator extends Authenticatable
@@ -723,6 +724,7 @@ class Creator extends Authenticatable
     {
         $pair = self::with('gallery')
             ->select('id', 'city', 'state', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photos'),)
+            ->where('id', '!=', Auth::guard('web')?->id())
             ->showOnSite()
             ->playRoulette()
             ->inRandomOrder()

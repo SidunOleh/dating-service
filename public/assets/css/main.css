@@ -4259,7 +4259,9 @@ input {
     color: #fbfbfb;
     margin: 16px 0;
 }
-
+.subscribe .deposit {
+    margin-top: 32px;
+}
 .subscribe .duposit-rules {
     text-align: center;
     font-size: 15px;

@@ -40,7 +40,14 @@ export default {
     methods: {
         async find() {
             if (!this.location.zip) {
-                message.error('Fill all address fields.')
+                this.location = {
+                    zip: null,
+                    state: '',
+                    city: '',
+                    latitude: null,
+                    longitude: null,
+                }
+                this.$emit('change', this.location)
                 return
             }
 

@@ -19,11 +19,17 @@ class UpdateController extends Controller
             CreatorInactivated::dispatch($creator);
         }
 
-        $zip = ZipCode::firstWhere('zip', $validated['zip']);
-        $validated['state'] = $zip->state;
-        $validated['city'] = $zip->city;
-        $validated['latitude'] = $zip->latitude;
-        $validated['longitude'] = $zip->longitude;
+        if ($zip = ZipCode::firstWhere('zip', $validated['zip'])) {
+            $validated['state'] = $zip->state;
+            $validated['city'] = $zip->city;
+            $validated['latitude'] = $zip->latitude;
+            $validated['longitude'] = $zip->longitude;
+        } else {
+            $validated['state'] = null;
+            $validated['city'] = null;
+            $validated['latitude'] = null;
+            $validated['longitude'] = null;
+        }
 
         $deletedPhotos = array_diff(
             $creator->photos ?? [],

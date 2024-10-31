@@ -28,6 +28,6 @@ class ApplyController extends Controller
 
         session(['filters' => $filters,]);
 
-        return redirect()->back();
+        return redirect()->route('home.page');
     }
 }

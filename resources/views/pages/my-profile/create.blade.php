@@ -871,8 +871,7 @@
                                 <textarea 
                                     id="description" 
                                     name="description" 
-                                    placeholder="Allowed: Feel free to share your hobbies and what makes you unique. Just be yourself.
-                                    The Cherry21 team uses AI to adjust anything off-limits or block your account if needed!" 
+                                    placeholder="Allowed: Feel free to share your hobbies and what makes you unique. Just be yourself. The Cherry21 team uses AI to adjust anything off-limits or block your account if needed!" 
                                     maxlength="500"
                                     minlength="250"
                                     v-model="data.description"></textarea>

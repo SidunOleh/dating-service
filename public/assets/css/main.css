@@ -2664,6 +2664,14 @@ input {
         width: 20px !important;
         height: auto !important;
     }
+    .profile .left-side .head-porfile .img-card .likes .btn {
+        width: 40px;
+        height: 40px;
+    }
+    .profile .left-side .head-porfile .img-card .likes .btn svg {
+        width: 20px !important;
+        height: auto !important;
+    }
 }
 
 .profile .left-side .head-porfile .img-card .likes .likes-count {

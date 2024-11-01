@@ -865,7 +865,9 @@
                                 <label for="description">
                                     My Story:*
                                 </label>
-                                <p><b>Not Allowed:</b> Any prices, coded words like "BBJ" or "BBC", or harassment.</p>
+                                <label for="description">
+                                    <p><b>Not Allowed:</b> Any prices, coded words like "BBJ" or "BBC", or harassment.</p>
+                                </label>
                                 <textarea 
                                     id="description" 
                                     name="description" 

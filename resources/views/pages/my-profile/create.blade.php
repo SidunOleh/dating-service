@@ -1007,9 +1007,10 @@
                     <div class="step-body">
                         <div class="form-group">
                             <ol>
-                                <li>1. Photos must be clear.</li>
-                                <li>2. Photos must be uncropped.</li>
-                                <li>3. Photos must be unaltered.</li>
+                                <li><b>Verification Required:</b> You must verify your account to publish nudity or sexual content.</li>
+                                <li><b>Nudity:</b>  This refers to images showing exposed genitals, breasts, or buttocks.</li>
+                                <li><b>Legal Compliance:</b> This is required by law, not just our policy.</li>
+                                <li><b>Non-Nudity:</b> You can skip verification if you’re not posting nudity. Non-verified accounts may appear lower in search results and can be blocked without explanation.</li>
                             </ol>
 
                             <div class="verification-section">

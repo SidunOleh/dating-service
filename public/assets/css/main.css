@@ -3735,6 +3735,7 @@ input {
     text-align: center;
     font-size: 13px;
     font-weight: 300;
+    margin-bottom: 16px;
 }
 .profile-filling .photo-container input[type="file"] {
     display: none;

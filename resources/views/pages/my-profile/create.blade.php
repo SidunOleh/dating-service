@@ -910,7 +910,7 @@
                                     <br />
                                     <span>jpeg, .webp, .heic / file size limit: Up to 10Mb</span>
                                 </p>
-                                <p>Not Allowed:</p>
+                                <p><b>Not Allowed:</b> </p>
                                 <ul>
                                     <li>Photos with added text or graphical elements.</li>
                                     <li>Photos of anyone other than yourself.</li>

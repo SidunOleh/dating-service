@@ -1001,7 +1001,7 @@
                 <!-- Step 6 -->
                 <div class="form-step step-6" data-step="5">
                     <div class="step-head">
-                        <h2><span>6</span> Verification</h2>
+                        <h2><span>6</span> Account Verification</h2>
                     </div>
 
                     <div class="step-body">
@@ -1014,7 +1014,7 @@
 
                             <div class="verification-section">
                                 <label for="document-photo">
-                                    Photo of the document (driver's license)*
+                                   <b>Verification Required:</b>  You must verify your account to publish nudity or sexual content.
                                 </label>
 
                                 <div class="image-card">
@@ -1070,7 +1070,7 @@
 
                             <div class="verification-section">
                                 <label for="permission-photo">
-                                    A photo with "I give permission to use this photo"*
+                                   <b>Nudity:</b> This refers to images showing exposed genitals, breasts, or buttocks.
                                 </label>
                                 
                                 <div class="image-card">

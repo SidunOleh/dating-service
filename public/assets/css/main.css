@@ -563,7 +563,7 @@ input {
 }
 @media screen and (max-width: 1024px) {
     .header-menu {
-        max-width: 350px;
+        max-width: 385px;
     }
 }
 

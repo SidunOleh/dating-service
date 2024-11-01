@@ -3730,7 +3730,12 @@ input {
     font-size: 13px;
     font-weight: 300;
 }
-
+.profile-filling .photo-container ul {
+    color: var(--white, #fbfbfb);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 300;
+}
 .profile-filling .photo-container input[type="file"] {
     display: none;
 }

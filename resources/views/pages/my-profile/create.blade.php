@@ -910,7 +910,13 @@
                                     <br />
                                     <span>jpeg, .webp, .heic / file size limit: Up to 10Mb</span>
                                 </p>
-
+                                <p>Not Allowed:</p>
+                                <ul>
+                                    <li>Photos with added text or graphical elements.</li>
+                                    <li>Photos of anyone other than yourself.</li>
+                                    <li>Blurry or low-quality images.</li>
+                                    <li>Collages or images combining multiple photos.</li>
+                                </ul>
                                 <input 
                                     type="file" 
                                     id="photoInput" 

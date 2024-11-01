@@ -1259,14 +1259,15 @@
                 <!-- Step 7 -->
                 <div class="form-step" data-step="6">
                     <div class="step-head">
-                        <h2><span>7</span> Sending for approval</h2>
+                        <h2><span>7</span> Sending for Approval</h2>
                     </div>
                     <div class="step-body">
                         <div class="form-group">
                             <p class="text">
-                                Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill
-                                out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out
-                                your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile.
+                                Yes, You did it! Thank you for completing your profile! <br>
+                                Approval may take up to 72 hours. <br>
+                                Please double-check all information before submitting. <br>
+                                You won’t be able to change this information <b>until it is approved.</b>
                             </p>
                         </div>
 
@@ -1275,7 +1276,7 @@
                                 class="btn red" 
                                 @click.stop.prevent="send">
                                 <img v-if="loading" src="/assets/img/btn-loader.svg" alt="" class="loader" />
-                                Confirm
+                                Send
                             </button>
                         </div>
                     </div>

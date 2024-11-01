@@ -1015,7 +1015,7 @@
 
                             <div class="verification-section">
                                 <label for="document-photo">
-                                   <b>Verification Required:</b>  You must verify your account to publish nudity or sexual content.
+                                    Photo of your document showing your photo, name and date of birth (e.g., driver's license)*
                                 </label>
 
                                 <div class="image-card">
@@ -1071,7 +1071,7 @@
 
                             <div class="verification-section">
                                 <label for="permission-photo">
-                                   <b>Nudity:</b> This refers to images showing exposed genitals, breasts, or buttocks.
+                                    Photo of yourself holding your document with your face visible*
                                 </label>
                                 
                                 <div class="image-card">
@@ -1127,7 +1127,7 @@
 
                             <div class="verification-section">
                                 <label for="street-photo">
-                                    Street photo*
+                                    Photo of yourself standing outdoors with your face visible*
                                 </label>
                                 
                                 <div class="image-card">

@@ -544,30 +544,35 @@
 
                 <!-- Step 1 -->
                 <div class="form-step active" data-step="0">
-                    <div class="step-head">
-                        <h2><span>1</span>Platform rules</h2>
+                <div class="step-head">
+                        <h2><span>1</span>Hey there, it’s <b>Cherry21.</b></h2>
                     </div>
 
-                    <div class="step-body" v-clock>
+                    <div class="step-body">
                         <div class="form-group rules">
                             <p class="title">
-                                Community rules and prohibitions
+                                Welcome to <b>Our Magic Family!</b> 
                             </p>
                             <p>
-                                Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile.
+                                I see you’re ready to create your profile! Before we get started, let’s go over a few simple rules.
+                                It’s all about being <b>friendly</b>  and showing <b>off your unique magic!</b> 
                             </p>
+                            <p><b>Age Requirement:</b> Only users aged <b>21+</b> are allowed.</p>
                             <ul>
                                 <li>
-                                    1. Our platform is cool and safe. Fill out your profile.
+                                    <b>Verification Requirement:</b> If you include nudity in your content, your account must be verified.
                                 </li>
                                 <li>
-                                    2. Our platform is cool and safe. Fill out your profile.
+                                    <b>Personal Content Only:</b> Upload only your own content and respect others uniqueness.
                                 </li>
                                 <li>
-                                    3. Our platform is cool and safe. Fill out your profile.
+                                    <b>Photo Guidelines:</b> Not Allowed any text or graphical elements on images.
                                 </li>
                                 <li>
-                                    4. Our platform is cool and safe. Fill out your profile.
+                                    <b> Text Guidelines:</b> Not Allowed any prices, coded words like "BBJ" or "BBC," or harassment.
+                                </li>
+                                <li>
+                                    <b>Account Deletion:</b> The Cherry21 team reserves the right to delete any account without explanation.
                                 </li>
                             </ul>
                         </div>
@@ -959,14 +964,15 @@
                     <div class="step-body" v-clock>
                         <div class="form-group">
                             <ol>
-                                <li>1. Photos must be clear.</li>
-                                <li>2. Photos must be uncropped.</li>
-                                <li>3. Photos must be unaltered.</li>
+                                <li><b>Verification Required:</b> You must verify your account to publish nudity or sexual content.</li>
+                                <li><b>Nudity:</b>  This refers to images showing exposed genitals, breasts, or buttocks.</li>
+                                <li><b>Legal Compliance:</b> This is required by law, not just our policy.</li>
+                                <li><b>Non-Nudity:</b> You can skip verification if you’re not posting nudity. Non-verified accounts may appear lower in search results and can be blocked without explanation.</li>
                             </ol>
 
                             <div class="verification-section">
                                 <label for="document-photo">
-                                    Photo of the document (driver's license)
+                                    Photo of your document showing your photo, name and date of birth (e.g., driver's license)*
                                 </label>
                                 
                                 <div class="image-card">
@@ -1024,7 +1030,7 @@
 
                             <div class="verification-section">
                                 <label for="permission-photo">
-                                    A photo with "I give permission to use this photo"
+                                    Photo of yourself holding your document with your face visible*
                                 </label>
                                 
                                 <div class="image-card">
@@ -1082,7 +1088,7 @@
 
                             <div class="verification-section">
                                 <label for="street-photo">
-                                    Street photo
+                                    Photo of yourself standing outdoors with your face visible*
                                 </label>
 
                                 <div class="image-card">
@@ -1142,7 +1148,7 @@
 
                                 <div class="input-wrapper">
                                     <label for="first-name">
-                                        First name*
+                                        First name
                                     </label>
                                     <input 
                                         type="text" 
@@ -1159,7 +1165,7 @@
 
                                 <div class="input-wrapper">
                                     <label for="last-name">
-                                        Last name*
+                                        Last name
                                     </label>
                                     <input 
                                         type="text" 
@@ -1199,15 +1205,16 @@
                 <!-- Step 7 -->
                 <div class="form-step" data-step="6">
                     <div class="step-head">
-                        <h2><span>7</span> Sending for approval</h2>
+                        <h2><span>7</span> Sending for Approval</h2>
                     </div>
 
                     <div class="step-body" v-clock>
                         <div class="form-group">
                             <p class="text">
-                                Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill
-                                out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out
-                                your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile. Our platform is cool and safe. Fill out your profile.
+                                Yes, You did it! Thank you for completing your profile! <br>
+                                Approval may take up to 72 hours. <br>
+                                Please double-check all information before submitting. <br>
+                                You won’t be able to change this information <b>until it is approved.</b>
                             </p>
                         </div>
 

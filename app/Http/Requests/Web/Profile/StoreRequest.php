@@ -75,7 +75,7 @@ class StoreRequest extends FormRequest
             'description.min' => 'Must be 250-500 words',
             'description.max' => 'Must be 250-500 words',
             
-            'photos.required' => 'Photos required',
+            'photos.required' => 'Photo required',
 
             'id_photo.required_with' => 'Photo required',
             'street_photo.required_with' => 'Photo required',

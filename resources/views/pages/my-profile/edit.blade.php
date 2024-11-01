@@ -110,7 +110,7 @@
 
                     photos: [
                         {
-                            message: 'Photos required',
+                            message: 'Photo required',
                             fn: val => val.length >= 1,
                         },
                     ],
@@ -946,7 +946,7 @@
                 <!-- Step 6 -->
                 <div class="form-step step-6" data-step="5">
                     <div class="step-head">
-                        <h2><span>6</span> Verification</h2>
+                        <h2><span>6</span> Account Verification</h2>
                     </div>
 
                     <div class="step-body" v-clock>

@@ -876,7 +876,7 @@
                                     minlength="250"
                                     v-model="data.description"></textarea>
                                 <div class="rule">
-                                    <p>At least 250 characters, no more than 500 characters</p>
+                                    <p>Minimum 250 characters, maximum 500 characters</p>
                                     <p class="characterCount"><span class="counter">0</span> / 500</p>
                                 </div>
                                 <div v-if="errors.description" class="error-text">
@@ -899,7 +899,7 @@
                 <!-- Step 5 -->
                 <div class="form-step" data-step="4">
                     <div class="step-head">
-                        <h2><span>5</span> Add photo</h2>
+                        <h2><span>5</span> Add Photo </h2>
                     </div>
 
                     <div class="step-body">
@@ -908,7 +908,7 @@
                                 <p>
                                     Maximum number of photos: 12
                                     <br />
-                                    <span>.jpeg, .webp, .heic, up to 10MB</span>
+                                    <span>jpeg, .webp, .heic / file size limit: Up to 10Mb</span>
                                 </p>
 
                                 <input 

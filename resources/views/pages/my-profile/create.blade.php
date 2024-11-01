@@ -603,7 +603,7 @@
                 <!-- Step 2 -->
                 <div class="form-step" data-step="1">
                     <div class="step-head">
-                        <h2><span>2</span> Contact information</h2>
+                        <h2><span>2</span> Contact Information</h2>
                     </div>
 
                     <div class="step-body">
@@ -740,7 +740,7 @@
                 <!-- Step 3 -->
                 <div class="form-step" data-step="2">
                     <div class="step-head">
-                        <h2><span>3</span> Add location</h2>
+                        <h2><span>3</span> Your Location</h2>
                     </div>
 
                     <div class="step-body">
@@ -804,7 +804,7 @@
                 <!-- Step 4 -->
                 <div class="form-step" data-step="3">
                     <div class="step-head">
-                        <h2><span>4</span> About you</h2>
+                        <h2><span>4</span> Personal Details</h2>
                     </div>
 
                     <div class="step-body">
@@ -812,7 +812,7 @@
                             
                             <div class="input-wrapper">
                                 <label for="name">
-                                    Your name:*
+                                    Your name for public:*
                                 </label>
                                 <input 
                                     type="text" 
@@ -863,7 +863,7 @@
 
                             <div class="input-wrapper">
                                 <label for="description">
-                                    Description:*
+                                    My Story:*
                                 </label>
                                 <textarea 
                                     id="description" 

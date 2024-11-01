@@ -2743,9 +2743,7 @@ input {
     line-height: normal;
     word-break: break-all;
 }
-.profile .left-side .description textarea::placeholder {
-    font-size: 14px;
-}
+
 .profile .user-photo-list {
     width: 50%;
     display: -webkit-box;

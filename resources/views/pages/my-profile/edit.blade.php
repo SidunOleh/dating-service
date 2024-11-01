@@ -1006,7 +1006,7 @@
                                         class="custom-upload-btn"
                                         data-input="document-photo"
                                         @click="$('#document-photo').click()">
-                                        Upload Photo 
+                                        Upload photo 
                                         <img src="/assets/img/attach.svg" alt="" />
                                     </button>
 
@@ -1016,7 +1016,7 @@
                                         class="custom-remove-btn"
                                         data-img="document-photo-img"
                                         @click="removeVerificationPhoto('id_photo')">
-                                        Remove Photo
+                                        Remove photo
                                     </button>
 
                                 </div>
@@ -1064,7 +1064,7 @@
                                         class="custom-upload-btn"
                                         data-input="permission-photo"
                                         @click="$('#permission-photo').click()">
-                                        Upload Photo 
+                                        Upload photo 
                                         <img id="permission-photo-img" src="/assets/img/attach.svg" alt=""/>
                                     </button>
 
@@ -1074,7 +1074,7 @@
                                         class="custom-remove-btn"
                                         data-img="permission-photo-img"
                                         @click="removeVerificationPhoto('verification_photo')">
-                                        Remove Photo
+                                        Remove photo
                                     </button>
 
                                 </div>
@@ -1122,7 +1122,7 @@
                                         class="custom-upload-btn" 
                                         data-input="street-photo" 
                                         @click="$('#street-photo').click()">
-                                        Upload Photo 
+                                        Upload photo 
                                         <img src="/assets/img/attach.svg" alt="" />
                                     </button>
 
@@ -1132,7 +1132,7 @@
                                         class="custom-remove-btn"
                                         data-img="street-photo-img" 
                                         @click="removeVerificationPhoto('street_photo')">
-                                        Remove Photo
+                                        Remove photo
                                     </button>
 
                                 </div>

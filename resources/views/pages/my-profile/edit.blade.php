@@ -348,89 +348,77 @@
                         this.location.marker.addTo(this.location.map)
                     }
                 },
-
-                async uploadImage(img, watermark) {
-                    const data = new FormData()
-                    data.append('img', img)
-                    data.append('watermark', watermark ? 1 : 0)
-                    
-                    return $.ajax({
-                        type: 'POST',
-                        url: '/images/upload',
-                        data: data,
-                        processData: false,
-                        contentType: false,
-                    })
-                },
-                deleteImage(id) {
-                    return $.ajax({
-                        type: 'DELETE',
-                        url: `/images/${id}`,
-                    })
-                },
-
                 async uploadPhotos(e) {
-                    const files = e.target.files
+                    const files = e.target.files;
                     for (let i = 0; i < files.length; i++) {
-                        if (this.data.photos.length == 12) {
-                            break
+                        if (this.data.photos.length === 12) {
+                            break;
                         }
 
                         if (files[i].size > 10 * 1024 * 1024) {
-                            continue
+                            continue;
                         }
 
                         let photo = {
                             file: files[i],
                             status: 'loading',
-                        }
-                        
-                        this.data.photos.push(photo)
+                        };
+
+                        this.data.photos.push(photo);
 
                         await this.uploadImage(photo.file, true)
                             .then(data => {
-                                photo.id = data.id
-                                photo.url = data.url
-                                photo.status = 'loaded'
+                                photo.id = data.id;
+                                photo.url = data.url;
+                                photo.status = 'loaded';
 
-                                this.data.photos.forEach((item, i) => item.file == photo.file && this.data.photos.splice(i, 1))
-                                this.data.photos.push({...photo})
-                            }).catch(jqXHR => {
-                                this.errors.photos = jqXHR.responseJSON?.message
-
-                                this.data.photos.forEach((item, i) => item.file == photo.file && this.data.photos.splice(i, 1))
+                                this.data.photos.forEach((item, i) => item.file === photo.file && this.data.photos.splice(i, 1));
+                                this.data.photos.push({ ...photo });
                             })
+                            .catch(jqXHR => {
+                                this.errors.photos = jqXHR.responseJSON?.message;
+
+                                this.data.photos.forEach((item, i) => item.file === photo.file && this.data.photos.splice(i, 1));
+                            });
+
+                        updateMoveButtonsVisibility(); // Оновлення видимості кнопок після додавання кожного фото
                     }
 
-                    $(e.target).val(null)
-                },  
+                    $(e.target).val(null);
+                },
+
                 moveUp(i) {
-                    if (i == 0) {
-                        return
+                    if (i === 0) {
+                        return;
                     }
 
-                    const prev = this.data.photos[i-1]
+                    const prev = this.data.photos[i - 1];
+                    this.data.photos[i - 1] = this.data.photos[i];
+                    this.data.photos[i] = prev;
 
-                    this.data.photos[i-1] = this.data.photos[i]
-                    this.data.photos[i] = prev
+                    updateMoveButtonsVisibility(); // Оновлення видимості кнопок після переміщення фото
                 },
+
                 moveDown(i) {
-                    if (i == this.data.photos.length-1) {
-                        return
+                    if (i === this.data.photos.length - 1) {
+                        return;
                     }
 
-                    const next = this.data.photos[i+1]
+                    const next = this.data.photos[i + 1];
+                    this.data.photos[i + 1] = this.data.photos[i];
+                    this.data.photos[i] = next;
 
-                    this.data.photos[i+1] = this.data.photos[i]
-                    this.data.photos[i] = next
+                    updateMoveButtonsVisibility(); // Оновлення видимості кнопок після переміщення фото
                 },
+
                 remove(i) {
-                    if (this.data.photos[i].status == 'loaded') {
-                        this.deleteImage(this.data.photos[i].id)
+                    if (this.data.photos[i].status === 'loaded') {
+                        this.deleteImage(this.data.photos[i].id);
                     }
                     
-                    this.data.photos.splice(i, 1)
-                },
+                    this.data.photos.splice(i, 1);
+                    updateMoveButtonsVisibility(); // Оновлення видимості кнопок після видалення фото
+                }
 
                 uploadVerificationPhoto(photo) {
                     const file = $(`[name=${photo}]`)[0].files[0]

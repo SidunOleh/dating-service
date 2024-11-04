@@ -420,6 +420,18 @@
                     updateMoveButtonsVisibility(); // Оновлення видимості кнопок після видалення фото
                 },
 
+                updateMoveButtonsVisibility() {
+                    const photos = this.data.photos;
+                    const moveButtons = $(".move-button");
+
+                    // Якщо фото немає, приховуємо кнопки
+                    if (photos.length === 0) {
+                        moveButtons.hide();
+                    } else {
+                        moveButtons.show();
+                    }
+                },
+
                 uploadVerificationPhoto(photo) {
                     const file = $(`[name=${photo}]`)[0].files[0]
 

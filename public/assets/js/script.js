@@ -1414,7 +1414,7 @@ $(document).ready(function () {
 });
 
 function updateMoveButtonsVisibility() {
-    const photos = $("#photos");
+    const photos = $("#photos div");
     const moveButtons = $(".move-button");
 
     if (photos.length === 1) {

@@ -5649,13 +5649,19 @@ input {
 }
 
 .faq .faq-content img {
-    width: 100%;
-    height: 300px;
+    width: 40%;
+    height: 350px;
     -o-object-fit: cover;
     object-fit: cover;
     margin: 12px 0;
 }
 
+@media screen and (max-width: 768px) {
+    .faq .faq-content img {
+        width: 100%;
+        height: 350px;
+    }
+}
 .faq .faq-content h2 {
     color: #eaeff3;
     font-size: 20px;

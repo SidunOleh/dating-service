@@ -1412,16 +1412,3 @@ $(document).ready(function () {
         }
     });
 });
-
-function updateMoveButtonsVisibility() {
-    const photos = $("#photos div");
-    const moveButtons = $(".move-button");
-
-    if (photos.length === 1) {
-        moveButtons.hide();
-    } else {
-        moveButtons.show();
-    }
-}
-
-updateMoveButtonsVisibility();

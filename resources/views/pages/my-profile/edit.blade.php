@@ -418,7 +418,7 @@
                     
                     this.data.photos.splice(i, 1);
                     updateMoveButtonsVisibility(); // Оновлення видимості кнопок після видалення фото
-                }
+                },
 
                 uploadVerificationPhoto(photo) {
                     const file = $(`[name=${photo}]`)[0].files[0]

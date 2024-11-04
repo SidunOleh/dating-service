@@ -1114,6 +1114,11 @@ $(document).on("click", ".sidebar-menu-item", function () {
     }
 });
 
+$(document).on("click", ".accordion-item", function () {
+    $(".sidebar").removeClass("open");
+    $("html").removeClass("lock");
+});
+
 //__________________________Transactions__________________________//
 
 $(".open-transaction").click(() => {

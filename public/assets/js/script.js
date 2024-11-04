@@ -1417,7 +1417,7 @@ function updateMoveButtonsVisibility() {
     const photos = $("#photos");
     const moveButtons = $(".move-button");
 
-    if (photos.length === 0) {
+    if (photos.length === 1) {
         moveButtons.hide();
     } else {
         moveButtons.show();

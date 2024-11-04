@@ -1108,8 +1108,10 @@ $(document).ready(function () {
 });
 
 $(document).on("click", ".sidebar-menu-item", function () {
-    $(".sidebar").removeClass("open");
-    $("html").removeClass("lock");
+    if (!$(this).hasClass("accordion")) {
+        $(".sidebar").removeClass("open");
+        $("html").removeClass("lock");
+    }
 });
 
 //__________________________Transactions__________________________//

@@ -1372,14 +1372,9 @@
                             1 < s && K(c),
                             1 < s &&
                                 Q(
-                                    e
-                                        .slice(0, s - 1)
-                                        .concat({
-                                            value:
-                                                " " === e[s - 2].type
-                                                    ? "*"
-                                                    : "",
-                                        })
+                                    e.slice(0, s - 1).concat({
+                                        value: " " === e[s - 2].type ? "*" : "",
+                                    })
                                 ).replace(ve, "$1"),
                             t,
                             s < n && te(e.slice(s, n)),
@@ -16698,15 +16693,7 @@ $(document).ready(function () {
         }
     });
 });
-$(document).ready(function () {
-    if ($("header .advertising-banner").length) {
-        $(".open-faq").css("top", "93px");
-        $(".sidebar.open").css("top", "93px");
-    } else {
-        $(".open-faq").css("top", "60px");
-        $(".sidebar.open").css("top", "60px");
-    }
-});
+
 $(document).on("click", ".sidebar-menu-item", function () {
     $(".sidebar").removeClass("open");
     $("html").removeClass("lock");

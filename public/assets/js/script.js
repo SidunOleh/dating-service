@@ -1024,6 +1024,17 @@ $(document).ready(function () {
     }
     $(".search-input").on("input", function () {
         var query = $(this).val().toLowerCase().trim();
+        displaySearchResults(query);
+    });
+
+    $(".search-input").on("focus", function () {
+        var query = $(this).val().toLowerCase().trim();
+        if (query) {
+            $(".search-result").show();
+        }
+    });
+
+    function displaySearchResults(query) {
         var $searchResult = $(".search-result");
         $searchResult.empty();
 
@@ -1076,7 +1087,7 @@ $(document).ready(function () {
         } else {
             $searchResult.hide();
         }
-    });
+    }
 
     $(document).on("click", function (event) {
         if (!$(event.target).closest(".search-wrapper").length) {

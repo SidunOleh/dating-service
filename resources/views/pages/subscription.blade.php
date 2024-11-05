@@ -196,10 +196,10 @@
     <div class="unsubcribe-card">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="text">
-            Your subscription will be active until <span>xx.xx.xxxx.</span> After this date, you will be able to renew your subscription.
+            Your subscription is active until: <span>xx.xx.xxxx.</span> Cancel your renewal?
         </p>
         <div class="btn red">
-            Confirm
+            Cancel
         </div>
     </div>
 </div>

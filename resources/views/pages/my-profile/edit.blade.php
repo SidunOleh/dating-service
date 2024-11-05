@@ -279,21 +279,35 @@
                         '(' + phone[1] + ') ' + phone[2] + (phone[3] ? '-' + phone[3] : '')
                 },
                 formatDate(e) {
-                    let birthday = this.data.birthday.replace(/\D/g, "").substring(0, 8)
-                    let day = birthday.substring(0, 2)
-                    let month = birthday.substring(2, 4)
-                    let year = birthday.substring(4, 8)
+                    let birthday = this.data.birthday.replace(/\D/g, "").substring(0, 8);
+                    let day = parseInt(birthday.substring(0, 2), 10);
+                    let month = parseInt(birthday.substring(2, 4), 10);
+                    let year = parseInt(birthday.substring(4, 8), 10);
 
-                    if (birthday.length >= 5) {
-                        this.data.birthday = day + "/" + month + "/" + year
-                    } else if (birthday.length >= 3) {
-                        this.data.birthday = day + "/" + month
-                    } else if (birthday.length >= 1) {
-                        this.data.birthday = day
-                    } else {
-                        this.data.birthday = ''
+                    // Поточний рік мінус 21
+                    const currentYear = new Date().getFullYear() - 21;
+
+                    // Перевірка на максимальні значення
+                    if (day > 31) day = 31;
+                    if (month > 12) month = 12;
+                    if (year > currentYear) year = currentYear;
+
+                    let formattedDate = '';
+
+                    // Формування дати з обмеженнями
+                    if (birthday.length >= 2) {
+                        formattedDate += String(day).padStart(2, '0'); // День з двома цифрами
                     }
-                },
+                    if (birthday.length >= 4) {
+                        formattedDate += '/' + String(month).padStart(2, '0'); // Місяць з двома цифрами
+                    }
+                    if (birthday.length === 8) {
+                        formattedDate += '/' + year; // Рік
+                    }
+
+                    this.data.birthday = formattedDate;
+                }
+
                 
                 async search() {
                     this.location.loading = true

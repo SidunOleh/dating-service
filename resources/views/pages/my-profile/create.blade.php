@@ -948,12 +948,12 @@
                                             src="/assets/img/img-loading.webp">
 
                                         <button 
-                                            v-if="data.photos.length" 
+                                            v-if="data.photos.length > 1" 
                                             class="move-button move-up" 
                                             type="button" 
                                             @click="moveUp(i)">↑</button>
                                         <button 
-                                            v-if="data.photos.length" 
+                                            v-if="data.photos.length > 1" 
                                             class="move-button move-down" 
                                             type="button" 
                                             @click="moveDown(i)">↓</button>

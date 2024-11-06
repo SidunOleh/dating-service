@@ -49,7 +49,7 @@
 <x-slot:subcopy>
 <div style="text-align: center;">
 @lang(
-    "If you’re having trouble with the \":actionText\" button, copy and paste this URL into your browser: :actionUrl",
+    "If you’re having trouble with the \":actionText\" button, copy and paste this URL into your browser: <b>:actionUrl</b>",
     [
         'actionText' => $actionText,
         'actionUrl' => $actionUrl,

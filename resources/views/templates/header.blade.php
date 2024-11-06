@@ -10,6 +10,7 @@
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Cherry21">
+    <meta property="og:description" content="Our Magic Family">
     <meta property="og:image" content="{{ asset("assets/img/Cherry21.jpg") }}">
 
     <title>{{ ($title ?? '') ? $title . ' - ' . config('app.name') : config('app.name') }}</title>

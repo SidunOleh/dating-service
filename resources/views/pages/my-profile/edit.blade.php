@@ -911,12 +911,10 @@
                                             :src="photo.url">
 
                                         <button 
-                                            v-if="data.photos.length > 1" 
                                             class="move-button move-up" 
                                             type="button" 
                                             @click="moveUp(i)">↑</button>
                                         <button 
-                                            v-if="data.photos.length > 1" 
                                             class="move-button move-down" 
                                             type="button" 
                                             @click="moveDown(i)">↓</button>

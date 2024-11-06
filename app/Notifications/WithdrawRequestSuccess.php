@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class WithdrawRequestSuccess extends Notification
 {
@@ -38,7 +39,8 @@ class WithdrawRequestSuccess extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Your withdraw request was successfully finished.')
+            ->subject('Cherry21 Withdrawal Approved')
+            ->line(new HtmlString("<div style=\"text-align: center;\">Your withdrawal is <b>Approved!</b></div>"))
             ->action('Go to Site', url('/'));
     }
 

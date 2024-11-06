@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class WithdrawRequestRejected extends Notification
 {
@@ -38,7 +39,9 @@ class WithdrawRequestRejected extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('Your withdraw request was rejected.')
+            ->subject('Cherry21 Withdrawal Declined')
+            ->line(new HtmlString("<div style=\"text-align: center;\">Your withdrawal was <b>Declined!</b></div>"))
+            ->line(new HtmlString("<div style=\"text-align: center;\">Contact our team for help.</div>"))
             ->action('Go to Site', url('/'));
     }
 

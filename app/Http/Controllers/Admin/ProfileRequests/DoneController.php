@@ -21,9 +21,7 @@ class DoneController extends Controller
         $profileRequest->update($data);
         $profileRequest->migrateDataToProfile();
 
-        if ($profileRequest->creator->is_approved) {
-            ProfileApproved::dispatch($profileRequest->creator);
-        }
+        ProfileApproved::dispatch($profileRequest->creator);
 
         $profileRequest->creator->secondLastProfileRequest()?->deleteRejectedPhotos();
 

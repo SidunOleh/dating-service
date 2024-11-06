@@ -8,6 +8,10 @@
     <meta name="description" content="{{ config('app.name') }}">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cherry21">
+    <meta property="og:image" content="{{ asset("assets/img/Cherry21.jpg") }}">
+
     <title>{{ ($title ?? '') ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
 
     <link rel="icon" type="image/svg" href="/favicon.svg">

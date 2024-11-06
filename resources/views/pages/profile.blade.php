@@ -108,9 +108,9 @@
                 <div class="user-photo-item">
                     <div class="subscribe">
                         @if(!auth('web')->check())
-                            <p>Log in, to get full access!</p>
+                            <p>Log In, to get full access!</p>
                             <div class="btn red login">
-                                Log in
+                                Log In
                             </div>
                         @else
                             <p>Subscribe, to get full access!</p>

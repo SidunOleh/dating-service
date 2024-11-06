@@ -10,7 +10,7 @@ $isResetPage = request()->query('token') and request()->query('email');
         </div>
         
         <p class="title">
-            Sign up
+            Sign Up
         </p>
 
         <form id="sign-up">
@@ -72,14 +72,14 @@ $isResetPage = request()->query('token') and request()->query('email');
                 value="{{ request()->route()?->getName() == 'profile.page' ? (isset($creator) ? $creator->id : '') : '' }}">
 
             <button type="submit" class="submit btn red" disabled>
-                Sign up
+                Sign Up
             </button>
         </form>
 
         <div class="text-error"></div>
 
         <p class="switch-to-login">
-            Have an account? <span class="login-link">Log in</span>
+            Have an account? <span class="login-link">Log In</span>
         </p>
     </div>
 
@@ -89,7 +89,7 @@ $isResetPage = request()->query('token') and request()->query('email');
         </div>
 
         <p class="title">
-            Log in
+            Log In
         </p>
         
         <form id="sign-in">
@@ -128,7 +128,7 @@ $isResetPage = request()->query('token') and request()->query('email');
             </div>
 
             <button type="submit" class="submit btn red" disabled>
-                Log in
+                Log In
             </button>
             
         </form>
@@ -136,7 +136,7 @@ $isResetPage = request()->query('token') and request()->query('email');
         <div class="text-error"></div>
 
         <p class="switch-to-signup">
-            Don’t have an account? <span class="signup-link">Sign up</span>
+            Don’t have an account? <span class="signup-link">Sign Up</span>
         </p>
     </div>
 
@@ -220,7 +220,7 @@ $isResetPage = request()->query('token') and request()->query('email');
             Your password has been successfully changed
         </p>
         <div class="btn red login">
-            Log in
+            Log In
         </div>
     </div>
 

@@ -54,10 +54,10 @@
 
                 <div class="right">
                     <div class="btn red login">
-                        Log in
+                        Log In
                     </div>
                     <div class="btn signup">
-                        Sign up
+                        Sign Up
                     </div>
                 </div>
 

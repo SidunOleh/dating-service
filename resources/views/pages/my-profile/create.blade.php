@@ -254,7 +254,18 @@
                         {
                             message: 'Date is invalid',
                             fn: (val, data) => {
-                                return ! val || ! isNaN(Date.parse(val))
+                                if (!val || isNaN(Date.parse(val))) return false;
+                                
+                                const [month, day, year] = val.split('/').map(Number);
+
+                                const currentYear = new Date().getFullYear();
+                                const minYear = currentYear;
+
+                                return (
+                                    month >= 1 && month <= 12 &&
+                                    day >= 1 && day <= 31 &&
+                                    year <= minYear
+                                );
                             },
                         },
                     ],
@@ -557,11 +568,12 @@
                 <!-- Step 1 -->
                 <div class="form-step active" data-step="0">
                     <div class="step-head">
-                        <h2><span>1</span>Hey there, it’s <b>Cherry21.</b></h2>
+                        <h2><span>1</span>Cherry's rules</h2>
                     </div>
 
                     <div class="step-body">
                         <div class="form-group rules">
+                            <p class="title">Hey there, it’s <b>Cherry21.</b></p>
                             <p class="title">
                                 Welcome to <b>Our Magic Family!</b> 
                             </p>

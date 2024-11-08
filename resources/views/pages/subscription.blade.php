@@ -25,13 +25,13 @@
 
             @if($creator->activeSub and ! $creator->activeSub->unsubscribed)
             <p class="renewal">
-                Renewal Date: <span>{{ $creator->activeSub->ends_at->format('d.m.Y') }}</span>
+                Renewal Date: <span>{{ $creator->activeSub->ends_at->format('M d, Y') }}</span>
             </p>
             @endif
 
             @if($creator->activeSub and $creator->activeSub->unsubscribed)
             <div class="end-date">
-                Subscription end date: <span>{{ $creator->activeSub->ends_at->format('d.m.Y') }}</span>
+                Subscription end date: <span>{{ $creator->activeSub->ends_at->format('M d, Y') }}</span>
             </div>
             @endif
 

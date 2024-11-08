@@ -259,7 +259,7 @@
                                 const [month, day, year] = val.split('/').map(Number);
 
                                 const currentYear = new Date().getFullYear();
-                                const minYear = currentYear - 21;
+                                const minYear = currentYear;
 
                                 return (
                                     month >= 1 && month <= 12 &&

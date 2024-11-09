@@ -2475,7 +2475,7 @@ input {
 }
 
 .profile .info-group.pending:after {
-    content: "Pending up to 72h...";
+    content: "Pending approval! \A This may take up to 72 hours.";
     position: absolute;
     left: 0;
     top: 0;

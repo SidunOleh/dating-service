@@ -196,7 +196,7 @@
     <div class="unsubcribe-card">
         <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         <p class="text">
-            Your subscription is active until: <span>xx.xx.xxxx.</span> Cancel your renewal?
+            Your subscription is active until: <span>xx.xx.xxxx.</span> <br> Cancel your renewal?
         </p>
         <div class="btn red">
             Cancel

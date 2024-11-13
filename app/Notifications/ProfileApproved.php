@@ -36,10 +36,9 @@ class ProfileApproved extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Cherry21 You are Online')
-            ->line(new HtmlString("<div style=\"text-align: center;\">Hi there,</div>"))
-            ->line(new HtmlString("<div style=\"text-align: center;\">Congratulations!</div>"))
-            ->line(new HtmlString("<div style=\"text-align: center;\">Your profile has been approved, and you are Online.</div>"))
+            ->subject('Cherry21 Profile Updated')
+            ->line(new HtmlString("<div style=\"text-align: center;\">Your public profile has been <b>Updated!</b></div>"))
+            ->line(new HtmlString("<div style=\"text-align: center;\">Take a look at all the changes on your My Post page.</div>"))
             ->action('Go to Site', url('/'));
     }
 

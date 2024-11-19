@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        @if($creator->profile_is_created)
+        @if($creator->profile_is_created and ! $creator->hasUndoneProfileRequest())
         <div class="info-text">
             <p class="delete-acc">
                 Delete your profile

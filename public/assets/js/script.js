@@ -84,12 +84,16 @@ $(".img-slider").each(function () {
     var $slider = $(this);
     var $parent = $slider.closest(".user-image");
 
-    $slider.slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        prevArrow: $parent.find(".prev"),
-        nextArrow: $parent.find(".next"),
-    });
+    if ($slider.find(".slick-slide").length <= 1) {
+        $parent.find(".prev, .next").hide();
+    } else {
+        $slider.slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: $parent.find(".prev"),
+            nextArrow: $parent.find(".next"),
+        });
+    }
 });
 
 //_________________________Popups___________________________//

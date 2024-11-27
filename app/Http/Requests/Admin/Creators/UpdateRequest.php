@@ -45,7 +45,7 @@ class UpdateRequest extends FormRequest
             'photos' => 'array|max:12|nullable',
             'photos.*' => 'exists:images,id',
 
-            'name' => 'string|min:2|max:8|nullable',
+            'name' => 'string|min:2|max:12|nullable',
             'age' => 'integer|between:21,100|nullable',
             'gender' => 'in:Man,Woman,LGBTQIA+|nullable',
             'description' => 'string|min:250|max:500|nullable',

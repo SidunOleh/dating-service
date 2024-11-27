@@ -27,8 +27,8 @@
                 rules: {
                     phone: [
                         {
-                            message: 'One from Phone, Telegram, Whatsapp fields required',
-                            fn: (val, data) => Boolean(val || data.telegram || data.whatsapp),
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.onlyfans || data.profile_email),
                         },
                         {
                             message: 'Invalid format',
@@ -37,17 +37,39 @@
                     ],
                     telegram: [
                         {
-                            message: 'One from Phone, Telegram, Whatsapp fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.whatsapp),
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.phone || data.whatsapp || data.instagram || data.snapchat || data.onlyfans || data.profile_email),
                         },
                     ],
                     whatsapp: [
                         {
-                            message: 'One from Phone, Telegram, Whatsapp fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.telegram),
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.instagram || data.snapchat || data.onlyfans || data.profile_email),
+                        },
+                    ],
+                    instagram: [
+                        {
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.snapchat || data.onlyfans || data.profile_email),
+                        },
+                    ],
+                    snapchat: [
+                        {
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.onlyfans || data.profile_email),
+                        },
+                    ],
+                    onlyfans: [
+                        {
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.profile_email),
                         },
                     ],
                     profile_email: [
+                        {
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.onlyfans),
+                        },
                         {
                             message: 'Invalid format',
                             fn: val => Boolean(! val || val.match(/^\S+@\S+\.\S+$/))
@@ -75,8 +97,8 @@
                             fn: val => val.length >= 2,
                         },
                         {
-                            message: 'Up to 8 letters',
-                            fn: val => val.length <= 8,
+                            message: 'Up to 12 letters',
+                            fn: val => val.length <= 12,
                         },
                     ],
                     age: [

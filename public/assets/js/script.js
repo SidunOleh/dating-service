@@ -84,12 +84,18 @@ $(".img-slider").each(function () {
     var $slider = $(this);
     var $parent = $slider.closest(".user-image");
 
-    $slider.slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        prevArrow: $parent.find(".prev"),
-        nextArrow: $parent.find(".next"),
-    });
+    // Перевірка кількості слайдів
+    if ($slider.find(".slick-slide").length <= 1) {
+        $parent.find(".prev, .next").hide(); // Приховати стрілки
+    } else {
+        // Ініціалізація Slick Slider
+        $slider.slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: $parent.find(".prev"),
+            nextArrow: $parent.find(".next"),
+        });
+    }
 });
 
 //_________________________Popups___________________________//

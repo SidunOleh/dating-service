@@ -84,11 +84,9 @@ $(".img-slider").each(function () {
     var $slider = $(this);
     var $parent = $slider.closest(".user-image");
 
-    // Перевірка кількості слайдів
     if ($slider.find(".slick-slide").length <= 1) {
-        $parent.find(".prev, .next").hide(); // Приховати стрілки
+        $parent.find(".prev, .next").hide();
     } else {
-        // Ініціалізація Slick Slider
         $slider.slick({
             slidesToShow: 1,
             slidesToScroll: 1,

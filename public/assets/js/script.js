@@ -84,7 +84,7 @@ $(".img-slider").each(function () {
     var $slider = $(this);
     var $parent = $slider.closest(".user-image");
 
-    if ($slider.find(".slick-slide").length <= 1) {
+    if ($slider.children().length <= 1) {
         $parent.find(".prev, .next").hide();
     } else {
         $slider.slick({

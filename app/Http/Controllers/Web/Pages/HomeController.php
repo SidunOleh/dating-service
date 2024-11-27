@@ -13,6 +13,7 @@ class HomeController extends Controller
     public function __invoke(Request $request, int $page = 1)
     {
         $filters = session('filters', []);
+        $filters['s'] = $request->query('s');
 
         $template = Template::inRandomOrder()->firstOrFail();
         $template->setPage($page)

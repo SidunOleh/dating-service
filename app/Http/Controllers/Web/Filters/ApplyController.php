@@ -11,19 +11,18 @@ class ApplyController extends Controller
     public function __invoke(Request $request)
     {
         $filters = [];
-        $filters['s'] = $request->query('s');
         $filters['gender'] = $request->query('gender');
+        $filters['zip'] = $request->query('zip');
+        $filters['miles'] = $request->query('miles');
 
-        if (
-            $zip = $request->query('zip') and
-            $zipCode = ZipCode::where('zip', $zip)->first() and
-            $miles = $request->query('miles')
+        if ( 
+            $filters['zip'] and 
+            $filters['miles'] and 
+            $zipCode = ZipCode::where('zip', $filters['zip'])->first() 
         ) {
-            $filters['zip'] = $zip;
-            $filters['miles'] = $miles;
             $filters['center']['lat'] = $zipCode->latitude;
             $filters['center']['lng'] = $zipCode->longitude;
-            $filters['radius'] = $miles * 1609;
+            $filters['radius'] = $filters['miles'] * 1609;
         }
 
         session(['filters' => $filters,]);

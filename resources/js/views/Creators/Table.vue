@@ -5,6 +5,17 @@
         placeholder="Search"
         v-model:value="query.q"/>
 
+    <Flex 
+        style="margin-bottom: 15px;"
+        :gap="10">
+        <div>
+            <b>Accounts:</b> {{ data?.meta?.total_creators }}
+        </div>
+        <div>
+            <b>Profiles:</b> {{ data?.meta?.total_profiles }}
+        </div>
+    </Flex>
+
     <Table
         :columns="columns"
         :dataSource="data.data"
@@ -84,7 +95,7 @@
 </template>
 
 <script>
-import { Table, Tooltip, Tag, message, Input, Image, } from 'ant-design-vue'
+import { Table, Tooltip, Tag, message, Input, Image, Flex, } from 'ant-design-vue'
 import EditIcon from '../icons/Edit.vue'
 import DeleteIcon from '../icons/Delete.vue'
 import creatorsApi from '../../api/creators'
@@ -93,7 +104,7 @@ export default {
     components: {
         Table, Tooltip, Tag,
         EditIcon, DeleteIcon, Input,
-        Image,
+        Image, Flex,
     },
     data() {
         return {

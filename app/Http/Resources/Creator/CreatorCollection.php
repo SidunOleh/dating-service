@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Creator;
 
+use App\Models\Creator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -26,10 +27,15 @@ class CreatorCollection extends ResourceCollection
             $data[$i]['created_at'] = $creator->created_at;
         }
 
+        $totalCreators = Creator::count();
+        $totalProfiles = Creator::where('profile_is_created', true)->count();
+
         $meta = [
             'current_page' => $this->currentPage(),
             'per_page' => $this->perPage(),
             'total' => $this->total(),
+            'total_creators' => $totalCreators,
+            'total_profiles' => $totalProfiles,
         ];
 
         return [

@@ -15,14 +15,13 @@
             <div class="slide">
                 @if($i == 0)
                 <img 
-                    src="{{ asset('assets/img/placeholder.png') }}" 
-                    data-src="{{ $img->getUrl() }}" 
-                    class="lazyload"
+                    src="{{ $img->getUrl() }}" 
                     alt="image" />
                 @else
                 <img 
                     src="{{ asset('assets/img/placeholder.png') }}" 
-                    src="{{ $img->getUrl() }}" 
+                    data-src="{{ $img->getUrl() }}" 
+                    class="lazyload"
                     alt="image" />
                 @endif
             </div>

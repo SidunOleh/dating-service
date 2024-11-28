@@ -18,7 +18,6 @@
 
 
 <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
-<!-- <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.key') }}"></script> -->
 
 @if(Route::currentRouteName() == 'subscription.page')
 <script src="{{ asset('assets/js/qrcode.min.js') }}"></script>
@@ -29,14 +28,6 @@
 <script>
     // disable context menu
     // document.addEventListener('contextmenu', event => event.preventDefault())
-
-    // recaptcha
-    // function getReCaptchaV3(action) {
-    //     return new Promise((resolve, reject) => grecaptcha.ready(() => grecaptcha
-    //         .execute("{{ config('services.recaptcha.key') }}", {action,})
-    //         .then(resolve))
-    //     )
-    // }
 
     // lazy load
     const load = () => {

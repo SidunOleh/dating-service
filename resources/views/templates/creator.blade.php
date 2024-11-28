@@ -11,13 +11,20 @@
             $imgs = auth('web')->user()?->activeSub ? $imgs : $imgs->slice(0, 3);
             @endphp
 
-            @foreach($imgs as $img)
+            @foreach($imgs as $i => $img)
             <div class="slide">
+                @if($i == 0)
                 <img 
                     src="{{ asset('assets/img/placeholder.png') }}" 
                     data-src="{{ $img->getUrl() }}" 
                     class="lazyload"
                     alt="image" />
+                @else
+                <img 
+                    src="{{ asset('assets/img/placeholder.png') }}" 
+                    src="{{ $img->getUrl() }}" 
+                    alt="image" />
+                @endif
             </div>
             @endforeach
         </div>

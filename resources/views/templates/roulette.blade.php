@@ -27,9 +27,7 @@
 
             <div class="photo-container photo" id="photo1" data-id="{{ $pair[0]->id }}">
                 <img
-                    src="{{ asset('assets/img/placeholder.png') }}" 
-                    data-src="{{ $pair[0]->gallery->random()->url }}" 
-                    class="lazyload" 
+                    src="{{ $pair[0]->gallery->random()->url }}" 
                     alt="image" />
                 <div class="info right">
                     {{ $pair[0]->city }}, {{ $pair[0]->state }}
@@ -38,9 +36,7 @@
             
             <div class="photo-container photo" id="photo2" data-id="{{ $pair[1]->id }}">
                 <img
-                    src="{{ asset('assets/img/placeholder.png') }}" 
-                    data-src="{{ $pair[1]->gallery->random()->url }}" 
-                    class="lazyload" 
+                    src="{{ $pair[1]->gallery->random()->url }}" 
                     alt="image" />
                 <div class="info left">
                     {{ $pair[0]->city }}, {{ $pair[0]->state }}

@@ -8,9 +8,3 @@ body {
     margin-left: -12px;
     margin-top: -41px;
 }
-
-@media (max-width: 768px) {
-    .popUp-wrapper .loading {
-        border-radius: 0 !important;
-    }
-}

@@ -1,4 +1,4 @@
-@include('templates.header', ['title' => $creator->name,])
+@include('templates.header', ['title' => $creator->name, 'description' => $creator->description,])
 
 <section class="profile">
     <div class="container">

@@ -15,6 +15,8 @@
 
     <title>{{ ($title ?? '') ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
 
+    <meta name="description" content="{{ $description ?? 'Our Magic Family. 21+ Only!' }}">
+
     <link rel="icon" type="image/svg" href="/favicon.svg">
 
     @if(in_array(Route::currentRouteName(), ['profile.page', 'my-profile.show',]))

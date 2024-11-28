@@ -11,6 +11,6 @@ body {
 
 @media (max-width: 768px) {
     .popUp-wrapper .loading {
-        border: 0 !important;
+        border-radius: 0 !important;
     }
 }

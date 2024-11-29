@@ -286,6 +286,7 @@ if (DS.ads?.data && DS.ads?.settings) {
                 "click",
                 ".advertising-close-timer.enabled",
                 () => {
+                    $(".advertising-link").removeAttr("clicked");
                     this.hide();
                 }
             );
@@ -295,7 +296,10 @@ if (DS.ads?.data && DS.ads?.settings) {
             });
 
             $(".advertising-link").bind("auxclick click", function () {
-                $.post(`/ads/${$(this).data("id")}/click`);
+                if ($(this).attr("clicked") != 'true') {
+                    $(this).attr("clicked", 'true');
+                    $.post(`/ads/${$(this).data("id")}/click`);
+                }
             });
 
             this.interval = setInterval(() => {

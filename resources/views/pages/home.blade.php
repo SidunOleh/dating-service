@@ -20,18 +20,27 @@
         @if($template->total())
             <div class="users-list">
 
-                @foreach($template->data() as $block)
+                @foreach($template->data() as $i => $block)
 
                     @if($block instanceof App\Models\Creator)
-                        @include('templates.creator', ['creator' => $block,])
+                        @include('templates.creator', [
+                            'creator' => $block, 
+                            'position' => $i,
+                        ])
                     @endif
 
                     @if($block instanceof App\Models\Ad)
-                        @include('templates.ad', ['ad' => $block,])
+                        @include('templates.ad', [
+                            'ad' => $block, 
+                            'position' => $i,
+                        ])
                     @endif
 
                     @if(is_array($block))
-                        @include('templates.roulette', ['pair' => $block,])
+                        @include('templates.roulette', [
+                            'pair' => $block, 
+                            'position' => $i,
+                        ])
                     @endif
 
                 @endforeach

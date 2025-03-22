@@ -1,0 +1,75 @@
+on:
+  push: 
+    branches: [dev]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
+
+      - run: |
+          cp .env.dev .env
+          sed -i 's/DB_HOST=/DB_HOST=${{ secrets.DEV_DB_HOST }}/g' .env
+          sed -i 's/DB_PORT=/DB_PORT=${{ secrets.DEV_DB_PORT }}/g' .env
+          sed -i 's/DB_DATABASE=/DB_DATABASE=${{ secrets.DEV_DB_DATABASE }}/g' .env
+          sed -i 's/DB_USERNAME=/DB_USERNAME=${{ secrets.DEV_DB_USERNAME }}/g' .env
+          sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.DEV_DB_PASSWORD }}/g' .env
+          sed -i 's/MAIL_HOST=/MAIL_HOST=${{ secrets.DEV_MAIL_HOST }}/g' .env
+          sed -i 's/MAIL_PORT=/MAIL_PORT=${{ secrets.DEV_MAIL_PORT }}/g' .env
+          sed -i 's/MAIL_USERNAME=/MAIL_USERNAME=${{ secrets.DEV_MAIL_USERNAME }}/g' .env
+          sed -i 's/MAIL_PASSWORD=/MAIL_PASSWORD="${{ secrets.DEV_MAIL_PASSWORD }}"/g' .env
+          sed -i 's/PLISIO_SECRET_KEY=/PLISIO_SECRET_KEY=${{ secrets.PLISIO_SECRET_KEY }}/g' .env
+          sed -i 's/RECAPTCHA_SITE_KEY=/RECAPTCHA_SITE_KEY=${{ secrets.DEV_RECAPTCHA_SITE_KEY }}/g' .env
+          sed -i 's/RECAPTCHA_SECRET_KEY=/RECAPTCHA_SECRET_KEY=${{ secrets.DEV_RECAPTCHA_SECRET_KEY }}/g' .env
+          sed -i 's/PASSIMPAY_PLATFORM_ID=/PASSIMPAY_PLATFORM_ID=${{ secrets.PASSIMPAY_PLATFORM_ID }}/g' .env
+          sed -i 's/PASSIMPAY_SECRET_KEY=/PASSIMPAY_SECRET_KEY=${{ secrets.PASSIMPAY_SECRET_KEY }}/g' .env
+
+      - run: php artisan key:generate
+          
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - run: |
+          npm install
+          npm run build
+          npm run bundle-js
+          rm -rf node_modules
+
+      - uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.DEV_SERVER_IP }}
+          username: ${{ secrets.DEV_SERVER_USERNAME }}
+          password: ${{ secrets.DEV_SERVER_PASSWORD }}
+          port: 22
+          source: './'
+          target: '/var/www/date'
+
+      - uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SERVER_IP }}
+          username: ${{ secrets.DEV_SERVER_USERNAME }}
+          password: ${{ secrets.DEV_SERVER_PASSWORD }}
+          port: 22
+          script: |
+              cd /var/www/date
+              chown -R www-data:www-data .
+              find . -type d -exec chmod 755 {} \;
+              chmod -R 775 storage bootstrap/cache
+              find . -type f -exec chmod 644 {} \;
+              php artisan storage:link
+              php artisan optimize:clear
+              php artisan config:cache
+              php artisan event:cache
+              php artisan route:cache
+              php artisan view:cache
+              php artisan passimpay:rates
+              

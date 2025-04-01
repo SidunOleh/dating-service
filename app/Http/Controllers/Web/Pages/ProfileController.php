@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\Creator;
+use App\Models\Option;
 
 class ProfileController extends Controller
 {
@@ -23,9 +24,12 @@ class ProfileController extends Controller
             session('filters', [])
         );
 
+        $settings = Option::getSettings();
+
         return view('pages.profile', [
             'creator' => $creator,
             'recommends' => $recommends,
+            'show_contacts' => $settings['show_contacts'],
         ]);
     }
 }

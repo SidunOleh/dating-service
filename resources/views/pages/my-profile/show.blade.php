@@ -46,7 +46,7 @@
             <div class="user-info-list info-group {{ $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) }}">
                 <p class="info-title">
                     <img src="{{ asset('/assets/img/user-card.svg') }}" alt="" /> 
-                    Your сontact information
+                    Your Get in Touch
                 </p>
 
                 @if($data['phone']['value'])
@@ -143,7 +143,7 @@
             <div class="description info-group {{ $data['description']['status'] }}">
                 <p class="info-title">
                     <img src="{{ asset('/assets/img/description.svg') }}" alt="" /> 
-                    Your descrittion
+                    Your Story
                 </p>
 
                 {{ $data['description']['value'] }}

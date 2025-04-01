@@ -107,6 +107,19 @@
 
             </CollapsePanel>
 
+            <CollapsePanel 
+                header="Other settings"
+                :showArrow="false"
+                :key="5">
+
+                <FormItem
+                    label="Show contacts for non logged user"
+                    :required="true">
+                    <Switch v-model:checked="settings.show_contacts"/>
+                </FormItem>
+
+            </CollapsePanel>
+
         </Collapse>
 
         <Button
@@ -130,7 +143,7 @@ export default {
     },
     data() {
         return {
-            activeKey: [1, 2, 3, 4,],
+            activeKey: [1, 2, 3, 4, 5,],
             settings: {
                 show_top_warning: false,
                 clicks_between_popups: null,
@@ -139,6 +152,7 @@ export default {
                 referral_percent: null,
                 repeat_time: null,
                 subscription_price: null,
+                show_contacts: false,
             },
             editing: false,
         }

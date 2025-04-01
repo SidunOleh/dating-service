@@ -53,6 +53,8 @@ class Option extends Model
                 $settings['repeat_time'] ?? 5,
             'subscription_price' => 
                 $settings['subscription_price'] ?? 0,
+            'show_contacts' => 
+                $settings['show_contacts'] ?? false,
         ];
     }
 

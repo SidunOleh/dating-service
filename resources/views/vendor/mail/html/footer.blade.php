@@ -11,7 +11,7 @@
         21+ Only! 
     </span>
     <span>
-        ©2024 <a href="{{ url('/') }}" style="color: #15c;">cherry21.com</a>
+        ©{{ date( 'Y' ) }} <a href="{{ url('/') }}" style="color: #15c;">cherry21.com</a>
     </span>
 </p>
 </td>

@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
             'referral_percent' => 'required|integer|between:0,100',
             'repeat_time' => 'required|integer|gte:1',
             'subscription_price' => 'required|integer|gte:0',
+            'show_contacts' => 'required|boolean',
         ];
     }
 }

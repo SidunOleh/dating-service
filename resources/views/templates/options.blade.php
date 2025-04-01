@@ -59,6 +59,25 @@
             </div>
         </div>
 
+        <div class="sub-link"> 
+            <div class="title" style="margin-bottom: 8px;">
+                Share Your Profile
+            </div>
+            <div class="subtitle">Share your personal profile link</div>
+            <div class="link-body">
+                <div class="link">
+                    {{ route('profile.page', ['creator' => $creator->id,]) }}
+                </div>
+                <div class="btn red copy-link" style="white-space: nowrap;">Copy Link</div>
+                <div class="message">
+                    <div>
+                        Link copied 
+                        <img src="{{ asset('/assets/img/checkmark.svg') }}" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @if($creator->profile_is_created and ! $creator->hasUndoneProfileRequest())
         <div class="info-text">
             <p class="delete-acc">

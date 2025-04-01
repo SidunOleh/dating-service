@@ -44,15 +44,14 @@
                 </div>
             </div>
 
-            <div class="sub-link">
-                
+            <div class="sub-link"> 
                 <div class="title" style="margin-bottom: 8px;">
                     Your Personal Cherry Link
                 </div>
                 <p class="subtitle">Share your personal referral link with friends, fans, and followers!</p>
                 <div class="link-body">
                     <p class="link">
-                        {{ route('home.index', ['ref' => $creator->referral_code,]) }}
+                        {{ route('profile.page', ['creator' => $creator->id, 'ref' => $creator->referral_code,]) }}
                     </p>
                     <div class="btn red copy-link" style="white-space: nowrap;">Copy Link</div>
                     <div class="message">

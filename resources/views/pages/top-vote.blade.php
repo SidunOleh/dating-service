@@ -27,4 +27,7 @@
     </div>
 </section>
 
+@includeWhen(!auth('web')->check(), 'modals.auth')
+@includeWhen(!auth('web')->check(), 'modals.verification')
+
 @include('templates.footer')

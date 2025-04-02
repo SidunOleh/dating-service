@@ -6344,3 +6344,11 @@ select#gender {
     width: fit-content;
     margin: 0 auto;
 }
+
+.meow {
+    position: fixed;
+    left: 50px;
+    bottom: 50px;
+    z-index: 100;
+    user-select: none;
+}

@@ -54,4 +54,6 @@
 
 @include('modals.ad')
     
+@include('templates.meow-btn')
+
 @include('templates.footer')

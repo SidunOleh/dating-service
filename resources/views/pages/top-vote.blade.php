@@ -30,4 +30,6 @@
 @includeWhen(!auth('web')->check(), 'modals.auth')
 @includeWhen(!auth('web')->check(), 'modals.verification')
 
+@include('templates.meow-btn')
+
 @include('templates.footer')

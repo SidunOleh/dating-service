@@ -6247,6 +6247,8 @@ select#gender {
     align-items: center;
     gap: 8px;
     margin-bottom: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 @media screen and (max-width: 390px) {

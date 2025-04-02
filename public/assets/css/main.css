@@ -6197,14 +6197,14 @@ select#gender {
     }
 }
 
-.profile .subtitle {
+.left-card .subtitle {
     text-align: center;
     color: #fff !important;
     font-size: 15px;
     margin-bottom: 12px;
 }
 
-.profile .title {
+.left-card .title {
     color: #fbfbfb;
     text-align: center;
     font-size: 16px;
@@ -6213,21 +6213,21 @@ select#gender {
     margin-bottom: 12px;
 }
 
-.profile .title.per {
+.left-card .title.per {
     font-weight: 400 !important;
     margin: 0 auto;
     margin-top: 22px;
     max-width: 460px;
 }
 
-.profile .sub-link .title {
+.profileft-cardle .sub-link .title {
     max-width: 330px;
     margin: 0 auto;
     margin-bottom: 16px;
     line-height: 151%;
 }
 
-.profile .title.per span {
+.proleft-cardfile .title.per span {
     padding: 4px 8px;
     border-radius: 4px;
     background: -webkit-gradient( linear, left top, left bottom, color-stop(-29.63%, #ffe603), to(#d80957));
@@ -6236,7 +6236,7 @@ select#gender {
     margin: 0 4px;
 }
 
-.profile .link-body {
+.left-card .link-body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -6250,7 +6250,7 @@ select#gender {
 }
 
 @media screen and (max-width: 390px) {
-    .profile .link-body {
+    .left-card .link-body {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -6258,7 +6258,7 @@ select#gender {
     }
 }
 
-.profile .link-body .link {
+.left-card .link-body .link {
     border-radius: 4px;
     background: #525252;
     height: 39px;
@@ -6278,11 +6278,11 @@ select#gender {
     padding: 0 14px;
 }
 
-.profile .link-body .btn {
+.left-card .link-body .btn {
     display: block;
 }
 
-.profile .link-body .message {
+.left-card .link-body .message {
     position: fixed;
     left: 20px;
     bottom: 80px;
@@ -6296,7 +6296,7 @@ select#gender {
     display: none;
 }
 
-.profile .link-body .message div {
+.left-card .link-body .message div {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -6306,11 +6306,11 @@ select#gender {
     gap: 8px;
 }
 
-.profile .link-body .message img {
+.left-card .link-body .message img {
     width: 16px;
 }
 
-.profile .sub-link {
+.left-card .sub-link {
     margin-top: 16px;
 }
 

@@ -6349,8 +6349,17 @@ select#gender {
 
 .meow {
     position: fixed;
-    left: 50px;
+    left: 0px;
     bottom: 50px;
     z-index: 100;
     user-select: none;
+    border-radius: 0 4px 4px 0 !important;
+    width: 100px;
+}
+
+.user-info-list.with-blur {
+    border: 0.1px solid #d33131;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 4px 20px 0px rgba(211, 49, 49, 0.44);
+    box-shadow: 0px 4px 20px 0px rgba(211, 49, 49, 0.44);
 }

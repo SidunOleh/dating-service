@@ -47,7 +47,7 @@
     @endif
 </div>
 @else
-<div class="user-info-list">
+<div class="user-info-list with-blur">
     <div class="blur">
         <div class="blur__body">
             <div class="blur__text">

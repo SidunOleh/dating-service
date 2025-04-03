@@ -1057,7 +1057,7 @@
                                 <div class="image-card">
                                     <img 
                                         v-if="! data.id_photo" 
-                                        src="/assets/img/idOK.jpg" 
+                                        src="/assets/img/faceOK.jpg" 
                                         alt=""/>
                                     <img 
                                         v-if="data.id_photo?.status == 'loading'"
@@ -1113,7 +1113,7 @@
                                 <div class="image-card">
                                     <img 
                                         v-if="! data.verification_photo" 
-                                        src="/assets/img/faceOK.jpg" 
+                                        src="/assets/img/idOK.jpg" 
                                         alt=""/>
                                     <img 
                                         v-if="data.verification_photo?.status == 'loading'"

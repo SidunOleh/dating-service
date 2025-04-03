@@ -1012,7 +1012,7 @@
                                 <div class="image-card">
                                     <img 
                                         v-if="!data.id_photo" 
-                                        src="/assets/img/idOK.jpg" 
+                                        src="/assets/img/faceOK.jpg" 
                                         alt=""/>
 
                                     <img 
@@ -1070,7 +1070,7 @@
                                 <div class="image-card">
                                     <img 
                                         v-if="!data.verification_photo" 
-                                        src="/assets/img/faceOK.jpg" 
+                                        src="/assets/img/idOK.jpg" 
                                         alt=""/>
 
                                     <img 

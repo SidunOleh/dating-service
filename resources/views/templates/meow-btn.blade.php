@@ -4,7 +4,6 @@
 
 <script>
     const meowText = [
-        'Play ;D',
         '14',
         '13',
         'noon',
@@ -55,22 +54,23 @@
 
     window.onload = () => {
         $('.meow.btn').on('click', function () {
-            const step = Number($(this).data('step')) + 1
+            const step = Number($(this).data('step'))
 
             if (step <= 20) {
                 $(this).text(meowText[step])
 
                 new Audio(meowAudio[step]).play()
-                if (meowAudio[step+1]) {
-                    new Audio(meowAudio[step+1])
-                }
-
-                if (step == 20) {
-                    location.href = '/faq#some-funny-feature'
-                }
             } 
 
-            $(this).data('step', step)
+            if (step == 20) {
+                setTimeout(() => location.href = '/faq#some-funny-feature', 1000)
+            }
+
+            const nextStep = step + 1
+            
+            $(this).data('step', nextStep)
+
+            new Audio(meowAudio[nextStep])
         })
     }
 </script>

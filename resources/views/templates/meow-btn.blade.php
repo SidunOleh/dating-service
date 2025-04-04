@@ -49,21 +49,24 @@
         '/assets/meow/20.mp3',
         '/assets/meow/21.mp3',
     ]
-
     new Audio(meowAudio[0])
 
     window.onload = () => {
+        let currentAudio = null
+
         $('.meow.btn').on('click', function () {
             const step = Number($(this).data('step'))
 
             if (step <= 20) {
                 $(this).text(meowText[step])
 
-                new Audio(meowAudio[step]).play()
+                currentAudio?.pause()
+                currentAudio = new Audio(meowAudio[step])
+                currentAudio.play()
             } 
 
             if (step == 20) {
-                setTimeout(() => location.href = '/faq#some-funny-feature', 1000)
+                $(currentAudio).on('ended', () => location.href = '/faq#some-funny-feature')
             }
 
             const nextStep = step + 1

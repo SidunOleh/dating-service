@@ -32,23 +32,23 @@
         '/assets/meow/2.mp3',
         '/assets/meow/3.mp3',
         '/assets/meow/4.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
-        '/assets/meow/1.mp3',
+        '/assets/meow/5.mp3',
+        '/assets/meow/6.mp3',
+        '/assets/meow/7.mp3',
+        '/assets/meow/8.mp3',
+        '/assets/meow/9.mp3',
+        '/assets/meow/10.mp3',
+        '/assets/meow/11.mp3',
+        '/assets/meow/12.mp3',
+        '/assets/meow/13.mp3',
+        '/assets/meow/14.mp3',
+        '/assets/meow/15.mp3',
+        '/assets/meow/16.mp3',
+        '/assets/meow/17.mp3',
+        '/assets/meow/18.mp3',
+        '/assets/meow/19.mp3',
+        '/assets/meow/20.mp3',
+        '/assets/meow/21.mp3',
     ]
 
     new Audio(meowAudio[0])
@@ -66,7 +66,7 @@
                 }
 
                 if (step == 20) {
-                    location.href = '/faq'
+                    location.href = '/faq#some-funny-feature'
                 }
             } 
 

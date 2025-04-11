@@ -43,8 +43,6 @@
                     :required="true">
                     <UploadImg
                         :multiple="true"
-                        :watermark="true"
-                        :quality="20"
                         @change="imgs => data.photos = imgs"/>
                 </FormItem>
 

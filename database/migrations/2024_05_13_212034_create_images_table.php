@@ -21,7 +21,7 @@ return new class extends Migration
             $table->index('user_id');
             $table->string('user_type');
 
-            $table->boolean('processed')->default(false);
+            $table->boolean('processed')->nullable();
             
             $table->timestamps();
         });

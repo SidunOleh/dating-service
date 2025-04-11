@@ -77,8 +77,6 @@
                     <UploadImg
                         :uploaded="data.photos"
                         :multiple="true"
-                        :watermark="true"
-                        :quality="20"
                         @change="imgs => data.photos = imgs"/>
                 </FormItem>
 

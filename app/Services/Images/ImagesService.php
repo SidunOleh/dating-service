@@ -1,0 +1,118 @@
+<?php
+
+namespace App\Services\Images;
+
+use App\Jobs\ProcessImage;
+use App\Models\Creator;
+use App\Models\Image;
+use App\Models\Upload;
+use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\ImageManager;
+use Spatie\Image\Image as SpatieImage;
+
+class ImagesService
+{
+    public function upload(
+        User|Creator $user,
+        UploadedFile $uploaded,
+        bool $process,
+        string $disk = 'public'
+    ): Image
+    {
+        $dir = $this->dir($disk);
+
+        $name = md5($user->id . microtime() . $uploaded->getClientOriginalName()) . '.webp';
+
+        $path = $uploaded->storeAs($dir, $name, $disk);
+
+        $image = Image::create([
+            'path' => $path,
+            'disk' => $disk,
+            'user_id' => $user->id,
+            'user_type' => get_class($user),
+        ]);
+
+        if (in_array($uploaded->getMimeType(), [
+            'image/heif', 
+            'image/heif-sequence', 
+            'image/heic', 
+            'image/heic-sequence', 
+            'image/avif',
+        ])) {
+            $this->convertToWebp($image);
+        }
+
+        if ($process) {
+            $image->update(['processed' => false]);
+
+            ProcessImage::dispatch($image)->delay(now()->addMinutes(1));
+        }
+
+        if ($user instanceof Creator) {
+            Upload::create(['creator_id' => $user->id]);
+        }
+        
+        return $image;
+    }
+
+    private function dir(string $disk): string
+    {
+        $dir = date('Y') . '/' . date('m');
+        
+        $path = Storage::disk($disk)->path($dir);
+
+        if (! file_exists($path)) {
+            mkdir($path, recursive: true);
+        }
+
+        return $dir;
+    }
+
+    public function process(Image $image): void
+    {
+        $this->convertToWebp($image);
+
+        $this->optimize($image);
+
+        $this->addWatermark($image);
+
+        $image->update(['processed' => true]);
+    }
+
+    public function convertToWebp(Image $image): void
+    {
+        $manager = new ImageManager(new Driver());
+        
+        $_image = $manager->read($image->getPath());
+        
+        $_image->toWebp()->save($image->getPath());
+    }
+
+    public function optimize(Image $image): void
+    {
+        $manager = new ImageManager(new Driver());
+
+        $_image = $manager->read($image->getPath());
+        
+        $_image->save($image->getPath(), 10);
+    }
+
+    public function addWatermark(Image $image): void
+    {
+        $_image = SpatieImage::load($image->getPath());
+        
+        $_image->text(
+            'Cherry21.com', 
+            fontSize: 20, 
+            color: 'rgba(150, 152, 158, 0.8)',
+            x: $_image->getWidth() - 140, 
+            y: $_image->getHeight() - 10,
+            fontPath: storage_path('Poppins-Regular.ttf'),
+        );
+        
+        $_image->save();
+    }
+}

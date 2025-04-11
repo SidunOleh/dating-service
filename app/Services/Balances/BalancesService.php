@@ -3,7 +3,6 @@
 namespace App\Services\Balances;
 
 use App\Constants\Balances;
-use App\Enums\Balances as EnumsBalances;
 use App\Exceptions\NotEnoughMoneyException;
 use App\Models\BalancesTransfer;
 use App\Models\Creator;
@@ -20,11 +19,11 @@ class BalancesService
         DB::beginTransaction();
 
         $this->debitMoney($creator, $amount);
-        $this->creditMoney($creator, $amount, EnumsBalances::Balance2->value);
+        $this->creditMoney($creator, $amount, Balances::Balance2);
 
         $balancesTransfer = BalancesTransfer::create([
-            'from' => EnumsBalances::Balance->value,
-            'to' => EnumsBalances::Balance2->value,
+            'from' => Balances::Balance,
+            'to' => Balances::Balance2,
             'amount' => $amount,
             'creator_id' => $creator->id,
         ]);
@@ -39,14 +38,14 @@ class BalancesService
         if ($this->hasEnoughMoney(
             $creator, 
             Balances::AUTO_CREDIT_AMOUNT, 
-            EnumsBalances::Balance2Total->value
+            Balances::Balance2Total
         )) {
             return 0;
         }
 
-        $amount = Balances::AUTO_CREDIT_AMOUNT - $creator->{EnumsBalances::Balance2Total->value};
+        $amount = Balances::AUTO_CREDIT_AMOUNT - $creator->{Balances::Balance2Total};
 
-        $this->creditMoney($creator, $amount, EnumsBalances::Balance2Auto->value);
+        $this->creditMoney($creator, $amount, Balances::Balance2Auto);
 
         return $amount;
     }
@@ -54,7 +53,7 @@ class BalancesService
     public function hasEnoughMoney(
         Creator $creator, 
         float $amount, 
-        string $balance = EnumsBalances::Balance->value
+        string $balance = Balances::Balance
     ): bool
     {
         return $amount <= $creator->{$balance};
@@ -63,7 +62,7 @@ class BalancesService
     public function debitMoney(
         Creator $creator, 
         float $amount, 
-        string $balance = EnumsBalances::Balance->value
+        string $balance = Balances::Balance
     ): void
     {
         $creator->{$balance} -= $amount;
@@ -73,7 +72,7 @@ class BalancesService
     public function creditMoney(
         Creator $creator, 
         float $amount, 
-        string $balance = EnumsBalances::Balance->value
+        string $balance = Balances::Balance
     ): void
     {
         $creator->{$balance} += $amount;
@@ -83,8 +82,8 @@ class BalancesService
     public function transfersStat(Creator $creator, ?string $interval = null): float
     {   
         $balancesTransfers = $creator->balancesTransfers()->where([
-            'from' => EnumsBalances::Balance->value,
-            'to' => EnumsBalances::Balance2->value,
+            'from' => Balances::Balance,
+            'to' => Balances::Balance2,
         ]);
 
         if ($interval == 'month') {

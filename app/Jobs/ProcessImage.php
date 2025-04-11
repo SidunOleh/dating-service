@@ -3,18 +3,12 @@
 namespace App\Jobs;
 
 use App\Models\Image;
+use App\Services\Images\ImagesService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Intervention\Image\Drivers\Imagick\Driver;
-use Intervention\Image\ImageManager;
-use Spatie\Image\Image as SpatieImage;
-use Spatie\Image\Enums\AlignPosition;
-use Spatie\Image\Enums\Fit;
-use Spatie\Image\Enums\Unit;
-
 
 class ProcessImage implements ShouldQueue
 {
@@ -24,9 +18,7 @@ class ProcessImage implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        private Image $image,
-        private int $quality,
-        private int $watermark,
+        private Image $image
     )
     {
         //
@@ -35,45 +27,8 @@ class ProcessImage implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(ImagesService $imagesService): void
     {
-        $manager = new ImageManager(new Driver());
-
-        $image = $manager->read($this->image->getPath());
-        
-        $image->toWebp($this->quality)->save($this->image->getPath());
-
-        if ($this->watermark) {
-            // SpatieImage::load($this->image->getPath())->watermark(
-            //     storage_path('watermark.png'),
-            //     AlignPosition::Center,
-            //     width: 100,
-            //     widthUnit: Unit::Percent,
-            //     height: 100,
-            //     heightUnit: Unit::Percent,
-            //     fit: Fit::Stretch,
-            //     alpha: 10,
-            // )->save();
-
-            // $image = $manager->read($this->image->getPath());
-
-            // $watermark = $manager->read(storage_path('watermark.png'))->cover(
-            //     $image->width(),
-            //     $image->height()
-            // );
-
-            // $image->place($watermark, 'center', 0, 0, 100)->save($this->image->getPath());
-
-            SpatieImage::load($this->image->getPath())->text(
-                'Cherry21.com', 
-                fontSize: 20, 
-                color: 'rgba(150, 152, 158, 0.8)',
-                x: $image->width() - 140, 
-                y: $image->height() - 10,
-                fontPath: storage_path('Poppins-Regular.ttf'),
-            )->save();
-        }
-
-        $this->image->update(['processed' => true,]);
+        $imagesService->process($this->image);
     }
 }

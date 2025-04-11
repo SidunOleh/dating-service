@@ -38,8 +38,6 @@ class UploadRequest extends FormRequest
         return [
             'img' => 'required|file|mimetypes:' . implode(',', $mimes) . '|max:10240',
             'process' => 'boolean',
-            'watermark' => 'boolean',
-            'quality' => 'integer|between:0,100',
         ];
     }
 }

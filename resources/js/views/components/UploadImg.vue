@@ -79,13 +79,6 @@ export default {
             type: Boolean,
             default: true,
         },
-        watermark: {
-            type: Boolean,
-            default: false,
-        },
-        quality: {
-            type: Number,
-        },
         accept: {
             type: Array,
             default: [
@@ -128,9 +121,7 @@ export default {
                 try {
                     const img = await imagesApi.upload(
                         files.item(i),
-                        this.process,
-                        this.watermark,
-                        this.quality
+                        this.process
                     )
                     this.imgs.push(img)
                     this.$emit('change', this.imgs)

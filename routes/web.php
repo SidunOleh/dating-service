@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\Auth\SignInVerifyCodeController;
 use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
+use App\Http\Controllers\Web\Balances\TransferController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Filters\ApplyController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Web\Pages\EarnController;
 use App\Http\Controllers\Web\Pages\FAQController;
 use App\Http\Controllers\Web\Pages\FavoritesController;
 use App\Http\Controllers\Web\Pages\HomeController;
+use App\Http\Controllers\Web\Pages\InfoController;
 use App\Http\Controllers\Web\Pages\ProfileController;
 use App\Http\Controllers\Web\Pages\SettingsController;
 use App\Http\Controllers\Web\Pages\SubscriptionController;
@@ -148,6 +150,9 @@ Route::get('/settings', SettingsController::class)
     ->name('settings.page');
 Route::get('/faq', FAQController::class)
     ->name('faq.page');
+Route::get('/info', InfoController::class)
+    ->middleware(['auth:web',])
+    ->name('info.page');
 
 /**
  * Filters
@@ -279,6 +284,13 @@ Route::post('/change-password', ChangePasswordController::class)
 Route::get('logs', [LogViewerController::class, 'index'])
     ->middleware(['auth:sanctum',])
     ->can('logs');
+
+/**
+ * Balances
+ */
+Route::post('/balances/transfer', TransferController::class)
+    ->middleware(['auth:web',])
+    ->name('balances.transfer');
 
 /**
  * 404

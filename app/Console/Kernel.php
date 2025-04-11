@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('plisio:update-withdrawals')->everyMinute();
         $schedule->command('passimpay:rates')->everyMinute();
         $schedule->command('passimpay:update-withdrawals')->everyMinute();
+        $schedule->command('balances:auto-credit-money')->daily();
     }
 
     /**

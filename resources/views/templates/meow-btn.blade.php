@@ -1,6 +1,17 @@
+@auth('web')
+<a href="{{ route('info.page') }}" class="btn red meow balance">
+    <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
+    <span class="balance-2">
+        {{ ($balace2Total = auth('web')->user()->balance_2_total) >= 100 ? 'Rich' : $balace2Total }}
+    </span>
+</a>
+@endauth
+
+@guest('web')
 <div class="btn red meow" data-step="0">
     Play ;D
 </div>
+@endguest
 
 <script>
     const meowText = [
@@ -24,6 +35,7 @@
         'more!',
         '-4',
         'doNe',
+        'Play ;D',
     ]
 
     const meowAudio = [
@@ -65,11 +77,7 @@
                 currentAudio.play()
             } 
 
-            if (step == 20) {
-                $(currentAudio).on('ended', () => location.href = '/faq#some-funny-feature')
-            }
-
-            const nextStep = step + 1
+            const nextStep = step == 20 ? 0 : step + 1
             
             $(this).data('step', nextStep)
 

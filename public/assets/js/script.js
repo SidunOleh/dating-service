@@ -1428,3 +1428,35 @@ $(document).ready(function () {
         }
     });
 });
+
+//__________________________Swap__________________________//
+
+$('.swap__btn').on('click', async function () {
+    let balance1 = $(this).data('balance-1')
+    let balance2 = $(this).data('balance-2')
+
+    if (balance1 < 1) {
+        return
+    }
+
+    balance1 -= 1
+    balance2 += 1
+    updateBalances(balance1, balance2)
+
+    try {
+        await $.post('/balances/transfer')
+    } catch (err) {
+        console.error(err)
+
+        balance1 += 1
+        balance2 -= 1
+        updateBalances(balance1, balance2)
+    }
+})
+
+function updateBalances(balance1, balance2) {
+    $('[data-balance-1]').data('balance-1', balance1)
+    $('[data-balance-2]').data('balance-2', balance2)
+    $('.balance-1').text(balance1)
+    $('.balance-2').text(balance2 >= 100 ? 'Rich' : balance2)
+}

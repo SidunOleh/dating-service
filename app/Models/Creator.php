@@ -831,4 +831,18 @@ class Creator extends Authenticatable
     
         $this->notify(new ResetPassword($url));
     }
+
+    protected function balance2Total(): Attribute
+    {
+        return Attribute::make(
+            get: function (mixed $value, array $attributes) {
+                return $attributes['balance_2'] + $attributes['balance_2_auto'];
+            },
+        );
+    }
+
+    public function balancesTransfers(): HasMany
+    {
+        return $this->hasMany(BalancesTransfer::class);
+    }
 }

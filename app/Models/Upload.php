@@ -10,8 +10,9 @@ class Upload extends Model
     use HasFactory;
 
     protected $fillable = [
-        'creator_id',
+        'user_type',
+        'user_id',
+        'mime_type',
+        'size',
     ];
-
-    public const MAX = 30;
 }

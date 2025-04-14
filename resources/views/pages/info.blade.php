@@ -21,13 +21,13 @@
                 <p class="subtitle">Track your swaps and activity through real-time swap stats:</p>
                 <div class="statistic-list">
                     <div class="statistic-item">
-                        <span>Daily:</span> {{ $transferStat['day'] }}
+                        <span>Daily:</span> {{ $transfersStat['day'] }}
                     </div>
                     <div class="statistic-item">
-                        <span>Weekly:</span> {{ $transferStat['week'] }}
+                        <span>Weekly:</span> {{ $transfersStat['week'] }}
                     </div>
                     <div class="statistic-item">
-                        <span>Monthly:</span> {{ $transferStat['month'] }}
+                        <span>Monthly:</span> {{ $transfersStat['month'] }}
                     </div>
                 </div>
                 <div class="title per">
@@ -42,8 +42,12 @@
                         <span class="balance-1">{{ $creator->balance }}</span>
                     </div>  
                     <div class="swap__arrow">
-                        ➡
+                        ➜
                     </div>
+                    <div class="swap__coins">
+                        <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
+                        <span class="balance-2">{{ $creator->balance_2_total }}</span>
+                    </div>  
                     <div 
                         class="swap__btn btn red"
                         data-balance-1="{{ $creator->balance }}"

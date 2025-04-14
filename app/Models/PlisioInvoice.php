@@ -45,22 +45,4 @@ class PlisioInvoice extends Model
     {
         return $this->transaction->creator;
     }
-
-    public function webhookCallback(array $data): void
-    {
-        $this->update([
-            'received' => $data['amount'],
-            'status' => $data['status'],
-        ]);
-
-        $this->transaction->update([
-            'status' => $data['status'],
-        ]);
-
-        if (in_array($data['status'], ['expired', 'completed', 'mismatch',])) {
-            $this->transaction->creator->balance += 
-                (float) $data['amount'] / (float) $data['source_rate'];
-            $this->transaction->creator->save();
-        }
-    }
 }

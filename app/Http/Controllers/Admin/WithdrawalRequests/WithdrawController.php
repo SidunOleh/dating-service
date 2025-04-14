@@ -2,35 +2,35 @@
 
 namespace App\Http\Controllers\Admin\WithdrawalRequests;
 
-use App\Events\WithdrawRequestSuccess;
+use App\Exceptions\NotEnoughMoneyException;
 use App\Http\Controllers\Controller;
 use App\Models\WithdrawalRequest;
-use Exception;
+use App\Services\Balances\BalancesService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class WithdrawController extends Controller
 {
+    public function __construct(
+        public BalancesService $balancesService
+    )
+    {
+        
+    }
+
     public function __invoke(WithdrawalRequest $withdrawalRequest)
     {
         try {
-            $withdrawalRequest->withdraw();
+            $user = Auth::guard('admin')->user();
 
-            Log::info('withdrawal request approved', [
-                'withdrawal_request_id' => $withdrawalRequest->id,
-                'user_id' => Auth::guard('admin')->id(), 
-            ]);
-
-            WithdrawRequestSuccess::dispatch($withdrawalRequest);
+            $this->balancesService->withdrawBalance(
+                $withdrawalRequest->creator,
+                $withdrawalRequest,
+                $user
+            );
 
             return response(['message' => 'OK',]);
-        } catch (Exception $e) {
-            Log::error($e, [
-                'withdrawal_request_id' => $withdrawalRequest->id,
-                'user_id' => Auth::guard('admin')->id(), 
-            ]);
-
-            return response(['message' => $e->getMessage(),], 400);
+        } catch (NotEnoughMoneyException $e) {
+            return response(['message' => 'Balance is too low!',], 400);
         }
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Web\Payments;
 
+use App\Exceptions\TooFastException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Payments\WithdrawResendRequest;
 use App\Services\Verification\Code;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class WithdrawResendController extends Controller
@@ -17,8 +17,8 @@ class WithdrawResendController extends Controller
             $code->resend(Auth::guard('web')->user()->email);
 
             return response(['message' => 'OK',]);
-        } catch (Exception $e) {
-            return response(['message' => 'Bad request',], 400);
+        } catch (TooFastException $e) {
+            return response(['message' => 'Too fast.',], 400);
         }
     }
 }

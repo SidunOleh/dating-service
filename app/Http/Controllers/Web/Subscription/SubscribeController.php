@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers\Web\Subscription;
 
+use App\Exceptions\HasSubscriptionException;
 use App\Http\Controllers\Controller;
-use Exception;
+use App\Services\Subscriptions\SubscriptionsService;
 use Illuminate\Support\Facades\Auth;
 
 class SubscribeController extends Controller
 {
+    public function __construct(
+        public SubscriptionsService $subscriptionsService
+    )
+    {
+        
+    }
+
     public function __invoke()
     {
-        $creator = Auth::guard('web')->user();
-
-        if ($creator->activeSub) {
-            abort(400);
-        }
-
         try {
-            $subscription = $creator->subscribe();
+            $creator = Auth::guard('web')->user();
+
+            $subscription = $this->subscriptionsService->subscribe($creator);
 
             return response($subscription);
-        } catch (Exception $e) {
-            return response(['message' => $e->getMessage(),], 400);
+        } catch (HasSubscriptionException $e) {
+            return response(['message' => 'You are subscribed.',], 400);
         }
     }
 }

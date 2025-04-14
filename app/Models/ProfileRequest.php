@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -60,7 +59,7 @@ class ProfileRequest extends Model
         'street_photo' => 'array',
     ];
 
-    protected $profileFields = [
+    public $profileFields = [
         'name',
         'age',
         'gender',
@@ -110,32 +109,6 @@ class ProfileRequest extends Model
     public function streetPhoto(): BelongsTo
     {
         return $this->belongsTo(Image::class, 'street_photo->value');
-    }
-
-    public function migrateDataToProfile(): bool
-    {
-        foreach ($this->profileFields as $field) {
-            if (! $this->{$field}) {
-                continue;
-            }
-
-            if (is_array($this->{$field}['status'])) {
-                $values = array_filter($this->{$field}['value'], function ($i) use($field) {
-                    return $this->{$field}['status'][$i] == 'approved';
-                }, ARRAY_FILTER_USE_KEY);
-    
-                $this->creator[$field] = array_merge($this->creator->{$field} ?? [], $values);
-                continue;
-            }
-
-            if ($this->{$field}['status'] != 'approved') {
-                continue;
-            }
-
-            $this->creator[$field] = $this->{$field}['value'];
-        }
-
-        return $this->creator->save();
     }
 
     public function profileData(): array
@@ -195,36 +168,5 @@ class ProfileRequest extends Model
         }
 
         return $comments;
-    }
-
-    public function deleteRejectedPhotos(): void
-    {
-        $approved = [];
-        $rejected = [];
-        foreach ($this->photos['status'] ?? [] as $i => $status) {
-            if ($status == 'rejected') {
-                $rejected[] = $this->photos['value'][$i];
-            } else {
-                $approved['value'][] = 
-                    $this->photos['value'][$i];
-                $approved['status'][] = 
-                    $this->photos['status'][$i];
-                $approved['comment'][] = 
-                    $this->photos['comment'][$i];
-            }
-        }
-
-        Image::deleteByIds($rejected);
-
-        $this->photos = $approved ?: null;
-        $this->save();
-    }
-
-    public static function next(bool $approved): ?ProfileRequest
-    {
-        return ProfileRequest::where('status', 'undone')
-            ->whereHas('creator', function (Builder $query) use($approved) {
-                $query->where('is_approved', $approved);
-            })->orderBy('created_at', 'DESC')->first();
     }
 }

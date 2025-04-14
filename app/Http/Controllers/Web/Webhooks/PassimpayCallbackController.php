@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers\Web\Webhooks;
 
+use App\Constants\Transactions;
 use App\Http\Controllers\Controller;
-use App\Models\PassimpayDeposit;
-use App\Services\PaymentGateways\Passimpay\PassimpayApi;
+use App\Services\Balances\BalancesService;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class PassimpayCallbackController extends Controller
 {
+    public function __construct(
+        public BalancesService $balancesService
+    )
+    {
+        
+    }
+
     public function __invoke(Request $request)
     {
         try {
@@ -22,39 +28,10 @@ class PassimpayCallbackController extends Controller
                 'body' => $request->all(),
             ]);
             
-            $passimpayApi = new PassimpayApi(
-                config('services.passimpay.platform_id'),
-                config('services.passimpay.secret_key')
-            );
-
-            $signature = $passimpayApi->signature($request->all());
-
-            if ($signature != $request->header('x-signature')) {
-                throw new Exception('Passimpay signature error.');
-            }
-
-            $deposit = PassimpayDeposit::findOrFail($request->orderId);
-
-            DB::beginTransaction();
-
-            $deposit->update([
-                'payment_id' => $request->paymentId,
-                'amount' => $request->amount,
-                'txhash' => $request->txhash,
-                'address_from' => $request->addressFrom,
-                'address_to' => $request->addressTo,
-                'confirmations' => $request->confirmations,
-                'destination_tag' => $request->destinationTag,
-            ]);
-
-            $deposit->transferToCreator();
-
-            DB::commit();
+            $this->balancesService->handleDepositWebhook(Transactions::GATEWAYS['crypto'], $request);
 
             return response('OK');
-        } catch (Exception $e) {
-            DB::rollBack();
-            
+        } catch (Exception $e) {            
             Log::error($e, [
                 'url' => $request->fullUrl(),
                 'ip' => $request->ip(),

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Web\Settings;
 
+use App\Exceptions\TooFastException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Settings\ChangeEmailResendRequest;
 use App\Services\Verification\Code;
-use Exception;
 
 class ChangeEmailResendController extends Controller
 {
@@ -19,8 +19,8 @@ class ChangeEmailResendController extends Controller
             $code->resend($data['new_email']);
 
             return response(['message' => 'OK',]);
-        } catch (Exception $e) {
-            return response(['message' => $e->getMessage()], 400);
+        } catch (TooFastException $e) {
+            return response(['message' => 'Too fast.',], 400);
         }
     }
 }

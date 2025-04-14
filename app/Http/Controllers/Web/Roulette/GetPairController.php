@@ -3,13 +3,21 @@
 namespace App\Http\Controllers\Web\Roulette;
 
 use App\Http\Controllers\Controller;
-use App\Models\Creator;
+use App\Services\Creators\CreatorsService;
+use Illuminate\Support\Facades\Auth;
 
 class GetPairController extends Controller
 {
+    public function __construct(
+        public CreatorsService $creatorsService
+    )
+    {
+        
+    }
+
     public function __invoke()
     {
-        $pair = Creator::roulettePair();
+        $pair = $this->creatorsService->roulettePair([Auth::guard('web')->id()]);
 
         if ($pair->count() < 2) {
             return response('', 204);

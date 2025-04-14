@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('balances_transfers', function (Blueprint $table) {
+        Schema::create('posts_opens', function (Blueprint $table) {
             $table->id();
-            $table->string('from');
-            $table->string('to');
-            $table->decimal('amount', 10, 8);
+            $table->json('pressed_buttons')->nullable();
+            $table->boolean('post_open')->default(false);
+            $table->foreignId('post_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('creator_id')
                 ->constrained()
                 ->onUpdate('cascade')
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('balances_transfers');
+        Schema::dropIfExists('posts_opens');
     }
 };

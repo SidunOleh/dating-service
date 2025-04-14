@@ -4,27 +4,28 @@ namespace App\Http\Controllers\Web\Payments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Payments\DepositRequest;
-use Exception;
+use App\Services\Balances\BalancesService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class DepositController extends Controller
 {
+    public function __construct(
+        public BalancesService $balancesService
+    )
+    {
+        
+    }
+
     public function __invoke(DepositRequest $request)
     {
-        $vaidated = $request->validated();
+        $data = $request->validated();
 
-        try {
-            $transaction = Auth::guard('web')->user()->deposit(
-                $vaidated['gateway'], 0, $vaidated
-            );
-            $transaction->details;
+        $creator = Auth::guard('web')->user();
 
-            return response($transaction);
-        } catch (Exception $e) {
-            Log::error($e, ['creator_id' => Auth::guard('web')->id(),]);
+        $transaction = $this->balancesService->depositBalance($creator, 0, $data['gateway'], $data);
+        
+        $transaction->load('details');
 
-            return response(['message' => 'Bad request',], 400);
-        }
+        return response($transaction);
     }
 }

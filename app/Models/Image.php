@@ -63,11 +63,4 @@ class Image extends Model
 
         return unlink($this->getPath());
     }
-
-    public static function deleteByIds(array $ids): void
-    {
-        foreach ($ids as $id) {
-            Image::find($id)?->delete();
-        }
-    }
 }

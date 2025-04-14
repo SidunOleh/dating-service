@@ -35,10 +35,10 @@ class AutoCreditMoney extends Command
      */
     public function handle()
     {
-        Creator::whereRaw('balance_2 + balace_2_auto < ' . Balances::AUTO_CREDIT_AMOUNT)
+        Creator::whereRaw('balance_2 + balance_2_auto < ' . Balances::AUTO_CREDIT_AMOUNT)
             ->chunk(100, function ($creators) {
                 foreach ($creators as $creator) {
-                    $this->balancesService->autoCreditMoney($creator);
+                    $this->balancesService->autoCreditToBalance2($creator);
                 }
             });
     }

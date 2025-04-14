@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Option;
 use App\Models\Subscription;
+use App\Services\Subscriptions\SubscriptionsService;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -25,6 +25,13 @@ class CheckSubscriptions extends Command
      */
     protected $description = 'Check subscriptions';
 
+    public function __construct(
+        public SubscriptionsService $subscriptionsService
+    )
+    {
+        parent::__construct();     
+    }
+
     /**
      * Execute the console command.
      */
@@ -37,20 +44,11 @@ class CheckSubscriptions extends Command
 
     public function check(Collection $subscriptions): void
     {
-        $settings = Option::getSettings();
-
         foreach ($subscriptions as $subscription) {
             try {
-                $subscription->inactivate();
-
-                if (
-                    ! $subscription->unsubscribed and 
-                    $subscription->creator->hasEnoughMoney($settings['subscription_price'])
-                ) {
-                    $subscription->creator->subscribe();
-                }
+                $this->subscriptionsService->check($subscription);
             } catch (Exception $e) {
-                Log::error($e, ['subscription_id' => $subscription->id,]);
+                Log::error($e, ['subscription_id' => $subscription->id]);
             }
         }
     }

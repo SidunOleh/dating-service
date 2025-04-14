@@ -42,14 +42,8 @@ class PassimpayWithdrawalRequest extends Model
         return $this->morphOne(WithdrawalRequest::class, 'concrete');
     }
 
-    public function withdraw(): Transaction
+    public function getData(): array
     {
-        $transaction = $this->common->creator->withdraw(
-            'crypto', 
-            $this->common->amount, 
-            ['payment_id' => $this->payment_id, 'address_to' => $this->address_to,]
-        );
-
-        return $transaction;
+        return ['payment_id' => $this->payment_id, 'address_to' => $this->address_to,];
     }
 }

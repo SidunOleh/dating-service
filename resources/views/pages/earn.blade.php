@@ -303,7 +303,7 @@
 </div>
 
 @include('templates.transactions', [
-    'transactions' => $creator->getTransactionList(),
+    'transactions' => $transactionsList,
 ])
 
 @include('modals.verification')

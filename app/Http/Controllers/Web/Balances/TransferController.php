@@ -21,13 +21,13 @@ class TransferController extends Controller
     public function __invoke()
     {
         try {
-            $this->balancesService->transfer(Auth::guard('web')->user(), 1);
+            $this->balancesService->transferBalanceBalance2(Auth::guard('web')->user(), 1);
 
             return response(['message' => 'OK']);
         } catch (NotEnoughMoneyException $e) {
             Log::error($e);
 
-            return response(['message' => 'Not enough money.'], 400);
+            return response(['message' => 'Balance is too low!'], 400);
         }
     }
 }

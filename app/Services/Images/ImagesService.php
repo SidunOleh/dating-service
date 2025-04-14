@@ -5,7 +5,6 @@ namespace App\Services\Images;
 use App\Jobs\ProcessImage;
 use App\Models\Creator;
 use App\Models\Image;
-use App\Models\Upload;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -35,6 +34,11 @@ class ImagesService
             'user_type' => get_class($user),
         ]);
 
+        $user->uploads()->create([
+            'mime_type' => $uploaded->getMimeType(),
+            'size' => $uploaded->getSize(),
+        ]);
+
         if (in_array($uploaded->getMimeType(), [
             'image/heif', 
             'image/heif-sequence', 
@@ -49,10 +53,6 @@ class ImagesService
             $image->update(['processed' => false]);
 
             ProcessImage::dispatch($image)->delay(now()->addMinutes(1));
-        }
-
-        if ($user instanceof Creator) {
-            Upload::create(['creator_id' => $user->id]);
         }
         
         return $image;
@@ -114,5 +114,12 @@ class ImagesService
         );
         
         $_image->save();
+    }
+
+    public function deleteByIds(array $ids): void
+    {
+        foreach ($ids as $id) {
+            Image::find($id)?->delete();
+        }
     }
 }

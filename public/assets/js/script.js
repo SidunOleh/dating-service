@@ -1431,6 +1431,32 @@ $(document).ready(function () {
 
 //__________________________Swap__________________________//
 
+let currentSwapAudio = null
+
+const swapAudio = [
+    '/assets/meow/1.mp3',
+    '/assets/meow/2.mp3',
+    '/assets/meow/3.mp3',
+    '/assets/meow/4.mp3',
+    '/assets/meow/5.mp3',
+    '/assets/meow/6.mp3',
+    '/assets/meow/7.mp3',
+    '/assets/meow/8.mp3',
+    '/assets/meow/9.mp3',
+    '/assets/meow/10.mp3',
+    '/assets/meow/11.mp3',
+    '/assets/meow/12.mp3',
+    '/assets/meow/13.mp3',
+    '/assets/meow/14.mp3',
+    '/assets/meow/15.mp3',
+    '/assets/meow/16.mp3',
+    '/assets/meow/17.mp3',
+    '/assets/meow/18.mp3',
+    '/assets/meow/19.mp3',
+    '/assets/meow/20.mp3',
+    '/assets/meow/21.mp3',
+]
+
 $('.swap__btn').on('click', async function () {
     let balance1 = $(this).data('balance-1')
     let balance2 = $(this).data('balance-2')
@@ -1442,6 +1468,10 @@ $('.swap__btn').on('click', async function () {
     balance1 -= 1
     balance2 += 1
     updateBalances(balance1, balance2)
+
+    currentSwapAudio?.pause()
+    currentSwapAudio = new Audio(swapAudio[Math.floor(Math.random() * swapAudio.length)])
+    currentSwapAudio.play()
 
     try {
         await $.post('/balances/transfer')
@@ -1458,5 +1488,10 @@ function updateBalances(balance1, balance2) {
     $('[data-balance-1]').data('balance-1', balance1)
     $('[data-balance-2]').data('balance-2', balance2)
     $('.balance-1').text(balance1)
-    $('.balance-2').text(balance2 >= 100 ? 'Rich' : balance2)
+    $('.balance-2').text(format_price(balance2))
+    $('.balance-2.rich').text(balance2 >= 100 ? 'Rich' : format_price(balance2))
+}
+
+function format_price(amount) {
+    return (Math.round(amount * 100) / 100).toFixed(2)
 }

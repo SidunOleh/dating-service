@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use App\Models\WithdrawalRequest as ModelsWithdrawalRequest;
-use App\PaymentGateways\Plisio\PlisioClient;
-use App\PaymentGateways\Plisio\Withdrawal\WithdrawalRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -23,14 +21,8 @@ class PlisioWithdrawalRequest extends Model
         return $this->morphOne(ModelsWithdrawalRequest::class, 'concrete');
     }
 
-    public function withdraw(): Transaction
+    public function getData(): array
     {
-        $transaction = $this->common->creator->withdraw(
-            'plisio', 
-            $this->common->amount, 
-            ['currency' => $this->currency, 'to' => $this->to,]
-        );
-
-        return $transaction;
+        return ['currency' => $this->currency, 'to' => $this->to,];
     }
 }

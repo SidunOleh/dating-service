@@ -2,12 +2,16 @@
 
 namespace App\Services\PaymentGateways\Passimpay;
 
+use App\Constants\Transactions;
+use App\Exceptions\CurrencyNotFoundException;
+use App\Exceptions\PassimpaySignatureException;
 use App\Models\Creator;
 use App\Models\PassimpayDeposit;
 use App\Models\PassimpayWithdrawal;
 use App\Models\Transaction;
 use App\Services\PaymentGateways\PaymentGateway;
-use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PassimpayGateway extends PaymentGateway
 {
@@ -24,6 +28,8 @@ class PassimpayGateway extends PaymentGateway
         array $data = []
     ): Transaction
     {
+        DB::beginTransaction();
+
         $deposit = PassimpayDeposit::create();
 
         $response = $this->client->address(
@@ -37,12 +43,52 @@ class PassimpayGateway extends PaymentGateway
         ]);
 
         $transaction = $deposit->transaction()->create([
-            'gateway' => 'crypto',
-            'type' => 'deposit',
+            'gateway' => Transactions::GATEWAYS['crypto'],
+            'type' => Transactions::PASSIMPAY_TYPES['deposit'],
             'amount' => $amount,
-            'status' => 'new',
+            'status' => Transactions::PASSIMPAY_DEPOSIT_STATUS['new'],
             'creator_id' => $creator->id,
         ]);
+
+        DB::commit();
+
+        return $transaction;
+    }
+
+    public function handleWebhook(Request $request): Transaction
+    {
+        $data = $request->all();
+
+        $signature = $this->client->signature($data);
+
+        if ($signature != $request->header('x-signature')) {
+            throw new PassimpaySignatureException();
+        }
+
+        DB::beginTransaction();
+
+        $deposit = PassimpayDeposit::findOrFail($data['orderId']);
+
+        $deposit->update([
+            'payment_id' => $data['paymentId'],
+            'amount' => $data['amount'],
+            'txhash' => $data['txhash'],
+            'address_from' => $data['addressFrom'],
+            'address_to' => $data['addressTo'],
+            'confirmations' => $data['confirmations'],
+            'destination_tag' => $data['destinationTag'],
+        ]);
+        
+        $amount = $this->cryptoToUsd($data['amount'], $data['paymentId']);
+
+        $transaction = $deposit->transaction;
+
+        $transaction->update([
+            'amount' => $amount,
+            'status' => Transactions::PASSIMPAY_DEPOSIT_STATUS['transfered'],
+        ]);
+
+        DB::commit();
 
         return $transaction;
     }
@@ -53,13 +99,15 @@ class PassimpayGateway extends PaymentGateway
         array $data = []
     ): Transaction
     {   
-        $cryptoAmount = $this->convertFromUSD($amount, $data['payment_id']);
+        $cryptoAmount = $this->usdToCrypto($amount, $data['payment_id']);
 
         $response = $this->client->withdraw(
             $data['payment_id'], 
             $data['address_to'], 
             $cryptoAmount
         );
+
+        DB::beginTransaction();
 
         $withdrawal = PassimpayWithdrawal::create([
             'payment_id' => $response['paymentId'],
@@ -69,39 +117,58 @@ class PassimpayGateway extends PaymentGateway
         ]);
 
         $transaction = $withdrawal->transaction()->create([
-            'gateway' => 'crypto',
-            'type' => 'withdrawal',
+            'gateway' => Transactions::GATEWAYS['crypto'],
+            'type' => Transactions::PASSIMPAY_TYPES['withdrawal'],
             'amount' => $amount,
             'creator_id' => $creator->id,
-            'status' => 'pending',
+            'status' => Transactions::PASSIMPAY_WITHDRAWAL_STATUS['pending'],
         ]);
+
+        DB::commit();
 
         return $transaction;
     }
 
-    public function convertFromUSD(float $amount, int $paymentId): float
+    public function updateWithdrawalStatus(Transaction $transaction): void
     {
-        $response = $this->client->currencies();
+        $status = [
+            Transactions::PASSIMPAY_WITHDRAWAL_STATUS['pending'],
+            Transactions::PASSIMPAY_WITHDRAWAL_STATUS['succes'],
+            Transactions::PASSIMPAY_WITHDRAWAL_STATUS['error'],
+        ];
 
-        foreach ($response['list'] as $currency) {
-            if ($paymentId == $currency['id']) {
-                return $amount / $currency['rateUsd'];
-            }
-        }
+        $response = $this->client->withdrawstatus(
+            $transaction->details->transaction_id
+        );
 
-        throw new Exception('Can not convert.');
+        $transaction->update([
+            'status' => $status[$response['approve']],
+        ]);
     }
 
-    public function convertToUSD(float $amount, int $paymentId): float
+    public function usdToCrypto(float $amountUsd, int $paymentId): float
     {
         $response = $this->client->currencies();
 
         foreach ($response['list'] as $currency) {
             if ($paymentId == $currency['id']) {
-                return $amount * $currency['rateUsd'];
+                return $amountUsd / $currency['rateUsd'];
             }
         }
 
-        throw new Exception('Can not convert.');
+        throw new CurrencyNotFoundException();
+    }
+
+    public function cryptoToUsd(float $amountCrypto, int $paymentId): float
+    {
+        $response = $this->client->currencies();
+
+        foreach ($response['list'] as $currency) {
+            if ($paymentId == $currency['id']) {
+                return $amountCrypto * $currency['rateUsd'];
+            }
+        }
+
+        throw new CurrencyNotFoundException;
     }
 }

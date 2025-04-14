@@ -20,14 +20,17 @@ class InfoController extends Controller
     {
         $creator = Auth::guard('web')->user();
 
-        $transferStat = [];
-        $transferStat['day'] = $this->balancesService->transfersStat($creator, 'day');
-        $transferStat['week'] = $this->balancesService->transfersStat($creator, 'week');
-        $transferStat['month'] = $this->balancesService->transfersStat($creator, 'month');
+        $transfersStat = [];
+        $transfersStat['day'] = 
+            $this->balancesService->balanceBalace2TransfersStat($creator, 'day');
+        $transfersStat['week'] = 
+            $this->balancesService->balanceBalace2TransfersStat($creator, 'week');
+        $transfersStat['month'] = 
+            $this->balancesService->balanceBalace2TransfersStat($creator, 'month');
 
         return view('pages.info', [
             'creator' => $creator,
-            'transferStat' => $transferStat,
+            'transfersStat' => $transfersStat,
         ]);
     }
 }

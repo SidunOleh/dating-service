@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Constants\Transactions;
 use App\Models\PassimpayWithdrawal;
 use App\Models\Transaction;
-use App\Services\PaymentGateways\Passimpay\PassimpayApi;
+use App\Services\Balances\BalancesService;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class UpdatePassimpayWithdrawals extends Command
@@ -27,6 +27,13 @@ class UpdatePassimpayWithdrawals extends Command
      */
     protected $description = 'Update passimpay withdrawals';
 
+    public function __construct(
+        public BalancesService $balancesService
+    )
+    {
+        parent::__construct();
+    }
+
     /**
      * Execute the console command.
      */
@@ -34,44 +41,17 @@ class UpdatePassimpayWithdrawals extends Command
     {
         Transaction::where([
             'details_type' => PassimpayWithdrawal::class,
-            'status' => 'pending',
+            'status' => Transactions::PASSIMPAY_WITHDRAWAL_STATUS['pending'],
         ])->chunk(1000, [$this, 'update']);
     }
 
     public function update(Collection $transactions)
     {
-        $passimpay = new PassimpayApi(
-            config('services.passimpay.platform_id'),
-            config('services.passimpay.secret_key')
-        );
-
-        $status = [
-            'pending',
-            'success',
-            'error',
-        ];
         foreach ($transactions as $transaction) {
             try {
-                $response = $passimpay->withdrawstatus(
-                    $transaction->details->transaction_id
-                );
-
-                DB::beginTransaction();
-
-                $transaction->update([
-                    'status' => $status[$response['approve']],
-                ]);
-
-                if ($response['approve'] == 2) {
-                    $transaction->creator->balance += $transaction->amount;
-                    $transaction->creator->save();
-                }
-
-                DB::commit();
-            } catch (Exception $e) {
-                DB::rollBack();
-                
-                Log::error($e, ['passimpay_withdrawal_id' => $transaction->details->id,]);
+                $this->balancesService->updateWithdrawalStatus($transaction->creator, $transaction);
+            } catch (Exception $e) {                
+                Log::error($e, ['transaction_id' => $transaction->id,]);
             }
         }
     }

@@ -2,16 +2,18 @@
 
 namespace App\Listeners;
 
-use App\Models\Option;
+use App\Services\ReferralSystem\ReferralSystem;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class PayPercentReferrer
+class PayPercentReferrer implements ShouldQueue
 {
     /**
      * Create the event listener.
      */
-    public function __construct()
+    public function __construct(
+        public ReferralSystem $referralSystem
+    )
     {
         //
     }
@@ -22,13 +24,7 @@ class PayPercentReferrer
     public function handle(object $event): void
     {
         $creator = $event->creator;
-        
-        if ($creator->referral and ! $creator->referral->rewarded()) {
-            $settings = Option::getSettings();
-                        
-            $amount = $settings['subscription_price'] * $settings['referral_percent'] / 100;
 
-            $creator->referral->reward($amount);
-        }
+        $this->referralSystem->payPercentForSubscription($creator);
     }
 }

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('creator_id')
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('user_type');
+            $table->unsignedBigInteger('user_id');
+            $table->string('mime_type');
+            $table->unsignedBigInteger('size');
             $table->timestamps();
         });
     }

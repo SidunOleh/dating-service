@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Images;
 
+use App\Constants\Uploads;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Images\UploadRequest;
 use App\Models\Upload;
@@ -22,7 +23,7 @@ class UploadController extends Controller
         $creator = Auth::guard('web')->user();
 
         if (! $creator->canUpload()) {
-            return response(['message' => 'Too many uploads(' . Upload::MAX . ' per day)'], 429);
+            return response(['message' => 'Too many uploads(' . Uploads::MAX . ' per day)'], 429);
         }
 
         $image = $this->imagesService->upload($creator, $request->file('img'), true);

@@ -7,3 +7,7 @@ function minify_css($css) {
    
    return $css;
 }
+
+function format_price(float $amount) {
+    return number_format($amount, 2);
+}

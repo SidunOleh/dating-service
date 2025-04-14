@@ -2,24 +2,23 @@
 
 namespace App\Models;
 
+use App\Constants\Subscriptions;
+use App\Constants\Uploads;
 use App\Notifications\ResetPassword;
-use App\Services\PaymentGateways\PaymentGateway;
+use App\Services\Images\ImagesService;
+use App\Services\ReferralSystem\ReferralSystem;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Cache;
 use Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
 use Staudenmeir\EloquentJsonRelations\Relations\BelongsToJson;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Creator extends Authenticatable
 {
@@ -32,6 +31,7 @@ class Creator extends Authenticatable
         'show_on_site',
         'play_roulette', 
         'created_by_admin',
+        'profile_is_created',
         'photos',
         'name',
         'age',
@@ -73,11 +73,13 @@ class Creator extends Authenticatable
         'latitude' => 'float',
         'longitude'=> 'float', 
         'balance' => 'float',
+        'balance_2' => 'float',
+        'balance_2_auto' => 'float',
         'is_verified' => 'boolean',
         'birthday' => 'date',
     ];
 
-    protected $profileFields = [
+    public $profileFields = [
         'name',
         'age',
         'gender',
@@ -114,40 +116,29 @@ class Creator extends Authenticatable
         });
 
         static::created(function (self $creator) {
-            if (
-                ($code = Cookie::get('ref') and
-                $referrer = self::firstWhere('referral_code', $code)) or 
-                ($from = Cookie::get('from') and 
-                $referrer = self::find($from))
-            ) {
-                Referral::create([
-                    'referrer_id' => $referrer->id,
-                    'referee_id' => $creator->id,
-                ]);
-
-                Cookie::queue(Cookie::forget('ref'));
-                Cookie::queue(Cookie::forget('from'));
-            }
+            app()->make(ReferralSystem::class)->createReferral($creator);
         });
 
         static::updating(function (self $creator) {
             $creator->is_approved = $creator->isApproved();
             $creator->is_verified = $creator->isVerified();
 
+            $imagesService = app()->make(ImagesService::class);
+
             if ($photos = array_diff($creator->getOriginal('photos') ?? [], $creator->photos ?? [])) {
-                Image::deleteByIds($photos);
+                $imagesService->deleteByIds($photos);
             }
 
             if ($creator->getOriginal('verification_photo') and ! $creator->verification_photo) {
-                Image::deleteByIds([$creator->getOriginal('verification_photo')]);
+                $imagesService->deleteByIds([$creator->getOriginal('verification_photo')]);
             }
 
             if ($creator->getOriginal('street_photo') and ! $creator->street_photo) {
-                Image::deleteByIds([$creator->getOriginal('street_photo')]);
+                $imagesService->deleteByIds([$creator->getOriginal('street_photo')]);
             }
 
             if ($creator->getOriginal('id_photo') and ! $creator->id_photo) {
-                Image::deleteByIds([$creator->getOriginal('id_photo')]);
+                $imagesService->deleteByIds([$creator->getOriginal('id_photo')]);
             }
         });
     }
@@ -283,29 +274,6 @@ class Creator extends Authenticatable
         return $this->hasOne(Referral::class, 'referee_id');
     }
 
-    public function hasEnoughMoney(float $amount): bool
-    {
-        return $amount <= $this->balance;
-    }
-
-    public function creditMoney(float $amount): bool
-    {
-        $this->balance += $amount;
-
-        return $this->save();
-    }
-
-    public function debitMoney(float $amount): bool
-    {
-        if ($this->balance < $amount) {
-            return false;
-        }
-
-        $this->balance -= $amount;
-
-        return $this->save();
-    }
-
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
@@ -315,130 +283,12 @@ class Creator extends Authenticatable
     {
         return $this
             ->hasOne(Subscription::class)
-            ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', 'active'));
-    }
-
-    public function subscribe(): Subscription
-    {
-        return Subscription::subscribe($this);
-    }
-
-    public function unsubscribe(): bool
-    {
-        return $this->activeSub->unsubscribe();
+            ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', Subscriptions::STATUS['active']));
     }
 
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
-    }
-
-    public function deposit(string $gateway, float $amount, array $data = []): Transaction
-    {
-        $paymentGateway = PaymentGateway::create($gateway);
-
-        $transaction = $paymentGateway->deposit($this, $amount, $data);
-
-        return $transaction;
-    }
-
-    public function withdraw(string $gateway, float $amount, array $data = []): Transaction
-    {
-        $paymentGateway = PaymentGateway::create($gateway);
-
-        $transaction = $paymentGateway->withdraw($this, $amount, $data);
-
-        return $transaction;
-    }
-
-    public function saveNotApprovableProfileChanges(array $data): bool
-    {
-        foreach ($this->profileFields as $field) {
-            if (! array_key_exists($field, $data)) {
-                continue;
-            }
-
-            if ($field == 'photos') {
-                $this->photos = array_intersect($data['photos'], $this->photos ?? []);
-            }
-
-            if (! $data[$field]) {
-                $this->{$field} = null;
-            }
-        }
-
-        return $this->save();
-    }
-
-    public function createProfileRequest(array $data): ?ProfileRequest
-    {
-        $request = [];
-        foreach ($this->profileFields as $field) {
-            if (
-                ! array_key_exists($field, $data) or 
-                ! $this->profileFieldChanged($field, $data[$field])
-            ) {
-                continue;
-            }
-
-            if (in_array($field, [
-                'zip',
-                'state', 
-                'city', 
-                'latitude', 
-                'longitude',
-            ])) { 
-                $request['location']['value']['zip'] =
-                    $data['zip'];
-                $request['location']['value']['state'] =
-                    $data['state'];
-                $request['location']['value']['city'] = 
-                    $data['city'];
-                $request['location']['value']['latitude'] = 
-                    $data['latitude'];
-                $request['location']['value']['longitude'] =    
-                    $data['longitude'];
-                $request['location']['status'] = 'pending';
-                $request['location']['comment'] = '';
-            } elseif ($field == 'photos') {
-                $photos = array_diff($data['photos'], $this->photos ?? []);
-                $request['photos']['value'] = $photos;
-                $request['photos']['status'] = 
-                    array_fill(0, count($photos), 'pending');
-                $request['photos']['comment'] = 
-                    array_fill(0, count($photos), '');
-            } else {
-                $request[$field]['value'] = $data[$field];
-                $request[$field]['status'] = 'pending';
-                $request[$field]['comment'] = '';
-            }
-        }
-
-        return $request ? $this->profileRequests()->create($request) : null;
-    }
-
-    private function profileFieldChanged(string $field, $value): bool
-    {
-        if ($field == 'photos') {
-            return (bool) array_diff($value, $this->photos ?? []);   
-        }
-
-        if ($field == 'birthday') {
-            return $this->birthday?->format('Y-m-d') != $value;
-        }
-
-        return $this->{$field} != $value;
-    }
-    
-    public function deleteProfile(): bool
-    {
-        foreach ($this->profileFields as $field) {
-            $this->{$field} = null;
-        }
-
-        $this->profile_is_created = false;
-
-        return $this->save();
     }
 
     public function profileRequests(): HasMany
@@ -539,144 +389,6 @@ class Creator extends Authenticatable
             ]);
     } 
 
-    public static function seed(): int
-    {
-        if (! $seed = Cache::get('seed')) {
-            $seed = rand();
-            Cache::put('seed', $seed, 3600 * 2);
-        }
-
-        return $seed;
-    }
-
-    public static function top(int $count, array $filters): Collection
-    {
-        $seed = self::seed();
-
-        $query = self::with('gallery')->withCount('inFavorites')
-            ->showOnSite()
-            ->verified();
-
-        if (isset($filters['s'])) {
-            $query->search($filters['s']);
-        }
-
-        if (isset($filters['gender'])) {
-            $query->where('gender', $filters['gender']);
-        }
-
-        if (isset($filters['center']) and isset($filters['radius'])) {
-            $query->radius($filters['center'], $filters['radius']);
-        }
-
-        if (isset($filters['in_favorites'])) {
-            $query->whereHas('inFavorites', fn (Builder $query) => $query->where('creator_id', $filters['in_favorites']));
-        }
-            
-        return $query->orderByRaw("rand({$seed})")->limit($count)->get();
-    }
-
-    public static function mainList(int $page, int $perpage, array $filters = []): Collection
-    {
-        $top = self::top($perpage < 10 ? $perpage : 10, $filters);
-
-        $seed = self::seed();
-        $limit = $page == 1 ? $perpage - $top->count() : $perpage;
-        $offset = $perpage * ($page - 1) - $top->count();
-        
-        $query = self::with('gallery')->withCount('inFavorites')
-            ->whereNotIn('id', $top->pluck('id')->all())
-            ->showOnSite();
-
-        if (isset($filters['s'])) {
-            $query->search($filters['s']);
-        }
-
-        if (isset($filters['gender'])) {
-            $query->where('gender', $filters['gender']);
-        }
-
-        if (isset($filters['center']) and isset($filters['radius'])) {
-            $query->radius($filters['center'], $filters['radius']);
-        }
-
-        if (isset($filters['in_favorites'])) {
-            $query->whereHas('inFavorites', fn (Builder $query) => $query->where('creator_id', $filters['in_favorites']));
-        }
-        
-        $creators = $query->orderByRaw("rand({$seed})")
-            ->limit($limit)
-            ->offset($offset)
-            ->get();
-
-        return $page == 1 ? $top->merge($creators) : $creators;
-    } 
-
-    public static function mainListTotalCount(array $filters = []): int
-    {
-        $query = self::showOnSite();
-
-        if (isset($filters['s'])) {
-            $query->search($filters['s']);
-        }
-
-        if (isset($filters['gender'])) {
-            $query->where('gender', $filters['gender']);
-        }
-
-        if (isset($filters['center']) and isset($filters['radius'])) {
-            $query->radius($filters['center'], $filters['radius']);
-        }
-
-        if (isset($filters['in_favorites'])) {
-            $query->whereHas('inFavorites', fn (Builder $query) => $query->where('creator_id', $filters['in_favorites']));
-        }
-
-        return $query->count();
-    } 
-
-    public static function recommends(
-        int $count, 
-        array $exclude = [], 
-        array $filters = [], 
-        int $level = 1
-    ): Collection
-    {        
-        $query = self::with('gallery')->showOnSite();
-
-        if ($exclude) {
-            $query->whereNotIn('id', $exclude);
-        }
-
-        if (isset($filters['s'])) {
-            $query->search($filters['s']);
-        }
-
-        if (isset($filters['gender'])) {
-            $query->where('gender', $filters['gender']);
-        }
-
-        if (isset($filters['center']) and isset($filters['radius'])) {
-            $query->radius($filters['center'], $filters['radius']);
-        }
-        
-        $recommends = $query->inRandomOrder()->limit($count)->get();
-
-        if ($recommends->count() < $count and $level == 1) {
-            $count = $count - $recommends->count();
-            $exclude = [...$exclude, ...$recommends->pluck('id')];
-
-            $recommends = $recommends->merge(self::recommends(
-                $count,  
-                $exclude,
-                [],
-                $level + 1
-            ));
-        }
-
-        return $recommends;
-    } 
-
     public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(self::class, 'favorites', 'creator_id', 'favorite_id')->withTimestamps();
@@ -720,33 +432,9 @@ class Creator extends Authenticatable
         return $visits->count();
     }
 
-    public static function roulettePair(): Collection
+    public function uploads(): MorphMany
     {
-        $pair = self::with('gallery')
-            ->select('id', 'city', 'state', DB::raw('JSON_EXTRACT(photos, CONCAT("$[", FLOOR(RAND() * JSON_LENGTH(photos)), "]")) photos'),)
-            ->where('id', '!=', Auth::guard('web')?->id())
-            ->showOnSite()
-            ->playRoulette()
-            ->inRandomOrder()
-            ->limit(2)
-            ->get();
-
-        return $pair;
-    }
-
-    public static function topVote(int $count): Collection
-    {
-        return self::withCount('inFavorites')
-            ->with('gallery')
-            ->showOnSite()
-            ->orderBy('votes', 'DESC')
-            ->limit($count)
-            ->get();
-    }
-
-    public function uploads(): HasMany
-    {
-        return $this->hasMany(Upload::class);
+        return $this->morphMany(Upload::class, 'user');
     }
 
     public function canUpload(): bool
@@ -757,67 +445,7 @@ class Creator extends Authenticatable
             ->whereRaw('DAY(`created_at`) = ' . date('d'))
             ->count();
 
-        return $count < Upload::MAX;
-    }
-
-    public function getTransactionList(): array
-    {
-        $transactions = $this->transactions()
-            ->with('details')
-            ->get();
-        $list = $transactions->filter(function (Transaction $transaction) {
-            if ($transaction->details instanceof PassimpayDeposit) {
-                return $transaction->amount > 0;
-            } elseif ($transaction->details instanceof PassimpayWithdrawal)  {
-                return in_array($transaction->status, ['success', 'pending',]);
-            } else {
-                return false;
-            }
-        });
-
-        $withdrawalRequests = $this->withdrawalRequests()
-            ->where('status', 'pending')
-            ->with('concrete')
-            ->get();
-        foreach ($withdrawalRequests as $withdrawalRequest) {
-            $list->push($withdrawalRequest);
-        }
-
-        $list = $list->sortByDesc('created_at');
-
-        $formattedList = [];
-        foreach ($list as $item) {
-            if (
-                $item instanceof Transaction and 
-                $item->details instanceof PassimpayDeposit
-            ) {
-                $formattedItem['type'] = 'IN';
-                $formattedItem['amount'] = $item->details->amount;
-                $formattedItem['currency'] = $item->details->currency;
-            } elseif (
-                $item instanceof Transaction and 
-                $item->details instanceof PassimpayWithdrawal
-            ) {
-                $formattedItem['type'] = $item->details->status == 'success' ? 'OUT' : 'OUT(pending)';
-                $formattedItem['amount'] = $item->details->amount;
-                $formattedItem['currency'] = $item->details->currency;
-            } elseif (
-                $item instanceof WithdrawalRequest and 
-                $item->concrete instanceof PassimpayWithdrawalRequest
-            ) {
-                $formattedItem['type'] = 'WITHDRAWAL REQUEST';
-                $formattedItem['amount'] = $item->amount;
-                $formattedItem['currency'] = 'Coin';
-            } else {
-                continue;
-            }
-
-            $formattedItem['date'] = $item->created_at->format('M d, Y');
-
-            $formattedList[] = $formattedItem;
-        }
-
-        return $formattedList;
+        return $count < Uploads::MAX;
     }
 
     public function withdrawalRequests(): HasMany
@@ -841,8 +469,25 @@ class Creator extends Authenticatable
         );
     }
 
-    public function balancesTransfers(): HasMany
+    public function balance2Transactions(): HasMany
     {
-        return $this->hasMany(BalancesTransfer::class);
+        return $this->hasMany(Balance2Transaction::class);
+    }
+
+    public function hasEnoughMoney(float $amount, string $balance = 'balance'): bool
+    {
+        return $amount <= $this->{$balance};
+    }
+
+    public function debitMoney(float $amount, string $balance = 'balance'): void
+    {
+        $this->{$balance} -= $amount;
+        $this->save();
+    }
+
+    public function creditMoney(float $amount, string $balance = 'balance'): void
+    {
+        $this->{$balance} += $amount;
+        $this->save();
     }
 }

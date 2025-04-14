@@ -25,7 +25,6 @@ return new class extends Migration
                 ->on('creators')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->decimal('reward', 10, 2)->nullable();
             $table->timestamps();
         });
     }

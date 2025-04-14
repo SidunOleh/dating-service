@@ -2,9 +2,13 @@
 
 namespace App\Services\Verification;
 
+use App\Exceptions\CodeIsExpiredException;
+use App\Exceptions\CodeNotFoundException;
+use App\Exceptions\InvalidCodeException;
+use App\Exceptions\TooFastException;
+use App\Exceptions\TooManyAttempsException;
 use App\Notifications\VerificationCode as NotificationsVerificationCode;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Support\Facades\Notification;
 
 class Code
@@ -16,7 +20,7 @@ class Code
     public function __construct(string $action)
     {
         if (! $data = session($action)) {
-            throw new Exception('Code not found.');
+            throw new CodeNotFoundException();
         }
 
         $this->action = $action;
@@ -32,7 +36,7 @@ class Code
     public function resend(string $email): void
     {
         if (now()->lessThan(Carbon::createFromTimestamp($this->data['created_at'] + 60))) {
-            throw new Exception('Too fast.');
+            throw new TooFastException();
         }
 
         $this->data['code'] = rand(100000, 999999);
@@ -48,15 +52,15 @@ class Code
         $this->data['attemps']++;
 
         if ($this->data['attemps'] > 3) {
-            throw new Exception('Too many attemps.');
+            throw new TooManyAttempsException();
         }
 
         if (now()->greaterThan(Carbon::createFromTimestamp($this->data['expire_at']))) {
-            throw new Exception('Code is expired.');
+            throw new CodeIsExpiredException();
         }
 
         if ($this->data['code'] != $code) {
-            throw new Exception('Invalid code.');
+            throw new InvalidCodeException();
         }
 
         return true;

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Web\Auth;
 
+use App\Exceptions\TooFastException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Auth\SignUpResendCodeRequest;
 use App\Services\Verification\Code;
-use Exception;
 
 class SignUpResendCodeController extends Controller
 {
@@ -19,8 +19,8 @@ class SignUpResendCodeController extends Controller
             $code->resend($credentials['email']);
 
             return response(['message' => 'OK',]);
-        } catch (Exception $e) {
-            return response(['message' => $e->getMessage()], 400);
+        } catch (TooFastException $e) {
+            return response(['message' => 'Too fast.',], 400);
         }
     }
 }

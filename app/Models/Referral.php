@@ -13,7 +13,6 @@ class Referral extends Model
     protected $fillable = [
         'referrer_id',
         'referee_id',
-        'reward',
     ];
 
     public function referrer(): BelongsTo
@@ -24,17 +23,5 @@ class Referral extends Model
     public function referee(): BelongsTo
     {
         return $this->belongsTo(Creator::class, 'referee_id');
-    }
-
-    public function rewarded(): bool
-    {
-        return ! is_null($this->reward);
-    }
-
-    public function reward(float $amout): void
-    {
-        $this->referrer->creditMoney($amout);
-        
-        $this->update(['reward' => $amout]);
     }
 }

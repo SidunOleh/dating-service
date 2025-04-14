@@ -5,16 +5,24 @@ namespace App\Http\Controllers\Web\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Profile\StoreRequest;
 use App\Models\ZipCode;
+use App\Services\Creators\CreatorsService;
 use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
+    public function __construct(
+        public CreatorsService $creatorsService
+    )
+    {
+        
+    }
+
     public function __invoke(StoreRequest $requets)
     {
         $creator = Auth::guard('web')->user();
 
         if ($creator->profile_is_created) {
-            return abort(400);
+            return response(['message' => 'You have profile.'], 400);
         }
 
         $validated = $requets->validated();
@@ -25,10 +33,7 @@ class StoreController extends Controller
         $validated['latitude'] = $zip->latitude;
         $validated['longitude'] = $zip->longitude;
 
-        $creator->createProfileRequest($validated);
-        
-        $creator->profile_is_created = true;
-        $creator->save();
+        $this->creatorsService->createProfileRequest($creator, $validated);
 
         return response(['message' => 'OK',]);
     }

@@ -2,9 +2,8 @@
 
 namespace App\Services\PaymentGateways\Passimpay;
 
-use Exception;
+use App\Exceptions\PassimpayApiException;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class PassimpayApi
 {
@@ -27,10 +26,6 @@ class PassimpayApi
     {
         $response = $this->request("{$this->baseUrl}/currencies");
 
-        if ($response['result'] == 0) {
-            throw new Exception($response['message']);
-        }
-
         return $response;
     }
 
@@ -40,10 +35,6 @@ class PassimpayApi
             'paymentId' => $paymentId,
             'orderId' => $orderId,
         ]);
-
-        if ($response['result'] == 0) {
-            throw new Exception($response['message']);
-        }
 
         return $response;
     }
@@ -60,10 +51,6 @@ class PassimpayApi
             'amount' => $amount,
         ]);
 
-        if ($response['result'] == 0) {
-            throw new Exception($response['message']);
-        }
-
         return $response;
     }
 
@@ -72,10 +59,6 @@ class PassimpayApi
         $response = $this->request("{$this->baseUrl}/withdrawstatus", [
             'transactionId' => $transactionId,
         ]);
-
-        if ($response['result'] == 0) {
-            throw new Exception($response['message']);
-        }
 
         return $response;
     }
@@ -90,7 +73,13 @@ class PassimpayApi
             'x-signature' => $signature,
         ])->withBody(json_encode($data), 'application/json')->post($url);
 
-        return $response->json();
+        $json = $response->json();
+
+        if ($json['result'] == 0) {
+            throw new PassimpayApiException($json['message']);
+        }
+
+        return $json;
     }
 
     public function signature(array $data): string

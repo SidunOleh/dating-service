@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class BalancesTransfer extends Model
+class TransferRequest extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'from',
-        'to',
-        'amount',
+        'amount', 
+        'status',
         'creator_id',
     ];
 

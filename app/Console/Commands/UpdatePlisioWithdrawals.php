@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Constants\Transactions;
 use App\Models\PlisioWithdrawal;
-use App\Services\PaymentGateways\Plisio\Api\PlisioClient;
+use App\Services\Balances\BalancesService;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
@@ -25,35 +26,33 @@ class UpdatePlisioWithdrawals extends Command
      */
     protected $description = 'Update plisio withdrawals';
 
+    public function __construct(
+        public BalancesService $balancesService
+    )
+    {
+        parent::__construct();
+    }
+
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        PlisioWithdrawal::where('status', 'pending')->chunk(1000, [$this, 'update']);
+        PlisioWithdrawal::where([
+            'status' => Transactions::PLISIO_WITHDRAWAL_STATUS['pending'],
+        ])->chunk(1000, [$this, 'update']);
     }
 
     public function update(Collection $withdrawals)
     {
-        $plisio = new PlisioClient(config('services.plisio.secret'));
-
         foreach ($withdrawals as $withdrawal) {
             try {
-                $data = $plisio->transaction($withdrawal->plisio_id);
-
-                $withdrawal->update([
-                    'status' => $data['status'],
-                ]);
-                $withdrawal->transaction->update([
-                    'status' => $data['status'],
-                ]);
-
-                if ($data['status'] == 'error') {
-                    $withdrawal->transaction->creator->balance += $withdrawal->transaction->amount;
-                    $withdrawal->transaction->creator->save();
-                }
+                $this->balancesService->updateWithdrawalStatus(
+                    $withdrawal->transaction->creator,
+                    $withdrawal->transaction,
+                );
             } catch (Exception $e) {
-                Log::error($e, ['plisio_withdrawal_id' => $withdrawal->id,]);
+                Log::error($e, ['transaction_id' => $withdrawal->transaction->id,]);
             }
         }
     }

@@ -1,8 +1,8 @@
 @auth('web')
 <a href="{{ route('info.page') }}" class="btn red meow balance">
     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
-    <span class="balance-2">
-        {{ ($balace2Total = auth('web')->user()->balance_2_total) >= 100 ? 'Rich' : $balace2Total }}
+    <span class="balance-2 rich">
+        {{ ($balace2Total = auth('web')->user()->balance_2_total) >= 100 ? 'Rich' : format_price($balace2Total) }}
     </span>
 </a>
 @endauth
@@ -11,7 +11,6 @@
 <div class="btn red meow" data-step="0">
     Play ;D
 </div>
-@endguest
 
 <script>
     const meowText = [
@@ -85,3 +84,4 @@
         })
     }
 </script>
+@endguest

@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Services\PaymentGateways\Passimpay\PassimpayApi;
-use Exception;
 use Illuminate\Console\Command;
 
 class PassimpayRates extends Command

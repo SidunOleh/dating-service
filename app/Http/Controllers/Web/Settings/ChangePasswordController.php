@@ -11,8 +11,8 @@ class ChangePasswordController extends Controller
     public function __invoke(ChangePasswordRequest $request)
     {
         $creator = Auth::guard('web')->user();
-        $creator->password = $request->input('new_password');
-        $creator->save();
+
+        $creator->update(['password' => $request->input('new_password')]);
 
         return response(['message' => 'OK',]);
     }

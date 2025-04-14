@@ -5,9 +5,17 @@ namespace App\Http\Controllers\Web\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\Creator;
 use App\Models\Option;
+use App\Services\Creators\CreatorsService;
 
 class ProfileController extends Controller
 {
+    public function __construct(
+        public CreatorsService $creatorsService
+    )
+    {
+        
+    }
+
     public function __invoke(Creator $creator)
     {
         if (
@@ -18,7 +26,7 @@ class ProfileController extends Controller
             return abort(404);
         }
         
-        $recommends = Creator::recommends(
+        $recommends = $this->creatorsService->recommends(
             count($creator->photos) * 3,
             [$creator->id,], 
             session('filters', [])

@@ -6,11 +6,18 @@ use App\Events\CreatorInactivated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Creators\UpdateRequest;
 use App\Models\Creator;
-use App\Models\Image;
 use App\Models\ZipCode;
+use App\Services\Images\ImagesService;
 
 class UpdateController extends Controller
 {
+    public function __construct(
+        public ImagesService $imagesService
+    )
+    {
+        
+    }
+
     public function __invoke(Creator $creator, UpdateRequest $request)
     {
         $validated = $request->validated();
@@ -35,7 +42,7 @@ class UpdateController extends Controller
             $creator->photos ?? [],
             $validated['photos'] ?? []
         );
-        Image::deleteByIds($deletedPhotos);
+        $this->imagesService->deleteByIds($deletedPhotos);
 
         $creator->update($validated);
 

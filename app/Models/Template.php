@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Creators\CreatorsService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -59,7 +60,9 @@ class Template extends Model
         $this->data = new Collection();
         $this->total = 0;
 
-        $profiles = Creator::mainList(
+        $creatorsService = app()->make(CreatorsService::class);
+
+        $profiles = $creatorsService->mainList(
             $this->page, 
             $this->count('profile'), 
             $this->filters
@@ -70,7 +73,7 @@ class Template extends Model
         }
 
         $this->total = ceil(
-            Creator::mainListTotalCount($this->filters) / $this->count('profile')
+            $creatorsService->mainListTotalCount($this->filters) / $this->count('profile')
         );
 
         $ads = Ad::with('image')

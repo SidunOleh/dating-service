@@ -11,9 +11,8 @@ class SwitchOptionController extends Controller
     public function __invoke(SwitchOptionRequest $request)
     {
         $creator = Auth::guard('web')->user();
-        
-        $creator->{$request->name} = $request->value;
-        $creator->save();
+
+        $creator->update([$request->name => $request->value]);
 
         return response(['message' => 'OK',]);
     }

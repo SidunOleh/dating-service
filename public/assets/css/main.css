@@ -6484,3 +6484,8 @@ select#gender {
     justify-content: center;
     gap: 8px;
 }
+
+.left-card .link-body .link,
+.refferals .link-body .link {
+    word-break: break-all;
+}

@@ -1490,7 +1490,7 @@ function updateBalances(balance1, balance2) {
     $('.balance-1').text(balance1)
     $('.balance-2').text(format_price(balance2))
     $('.balance-2.rich').text(balance2 >= 100 ? 'Rich' : format_price(balance2))
-    $('.exchange-form #amount').text(balance2)
+    $('.exchange-form #amount').attr('max', balance2)
 }
 
 function format_price(amount) {

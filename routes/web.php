@@ -13,6 +13,7 @@ use App\Http\Controllers\Web\Auth\SignUpResendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpSendCodeController;
 use App\Http\Controllers\Web\Auth\SignUpVerifyCodeController;
 use App\Http\Controllers\Web\Balances\TransferController;
+use App\Http\Controllers\Web\Balances\TransferToBalanceController;
 use App\Http\Controllers\Web\Favorites\AddToFavotiresController;
 use App\Http\Controllers\Web\Favorites\RemoveFromFavotiresController;
 use App\Http\Controllers\Web\Filters\ApplyController;
@@ -291,6 +292,9 @@ Route::get('logs', [LogViewerController::class, 'index'])
 Route::post('/balances/transfer', TransferController::class)
     ->middleware(['auth:web',])
     ->name('balances.transfer');
+Route::post('/balances/transfer-to-balance', TransferToBalanceController::class)
+    ->middleware(['auth:web',])
+    ->name('balances.transfer-to-balance');
 
 /**
  * 404

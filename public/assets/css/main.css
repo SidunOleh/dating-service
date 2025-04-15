@@ -6454,6 +6454,7 @@ select#gender {
     gap: 20px;
     margin: 0 auto;
     margin-top: 22px;
+    flex-wrap: wrap;
 }
 
 .swap__coins {
@@ -6488,4 +6489,139 @@ select#gender {
 .left-card .link-body .link,
 .refferals .link-body .link {
     word-break: break-all;
+}
+
+.swap__transfer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.exchange-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgb(22 22 22 / 98%);
+    padding: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: none;
+}
+
+.exchange-wrapper.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.exchange-popup {
+    border-radius: 12px;
+    background: #39393e;
+    padding: 24px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+}
+
+.exchange-wrapper .max-amount {
+    top: 11px;
+}
+
+.exchange-wrapper .max-amount {
+    cursor: pointer;
+    position: absolute;
+    right: 12px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.exchange-wrapper .amount-input input {
+    padding-left: 35px;
+    color: #fc8f1b;
+    height: 40px;
+}
+
+.exchange-wrapper input {
+    border-radius: 4px;
+    background: #525252;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.exchange-wrapper .amount-input .input-label {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+}
+
+.exchange-wrapper .amount-input {
+    position: relative;
+}
+
+.exchange-wrapper .title {
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 12px 0;
+}
+
+.exchange-wrapper .btn-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.exchange-wrapper .btn-box .btn {
+    width: 100%;
+    max-width: 200px;
+}
+
+.exchange-wrapper .close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.exchange-wrapper .exchange-form,
+.exchange-wrapper .exchange-msg {
+    display: none;
+}
+
+.exchange-wrapper .exchange-form.active,
+.exchange-wrapper .exchange-msg.active {
+    display: block;
+}
+
+.exchange-wrapper .error input {
+    border-radius: 4px;
+    background: #7d5050;
+}
+
+.exchange-wrapper .error .error-text {
+    display: block;
+}
+
+.exchange-wrapper .error-text {
+    margin-top: 8px;
+    color: #fb4444;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: none;
 }

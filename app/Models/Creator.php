@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Constants\Subscriptions;
+use App\Constants\Transactions;
 use App\Constants\Uploads;
 use App\Notifications\ResetPassword;
 use App\Services\Images\ImagesService;
@@ -489,5 +490,17 @@ class Creator extends Authenticatable
     {
         $this->{$balance} += $amount;
         $this->save();
+    }
+
+    public function transferRequests(): HasMany
+    {
+        return $this->hasMany(TransferRequest::class);
+    }
+
+    public function transferRequestInPending(): HasOne
+    {
+        return $this
+            ->hasOne(TransferRequest::class)
+            ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', Transactions::TRANSFER_REQUEST_STATUS['pending']));
     }
 }

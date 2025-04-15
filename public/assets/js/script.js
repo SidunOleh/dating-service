@@ -1495,3 +1495,53 @@ function updateBalances(balance1, balance2) {
 function format_price(amount) {
     return (Math.round(amount * 100) / 100).toFixed(2)
 }
+
+//__________________________Exchange__________________________//
+
+$('.exchange-wrapper .close').on('click', function () {
+    $('.exchange-wrapper').removeClass('active')
+})
+
+$('.exchange-wrapper .btn-close').on('click', function () {
+    location.reload()
+})
+
+$('.swap__exchange').on('click', function () {
+    $('.exchange-wrapper').addClass('active')
+    $('.exchange-form').addClass('active')
+    $('.exchange-msg').removeClass('active')
+})
+
+$('.exchange-form .btn').on('click', function () {
+    $('.amount-input').removeClass('error')
+
+    let valid = true
+
+    const amount = Number($('.exchange-form #amount').val())
+
+    if (!amount) {
+        $('.amount-input').addClass('error')
+        $('.amount-input').find(".error-text").text('Amount is required')
+        valid = false
+    }
+
+    if (!valid) {
+        return
+    }
+
+    addLoader('.exchange-popup')
+
+    $.post('/balances/transfer-to-balance', {amount})
+        .done(() => {
+            $('.exchange-form').removeClass('active')
+            $('.exchange-msg').addClass('active')
+        })
+        .fail((xhr) => {
+            $('.exchange-form .text-error')
+                .text(xhr.responseJSON.message)
+                .addClass('show')
+        })
+        .always(() => {
+            removeLoader('.exchange-popup')
+        })
+})

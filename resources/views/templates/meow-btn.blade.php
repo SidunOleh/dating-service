@@ -1,6 +1,5 @@
 @auth('web')
 <a href="{{ route('info.page') }}" class="btn red meow balance">
-    <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
     <span class="balance-2 rich">
         {{ ($balace2Total = auth('web')->user()->balance_2_total) >= 100 ? 'Rich' : format_price($balace2Total) }}
     </span>

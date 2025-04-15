@@ -39,6 +39,9 @@ use App\Http\Controllers\Admin\Users\StoreController;
 use App\Http\Controllers\Admin\Users\UpdateController;
 use App\Http\Controllers\Admin\Users\DeleteController;
 use App\Http\Controllers\Admin\Transactions\DeleteController as TransactionsDeleteController;
+use App\Http\Controllers\Admin\TransferRequests\ApproveController;
+use App\Http\Controllers\Admin\TransferRequests\IndexController as TransferRequestsIndexController;
+use App\Http\Controllers\Admin\TransferRequests\RejectController as TransferRequestsRejectController;
 use App\Http\Controllers\Admin\Warnings\DeleteController as WarningsDeleteController;
 use App\Http\Controllers\Admin\Warnings\IndexController as WarningsIndexController;
 use App\Http\Controllers\Admin\Warnings\ShowSettingsController;
@@ -251,5 +254,17 @@ Route::middleware(['auth:sanctum',])->group(function () {
         Route::post('/', ContentUpdateController::class)
             ->name('update')
             ->can('content.edit');
+    });
+
+    Route::prefix('/transfer-requests')->name('transfer-requests.')->group(function () {
+        Route::get('/', TransferRequestsIndexController::class)
+            ->name('index')
+            ->can('transfer-requests.view');
+        Route::post('/{transferRequest}/approve', ApproveController::class)  
+            ->name('approve')
+            ->can('transfer-requests.approve');
+        Route::post('/{transferRequest}/reject', TransferRequestsRejectController::class)  
+            ->name('reject')
+            ->can('transfer-requests.reject');
     });
 });

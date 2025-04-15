@@ -315,6 +315,19 @@ const routes = [{
         menuKey: 'content',
     },
 }, {
+    path: '/u0puffeto4nh7SlHzFn8/transfer-requests',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/TransferRequests/Index.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'transfer-requests.index',
+    meta: {
+        access: 'private',
+        permission: 'transfer-requests.view',
+        menuKey: 'transfer-requests',
+    },
+}, {
     path: '/u0puffeto4nh7SlHzFn8/:pathMatch(.*)*',
     component: defineAsyncComponent({
         loader: () =>

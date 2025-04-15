@@ -20,7 +20,7 @@ class RejectController extends Controller
     {
         $user = Auth::guard('admin')->user();
 
-        $this->balancesService->rejectWithdrawalRequest($withdrawalRequest, $user);
+        $this->balancesService->rejectWithdrawalRequest($withdrawalRequest->creator, $withdrawalRequest, $user);
 
         return response(['message' => 'OK',]);
     }

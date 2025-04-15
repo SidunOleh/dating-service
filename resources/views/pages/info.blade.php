@@ -3,7 +3,6 @@
 <section class="swaps">
     <div class="container">
         <div class="swaps-card">
-            
             <div class="top">
                 <div class="coins">
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
@@ -66,7 +65,6 @@
                 </div>
                 @endif
             </div>
-
         </div>
     </div>
 </section>
@@ -96,6 +94,7 @@
             </div>
             <div class="text-error"></div>
         </div>
+        
         <div class="exchange-msg">
             <p class="title">
                 Your exchange request will be processed within 72 hours. <br /> You will receive a notification by email.

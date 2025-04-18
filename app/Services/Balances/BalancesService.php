@@ -4,6 +4,8 @@ namespace App\Services\Balances;
 
 use App\Constants\Balances;
 use App\Constants\Transactions;
+use App\Events\TransferRequestApproved;
+use App\Events\TransferRequestRejected;
 use App\Events\WithdrawRequestRejected;
 use App\Events\WithdrawRequestSuccess;
 use App\Exceptions\NotEnoughMoneyException;
@@ -230,7 +232,7 @@ class BalancesService
         return $transaction;
     }
 
-    public function debitBalance2(Creator $creator, float $amount, string $type): Balance2Transaction
+    public function debitBalance2(Creator $creator, float $amount, string $type): array
     {   
         if (! $creator->hasEnoughMoney($amount, 'balance_2_total')) {
             throw new NotEnoughMoneyException();
@@ -258,7 +260,7 @@ class BalancesService
 
         DB::commit();
 
-        return $transaction;
+        return [$transaction, $fromBalance2Auto, $fromBalance2];
     }
 
     public function createTransferRequest(Creator $creator, float $amount): TransferRequest
@@ -283,6 +285,8 @@ class BalancesService
         }
 
         $transferRequest->update(['status' => Transactions::TRANSFER_REQUEST_STATUS['rejected']]);
+
+        TransferRequestRejected::dispatch($transferRequest);
     }
 
     public function transferBalance2Balance(Creator $creator, TransferRequest $transferRequest): void
@@ -304,6 +308,8 @@ class BalancesService
         $transferRequest->update(['status' => Transactions::TRANSFER_REQUEST_STATUS['approved']]);
 
         DB::commit();
+
+        TransferRequestApproved::dispatch($transferRequest);
     }
 
     public function getTransactionList(Creator $creator): array

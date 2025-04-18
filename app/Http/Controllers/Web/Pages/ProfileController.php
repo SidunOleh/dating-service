@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Creator;
 use App\Models\Option;
 use App\Services\Creators\CreatorsService;
+use App\Services\Posts\PostsService;
 
 class ProfileController extends Controller
 {
     public function __construct(
-        public CreatorsService $creatorsService
+        public CreatorsService $creatorsService,
+        public PostsService $postsService
     )
     {
         
@@ -34,10 +36,13 @@ class ProfileController extends Controller
 
         $settings = Option::getSettings();
 
+        $posts = $this->postsService->getPosts($creator, 1);
+
         return view('pages.profile', [
             'creator' => $creator,
             'recommends' => $recommends,
             'show_contacts' => $settings['show_contacts'],
+            'posts' => $posts,
         ]);
     }
 }

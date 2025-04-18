@@ -5,12 +5,14 @@ namespace App\Providers;
 use App\Models\Ad;
 use App\Models\Creator;
 use App\Models\Option;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Warning;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
@@ -71,6 +73,10 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') == 'production') {
             URL::forceScheme('https');
         }
+
+        Gate::define('delete-post', function (Creator $creator, Post $post) {
+            return $post->creator_id == $creator->id;
+        });
 
         // DB::listen(fn($sql) => $GLOBALS['sql'][] = $sql);
     }

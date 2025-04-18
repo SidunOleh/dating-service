@@ -131,7 +131,7 @@ function togglePopup(cardName, show) {
     }
 }
 
-$(".btn.login, .header-burger").on("click", () => togglePopup("logIn", true));
+$(document).on("click", ".btn.login, .header-burger", () => togglePopup("logIn", true));
 $(".btn.signup, .signup-link").on("click", () => togglePopup("signUp", true));
 $(".login-link").on("click", () => togglePopup("logIn", true));
 $(".reset-pass").on("click", () => togglePopup("resetPassword", true));
@@ -697,11 +697,11 @@ $(".delete-acc").click(() => {
     $("#delete-popup").addClass("active");
 });
 
-$("#delete-popup #close-popup-btn").click(() => {
+$(".delete-profile #close-popup-btn").click(() => {
     $("#delete-popup").removeClass("active");
 });
 
-$("#delete-popup #confirm-delete:not(.load)").click(function () {
+$(".delete-profile #confirm-delete:not(.load)").click(function () {
     $(this).addClass("load");
 
     $.ajax({
@@ -1544,5 +1544,101 @@ $('.exchange-form .btn').on('click', function () {
         })
         .always(() => {
             removeLoader('.exchange-popup')
+        })
+})
+
+//__________________________Posts__________________________//
+
+$(document).on('click', '.post__btns .btn:not(.clicked):not(.shaking)', function () {
+    const buttonNumber = $(this).data('number')
+    const postId = $(this).closest('.post').data('id')
+
+    $(this).addClass('shaking')
+
+    $.post(`/posts/${postId}/open`, {button_number: buttonNumber})
+        .done(res => {
+            $(this).addClass('clicked')
+            
+            updateBalances(res.balance, res.balance_2)
+
+            if (res.open) {
+                $(this).closest('.post').replaceWith(res.html)
+            }
+        })
+        .fail(xhr => {
+            $(this).closest('.post').find('.error').text(xhr.responseJSON.message)
+        })
+        .always(() => {
+            $(this).removeClass('shaking')
+        })
+})
+
+function loadMorePosts() {
+    if ($('.posts').hasClass('load')) {
+        return
+    }
+
+    const currentPage = $('.posts__list').data('current-page')
+    const totalPages = $('.posts__list').data('total-pages')
+
+    if (currentPage >= totalPages) {
+        return
+    }
+
+    $('.posts').addClass('load')
+
+    const nextPage = currentPage + 1
+
+    let url = ''
+    if ($('.tab').hasClass('tab_myprofile')) {
+        url = `/posts/my-profile/load-more?page=${nextPage}`
+    } else {
+        url = `/posts/${$('.posts__list').data('creator-id')}/load-more?page=${nextPage}`
+    }
+
+    $.get(url)
+        .done(res => {
+            $('.posts__list').data('current-page', nextPage)
+            $('.posts__list').append(res.html)
+        })
+        .always(() => {
+            $('.posts').removeClass('load')
+        })
+}
+
+$(window).scroll(() => {
+    if($(window).scrollTop() + $(window).height() > $(document).height() - 100 
+        && $('.tab__right').hasClass('open')) {
+        loadMorePosts()
+    }
+})
+
+$(document).on('click', '.post__close', function () {
+    $('.delete-post').data('id', $(this).closest('.post').data('id'))
+    $('.delete-post').addClass('active')
+})
+
+$(document).on('click', '.delete-post #close-popup-btn', function () {
+    $('.delete-post').removeClass('active')
+})
+
+$(document).on('click', '.delete-post #confirm-delete', function () {
+    const postId = $('.delete-post').data('id')
+
+    const post = $(`.post[data-id=${postId}]`)
+
+    if (post.hasClass('loading')) {
+        return
+    }
+
+    $(this).addClass('load')
+
+    $.ajax({method: 'DELETE', url: `/posts/${postId}`})
+        .done(() => {
+            post.remove()
+            $('.delete-post').removeClass('active')
+        })
+        .always(() => {
+            $(this).removeClass('load')
         })
 })

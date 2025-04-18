@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Web\Images;
 
+use App\Constants\Uploads;
 use App\Rules\ReCaptchaV3;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,18 +23,8 @@ class UploadRequest extends FormRequest
      */
     public function rules(): array
     {
-        $mimes = [
-            'image/jpeg',
-            'image/webp',
-            'image/heif',
-            'image/heif-sequence',
-            'image/heic',
-            'image/heic-sequence',
-            'image/avif',
-        ];
-
         return [
-            'img' => 'required|file|mimetypes:' . implode(',', $mimes) . '|min:10|max:10240',
+            'img' => 'required|file|mimetypes:' . implode(',', Uploads::IMAGE_MIME_TYPES) . '|min:10|max:10240',
         ];
     }
 }

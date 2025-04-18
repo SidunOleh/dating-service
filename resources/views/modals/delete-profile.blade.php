@@ -1,4 +1,4 @@
-<div class="delete-wrapper" id="delete-popup">
+<div class="delete-wrapper delete-profile" id="delete-popup">
     <div class="delete-popup">
         <p class="title">
             Are you sure you want to delete your profile?

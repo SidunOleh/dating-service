@@ -1,196 +1,277 @@
 @include('templates.header', ['title' => 'My post',])
 
-<section class="profile account">
+<div class="tab tab_myprofile">
     <div class="container">
+        <div class="tab__left open">
+            <div class="tab__content">
+                <section class="profile account">
+                    <div class="profile__container">
 
-        <div class="left-side">
+                        <div class="left-side">
 
-            @include('templates.options')
-            
-            <div @class([
-                'head-porfile',  
-                'info-group',
-                'verified' => $creator->is_verified,
-                'pending' => $request->status([
-                    'name', 
-                    'age', 
-                    'location',
-                ]) == 'pending',
-                'rejected' => $request->status([
-                    'name', 
-                    'age', 
-                    'location',
-                ]) == 'rejected',
-                ])>
+                            @include('templates.options')
+                            
+                            <div @class([
+                                'head-porfile',  
+                                'info-group',
+                                'verified' => $creator->is_verified,
+                                'pending' => $request->status([
+                                    'name', 
+                                    'age', 
+                                    'location',
+                                ]) == 'pending',
+                                'rejected' => $request->status([
+                                    'name', 
+                                    'age', 
+                                    'location',
+                                ]) == 'rejected',
+                                ])>
 
-                <div class="img-card">
-                    <img src="{{ $creator->gallery->count() ? $creator->gallery[0]->getUrl() : $request->gallery[0]->getUrl() }}" alt="" />
-                </div>
+                                <div class="img-card">
+                                    <img src="{{ $creator->gallery->count() ? $creator->gallery[0]->getUrl() : $request->gallery[0]->getUrl() }}" alt="" />
+                                </div>
 
-                <div class="userMain">
-                    <p class="name">
-                        {{ $data['name']['value'] }}, {{ $data['age']['value'] }}
-                    </p>
-                    <p class="city">
-                        {{ $data['location']['value']['city'] }}, {{ $data['location']['value']['state'] }}
-                    </p>
-                </div>
+                                <div class="userMain">
+                                    <p class="name">
+                                        {{ $data['name']['value'] }}, {{ $data['age']['value'] }}
+                                    </p>
+                                    <p class="city">
+                                        {{ $data['location']['value']['city'] }}, {{ $data['location']['value']['state'] }}
+                                    </p>
+                                </div>
 
-                @includeWhen(
-                    $request->status(['name', 'age', 'location',]) == 'rejected', 
-                    'templates.rejected', 
-                    ['comments' => $request->comments(['name', 'age', 'location',]),]
-                )
+                                @includeWhen(
+                                    $request->status(['name', 'age', 'location',]) == 'rejected', 
+                                    'templates.rejected', 
+                                    ['comments' => $request->comments(['name', 'age', 'location',]),]
+                                )
+                            </div>
+
+                            <div class="user-info-list info-group {{ $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) }}">
+                                <p class="info-title">
+                                    <img src="{{ asset('/assets/img/user-card.svg') }}" alt="" /> 
+                                    Your Get in Touch
+                                </p>
+
+                                @if($data['phone']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/phone.svg" alt="" /> Phone:</span>
+                                    <p class="info">
+                                        {{ $data['phone']['value'] }}
+                                    </p>
+                                </div>
+                                @endif
+
+                                @if($data['telegram']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/ic_outline-telegram.svg" alt="" /> Telegram:</span>
+                                    <p class="info">
+                                        {{ $data['telegram']['value'] }}
+                                    </p>
+                                </div>
+                                @endif 
+
+                                @if($data['whatsapp']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/whatsapp.svg" alt="" /> Whatsapp:</span>
+                                    <p class="info">
+                                        {{ $data['whatsapp']['value'] }}
+                                    </p>
+                                </div>
+                                @endif
+
+                                @if($data['instagram']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/mdi_instagram.svg" alt="" /> Instagram:</span>
+                                    <p class="info">
+                                        {{ $data['instagram']['value'] }}
+                                    </p>
+                                </div>
+                                @endif
+
+                                @if($data['snapchat']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/snapchat.svg" alt="" /> Snapchat:</span>
+                                    <p class="info">
+                                        {{ $data['snapchat']['value'] }}
+                                    </p>
+                                </div>
+                                @endif
+
+                                @if($data['onlyfans']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/onlyfans.svg" alt="" /> OnlyFans:</span>
+                                    <p class="info">
+                                        {{ $data['onlyfans']['value'] }}
+                                    </p>
+                                </div>
+                                @endif
+
+                                @if($data['profile_email']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/mail.svg" alt="" /> Email:</span>
+                                    <p class="info">
+                                        {{ $data['profile_email']['value'] }}
+                                    </p>
+                                </div>
+                                @endif
+
+                                @includeWhen(
+                                    $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) == 'rejected', 
+                                    'templates.rejected', 
+                                    ['comments' => $request->comments(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]),]
+                                )
+                            </div>
+
+                            <div class="info-group {{ $data['location']['status'] }}">
+                                <div class="user-location">
+                                    <p class="info-title">
+                                        <img src="{{ asset('/assets/img/local.svg') }}" alt="" /> 
+                                        Your location
+                                    </p>
+
+                                    <div id="map"></div>
+                                </div>
+                                
+                                <div class="location-address">
+                                    {{ "{$data['location']['value']['city']}, {$data['location']['value']['state']} {$data['location']['value']['zip']}" }}
+                                </div>
+
+                                @includeWhen(
+                                    $data['location']['status'] == 'rejected', 
+                                    'templates.rejected', 
+                                    ['comments' => [$data['location']['comment'],],]
+                                )
+                            </div>
+
+                            <div class="description info-group {{ $data['description']['status'] }}">
+                                <p class="info-title">
+                                    <img src="{{ asset('/assets/img/description.svg') }}" alt="" /> 
+                                    Your Story
+                                </p>
+
+                                {{ $data['description']['value'] }}
+                                
+                                @includeWhen(
+                                    $data['description']['status'] == 'rejected', 
+                                    'templates.rejected', 
+                                    ['comments' => [$data['description']['comment'],],]
+                                )
+                            </div>
+
+                        </div>
+
+                        <div class="user-photo-list">
+                            @foreach($creator->gallery as $photo)
+                                <a href="{{ $photo->getUrl() }}" data-fancybox="user-photos" class="user-photo-item info-group">
+                                    <img src="{{ $photo->getUrl() }}" alt="" />
+                                </a>
+                            @endforeach
+
+                            @foreach($request->gallery as $i => $photo)
+                                @if($data['photos']['status'][$i] != 'approved')
+                                <a href="{{ $photo->getUrl() }}" data-fancybox="user-photos" class="user-photo-item info-group {{ $data['photos']['status'][$i] }}">
+                                    <img src="{{ $photo->getUrl() }}" alt="" />
+
+                                    @includeWhen(
+                                        $data['photos']['status'][$i] == 'rejected', 
+                                        'templates.rejected', 
+                                        ['comments' => [$data['photos']['comment'][$i],],]
+                                    )
+                                </a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+
+                    @if(! $creator->hasUndoneProfileRequest())
+                    <div class="edit-info-btn">
+                        <a href="{{ route('my-profile.edit') }}" class="btn red">
+                            Edit information
+                        </a>
+                    </div>
+                    @endif
+
+                    @include('modals.delete-profile')                
+
+                </section>
             </div>
-
-            <div class="user-info-list info-group {{ $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) }}">
-                <p class="info-title">
-                    <img src="{{ asset('/assets/img/user-card.svg') }}" alt="" /> 
-                    Your Get in Touch
-                </p>
-
-                @if($data['phone']['value'])
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/phone.svg" alt="" /> Phone:</span>
-                    <p class="info">
-                        {{ $data['phone']['value'] }}
-                    </p>
-                </div>
-                @endif
-
-                @if($data['telegram']['value'])
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/ic_outline-telegram.svg" alt="" /> Telegram:</span>
-                    <p class="info">
-                        {{ $data['telegram']['value'] }}
-                    </p>
-                </div>
-                @endif 
-
-                @if($data['whatsapp']['value'])
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/whatsapp.svg" alt="" /> Whatsapp:</span>
-                    <p class="info">
-                        {{ $data['whatsapp']['value'] }}
-                    </p>
-                </div>
-                @endif
-
-                @if($data['instagram']['value'])
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/mdi_instagram.svg" alt="" /> Instagram:</span>
-                    <p class="info">
-                        {{ $data['instagram']['value'] }}
-                    </p>
-                </div>
-                @endif
-
-                @if($data['snapchat']['value'])
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/snapchat.svg" alt="" /> Snapchat:</span>
-                    <p class="info">
-                        {{ $data['snapchat']['value'] }}
-                    </p>
-                </div>
-                @endif
-
-                @if($data['onlyfans']['value'])
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/onlyfans.svg" alt="" /> OnlyFans:</span>
-                    <p class="info">
-                        {{ $data['onlyfans']['value'] }}
-                    </p>
-                </div>
-                @endif
-
-                @if($data['profile_email']['value'])
-                <div class="user-info-item">
-                    <span class="type"><img src="/assets/img/mail.svg" alt="" /> Email:</span>
-                    <p class="info">
-                        {{ $data['profile_email']['value'] }}
-                    </p>
-                </div>
-                @endif
-
-                @includeWhen(
-                    $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) == 'rejected', 
-                    'templates.rejected', 
-                    ['comments' => $request->comments(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]),]
-                )
+            <div class="tab__head">
+                <span>Posts</span>
             </div>
-
-            <div class="info-group {{ $data['location']['status'] }}">
-                <div class="user-location">
-                    <p class="info-title">
-                        <img src="{{ asset('/assets/img/local.svg') }}" alt="" /> 
-                        Your location
-                    </p>
-
-                    <div id="map"></div>
-                </div>
-                
-                <div class="location-address">
-                    {{ "{$data['location']['value']['city']}, {$data['location']['value']['state']} {$data['location']['value']['zip']}" }}
-                </div>
-
-                @includeWhen(
-                    $data['location']['status'] == 'rejected', 
-                    'templates.rejected', 
-                    ['comments' => [$data['location']['comment'],],]
-                )
-            </div>
-
-            <div class="description info-group {{ $data['description']['status'] }}">
-                <p class="info-title">
-                    <img src="{{ asset('/assets/img/description.svg') }}" alt="" /> 
-                    Your Story
-                </p>
-
-                {{ $data['description']['value'] }}
-                
-                @includeWhen(
-                    $data['description']['status'] == 'rejected', 
-                    'templates.rejected', 
-                    ['comments' => [$data['description']['comment'],],]
-                )
-            </div>
-
         </div>
 
-        <div class="user-photo-list">
-            @foreach($creator->gallery as $photo)
-                <a href="{{ $photo->getUrl() }}" data-fancybox="user-photos" class="user-photo-item info-group">
-                    <img src="{{ $photo->getUrl() }}" alt="" />
-                </a>
-            @endforeach
+        <div class="tab__right">
+            <div class="tab__head">
+                <span>Profile</span>    
+            </div>
 
-            @foreach($request->gallery as $i => $photo)
-                @if($data['photos']['status'][$i] != 'approved')
-                <a href="{{ $photo->getUrl() }}" data-fancybox="user-photos" class="user-photo-item info-group {{ $data['photos']['status'][$i] }}">
-                    <img src="{{ $photo->getUrl() }}" alt="" />
+            <div class="tab__content">
+                @includeWhen(!$creator->postInPending, 'templates.posts.create', ['creator' => $creator])
 
-                    @includeWhen(
-                        $data['photos']['status'][$i] == 'rejected', 
-                        'templates.rejected', 
-                        ['comments' => [$data['photos']['comment'][$i],],]
-                    )
-                </a>
+                @if($posts->count())
+                    <section class="posts">
+                        <div class="posts__container">
+                            <div 
+                                class="posts__list"
+                                data-current-page="{{ $posts->currentPage() }}"
+                                data-total-pages="{{ ceil($posts->total() / $posts->perPage()) }}">
+                                @include('templates.posts.my-posts', ['posts' => $posts])
+                            </div>
+
+                            <div class="posts__loader">
+                                <div class="lds-ellipsis">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    @include('modals.delete-post')
                 @endif
-            @endforeach
+            </div>
         </div>
     </div>
+</div>
 
-    @if(! $creator->hasUndoneProfileRequest())
-    <div class="edit-info-btn">
-        <a href="{{ route('my-profile.edit') }}" class="btn red">
-            Edit information
-        </a>
-    </div>
-    @endif
+<script>
+    function positionTabHeadTitle(withTransition = true) {
+        const title = document.querySelector('.open .tab__head span') 
 
-    @include('modals.delete-profile')                
+        title.classList.remove('transition')
+        
+        if (withTransition) {
+            title.classList.add('transition')
+        }
 
-</section>
+        let rect = document.querySelector('.open .tab__head').getBoundingClientRect()
+        const visibleTop = Math.max(0, rect.top)
+        const visibleBottom = Math.min(window.innerHeight, rect.bottom)
+        const visibleHeight = visibleBottom - visibleTop
+        const pxFromVisibleTopToCenter = visibleHeight / 2
+        const invisibleTopHeight = Math.max(0, -rect.top)
+        title.style.top = `${pxFromVisibleTopToCenter + invisibleTopHeight}px`
+    }
+
+    positionTabHeadTitle(false)
+
+    document.addEventListener('DOMContentLoaded', () => {
+        $('.tab__head').on('click', function () {
+            $('.tab__right, .tab__left').toggleClass('open')
+            $('.tab').addClass('flash')
+            positionTabHeadTitle(false)
+            setTimeout(() => $('.tab').removeClass('flash'), 100)
+            setTimeout(() => window.dispatchEvent(new Event('resize')))
+        })
+
+        $(window).on('scroll resize', () => {
+            positionTabHeadTitle()
+        })
+    })
+</script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>

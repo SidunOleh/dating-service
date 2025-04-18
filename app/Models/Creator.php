@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Constants\Posts;
 use App\Constants\Subscriptions;
 use App\Constants\Transactions;
 use App\Constants\Uploads;
 use App\Notifications\ResetPassword;
-use App\Services\Images\ImagesService;
 use App\Services\ReferralSystem\ReferralSystem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -123,24 +123,6 @@ class Creator extends Authenticatable
         static::updating(function (self $creator) {
             $creator->is_approved = $creator->isApproved();
             $creator->is_verified = $creator->isVerified();
-
-            $imagesService = app()->make(ImagesService::class);
-
-            if ($photos = array_diff($creator->getOriginal('photos') ?? [], $creator->photos ?? [])) {
-                $imagesService->deleteByIds($photos);
-            }
-
-            if ($creator->getOriginal('verification_photo') and ! $creator->verification_photo) {
-                $imagesService->deleteByIds([$creator->getOriginal('verification_photo')]);
-            }
-
-            if ($creator->getOriginal('street_photo') and ! $creator->street_photo) {
-                $imagesService->deleteByIds([$creator->getOriginal('street_photo')]);
-            }
-
-            if ($creator->getOriginal('id_photo') and ! $creator->id_photo) {
-                $imagesService->deleteByIds([$creator->getOriginal('id_photo')]);
-            }
         });
     }
 
@@ -502,5 +484,17 @@ class Creator extends Authenticatable
         return $this
             ->hasOne(TransferRequest::class)
             ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', Transactions::TRANSFER_REQUEST_STATUS['pending']));
+    }
+
+    public function postInPending(): HasOne
+    {
+        return $this
+            ->hasOne(Post::class)
+            ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', Posts::STATUS['pending']));
+    }
+
+    public function lastPost(): HasOne
+    {
+        return $this->hasOne(Post::class)->latestOfMany();
     }
 }

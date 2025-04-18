@@ -11,3 +11,11 @@ function minify_css($css) {
 function format_price(float $amount) {
     return number_format($amount, 2);
 }
+
+function get_random_photo() {
+    $blur = scandir(public_path('assets/img/blur'));
+    $blur = array_filter($blur, fn ($file) => ! in_array($file, ['.', '..',]));
+    $blur = array_values($blur);
+
+    return '/assets/img/blur/' . $blur[rand(0, count($blur)-1)];
+}

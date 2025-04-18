@@ -328,6 +328,32 @@ const routes = [{
         menuKey: 'transfer-requests',
     },
 }, {
+    path: '/u0puffeto4nh7SlHzFn8/posts',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/Posts/Index.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'posts.index',
+    meta: {
+        access: 'private',
+        permission: 'posts.view',
+        menuKey: 'posts',
+    },
+}, {
+    path: '/u0puffeto4nh7SlHzFn8/posts/:id',
+    component: defineAsyncComponent({
+        loader: () =>
+            import ('../views/Posts/Show.vue'),
+        loadingComponent: Loader,
+    }),
+    name: 'posts.show',
+    meta: {
+        access: 'private',
+        permission: 'posts.show',
+        menuKey: 'posts',
+    },
+}, {
     path: '/u0puffeto4nh7SlHzFn8/:pathMatch(.*)*',
     component: defineAsyncComponent({
         loader: () =>

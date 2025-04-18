@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Permissions\DeleteController as PermissionsDeleteController;
 use App\Http\Controllers\Admin\Permissions\IndexController as PermissionsIndexController;
 use App\Http\Controllers\Admin\Permissions\StoreController as PermissionsStoreController;
+use App\Http\Controllers\Admin\Posts\ApproveController as PostsApproveController;
+use App\Http\Controllers\Admin\Posts\IndexController as PostsIndexController;
+use App\Http\Controllers\Admin\Posts\RejectController as PostsRejectController;
+use App\Http\Controllers\Admin\Posts\ShowController as PostsShowController;
 use App\Http\Controllers\Admin\ProfileRequests\DoneController;
 use App\Http\Controllers\Admin\ProfileRequests\IndexController as ProfileRequestIndexController;
 use App\Http\Controllers\Admin\ProfileRequests\ShowController;
@@ -266,5 +270,20 @@ Route::middleware(['auth:sanctum',])->group(function () {
         Route::post('/{transferRequest}/reject', TransferRequestsRejectController::class)  
             ->name('reject')
             ->can('transfer-requests.reject');
+    });
+
+    Route::prefix('/posts')->name('posts.')->group(function () {
+        Route::get('/', PostsIndexController::class)
+            ->name('index')
+            ->can('posts.view');
+        Route::get('/{post}', PostsShowController::class)
+            ->name('show')
+            ->can('posts.show');
+        Route::post('/{post}/approve', PostsApproveController::class)  
+            ->name('approve')
+            ->can('posts.approve');
+        Route::post('/{post}/reject', PostsRejectController::class)  
+            ->name('reject')
+            ->can('posts.reject');
     });
 });

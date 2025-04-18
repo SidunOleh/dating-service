@@ -9,4 +9,6 @@ class Posts
         'approved' => 'approved',
         'rejected' => 'rejected',
     ];
+
+    public const POST_OPEN_PRICE = 1;
 }

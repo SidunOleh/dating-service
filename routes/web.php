@@ -33,6 +33,11 @@ use App\Http\Controllers\Web\Payments\DepositController;
 use App\Http\Controllers\Web\Payments\WithdrawResendController;
 use App\Http\Controllers\Web\Payments\WithdrawSendController;
 use App\Http\Controllers\Web\Payments\WithdrawVerifyController;
+use App\Http\Controllers\Web\Posts\DeleteController as PostsDeleteController;
+use App\Http\Controllers\Web\Posts\LoadMoreController;
+use App\Http\Controllers\Web\Posts\MyProfileLoadMoreController;
+use App\Http\Controllers\Web\Posts\OpenController;
+use App\Http\Controllers\Web\Posts\StoreController as PostsStoreController;
 use App\Http\Controllers\Web\Profile\CreateController;
 use App\Http\Controllers\Web\Profile\DeleteController as ProfileDeleteController;
 use App\Http\Controllers\Web\Profile\EditController;
@@ -50,7 +55,6 @@ use App\Http\Controllers\Web\Subscription\SubscribeController;
 use App\Http\Controllers\Web\Subscription\UnsubscribeController;
 use App\Http\Controllers\Web\Warnings\ClickController as WarningsClickController;
 use App\Http\Controllers\Web\Webhooks\PassimpayCallbackController;
-use App\Http\Controllers\Web\Webhooks\PlisioCallbackController;
 use Illuminate\Support\Facades\Route;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
@@ -295,6 +299,23 @@ Route::post('/balances/transfer', TransferController::class)
 Route::post('/balances/transfer-to-balance', TransferToBalanceController::class)
     ->middleware(['auth:web',])
     ->name('balances.transfer-to-balance');
+
+/**
+ * Posts
+ */
+Route::prefix('/posts')->name('posts.')->middleware(['auth:web',])->group(function () {
+    Route::get('/my-profile/load-more', MyProfileLoadMoreController::class)
+        ->name('my-prpfiel.load-more');
+    Route::get('/{creator}/load-more', LoadMoreController::class)
+        ->name('load-more')
+        ->withoutMiddleware('auth:web');
+    Route::post('/', PostsStoreController::class)
+        ->name('store');
+    Route::post('/{post}/open', OpenController::class)
+        ->name('open');
+    Route::delete('/{post}', PostsDeleteController::class)
+        ->name('delete');
+});
 
 /**
  * 404

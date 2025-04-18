@@ -53,6 +53,17 @@
         </MenuItem>
 
         <MenuItem
+            v-if="can('posts.view')" 
+            key="posts">
+            <template #icon>
+                <PostsIcon />
+            </template>
+            <router-link :to="{name: 'posts.index'}">
+                Posts
+            </router-link>
+        </MenuItem>
+
+        <MenuItem
             v-if="can('templates.view')" 
             key="templates">
             <template #icon>
@@ -155,7 +166,7 @@
             v-if="can('transactions.view')" 
             key="transfer-requests">
             <template #icon>
-                <TransferRequests />
+                <TransferRequestsIcon />
             </template>
             <router-link :to="{name: 'transfer-requests.index'}">
                 Transfer requests
@@ -201,7 +212,8 @@ import WithdrawalIcon from './icons/Withdrawal.vue'
 import SettingsIcon from './icons/Settings.vue'
 import ContentIcon from './icons/Content.vue'
 import WarningIcon from './icons/Warning.vue'
-import TransferRequests from './icons/TransferRequests.vue'
+import TransferRequestsIcon from './icons/TransferRequests.vue'
+import PostsIcon from './icons/Posts.vue'
 import can from '../helpers/can'
 
 export default {
@@ -210,7 +222,8 @@ export default {
         SubMenu, UserIcon, TemplateIcon,
         AdIcon, ProfileIcon, ApproveIcon,
         MoneyIcon, WithdrawalIcon, SettingsIcon,
-        ContentIcon, WarningIcon, TransferRequests,
+        ContentIcon, WarningIcon, TransferRequestsIcon,
+        PostsIcon,
     },
     data() {
         return {

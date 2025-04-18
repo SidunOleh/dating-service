@@ -2,7 +2,7 @@ import can from '../helpers/can'
 
 const transferRequestsApi = {
     async fetch(
-        page = 1, 
+        page = 1,
         perpage = 15,
         orderby = 'created_at',
         order = 'DESC',
@@ -23,7 +23,7 @@ const transferRequestsApi = {
         return res.data
     },
     async approve(id) {
-        if (!can('transfer-requests.create')) {
+        if (!can('transfer-requests.approve')) {
             throw new Error('Forbidden.')
         }
 
@@ -32,7 +32,7 @@ const transferRequestsApi = {
         return res.data
     },
     async reject(id) {
-        if (!can('transfer-requests.create')) {
+        if (!can('transfer-requests.reject')) {
             throw new Error('Forbidden.')
         }
 

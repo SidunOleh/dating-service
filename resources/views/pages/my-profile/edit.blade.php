@@ -881,7 +881,7 @@
                                 </textarea>
                                 <div class="rule">
                                     <p>At least 250 characters, no more than 500 characters</p>
-                                    <p class="characterCount"><span class="counter">0</span> / 500</p>
+                                    <p class="characterCount"><span class="counter">{{ data.description.length }}</span> / 500</p>
                                 </div>
                                 <div v-if="errors.description" class="error-text">
                                     {{ errors.description }}

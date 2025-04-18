@@ -6671,7 +6671,7 @@ select#gender {
 }
 
 .tab__head span.transition {
-    transition: all 0.2s linear;
+    transition: all 0.1s linear;
 }
 
 @media (max-width: 425px) {
@@ -7373,4 +7373,8 @@ select#gender {
     top: 10px;
     right: 10px;
     padding: 0px;
+}
+
+.post-form .loader {
+    animation: spin 1s linear infinite reverse;
 }

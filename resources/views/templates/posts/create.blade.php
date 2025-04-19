@@ -20,7 +20,7 @@
             }
 
             if (! this.data.button_number) {
-                this.errors.button_number = 'Choose button'
+                this.errors.button_number = 'Button is required'
                 valid = false
             }
 

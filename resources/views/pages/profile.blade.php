@@ -2,7 +2,7 @@
 
 <div class="tab tab_profile">
     <div class="container">
-        <div class="tab__left open">
+        <div @class(['tab__left' => true, 'open' => request()->query('tab', 'profile') == 'profile'])>
             <div class="tab__content">
                 <section class="profile">
                     <div class="profile__container">
@@ -118,7 +118,7 @@
             </div>
         </div>
 
-        <div class="tab__right">
+        <div @class(['tab__right' => true, 'open' => request()->query('tab') == 'posts'])>
             <div class="tab__head">
                 <span>Profile</span>    
             </div>
@@ -176,10 +176,17 @@
     document.addEventListener('DOMContentLoaded', () => {
         $('.tab__head').on('click', function () {
             $('.tab__right, .tab__left').toggleClass('open')
+            const url = new URL(window.location.href)
+            if ($('.tab__right').hasClass('open')) {
+                url.searchParams.set('tab', 'posts')
+            } else {
+                url.searchParams.set('tab', 'profile')
+            }
+            window.history.pushState({}, '', url.toString())
             $('.tab').addClass('flash')
             positionTabHeadTitle(false)
             setTimeout(() => $('.tab').removeClass('flash'), 100)
-            setTimeout(() => window.dispatchEvent(new Event('resize')))
+            window.dispatchEvent(new Event('resize'))
         })
 
         $(window).on('scroll resize', () => {

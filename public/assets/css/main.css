@@ -6763,7 +6763,7 @@ select#gender {
 }
 
 .post__content {
-    border-radius: 12px;
+    border-radius: 4px;
     overflow: hidden;
     position: relative;
 }
@@ -6941,9 +6941,9 @@ select#gender {
 }
 
 .post-form {
-    border-radius: 4px;
+    /* border-radius: 4px;
     background: #39393e;
-    padding: 10px;
+    padding: 10px; */
     margin-bottom: 20px;
 }
 
@@ -6956,6 +6956,9 @@ select#gender {
     -ms-flex-direction: column;
     flex-direction: column;
     gap: 10px;
+    background: #39393e;
+    padding: 10px;
+    border-radius: 4px;
 }
 
 .post-form .form-group .input-wrapper {

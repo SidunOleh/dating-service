@@ -122,7 +122,7 @@
 <div class="post-form" v-clock @vue:mounted="mounted">
     <form id="post-form">
 
-        <div class="form-group" style="margin-top: 10px;">
+        <div class="form-group">
             <div class="photo-container">
                 <p>
                     Maximum number of photos: 3
@@ -154,7 +154,9 @@
                     Add photo
                 </button>
 
-                <div id="photos">
+                <div 
+                    v-if="data.images.length"
+                    id="photos">
                     <div 
                         v-for="(photo, i) in data.images" 
                         style="position: relative; display: inline-block;">

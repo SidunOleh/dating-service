@@ -35,33 +35,31 @@
                 {{ new Date(record.created_at).toLocaleDateString('en-US') }}
             </template>
 
-            <Tooltip>
-                <template #title>
-                    Approve
-                </template>
+            <template v-if="column.key === 'actions'">
+                <Flex :gap="10">
+                    <Tooltip>
+                        <template #title>
+                            Approve
+                        </template>
 
-                <template v-if="column.key === 'approve'">
-                    <span
-                        style="cursor: pointer;"
-                        @click="$emit('approve', record)">
-                        <ThumbUpIcon/>
-                    </span>
-                </template>
-            </Tooltip>
+                        <Button @click="$emit('approve', record)">
+                            Approve
+                        </Button>
+                    </Tooltip>
 
-            <Tooltip>
-                <template #title>
-                    Reject
-                </template>
-    
-                <template v-if="column.key === 'reject'">
-                    <span
-                        style="cursor: pointer;"
-                        @click="$emit('reject', record)">
-                        <ThumbDownIcon/>
-                    </span>
-                </template>
-            </Tooltip>
+                    <Tooltip>
+                        <template #title>
+                            Reject
+                        </template>
+            
+                        <Button
+                            danger
+                            @click="$emit('reject', record)">
+                            Reject
+                        </Button>
+                    </Tooltip>
+                </Flex>
+            </template>
 
         </template>
 
@@ -70,15 +68,13 @@
 </template>
 
 <script>
-import { Table, Tooltip, message, } from 'ant-design-vue'
-import ThumbUpIcon from '../icons/ThumbUp.vue'
-import ThumbDownIcon from '../icons/ThumbDown.vue'
+import { Table, Tooltip, message, Button, Flex, } from 'ant-design-vue'
 import transferRequestsApi from '../../api/transferRequests'
 
 export default {
     components: {
-        Table, ThumbUpIcon, ThumbDownIcon, 
-        Tooltip,
+        Table, Tooltip, Button,
+        Flex,
     },
     data() {
         return {
@@ -106,10 +102,7 @@ export default {
                     sorter: true,
                 },
                 {
-                    key: 'approve',
-                },
-                {
-                    key: 'reject',
+                    key: 'actions',
                 },
             ],
             data: {},

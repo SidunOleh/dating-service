@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\CreatorInactivated;
 use App\Events\CreatorSubscribed;
 use App\Events\PostApproved;
+use App\Events\PostOpenDebitMoney;
 use App\Events\PostRejected;
 use App\Events\ProfileApproved;
 use App\Events\TransferRequestApproved;
@@ -12,7 +13,8 @@ use App\Events\TransferRequestRejected;
 use App\Events\UserCreated;
 use App\Events\WithdrawRequestRejected;
 use App\Events\WithdrawRequestSuccess;
-use App\Listeners\PayPercentReferrer;
+use App\Listeners\PayPercentPostOpen;
+use App\Listeners\PayPercentSubscription;
 use App\Listeners\SendEmailPostApproved;
 use App\Listeners\SendEmailPostRejected;
 use App\Listeners\SendEmailProfileApproved;
@@ -44,7 +46,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailToInactivatedCreator::class,
         ],
         CreatorSubscribed::class => [
-            PayPercentReferrer::class,
+            PayPercentSubscription::class,
         ],
         WithdrawRequestSuccess::class => [
             WithdrawRequestSuccessSendMail::class,
@@ -66,6 +68,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         TransferRequestRejected::class => [
             SendEmailTransferRejected::class,
+        ],
+        PostOpenDebitMoney::class => [
+            PayPercentPostOpen::class,
         ],
     ];
 

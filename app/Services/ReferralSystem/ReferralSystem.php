@@ -4,8 +4,10 @@ namespace App\Services\ReferralSystem;
 
 use App\Models\Creator;
 use App\Models\Option;
+use App\Models\Post;
 use App\Models\Referral;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class ReferralSystem
 {
@@ -36,7 +38,7 @@ class ReferralSystem
         return null;
     }
 
-    public function payPercentForSubscription(Creator $creator): false|float
+    public function payPercentSubscription(Creator $creator): false|float
     {
         if (! $creator->referral) {
             return false;
@@ -54,5 +56,22 @@ class ReferralSystem
         $referrer->creditMoney($amount);
 
         return $amount;
+    }
+
+    public function payPercentPostOpen(Creator $creator, Post $post, float $amount): void
+    {
+        $settings = Option::getSettings();
+        $referrer = $creator->referral?->referrer;
+        DB::beginTransaction();
+        for ($i=0; $i < 4; $i++) { 
+            if (! $referrer) {
+                break;
+            }
+
+            $referrer->creditMoney($amount * $settings['referral_percent'] / 100);
+
+            $referrer = $referrer->referral?->referrer;
+        }
+        DB::commit();
     }
 }

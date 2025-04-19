@@ -6,7 +6,7 @@ use App\Services\ReferralSystem\ReferralSystem;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class PayPercentReferrer implements ShouldQueue
+class PayPercentPostOpen implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -23,8 +23,6 @@ class PayPercentReferrer implements ShouldQueue
      */
     public function handle(object $event): void
     {
-        $creator = $event->creator;
-
-        $this->referralSystem->payPercentForSubscription($creator);
+        $this->referralSystem->payPercentPostOpen($event->creator, $event->post, $event->amount);
     }
 }

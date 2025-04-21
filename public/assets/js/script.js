@@ -1487,7 +1487,7 @@ $('.swap__btn').on('click', async function () {
 function updateBalances(balance1, balance2) {
     $('[data-balance-1]').data('balance-1', balance1)
     $('[data-balance-2]').data('balance-2', balance2)
-    $('.balance-1').text(balance1)
+    $('.balance-1').text(format_price(balance1))
     $('.balance-2').text(format_price(balance2))
     $('.balance-2.rich').text(balance2 >= 100 ? 'Rich' : format_price(balance2))
     $('.exchange-form #amount').attr('max', balance2)

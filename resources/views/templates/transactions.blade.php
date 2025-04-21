@@ -1,7 +1,7 @@
 <div class="transaction-wrapper">
     <div class="transaction-popup">
         <div class="top">
-            <div class="title">Transaction list: <span>(Up to 1-hour delay )</span></div>
+            <div class="title">Transaction list: <span>(Up to 1-hour delay)</span></div>
             <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
         </div>
         <div class="transactions">
@@ -24,7 +24,7 @@
                                 {{ $transaction['type'] }}
                             </td>
                             <td class="sum">
-                                {{ $transaction['amount'] }}
+                                {{ format_price($transaction['amount']) }}
                             </td>
                             <td class="currency">
                                 {{ $transaction['currency'] }}

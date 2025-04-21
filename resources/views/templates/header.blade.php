@@ -93,7 +93,7 @@
                 <div class="coins">
                     <img src="{{ asset('assets/img/coins.svg') }}" alt="" />
                     <span>
-                        {{ auth('web')->user()->balance }}
+                        {{ format_price(auth('web')->user()->balance) }}
                     </span>
                     <div class="add-coins flex red">
                         <a href="{{ route('subscription.page') }}#deposit">

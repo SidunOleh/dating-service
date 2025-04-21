@@ -6,7 +6,7 @@
             <div class="top">
                 <div class="coins">
                     <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
-                    <span class="balance-1">{{ $creator->balance }}</span>
+                    <span class="balance-1">{{ format_price($creator->balance) }}</span>
                     <div class="add-coins flex red">
                         <a href="{{ route('subscription.page') }}#deposit">
                             <img src="{{ asset('/assets/img/plus.svg') }}" alt="" />
@@ -38,7 +38,7 @@
                 <div class="swap">
                     <div class="swap__coins">
                         <img src="{{ asset('/assets/img/coins.svg') }}" alt="" />
-                        <span class="balance-1">{{ $creator->balance }}</span>
+                        <span class="balance-1">{{ format_price($creator->balance) }}</span>
                     </div>  
                     <div class="swap__arrow">
                         ➜

@@ -29,7 +29,7 @@ class TransferToBalanceController extends Controller
 
             if ($creator->transferRequestInPending) {
                 DB::commit();
-                
+
                 return response(['message' => 'Oops.'], 400);
             }
 

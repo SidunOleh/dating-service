@@ -6,6 +6,7 @@ use App\Models\Creator;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\Referral;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +39,7 @@ class ReferralSystem
         return null;
     }
 
-    public function payPercentSubscription(Creator $creator): false|float
+    public function payPercentSubscription(Creator $creator, Subscription $subscription): false|float
     {
         if (! $creator->referral) {
             return false;

@@ -12,7 +12,7 @@ class UpdateRates extends Command
      *
      * @var string
      */
-    protected $signature = 'plisio:rate';
+    protected $signature = 'plisio:rates';
 
     /**
      * The console command description.

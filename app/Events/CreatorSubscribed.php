@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Creator;
+use App\Models\Subscription;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,7 +20,8 @@ class CreatorSubscribed
      * Create a new event instance.
      */
     public function __construct(
-        public Creator $creator
+        public Creator $creator,
+        public Subscription $subscription
     )
     {
         //

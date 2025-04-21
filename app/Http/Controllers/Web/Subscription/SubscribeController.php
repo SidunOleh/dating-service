@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web\Subscription;
 
-use App\Exceptions\HasSubscriptionException;
+use App\Exceptions\NotEnoughMoneyException;
 use App\Http\Controllers\Controller;
 use App\Services\Subscriptions\SubscriptionsService;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +24,8 @@ class SubscribeController extends Controller
             $subscription = $this->subscriptionsService->subscribe($creator);
 
             return response($subscription);
-        } catch (HasSubscriptionException $e) {
-            return response(['message' => 'You are subscribed.',], 400);
+        } catch (NotEnoughMoneyException $e) {
+            return response(['message' => 'Balance is too low!',], 400);
         }
     }
 }

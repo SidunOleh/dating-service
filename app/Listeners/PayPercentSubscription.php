@@ -23,6 +23,6 @@ class PayPercentSubscription implements ShouldQueue
      */
     public function handle(object $event): void
     {
-        $this->referralSystem->payPercentSubscription($event->creator);
+        $this->referralSystem->payPercentSubscription($event->creator, $event->subscription);
     }
 }

@@ -186,7 +186,7 @@
             $('.tab').addClass('flash')
             positionTabHeadTitle(false)
             setTimeout(() => $('.tab').removeClass('flash'), 100)
-            window.dispatchEvent(new Event('resize'))
+            setTimeout(() => window.dispatchEvent(new Event('resize')), 500)
         })
 
         $(window).on('scroll resize', () => {

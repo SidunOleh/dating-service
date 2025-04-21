@@ -48,7 +48,7 @@ class SubscriptionsService
 
         DB::commit();
 
-        CreatorSubscribed::dispatch($creator);
+        CreatorSubscribed::dispatch($creator, $subscription);
 
         return $subscription;
     }

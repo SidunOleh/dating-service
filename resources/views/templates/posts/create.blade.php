@@ -123,6 +123,9 @@
     <form id="post-form">
 
         <div class="form-group">
+            <div class="head">
+                <span>1</span> Add photo
+            </div>
             <div class="photo-container">
                 <p>
                     Maximum number of photos: 3
@@ -204,6 +207,9 @@
         </div>
 
         <div class="form-group">
+            <div class="head">
+                <span>2</span> Write text
+            </div>
             <div class="input-wrapper">
                 <label for="description">
                     Text:
@@ -227,9 +233,13 @@
         </div>
 
         <div class="form-group">
+            <div class="head">
+                <span>3</span> Choose button
+            </div>
+            <div class="title">
+                Buttons:
+            </div>
             <div class="input-wrapper">
-                <p class="title">Choose button</p>
-
                 <div class="post-btns">
                     <div 
                         :class="{'btn': true, 'red': data.button_number == 1}"
@@ -255,6 +265,9 @@
         </div>
 
         <div class="form-group">
+            <div class="head">
+                <span>4</span> Sending for Approval
+            </div>
             <p class="text">
                 Yes, You did it! Thank you for completing your post! <br>
                 Approval may take up to 72 hours. <br>

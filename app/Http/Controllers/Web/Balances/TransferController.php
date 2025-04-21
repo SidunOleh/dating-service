@@ -35,6 +35,8 @@ class TransferController extends Controller
                 'balance_2' => $creator->balance_2_total,
             ]);
         } catch (NotEnoughMoneyException $e) {
+            DB::rollBack();
+            
             Log::error($e);
 
             return response(['message' => 'Balance is too low!'], 400);

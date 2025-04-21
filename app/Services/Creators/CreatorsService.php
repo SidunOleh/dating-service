@@ -95,9 +95,9 @@ class CreatorsService
 
         $this->migrateDataToProfile($profileRequest);
 
-        if ($secondLast = $profileRequest->creator->secondLastProfileRequest()) {
-            $this->deleteRejectedPhotos($secondLast);
-        }
+        // if ($secondLast = $profileRequest->creator->secondLastProfileRequest()) {
+        //     $this->deleteRejectedPhotos($secondLast);
+        // }
 
         ProfileApproved::dispatch($profileRequest->creator);
 

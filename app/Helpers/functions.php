@@ -9,7 +9,7 @@ function minify_css($css) {
 }
 
 function format_price(float $amount) {
-    return number_format($amount, 2);
+    return number_format($amount, 2, thousands_separator: '');
 }
 
 function get_random_photo() {

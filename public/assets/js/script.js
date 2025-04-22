@@ -1293,6 +1293,7 @@ $(".crypto-address .next").on("click", async () => {
 
     $(".crypto-address-input").removeClass("error");
     $(".amount-input").removeClass("error");
+    $(".crypto-address .text-error").removeClass("show");
 
     let valid = true;
 
@@ -1338,6 +1339,11 @@ $(".crypto-address .next").on("click", async () => {
                 "/payments/withdraw/resend-code",
                 $(".user-mail").text()
             );
+        })
+        .fail((xhr) => {
+            $(".crypto-address .text-error")
+                .text(xhr.responseJSON.message)
+                .addClass("show")
         })
         .always(() => {
             removeLoader(".crypto-address");

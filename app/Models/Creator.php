@@ -497,4 +497,11 @@ class Creator extends Authenticatable
     {
         return $this->hasOne(Post::class)->latestOfMany();
     }
+
+    public function withdrawalRequestInPending(): HasOne
+    {
+        return $this
+            ->hasOne(WithdrawalRequest::class)
+            ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', Transactions::WITHDRAWAL_REQUEST_STATUS['pending']));
+    }
 }

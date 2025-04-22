@@ -265,6 +265,8 @@
             <div class="back btn white">Back</div>
             <div class="next btn red">Next</div>
         </div>
+
+        <div class="text-error"></div>
     </div>
 
     <!-- <div class="withdrawn-details card">

@@ -7413,3 +7413,7 @@ select#gender {
     align-items: center;
     gap: 8px;
 }
+
+.crypto-address .text-error {
+    margin-top: 0;
+}

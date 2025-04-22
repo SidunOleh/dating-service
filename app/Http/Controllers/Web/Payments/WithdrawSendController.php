@@ -11,8 +11,14 @@ class WithdrawSendController extends Controller
 {
     public function __invoke(WithdrawSendRequest $request)
     {
+        $creator = Auth::guard('web')->user();
+
+        if ($creator->withdrawalRequestInPending) {
+            return response(['message' => 'Wait until prev withdrawal will be completed.'], 400);
+        }
+
         $code = Code::create('withdraw', $request->validated());
-        $code->send(Auth::guard('web')->user()->email);
+        $code->send($creator->email);
 
         return response(['message' => 'OK',]);
     }

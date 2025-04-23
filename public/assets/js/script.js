@@ -1555,11 +1555,12 @@ $('.exchange-form .btn').on('click', function () {
 
 //__________________________Posts__________________________//
 
-$(document).on('click', '.post__btns .btn:not(.clicked):not(.shaking)', function () {
+$(document).on('click', '.post__btns:not(.opening) .btn:not(.clicked):not(.shaking)', function () {
     const buttonNumber = $(this).data('number')
     const postId = $(this).closest('.post').data('id')
 
     $(this).addClass('shaking')
+    $(this).closest('.post__btns').addClass('opening')
 
     $.post(`/posts/${postId}/open`, {button_number: buttonNumber})
         .done(res => {
@@ -1576,6 +1577,7 @@ $(document).on('click', '.post__btns .btn:not(.clicked):not(.shaking)', function
         })
         .always(() => {
             $(this).removeClass('shaking')
+            $(this).closest('.post__btns').removeClass('opening')
         })
 })
 

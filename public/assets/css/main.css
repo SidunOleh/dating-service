@@ -6358,6 +6358,9 @@ select#gender {
     user-select: none;
     border-radius: 0 4px 4px 0 !important;
     width: 100px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .user-info-list.with-blur {
@@ -6775,14 +6778,12 @@ select#gender {
     max-width: 100%;
 }
 
-.post__btns .btn.clicked {
-    transform: rotate(180deg);
-    color: #fff;
-    background: var( --Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
-    transition: all 0.2 linear;
+.post__btns .paw-btn.clicked {
+    opacity: 0.3;
+    cursor: default;
 }
 
-.post__btns .btn.shaking {
+.post__btns .paw-btn.shaking {
     animation: tilt-shaking 0.4s infinite;
 }
 
@@ -7416,4 +7417,131 @@ select#gender {
 
 .crypto-address .text-error {
     margin-top: 0;
+}
+
+.meowicon {
+    width: 20px;
+    height: 20px;
+}
+
+.buy-meow-btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy-meow-btn .buy {
+    max-width: 80px;
+    cursor: pointer;
+    filter: brightness(0.8)
+}
+
+.buy-meow-btn .buy:hover {
+    filter: brightness(1)
+}
+
+.swaps .boost {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.swaps .boost p {
+    display: flex;
+    gap: 8px;
+}
+
+.post .blur__text.unlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.post .blur__text.unlock .price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.paw-btn {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.paw-btn:not(.clicked) {
+    filter: brightness(0.8);
+}
+
+.paw-btn:not(.clicked):hover {
+    filter: brightness(1);
+}
+
+.paw-btn img {
+    max-width: 100%;
+}
+
+.post {
+    position: relative;
+    overflow: hidden;
+}
+
+.post.flash::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation: flash 0.07s ease-in-out;
+    animation: flash 0.07s ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+.post .alert {
+    position: relative;
+    margin-top: -68px;
+    display: none;
+}
+
+.post .alert.show {
+    display: block;
+    animation: downUp 1.5s linear;
+    animation-iteration-count: 1;
+}
+
+@keyframes downUp {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: -300px;
+    }
+}
+
+.alert.success .unlock {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.alert.success .unlock>* {
+    flex-shrink: 0;
+}
+
+.alert.success .unlock .price {
+    display: flex;
+    gap: 8px;
+}
+
+.alert.fail .price {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }

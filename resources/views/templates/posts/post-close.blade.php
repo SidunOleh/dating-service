@@ -3,25 +3,47 @@
         <div class="post__content with-blur">
             <div class="blur">
                 <div class="blur__body">
+                <div class="alert success">
+                    <div class="blur__text">MY WINNER!</div>
+                    <div class="blur__text unlock">
+                        <div>Free unlock </div>
+                        <div class="price">+<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
+                        <div>Your bonus!</div>
+                    </div>
+                </div>
+                <div class="alert fail">
+                    <div class="blur__text">Missed! Try another one!</div>
+                    <div class="blur__text price">-<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
+                </div>
                     <div class="blur__text">
-                        Click buttons to open post
+                        Choose Your Lucky Paw!
+                    </div>
+                    <div class="blur__text">
+                        First guess right? 
+                    </div>
+                    <div class="blur__text">
+                        You get a double bonus and a free unlock!
                     </div>
                     <div class="post__btns">
                         <div 
                             data-number="1"
-                            @class(['btn', 'clicked' => $post->buttonClicked(1)])>
-                            1
+                            @class(['paw-btn', 'clicked' => $post->buttonClicked(1)])>
+                            <img src="{{ asset('/assets/img/buPaw1.png') }}" alt="">
                         </div>
                         <div 
                             data-number="2"
-                            @class(['btn', 'clicked' => $post->buttonClicked(2)])>
-                            2
+                            @class(['paw-btn', 'clicked' => $post->buttonClicked(2)])>
+                            <img src="{{ asset('/assets/img/buPaw2.png') }}" alt="">
                         </div>
                         <div 
                             data-number="3"
-                            @class(['btn', 'clicked' => $post->buttonClicked(3)])>
-                            3
+                            @class(['paw-btn', 'clicked' => $post->buttonClicked(3)])>
+                            <img src="{{ asset('/assets/img/buPaw3.png') }}" alt="">
                         </div>
+                    </div>
+                    <div class="blur__text unlock">
+                        <p>Unlock price:</p>
+                        <p class="price"><img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</p>
                     </div>
                     <div class="error"></div>
                 </div>

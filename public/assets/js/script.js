@@ -1437,7 +1437,7 @@ $(document).ready(function () {
 
 //__________________________Swap__________________________//
 
-$('.swap__btn').on('click', async function () {
+$('.buy-meow-btn .buy').on('click', async function () {
     let balance1 = $(this).data('balance-1')
     let balance2 = $(this).data('balance-2')
 
@@ -1475,24 +1475,60 @@ function format_price(amount) {
 
 //__________________________Posts__________________________//
 
-$(document).on('click', '.post__btns:not(.opening) .btn:not(.clicked):not(.shaking)', function () {
+$(document).on('click', '.post__btns:not(.opening) .paw-btn:not(.clicked):not(.shaking)', function () {
+    const start = new Date().getTime()
+
     const buttonNumber = $(this).data('number')
-    const postId = $(this).closest('.post').data('id')
+    const post = $(this).closest('.post')
+    const postId = post.data('id')
 
     $(this).addClass('shaking')
     $(this).closest('.post__btns').addClass('opening')
 
     $.post(`/posts/${postId}/open`, {button_number: buttonNumber})
         .done(res => {
-            $(this).addClass('clicked')
-            
-            updateBalances(res.balance, res.balance_2)
+            const time = Date.now() - start
+            if (time < 1500) {
+                sleep(1500 - time)
+            } 
 
-            if (res.open) {
-                $(this).closest('.post').replaceWith(res.html)
-            }
+            post.addClass('flash')
+
+            setTimeout(() => {
+                post.removeClass('flash')
+
+                $(this).addClass('clicked')
+            
+                updateBalances(res.balance, res.balance_2)
+
+                const tryCount = post.find('.paw-btn.clicked').length
+    
+                if (res.open && tryCount == 1) {
+                    post.find('.alert.success').addClass('show')
+                    setTimeout(() => {
+                        post.find('.alert.success').removeClass('show')
+                        post.replaceWith(res.html)
+                    }, 1000)
+                } 
+
+                if (res.open && tryCount > 1) {
+                    post.replaceWith(res.html)
+                }
+                
+                if (! res.open) {
+                    post.find('.alert.fail').addClass('show')
+                    setTimeout(() => {
+                        post.find('.alert.fail').removeClass('show')
+                    }, 1000)
+                }
+            }, 70)
         })
         .fail(xhr => {
+            const time = Date.now() - start
+            if (time < 1500) {
+                sleep(1500 - time)
+            }
+
             $(this).closest('.post').find('.error').text(xhr.responseJSON.message)
         })
         .always(() => {
@@ -1570,3 +1606,14 @@ $(document).on('click', '.delete-post #confirm-delete', function () {
             $(this).removeClass('load')
         })
 })
+
+//__________________________Functions__________________________//
+
+function sleep(milliseconds) {
+    let start = new Date().getTime()
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break
+        }
+    }
+}

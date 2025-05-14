@@ -1,5 +1,6 @@
 @auth('web')
 <a href="{{ route('info.page') }}" class="btn red meow balance">
+    <img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" />
     <span class="balance-2 rich">
         {{ ($balace2Total = auth('web')->user()->balance_2_total) >= 100 ? 'Rich' : format_price($balace2Total) }}
     </span>
@@ -8,7 +9,7 @@
 
 @guest('web')
 <div class="btn red meow" data-step="0">
-    Play ;D
+    Click :)
 </div>
 
 <script>
@@ -33,7 +34,7 @@
         'more!',
         '-4',
         'doNe',
-        'Play ;D',
+        'Click :)',
     ]
 
     const meowAudio = [

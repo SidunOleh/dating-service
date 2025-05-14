@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\Balances;
 use App\Constants\Posts;
 use App\Constants\Subscriptions;
 use App\Constants\Transactions;
@@ -114,6 +115,7 @@ class Creator extends Authenticatable
             $creator->referral_code = self::generateReferralCode();
             $creator->is_approved = $creator->isApproved();
             $creator->is_verified = $creator->isVerified();
+            $creator->balance_2 = Balances::AUTO_CREDIT_AMOUNT;
         });
 
         static::created(function (self $creator) {

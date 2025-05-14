@@ -174,31 +174,6 @@ class BalancesService
         return $transaction;
     }
 
-    public function balanceBalace2TransfersStat(Creator $creator, ?string $interval = null): float
-    {   
-        $transactions = $creator->balance2Transactions()->where([
-            'type' => Transactions::BALANCE_2_TYPE['transfer_balance_balance_2'],
-        ]);
-
-        if ($interval == 'month') {
-            $transactions->whereRaw("YEAR(`created_at`) = " . date('Y'))
-                ->whereRaw("MONTH(`created_at`) = " . date('m'));
-        }
-
-        if ($interval == 'week') {
-            $transactions->whereRaw("YEAR(`created_at`) = " . date('Y'))
-                ->whereRaw("WEEK(`created_at`) = " . date('W') - 1);
-        }
-
-        if ($interval == 'day') {
-            $transactions->whereRaw('YEAR(`created_at`) = ' . date('Y'))
-                ->whereRaw('MONTH(`created_at`) = ' . date('m'))
-                ->whereRaw('DAY(`created_at`) = ' . date('d'));
-        }
-
-        return $transactions->sum('amount');
-    }
-
     public function autoCreditBalance2(Creator $creator): float
     {
         if ($creator->hasEnoughMoney(Balances::AUTO_CREDIT_AMOUNT, 'balance_2_total')) {

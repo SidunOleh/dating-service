@@ -474,18 +474,6 @@ class Creator extends Authenticatable
         $this->save();
     }
 
-    public function transferRequests(): HasMany
-    {
-        return $this->hasMany(TransferRequest::class);
-    }
-
-    public function transferRequestInPending(): HasOne
-    {
-        return $this
-            ->hasOne(TransferRequest::class)
-            ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', Transactions::TRANSFER_REQUEST_STATUS['pending']));
-    }
-
     public function postInPending(): HasOne
     {
         return $this

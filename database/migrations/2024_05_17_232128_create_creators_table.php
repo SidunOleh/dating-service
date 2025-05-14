@@ -67,7 +67,11 @@ return new class extends Migration
                 ->onDelete('set null');
 
             $table->unsignedInteger('referral_code')->unique();
+
             $table->decimal('balance', 10, 2)->default(0);
+            $table->decimal('balance_2', 10, 2)->default(0);
+            $table->decimal('balance_2_auto', 10, 2)->default(0);
+            $table->decimal('balance_earn', 10, 2)->default(0);
 
             $table->unsignedInteger('votes')->default(0);
 

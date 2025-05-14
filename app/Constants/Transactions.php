@@ -47,15 +47,8 @@ class Transactions
         'succes' => 'success',
     ];
 
-    public const TRANSFER_REQUEST_STATUS = [
-        'pending' => 'pending',
-        'approved' => 'approved',
-        'rejected' => 'rejected',
-    ];
-
     public const BALANCE_2_TYPE = [
         'transfer_balance_balance_2' => 'transfer_balance_balance_2',
-        'transfer_balance_2_balance' => 'transfer_balance_2_balance',
         'auto_credit' => 'auto_credit',
         'blog_open_credit' => 'blog_open_credit',
         'blog_open_debit' => 'blog_open_debit',

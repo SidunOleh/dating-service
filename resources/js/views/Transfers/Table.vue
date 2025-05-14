@@ -14,48 +14,44 @@
         <template #bodyCell="{column, record}">
 
             <template v-if="column.key == 'creator'">
-                <router-link :to="{name: 'creators.edit', params: {id: record.creator?.id,},}">
-                    {{ record.creator?.email }}
+                <router-link :to="{name: 'creators.edit', params: {id: record.id,},}">
+                    {{ record.email }}
                 </router-link>
             </template>
 
-            <template v-if="column.key == 'amount'">
-                {{ record.amount }}
+            <template v-if="column.key == 'balance_earn'">
+                {{ record.balance_earn }}
             </template>
 
             <template v-if="column.key == 'balance'">
-                {{ record.creator.balance }}
+                {{ record.balance }}
             </template>
 
-            <template v-if="column.key == 'balance_2_total'">
-                {{ record.creator.balance_2_total }}
-            </template>
-
-            <template v-if="column.key === 'created_at'">
-                {{ new Date(record.created_at).toLocaleDateString('en-US') }}
+            <template v-if="column.key == 'balance_2'">
+                {{ record.balance_2 }}
             </template>
 
             <template v-if="column.key === 'actions'">
                 <Flex :gap="10">
                     <Tooltip>
                         <template #title>
-                            Approve
+                            Transfer
                         </template>
 
-                        <Button @click="$emit('approve', record)">
-                            Approve
+                        <Button @click="$emit('transfer', record)">
+                            Transfer
                         </Button>
                     </Tooltip>
 
                     <Tooltip>
                         <template #title>
-                            Reject
+                            Reset
                         </template>
             
                         <Button
                             danger
-                            @click="$emit('reject', record)">
-                            Reject
+                            @click="$emit('reset', record)">
+                            Reset
                         </Button>
                     </Tooltip>
                 </Flex>
@@ -69,7 +65,7 @@
 
 <script>
 import { Table, Tooltip, message, Button, Flex, } from 'ant-design-vue'
-import transferRequestsApi from '../../api/transferRequests'
+import transfersApi from '../../api/transfers'
 
 export default {
     components: {
@@ -84,22 +80,17 @@ export default {
                     key: 'creator',
                 },
                 {
-                    title: 'Amount',
-                    key: 'amount',
+                    title: 'Amount to transfer',
+                    key: 'balance_earn',
                     sorter: true,
-                },
-                {
-                    title: 'Balance №2',
-                    key: 'balance_2_total',
                 },
                 {
                     title: 'Balance',
                     key: 'balance',
                 },
                 {
-                    title: 'Created at',
-                    key: 'created_at',
-                    sorter: true,
+                    title: 'Balance №2',
+                    key: 'balance_2',
                 },
                 {
                     key: 'actions',
@@ -119,7 +110,7 @@ export default {
         async updateData() {
             try {
                 this.loading = true
-                this.data = await transferRequestsApi.fetch(
+                this.data = await transfersApi.fetch(
                     this.query.page, 
                     this.query.perpage, 
                     this.query.orderby,

@@ -61,18 +61,29 @@ class ReferralSystem
 
     public function payPercentPostOpen(Creator $creator, Post $post, float $amount): void
     {
-        $settings = Option::getSettings();
-        $referrer = $creator->referral?->referrer;
         DB::beginTransaction();
-        for ($i=0; $i < 4; $i++) { 
+
+        $settings = Option::getSettings();
+
+        $earnAmount = $amount * $settings['referral_percent'] / 100;
+
+        $post->creator->creditMoney($earnAmount, 'balance_earn');
+
+        $referrer = $creator->referral?->referrer;
+        $restAmount = $amount - $earnAmount;
+        for ($i=0; $i < 3; $i++) { 
             if (! $referrer) {
                 break;
             }
 
-            $referrer->creditMoney($amount * $settings['referral_percent'] / 100);
+            $earnAmount = $restAmount * $settings['referral_percent'] / 100;
+
+            $referrer->creditMoney($earnAmount, 'balance_earn');
 
             $referrer = $referrer->referral?->referrer;
+            $restAmount -= $earnAmount;
         }
+
         DB::commit();
     }
 }

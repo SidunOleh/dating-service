@@ -1,14 +1,14 @@
 <template>
     <Table
         ref="table"
-        @approve="record => confirmPopup(() => approve(record), `Are you sure you want to approve ${record.creator.email} request?`)"
-        @reject="record => confirmPopup(() => reject(record), `Are you sure you want to reject ${record.creator.email} request?`)"/>
+        @transfer="record => confirmPopup(() => transfer(record), `Are you sure you want to transfer ${record.email}?`)"
+        @reset="record => confirmPopup(() => reset(record), `Are you sure you want to reset ${record.email}?`)"/>
 </template>
 
 <script>
 import { message } from 'ant-design-vue'
 import Table from './Table.vue'
-import transferRequestsApi from '../../api/transferRequests'
+import transfersApi from '../../api/transfers'
 import { confirmPopup, } from '../../helpers/popups'
 
 export default {
@@ -17,19 +17,19 @@ export default {
     },
     methods: {
         confirmPopup,
-        async approve(record) {
+        async transfer(record) {
             try {
-                await transferRequestsApi.approve(record.id)
-                message.success('Successfully approved')
+                await transfersApi.transfer(record.id)
+                message.success('Successfully transfered')
                 this.$refs.table.updateData()   
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
             }
         },
-        async reject(record) {
+        async reset(record) {
             try {
-                await transferRequestsApi.reject(record.id)
-                message.success('Successfully rejected')
+                await transfersApi.reset(record.id)
+                message.success('Successfully reset')
                 this.$refs.table.updateData()   
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)

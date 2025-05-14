@@ -2,11 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Notifications\TransferRejected;
+use App\Events\TransferMade as EventsTransferMade;
+use App\Notifications\TransferMade;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendEmailTransferRejected
+class SendEmailTransferMade
 {
     /**
      * Create the event listener.
@@ -19,8 +20,8 @@ class SendEmailTransferRejected
     /**
      * Handle the event.
      */
-    public function handle(object $event): void
+    public function handle(EventsTransferMade $event): void
     {
-        $event->transferRequest->creator->notify(new TransferRejected);
+        $event->creator->notify(new TransferMade($event->creator));
     }
 }

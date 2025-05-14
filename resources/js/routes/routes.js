@@ -315,17 +315,17 @@ const routes = [{
         menuKey: 'content',
     },
 }, {
-    path: '/u0puffeto4nh7SlHzFn8/transfer-requests',
+    path: '/u0puffeto4nh7SlHzFn8/transfere',
     component: defineAsyncComponent({
         loader: () =>
-            import ('../views/TransferRequests/Index.vue'),
+            import ('../views/Transfers/Index.vue'),
         loadingComponent: Loader,
     }),
-    name: 'transfer-requests.index',
+    name: 'transfers.index',
     meta: {
         access: 'private',
-        permission: 'transfer-requests.view',
-        menuKey: 'transfer-requests',
+        permission: 'transfers.view',
+        menuKey: 'transfers',
     },
 }, {
     path: '/u0puffeto4nh7SlHzFn8/posts',

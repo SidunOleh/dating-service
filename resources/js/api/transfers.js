@@ -1,13 +1,13 @@
 import can from '../helpers/can'
 
-const transferRequestsApi = {
+const transfersApi = {
     async fetch(
         page = 1,
         perpage = 15,
         orderby = 'created_at',
         order = 'DESC',
     ) {
-        if (!can('transfer-requests.view')) {
+        if (!can('transfes.view')) {
             throw new Error('Forbidden.')
         }
 
@@ -18,28 +18,28 @@ const transferRequestsApi = {
             order,
         })
 
-        const res = await axios.get(`/api/u0puffeto4nh7SlHzFn8/transfer-requests?${query}`)
+        const res = await axios.get(`/api/u0puffeto4nh7SlHzFn8/transfers?${query}`)
 
         return res.data
     },
-    async approve(id) {
-        if (!can('transfer-requests.approve')) {
+    async transfer(creatorId) {
+        if (!can('transfers.transfer')) {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post(`/api/u0puffeto4nh7SlHzFn8/transfer-requests/${id}/approve`)
+        const res = await axios.post(`/api/u0puffeto4nh7SlHzFn8/transfers/${creatorId}/transfer`)
 
         return res.data
     },
-    async reject(id) {
-        if (!can('transfer-requests.reject')) {
+    async reset(creatorId) {
+        if (!can('transfers.reset')) {
             throw new Error('Forbidden.')
         }
 
-        const res = await axios.post(`/api/u0puffeto4nh7SlHzFn8/transfer-requests/${id}/reject`)
+        const res = await axios.post(`/api/u0puffeto4nh7SlHzFn8/transfers/${creatorId}/reset`)
 
         return res.data
     },
 }
 
-export default transferRequestsApi
+export default transfersApi

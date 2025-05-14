@@ -4,13 +4,11 @@ namespace App\Services\Balances;
 
 use App\Constants\Balances;
 use App\Constants\Transactions;
-use App\Events\TransferRequestApproved;
-use App\Events\TransferRequestRejected;
+use App\Events\TransferMade;
 use App\Events\WithdrawRequestRejected;
 use App\Events\WithdrawRequestSuccess;
 use App\Exceptions\NotEnoughMoneyException;
 use App\Exceptions\PaymentGatewayNotFoundException;
-use App\Exceptions\TransferRequestIsCompletedException;
 use App\Exceptions\WithdrawalRequestIsCompletedException;
 use App\Models\Balance2Transaction;
 use App\Models\Creator;
@@ -19,7 +17,6 @@ use App\Models\PassimpayWithdrawal;
 use App\Models\PassimpayWithdrawalRequest;
 use App\Models\PlisioWithdrawalRequest;
 use App\Models\Transaction;
-use App\Models\TransferRequest;
 use App\Models\User;
 use App\Models\WithdrawalRequest;
 use App\Services\PaymentGateways\PaymentGateway;
@@ -202,7 +199,7 @@ class BalancesService
         return $transactions->sum('amount');
     }
 
-    public function autoCreditToBalance2(Creator $creator): float
+    public function autoCreditBalance2(Creator $creator): float
     {
         if ($creator->hasEnoughMoney(Balances::AUTO_CREDIT_AMOUNT, 'balance_2_total')) {
             return 0;
@@ -263,53 +260,23 @@ class BalancesService
         return [$transaction, $fromBalance2Auto, $fromBalance2];
     }
 
-    public function createTransferRequest(Creator $creator, float $amount): TransferRequest
+    public function transferBalanceEarnBalance(Creator $creator): void
     {
-        if (! $creator->hasEnoughMoney($amount, 'balance_2_total')) {
-            throw new NotEnoughMoneyException();
-        }
-
-        $transferRequest = TransferRequest::create([
-            'amount' => $amount,
-            'status' => Transactions::TRANSFER_REQUEST_STATUS['pending'],
-            'creator_id' => $creator->id,
-        ]);
-
-        return $transferRequest;
-    }
-
-    public function rejectTransferRequest(Creator $creator, TransferRequest $transferRequest): void
-    {
-        if ($transferRequest->status != Transactions::TRANSFER_REQUEST_STATUS['pending']) {
-            throw new TransferRequestIsCompletedException();
-        }
-
-        $transferRequest->update(['status' => Transactions::TRANSFER_REQUEST_STATUS['rejected']]);
-
-        TransferRequestRejected::dispatch($transferRequest);
-    }
-
-    public function transferBalance2Balance(Creator $creator, TransferRequest $transferRequest): void
-    {
-        if ($transferRequest->status != Transactions::TRANSFER_REQUEST_STATUS['pending']) {
-            throw new TransferRequestIsCompletedException();
-        }
-
-        if (! $creator->hasEnoughMoney($transferRequest->amount, 'balance_2_total')) {
-            throw new NotEnoughMoneyException();
-        }
-
         DB::beginTransaction();
 
-        $this->debitBalance2($creator, $transferRequest->amount, 'transfer_balance_2_balance');
-        
-        $creator->creditMoney($transferRequest->amount);
+        $amount = $creator->balance_earn;
 
-        $transferRequest->update(['status' => Transactions::TRANSFER_REQUEST_STATUS['approved']]);
+        $creator->debitMoney($amount, 'balance_earn');
+        $creator->creditMoney($amount);
+
+        TransferMade::dispatch($creator);
 
         DB::commit();
+    }
 
-        TransferRequestApproved::dispatch($transferRequest);
+    public function resetBalanceEarn(Creator $creator): void
+    {
+        $creator->debitMoney($creator->balance_earn, 'balance_earn');
     }
 
     public function getTransactionList(Creator $creator): array

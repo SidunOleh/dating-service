@@ -104,7 +104,7 @@ class PostsService
         $tryCount = count($pressedButtons);
         $guessed = $pressedButton == $post->button_number;
 
-        if (($tryCount == 1 and $guessed) or $tryCount == 3) {
+        if ($guessed) {
             $postsOpen->update(['post_open' => true]);
         }
 
@@ -112,8 +112,8 @@ class PostsService
             $this->balancesService->creditBalance2($creator, Posts::POST_OPEN_PRICE, Transactions::BALANCE_2_TYPE['blog_open_credit']);
         } else {
             $result = $this->balancesService->debitBalance2($creator, Posts::POST_OPEN_PRICE, Transactions::BALANCE_2_TYPE['blog_open_debit']);
-        
-            PostOpenDebitMoney::dispatch($creator, $post, $result[1]);
+ 
+            PostOpenDebitMoney::dispatch($creator, $post, $result[2]);
         }
         
         DB::commit();

@@ -41,7 +41,7 @@ class AutoCreditMoney extends Command
             ->chunk(100, function ($creators) {
                 foreach ($creators as $creator) {
                     try {
-                        $this->balancesService->autoCreditToBalance2($creator);
+                        $this->balancesService->autoCreditBalance2($creator);
                     } catch (Exception $e) {
                         Log::error($e);
                     }

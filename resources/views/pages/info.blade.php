@@ -57,56 +57,10 @@
                 <div class="title per">
                     Meow is automatically added every day up to 5.00, so you can try out how it works!
                 </div>
-                @if (! $creator->transferRequestInPending)
-                <div class="swap__transfer">
-                    <div class="swap__exchange btn">
-                        Exchange Meow
-                    </div>
-                </div>
-                @endif
             </div>
         </div>
     </div>
 </section>
-
-<div class="exchange-wrapper">
-    <div class="exchange-popup">
-        <div class="exchange-form">
-            <img src="{{ asset('/assets/img/close.svg') }}" alt="" class="close" />
-            <p class="title">
-                Exchange Meow
-            </p>
-            <div class="amount-input">
-                <img src="{{ asset('/assets/img/coins.svg') }}" alt="" class="input-label" />
-                <input 
-                    id="amount" 
-                    type="number" 
-                    placeholder="Enter the amount" 
-                    min="1" 
-                    max="{{ $creator->balance_2_total }}" />
-                <p class="max-amount">Max</p>
-                <p class="error-text"></p>
-            </div>
-            <div class="btn-box">
-                <div class="btn red">
-                    Exchange
-                </div>
-            </div>
-            <div class="text-error"></div>
-        </div>
-        
-        <div class="exchange-msg">
-            <p class="title">
-                Your exchange request will be processed within 72 hours. <br /> You will receive a notification by email.
-            </p>
-            <div class="btn-box">
-                <div class="btn red btn-close">
-                    Close
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @include('templates.meow-btn')
 

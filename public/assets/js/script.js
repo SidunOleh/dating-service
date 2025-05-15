@@ -1607,33 +1607,6 @@ $(document).on('click', '.delete-post #confirm-delete', function () {
         })
 })
 
-//__________________________Tabs__________________________//
-
-function openTabs() {
-    $('.tab__right, .tab__left').toggleClass('open')
-    const url = new URL(window.location.href)
-    if ($('.tab__right').hasClass('open')) {
-        url.searchParams.set('tab', 'posts')
-    } else {
-        url.searchParams.set('tab', 'profile')
-    }
-    window.history.pushState({}, '', url.toString())
-    $('.tab').addClass('flash')
-    setTimeout(() => $('.tab').removeClass('flash'), 100)
-    for (let i = 0; i < 2; i++) {
-        setTimeout(() => window.dispatchEvent(new Event('resize')), i*500)
-    }
-}
-
-$('.tab__head').on('click', function () {
-    openTabs()
-})
-
-$('.tab__item').on('click', function () {
-    $('.tab__item').toggleClass('open')
-    openTabs()
-})
-
 //__________________________Functions__________________________//
 
 function sleep(milliseconds) {

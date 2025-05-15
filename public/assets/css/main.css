@@ -7676,7 +7676,7 @@ select#gender {
 }
 
 .tab_myprofile .posts {
-    max-width: 510px;
+    max-width: 100%;
 }
 
 .paw-btn.chosen {

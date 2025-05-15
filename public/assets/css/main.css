@@ -6645,6 +6645,7 @@ select#gender {
     position: relative;
     max-width: 1050px;
     margin: 0 auto;
+    display: flex;
 }
 
 .tab__left.open,

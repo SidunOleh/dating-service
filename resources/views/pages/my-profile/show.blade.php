@@ -2,6 +2,15 @@
 
 <div class="tab tab_myprofile">
     <div class="container">
+        <div class="tab__top">
+            <div @class(['tab__item' => true, 'open' => request()->query('tab') == 'posts'])>
+                Posts
+            </div>
+            <div @class(['tab__item' => true, 'open' => request()->query('tab', 'profile') == 'profile'])>
+                Info
+            </div>
+        </div>
+
         <div @class(['tab__left' => true, 'open' => request()->query('tab', 'profile') == 'profile'])>
             <div class="tab__content">
                 <section class="profile account">
@@ -196,14 +205,27 @@
 
                 </section>
             </div>
+            
             <div class="tab__head">
+                <div class="arrow">
+                    <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
+                </div>
                 <span>Posts</span>
+                <div class="arrow">
+                    <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
+                </div>
             </div>
         </div>
 
         <div @class(['tab__right' => true, 'open' => request()->query('tab') == 'posts'])>
             <div class="tab__head">
-                <span>Profile</span>    
+                <div class="arrow">
+                    <img src="{{ asset('assets/img/next.svg') }}" alt="" />
+                </div>
+                <span>Info</span>    
+                <div class="arrow">
+                    <img src="{{ asset('assets/img/next.svg') }}" alt="" />
+                </div>
             </div>
 
             <div class="tab__content">
@@ -236,51 +258,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    function positionTabHeadTitle(withTransition = true) {
-        const title = document.querySelector('.open .tab__head span') 
-
-        title.classList.remove('transition')
-        
-        if (withTransition) {
-            title.classList.add('transition')
-        }
-
-        let rect = document.querySelector('.open .tab__head').getBoundingClientRect()
-        const visibleTop = Math.max(0, rect.top)
-        const visibleBottom = Math.min(window.innerHeight, rect.bottom)
-        const visibleHeight = visibleBottom - visibleTop
-        const pxFromVisibleTopToCenter = visibleHeight / 2
-        const invisibleTopHeight = Math.max(0, -rect.top)
-        title.style.top = `${pxFromVisibleTopToCenter + invisibleTopHeight}px`
-    }
-
-    positionTabHeadTitle(false)
-
-    document.addEventListener('DOMContentLoaded', () => {
-        $('.tab__head').on('click', function () {
-            $('.tab__right, .tab__left').toggleClass('open')
-            const url = new URL(window.location.href)
-            if ($('.tab__right').hasClass('open')) {
-                url.searchParams.set('tab', 'posts')
-            } else {
-                url.searchParams.set('tab', 'profile')
-            }
-            window.history.pushState({}, '', url.toString())
-            $('.tab').addClass('flash')
-            positionTabHeadTitle(false)
-            setTimeout(() => $('.tab').removeClass('flash'), 100)
-            for (let i = 0; i < 2; i++) {
-                setTimeout(() => window.dispatchEvent(new Event('resize')), i*500)
-            }
-        })
-
-        $(window).on('scroll resize', () => {
-            positionTabHeadTitle()
-        })
-    })
-</script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>

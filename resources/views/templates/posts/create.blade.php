@@ -15,12 +15,12 @@
             let valid = true
 
             if (! this.data.images.length) {
-                this.errors.images = 'Images are required'
+                this.errors.images = 'Images are required.'
                 valid = false
             }
 
             if (! this.data.button_number) {
-                this.errors.button_number = 'Button is required'
+                this.errors.button_number = 'Choose Lucky Paw.'
                 valid = false
             }
 
@@ -40,26 +40,6 @@
         },  
         deleteImage(i) {
             this.data.images.splice(i, 1)
-        },
-        moveUp(i) {
-            if (i == 0) {
-                return
-            }
-
-            const prev = this.data.images[i-1]
-
-            this.data.images[i-1] = this.data.images[i]
-            this.data.images[i] = prev
-        },
-        moveDown(i) {
-            if (i == this.data.images.length-1) {
-                return
-            }
-
-            const next = this.data.images[i+1]
-
-            this.data.images[i+1] = this.data.images[i]
-            this.data.images[i] = next
         },
         getFormData() {
             const formData = new FormData()
@@ -123,9 +103,6 @@
     <form id="post-form">
 
         <div class="form-group">
-            <div class="head">
-                <span>1</span> Add photo
-            </div>
             <div class="photo-container">
                 <p>
                     Maximum number of photos: 3
@@ -147,36 +124,24 @@
                     multiple 
                     hidden
                     @change="addImages"/>
-                
-                <button 
-                    v-if="data.images.length == 0" 
-                    id="customButton1" 
-                    type="button" 
-                    class="btn red" 
-                    @click="$('#photoInput').click()">
-                    Add photo
-                </button>
+            
 
-                <div 
-                    v-if="data.images.length"
-                    id="photos">
+                <div id="photos" :class="{'align-center': data.images.length == 0}">
                     <div 
-                        v-for="(photo, i) in data.images" 
+                        v-for="(photo, i) in data.images ?? []" 
                         style="position: relative; display: inline-block;">
                         <img :src="window.URL.createObjectURL(photo)">
-
-                        <button 
-                            class="move-button move-up" 
-                            type="button" 
-                            @click="moveUp(i)">↑</button>
-                        <button 
-                            class="move-button move-down" 
-                            type="button" 
-                            @click="moveDown(i)">↓</button>
 
                         <span 
                             class="remove-photo" 
                             @click="deleteImage(i)">×</span>
+                    </div>
+
+                    <div 
+                        v-if="data.images.length < 3" 
+                        class="add-photo"
+                        @click="$('#photoInput').click()">
+                        +
                     </div>
 
                 </div>
@@ -192,33 +157,14 @@
             <div v-if="errors.images" class="form-error">
                 {{ errors.images }}
             </div>
-            
-            <div 
-                v-if="data.images.length >= 1 && data.images.length < 3" 
-                class="btn-group">
-                <button 
-                    id="customButton2" 
-                    type="button" 
-                    class="btn" 
-                    @click="$('#photoInput').click()">
-                    Add photo
-                </button>
-            </div>
         </div>
 
         <div class="form-group">
-            <div class="head">
-                <span>2</span> Write text
-            </div>
             <div class="input-wrapper">
-                <label for="description">
-                    Text:
-                </label>
-                    <p><b>Not Allowed:</b> Any prices, coded words like "BBJ" or "BBC", or harassment.</p>
                 <textarea 
                     id="text" 
                     name="text" 
-                    placeholder="Text" 
+                    placeholder='Not Allowed: Any prices, coded words like "BBJ" or "BBC", or harassment.'
                     maxlength="150"
                     v-model="data.text">
                 </textarea>
@@ -233,28 +179,28 @@
         </div>
 
         <div class="form-group">
-            <div class="head">
-                <span>3</span> Choose button
-            </div>
             <div class="title">
-                Buttons:
+                Choose Your Lucky Paw!
             </div>
             <div class="input-wrapper">
                 <div class="post-btns">
                     <div 
-                        :class="{'btn': true, 'red': data.button_number == 1}"
+                        data-number="1"
+                        :class="{'paw-btn': true, 'chosen': data.button_number == 1}"
                         @click="data.button_number = 1">
-                        1
+                        <img src="/assets/img/buPaw1.png" alt="">
                     </div>
                     <div 
-                        :class="{'btn': true, 'red': data.button_number == 2}"
+                        data-number="2"
+                        :class="{'paw-btn': true, 'chosen': data.button_number == 2}"
                         @click="data.button_number = 2">
-                        2
+                        <img src="/assets/img/buPaw2.png" alt="">
                     </div>
                     <div 
-                        :class="{'btn': true, 'red': data.button_number == 3}"
+                        data-number="3"
+                        :class="{'paw-btn': true, 'chosen': data.button_number == 3}"
                         @click="data.button_number = 3">
-                        3
+                        <img src="/assets/img/buPaw3.png" alt="">
                     </div>
                 </div>
              
@@ -262,17 +208,12 @@
                     {{ errors.button_number }}
                 </div>
             </div>
+            <a href="">What is Lucky Paw?</a>
         </div>
 
         <div class="form-group">
-            <div class="head">
-                <span>4</span> Sending for Approval
-            </div>
             <p class="text">
-                Yes, You did it! Thank you for completing your post! <br>
-                Approval may take up to 72 hours. <br>
-                Please double-check all information before submitting. <br>
-                You won’t be able to change this information <b>until it is approved.</b>
+                Approval takes up to 72 hours! Double-check before sending.
             </p>
 
             <div class="btn-group">
@@ -280,7 +221,7 @@
                     class="btn red" 
                     @click.stop.prevent="send">
                     <img v-if="loading" src="/assets/img/btn-loader.svg" alt="" class="loader" />
-                    Save
+                    Send
                 </button>
             </div>
         </div>

@@ -2772,7 +2772,7 @@ input {
     }
 }
 
-.profile .other-user-list {
+.other-user-list {
     width: 14%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2786,7 +2786,7 @@ input {
 }
 
 @media screen and (max-width: 768px) {
-    .profile .other-user-list {
+    .other-user-list {
         margin: 0;
         width: 100%;
         -ms-flex-wrap: wrap;
@@ -2798,7 +2798,7 @@ input {
     }
 }
 
-.profile .other-user-list .other-user-item {
+.other-user-list .other-user-item {
     overflow: hidden;
     border-radius: 4px;
     background: #4c4c52;
@@ -2806,19 +2806,19 @@ input {
 }
 
 @media screen and (max-width: 768px) {
-    .profile .other-user-list .other-user-item {
+    .other-user-list .other-user-item {
         width: calc((100% - 16px) / 2);
     }
-    .profile .other-user-list .other-user-item:not(:nth-child(-n+4)) {
+    .other-user-list .other-user-item:not(:nth-child(-n+4)) {
         display: none;
     }
 }
 
-.profile .other-user-list .other-user-item:hover {
+.other-user-list .other-user-item:hover {
     background-color: #606068;
 }
 
-.profile .other-user-list .other-user-item.verified:after {
+.other-user-list .other-user-item.verified:after {
     content: "Verified";
     width: 35px;
     height: 35px;
@@ -2848,12 +2848,12 @@ input {
 }
 
 @media screen and (max-width: 768px) {
-    .profile .other-user-list .other-user-item.verified:after {
+    .other-user-list .other-user-item.verified:after {
         top: 120px;
     }
 }
 
-.profile .other-user-list .other-user-item img:not(.likes img) {
+.other-user-list .other-user-item img:not(.likes img) {
     width: 100%;
     height: 108px;
     -o-object-fit: cover;
@@ -2861,12 +2861,12 @@ input {
 }
 
 @media screen and (max-width: 768px) {
-    .profile .other-user-list .other-user-item img:not(.likes img) {
+    .other-user-list .other-user-item img:not(.likes img) {
         height: 139px;
     }
 }
 
-.profile .other-user-list .likes {
+.other-user-list .likes {
     position: absolute;
     top: 8px;
     left: 8px;
@@ -2879,7 +2879,7 @@ input {
     gap: 4px;
 }
 
-.profile .other-user-list .likes .btn {
+.other-user-list .likes .btn {
     padding: 0;
     width: 16px;
     height: 16px;
@@ -2895,36 +2895,36 @@ input {
     border-radius: 4px !important;
 }
 
-.profile .other-user-list .likes .btn img {
+.other-user-list .likes .btn img {
     width: 10px;
 }
 
-.profile .other-user-list .likes .likes-count {
+.other-user-list .likes .likes-count {
     color: #fbfbfb;
     font-size: 10px;
     font-weight: 600;
     line-height: normal;
 }
 
-.profile .other-user-list .likes.active .btn {
+.other-user-list .likes.active .btn {
     background: #fff !important;
 }
 
-.profile .other-user-list .likes.active path {
+.other-user-list .likes.active path {
     fill: rgb(164, 0, 0);
 }
 
-.profile .other-user-list .card {
+.other-user-list .card {
     padding: 8px;
 }
 
-.profile .other-user-list .card .name {
+.other-user-list .card .name {
     color: var(--white, #fbfbfb);
     font-size: 14px;
     font-weight: 700;
 }
 
-.profile .other-user-list .card .city {
+.other-user-list .card .city {
     color: var(--light-gray, #bebfc0);
     font-size: 12px;
     line-height: normal;
@@ -6638,7 +6638,7 @@ select#gender {
 
 .tab__left,
 .tab__right {
-    min-height: calc(100vh - 215px);
+    min-height: calc(100vh - 265px);
     justify-content: center;
     gap: 16px;
     display: none;
@@ -6656,8 +6656,13 @@ select#gender {
     background-color: #39393e;
     cursor: pointer;
     border-radius: 4px;
-    padding: 20px;
+    padding: 10px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .tab__head span {
@@ -6667,23 +6672,14 @@ select#gender {
     white-space: nowrap;
     font-weight: 700;
     writing-mode: vertical-rl;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+.tab__right .tab__head span {
+    transform: rotate(180deg);
 }
 
 .tab__head span.transition {
     transition: all 0.1s linear;
-}
-
-@media (max-width: 425px) {
-    .tab__head {
-        padding: 15px;
-    }
-    .tab__head span {
-        font-size: 17px;
-    }
 }
 
 .tab.flash .tab__left.open::after,
@@ -6941,13 +6937,6 @@ select#gender {
     position: relative;
 }
 
-.post-form {
-    /* border-radius: 4px;
-    background: #39393e;
-    padding: 10px; */
-    margin-bottom: 20px;
-}
-
 .post-form .form-group {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -6957,8 +6946,12 @@ select#gender {
     -ms-flex-direction: column;
     flex-direction: column;
     gap: 10px;
-    background: #39393e;
+    border-radius: 4px;
+}
+
+.post-form {
     padding: 10px;
+    background: #39393e;
     border-radius: 4px;
 }
 
@@ -7152,24 +7145,39 @@ select#gender {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
     gap: 8px;
     margin-top: 8px;
+    overflow: auto;
+    scrollbar-width: thin;
+    padding-bottom: 5px;
+}
+
+.post-form .photo-container #photos>div {
+    flex-shrink: 0;
+}
+
+.post-form .add-photo {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8585858d;
+    font-size: 30px;
+    border: 1px solid #8585858d;
+    cursor: pointer;
+}
+
+.post-form .add-photo:hover {
+    border: 1px solid #b80006;
+    color: #7a0004;
 }
 
 .post-form .photo-container img {
-    width: 100%;
-    height: 100%;
-    max-height: 600px;
-    min-height: 600px;
+    width: 150px;
+    height: 150px;
     border-radius: 4px;
     -o-object-fit: contain;
     object-fit: contain;
@@ -7204,7 +7212,7 @@ select#gender {
 #post-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 #post-form .text {
@@ -7544,4 +7552,127 @@ select#gender {
     display: flex;
     justify-content: center;
     gap: 8px;
+}
+
+.tab__top {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-bottom: 20px;
+}
+
+.tab__item {
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.tab__item:hover {
+    color: rgb(160, 17, 17);
+}
+
+.tab__item.open {
+    color: rgb(160, 17, 17);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+@media (max-width: 1024px) {
+    .tab__top {
+        display: none;
+    }
+}
+
+@media (min-width: 1025px) {
+    .tab__head {
+        display: none;
+    }
+}
+
+.tab__right .tab__content {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .tab__right .other-user-list {
+        display: none;
+    }
+}
+
+.tab__right .posts {
+    max-width: 460px;
+}
+
+.tab__right .tab__content {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.tab__head {
+    position: fixed;
+    top: 60px;
+    height: calc(100% - 60px);
+}
+
+.tab__right .tab__head {
+    left: 0;
+}
+
+.tab__left .tab__head {
+    right: 0;
+}
+
+.tab__right .tab__content {
+    padding-left: 24px;
+}
+
+.tab__left .tab__content {
+    padding-right: 24px;
+}
+
+.tab__head .arrow {
+    width: 23px;
+    height: 23px;
+    border-radius: 4px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+    background: var( --Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+}
+
+.tab_myprofile .tab__right .tab__content {
+    flex-direction: column;
+    align-items: center;
+    max-width: 510px;
+}
+
+.post-form {
+    width: 100%;
+}
+
+.tab_myprofile .posts {
+    max-width: 510px;
+}
+
+.paw-btn.chosen {
+    filter: brightness(1);
+}
+
+.post-form a {
+    color: white;
+    text-decoration: underline;
+}
+
+.align-center {
+    justify-content: center;
 }

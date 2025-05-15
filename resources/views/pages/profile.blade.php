@@ -153,35 +153,6 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        function openTabs() {
-            $('.tab__right, .tab__left').toggleClass('open')
-            const url = new URL(window.location.href)
-            if ($('.tab__right').hasClass('open')) {
-                url.searchParams.set('tab', 'posts')
-            } else {
-                url.searchParams.set('tab', 'profile')
-            }
-            window.history.pushState({}, '', url.toString())
-            $('.tab').addClass('flash')
-            setTimeout(() => $('.tab').removeClass('flash'), 100)
-            for (let i = 0; i < 2; i++) {
-                setTimeout(() => window.dispatchEvent(new Event('resize')), i*500)
-            }
-        }
-        
-        $('.tab__head').on('click', function () {
-            openTabs()
-        })
-        
-        $('.tab__item').on('click', function () {
-            $('.tab__item').toggleClass('open')
-            openTabs()
-        })
-    })
-</script>
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>

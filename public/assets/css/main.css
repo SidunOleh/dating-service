@@ -4918,6 +4918,7 @@ input {
 
 .refferals .link-body .btn {
     display: block;
+    flex-shrink: 0;
 }
 
 .refferals .link-body .message {
@@ -6938,7 +6939,7 @@ select#gender {
 }
 
 .tab__content {
-    flex-grow: 1;
+    /* flex-grow: 1; */
 }
 
 .post {
@@ -7591,12 +7592,6 @@ select#gender {
     }
 }
 
-@media (min-width: 1025px) {
-    .tab__head {
-        display: none;
-    }
-}
-
 .tab__right .tab__content {
     display: flex;
 }
@@ -7613,7 +7608,6 @@ select#gender {
 
 .tab__right .tab__content {
     display: flex;
-    justify-content: center;
     gap: 16px;
 }
 
@@ -7692,4 +7686,15 @@ select#gender {
 
 .align-center {
     justify-content: center;
+}
+
+.tab__head {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .tab__left.open .tab__head,
+    .tab__right.open .tab__head {
+        display: flex;
+    }
 }

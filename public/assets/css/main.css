@@ -6665,6 +6665,12 @@ select#gender {
     gap: 20px;
 }
 
+@media (max-width: 768px) {
+    .tab__head {
+        padding: 5px;
+    }
+}
+
 .tab__head span {
     color: white;
     font-family: Inter;
@@ -7629,6 +7635,15 @@ select#gender {
 
 .tab__left .tab__content {
     padding-right: 24px;
+}
+
+@media (max-width: 768px) {
+    .tab__right .tab__content {
+        padding-left: 19px;
+    }
+    .tab__left .tab__content {
+        padding-right: 19px;
+    }
 }
 
 .tab__head .arrow {

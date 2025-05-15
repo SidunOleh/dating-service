@@ -6638,10 +6638,10 @@ select#gender {
 
 .tab__left,
 .tab__right {
-    min-height: calc(100vh - 265px);
     justify-content: center;
     gap: 16px;
-    display: none;
+    height: 0;
+    overflow: hidden;
     position: relative;
     max-width: 1050px;
     margin: 0 auto;
@@ -6649,7 +6649,8 @@ select#gender {
 
 .tab__left.open,
 .tab__right.open {
-    display: flex;
+    min-height: calc(100vh - 265px);
+    height: auto;
 }
 
 .tab__head {

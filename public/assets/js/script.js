@@ -1620,7 +1620,7 @@ function openTabs() {
     window.history.pushState({}, '', url.toString())
     $('.tab').addClass('flash')
     setTimeout(() => $('.tab').removeClass('flash'), 100)
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 2; i++) {
         setTimeout(() => window.dispatchEvent(new Event('resize')), i*500)
     }
 }

@@ -120,7 +120,7 @@
                 <input 
                     type="file" 
                     id="photoInput" 
-                    accept=".jpg,.jpeg,.jpe,.jif,.jfif,.jfi,.webp,.heif,.heifs,.heic,.heics,.avci,.avcs,.HIF,.png"
+                    accept=".jpg,.jpeg,.jpe,.jif,.jfif,.jfi,.webp,.heif,.heifs,.heic,.heics,.avci,.avcs,.HIF"
                     multiple 
                     hidden
                     @change="addImages"/>

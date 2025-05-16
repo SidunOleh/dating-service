@@ -120,11 +120,10 @@
                 <input 
                     type="file" 
                     id="photoInput" 
-                    accept=".jpg,.jpeg,.jpe,.jif,.jfif,.jfi,.webp,.heif,.heifs,.heic,.heics,.avci,.avcs,.HIF"
+                    accept=".jpg,.jpeg,.jpe,.jif,.jfif,.jfi,.webp,.heif,.heifs,.heic,.heics,.avci,.avcs,.HIF,.png"
                     multiple 
                     hidden
                     @change="addImages"/>
-            
 
                 <div id="photos" :class="{'align-center': data.images.length == 0}">
                     <div 
@@ -157,6 +156,10 @@
             <div v-if="errors.images" class="form-error">
                 {{ errors.images }}
             </div>
+
+            <div v-for="i in [0,1,2]" class="form-error">
+                {{ errors[`images.${i}`] }}
+            </div>
         </div>
 
         <div class="form-group">
@@ -173,7 +176,7 @@
                     <p class="characterCount"><span class="counter">{{ data.text.length }}</span> / 150</p>
                 </div>
                 <div v-if="errors.text" class="error-text">
-                    {{ errors.description }}
+                    {{ errors.text }}
                 </div>
             </div>
         </div>

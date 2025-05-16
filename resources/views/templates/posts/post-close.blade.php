@@ -3,25 +3,24 @@
         <div class="post__content with-blur">
             <div class="blur">
                 <div class="blur__body">
-                <div class="alert success">
-                    <div class="blur__text">MY WINNER!</div>
-                    <div class="blur__text unlock">
-                        <div>Free unlock </div>
-                        <div class="price">+<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
-                        <div>Your bonus!</div>
+                    <div class="alert success">
+                        <div class="blur__text">MY WINNER!</div>
+                        <div class="blur__text unlock">
+                            <div>Free unlock </div>
+                            <div class="price">+<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
+                            <div>Your bonus!</div>
+                        </div>
                     </div>
-                </div>
-                <div class="alert fail">
-                    <div class="blur__text">Missed! Try another one!</div>
-                    <div class="blur__text price">-<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
-                </div>
-                    <div class="blur__text">
-                        Choose Your Lucky Paw!
+                    <div class="alert fail">
+                        <div class="blur__text">Missed! Try another one!</div>
+                        <div class="blur__text price">-<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
                     </div>
-                    <div class="blur__text">
+                    <div class="blur__text" style="margin-bottom: 20px;">
+                        Choose Your Lucky Paw! 
+                    </div>
+                    <div class="lucky-text">
                         First guess right? 
-                    </div>
-                    <div class="blur__text">
+                        <br>
                         You get a double bonus and a free unlock!
                     </div>
                     <div class="post__btns">
@@ -41,7 +40,7 @@
                             <img src="{{ asset('/assets/img/buPaw3.png') }}" alt="">
                         </div>
                     </div>
-                    <div class="blur__text unlock">
+                    <div class="lucky-text unlock">
                         <p>Unlock price:</p>
                         <p class="price"><img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</p>
                     </div>

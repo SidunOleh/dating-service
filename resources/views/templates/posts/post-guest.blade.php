@@ -3,12 +3,12 @@
         <div class="post__content with-blur">
             <div class="blur">
                 <div class="blur__body">
-                <div class="blur__text">
-                    Log In, to Get in Touch
-                </div>
-                <div class="btn red login">
-                    Log In
-                </div>
+                    <div class="blur__text">
+                        Log In, to see Post
+                    </div>
+                    <div class="btn red login">
+                        Log In
+                    </div>
                 </div>
             </div>
             <img src="{{ get_random_photo() }}" alt="" class="post__image">

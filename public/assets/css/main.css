@@ -6336,6 +6336,7 @@ select#gender {
     -webkit-backdrop-filter: blur(25px);
     backdrop-filter: blur(5px);
     border-radius: 4px;
+    padding: 5px;
 }
 
 .blur__text {
@@ -6433,7 +6434,6 @@ select#gender {
 .swaps .title.per {
     font-weight: 400 !important;
     margin: 0 auto;
-    margin-top: 22px;
     max-width: 460px;
 }
 
@@ -6658,7 +6658,6 @@ select#gender {
 .tab__head {
     background-color: #39393e;
     cursor: pointer;
-    border-radius: 4px;
     padding: 10px;
     position: relative;
     display: flex;
@@ -6715,7 +6714,7 @@ select#gender {
 }
 
 .post__image {
-    height: 450px;
+    height: 400px;
     width: 100%;
     object-fit: cover;
 }
@@ -6823,11 +6822,11 @@ select#gender {
 }
 
 .post__images {
-    height: 450px;
+    height: 400px;
 }
 
 .post__images img {
-    height: 450px;
+    height: 400px;
     width: 100%;
     object-fit: cover;
 }
@@ -7449,7 +7448,7 @@ select#gender {
 }
 
 .buy-meow-btn .buy {
-    max-width: 80px;
+    max-width: 320px;
     cursor: pointer;
     filter: brightness(0.8)
 }
@@ -7465,12 +7464,12 @@ select#gender {
     flex-wrap: wrap;
 }
 
-.swaps .boost p {
+.swaps .boost .amount {
     display: flex;
     gap: 8px;
 }
 
-.post .blur__text.unlock {
+.post .unlock {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7478,15 +7477,15 @@ select#gender {
     margin-top: 10px;
 }
 
-.post .blur__text.unlock .price {
+.post .unlock .price {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .paw-btn {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     cursor: pointer;
 }
 
@@ -7697,4 +7696,17 @@ select#gender {
     .tab__right.open .tab__head {
         display: flex;
     }
+}
+
+.lucky-text {
+    text-align: center;
+    color: #bebfc0;
+    font-size: 14px;
+    line-height: normal;
+}
+
+.swap__bottom {
+    max-width: 460px;
+    margin: 0 auto;
+    margin-top: 20px;
 }

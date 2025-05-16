@@ -18,12 +18,13 @@
             </div>
 
             <div class="statistic">
-                <div class="title per">
+                <div class="title">
                     Free Daily Sample:
                 </div>
-                <div class="title per boost">
+                <div class="lucky-text boost">
                     <p>Every day we boost your balance to</p>
-                    <p><img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" />  5.00!</p>
+                    <p class="amount"><img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" />  5.00!</p>
+                    <p>for <b>FREE!</b></p>
                 </div>
                 <div class="buy-meow-btn">
                     <img 
@@ -38,14 +39,14 @@
                         <span class="balance-1">{{ format_price($creator->balance) }}</span>
                     </div>  
                     <div class="swap__arrow">
-                        ➜
+                        =
                     </div>
                     <div class="swap__coins">
                         <img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" />
                         <span class="balance-2">{{ format_price($creator->balance_2_total) }}</span>
                     </div>  
                 </div>
-                <div class="title per">
+                <div class="swap__bottom lucky-text">
                     Important:
                     <br>
                     Meow - is just a game token, so you can't exchange or withdraw it. You can only use it within our project.

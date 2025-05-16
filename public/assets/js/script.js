@@ -1542,6 +1542,10 @@ function loadMorePosts() {
         return
     }
 
+    if (! $('.posts__list').length) {
+        return
+    }
+
     const currentPage = $('.posts__list').data('current-page')
     const totalPages = $('.posts__list').data('total-pages')
 

@@ -188,6 +188,10 @@ return [
 
     'attributes' => [
         'image_id' => 'image',
+        'images.*' => 'image',
+        'images.0' =>  'image №1',
+        'images.1' =>  'image №2',
+        'images.2' =>  'image №3',
     ],
 
 ];

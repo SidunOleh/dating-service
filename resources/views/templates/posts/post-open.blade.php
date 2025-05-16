@@ -11,7 +11,6 @@
                     </div>
                     @endforeach
                 </div>
-
                 <div class="slider-navigation">
                     <div class="arrow prev">
                         <img src="{{ asset('assets/img/prev.svg') }}" alt="" />

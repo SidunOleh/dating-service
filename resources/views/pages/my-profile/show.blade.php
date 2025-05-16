@@ -211,9 +211,6 @@
                     <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
                 </div>
                 <span>Posts</span>
-                <div class="arrow">
-                    <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
-                </div>
             </div>
         </div>
 
@@ -223,9 +220,6 @@
                     <img src="{{ asset('assets/img/next.svg') }}" alt="" />
                 </div>
                 <span>Info</span>    
-                <div class="arrow">
-                    <img src="{{ asset('assets/img/next.svg') }}" alt="" />
-                </div>
             </div>
 
             <div class="tab__content">

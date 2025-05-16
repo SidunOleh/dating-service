@@ -157,8 +157,10 @@
                 {{ errors.images }}
             </div>
 
-            <div v-for="i in [0,1,2]" class="form-error">
-                {{ errors[`images.${i}`] }}
+            <div v-for="i in [0,1,2]">
+                <div v-if="errors[`images.${i}`]" class="form-error">
+                    {{ errors[`images.${i}`] }}
+                </div>
             </div>
         </div>
 

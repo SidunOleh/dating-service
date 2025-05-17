@@ -2,6 +2,7 @@
 
 namespace App\Services\ReferralSystem;
 
+use App\Constants\Referral as ConstantsReferral;
 use App\Models\Creator;
 use App\Models\Option;
 use App\Models\Post;
@@ -66,22 +67,30 @@ class ReferralSystem
         $settings = Option::getSettings();
 
         $earnAmount = $amount * $settings['referral_percent'] / 100;
+        $restAmount = $amount - $earnAmount;
 
         $post->creator->creditMoney($earnAmount, 'balance_earn');
 
-        $referrer = $creator->referral?->referrer;
-        $restAmount = $amount - $earnAmount;
+        $referrer = $post->creator->referral?->referrer;
         for ($i=0; $i < 3; $i++) { 
             if (! $referrer) {
                 break;
             }
 
-            $earnAmount = $restAmount * $settings['referral_percent'] / 100;
-
-            $referrer->creditMoney($earnAmount, 'balance_earn');
+            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance_earn');
 
             $referrer = $referrer->referral?->referrer;
-            $restAmount -= $earnAmount;
+        }
+
+        $referrer = $creator->referral?->referrer;
+        for ($i=0; $i < 3; $i++) { 
+            if (! $referrer) {
+                break;
+            }
+
+            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance_earn');
+
+            $referrer = $referrer->referral?->referrer;
         }
 
         DB::commit();

@@ -5,7 +5,6 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class ReCaptchaV3 implements ValidationRule
 {
@@ -24,8 +23,6 @@ class ReCaptchaV3 implements ValidationRule
         if (! $response->ok()) {
             $fail($response->getReasonPhrase());
         }
-
-        Log::info('recaptcha', $response->json());
 
         $data = $response->json();
 

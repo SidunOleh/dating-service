@@ -2773,7 +2773,6 @@ input {
 }
 
 .other-user-list {
-    width: 14%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

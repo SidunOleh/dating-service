@@ -102,7 +102,7 @@
             </div>
             <div class="tab__head">
                 <div class="arrow">
-                    <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
+                    <img src="{{ asset('assets/img/next.svg') }}" alt="" />
                 </div>
                 <span>Posts</span>
             </div>
@@ -111,7 +111,7 @@
         <div @class(['tab__right' => true, 'open' => request()->query('tab') == 'posts'])>
             <div class="tab__head">
                 <div class="arrow">
-                    <img src="{{ asset('assets/img/next.svg') }}" alt="" />
+                    <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
                 </div>
                 <span>Info</span>    
             </div>

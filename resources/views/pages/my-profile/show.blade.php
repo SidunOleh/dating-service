@@ -3,15 +3,23 @@
 <div class="tab tab_myprofile">
     <div class="container">
         <div class="tab__top">
-            <div @class(['tab__item' => true, 'open' => request()->query('tab') == 'posts'])>
-                Posts
+            <div 
+                @class(['tab__item' => true, 'open' => request()->query('tab') == 'post']) 
+                data-head="post">
+                <span>Post</span>
+                <img src="{{ asset('assets/img/next.svg') }}" alt="">
             </div>
-            <div @class(['tab__item' => true, 'open' => request()->query('tab', 'profile') == 'profile'])>
-                Info
+            <div 
+                @class(['tab__item' => true, 'open' => request()->query('tab', 'info') == 'info']) 
+                data-head="info">
+                <span>Info</span>
+                <img src="{{ asset('assets/img/next.svg') }}" alt="">
             </div>
         </div>
 
-        <div @class(['tab__left' => true, 'open' => request()->query('tab', 'profile') == 'profile'])>
+        <div 
+            @class(['tab__left' => true, 'open' => request()->query('tab', 'info') == 'info'])
+            data-tab="info">
             <div class="tab__content">
                 <section class="profile account">
                     <div class="profile__container">
@@ -206,7 +214,7 @@
                 </section>
             </div>
             
-            <div class="tab__head">
+            <div class="tab__head" data-head="post">
                 <div class="arrow">
                     <img src="{{ asset('assets/img/next.svg') }}" alt="" />
                 </div>
@@ -214,8 +222,10 @@
             </div>
         </div>
 
-        <div @class(['tab__right' => true, 'open' => request()->query('tab') == 'posts'])>
-            <div class="tab__head">
+        <div 
+            @class(['tab__right' => true, 'open' => request()->query('tab') == 'post'])
+            data-tab="post">
+            <div class="tab__head" data-head="info">
                 <div class="arrow">
                     <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
                 </div>

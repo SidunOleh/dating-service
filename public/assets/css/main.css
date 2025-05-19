@@ -7574,19 +7574,32 @@ select#gender {
 }
 
 .tab__item {
-    color: white;
+    color: rgb(160, 17, 17, 0.8);
     font-size: 20px;
     cursor: pointer;
-}
-
-.tab__item:hover {
-    color: rgb(160, 17, 17);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    order: 1;
 }
 
 .tab__item.open {
-    color: rgb(160, 17, 17);
-    text-decoration: underline;
-    text-underline-offset: 5px;
+    order: 2;
+}
+
+.tab__item:hover {
+    color: rgb(160, 17, 17, 1);
+}
+
+.tab__item.open::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100vw;
+    height: 2px;
+    background-color: rgb(160, 17, 17);
 }
 
 @media (max-width: 1024px) {

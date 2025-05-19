@@ -18,7 +18,7 @@
                     <div class="blur__text" style="margin-bottom: 20px;">
                         Choose Your Lucky Paw! 
                     </div>
-                    <div class="lucky-text">
+                    <div class="lucky-text" style="margin-bottom: 10px;">
                         First guess right? 
                         <br>
                         You get a double bonus and a free unlock!

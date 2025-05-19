@@ -34,7 +34,6 @@
         'more!',
         '-4',
         'doNe',
-        'Click :)',
     ]
 
     const meowAudio = [
@@ -76,7 +75,11 @@
                 currentAudio.play()
             } 
 
-            const nextStep = step == 20 ? 0 : step + 1
+            if (step == 20) {
+                $(currentAudio).on('ended', () => location.href = '/faq#some-funny-feature')
+            }
+
+            const nextStep = step + 1
             
             $(this).data('step', nextStep)
 

@@ -1613,14 +1613,11 @@ $(document).on('click', '.delete-post #confirm-delete', function () {
 
 //__________________________Tabs__________________________//
 
-function openTabs() {
-    $('.tab__right, .tab__left').toggleClass('open')
+function openTab(tab) {
+    $('[data-tab]').removeClass('open')
+    $(`[data-tab=${tab}]`).addClass('open')
     const url = new URL(window.location.href)
-    if ($('.tab__right').hasClass('open')) {
-        url.searchParams.set('tab', 'posts')
-    } else {
-        url.searchParams.set('tab', 'profile')
-    }
+    url.searchParams.set('tab', tab)
     window.history.pushState({}, '', url.toString())
     $('.tab').addClass('flash')
     setTimeout(() => $('.tab').removeClass('flash'), 100)
@@ -1630,12 +1627,18 @@ function openTabs() {
 }
 
 $('.tab__head').on('click', function () {
-    openTabs()
+    const tab = $(this).data('head')
+    openTab(tab)
 })
 
 $('.tab__item').on('click', function () {
-    $('.tab__item').toggleClass('open')
-    openTabs()
+    if ($(this).hasClass('open')) {
+        return
+    }
+    $('.tab__item').removeClass('open')
+    $(this).addClass('open')
+    const tab = $(this).data('head')
+    openTab(tab)
 })
 
 //__________________________Functions__________________________//

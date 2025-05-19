@@ -1,3 +1,5 @@
 <div class="no-posts">
-    <span>No posts</span> 
+    <img src="{{ asset('assets/img/noRes.svg') }}" alt="">
+    <span>Sorry! :(</span>
+    <span>This Creator has no Posts yet.</span>
 </div>

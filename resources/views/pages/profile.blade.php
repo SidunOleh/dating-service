@@ -3,15 +3,21 @@
 <div class="tab tab_profile">
     <div class="container">
         <div class="tab__top">
-            <div @class(['tab__item' => true, 'open' => request()->query('tab') == 'posts'])>
-                Posts
+            <div 
+                @class(['tab__item' => true, 'open' => request()->query('tab') == 'post']) 
+                data-head="post">
+                Post
             </div>
-            <div @class(['tab__item' => true, 'open' => request()->query('tab', 'profile') == 'profile'])>
+            <div 
+                @class(['tab__item' => true, 'open' => request()->query('tab', 'info') == 'info']) 
+                data-head="info">
                 Info
             </div>
         </div>
 
-        <div @class(['tab__left' => true, 'open' => request()->query('tab', 'profile') == 'profile'])>
+        <div 
+            @class(['tab__left' => true, 'open' => request()->query('tab', 'info') == 'info'])
+            data-tab="info">
             <div class="tab__content">
                 <section class="profile">
                     <div class="profile__container">
@@ -100,16 +106,18 @@
                     </div>
                 </section>
             </div>
-            <div class="tab__head">
+            <div class="tab__head" data-head="post">
                 <div class="arrow">
                     <img src="{{ asset('assets/img/next.svg') }}" alt="" />
                 </div>
-                <span>Posts</span>
+                <span>Post</span>
             </div>
         </div>
 
-        <div @class(['tab__right' => true, 'open' => request()->query('tab') == 'posts'])>
-            <div class="tab__head">
+        <div 
+            @class(['tab__right' => true, 'open' => request()->query('tab') == 'post'])
+            data-tab="post">
+            <div class="tab__head" data-head="info">
                 <div class="arrow">
                     <img src="{{ asset('assets/img/prev.svg') }}" alt="" />
                 </div>

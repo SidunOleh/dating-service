@@ -210,7 +210,7 @@
                 <div class="arrow">
                     <img src="{{ asset('assets/img/next.svg') }}" alt="" />
                 </div>
-                <span>Posts</span>
+                <span>Post</span>
             </div>
         </div>
 

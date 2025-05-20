@@ -6929,17 +6929,24 @@ select#gender {
     justify-content: center;
     align-items: center;
     height: 100%;
+    gap: 16px;
 }
 
-.no-posts span {
+.no-posts span:first-child {
     color: #fbfbfb;
     text-align: center;
     font-size: 24px;
     font-weight: 700;
 }
 
+.no-posts span:nth-child(2) {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16p
+}
+
 .no-posts img {
-    max-width: 100%;
+    max-width: 283px;
 }
 
 .tab__content {
@@ -7655,8 +7662,8 @@ select#gender {
 
 .tab__head {
     position: fixed;
-    top: 60px;
-    height: calc(100% - 60px);
+    top: 0;
+    height: 100vh;
 }
 
 .tab__right .tab__head {

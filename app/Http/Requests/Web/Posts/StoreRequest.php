@@ -29,4 +29,11 @@ class StoreRequest extends FormRequest
             'button_number' => 'required|in:1,2,3',
         ];
     }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'text' => str_replace("\r", '', $this->input('text')),
+        ]);
+    }
 }

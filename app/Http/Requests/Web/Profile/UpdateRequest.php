@@ -91,4 +91,11 @@ class UpdateRequest extends FormRequest
             'birthday.required_with' => 'Birthday required',
         ];
     }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'description' => str_replace("\r", '', $this->input('description')),
+        ]);
+    }
 }

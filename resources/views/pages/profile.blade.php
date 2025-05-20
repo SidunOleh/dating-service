@@ -108,7 +108,10 @@
 
                         </div>
                     
-                        @include('templates.recommends', ['recommends' => $recommends])
+                        @include('templates.recommends', [
+                            'recommendss' => $recommends, 
+                            'showOnDesctopCount' => $creator->gallery->count() * 3,
+                        ])
                     </div>
                 </section>
             </div>
@@ -152,7 +155,10 @@
                         </div>
                     </section>
 
-                    @include('templates.recommends', ['recommends' => $recommends])
+                    @include('templates.recommends', [
+                        'recommendss' => $recommends, 
+                        'showOnDesctopCount' => $creator->gallery->count() * 3,
+                    ])
                 @else
                     @include('templates.posts.no-posts')
                 @endif

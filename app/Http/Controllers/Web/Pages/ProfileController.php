@@ -28,8 +28,10 @@ class ProfileController extends Controller
             return abort(404);
         }
         
+        $recommcendsCount = count($creator->photos) * 3;
+        $recommcendsCount = $recommcendsCount < 4 ? 4 : $recommcendsCount;
         $recommends = $this->creatorsService->recommends(
-            count($creator->photos) * 3,
+            $recommcendsCount,
             [$creator->id,], 
             session('filters', [])
         );

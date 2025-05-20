@@ -51,7 +51,7 @@
                 <p class="subtitle">Share your personal referral link with friends, fans, and followers!</p>
                 <div class="link-body">
                     <p class="link">
-                        {{ route('profile.page', ['creator' => $creator->id, 'ref' => $creator->referral_code,]) }}
+                        {{ route('profile.page', ['creator' => $creator->id,]) }}
                     </p>
                     <div class="btn red copy-link" style="white-space: nowrap;">Copy Link</div>
                     <div class="message">

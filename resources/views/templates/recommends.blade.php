@@ -1,9 +1,9 @@
 <div class="other-user-list">
-    @foreach($recommends as $recommend)
+    @foreach($recommends as $i => $recommend)
     <a 
     
         href="{{ route('profile.page', ['creator' => $recommend->id,]) }}" 
-        @class(['other-user-item', 'verified' => $recommend->is_verified,])>
+        @class(['other-user-item', 'verified' => $recommend->is_verified, 'onlyMobile' => $i + 1 > $showOnDesctopCount,])>
         <div class="img-card">
             <img
                 src="{{ $recommend->gallery->first()->getUrl() }}"

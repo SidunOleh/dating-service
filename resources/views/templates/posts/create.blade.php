@@ -51,7 +51,7 @@
             return formData
         },
         async send() {
-            if (! this.validate()) {
+            if (this.loading || ! this.validate()) {
                 return
             }
 

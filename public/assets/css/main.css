@@ -6651,7 +6651,7 @@ select#gender {
 
 .tab__left.open,
 .tab__right.open {
-    min-height: calc(100vh - 265px);
+    min-height: calc(100vh - 269px);
     height: auto;
 }
 
@@ -7764,5 +7764,15 @@ select#gender {
 @media (min-width: 768px) {
     .other-user-list {
         max-width: 120px;
+    }
+}
+
+.other-user-list .other-user-item.onlyMobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .other-user-list .other-user-item.onlyMobile {
+        display: block;
     }
 }

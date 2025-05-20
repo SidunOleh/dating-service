@@ -550,6 +550,10 @@
                     }
                 },
                 async send() {
+                    if (this.loading) {
+                        return
+                    }
+
                     this.loading = true
 
                     const data = await this.getData()

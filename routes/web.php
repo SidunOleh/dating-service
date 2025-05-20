@@ -133,7 +133,7 @@ Route::get('/page/{page?}', HomeController::class)
     ->where('page', '[0-9]+')
     ->name('home.page');
 Route::get('/profile/{creator}', ProfileController::class)
-    ->middleware(['track.profile-visits',])
+    ->middleware(['track.profile-visits', 'check-referral',])
     ->name('profile.page');
 Route::get('/top-vote', TopVoteController::class)
     ->name('top-vote.page');

@@ -7,13 +7,17 @@
                 @class(['tab__item' => true, 'open' => request()->query('tab') == 'post']) 
                 data-head="post">
                 <span>Post</span>
-                <img src="{{ asset('assets/img/next.svg') }}" alt="">
+                <div class="arrow">
+                    <img src="{{ asset('assets/img/next.svg') }}" alt="">
+                </div>
             </div>
             <div 
                 @class(['tab__item' => true, 'open' => request()->query('tab', 'info') == 'info']) 
                 data-head="info">
                 <span>Info</span>
-                <img src="{{ asset('assets/img/next.svg') }}" alt="">
+                <div class="arrow">
+                    <img src="{{ asset('assets/img/next.svg') }}" alt="">
+                </div>
             </div>
         </div>
 

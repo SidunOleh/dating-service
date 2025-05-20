@@ -59,6 +59,7 @@ body {
     position: relative;
     padding-bottom: 110px;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 @media screen and (max-width: 768px) {
@@ -7579,13 +7580,38 @@ select#gender {
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 7px;
     position: relative;
     order: 1;
 }
 
+.tab__item .arrow {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+    background: var( --Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+}
+
+.tab__item.open .arrow {
+    display: none;
+}
+
 .tab__item.open {
+    color: white;
     order: 2;
+    pointer-events: none;
 }
 
 .tab__item:hover {

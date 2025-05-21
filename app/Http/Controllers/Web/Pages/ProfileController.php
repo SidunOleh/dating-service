@@ -25,7 +25,7 @@ class ProfileController extends Controller
             ! $creator->show_on_site or
             $creator->is_banned
         ) {
-            return abort(404);
+            return redirect()->route('home.index');
         }
         
         $recommcendsCount = count($creator->photos) * 3;

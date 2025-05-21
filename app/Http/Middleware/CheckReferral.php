@@ -23,9 +23,10 @@ class CheckReferral
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $creator = $request->creator;
         $referer = parse_url($request->headers->get('referer'));
-        if (($referer['host'] ?? '') != $request->getHost()) {
-            $this->referralSystem->memoryReferralCode($request->creator->referral_code);
+        if (($referer['host'] ?? '') != $request->getHost() and $creator) {
+            $this->referralSystem->memoryReferralCode($creator->referral_code);
         }
 
         return $next($request);

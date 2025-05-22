@@ -20,6 +20,7 @@ use Illuminate\Notifications\Notifiable;
 use Staudenmeir\EloquentJsonRelations\HasJsonRelationships;
 use Staudenmeir\EloquentJsonRelations\Relations\BelongsToJson;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Creator extends Authenticatable
@@ -495,5 +496,15 @@ class Creator extends Authenticatable
         return $this
             ->hasOne(WithdrawalRequest::class)
             ->ofMany(['id' => 'max',], fn (Builder $query) => $query->where('status', Transactions::WITHDRAWAL_REQUEST_STATUS['pending']));
+    }
+
+    public function referralRewards(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            ReferralReward::class,
+            Referral::class,
+            'referrer_id',
+            'referral_id',
+        );
     }
 }

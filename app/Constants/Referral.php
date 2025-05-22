@@ -9,4 +9,10 @@ class Referral
         0.075, 
         0.05,
     ];
+
+    public const REWARD_STATUS = [
+        'pending' => 'pending',
+        'completed' => 'completed',
+        'rejected' => 'rejected',
+    ];
 }

@@ -7,6 +7,7 @@ use App\Models\Creator;
 use App\Models\Option;
 use App\Models\Post;
 use App\Models\Referral;
+use App\Models\ReferralReward;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
@@ -49,15 +50,38 @@ class ReferralSystem
         $earnAmount = $settings['subscription_price'] * $settings['referral_percent'] / 100;
         $restAmount = $settings['subscription_price'] - $earnAmount;
 
-        $referrer = $creator->referral?->referrer;
+        $referral = $creator->referral;
+        if (! $referral) {
+            return;
+        }
+
+        $referral->referrer->creditMoney($earnAmount, 'balance');
+
+        ReferralReward::create([
+            'referral_id' => $referral->id,
+            'amount' => $earnAmount,
+            'type' => 'sub',
+            'status' => ConstantsReferral::REWARD_STATUS['completed'],
+        ]);
+
+        $referral = $referral->referrer->referral;
         for ($i=0; $i < 3; $i++) { 
-            if (! $referrer) {
+            if (! $referral) {
                 break;
             }
+            
+            $amount = $restAmount * ConstantsReferral::PCTS[$i];
 
-            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance');
+            $referral->referrer->creditMoney($amount, 'balance');
 
-            $referrer = $referrer->referral?->referrer;
+            ReferralReward::create([
+                'referral_id' => $referral->id,
+                'amount' => $amount,
+                'type' => 'sub',
+                'status' => ConstantsReferral::REWARD_STATUS['completed'],
+            ]);
+
+            $referral = $referral->referrer->referral;
         }
 
         DB::commit();
@@ -74,26 +98,44 @@ class ReferralSystem
 
         $post->creator->creditMoney($earnAmount, 'balance_earn');
 
-        $referrer = $post->creator->referral?->referrer;
+        $referral = $post->creator->referral;
         for ($i=0; $i < 3; $i++) { 
-            if (! $referrer) {
+            if (! $referral) {
                 break;
             }
 
-            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance_earn');
+            $amount = $restAmount * ConstantsReferral::PCTS[$i];
 
-            $referrer = $referrer->referral?->referrer;
+            $referral->referrer->creditMoney($amount, 'balance_earn');
+
+            ReferralReward::create([
+                'referral_id' => $referral->id,
+                'amount' => $amount,
+                'type' => 'post',
+                'status' => ConstantsReferral::REWARD_STATUS['pending'],
+            ]);
+
+            $referral = $referral->referrer->referral;
         }
 
-        $referrer = $creator->referral?->referrer;
+        $referral = $creator->referral;
         for ($i=0; $i < 3; $i++) { 
-            if (! $referrer) {
+            if (! $referral) {
                 break;
             }
 
-            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance_earn');
+            $amount = $restAmount * ConstantsReferral::PCTS[$i];
 
-            $referrer = $referrer->referral?->referrer;
+            $referral->referrer->creditMoney($amount, 'balance_earn');
+
+            ReferralReward::create([
+                'referral_id' => $referral->id,
+                'amount' => $amount,
+                'type' => 'post',
+                'status' => ConstantsReferral::REWARD_STATUS['pending'],
+            ]);
+
+            $referral = $referral->referrer->referral;
         }
 
         DB::commit();

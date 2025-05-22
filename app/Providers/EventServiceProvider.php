@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\BalanceEarnReset;
 use App\Events\CreatorInactivated;
 use App\Events\CreatorSubscribed;
 use App\Events\PostApproved;
@@ -12,8 +13,10 @@ use App\Events\TransferMade;
 use App\Events\UserCreated;
 use App\Events\WithdrawRequestRejected;
 use App\Events\WithdrawRequestSuccess;
+use App\Listeners\CompleteReferralRewards;
 use App\Listeners\PayPercentPostOpen;
 use App\Listeners\PayPercentSubscription;
+use App\Listeners\RejectReferralRewards;
 use App\Listeners\SendEmailPostApproved;
 use App\Listeners\SendEmailPostRejected;
 use App\Listeners\SendEmailProfileApproved;
@@ -66,6 +69,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         TransferMade::class => [
             SendEmailTransferMade::class,
+            CompleteReferralRewards::class,
+        ],
+        BalanceEarnReset::class => [
+            RejectReferralRewards::class,
         ],
     ];
 

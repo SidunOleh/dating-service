@@ -200,7 +200,7 @@
                                     </span>
                                 </td>
                                 <td class="sum">
-                                    {{ $referral->reward }}
+                                    {{ $referral->referralRewardsCompleted->sum('amount') }}
                                 </td>
                             </tr>
                         @endforeach

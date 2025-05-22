@@ -4,6 +4,7 @@ namespace App\Services\Balances;
 
 use App\Constants\Balances;
 use App\Constants\Transactions;
+use App\Events\BalanceEarnReset;
 use App\Events\TransferMade;
 use App\Events\WithdrawRequestRejected;
 use App\Events\WithdrawRequestSuccess;
@@ -243,15 +244,21 @@ class BalancesService
 
         $creator->debitMoney($amount, 'balance_earn');
         $creator->creditMoney($amount);
+        
+        DB::commit();
 
         TransferMade::dispatch($creator);
-
-        DB::commit();
     }
 
     public function resetBalanceEarn(Creator $creator): void
     {
+        DB::beginTransaction();
+        
         $creator->debitMoney($creator->balance_earn, 'balance_earn');
+
+        DB::commit();
+
+        BalanceEarnReset::dispatch($creator);
     }
 
     public function getTransactionList(Creator $creator): array

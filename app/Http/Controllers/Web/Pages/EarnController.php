@@ -23,6 +23,7 @@ class EarnController extends Controller
         $referrals = $creator
             ->referrals()
             ->with('referee')
+            ->with('referralRewardsCompleted')
             ->orderBy('created_at', 'DESC')
             ->get();
         $settings = Option::getSettings();

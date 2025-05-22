@@ -55,7 +55,7 @@ class ReferralSystem
                 break;
             }
 
-            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance_earn');
+            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance');
 
             $referrer = $referrer->referral?->referrer;
         }

@@ -37,6 +37,7 @@ class CreatorResource extends JsonResource
             'snapchat' => $this->snapchat,
             'onlyfans' => $this->onlyfans,
             'whatsapp' => $this->whatsapp,
+            'twitter' => $this->twitter,
 
             'zip' => $this->zip,
             'state' => $this->state,

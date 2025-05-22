@@ -43,6 +43,7 @@ class ProfileRequestResource extends JsonResource
             'snapchat' => $this->snapchat,
             'onlyfans' => $this->onlyfans,
             'whatsapp' => $this->whatsapp,
+            'twitter' => $this->twitter,
             'description' => $this->description,
             'photos' => $photos,
             'location' => $this->location,

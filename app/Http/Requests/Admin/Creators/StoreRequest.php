@@ -44,6 +44,7 @@ class StoreRequest extends FormRequest
             'instagram' => 'string|nullable',
             'onlyfans' => 'string|nullable',
             'profile_email' => 'email|nullable',
+            'twitter' => 'string|nullable',
 
             'zip' => 'required|regex:/^[0-9]{5}$/|exists:zip_codes,zip',
 

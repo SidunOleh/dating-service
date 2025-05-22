@@ -46,6 +46,7 @@ class Creator extends Authenticatable
         'snapchat',
         'onlyfans',
         'whatsapp',
+        'twitter',
         'zip',
         'state',
         'city',
@@ -94,6 +95,7 @@ class Creator extends Authenticatable
         'snapchat',
         'onlyfans',
         'whatsapp',
+        'twitter',
         'first_name',
         'last_name',
         'birthday',
@@ -115,7 +117,7 @@ class Creator extends Authenticatable
             $creator->referral_code = self::generateReferralCode();
             $creator->is_approved = $creator->isApproved();
             $creator->is_verified = $creator->isVerified();
-            $creator->balance_2 = Balances::AUTO_CREDIT_AMOUNT;
+            $creator->balance_2_auto = Balances::AUTO_CREDIT_AMOUNT;
         });
 
         static::created(function (self $creator) {

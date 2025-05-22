@@ -51,6 +51,10 @@ class DoneRequest extends FormRequest
         $rules['profile_email.value'] = 'email|nullable';
         $rules['profile_email.status'] = 'in:approved,rejected';
         $rules['profile_email.comment'] = 'string|nullable';
+        $rules['twitter'] = 'array|nullable';
+        $rules['twitter.value'] = 'string|nullable';
+        $rules['twitter.status'] = 'in:approved,rejected';
+        $rules['twitter.comment'] = 'string|nullable';
 
         $rules['name'] = 'array|nullable';
         $rules['name.value'] = 'string|min:2|max:12|nullable';

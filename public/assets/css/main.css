@@ -64,7 +64,7 @@ body {
 
 @media screen and (max-width: 768px) {
     body {
-        padding-bottom: 176px;
+        padding-bottom: 160px;
     }
 }
 
@@ -3951,15 +3951,33 @@ input {
     font-weight: 700;
 }
 
+@media (max-width: 768px) {
+    .noResults .title {
+        font-size: 16px;
+    }
+}
+
 .noResults .text {
     color: #fbfbfb;
     text-align: center;
     font-size: 16px;
 }
 
+@media (max-width: 768px) {
+    .noResults .text {
+        font-size: 15px;
+    }
+}
+
 .noResults img {
     width: 100%;
     max-width: 283px;
+}
+
+@media (max-width: 768px) {
+    .noResults img {
+        max-width: 212px;
+    }
 }
 
 .section-404 {
@@ -6713,12 +6731,6 @@ select#gender {
     max-width: 1000px;
 }
 
-.post__image {
-    height: 400px;
-    width: 100%;
-    object-fit: cover;
-}
-
 .post__card {
     padding: 12px;
     background-color: #39393e;
@@ -6821,13 +6833,49 @@ select#gender {
     margin-top: 10px;
 }
 
-.post__images {
-    height: 400px;
+.post__content {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .post__content {
+        height: 550px;
+    }
+}
+
+.post__imagesbox {
+    flex-grow: 1;
+}
+
+.post__card {
+    flex-shrink: 0;
+}
+
+.post__images,
+.post__images .slick-list,
+.post__images .slick-track,
+.post__images .slide,
+.post__images .slide a {
+    height: 100%;
+}
+
+.post__images .slide a {
+    display: inline-block;
+    width: 100%;
 }
 
 .post__images img {
-    height: 400px;
+    height: 100%;
     width: 100%;
+    object-fit: cover;
+}
+
+.post__image {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -6939,18 +6987,32 @@ select#gender {
     font-weight: 700;
 }
 
+@media (max-width: 768px) {
+    .no-posts span:first-child {
+        font-size: 16px;
+    }
+}
+
 .no-posts span:nth-child(2) {
     color: #fbfbfb;
     text-align: center;
-    font-size: 16p
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .no-posts span:nth-child(2) {
+        font-size: 15px;
+    }
 }
 
 .no-posts img {
     max-width: 283px;
 }
 
-.tab__content {
-    /* flex-grow: 1; */
+@media (max-width: 768px) {
+    .no-posts img {
+        max-width: 212px;
+    }
 }
 
 .post {
@@ -7589,7 +7651,6 @@ select#gender {
     align-items: center;
     gap: 7px;
     position: relative;
-    order: 1;
 }
 
 .tab__item .arrow {
@@ -7611,13 +7672,16 @@ select#gender {
     background: var( --Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
 }
 
+.tab__item:hover .arrow {
+    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+
 .tab__item.open .arrow {
     display: none;
 }
 
 .tab__item.open {
     color: white;
-    order: 2;
     pointer-events: none;
 }
 
@@ -7625,14 +7689,29 @@ select#gender {
     color: rgb(160, 17, 17, 1);
 }
 
-.tab__item.open::before {
+.tab__item:hover::before {
+    background: linear-gradient(180deg, #b00107 0%, #ea020b 100%);
+}
+
+.tab__item::before {
     content: '';
     position: absolute;
-    bottom: -2px;
-    left: 0;
+    bottom: -6px;
     width: 100vw;
     height: 2px;
-    background-color: rgb(160, 17, 17);
+    background: var(--Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+}
+
+.tab__item:first-child::before {
+    right: 0;
+}
+
+.tab__item:last-child::before {
+    left: 0;
+}
+
+.tab__item.open::before {
+    display: none;
 }
 
 @media (max-width: 1024px) {
@@ -7649,10 +7728,6 @@ select#gender {
     .tab__right .other-user-list {
         display: none;
     }
-}
-
-.tab__right .posts {
-    max-width: 460px;
 }
 
 .tab__right .tab__content {
@@ -7713,7 +7788,7 @@ select#gender {
 .tab_myprofile .tab__right .tab__content {
     flex-direction: column;
     align-items: center;
-    max-width: 510px;
+    width: 510px;
 }
 
 .post-form {
@@ -7721,7 +7796,7 @@ select#gender {
 }
 
 .tab_myprofile .posts {
-    max-width: 100%;
+    width: 100%;
 }
 
 .paw-btn.chosen {
@@ -7761,7 +7836,7 @@ select#gender {
     margin-top: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .other-user-list {
         max-width: 120px;
     }
@@ -7775,4 +7850,27 @@ select#gender {
     .other-user-list .other-user-item.onlyMobile {
         display: block;
     }
+}
+
+@media (max-width: 768px) {
+    .tab:has(.tab__left.open) .container {
+        padding-left: 16px;
+    }
+    .tab:has(.tab__right.open) .container {
+        padding-right: 16px;
+    }
+}
+
+.choose-lucky-paw-title {
+    text-align: center;
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.tab_profile .posts {
+    width: 510px;
 }

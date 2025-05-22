@@ -22,6 +22,7 @@ class EditCreatorData extends JsonResource
             'instagram' => $this->instagram,
             'onlyfans' => $this->onlyfans,
             'profile_email' => $this->profile_email,
+            'twitter' => $this->twitter,
 
             'zip' => $this->zip,
             'state' => $this->state,

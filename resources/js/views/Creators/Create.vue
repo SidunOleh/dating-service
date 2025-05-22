@@ -141,6 +141,13 @@
                         v-model:value="data.profile_email"/>
                 </FormItem>
 
+                <FormItem label="Twitter">
+                    <Input
+                        placeholder="Enter twitter account"
+                        prefix="@"
+                        v-model:value="data.twitter"/>
+                </FormItem>
+
             </CollapsePanel>
                 
             <CollapsePanel 
@@ -258,6 +265,7 @@ export default {
                 instagram: '',
                 onlyfans: '',
                 profile_email: '',
+                twitter: '',
                 zip: null,
                 state: '',
                 city: '',

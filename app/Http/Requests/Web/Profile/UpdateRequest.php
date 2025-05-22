@@ -23,13 +23,14 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => 'required_without_all:telegram,whatsapp,snapchat,instagram,onlyfans,profile_email|string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
-            'telegram' => 'required_without_all:phone,whatsapp,snapchat,instagram,onlyfans,profile_email|string|nullable',
-            'whatsapp' => 'required_without_all:phone,telegram,snapchat,instagram,onlyfans,profile_email|string|nullable',
-            'snapchat' => 'required_without_all:phone,telegram,whatsapp,instagram,onlyfans,profile_email|string|nullable',
-            'instagram' => 'required_without_all:phone,telegram,whatsapp,snapchat,onlyfans,profile_email|string|nullable',
-            'onlyfans' => 'required_without_all:phone,telegram,whatsapp,snapchat,instagram,profile_email|string|nullable',
-            'profile_email' => 'required_without_all:phone,telegram,whatsapp,snapchat,instagram,onlyfans|email|nullable',
+            'phone' => 'required_without_all:telegram,whatsapp,snapchat,instagram,onlyfans,profile_email,twitter|string|regex:/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/|nullable',
+            'telegram' => 'required_without_all:phone,whatsapp,snapchat,instagram,onlyfans,profile_email,twitter|string|nullable',
+            'whatsapp' => 'required_without_all:phone,telegram,snapchat,instagram,onlyfans,profile_email,twitter|string|nullable',
+            'snapchat' => 'required_without_all:phone,telegram,whatsapp,instagram,onlyfans,profile_email,twitter|string|nullable',
+            'instagram' => 'required_without_all:phone,telegram,whatsapp,snapchat,onlyfans,profile_email,twitter|string|nullable',
+            'onlyfans' => 'required_without_all:phone,telegram,whatsapp,snapchat,instagram,profile_email,twitter|string|nullable',
+            'profile_email' => 'required_without_all:phone,telegram,whatsapp,snapchat,instagram,onlyfans,twitter|email|nullable',
+            'twitter' => 'required_without_all:phone,telegram,whatsapp,snapchat,instagram,onlyfans,profile_email|string|nullable',
 
             'zip' => 'required|regex:/^[0-9]{5}$/|exists:zip_codes,zip',
 
@@ -62,6 +63,7 @@ class UpdateRequest extends FormRequest
             'onlyfans.required_without_all' => 'One from contact fields required',
             'profile_email.required_without_all' => 'One from contact fields required',
             'profile_email.email' => 'Invalid format',
+            'twitter.required_without_all' => 'One from contact fields required',
 
             'street.required' => 'Street required',
             'zip.required' => 'ZIP Code required',

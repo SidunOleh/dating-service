@@ -45,6 +45,12 @@
         <p class="info">{{ $creator->profile_email }}</p>
     </div>
     @endif
+    @if($creator->twitter)
+    <div class="user-info-item">
+        <span class="type"><img src="/assets/img/twitter.png" alt="" /> Twitter:</span>
+        <p class="info">{{ $creator->twitter }}</p>
+    </div>
+    @endif
 </div>
 @else
 <div class="user-info-list with-blur">

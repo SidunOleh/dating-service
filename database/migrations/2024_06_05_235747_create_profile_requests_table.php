@@ -26,6 +26,7 @@ return new class extends Migration
             $table->json('snapchat')->nullable();
             $table->json('onlyfans')->nullable();
             $table->json('whatsapp')->nullable();
+            $table->json('twitter')->nullable();
             
             $table->json('location')->nullable();
             

@@ -57,6 +57,7 @@ class UpdateRequest extends FormRequest
             'instagram' => 'string|nullable',
             'onlyfans' => 'string|nullable',
             'profile_email' => 'email|nullable',
+            'twitter' => 'string|nullable',
 
             'zip' => 'regex:/^[0-9]{5}$/|exists:zip_codes,zip|nullable',
 

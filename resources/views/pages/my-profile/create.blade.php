@@ -20,6 +20,7 @@
                     snapchat: '',
                     onlyfans: '',
                     profile_email: '',
+                    twitter: '',
 
                     zip: '',
                     
@@ -38,7 +39,7 @@
                 },
                 steps: [
                     [],
-                    ['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',],
+                    ['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email', 'twitter',],
                     ['zip',],
                     ['name', 'age', 'description',],
                     ['photos',],
@@ -59,41 +60,47 @@
                     telegram: [
                         {
                             message: 'One from contact fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.whatsapp || data.instagram || data.snapchat || data.onlyfans || data.profile_email),
+                            fn: (val, data) => Boolean(val || data.phone || data.whatsapp || data.instagram || data.snapchat || data.onlyfans || data.profile_email || data.twitter),
                         },
                     ],
                     whatsapp: [
                         {
                             message: 'One from contact fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.instagram || data.snapchat || data.onlyfans || data.profile_email),
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.instagram || data.snapchat || data.onlyfans || data.profile_email || data.twitter),
                         },
                     ],
                     instagram: [
                         {
                             message: 'One from contact fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.snapchat || data.onlyfans || data.profile_email),
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.snapchat || data.onlyfans || data.profile_email || data.twitter),
                         },
                     ],
                     snapchat: [
                         {
                             message: 'One from contact fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.onlyfans || data.profile_email),
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.onlyfans || data.profile_email || data.twitter),
                         },
                     ],
                     onlyfans: [
                         {
                             message: 'One from contact fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.profile_email),
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.profile_email || data.twitter),
                         },
                     ],
                     profile_email: [
                         {
                             message: 'One from contact fields required',
-                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.onlyfans),
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.onlyfans || data.twitter),
                         },
                         {
                             message: 'Invalid format',
                             fn: val => Boolean(! val || val.match(/^\S+@\S+\.\S+$/))
+                        },
+                    ],
+                    twitter: [
+                        {
+                            message: 'One from contact fields required',
+                            fn: (val, data) => Boolean(val || data.phone || data.telegram || data.whatsapp || data.instagram || data.snapchat || data.onlyfans || data.profile_email),
                         },
                     ],
 
@@ -758,6 +765,22 @@
                                     v-model="data.profile_email"/>
                                 <div v-if="errors.profile_email" class="error-text">
                                     {{ errors.profile_email }}
+                                </div>
+                            </div>
+
+                            <div class="input-wrapper">
+                                <label for="twitter">
+                                    <img src="/assets/img/twitter.png" alt="" />
+                                    Twitter:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="twitter"
+                                    placeholder="@"
+                                    onkeydown="return event.key != 'Enter'"
+                                    v-model="data.twitter"/>
+                                <div v-if="errors.twitter" class="error-text">
+                                    {{ errors.twitter }}
                                 </div>
                             </div>
 

@@ -40,24 +40,27 @@ class ReferralSystem
         return null;
     }
 
-    public function payPercentSubscription(Creator $creator, Subscription $subscription): false|float
+    public function payPercentSubscription(Creator $creator, Subscription $subscription): void
     {
-        if (! $creator->referral) {
-            return false;
-        }
-
-        if ($creator->subscriptions()->count() != 1) {
-            return false;
-        }
+        DB::beginTransaction();
 
         $settings = Option::getSettings();
-                        
-        $amount = $settings['subscription_price'] * $settings['referral_percent'] / 100;
 
-        $referrer = $creator->referral->referrer;
-        $referrer->creditMoney($amount);
+        $earnAmount = $settings['subscription_price'] * $settings['referral_percent'] / 100;
+        $restAmount = $settings['subscription_price'] - $earnAmount;
 
-        return $amount;
+        $referrer = $creator->referral?->referrer;
+        for ($i=0; $i < 3; $i++) { 
+            if (! $referrer) {
+                break;
+            }
+
+            $referrer->creditMoney($restAmount * ConstantsReferral::PCTS[$i], 'balance_earn');
+
+            $referrer = $referrer->referral?->referrer;
+        }
+
+        DB::commit();
     }
 
     public function payPercentPostOpen(Creator $creator, Post $post, float $amount): void

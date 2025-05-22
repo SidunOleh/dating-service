@@ -39,7 +39,7 @@ class TransferController extends Controller
             
             Log::error($e);
 
-            return response(['message' => 'Balance is too low!'], 400);
+            return response(['message' => 'Not enough Coins :('], 400);
         }
     }
 }

@@ -181,6 +181,20 @@
                         v-model:comment="data.profile_email.comment"/>
                 </FormItem>
 
+                <FormItem
+                    label="Twitter"
+                    :class="data.twitter?.status">                   
+                    <Input
+                        style="margin-bottom: 10px;"
+                        readonly 
+                        :value="data.twitter ? data.twitter?.value : data.creator?.twitter"/>
+                    
+                    <ApproveField
+                        v-if="data.twitter" 
+                        v-model:status="data.twitter.status"
+                        v-model:comment="data.twitter.comment"/>
+                </FormItem>
+
             </CollapsePanel>
 
             <CollapsePanel

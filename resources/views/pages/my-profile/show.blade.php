@@ -4,17 +4,17 @@
     <div class="container">
         <div class="tab__top">
             <div 
+                @class(['tab__item' => true, 'open' => request()->query('tab', 'info') == 'info']) 
+                data-head="info">
+                <div class="arrow">
+                    <img src="{{ asset('assets/img/next.svg') }}" alt="" style="rotate: 180deg;">
+                </div>
+                <span>Info</span>
+            </div>
+            <div 
                 @class(['tab__item' => true, 'open' => request()->query('tab') == 'post']) 
                 data-head="post">
                 <span>Post</span>
-                <div class="arrow">
-                    <img src="{{ asset('assets/img/next.svg') }}" alt="">
-                </div>
-            </div>
-            <div 
-                @class(['tab__item' => true, 'open' => request()->query('tab', 'info') == 'info']) 
-                data-head="info">
-                <span>Info</span>
                 <div class="arrow">
                     <img src="{{ asset('assets/img/next.svg') }}" alt="">
                 </div>
@@ -68,7 +68,7 @@
                                 )
                             </div>
 
-                            <div class="user-info-list info-group {{ $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) }}">
+                            <div class="user-info-list info-group {{ $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email', 'twitter',]) }}">
                                 <p class="info-title">
                                     <img src="{{ asset('/assets/img/user-card.svg') }}" alt="" /> 
                                     Your Get in Touch
@@ -137,10 +137,19 @@
                                 </div>
                                 @endif
 
+                                @if($data['twitter']['value'])
+                                <div class="user-info-item">
+                                    <span class="type"><img src="/assets/img/twitter.png" alt="" /> Twitter:</span>
+                                    <p class="info">
+                                        {{ $data['twitter']['value'] }}
+                                    </p>
+                                </div>
+                                @endif
+
                                 @includeWhen(
-                                    $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]) == 'rejected', 
+                                    $request->status(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email', 'twitter',]) == 'rejected', 
                                     'templates.rejected', 
-                                    ['comments' => $request->comments(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email',]),]
+                                    ['comments' => $request->comments(['phone', 'telegram', 'whatsapp', 'instagram', 'snapchat', 'onlyfans', 'profile_email', 'twitter',]),]
                                 )
                             </div>
 

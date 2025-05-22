@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('snapchat')->nullable();
             $table->string('onlyfans')->nullable();
             $table->string('whatsapp')->nullable();
+            $table->string('twitter')->nullable();
             
             $table->string('zip', 10)->nullable();
             $table->char('state', 2)->nullable();

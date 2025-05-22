@@ -157,10 +157,16 @@
                 {{ errors.images }}
             </div>
 
-            <div v-for="i in [0,1,2]">
-                <div v-if="errors[`images.${i}`]" class="form-error">
-                    {{ errors[`images.${i}`] }}
-                </div>
+            <div v-if="errors['images.0']" class="form-error">
+                {{ errors['images.0'] }}
+            </div>
+
+            <div v-if="errors['images.1']" class="form-error">
+                {{ errors['images.1'] }}
+            </div>
+
+            <div v-if="errors['images.2']" class="form-error">
+                {{ errors['images.2'] }}
             </div>
         </div>
 
@@ -174,7 +180,7 @@
                     v-model="data.text">
                 </textarea>
                 <div class="rule">
-                    <p>no more than 150 characters</p>
+                    <p>No more than 150 characters</p>
                     <p class="characterCount"><span class="counter">{{ data.text.length }}</span> / 150</p>
                 </div>
                 <div v-if="errors.text" class="error-text">
@@ -184,7 +190,7 @@
         </div>
 
         <div class="form-group">
-            <div class="title">
+            <div class="choose-lucky-paw-title">
                 Choose Your Lucky Paw!
             </div>
             <div class="input-wrapper">
@@ -213,12 +219,14 @@
                     {{ errors.button_number }}
                 </div>
             </div>
-            <a href="">What is Lucky Paw?</a>
+            <a href="" class="choose-lucky-paw-title">What is Lucky Paw?</a>
         </div>
 
         <div class="form-group">
-            <p class="text">
-                Approval takes up to 72 hours! Double-check before sending.
+            <p class="text" style="line-height: 1.3;">
+                Approval takes up to 72 hours! 
+                <br>
+                Double-check before sending.
             </p>
 
             <div class="btn-group">

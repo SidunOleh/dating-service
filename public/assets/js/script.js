@@ -1438,10 +1438,13 @@ $(document).ready(function () {
 //__________________________Swap__________________________//
 
 $('.buy-meow-btn .buy').on('click', async function () {
+    $('.swaps .text-error').removeClass('show')
+
     let balance1 = $(this).data('balance-1')
     let balance2 = $(this).data('balance-2')
 
     if (balance1 < 1) {
+        $('.swaps .text-error').text('Not enough Coins :(').addClass('show')
         return
     }
 
@@ -1453,6 +1456,8 @@ $('.buy-meow-btn .buy').on('click', async function () {
         await $.post('/balances/transfer')
     } catch (err) {
         console.error(err)
+
+        $('.swaps .text-error').text(err.responseJSON?.message ?? 'Error').addClass('show')
 
         balance1 += 1
         balance2 -= 1

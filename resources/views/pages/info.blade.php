@@ -46,6 +46,7 @@
                         <span>1.00</span>
                     </div>  
                 </div>
+                <div class="text-error"></div>
                 <div class="swap__bottom ">
                     <div class="title">
                         Important:

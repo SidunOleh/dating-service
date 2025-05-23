@@ -7874,3 +7874,36 @@ select#gender {
 .tab_profile .posts {
     width: 510px;
 }
+
+@media (max-width: 768px) {
+    .tab:has(.tab__left.open) .container {
+        padding-left: 20px;
+    }
+    .tab__left .tab__content {
+        padding-right: 20px;
+    }
+    .tab {
+        padding: 20px 0;
+    }
+    .profile .left-side {
+        gap: 20px;
+    }
+    .profile .profile__container {
+        gap: 20px;
+    }
+    .other-user-list {
+        gap: 20px;
+    }
+    .tab__right .tab__content {
+        padding-left: 20px;
+    }
+    .tab:has(.tab__right.open) .container {
+        padding-right: 20px;
+    }
+    .posts__list {
+        gap: 20px;
+    }
+    .profile.account .left-side {
+        gap: 20px;
+    }
+}

@@ -2807,7 +2807,7 @@ input {
 
 @media screen and (max-width: 768px) {
     .other-user-list .other-user-item {
-        width: calc((100% - 16px) / 2);
+        width: calc((100% - 22px) / 2);
     }
     .other-user-list .other-user-item:not(:nth-child(-n+4)) {
         display: none;

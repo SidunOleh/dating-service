@@ -17,7 +17,12 @@ class GetPairController extends Controller
 
     public function __invoke()
     {
-        $pair = $this->creatorsService->roulettePair([Auth::guard('web')->id()]);
+        $except = [];
+        if (Auth::guard('web')->check()) {
+            $except[] = Auth::guard('web')->id();
+        }
+
+        $pair = $this->creatorsService->roulettePair($except);
 
         if ($pair->count() < 2) {
             return response('', 204);

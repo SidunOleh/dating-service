@@ -7907,3 +7907,7 @@ select#gender {
         gap: 20px;
     }
 }
+
+body {
+    word-break: break-word;
+}

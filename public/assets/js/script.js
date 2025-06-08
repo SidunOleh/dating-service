@@ -795,7 +795,7 @@ function initializeBattle($battle) {
         const $selectedPhoto = $(this);
 
         if ($selectedPhoto.hasClass("selected")) {
-            window.open(`/profile/${$selectedPhoto.data("id")}`, "_blank");
+            window.open(`/${$selectedPhoto.data("id")}`, "_blank");
         }
 
         if (!hasSelected) {

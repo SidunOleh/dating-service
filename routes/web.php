@@ -125,40 +125,6 @@ Route::post('/password/reset', ResetController::class)
 Route::post('/passimpay/callback', PassimpayCallbackController::class);
 
 /**
- * Pages
- */
-Route::get('/', HomeController::class)
-    ->name('home.index');
-Route::get('/page/{page?}', HomeController::class)
-    ->where('page', '[0-9]+')
-    ->name('home.page');
-Route::get('/profile/{creator}', ProfileController::class)
-    ->middleware(['track.profile-visits', 'check-referral',])
-    ->name('profile.page');
-Route::get('/top-vote', TopVoteController::class)
-    ->name('top-vote.page');
-Route::get('/favorites', FavoritesController::class)
-    ->middleware(['auth:web',])
-    ->name('favorites.index');
-Route::get('/favorites/page/{page}', FavoritesController::class)
-    ->middleware(['auth:web',])
-    ->name('favorites.page');
-Route::get('/subscription', SubscriptionController::class)
-    ->middleware(['auth:web',])
-    ->name('subscription.page');
-Route::get('/earn', EarnController::class)
-    ->middleware(['auth:web',])
-    ->name('earn.page');
-Route::get('/settings', SettingsController::class)
-    ->middleware(['auth:web',])
-    ->name('settings.page');
-Route::get('/faq', FAQController::class)
-    ->name('faq.page');
-Route::get('/info', InfoController::class)
-    ->middleware(['auth:web',])
-    ->name('info.page');
-
-/**
  * Filters
  */
 Route::get('/apply-filters', ApplyController::class)
@@ -313,6 +279,39 @@ Route::prefix('/posts')->name('posts.')->middleware(['auth:web',])->group(functi
         ->name('delete');
 });
 
+/**
+ * Pages
+ */
+Route::get('/', HomeController::class)
+    ->name('home.index');
+Route::get('/page/{page?}', HomeController::class)
+    ->where('page', '[0-9]+')
+    ->name('home.page');
+Route::get('/top-vote', TopVoteController::class)
+    ->name('top-vote.page');
+Route::get('/favorites', FavoritesController::class)
+    ->middleware(['auth:web',])
+    ->name('favorites.index');
+Route::get('/favorites/page/{page}', FavoritesController::class)
+    ->middleware(['auth:web',])
+    ->name('favorites.page');
+Route::get('/subscription', SubscriptionController::class)
+    ->middleware(['auth:web',])
+    ->name('subscription.page');
+Route::get('/earn', EarnController::class)
+    ->middleware(['auth:web',])
+    ->name('earn.page');
+Route::get('/settings', SettingsController::class)
+    ->middleware(['auth:web',])
+    ->name('settings.page');
+Route::get('/faq', FAQController::class)
+    ->name('faq.page');
+Route::get('/info', InfoController::class)
+    ->middleware(['auth:web',])
+    ->name('info.page');
+Route::get('/{creator}', ProfileController::class)
+    ->middleware(['track.profile-visits', 'check-referral',])
+    ->name('profile.page');
 /**
  * 404
  */

@@ -393,7 +393,8 @@
                                 :gap="10">
                                 <Image
                                     style="object-fit: contain;"
-                                    :height="230"
+                                    :height="700"
+                                    :width="'100%'"
                                     :src="img.url"/>
 
                                 <ApproveField 

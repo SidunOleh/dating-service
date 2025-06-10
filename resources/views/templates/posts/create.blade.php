@@ -194,7 +194,7 @@
                 Choose Your Lucky Paw!
             </div>
             <div class="input-wrapper">
-                <div class="post-btns">
+                <div :class="{'post-btns': true, 'chosen': data.button_number !== null,}">
                     <div 
                         data-number="1"
                         :class="{'paw-btn': true, 'chosen': data.button_number == 1}"
@@ -219,7 +219,7 @@
                     {{ errors.button_number }}
                 </div>
             </div>
-            <a href="" class="choose-lucky-paw-title">What is Lucky Paw?</a>
+            <a href="" class="choose-lucky-paw-title manual">What is Lucky Paw?</a>
         </div>
 
         <div class="form-group">

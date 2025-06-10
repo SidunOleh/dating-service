@@ -107,9 +107,13 @@ export default {
         async approve() {
             try {
                 this.loading.approve = true
-                await postsApi.approve(this.$route.params.id)
-                this.fetchData()
+                const res = await postsApi.approve(this.$route.params.id)
                 message.success('Successfully approved.')
+                if (res.next) {
+                    this.$router.push({name: 'posts.show', params: {id: res.next}})
+                } else {
+                    this.$router.push({name: 'posts.index'})
+                }
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
             } finally {
@@ -119,9 +123,13 @@ export default {
         async reject() {
             try {
                 this.loading.reject = true
-                await postsApi.reject(this.$route.params.id, {comment: this.comment})
-                this.fetchData()
+                const res = await postsApi.reject(this.$route.params.id, {comment: this.comment})
                 message.success('Successfully rejected.')
+                if (res.next) {
+                    this.$router.push({name: 'posts.show', params: {id: res.next}})
+                } else {
+                    this.$router.push({name: 'posts.index'})
+                }
             } catch (err) {
                 message.error(err?.response?.data?.message ?? err.message)
             } finally {

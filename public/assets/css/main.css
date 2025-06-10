@@ -7908,12 +7908,38 @@ select#gender {
     }
 }
 
-body {
-    word-break: break-word;
-}
-
 @media screen and (max-width: 768px) {
     .profile .user-photo-list {
         gap: 20px;
     }
+}
+
+.form-group .rule p:last-child {
+    min-width: 60px;
+    text-align: right;
+}
+
+.profile-filling #name,
+.profile-filling #age {
+    padding-left: 16px;
+}
+
+.post-btns.chosen .paw-btn:not(.chosen) {
+    opacity: 0.3;
+}
+
+.post-form .add-photo {
+    border-radius: 4px;
+}
+
+.manual {
+    cursor: pointer;
+    background: var(--Linear, linear-gradient(180deg, #7a0004 0%, #ba0007 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.other-user-list .other-user-item.verified:after {
+    top: 91px;
 }

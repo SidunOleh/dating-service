@@ -155,4 +155,11 @@ class PostsService
 
         return $posts;
     }   
+
+    public function getPostInPending(): ?Post
+    {
+        $post = Post::status([Posts::STATUS['pending']])->orderBy('created_at', 'ASC')->first();
+
+        return $post;
+    }
 }

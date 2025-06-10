@@ -20,6 +20,8 @@ class RejectController extends Controller
     {
         $this->postsService->reject($post, $request->comment);
 
-        return response(['message' => 'OK']);
+        $next = $this->postsService->getPostInPending();
+
+        return response(['next' => $next?->id,]);
     }
 }

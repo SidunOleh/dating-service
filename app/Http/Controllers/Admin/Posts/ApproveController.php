@@ -19,6 +19,8 @@ class ApproveController extends Controller
     {
         $this->postsService->approve($post);
 
-        return response(['message' => 'OK']);
+        $next = $this->postsService->getPostInPending();
+
+        return response(['next' => $next?->id,]);
     }
 }

@@ -7943,3 +7943,13 @@ select#gender {
 .other-user-list .other-user-item.verified:after {
     top: 91px;
 }
+
+.profile .left-side .user-info-list .type {
+    flex-shrink: 0;
+}
+
+.profile .left-side .description,
+.users .about,
+.post__text {
+    word-break: break-word;
+}

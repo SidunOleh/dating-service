@@ -7911,3 +7911,9 @@ select#gender {
 body {
     word-break: break-word;
 }
+
+@media screen and (max-width: 768px) {
+    .profile .user-photo-list {
+        gap: 20px;
+    }
+}

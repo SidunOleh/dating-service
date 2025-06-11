@@ -13,9 +13,6 @@
             <input type="number" autocomplete="off"/>
             <input type="number" autocomplete="off"/>
             <input type="number" autocomplete="off"/>
-            <input type="number" autocomplete="off"/>
-            <input type="number" autocomplete="off"/>
-            <input type="number" autocomplete="off"/>
             <p class="error-text"></p>
         </form>
 

@@ -39,7 +39,7 @@ class Code
             throw new TooFastException();
         }
 
-        $this->data['code'] = rand(100000, 999999);
+        $this->data['code'] = rand(100, 999);
         $this->data['created_at'] = time();
         $this->data['expire_at'] = time() + 60 * 10;
         $this->data['attemps'] = 0;
@@ -84,7 +84,7 @@ class Code
     public static function create(string $action, array $data = []): self
     {
         session([$action => [
-            'code' => rand(100000, 999999),
+            'code' => rand(100, 999),
             'created_at' => time(),
             'expire_at' => time() + 60 * 10,
             'attemps' => 0,

@@ -23,7 +23,7 @@ class SignInVerifyCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|integer|min:100000|max:999999',
+            'code' => 'required|integer|min:100|max:999',
         ];
     }
 }

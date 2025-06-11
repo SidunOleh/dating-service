@@ -421,7 +421,7 @@ $(".verification-wrapper input:last").on("input paste", async () => {
         (i, input) => input.value && code.push(input.value)
     );
 
-    if (code.length != 6) {
+    if (code.length != 3) {
         return;
     }
 

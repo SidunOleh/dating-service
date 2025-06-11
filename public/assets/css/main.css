@@ -7838,7 +7838,8 @@ select#gender {
 
 @media (min-width: 769px) {
     .other-user-list {
-        max-width: 120px;
+        width: 120px;
+        flex-shrink: 0;
     }
 }
 

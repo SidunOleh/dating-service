@@ -5199,7 +5199,7 @@ input {
 }
 
 .faq .sidebar {
-    max-height: 100vh;
+    /* max-height: 100vh; */
     overflow: auto;
     border-right: 1px solid #4e4e4e;
     position: sticky;
@@ -7640,7 +7640,7 @@ select#gender {
     display: flex;
     justify-content: center;
     gap: 100px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .tab__item {

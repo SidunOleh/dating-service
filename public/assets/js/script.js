@@ -540,7 +540,7 @@ $("#sign-up").submit(async function (e) {
 });
 
 $(document).on("sign_up-verified", () => {
-    location.href = "/";
+    location.reload()
 });
 
 //__________________________Sign In_________________________//
@@ -576,7 +576,7 @@ $("#sign-in").submit(async function (e) {
 });
 
 $(document).on("sign_in-verified", () => {
-    location.href = "/";
+    location.reload()
 });
 
 //__________________________Forgot Password_________________________//

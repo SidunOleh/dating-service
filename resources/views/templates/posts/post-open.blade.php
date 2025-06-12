@@ -46,7 +46,7 @@
             slidesToScroll: 1,
             prevArrow: $('[data-id={{ $post->id }}]').find('.prev'),
             nextArrow: $('[data-id={{ $post->id }}]').find('.next'),
-            infinite: true,
+            infinite: false,
         })
     }
 

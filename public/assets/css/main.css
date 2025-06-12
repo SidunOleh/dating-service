@@ -7954,3 +7954,15 @@ select#gender {
 .post__text {
     word-break: break-word;
 }
+
+.faq-content>ol>li>ol {
+    list-style: lower-alpha !important;
+}
+
+.faq-content>ol>li>ol>li>ol {
+    list-style: lower-roman !important;
+}
+
+#post-form .post-btns {
+    justify-content: center;
+}

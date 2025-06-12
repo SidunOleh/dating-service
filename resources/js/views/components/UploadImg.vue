@@ -1,5 +1,6 @@
 <template>
     <Flex 
+        :vertical="vertical"
         :gap="20"
         wrap="wrap">
 
@@ -9,8 +10,8 @@
 
             <Image 
                 style="object-fit: contain;"
-                :width="295"
-                :height="295"
+                :width="width"
+                :height="height"
                 :src="img.url"/>
             
             <template v-if="!disabled">
@@ -103,6 +104,18 @@ export default {
             ],
         },
         disabled: {
+            type: Boolean,
+            default: false,
+        },
+        width: {
+            type: String,
+            default: '295px',
+        },
+        height: {
+            type: String,
+            default: '295px',
+        },
+        vertical: {
             type: Boolean,
             default: false,
         },

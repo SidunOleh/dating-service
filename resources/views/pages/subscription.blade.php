@@ -162,7 +162,7 @@
                             BNB (Binance)
                         </p>
                     </div>
-                    <div 
+                    <!-- <div 
                         class="deposit-type" 
                         data-payment_id="50"
                         data-currency="BCH" 
@@ -171,6 +171,17 @@
                         <p class="name">Bitcoin Cash</p>
                         <p class="abbr">
                             BCH
+                        </p>
+                    </div> -->
+                    <div 
+                        class="deposit-type" 
+                        data-payment_id="246"
+                        data-currency="PYUSD" 
+                        data-network="PYUSD (ERC20)">
+                        <img src="{{ asset('/assets/img/pyusd.svg') }}" alt="" /> 
+                        <p class="name">PayPal USD</p>
+                        <p class="abbr">
+                            PYUSD
                         </p>
                     </div>
                     <div 

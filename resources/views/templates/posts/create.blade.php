@@ -219,7 +219,11 @@
                     {{ errors.button_number }}
                 </div>
             </div>
-            <a href="" class="choose-lucky-paw-title manual">What is Lucky Paw?</a>
+            @endverbatim
+            <a href="{{ route('faq.page') }}#what-is-lucky-paw" class="choose-lucky-paw-title manual">
+                What is Lucky Paw?
+            </a>
+            @verbatim
         </div>
 
         <div class="form-group">

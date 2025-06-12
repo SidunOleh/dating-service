@@ -20,7 +20,10 @@
             :required="true">
             <UploadImg
                 :uploaded="data.imagesModels"
-                :disabled="true"/>
+                :disabled="true"
+                :width="'100%'"
+                :height="'700px'"
+                :vertical="true"/>
         </FormItem>
 
         <FormItem label="Text">

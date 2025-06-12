@@ -65,7 +65,7 @@
                                 {{ $item['title'] }}
                             </h2>
                             <p>
-                                {!! $item['text'] ? convert_quill_list_to_nested_ul($item['text']) : '' !!}
+                                {!! $item['text'] ? convert_quill_flat_lists_to_nested($item['text']) : '' !!}
                             </p>
                         </div>
                     @else
@@ -75,7 +75,7 @@
                                     {{ $item['title'] }}
                                 </h2>
                                 <p>
-                                    {!! $item['text'] ? convert_quill_list_to_nested_ul($item['text']) : '' !!}
+                                    {!! $item['text'] ? convert_quill_flat_lists_to_nested($item['text']) : '' !!}
                                 </p>
                             </div>
                         @endforeach

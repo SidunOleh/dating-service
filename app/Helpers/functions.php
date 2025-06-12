@@ -20,22 +20,53 @@ function get_random_photo() {
     return '/assets/img/blur/' . $blur[rand(0, count($blur)-1)];
 }
 
-function convert_quill_list_to_nested_ul($html) {
+function convert_quill_flat_lists_to_nested($html) {
     $doc = new DOMDocument();
     libxml_use_internal_errors(true);
-    $doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+    $doc->loadHTML(mb_convert_encoding("<div>$html</div>", 'HTML-ENTITIES', 'UTF-8'));
 
-    $body = $doc->getElementsByTagName('body')->item(0);
-    $ulElements = $body->getElementsByTagName('ol');
+    $wrapper = $doc->getElementsByTagName('div')->item(0);
+    $newWrapper = $doc->createElement('div');
 
-    if ($ulElements->length === 0) {
-        return $html;
+    foreach (iterator_to_array($wrapper->childNodes) as $node) {
+        if ($node->nodeType !== XML_ELEMENT_NODE) {
+            $newWrapper->appendChild($doc->importNode($node, true));
+            continue;
+        }
+
+        $tag = $node->nodeName;
+        if (($tag === 'ul' || $tag === 'ol') && hasQuillIndentClasses($node)) {
+            $nestedList = convert_flat_list_to_nested($doc, $node);
+            $newWrapper->appendChild($nestedList);
+        } else {
+            $newWrapper->appendChild($doc->importNode($node, true));
+        }
     }
 
-    $flatUl = $ulElements->item(0);
+    $result = '';
+    foreach ($newWrapper->childNodes as $child) {
+        $result .= $doc->saveHTML($child);
+    }
+
+    return $result;
+}
+
+function hasQuillIndentClasses(DOMElement $list) {
+    foreach ($list->childNodes as $child) {
+        if ($child->nodeType === XML_ELEMENT_NODE && $child->hasAttribute('class')) {
+            if (preg_match('/ql-indent-\d+/', $child->getAttribute('class'))) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function convert_flat_list_to_nested(DOMDocument $doc, DOMElement $flatList) {
+    $tagName = $flatList->tagName;
     $listItems = [];
-    
-    foreach ($flatUl->childNodes as $node) {
+
+    foreach ($flatList->childNodes as $node) {
         if ($node->nodeName === 'li') {
             $indent = 0;
             if ($node->hasAttribute('class')) {
@@ -47,10 +78,10 @@ function convert_quill_list_to_nested_ul($html) {
         }
     }
 
-    $rootUl = $doc->createElement('ol');
-    $stack = [['ol' => $rootUl, 'indent' => -1]];
+    $rootList = $doc->createElement($tagName);
+    $stack = [ ['list' => $rootList, 'indent' => -1] ];
 
-    foreach ($listItems as $item) {
+    foreach ($listItems as $index => $item) {
         $li = $item['node'];
         $indent = $item['indent'];
         $li->removeAttribute('class');
@@ -59,16 +90,16 @@ function convert_quill_list_to_nested_ul($html) {
             array_pop($stack);
         }
 
-        $parentUl = $stack[count($stack) - 1]['ol'];
-        $parentUl->appendChild($li);
+        $parentList = $stack[count($stack) - 1]['list'];
+        $parentList->appendChild($li);
 
-        $nextIndex = array_search($item, $listItems, true) + 1;
-        if (isset($listItems[$nextIndex]) && $listItems[$nextIndex]['indent'] > $indent) {
-            $newUl = $doc->createElement('ol');
-            $li->appendChild($newUl);
-            $stack[] = ['ol' => $newUl, 'indent' => $indent];
+        $next = $listItems[$index + 1] ?? null;
+        if ($next && $next['indent'] > $indent) {
+            $newList = $doc->createElement($tagName);
+            $li->appendChild($newList);
+            $stack[] = ['list' => $newList, 'indent' => $indent];
         }
     }
 
-    return $doc->saveHTML($rootUl);
+    return $rootList;
 }

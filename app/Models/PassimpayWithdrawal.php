@@ -37,6 +37,7 @@ class PassimpayWithdrawal extends Model
                 130 => 'BNB (BNB)',
                 50 => 'BCH (BCH)',
                 232 => 'SOL (BEP29)',
+                246 => 'PYUSD (ERC20)',
             ][$this->payment_id],
         );
     }

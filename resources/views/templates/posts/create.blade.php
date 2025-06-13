@@ -199,19 +199,19 @@
                         data-number="1"
                         :class="{'paw-btn': true, 'chosen': data.button_number == 1}"
                         @click="data.button_number = 1">
-                        <img src="/assets/img/buPaw1.png" alt="">
+                        <img src="/assets/img/buPaw1.svg" alt="">
                     </div>
                     <div 
                         data-number="2"
                         :class="{'paw-btn': true, 'chosen': data.button_number == 2}"
                         @click="data.button_number = 2">
-                        <img src="/assets/img/buPaw2.png" alt="">
+                        <img src="/assets/img/buPaw2.svg" alt="">
                     </div>
                     <div 
                         data-number="3"
                         :class="{'paw-btn': true, 'chosen': data.button_number == 3}"
                         @click="data.button_number = 3">
-                        <img src="/assets/img/buPaw3.png" alt="">
+                        <img src="/assets/img/buPaw3.svg" alt="">
                     </div>
                 </div>
              

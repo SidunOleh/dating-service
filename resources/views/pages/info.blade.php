@@ -23,7 +23,7 @@
                 </div>
                 <div class="lucky-text boost">
                     <p>Every day we boost your balance to</p>
-                    <p class="amount"><img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" />  5.00</p>
+                    <p class="amount"><img src="{{ asset('/assets/img/MeowIcon.svg') }}" class="meowicon" alt="" />  5.00</p>
                     <p>for <b>FREE!</b></p>
                 </div>
                 <div class="buy-meow-btn">
@@ -31,7 +31,7 @@
                         class="buy"
                         data-balance-1="{{ $creator->balance }}"
                         data-balance-2="{{ $creator->balance_2_total }}"
-                        src="{{ asset('/assets/img/buyOneCoin22.png') }}" alt="" />
+                        src="{{ asset('/assets/img/buPawAdd2.svg') }}" alt="" />
                 </div>
                 <div class="swap">
                     <div class="swap__coins">
@@ -42,7 +42,7 @@
                         =
                     </div>
                     <div class="swap__coins">
-                        <img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" />
+                        <img src="{{ asset('/assets/img/MeowIcon.svg') }}" class="meowicon" alt="" />
                         <span>1.00</span>
                     </div>  
                 </div>

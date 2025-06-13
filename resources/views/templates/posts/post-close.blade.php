@@ -7,13 +7,13 @@
                         <div class="blur__text">MY WINNER!</div>
                         <div class="blur__text unlock">
                             <div>Free unlock </div>
-                            <div class="price">+<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
+                            <div class="price">+<img src="{{ asset('/assets/img/MeowIcon.svg') }}" class="meowicon" alt="" /> 1</div>
                             <div>Your bonus!</div>
                         </div>
                     </div>
                     <div class="alert fail">
                         <div class="blur__text">Missed! Try another one!</div>
-                        <div class="blur__text price">-<img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</div>
+                        <div class="blur__text price">-<img src="{{ asset('/assets/img/MeowIcon.svg') }}" class="meowicon" alt="" /> 1</div>
                     </div>
                     <div class="blur__text" style="margin-bottom: 20px;">
                         Choose Your Lucky Paw! 
@@ -27,22 +27,22 @@
                         <div 
                             data-number="1"
                             @class(['paw-btn', 'clicked' => $post->buttonClicked(1)])>
-                            <img src="{{ asset('/assets/img/buPaw1.png') }}" alt="">
+                            <img src="{{ asset('/assets/img/buPaw1.svg') }}" alt="">
                         </div>
                         <div 
                             data-number="2"
                             @class(['paw-btn', 'clicked' => $post->buttonClicked(2)])>
-                            <img src="{{ asset('/assets/img/buPaw2.png') }}" alt="">
+                            <img src="{{ asset('/assets/img/buPaw2.svg') }}" alt="">
                         </div>
                         <div 
                             data-number="3"
                             @class(['paw-btn', 'clicked' => $post->buttonClicked(3)])>
-                            <img src="{{ asset('/assets/img/buPaw3.png') }}" alt="">
+                            <img src="{{ asset('/assets/img/buPaw3.svg') }}" alt="">
                         </div>
                     </div>
                     <div class="lucky-text unlock">
                         <p>Unlock price:</p>
-                        <p class="price"><img src="{{ asset('/assets/img/MeowIcon.png') }}" class="meowicon" alt="" /> 1</p>
+                        <p class="price"><img src="{{ asset('/assets/img/MeowIcon.svg') }}" class="meowicon" alt="" /> 1</p>
                     </div>
                     <div class="error"></div>
                 </div>

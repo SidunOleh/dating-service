@@ -6,7 +6,7 @@ use App\Services\ReferralSystem\ReferralSystem;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class PayPercentPostOpen implements ShouldQueue
+class PayPercentPostOpen
 {
     /**
      * Create the event listener.

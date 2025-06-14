@@ -77,7 +77,7 @@ class PostsService
             throw new NotEnoughMoneyException();
         }
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
         $postsOpen = PostsOpen::firstOrCreate([
             'post_id' => $post->id,
@@ -116,7 +116,7 @@ class PostsService
             PostOpenDebitMoney::dispatch($creator, $post, $result[2]);
         }
         
-        DB::commit();
+        // DB::commit();
 
         $postsOpen->refresh();
 

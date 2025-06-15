@@ -183,7 +183,7 @@ class BalancesService
 
         $amount = Balances::AUTO_CREDIT_AMOUNT - $creator->balance_2_total;
 
-        $creator->creditBalance2($creator, $amount, Transactions::BALANCE_2_TYPE['auto_credit'], false);
+        $this->creditBalance2($creator, $amount, Transactions::BALANCE_2_TYPE['auto_credit'], false);
 
         return $amount;
     }

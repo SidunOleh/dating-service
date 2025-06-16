@@ -1449,6 +1449,8 @@ $('.buy-meow-btn .buy').on('click', async function () {
     }
 
     $('.buy-meow-btn').append('<div class="added">+1 added</div>')
+    $('.meow.balance').addClass('flash')
+    setTimeout(() => $('.meow.balance').removeClass('flash'), 100)
 
     balance1 -= 1
     balance2 += 1

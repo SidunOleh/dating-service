@@ -7966,3 +7966,31 @@ select#gender {
 #post-form .post-btns {
     justify-content: center;
 }
+
+.buy-meow-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.buy-meow-btn .added {
+    color: #fbfbfb;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: downUpAdded 1.5s linear forwards;
+    animation-iteration-count: 1;
+}
+
+@keyframes downUpAdded {
+    0% {
+        top: 50%;
+        opacity: 1;
+    }
+    100% {
+        top: -300px;
+        opacity: 0;
+    }
+}

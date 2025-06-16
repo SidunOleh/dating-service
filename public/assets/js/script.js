@@ -1448,6 +1448,8 @@ $('.buy-meow-btn .buy').on('click', async function () {
         return
     }
 
+    $('.buy-meow-btn').append('<div class="added">+1 added</div>')
+
     balance1 -= 1
     balance2 += 1
     updateBalances(balance1, balance2)

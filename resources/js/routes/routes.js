@@ -383,6 +383,7 @@ router.beforeEach((to, from) => {
         to.meta.permission &&
         !can(to.meta.permission)
     ) {
+        router.push({ name: 'login' })
         message.error('Forbidden.')
 
         return false

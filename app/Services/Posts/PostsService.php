@@ -130,6 +130,7 @@ class PostsService
             'imagesModels',
         ])->where('status', Posts::STATUS['approved'])
             ->where('creator_id', $creator->id)
+            ->orderBy('created_at', 'DESC')
             ->orderBy('id', 'DESC')
             ->paginate(perPage: 10, page: $page);
 

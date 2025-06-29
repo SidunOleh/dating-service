@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
 use Spatie\Image\Image as SpatieImage;
+use Illuminate\Http\File;
 
 class ImagesService
 {
@@ -55,6 +56,34 @@ class ImagesService
             ProcessImage::dispatch($image)->delay(now()->addMinutes(1));
         }
         
+        return $image;
+    }
+
+    public function createFromLocal(
+        string $path, 
+        Creator|User $creator,
+        string $disk = 'public'
+    ): Image
+    {
+        $dir = $this->dir($disk);
+        $name = md5($path).'.webp';
+        
+        $image = Image::whereRaw('path REGEXP ?', [preg_quote('/'.$name).'$'])->first();
+
+        if (! $image) {
+            $newPath = $dir.'/'.$name;
+            Storage::disk($disk)->put($newPath, file_get_contents($path));
+
+            $image = Image::create([
+                'path' => $newPath,
+                'disk' => $disk,
+                'user_id' => $creator->id,
+                'user_type' => get_class($creator),
+            ]);
+
+            $this->addWatermark($image);
+        }
+
         return $image;
     }
 

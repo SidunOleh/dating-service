@@ -23,6 +23,7 @@ class Post extends Model
         'status',
         'approve_comment',
         'creator_id',
+        'created_at',
     ];
 
     protected $casts = [

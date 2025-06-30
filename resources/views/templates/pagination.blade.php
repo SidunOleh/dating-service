@@ -4,7 +4,7 @@ $detect->setUserAgent(request()->header('User-Agent'));
 
 $endSize = $detect->isMobile() ? 1 : 2;
 $midSize = $detect->isMobile() ? 1 : 3;
-$step = $detect->isMobile() ? false : 10;
+$step = 10;
 @endphp
 
 <div class="pagination">

@@ -3,7 +3,7 @@ $detect = new Detection\MobileDetect();
 $detect->setUserAgent(request()->header('User-Agent'));
 
 $endSize = $detect->isMobile() ? 1 : 2;
-$midSize = $detect->isMobile() ? 1 : 3;
+$midSize = $detect->isMobile() ? 0 : 3;
 $step = 10;
 @endphp
 

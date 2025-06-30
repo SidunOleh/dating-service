@@ -7943,8 +7943,10 @@ select#gender {
     -webkit-text-fill-color: transparent;
 }
 
-.other-user-list .other-user-item.verified:after {
-    top: 91px;
+@media (min-width: 769px) {
+    .other-user-list .other-user-item.verified:after {
+        top: 91px;
+    }
 }
 
 .profile .left-side .user-info-list .type {

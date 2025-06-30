@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\ImageManager;
 use Spatie\Image\Image as SpatieImage;
-use Illuminate\Http\File;
 
 class ImagesService
 {

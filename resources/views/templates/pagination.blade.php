@@ -1,7 +1,10 @@
 @php
-$endSize = 2;
-$midSize = 3;
-$step = 10;
+$detect = new Detection\MobileDetect();
+$detect->setUserAgent(request()->header('User-Agent'));
+
+$endSize = $detect->isMobile() ? 1 : 2;
+$midSize = $detect->isMobile() ? 1 : 3;
+$step = $detect->isMobile() ? false : 10;
 @endphp
 
 <div class="pagination">
@@ -24,7 +27,7 @@ $step = 10;
             @endif
         @endfor
 
-        @if($endSize+1 < $current-$midSize)
+        @if($endSize+1 < $current-$midSize and $step)
         <li>
             <a href="{{ route($route, ['page' => $current-$step <= 0 ? 1 : $current-$step, ...request()->query(),]) }}">
                 ...
@@ -58,7 +61,7 @@ $step = 10;
             @endif
         @endfor
 
-        @if($current+$midSize < $total-$endSize)
+        @if($current+$midSize < $total-$endSize and $step)
         <li>
             <a href="{{ route($route, ['page' => $current+$step > $total ? $total : $current+$step, ...request()->query(),]) }}">
                 ...

@@ -63,13 +63,16 @@
                 </div>
             </div>
 
-            <a href="{{ route('faq.page', ['target' => 'tip1']) }}" class="btn red earn">
+            <a href="{{ route('faq.page') }}#tip-1-friends" class="btn red earn">
                 How to Earn (Tips & Tricks)
             </a>
             <p class="subtitle" style="margin-bottom: 44px">Maximize your earnings with our easy-to-follow tips and strategies.</p>
             <div class="deposit">
                 <p class="title">Withdrawal Options</p>
                 <p class="subtitle">Withdraw your earnings directly to your crypto wallet using any of our supported options:</p>
+                <a href="{{ route('faq.page') }}#how-to-deposit-or-withdraw" class="manual how-to-deposit">
+                    How to deposit
+                </a>
                 <div class="deposit-types">
 
                     <div 

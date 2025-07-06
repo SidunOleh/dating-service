@@ -118,6 +118,12 @@
                     <Switch v-model:checked="settings.show_contacts"/>
                 </FormItem>
 
+                <FormItem
+                    label="E-mail filter"
+                    :required="true">
+                    <Switch v-model:checked="settings.email_filter"/>
+                </FormItem>
+
             </CollapsePanel>
 
         </Collapse>
@@ -153,6 +159,7 @@ export default {
                 repeat_time: null,
                 subscription_price: null,
                 show_contacts: false,
+                email_filter: true,
             },
             editing: false,
         }

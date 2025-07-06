@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Web\Settings;
 
+use App\Models\Option;
 use App\Rules\ReCaptchaV3;
+use App\Rules\SupportedEmails;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ChangeEmailSendRequest extends FormRequest
@@ -22,8 +24,20 @@ class ChangeEmailSendRequest extends FormRequest
      */
     public function rules(): array
     {
+        $settings = Option::getSettings();
+
+        $emailRules = [
+            'required',
+            'email',
+            'unique:creators,email',
+        ];
+
+        if ($settings['email_filter']) {
+            $emailRules[] = new SupportedEmails;
+        }
+
         return [
-            'new_email' => 'required|email|unique:creators,email',
+            'new_email' => $emailRules,
             'password' => 'required|current_password:web',
         ];
     }

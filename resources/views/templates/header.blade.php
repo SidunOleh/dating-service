@@ -40,7 +40,7 @@
             <div class="header-body">
                 <div class="left">
                     @if(Route::currentRouteName() == 'profile.page')
-                    <div class="btn red closePage">
+                    <div class="btn red closePage" onclick="window.close()">
                         <img src="{{ asset('assets/img/close.svg') }}" alt="" />
                     </div>
                     @else
@@ -222,7 +222,7 @@
             <div class="header-body">
                 <div class="left">
                     @if(Route::currentRouteName() == 'profile.page')
-                    <div class="btn red closePage">
+                    <div class="btn red closePage" onclick="window.close()">
                         <img src="{{ asset('assets/img/close.svg') }}" alt="" />
                     </div>
                     @else

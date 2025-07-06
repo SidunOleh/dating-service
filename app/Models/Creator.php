@@ -306,6 +306,7 @@ class Creator extends Authenticatable
     public static function scopeAdminSearch(Builder $query, string $q): void
     {
         $query->whereAny([
+            'id',
             'email',
             'name',
             'description',

@@ -55,6 +55,8 @@ class Option extends Model
                 $settings['subscription_price'] ?? 0,
             'show_contacts' => 
                 $settings['show_contacts'] ?? false,
+            'email_filter' => 
+                $settings['email_filter'] ?? true,
         ];
     }
 

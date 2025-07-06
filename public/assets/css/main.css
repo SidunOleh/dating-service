@@ -8012,3 +8012,9 @@ select#gender {
     animation-iteration-count: 1;
     border-radius: 0 4px 4px 0;
 }
+
+.refferals .how-to-deposit {
+    margin: 12px auto;
+    display: block;
+    text-align: center;
+}

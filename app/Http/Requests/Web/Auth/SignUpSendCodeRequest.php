@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Web\Auth;
 
+use App\Models\Option;
 use App\Rules\ReCaptchaV3;
+use App\Rules\SupportedEmails;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SignUpSendCodeRequest extends FormRequest
@@ -22,8 +24,20 @@ class SignUpSendCodeRequest extends FormRequest
      */
     public function rules(): array
     {
+        $settings = Option::getSettings();
+
+        $emailRules = [
+            'required',
+            'email',
+            'unique:creators,email',
+        ];
+
+        if ($settings['email_filter']) {
+            $emailRules[] = new SupportedEmails;
+        }
+
         return [
-            'email' => 'required|email|unique:creators,email',
+            'email' => $emailRules,
             'password' => 'required|string|min:8|max:32|confirmed',
             'from' => 'integer|exists:creators,id|nullable',
         ];

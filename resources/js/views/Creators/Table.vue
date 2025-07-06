@@ -62,6 +62,20 @@
 
             <Tooltip>
                 <template #title>
+                    View on site
+                </template>
+
+                <template v-if="column.key === 'view'">
+                    <span
+                        style="cursor: pointer;"
+                        @click="$emit('view', record)">
+                        <ViewIcon/>
+                    </span>
+                </template>
+            </Tooltip>
+
+            <Tooltip>
+                <template #title>
                     Edit
                 </template>
 
@@ -99,12 +113,13 @@ import { Table, Tooltip, Tag, message, Input, Image, Flex, } from 'ant-design-vu
 import EditIcon from '../icons/Edit.vue'
 import DeleteIcon from '../icons/Delete.vue'
 import creatorsApi from '../../api/creators'
+import ViewIcon from '../icons/View.vue'
 
 export default {
     components: {
         Table, Tooltip, Tag,
         EditIcon, DeleteIcon, Input,
-        Image, Flex,
+        Image, Flex, ViewIcon,
     },
     data() {
         return {
@@ -139,6 +154,9 @@ export default {
                     title: 'Registered at',
                     key: 'created_at',
                     sorter: true,
+                },
+                {
+                    key: 'view',
                 },
                 {
                     key: 'edit',

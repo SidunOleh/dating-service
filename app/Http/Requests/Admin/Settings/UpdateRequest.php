@@ -30,6 +30,7 @@ class UpdateRequest extends FormRequest
             'repeat_time' => 'required|integer|gte:1',
             'subscription_price' => 'required|integer|gte:0',
             'show_contacts' => 'required|boolean',
+            'email_filter' => 'required|boolean',
         ];
     }
 }

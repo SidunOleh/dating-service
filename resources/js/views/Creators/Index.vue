@@ -9,6 +9,7 @@
 
     <Table
         ref="table"
+        @view="viewCreatorPage"
         @edit="record => $router.push({name: 'creators.edit', params: {id: record.id,},})"
         @delete="record => confirmPopup(() => deleteRecord(record), `Are you sure you want to delete ${record.email}?`)"/>
 
@@ -35,6 +36,9 @@ export default {
                 message.error(err?.response?.data?.message ?? err.message)
             }
         },
+        viewCreatorPage(record) {
+            location.href = `/${record.id}`
+        }
     },
 }
 </script>

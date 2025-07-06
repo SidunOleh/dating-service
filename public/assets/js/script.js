@@ -30,9 +30,9 @@ if ($("header .advertising-banner").length) {
     $(".open-faq").css("top", `72px`);
     $(".sidebar").css("top", "60px");
 }
-$(".closePage").on("click", function () {
-    window.close();
-});
+// $(".closePage").on("click", function () {
+//     window.close();
+// });
 
 if ($(".popUp-wrapper").hasClass("active")) {
     $("html").addClass("lock");
@@ -1633,6 +1633,7 @@ function openTab(tab) {
     for (let i = 0; i < 2; i++) {
         setTimeout(() => window.dispatchEvent(new Event('resize')), i*500)
     }
+    window.scrollTo({top: 0,})
 }
 
 $('.tab__head').on('click', function () {
